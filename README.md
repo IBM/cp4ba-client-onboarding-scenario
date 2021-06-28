@@ -10,6 +10,7 @@ The solution contains various components of the CP4BA platform. The following in
 4. Import objects into FileNetContent Manager
 5. Create the Automation Mobile Capture scenario
 6. Import the Business Automation Application app
+7. Import the Business Automation Insights data
 
 Once you have imported the Client Onboarding scenario successfully, you can perform the [IBM Cloud Pak for Business Automation labs](https://github.com/IBM/cp4ba-labs).
 
