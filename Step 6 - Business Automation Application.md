@@ -14,7 +14,7 @@
 1. Import the Client_Onboarding_Template.twx template into Business Automation Studio
 2. Provide read-only access for `tw_allusers` for the Client Onboarding Toolkit
 
-With this you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.
+Once you have imported the app successfully, import the Business Automation Insights data.
 
 
 
