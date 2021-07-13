@@ -12,7 +12,9 @@
 
 6. Click on `Import` and import ClientOnboardingDecisions.zip into the project
 
-7. Connect the project to the GIT repo previously created
+7. Click on `Connect` and enter the references of the GIT repo previously created
+ 
+ ![image-2021gitconnect](/images/ads-git-connect.png)
 
 8. Click on `Connected` under `Remote Git repository`
 
@@ -26,6 +28,8 @@
 
 13. Click on `Test Connection`
 
+ ![image-2021provider](/images/ads-add-provider.png)
+
 14. Click on `Save`
 
 15. Go back to the `Client Onboarding` project
@@ -37,6 +41,9 @@
 18. Click on `Connect` and select `OPS`
 
 19. Expand the `service-payment-default-risk` ML model and select the `service-payment-default-risk` deployment
+
+ ![image-2021connect](/images/ads-connect-ml.png)
+
 
 20. Click `Next` and go to `Test invocation`
 
@@ -63,23 +70,27 @@
     }
     ```
 
+
+ ![image-2021execute](/images/ads-ml-execute.png)
+
 24. Click on `Next`
 
 25. Click on `Generate from test output` then click `OK`
 
 26. Click on `Apply` in the upper-right corner
 
-27. Go back to the `Client Onboarding` project
+27. Under `Share changes` at the top, click on the number of changes, select all and click `Share`
 
-28. Under `Share changes` at the top, click on the number of changes, select all and click `Share`
+28.  In the `View history` tab, create a new version named `v1.1`
 
-29.  In the `View history` tab, create a new version named `v1.1`
+29. In the `Deploy` tab, expand `v1.1` and wait for deployment to complete
 
-30. In the `Deploy` tab, expand `v1.1` and wait for deployment to complete
+![image-2021deploy](/images/ads-deploy.png)
 
-31. Back in the studio, go to `Design` --> `Business Automations` -->`Decisions` and click on the `Client Onboarding` Decision project
 
-32. Select the three-dot menu for `v1.1` and click on `Publish`
+30. Back in the studio, go to `Design` --> `Business Automations` -->`Decisions` and click on the `Client Onboarding` Decision project
+
+31. Select the three-dot menu for `v1.1` and click on `Publish`
 
 Once you have setup the ADS project, import the Workflow solution.
 
