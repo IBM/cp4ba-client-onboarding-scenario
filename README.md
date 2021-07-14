@@ -6,9 +6,9 @@ The solution contains various components of the CP4BA platform. The following in
 
 1. Import the ADS ML Model
 2. Import the ADS Project
-3. Import the Workflow Solution
-4. Import objects into FileNetContent Manager
-5. Create the Automation Mobile Capture scenario
+3. Setup the RPA Server (optional)
+4. Import the Workflow Solution
+5. Import objects into FileNetContent Manager
 6. Import the Business Automation Application app
 7. Import the Business Automation Insights data
 
