@@ -16,7 +16,7 @@
    curl -k -XPOST -H 'Content-Type: application/json' -u {esadmin}:{espassword} '{eshost}/_bulk' --data-binary @processt.json
    ```
 
-3. Import the Mortgage Application dashboard in Business Performance Center.
+3. Import the Mortgage Application dashboard (Mortgage Application Completed.json) in Business Performance Center.
 
 ### Prepare a shared environment for labs
 
