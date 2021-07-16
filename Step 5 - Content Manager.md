@@ -4,29 +4,60 @@
 
 Perform the following steps:
 
-1. Login to ACCE.
-2. Open the target object store, its name is `BAWTOS`.
-3. Create a `Client Documents` folder under `Root folder`.
+1. Login to ACCE. You can switch to english locale if needed by clicking on the persona icon in upper right corner, and select `Change Language and Locale Settings`.
+2. Open the target object store, its name is `BAWTOS`, by clicking on it.
+   <br/><img src="images/content-open-bawtos.png" />
+3. Create a new folder named `Client Documents` under the root folder.
+   1. On the navigation area on the left side, open `Browse` and click on `Root folder`.
+      <br/><img src="images/content-open-rootfolder.png" />
+   2. Click on the `Actions` pulldown menu and click on `New Folder`.
+      <br/><img src="images/content-create-folder.png" />
+   3. The `Define New Folders Dialog` opens on the right side. Set the Folder name to `Client Documents`. Then click on `Next >` two times, then on `Finish`.
+      <br/><img src="images/content-create-client-documents.png" />
 4. Create a `File Identification Event Action` using the below JavaScript.
    1. Open `Event, Action, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
-   2. Set the name to `File Identification Event Action`, click `Next`
-   3. Select `Javascript`, click `Next`
-   4. Paste the Javascript text into the text box, click `Next` then `Finish`.
-6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
+      <br/><img src="images/content-create-eventaction.png" />
+   2. The Name and Describe the Event Action dialog opens on the right. Set the name to `File Identification Event Action`, click `Next >`
+      <br/><img src="images/content-event-action-name.png"/>
+   3. Select `Javascript`, click `Next >`
+      <br/><img src="images/content-event-action-javascript.png" />
+   4. Mark all text in the `Event Action Script` text box and remove it. Then go to the bottom of this page and copy the event action javascript. Paste the Javascript text from the bottom of this page into the `Event Action Script`text box, then click `Next >` then `Finish`.
+      <br/><img src="images/content-event-action-script.png" />
+5. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
    1. Open `Event, Action, Processes`. Right-click on `Subscriptions` and select `New Subscription` from context menu.
-   2. Set the name to `File Identification Subscription`, click `Next`
-   3. Set the class type to `Document`, and the class to `Identification`, click `Next` twice
-   4. Select `Checkin Event` to trigger the subscription, click `Next`
-   5. Set the event action to `File Identification Event Action`, click `Next`
+      <br/><img src="images/content-subscription1.png"/>
+   2. Set the name to `File Identification Subscription`, click `Next >`
+      <br/><img src="images/content-subscription2.png"/>   
+   3. Set the class type to `Document`, and the class to `Identification`, click `Next >` twice
+      <br/><img src="images/content-subscription3.png"/> 
+   4. Select `Checkin Event` to trigger the subscription, click `Next >`
+      <br/><img src="images/content-subscription4.png"/>  
+   5. Set the event action to `File Identification Event Action`, click `Next >`
+      <br/><img src="images/content-subscription5.png"/>
    6. Click on `Enable Subclasses`, click `Next` and `Finish`
+      <br/><img src="images/content-subscription6.png"/>
 
 ### Prepare a shared environment for labs
 
 Perform the following steps:
 
 1. For the `BAWTOS` object store, update the security for the cp4bausers group. Remove the right to `set owner of every object` from the group, as users with this right will automatically see every document in the object store.
+   1. Close all windows from the right side, and leave open only the Window showing the BAWTOS Object store properties. Select the `Security` tab.
+      <br/><img src="images/content-security-os1.png"/>
+   2. Mark the checkbox in front of the line for the `cp4bausers` group and click on `Edit...`
+   3. Scroll down and unselect the right to `Set owner of any object`. Click on `Ok`
+      <br/><img src="images/content-security-os2.png"/>
+   4. Observe that the rights are now showing `Custom` set of rights in the Object Store security. Click on `Save`.
+      <br/><img src="images/content-security-os3.png"/>
+   
 2. For the `Identification` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
-3. For the `Client Document` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
+   1. On the Navigation area on the left side, open `Data Design`, `Classes`, `Document` and click on the `Identification` class to bring up its properties on the right side.
+      <br/><img src="images/content-security-id1.png"/>
+   2. Select the `Default Instance Security` tab. Select the checkbox in front of the line with the `cp4bausers` group and click on `Remove`. Then click on `Save`.
+      <br/><img src="images/content-security-id2.png"/>
+   3. Select the `Security` tab. Select the checkbox in front of the line with the `cp4bausers` group and click on `Edit...`. In the dialog, set the permission group to `Modify properties`, then click on `Ok`. Click on `Save` again on the `Identification` class properties.
+      <br/><img src="images/content-security-id3.png"/>
+4. For the `Client Document` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`. Follow the same steps as before, just replace `Identification` class by `Client Document` class.
 
 
 ### Javascript for the File Identification Event Action
