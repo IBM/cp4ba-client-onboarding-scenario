@@ -38,7 +38,7 @@
 > ![](images/BAI-3.png)
 
 
-###With that, you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.
+### With that, you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.
 
 
 
