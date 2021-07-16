@@ -5,8 +5,10 @@
 Perform the following steps:
 
 1. Login to ACCE. You can switch to english locale if needed by clicking on the persona icon in upper right corner, and select `Change Language and Locale Settings`.
+
 2. Open the target object store, its name is `BAWTOS`, by clicking on it.
    <br/><img src="images/content-open-bawtos.png" />
+   
 3. Create a new folder named `Client Documents` under the root folder.
    1. On the navigation area on the left side, open `Browse` and click on `Root folder`.
       <br/><img src="images/content-open-rootfolder.png" />
@@ -14,7 +16,21 @@ Perform the following steps:
       <br/><img src="images/content-create-folder.png" />
    3. The `Define New Folders Dialog` opens on the right side. Set the Folder name to `Client Documents`. Then click on `Next >` two times, then on `Finish`.
       <br/><img src="images/content-create-client-documents.png" />
-4. Create a `File Identification Event Action` using the below JavaScript.
+   
+4. In the `Client Documents` folder, create the documents from the table below:
+   
+   | Document                                                     | Document Class  | Document Properties                                          |
+   | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
+   | [Banking Information - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
+   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution Exports/FileNet Content Manager/Client Documents/Certificate of Incorporation - Automation Elite Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
+   | [June Marie - Driver's License.png](/Solution Exports/FileNet Content Manager/Client Documents/June Marie - Driver's License.png) | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
+   | [Legacy Consulting - Banking Information.pdf](/Solution Exports/FileNet Content Manager/Client Documents/Legacy Consulting - Banking Information.pdf) | Client Document | Client Name: Legacy Consulting                               |
+   | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution Exports/FileNet Content Manager/Client Documents/Legacy Consulting - Certificate of Incorporation.pdf) | Client Document | Client Name: Legacy Consulting                               |
+   
+   
+   
+5. Create a `File Identification Event Action` using the below JavaScript.
+
    1. Open `Event, Action, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
       <br/><img src="images/content-create-eventaction.png" />
    2. The Name and Describe the Event Action dialog opens on the right. Set the name to `File Identification Event Action`, click `Next >`
@@ -23,7 +39,8 @@ Perform the following steps:
       <br/><img src="images/content-event-action-javascript.png" />
    4. Mark all text in the `Event Action Script` text box and remove it. Then go to the bottom of this page and copy the event action javascript. Paste the Javascript text from the bottom of this page into the `Event Action Script`text box, then click `Next >` then `Finish`.
       <br/><img src="images/content-event-action-script.png" />
-5. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
+
+6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
    1. Open `Event, Action, Processes`. Right-click on `Subscriptions` and select `New Subscription` from context menu.
       <br/><img src="images/content-subscription1.png"/>
    2. Set the name to `File Identification Subscription`, click `Next >`
@@ -62,7 +79,7 @@ Perform the following steps:
 
 ### Javascript for the File Identification Event Action
 
-```
+```javascript
 // ###############################################################################
 // #
 // # Licensed Materials - Property of IBM
