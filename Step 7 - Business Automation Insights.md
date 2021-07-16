@@ -17,13 +17,13 @@
    ```
 3.  Open IBM Cloud Pal for Business Automation - Business Automation Insights and click **Import.**
 
-> ![](media/image1.png){width="6.768055555555556in" height="1.9381944444444446in"}
+> ![](images/BAI-1.png){width="6.768055555555556in" height="1.9381944444444446in"}
 
 4.  Click **Browse.**
 
 5.  Select **Mortgage Application Complete.json** and click Import.
 
-> ![](media/image2.png){width="5.135416666666667in" height="2.0729254155730534in"}
+> ![](images/BAI-2.png){width="5.135416666666667in" height="2.0729254155730534in"}
 
 6.  Optionally follow the instruction in **Lab Guide - Operational Intelligence - BAI - Build Business Performance Center Dashboard.pdf** to add and configure Goals.
 
