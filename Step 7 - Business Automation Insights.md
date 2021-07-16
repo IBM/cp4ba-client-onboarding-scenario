@@ -17,7 +17,7 @@
    ```
 3.  Open IBM Cloud Pal for Business Automation - Business Automation Insights and click **Import.**
 
-> ![](images/BAI-1.png){width="6.768055555555556in" height="1.9381944444444446in"}
+> ![](images/BAI-1.png){width="6.768055555555556in" height="1.9381944444444446in"}!
 
 4.  Click **Browse.**
 
