@@ -22,9 +22,9 @@ Perform the following steps:
    | Document                                                     | Document Class  | Document Properties                                          |
    | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
    | [Banking Information - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
-   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
+   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
    | [June Marie - Driver's License.png](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
-   | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Client Document | Client Name: Legacy Consulting                               |
+   | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Client Document | Client Name: Legacy Consulting                               |
    | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Client Document | Client Name: Legacy Consulting                               |
    
    
