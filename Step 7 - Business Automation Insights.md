@@ -15,13 +15,13 @@
    ```
    curl -k -XPOST -H 'Content-Type: application/json' -u {esadmin}:{espassword} '{eshost}/_bulk' --data-binary @processt.json
    ```
-3.  Open IBM Cloud Pal for Business Automation - Business Automation Insights and click **Import.**
+3.  Open **IBM Cloud Pak for Business Automation - Business Automation Insights** and click **Import.**
 
 > ![](images/BAI-1.png)
 
 4.  Click **Browse.**
 
-5.  Select **Mortgage Application Complete.json** and click Import.
+5.  Select **Mortgage Application Complete.json** and click **Import**.
 
 > ![](images/BAI-2.png)
 
@@ -31,9 +31,14 @@
 
 ### Prepare a shared environment for labs
 
-1. In Business Performance Center, change the permissions of the Mortgage Application dashboard from private to public.
+1. Open **IBM Cloud Pak for Business Automation – Business Automation Insights**
 
-With that, you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.
+2.	On **Mortgage Application Completed** dashboard select the **ellipses** and click **Set public**.
+
+> ![](images/BAI-3.png)
+
+
+##With that, you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.##
 
 
 
