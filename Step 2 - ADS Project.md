@@ -1,20 +1,22 @@
 # Step 2 - Import the ADS Project
 
-1. Create an empty GIT repo and get its URL and API Key
+1. Download [ClientOnboardingDecisions.zip](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip)
 
-2. Open IBM Business Automation Studio
+2. Create an empty GIT repo and get its URL and API Key
 
-3. Click to the menu in the upper-left corner and go to `Design` --> `Business Automations`
+3. Open IBM Business Automation Studio
 
-4. Click on `Create` --> `Decision Automations`
+4. Click to the menu in the upper-left corner and go to `Design` --> `Business Automations`
 
-5. Provide `Client Onboarding` as the project name and click `Create`
+5. Click on `Create` --> `Decision Automations`
 
-6. Once the editor loads, click on `Import` and import ClientOnboardingDecisions.zip into the project
+6. Provide `Client Onboarding` as the project name and click `Create`
+
+7. Once the editor loads, click on `Import` and import the previously downloaded file ClientOnboardingDecisions.zip into the project
 
    ![ads-import](images/ads-import.png)
 
-7. Click on `Connect` and enter the references of the GIT repo previously created
+8. Click on `Connect` and enter the references of the GIT repo previously created
 
  ![image-2021gitconnect](/images/ads-git-connect.png)
 
