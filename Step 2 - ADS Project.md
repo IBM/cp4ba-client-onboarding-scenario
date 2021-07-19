@@ -8,12 +8,14 @@
 
 4. Click on `Create` --> `Decision Automations`
 
-5. Provide `Client Onboarding` as the project name
+5. Provide `Client Onboarding` as the project name and click `Create`
 
-6. Click on `Import` and import ClientOnboardingDecisions.zip into the project
+6. Once the editor loads, click on `Import` and import ClientOnboardingDecisions.zip into the project
+
+   ![ads-import](images/ads-import.png)
 
 7. Click on `Connect` and enter the references of the GIT repo previously created
- 
+
  ![image-2021gitconnect](/images/ads-git-connect.png)
 
 8. Click on `Connected` under `Remote Git repository`
