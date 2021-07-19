@@ -87,7 +87,7 @@
 
 28.  In the `View history` tab, create a new version named `v1.1`
 
-29. In the `Deploy` tab, expand `v1.1` and wait for deployment to complete
+29. In the `Deploy` tab, expand `v1.1`, click on `Deploy` and wait for deployment to complete
 
 ![image-2021deploy](/images/ads-deploy.png)
 
