@@ -15,7 +15,7 @@
    ```
    curl -k -XPOST -H 'Content-Type: application/json' -u {esadmin}:{espassword} '{eshost}/_bulk' --data-binary @processt.json
    ```
-3.  Open **IBM Cloud Pak for Business Automation - Business Automation Insights** and click **Import.**
+3.  Open **Business Performance Center** and click **Import.**
 
 > ![](images/BAI-1.png)
 
@@ -31,7 +31,7 @@
 
 ### Prepare a shared environment for labs
 
-1. Open **IBM Cloud Pak for Business Automation – Business Automation Insights**
+1. Open **Business Performance Center**
 
 2.	On **Mortgage Application Completed** dashboard select the **ellipses** and click **Set public**.
 
