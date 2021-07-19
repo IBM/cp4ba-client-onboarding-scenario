@@ -22,7 +22,7 @@
 
 8. Once the import completes, click on tile for the **Client Onboarding** Workflow project (Don't click on the open button but just the tile).
 
-9. Click o nthe 3-dot menu in the right and select **Open in Process Designer**
+9. Click on the 3-dot menu next to the Open button on the right and select **Open in Process Designer**
 
    ![wf-open-in-pd](images/wf-open-in-pd.png)
 
