@@ -33,7 +33,7 @@
 11. In the **Host name** field, enter the host name for your BAW server. It should look something like:
     `bawaut-ibm-cp4ba.....containers.appdomain.cloud`
 
-    Note that  `http://` or `https://` isn't used as a part of the host name. You can find the host name for your system by looking up the Process Admin URL and copying the part without the `https://` and `/ProcessPortal`
+    Note that  `http://` or `https://` isn't used as a part of the host name. You can find the host name for your system by looking up the Process Admin URL and copying the part without the `https://` and `/ProcessAdmin`
 
 12. In the password field, enter the password for the admin user.
 
@@ -115,17 +115,19 @@ You only need to do these steps if your environment will be used to perform the 
 
 18. In the **System URL** field, enter the host name of the BAW server that you previously used in navigator for the automation service but this time, include `https://`
 
-19. In the **Select a process application** dropdown, select **Client Onboarding**.
+19. Enter the admin credentials and click **Next**.
 
-20. Select the checkbox for **New Client Onboarding Request**.
+20. In the **Select a process application** dropdown, select **Client Onboarding**.
+
+21. Select the checkbox for **New Client Onboarding Request**.
 
     ![studio-external-aut-service](images/studio-external-aut-service.png)
 
-21. Click on **Next**.
+22. Click on **Next**.
 
-22. In the **Name** field, enter **Client_Onboarding_Workflows_External**.
+23. In the **Name** field, enter **Client_Onboarding_Workflows_External**.
 
-23. Click on **Publish**.
+24. Click on **Publish**.
 
 Once you have imported the app successfully, import the Business Automation Insights data.
 
