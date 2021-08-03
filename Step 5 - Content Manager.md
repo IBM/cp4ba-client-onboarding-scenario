@@ -27,6 +27,14 @@ Perform the following steps:
    | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Client Document | Client Name: Legacy Consulting                               |
    | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Client Document | Client Name: Legacy Consulting                               |
    
+   1. In the navigation area, navigate to "Browse", and "Root Folder". Click on "Client Documents" to bring up the contents of the folder. From the opened "Client Documents" folder, invoke "New Document" from the Actions pulldown menu.
+      <br/><img src="images/content-createdocs1.png" />
+   2. In the New Document wizard, on the first page provide the document name, and select the Document Class from the table. Then click "Next".
+      <br/><img src="images/content-createdocs2.png" />
+   3. On the "Document Content Source" page, click on "Add" in the "Content Element" section. Use the popup window to upload the document. Click "Browse" and locate the document on your harddisk, then click on "Add Content" to close the dialog. Then click "Next" on the "New Document" wizard.
+      <br/><img src="images/content-createdocs3.png" />
+   4. On the next page, provide the property values, according to the table above. No further changes are required, so press "Next" until the final page, then "Finish" and then "Close".
+   
    
    
 5. Create a `File Identification Event Action` using the below JavaScript.
