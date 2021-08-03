@@ -19,17 +19,17 @@ Perform the following steps:
    
 4. In the `Client Documents` folder, create the documents from the table below:
    
-   | Document                                                     | Document Class  | Document Properties                                          |
-   | ------------------------------------------------------------ | --------------- | ------------------------------------------------------------ |
-   | [Banking Information - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
-   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Client Document | Client Name: Automation Elite Inc.                           |
-   | [June Marie - Driver's License.png](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
-   | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Client Document | Client Name: Legacy Consulting                               |
-   | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Client Document | Client Name: Legacy Consulting                               |
+   | Document                                                     | Document Title | Document Class  | Document Properties                                          |
+   | ------------------------------------------------------------ | -------------- | --------------- | ------------------------------------------------------------ |
+   | [Banking Information - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Banking Information - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
+   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Certificate of Incorporation - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
+   | [June Marie - Driver's License.png](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | June Marie - Driver's License | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
+   | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Legacy Consulting - Banking Information | Client Document | Client Name: Legacy Consulting                               |
+   | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Legacy Consulting - Certificate of Incorporation | Client Document | Client Name: Legacy Consulting                               |
    
    1. In the navigation area, navigate to "Browse", and "Root Folder". Click on "Client Documents" to bring up the contents of the folder. From the opened "Client Documents" folder, invoke "New Document" from the Actions pulldown menu.
       <br/><img src="images/content-createdocs1.png" />
-   2. In the New Document wizard, on the first page provide the document name, and select the Document Class from the table. Then click "Next".
+   2. In the New Document wizard, on the first page provide the document title, and select the Document Class from the table. Then click "Next".
       <br/><img src="images/content-createdocs2.png" />
    3. On the "Document Content Source" page, click on "Add" in the "Content Element" section. Use the popup window to upload the document. Click "Browse" and locate the document on your harddisk, then click on "Add Content" to close the dialog. Then click "Next" on the "New Document" wizard.
       <br/><img src="images/content-createdocs3.png" />
