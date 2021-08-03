@@ -58,23 +58,14 @@ Perform the following steps:
 
 Perform the following steps:
 
-1. For the `BAWTOS` object store, update the security for the cp4bausers group. Remove the right to `set owner of every object` from the group, as users with this right will automatically see every document in the object store.
-   1. Close all windows from the right side, and leave open only the Window showing the BAWTOS Object store properties. Select the `Security` tab.
-      <br/><img src="images/content-security-os1.png"/>
-   2. Mark the checkbox in front of the line for the `cp4bausers` group and click on `Edit...`
-   3. Scroll down and unselect the right to `Set owner of any object`. Click on `Ok`
-      <br/><img src="images/content-security-os2.png"/>
-   4. Observe that the rights are now showing `Custom` set of rights in the Object Store security. Click on `Save`.
-      <br/><img src="images/content-security-os3.png"/>
-   
-2. For the `Identification` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
+1. For the `Identification` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
    1. On the Navigation area on the left side, open `Data Design`, `Classes`, `Document` and click on the `Identification` class to bring up its properties on the right side.
       <br/><img src="images/content-security-id1.png"/>
    2. Select the `Default Instance Security` tab. Select the checkbox in front of the line with the `cp4bausers` group and click on `Remove`. Then click on `Save`.
       <br/><img src="images/content-security-id2.png"/>
    3. Select the `Security` tab. Select the checkbox in front of the line with the `cp4bausers` group and click on `Edit...`. In the dialog, set the permission group to `Modify properties`, then click on `Ok`. Click on `Save` again on the `Identification` class properties.
       <br/><img src="images/content-security-id3.png"/>
-4. For the `Client Document` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`. Follow the same steps as before, just replace `Identification` class by `Client Document` class.
+2. For the `Client Document` document class, update the security settings: remove the cp4bausers from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`. Follow the same steps as before, just replace `Identification` class by `Client Document` class.
 
 
 ### Javascript for the File Identification Event Action
