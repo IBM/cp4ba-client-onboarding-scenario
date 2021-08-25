@@ -2,7 +2,7 @@
 
 ### Pepare the environment for the end-to-end scenario
 
-1. Download the [Workflow twx file](Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx).
+1. Download the [Workflow twx file](/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx).
 
 2. Login to **IBM Business Automation Studio**
 
@@ -82,11 +82,11 @@
 
 5. Select the **Group** radio button.
 
-6. Search for **cp4bausers** and select the checkbox for the result.
+6. Search for the group that contains your shared users (eg: cp4bausers) and select the checkbox for the result.
 
    ![wf-add-cp4bausers](images/wf-add-cp4bausers.png)
 
 7. Click on the **Add** button to close the dialog.
 
-Once you have imported the workflow solution, import the required objects in the content manager.
+Once you have imported the Workflow solution, [import the required objects in Filenet Content Manager](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/Step%205%20-%20Content%20Manager.md).
 

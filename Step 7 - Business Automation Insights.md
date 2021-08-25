@@ -4,30 +4,31 @@
 
 **Note:** The data is currently based on a Mortgage Application solution
 
-1. Run the following command to import Case data (replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL).
+1. Download the contents of the following directory - [Business Automation Insight](/Solution%20Exports/Business%20Automation%20Insights)s.
+
+2. From the folder where you've downloaded the files, run the following command to import Case data.
+
+   (Replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL).
 
    ```
    curl -k -XPOST -H 'Content-Type: application/json' -u {esadmin}:{espassword} '{eshost}/_bulk' --data-binary @icmt.json
    ```
 
-2. Run the following command to import BPM data:
+3. Run the following command to import BPM data:
 
    ```
    curl -k -XPOST -H 'Content-Type: application/json' -u {esadmin}:{espassword} '{eshost}/_bulk' --data-binary @processt.json
    ```
-3.  Open **Business Performance Center** and click **Import.**
+
+4. Open **Business Performance Center** and click **Import.**
 
 > ![](images/BAI-1.png)
 
 4.  Click **Browse.**
 
-5.  Select **Mortgage Application Complete.json** and click **Import**.
+5.  Select **Mortgage Application Complete.json** (downloaded earlier) and click **Import**.
 
 > ![](images/BAI-2.png)
-
-6.  Optionally follow the instruction in **Lab Guide - Operational Intelligence - BAI - Build Business Performance Center Dashboard.pdf** to add and configure Goals.
-
- 
 
 ### Prepare a shared environment for labs
 
@@ -38,7 +39,8 @@
 > ![](images/BAI-3.png)
 
 
-### With that, you have successfully setup your lab for the end-to-end and preapred a shared environment for the CP4BA labs.
+
+### With that, you have successfully setup your environment with the Client Onboarding scenario.
 
 
 

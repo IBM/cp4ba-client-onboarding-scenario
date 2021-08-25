@@ -8,7 +8,7 @@
 
 3. Click on `Try it out`
 
-4. Use the contents of the `Solution Exports/Automation Decision Services/ML/addModel.json` file as the request body
+4. Use the contents of the [addModel.json](/Solution%20Exports/Automation%20Decision%20Services/ML/addModel.json) file as the request body
 
 5. Click on `Execute`
 
@@ -26,7 +26,7 @@
 
 10. In the request body, keep `pickle` selected as the `format` 
 
-11. Download this [pickle file](/Solution%20Exports/ADS/ML/service-payment-default-risk-v0-archive.pkl) onto your computer and use it as as the selected file
+11. Download this [pickle file](/Solution%20Exports/Automation%20Decision%20Services/ML/service-payment-default-risk-v0-archive.pkl) onto your computer and use it as as the selected file
 
  ![image-2021Binary](/images/ads-ml-add-binary.png)
 
@@ -37,7 +37,7 @@ The following instructions validate that this deployment can be safely executed.
 
 14. Click on `Try it out`
 
-15. Use the contents of the `Solution Exports/Automation Decision Services/ML/runModel.json` file as the request body
+15. Use the contents of the [runModel.json](/Solution%20Exports/Automation%20Decision%20Services/ML/runModel.json) file as the request body
 
 16. Update the `{DECISION-ID}` in the json to the `ID` copied before
 
@@ -48,4 +48,4 @@ The following instructions validate that this deployment can be safely executed.
  ![image-2021Check](/images/ads-ml-check.png)
 
 
-Once you have imported the ADS ML Service, you will need to import the ADS Project in IBM Business Automation Studio.
+Once you have imported the ADS ML Service, you will need to [import the ADS Project in IBM Business Automation Studio](/Step%202%20-%20ADS%20Project.md).

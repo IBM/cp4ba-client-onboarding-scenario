@@ -1,6 +1,6 @@
 # Step 2 - Import the ADS Project
 
-1. Download [ClientOnboardingDecisions.zip](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip)
+1. Download [ClientOnboardingDecisions.zip](/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip)
 
 2. Create an empty GIT repo and get its URL and API Key
 
@@ -96,5 +96,6 @@
 
 31. Select the three-dot menu for `v1.1` and click on `Publish`
 
-Once you have setup the ADS project, import the Workflow solution.
+With that you have successfully imported the ADS solution. Next, [setup the RPA server](/Step%203%20-%20RPA%20Server.md). 
+**Note:** Setting up the RPA server is optional and only required if you want to demo the execution of the RPA bot. If you want to skip this step, go directly to [importing the Workflow solution](/Step%204%20-%20Workflow%20Solution.md).
 

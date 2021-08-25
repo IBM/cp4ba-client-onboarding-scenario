@@ -97,9 +97,9 @@ You only need to do these steps if your environment will be used to perform the 
 
 10. Select the **Group** radio button.
 
-11. In the search box, enter **cp4bausers** (assuming the lab users are in that group). 
+11. In the search box, enter the name of the shared user group (eg: cp4bausers).
 
-12. Check the **cp4bausers** group and click on **Add**.
+12. Check the user group and click on **Add**.
 
     ![app-toolkit-collaborators](images/app-toolkit-collaborators.png)
 
@@ -129,7 +129,7 @@ You only need to do these steps if your environment will be used to perform the 
 
 24. Click on **Publish**.
 
-Once you have imported the app successfully, import the Business Automation Insights data.
+Once you have imported the app successfully, [import the Business Automation Insights data](/Step%207%20-%20Business%20Automation%20Insights.md).
 
 
 
