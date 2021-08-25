@@ -4,7 +4,7 @@
 
 **Note:** The data is currently based on a Mortgage Application solution
 
-1. Download the contents of the following directory - [Business Automation Insight](/Solution%20Exports/Business%20Automation%20Insights)s.
+1. Download the contents of the following directory - [Business Automation Insights](/Solution%20Exports/Business%20Automation%20Insights).
 
 2. From the folder where you've downloaded the files, run the following command to import Case data.
 
