@@ -2,7 +2,7 @@
 
 ### Pepare the environment for the end-to-end scenario
 
-1. Download the contents of the [following folder](/Solution Exports/Navigator).
+1. Download the contents of the [following folder](Solution%20Exports/Navigator).
 
 2. Login to the **Navigator admin desktop**.
 
@@ -77,7 +77,7 @@
 
 You only need to do these steps if your environment will be used to perform the labs associated with Client Onboarding.
 
-1. Download the [application template twx file](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx).
+1. Download the [application template twx file](Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx).
 
 2. Login to **IBM Business Automation Studio**.
 
@@ -129,7 +129,7 @@ You only need to do these steps if your environment will be used to perform the 
 
 24. Click on **Publish**.
 
-Once you have imported the app successfully, [import the Business Automation Insights data](/Step%207%20-%20Business%20Automation%20Insights.md).
+Once you have imported the app successfully, [import the Business Automation Insights data](Step%207%20-%20Business%20Automation%20Insights.md).
 
 
 

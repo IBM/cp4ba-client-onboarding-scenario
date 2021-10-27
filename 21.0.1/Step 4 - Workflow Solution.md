@@ -2,7 +2,7 @@
 
 ### Pepare the environment for the end-to-end scenario
 
-1. Download the [Workflow twx file](/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx).
+1. Download the [Workflow twx file](Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx).
 
 2. Login to **IBM Business Automation Studio**
 
@@ -88,5 +88,5 @@
 
 7. Click on the **Add** button to close the dialog.
 
-Once you have imported the Workflow solution, [import the required objects in Filenet Content Manager](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/Step%205%20-%20Content%20Manager.md).
+Once you have imported the Workflow solution, [import the required objects in Filenet Content Manager](Step%205%20-%20Content%20Manager.md).
 

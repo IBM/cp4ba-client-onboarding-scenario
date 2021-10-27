@@ -21,11 +21,11 @@ Perform the following steps:
    
    | Document                                                     | Document Title | Document Class  | Document Properties                                          |
    | ------------------------------------------------------------ | -------------- | --------------- | ------------------------------------------------------------ |
-   | [Banking Information - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Banking Information - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
-   | [Certificate of Incorporation - Automation Elite Inc.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Certificate of Incorporation - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
-   | [June Marie - Driver's License.png](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | June Marie - Driver's License | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
-   | [Legacy Consulting - Banking Information.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Legacy Consulting - Banking Information | Client Document | Client Name: Legacy Consulting                               |
-   | [Legacy Consulting - Certificate of Incorporation.pdf](/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Legacy Consulting - Certificate of Incorporation | Client Document | Client Name: Legacy Consulting                               |
+   | [Banking Information - Automation Elite Inc.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Banking Information - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
+   | [Certificate of Incorporation - Automation Elite Inc.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Certificate of Incorporation - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
+   | [June Marie - Driver's License.png](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | June Marie - Driver's License | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
+   | [Legacy Consulting - Banking Information.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Legacy Consulting - Banking Information | Client Document | Client Name: Legacy Consulting                               |
+   | [Legacy Consulting - Certificate of Incorporation.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Legacy Consulting - Certificate of Incorporation | Client Document | Client Name: Legacy Consulting                               |
    
    1. In the navigation area, navigate to "Browse", and "Root Folder". Click on "Client Documents" to bring up the contents of the folder. From the opened "Client Documents" folder, invoke "New Document" from the Actions pulldown menu.
       <br/><img src="images/content-createdocs1.png" />
@@ -45,7 +45,7 @@ Perform the following steps:
       <br/><img src="images/content-event-action-name.png"/>
    3. Select `Javascript`, click `Next >`
       <br/><img src="images/content-event-action-javascript.png" />
-   4. Mark all text in the `Event Action Script` text box and remove it. Then go to the bottom of this page and copy the event action javascript. Paste the Javascript text from contents of [File Identification Event Action.js](/Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Finish`.
+   4. Mark all text in the `Event Action Script` text box and remove it. Then go to the bottom of this page and copy the event action javascript. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Finish`.
       <br/><img src="images/content-event-action-script.png" />
 
 6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
@@ -75,4 +75,4 @@ If you are using an environment that will be shared by multiple users, it is imp
       <br/><img src="images/content-security-id3.png"/>
 2. For the `Client Document` document class, update the security settings: remove the shared user group (eg: cp4bausers) from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`. Follow the same steps as before, just replace `Identification` class by `Client Document` class.
 
-With that, you have successfully imported the objects required for the solution into Filenet Content Manager. Next, [import the Business Automation Application into IBM Business Automation Navigator](/Step%206%20-%20Business%20Automation%20Application.md).
+With that, you have successfully imported the objects required for the solution into Filenet Content Manager. Next, [import the Business Automation Application into IBM Business Automation Navigator](Step%206%20-%20Business%20Automation%20Application.md).

@@ -1,6 +1,6 @@
 # Step 2 - Import the ADS Project
 
-1. Download [ClientOnboardingDecisions.zip](/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip)
+1. Download [ClientOnboardingDecisions.zip](Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip)
 
 2. Create an empty GIT repo and get its URL and API Key
 
@@ -18,7 +18,7 @@
 
 8. Click on `Connect` and enter the references of the GIT repo previously created
 
- ![image-2021gitconnect](/images/ads-git-connect.png)
+ ![image-2021gitconnect](images/ads-git-connect.png)
 
 8. Click on `Connected` under `Remote Git repository`
 
@@ -32,7 +32,7 @@
 
 13. Click on `Test Connection`
 
- ![image-2021provider](/images/ads-add-provider.png)
+ ![image-2021provider](images/ads-add-provider.png)
 
 14. Click on `Save`
 
@@ -46,7 +46,7 @@
 
 19. Expand the `service-payment-default-risk` ML model and select the `service-payment-default-risk` deployment
 
- ![image-2021connect](/images/ads-connect-ml.png)
+ ![image-2021connect](images/ads-connect-ml.png)
 
 
 20. Click `Next` and go to `Test invocation`
@@ -75,7 +75,7 @@
     ```
 
 
- ![image-2021execute](/images/ads-ml-execute.png)
+ ![image-2021execute](images/ads-ml-execute.png)
 
 24. Click on `Next`
 
@@ -89,13 +89,13 @@
 
 29. In the `Deploy` tab, expand `v1.1`, click on `Deploy` and wait for deployment to complete
 
-![image-2021deploy](/images/ads-deploy.png)
+![image-2021deploy](images/ads-deploy.png)
 
 
 30. Back in the studio, go to `Design` --> `Business Automations` -->`Decisions` and click on the `Client Onboarding` Decision project
 
 31. Select the three-dot menu for `v1.1` and click on `Publish`
 
-With that you have successfully imported the ADS solution. Next, [setup the RPA server](/Step%203%20-%20RPA%20Server.md). 
-**Note:** Setting up the RPA server is optional and only required if you want to demo the execution of the RPA bot. If you want to skip this step, go directly to [importing the Workflow solution](/Step%204%20-%20Workflow%20Solution.md).
+With that you have successfully imported the ADS solution. Next, [setup the RPA server](Step%203%20-%20RPA%20Server.md). 
+**Note:** Setting up the RPA server is optional and only required if you want to demo the execution of the RPA bot. If you want to skip this step, go directly to [importing the Workflow solution](Step%204%20-%20Workflow%20Solution.md).
 
