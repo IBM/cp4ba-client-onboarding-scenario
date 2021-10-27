@@ -39,17 +39,17 @@ Perform the following steps:
    
 5. Create a `File Identification Event Action` using the below JavaScript.
 
-   1. Open `Event, Action, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
+   1. Open `Event, Actions, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
       <br/><img src="images/content-create-eventaction.png" />
    2. The Name and Describe the Event Action dialog opens on the right. Set the name to `File Identification Event Action`, click `Next >`
       <br/><img src="images/content-event-action-name.png"/>
    3. Select `Javascript`, click `Next >`
       <br/><img src="images/content-event-action-javascript.png" />
-   4. Mark all text in the `Event Action Script` text box and remove it. Then go to the bottom of this page and copy the event action javascript. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Finish`.
+   4. Mark all text in the `Event Action Script` text box and remove it. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Finish`.
       <br/><img src="images/content-event-action-script.png" />
 
 6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
-   1. Open `Event, Action, Processes`. Right-click on `Subscriptions` and select `New Subscription` from context menu.
+   1. Open `Event, Actions, Processes`. Right-click on `Subscriptions` and select `New Subscription` from context menu.
       <br/><img src="images/content-subscription1.png"/>
    2. Set the name to `File Identification Subscription`, click `Next >`
       <br/><img src="images/content-subscription2.png"/>   
@@ -59,7 +59,7 @@ Perform the following steps:
       <br/><img src="images/content-subscription4.png"/>  
    5. Set the event action to `File Identification Event Action`, click `Next >`
       <br/><img src="images/content-subscription5.png"/>
-   6. Click on `Enable Subclasses`, click `Next` and `Finish`
+   6. Click on `Include Subclasses`, click `Next` and `Finish`
       <br/><img src="images/content-subscription6.png"/>
 
 ### Prepare a shared environment for labs

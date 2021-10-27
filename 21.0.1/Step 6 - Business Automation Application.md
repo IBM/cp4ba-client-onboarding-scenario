@@ -2,7 +2,7 @@
 
 ### Pepare the environment for the end-to-end scenario
 
-1. Download the contents of the [following folder](Solution%20Exports/Navigator).
+1. Download the contents of the [following folder](Solution%20Exports/Business%20Automation%20Navigator).
 
 2. Login to the **Navigator admin desktop**.
 
@@ -71,7 +71,7 @@
 
 26. In the **Desktops** tab, click on the **Import** button.
 
-27. Choose the the previously downloaded file **ICNExportedConfiguration.properties** and click on the **Import** button. You can close the summary dialog that pops up after the import is complete.
+27. Choose the the previously downloaded file **ICNExportedConfiguration.properties** and click on the **Import** button. You can close the summary dialog that pops up after the import is complete. Note that you may see a warning that says `The following items already exist on this system`. You can ignore this warning and continue with the import.
 
 ### Prepare a shared environment for labs
 

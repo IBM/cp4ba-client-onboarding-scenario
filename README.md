@@ -1,13 +1,22 @@
 # Client Onboarding Scenario
 
-The client onboarding scenario is an end-to-end solution that showcases the art of the possible with IBM Cloud Pak for Business Automation (CP4BA). A pre-recorded video of the scenario is available [here](http://ibm.biz/cp4ba-overview-video). 
+## Introduction
 
-The instructions below show you how to import the solution into an existing CP4BA installation. The instructions also assume that you have Open Prediction Service installed to execute the AI models required by the Decisions capability of the platform.
+The client onboarding scenario is an end-to-end solution that showcases the art of the possible with IBM Cloud Pak for Business Automation (CP4BA). You can see the end-to-end in action with this [pre-recorded video](http://ibm.biz/cp4ba-overview-video).
 
-**Note:** If you don't have an existing CP4BA install, you can request a pre-installed cluster using the links [here](https://techzone.ibm.com/collection/reserve-here-cloud-pak-for-business-automation-open-shift-demo-environments#tab-1). 
-The pre-installed cluster is a demo deployment and does not contain Open Prediction Service. You can follow the instructions [here](https://github.com/IBM/open-prediction-service-hub/tree/main/ops-implementations/ads-ml-service) to set it up if you want to show the client onboarding scenario backed by AI. Alternatively, you can setup your own enterprise deployment with Open Prediction Service using the instructions [here](https://github.com/IBM/cp4ba-rapid-deployment).
+## Prerequisistes
 
-Instructions to import the Client Onboarding solution for 21.0.1 can be found [here](/21.0.1).
+1. A CP4BA cluster:
+   - You can create a new cluster on IBM Cloud using ROKS using the SWAT team's [rapid deployment scripts](https://github.com/IBM/cp4ba-rapid-deployment).
+   - You can use your existing cluster with the following patterns: foundation, decisions_ads, application, workflow and content. You also need to install [Open Prediction Service](https://github.com/IBM/open-prediction-service-hub/tree/main/ops-implementations/ads-ml-service) to execute some of the AI capabilities of the scenario.
+   - You can request a new cluster to be created for you using the [technical sales activation kit](https://techzone.ibm.com/collection/cloud-pak-for-automation-activation-kit).
+2. A Gmail account with [less secured app access](https://support.google.com/accounts/answer/6010255?hl=en) turned on.
+
+## Import Instructions
+
+Instructions to import the Client Onboarding solution are available for the following CP4BA instructions:
+
+- [CP4BA v21.0.1](/21.0.1)
 
 Once you have imported the Client Onboarding scenario successfully, you can perform the [IBM Cloud Pak for Business Automation labs](https://github.com/IBM/cp4ba-labs).
 

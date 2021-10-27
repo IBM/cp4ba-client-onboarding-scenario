@@ -16,9 +16,7 @@
 
    ![ads-import](images/ads-import.png)
 
-8. Click on `Connect` and enter the references of the GIT repo previously created
-
- ![image-2021gitconnect](images/ads-git-connect.png)
+8. Click on `Connect` and enter the references of the GIT repo previously created ![image-2021gitconnect](images/ads-git-connect.png)
 
 8. Click on `Connected` under `Remote Git repository`
 
