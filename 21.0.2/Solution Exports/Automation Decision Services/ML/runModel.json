@@ -1,0 +1,26 @@
+{
+  "target": [
+    {
+      "rel": "endpoint",
+      "href": "/endpoints/{DECISION-ID}"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "clientAnnualRevenue",
+      "value": 65451716.0
+    },
+   {
+      "name": "clientExistenceDuration",
+      "value": 8.0
+    },
+  {
+      "name": "clientEmployeeNumber",
+      "value": 77.0
+    },
+ {
+      "name": "clientIndustry",
+      "value": 1.0
+    }
+  ]
+}

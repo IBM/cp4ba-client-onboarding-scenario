@@ -1,0 +1,70 @@
+{
+  "name": "service-payment-default-risk",
+  "input_schema": [
+    {
+      "name": "clientAnnualRevenue",
+      "order": 0,
+      "type": "float64"
+    },
+    {
+      "name": "clientExistenceDuration",
+      "order": 1,
+      "type": "float64"
+    },
+    {
+      "name": "clientEmployeeNumber",
+      "order": 2,
+      "type": "float64"
+    },
+    {
+      "name": "clientIndustry",
+      "order": 3,
+      "type": "float64"
+    }
+  ],
+  "output_schema": {
+    "attributes": [
+      {
+        "name": "prediction",
+        "type": "string"
+      },
+      {
+        "name": "probabilities",
+        "type": "[Probability]"
+      }
+    ]
+  },
+  "version": "V1",
+  "links": [
+    {
+      "rel": "string",
+      "href": "string"
+    }
+  ],
+  "metadata": {
+    "description": "Sample service risk predictive model",
+    "author": "Pierre Feillet",
+    "metrics": [
+      {
+        "name": "Coefficient of determination R^2",
+        "value": 0.9975
+      },
+      {
+        "name": "Root Mean Squared Error (RMSE)",
+        "value": 0.0025
+      },
+      {
+        "name": "Accuracy",
+        "value": 0.9975
+      },
+      {
+        "name": "Balanced accuracy",
+        "value": 0.9951272824020239
+      },
+      {
+        "name": "Confusion Matrix",
+        "value": "[[1748, 3], [2, 247]]"
+      }
+    ]
+  }
+}
