@@ -17,6 +17,7 @@ The client onboarding scenario is an end-to-end solution that showcases the art 
 Instructions to import the Client Onboarding solution are available for the following CP4BA instructions:
 
 - [CP4BA v21.0.1](/21.0.1)
+- [CP4BA v21.0.2](/21.0.2)
 
 Once you have imported the Client Onboarding scenario successfully, you can perform the [IBM Cloud Pak for Business Automation labs](https://github.com/IBM/cp4ba-labs).
 
