@@ -46,7 +46,7 @@
 
 ### Create and configure Goal
 
-1l Follw the cnstruction included in this document - [Create and configure Goal](Goal%20Setup%20Instructions.pdf).
+1. Follw the cnstruction included in this document - [Create and configure Goal](Solution%20Exports/Goal%20Setup%20Instructions.pdf).
 
 ### With that, you have successfully setup your environment with the Client Onboarding scenario.
 
