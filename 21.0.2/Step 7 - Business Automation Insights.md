@@ -39,7 +39,7 @@
 
 3. Click **Create**
 
-   ![](images/BAI-goal-create.png)
+   ![](images/BAI-create-goal.png)
 
 4. For Name enter **Focus Corp's top Client Onboarding KPI Completed**
 
