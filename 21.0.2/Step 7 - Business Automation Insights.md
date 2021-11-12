@@ -20,14 +20,13 @@
 
 3. Open **Business Performance Center** and click **Import.**
 
+   ![](images/BAI-1.png)
+   
+4. Click **Browse.**
 
-> ![](images/BAI-1.png)
+5. Select **Client Onboarding Completed.json** (downloaded earlier) and click **Import**.
 
-4.  Click **Browse.**
-
-5.  Select **Client Onboarding Completed.json** (downloaded earlier) and click **Import**.
-
-> ![](images/BAI-2.png)
+   ![](images/BAI-2.png)
 
 #### Create and configure goals
 
@@ -77,9 +76,9 @@
 
 1. Open **Business Performance Center**
 
-2.	On **Client Onboarding Completed** dashboard select the **3-dot menu** and click **Share with everyone**.
+2. On **Client Onboarding Completed** dashboard select the **3-dot menu** and click **Share with everyone**.
 
-> ![](images/BAI-3.png)
+   ![](images/BAI-3.png)
 
 
 
