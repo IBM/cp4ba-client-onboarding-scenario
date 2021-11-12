@@ -41,25 +41,31 @@ Perform the following steps:
 
    1. Open `Event, Actions, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
       <br/><img src="images/content-create-eventaction.png" />
+      
    2. The Name and Describe the Event Action dialog opens on the right. Set the name to `File Identification Event Action`, click `Next >`
       <br/><img src="images/content-event-action-name.png"/>
-   3. Select `Javascript`, click `Next >`
-      <br/><img src="images/content-event-action-javascript.png" />
-   4. Mark all text in the `Event Action Script` text box and remove it. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Finish`.
+      
+   3. Select `Event Action`, click `Next >`
+      <br/><img src="images/content-event-action-type.png" />
+      
+   4. Select `Javascript` as the Type, click `Next >`
+
+      <img src="images/content-event-action-type-javascript.png" />
+
+   5. Mark all text in the `Event Action Script` text box and remove it. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Close`.
       <br/><img src="images/content-event-action-script.png" />
 
 6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
-   1. Open `Event, Actions, Processes`. Right-click on `Subscriptions` and select `New Subscription` from context menu.
+   1. Open `Data Design --> Classes --> Document`. Right-click on `Identification` and select `New Subscription` from context menu.
       <br/><img src="images/content-subscription1.png"/>
    2. Set the name to `File Identification Subscription`, click `Next >`
       <br/><img src="images/content-subscription2.png"/>   
-   3. Set the class type to `Document`, and the class to `Identification`, click `Next >` twice
-      <br/><img src="images/content-subscription3.png"/> 
+   3. Click on `Next >` for the Specify the Subscription Behavior page.
    4. Select `Checkin Event` to trigger the subscription, click `Next >`
       <br/><img src="images/content-subscription4.png"/>  
    5. Set the event action to `File Identification Event Action`, click `Next >`
       <br/><img src="images/content-subscription5.png"/>
-   6. Click on `Include Subclasses`, click `Next` and `Finish`
+   6. Click on `Include Subclasses`, click `Next >` and `Finish`
       <br/><img src="images/content-subscription6.png"/>
 
 ### Prepare a shared environment for labs

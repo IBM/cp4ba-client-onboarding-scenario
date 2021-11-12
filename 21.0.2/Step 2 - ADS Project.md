@@ -26,7 +26,8 @@
 
 11. Enter `OPS` as the name
 
-12. Use the ADS ML Service (Open Prediction Service) URL in the `URL` field
+13. Use the ADS ML Service (Open Prediction Service) URL in the `URL` field
+    **Note:** This is the same URL you used for importing the predictive model without the `/docs` suffix at the end.
 
 13. Click on `Test Connection`![image-2021provider](images/ads-add-provider.png)
 
@@ -72,16 +73,12 @@
 ![image-2021execute](images/ads-ml-execute.png)
 
 24. Click on `Next`
-
 25. Click on `Generate from test output` then click `OK`
-
 26. Click on `Apply` in the upper-right corner
-
-27. Under `Share changes` at the top, click on the number of changes, select all and click `Share`
-
-28.  In the `View history` tab, create a new version named `v1.1`
-
-29. In the `Deploy` tab, expand `v1.1`, click on `Deploy` and wait for deployment to complete![image-2021deploy](images/ads-deploy.png)
+27. Under `Share changes` at the top, click on the number of changes.
+28. Select all the changes by clicking on the top-most unchecked checkbox and then click on `Share`
+29. In the `View history` tab, create a new version named `v1.1`
+30. In the `Deploy` tab, expand `v1.1`, click on `Deploy` and wait for deployment to complete![image-2021deploy](images/ads-deploy.png)
 
 
 30. Back in the studio, go to `Design` --> `Business Automations` -->`Decisions` and click on the `Client Onboarding` Decision project
