@@ -31,11 +31,9 @@
 10. Click on the **Service resources** tab and select the **REMOTE_SERVICE_SERVER** resource.
 
 11. In the **Host name** field, enter the host name for your BAW server. It should look something like:
-    `bawaut-ibm-cp4ba.....containers.appdomain.cloud`
+    `https://bawaut-ibm-cp4ba.....containers.appdomain.cloud`
 
-    Note that  `http://` or `https://` isn't used as a part of the host name. You can find the host name for your system by looking up the Process Admin URL and copying the part without the `https://` and `/ProcessAdmin`
-
-12. In the password field, enter the password for the admin user.
+    In the password field, enter the password for the admin user.
 
 13. Click on the **Save** button.
 
@@ -49,7 +47,7 @@
 
     ![nav-import-app](images/nav-import-app.png)
 
-17. Choose the the previously downloaded file **ClientOnboarding.zip** and click on the **Import** button. If a dialog pops up after import, you can close it.
+17. Choose the the previously downloaded file **ClientOnboarding.zip** and click on the **Import** button. If an information dialog pops up after import, you can close it.
 
 18. Click on the 3-dot menu for the **Client Onboarding** applicaiton and select **Details**,
 
@@ -67,7 +65,7 @@
 
 24. Click on the **Close** button.
 
-25. Close the **APPENGO** and **Connections** tab at the top.
+25. Close the **APPENGO** and **Connections** tabs at the top.
 
 26. In the **Desktops** tab, click on the **Import** button.
 
@@ -113,7 +111,7 @@ You only need to do these steps if your environment will be used to perform the 
 
 17. In the **Connection name** field, enter **External BAW System**.
 
-18. In the **System URL** field, enter the host name of the BAW server that you previously used in navigator for the automation service but this time, include `https://`
+18. In the **System URL** field, enter the host name of the BAW server that you previously used in navigator for the automation service (starting with `https://bawaut..`.
 
 19. Enter the admin credentials and click **Next**.
 
