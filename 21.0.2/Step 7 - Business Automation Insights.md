@@ -44,7 +44,9 @@
 
 > ![](images/BAI-3.png)
 
+### Create and configure Goal
 
+1. Follw the cnstruction included in this document - [Create and configure Goal](Solution%20Exports/Business%20Automation%20Insights/Goal%20Setup%20Instructions.pdf).
 
 ### With that, you have successfully setup your environment with the Client Onboarding scenario.
 
