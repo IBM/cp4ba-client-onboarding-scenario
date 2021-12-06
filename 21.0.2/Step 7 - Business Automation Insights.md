@@ -4,9 +4,14 @@
 
 1. Download the contents of the following directory - [Business Automation Insights](Solution%20Exports/Business%20Automation%20Insights).
 
-   In the script below, replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL.
+2. Replace the index names in the downloaded files:
 
-2. From the folder where you've downloaded the files, run the following script to import the data.
+   In the `process-data.json` and `case-data.json` files, the index name parameter must match the index names of your environment. The index names are dependent on the date of the install. For example, one of the index names in the provided data files is `icp4ba-bai-process-summaries-completed-idx-ibm-bai-2021.11.11-000001`. The date `2021.11.11` must be replaced by the data in your environment's index. 
+
+   You can get the index names for your environment using the following command (Replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
+   `curl -k -XGET -u {esadmin}:{espassword} '{eshost}/_aliases'`
+
+3. From the folder where you've downloaded the files and replaced the index names, run the following script to import the data (replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
 
    ```
    ES_ADMIN={esadmin}
@@ -18,13 +23,13 @@
    curl -k -XPOST -H 'Content-Type: application/json' -u ${ES_ADMIN}:${ES_PASSWORD} ${ES_HOST}/_bulk --data-binary @ads-data.json
    ```
 
-3. Open **Business Performance Center** and click **Import.**
+4. Open **Business Performance Center** and click **Import.**
 
    ![](images/BAI-1.png)
-   
-4. Click **Browse.**
 
-5. Select **Client Onboarding Completed.json** (downloaded earlier) and click **Import**.
+5. Click **Browse.**
+
+6. Select **Client Onboarding Completed.json** (downloaded earlier) and click **Import**.
 
    ![](images/BAI-2.png)
 
