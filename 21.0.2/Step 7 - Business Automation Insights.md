@@ -9,7 +9,9 @@
    In the `process-data.json` and `case-data.json` files, the index name parameter must match the index names of your environment. The index names are dependent on the date of the install. For example, one of the index names in the provided data files is `icp4ba-bai-process-summaries-completed-idx-ibm-bai-2021.11.11-000001`. The date `2021.11.11` must be replaced by the data in your environment's index. 
 
    You can get the index names for your environment using the following command (Replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
-   `curl -k -XGET -u {esadmin}:{espassword} '{eshost}/_aliases'`
+   ```
+   curl -k -XGET -u {esadmin}:{espassword} '{eshost}/_aliases'
+   ```
 
 3. From the folder where you've downloaded the files and replaced the index names, run the following script to import the data (replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
 
