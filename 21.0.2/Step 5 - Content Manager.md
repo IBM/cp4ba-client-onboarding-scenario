@@ -6,7 +6,7 @@ Perform the following steps:
 
 1. Login to ACCE. You can switch to english locale if needed by clicking on the persona icon in upper right corner, and select `Change Language and Locale Settings`.
 
-2. Open the target object store, its name is `BAWTOS`, by clicking on it.
+2. Open the target object store, (eg: `BAWTOS` or `TARGET`), by clicking on it.
    <br/><img src="images/content-open-bawtos.png" />
    
 3. Create a new folder named `Client Documents` under the root folder.

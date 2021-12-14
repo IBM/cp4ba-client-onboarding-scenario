@@ -4,7 +4,7 @@
 
 1. Download the contents of the [following folder](Solution%20Exports/Business%20Automation%20Navigator).
 
-2. Login to the **Navigator admin desktop**.
+2. Login to the **Navigator admin desktop** (URL should end with `desktop=admin`).
 
 3. Click on **Connections** in the menu on the left.
 
@@ -47,29 +47,31 @@
 
     ![nav-import-app](images/nav-import-app.png)
 
-17. Choose the the previously downloaded file **ClientOnboarding.zip** and click on the **Import** button. If an information dialog pops up after import, you can close it.
+16. Choose the the previously downloaded file **ClientOnboarding.zip** and click on the **Import** button. If an information dialog pops up after import, you can close it.
 
-18. Click on the 3-dot menu for the **Client Onboarding** applicaiton and select **Details**,
+    **NOTE: **The target object store name specified in the Application is **BAWTOS**. If you are using a demo environment, the target store name could be different (eg: **TARGET**). In that case, the 2nd page of the application won't show any documents as it looks for the documents in the BAWTOS object store. To fix this, you can import the application template in Studio as instructed at the end of this page, and update the object store name there.
 
-19. Click on the **Permissions** tab.
+17. Click on the 3-dot menu for the **Client Onboarding** applicaiton and select **Details**,
 
-20. Click on the **Add Teams** button.
+18. Click on the **Permissions** tab.
 
-21. In the popup, enter **#** in the **Filter by Teams** field and hit **Enter**.
+19. Click on the **Add Teams** button.
+
+20. In the popup, enter **#** in the **Filter by Teams** field and hit **Enter**.
 
     ![nav-app-permissions](images/nav-app-permissions.png)
 
-22. Select the **#AUTHENTICATED-USERS** team and click on the right-facing arrow to move the team to the **Selected** column.
+21. Select the **#AUTHENTICATED-USERS** team and click on the right-facing arrow to move the team to the **Selected** column.
 
-23. Click on the **Add** button.
+22. Click on the **Add** button.
 
-24. Click on the **Close** button.
+23. Click on the **Close** button.
 
-25. Close the **APPENGO** and **Connections** tabs at the top.
+24. Close the **APPENGO** and **Connections** tabs at the top.
 
-26. In the **Desktops** tab, click on the **Import** button.
+25. In the **Desktops** tab, click on the **Import** button.
 
-27. Choose the the previously downloaded file **ICNExportedConfiguration.properties** and click on the **Import** button. You can close the summary dialog that pops up after the import is complete. Note that you may see a warning that says `The following items already exist on this system`. You can ignore this warning and continue with the import.
+26. Choose the the previously downloaded file **ICNExportedConfiguration.properties** and click on the **Import** button. You can close the summary dialog that pops up after the import is complete. Note that you may see a warning that says `The following items already exist on this system`. You can ignore this warning and continue with the import.
 
 ### Prepare a shared environment for labs
 

@@ -36,7 +36,7 @@
 
 13. If you are executing the RPA bot, update the value for the **rpaServer** environment variable from the environment you reserved using the previous step.
 
-14. The default target object store name is **BAWTOS**. If you have changed this, update the value for the **tosName** environment variable.
+14. The default target object store name is **BAWTOS**. If you have changed this, update the value for the **tosName** environment variable. Demo environments have the default target object store name of **TARGET**.
 
 15. In the top-right corner, click on the **Finish Editing** button.
 
