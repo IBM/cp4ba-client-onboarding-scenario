@@ -18,6 +18,7 @@ Instructions to import the Client Onboarding solution are available for the foll
 
 - [CP4BA v21.0.1](/21.0.1)
 - [CP4BA v21.0.2](/21.0.2)
+- [CP4BA v21.0.3](/21.0.3)
 
 Once you have imported the Client Onboarding scenario successfully, you can perform the [IBM Cloud Pak for Business Automation labs](https://github.com/IBM/cp4ba-labs).
 
