@@ -90,7 +90,7 @@
 
 33. Select the checkbox for **New Client Onboarding Request**.
 
-    ![studio-external-aut-service](/Users/swapnil/IBM/SWAT/Public-Repos/cp4ba-client-onboarding-scenario/21.0.3/images/studio-external-aut-service.png)
+    ![studio-external-aut-service](images/studio-external-aut-service.png)
 
 34. Click on **Next**.
 
