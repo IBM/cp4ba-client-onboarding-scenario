@@ -1,4 +1,4 @@
-# Step 7 - Import the Business Automation Insights data
+# Step 8 - Import the Business Automation Insights data
 
 ### Pepare the environment for the end-to-end scenario
 
