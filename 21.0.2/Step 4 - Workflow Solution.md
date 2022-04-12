@@ -32,39 +32,43 @@
 
     ![wf-env-variables](images/wf-env-variables.png)
 
-12. The RPA bot is currently only executed if the user is `cp4badmin`. You can change this by updating the value of the **rpaBotExecutionUser** environment variable.
+12. If you are showcasing ADP as a part of the scenario, enter the ADP host, username, password, and projectID in their respective fields. If you are not, set **adpEnabled** to false.
 
-13. If you are executing the RPA bot, update the value for the **rpaServer** environment variable from the environment you reserved using the previous step.
+13. For the **documentUploadPage** environment variable, open the the **Client Document Upload** Client-Side Human Service and copy the URL in the **Overview** tab.
 
-14. The default target object store name is **BAWTOS**. If you have changed this, update the value for the **tosName** environment variable. Demo environments have the default target object store name of **TARGET**.
+14. The RPA bot is currently only executed if the user is `cp4badmin`. You can change this by updating the value of the **rpaBotExecutionUser** environment variable.
 
-15. In the top-right corner, click on the **Finish Editing** button.
+15. If you are executing the RPA bot, update the value for the **rpaServer** environment variable from the environment you reserved using the previous step.
+
+16. The default target object store name is **BAWTOS**. If you have changed this, update the value for the **tosName** environment variable. Demo environments have the default target object store name of **TARGET**.
+
+17. In the top-right corner, click on the **Finish Editing** button.
 
     ![wf-finish-editing](images/wf-finish-editing.png)
 
-16. In the top-left corner, click on **Business automations** to go back to the BA Studio.
+18. In the top-left corner, click on **Business automations** to go back to the BA Studio.
 
     ![wf-back-to-studio](images/wf-back-to-studio.png)
 
-17. Click on **Open** for the **Client Onboarding** Workflow automation project to open it in the Case Builder.
+19. Click on **Open** for the **Client Onboarding** Workflow automation project to open it in the Case Builder.
 
     ![wf-co-open](images/wf-co-open.png)
 
-18. In the top-right corner, click on the **Deploy** button. The deployment will take a few seconds. Wait until there is a green checkmark next to the button.
+20. In the top-right corner, click on the **Deploy** button. The deployment will take a few seconds. Wait until there is a green checkmark next to the button.
 
     ![wf-deploy-solution](images/wf-deploy-solution.png)
 
-19. In the top-left corner, click on **Automations** to go back to the BA Studio.
+21. In the top-left corner, click on **Automations** to go back to the BA Studio.
 
     ![wf-case-builder-automations](images/wf-case-builder-automations.png)
 
-20. Click on the tile for the **Client Onboarding** Workflow automation project.
+22. Click on the tile for the **Client Onboarding** Workflow automation project.
 
-21. Click on the 3-dot menu for latest version of the project and click on **Publish**.
+23. Click on the 3-dot menu for latest version of the project and click on **Publish**.
 
     ![wf-publish](images/wf-publish.png)
 
-22. Close the dialog that shows that the automation services were published successfully.
+24. Close the dialog that shows that the automation services were published successfully.
 
 ### Prepare a shared environment for labs
 

@@ -23,7 +23,8 @@ Perform the following steps:
    | ------------------------------------------------------------ | -------------- | --------------- | ------------------------------------------------------------ |
    | [Banking Information - Automation Elite Inc.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf) | Banking Information - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
    | [Certificate of Incorporation - Automation Elite Inc.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf) | Certificate of Incorporation - Automation Elite Inc | Client Document | Client Name: Automation Elite Inc.                           |
-   | [June Marie - Driver's License.png](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | June Marie - Driver's License | Identification  | Client Name: Automation Elite Inc.<br />Identification Number: S 100 100 100 100<br />First Name: June Marie<br />Last Name: Sample |
+   | [June Marie - Driver's License.png](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png) | June Marie - Driver's License | Client Document | Client Name: Automation Elite Inc.<br /> |
+   | [Utility Bill - Automation Elite Inc.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Utility%20Bill%20-%20Automation%20Elite%20Inc.pdf) | Utility Bill - Automation Elite Inc. | Utility Bill | Client Name: Automation Elite Inc.<br />Service Address: 3974 Carson St, Lansing, MI 48911 |
    | [Legacy Consulting - Banking Information.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf) | Legacy Consulting - Banking Information | Client Document | Client Name: Legacy Consulting                               |
    | [Legacy Consulting - Certificate of Incorporation.pdf](Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf) | Legacy Consulting - Certificate of Incorporation | Client Document | Client Name: Legacy Consulting                               |
    
@@ -35,50 +36,18 @@ Perform the following steps:
       <br/><img src="images/content-createdocs3.png" />
    4. On the next page, provide the property values, according to the table above. No further changes are required, so press "Next" until the final page, then "Finish" and then "Close".
    
-   
-   
-5. Create a `File Identification Event Action` using the below JavaScript.
-
-   1. Open `Event, Actions, Processes`. Right-click on `Event Actions` and select `New Event action` from context menu.
-      <br/><img src="images/content-create-eventaction.png" />
-      
-   2. The Name and Describe the Event Action dialog opens on the right. Set the name to `File Identification Event Action`, click `Next >`
-      <br/><img src="images/content-event-action-name.png"/>
-      
-   3. Select `Event Action`, click `Next >`
-      <br/><img src="images/content-event-action-type.png" />
-      
-   4. Select `Javascript` as the Type, click `Next >`
-
-      <img src="images/content-event-action-type-javascript.png" />
-
-   5. Mark all text in the `Event Action Script` text box and remove it. Paste the Javascript text from contents of [File Identification Event Action.js](Solution%20Exports/FileNet%20Content%20Manager/File%20Identification%20Event%20Action.js) into the `Event Action Script`text box, then click `Next >` then `Close`.
-      <br/><img src="images/content-event-action-script.png" />
-
-6. For the `Identification` document class, add an event subscription `File Identification` and use the event action from the previous step.
-   1. Open `Data Design --> Classes --> Document`. Right-click on `Identification` and select `New Subscription` from context menu.
-      <br/><img src="images/content-subscription1.png"/>
-   2. Set the name to `File Identification Subscription`, click `Next >`
-      <br/><img src="images/content-subscription2.png"/>   
-   3. Click on `Next >` for the Specify the Subscription Behavior page.
-   4. Select `Checkin Event` to trigger the subscription, click `Next >`
-      <br/><img src="images/content-subscription4.png"/>  
-   5. Set the event action to `File Identification Event Action`, click `Next >`
-      <br/><img src="images/content-subscription5.png"/>
-   6. Click on `Include Subclasses`, click `Next >` and `Finish`
-      <br/><img src="images/content-subscription6.png"/>
 
 ### Prepare a shared environment for labs
 
 If you are using an environment that will be shared by multiple users, it is important to disable certain permissions so that the objects defined for the Client Onboarding scenario are immuatable. Perform the following steps:
 
-1. For the `Identification` document class, update the security settings: remove the shared group (eg: cp4bausers) from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
-   1. On the Navigation area on the left side, open `Data Design`, `Classes`, `Document` and click on the `Identification` class to bring up its properties on the right side.
-      <br/><img src="images/content-security-id1.png"/>
+1. For the `Client Document` document class, update the security settings: remove the shared group (eg: cp4bausers) from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`.
+   1. On the Navigation area on the left side, open `Data Design`, `Classes`, `Document` and click on the `Client Document` class to bring up its properties on the right side.
+      <img src="images/content-security-id1.png"/>
    2. Select the `Default Instance Security` tab. Select the checkbox in front of the line with the shared user group (eg: cp4bausers) group and click on `Remove`. Then click on `Save`.
       <br/><img src="images/content-security-id2.png"/>
    3. Select the `Security` tab. Select the checkbox in front of the line with the shared user group (eg: cp4bausers) and click on `Edit...`. In the dialog, set the permission group to `Modify properties`, then click on `Ok`. Click on `Save` again on the `Identification` class properties.
       <br/><img src="images/content-security-id3.png"/>
-2. For the `Client Document` document class, update the security settings: remove the shared user group (eg: cp4bausers) from the **Default Instance Security**. Update the **Security** and lower the access level for the cp4bausers group to `Modify properties`. Follow the same steps as before, just replace `Identification` class by `Client Document` class.
+2. Repeat the step above for the sub-classes of `Client Document` i.e. `Banking Information` and `Utility Bill`
 
 With that, you have successfully imported the objects required for the solution into Filenet Content Manager. Next, [import the Business Automation Application into IBM Business Automation Navigator](Step%206%20-%20Business%20Automation%20Application.md).

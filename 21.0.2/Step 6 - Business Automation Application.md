@@ -16,38 +16,13 @@
 
 5. Click on the the **Connect...** button.
 
-6. Click on the **Automation Services** tab.
-
-7. Click on the **Import** button.
-
-   ![nav-import-aut-service](images/nav-import-aut-service.png)
-
-8. Choose the previously downloaded file **Client_Onboarding_Workflows_External.zip** and click on the **Import** button. If a dialog pops up after import, you can close it.
-
-9. Click on the 3-dot menu for the automation service and select **Details**.
-
-   ![nav-aut-service-details](images/nav-aut-service-details.png)
-
-10. Click on the **Service resources** tab and select the **REMOTE_SERVICE_SERVER** resource.
-
-11. In the **Host name** field, enter the host name for your BAW server. It should look something like:
-    `https://bawaut-ibm-cp4ba.....containers.appdomain.cloud`
-
-    In the password field, enter the password for the admin user.
-
-13. Click on the **Save** button.
-
-    ![nav-service-resources](images/nav-service-resources.png)
-
-14. Click on **Close** in the bottom-right corner.
-
 15. Click on the **Applications** tab.
 
 16. Click on the **Import** button.
 
     ![nav-import-app](images/nav-import-app.png)
 
-16. Choose the the previously downloaded file **ClientOnboarding.zip** and click on the **Import** button. If an information dialog pops up after import, you can close it.
+16. Choose the the previously downloaded file **ClientOnboardingRequest.zip** and click on the **Import** button. If an information dialog pops up after import, you can close it.
 
     **NOTE: **The target object store name specified in the Application is **BAWTOS**. If you are using a demo environment, the target store name could be different (eg: **TARGET**). In that case, the 2nd page of the application won't show any documents as it looks for the documents in the BAWTOS object store. To fix this, you can import the application template in Studio as instructed at the end of this page, and update the object store name there.
 
