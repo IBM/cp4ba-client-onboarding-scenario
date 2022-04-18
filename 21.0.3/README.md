@@ -11,3 +11,6 @@
 7. [Import the Business Automation Application app](Step%207%20-%20Business%20Automation%20Application.md)
 8. [Import the Business Automation Insights data](Step%208%20-%20Business%20Automation%20Insights.md)
 
+## Support
+
+IBMers can use this IBM internal Slack channel: [#dba-swat-asset-qna](**https://ibm-cloud.slack.com/archives/C026TD1SGCA**), everyone else can open a new issue in this github. 

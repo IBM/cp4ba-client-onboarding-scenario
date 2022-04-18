@@ -34,7 +34,7 @@
 
     ![wf-env-variables](images/wf-env-variables.png)
 
-12. If you are showcasing ADP as a part of the scenario, enter the ADP host, username, password, and projectID in their respective fields.
+12. If you are showcasing ADP as a part of the scenario, enter the ADP host, username, password, and projectID in their respective fields. If you are not, set **adpEnabled** to false.
 
 13. For the **documentUploadPage** environment variable, enter the URL for the navigator admin and replace the `admin` at the end with `CODocumentUpload`. You will add this desktop to the navigator in a later step.
 
