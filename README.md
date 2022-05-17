@@ -4,13 +4,13 @@
 
 The client onboarding scenario is an end-to-end solution that showcases the art of the possible with IBM Cloud Pak for Business Automation (CP4BA). You can see the end-to-end in action with this [pre-recorded video](http://ibm.biz/cp4ba-overview-video).
 
-## Prerequisistes
+## Prerequisites
 
 1. A CP4BA cluster:
    - You can create a new cluster on IBM Cloud using ROKS using the SWAT team's [rapid deployment scripts](https://github.com/IBM/cp4ba-rapid-deployment).
    - You can use your existing cluster with the following patterns: foundation, decisions_ads, application, document_processing, workflow and content. You also need to install [Open Prediction Service](https://github.com/IBM/open-prediction-service-hub/tree/main/ops-implementations/ads-ml-service) to execute some of the AI capabilities of the scenario.
    - You can request a new cluster to be created for you using the [technical sales activation kit](https://techzone.ibm.com/collection/cloud-pak-for-automation-activation-kit). You also need to install [Open Prediction Service](https://github.com/IBM/open-prediction-service-hub/tree/main/ops-implementations/ads-ml-service) to execute some of the AI capabilities of the scenario.
-2. A Gmail account with [less secured app access](https://support.google.com/accounts/answer/6010255?hl=en) turned on.
+2. A Gmail account: The end-to-end uses a Gmail SMTP server today to send out an email. For the credentials, you will need to create an [App Password](https://support.google.com/accounts/answer/185833?hl=en) which you will need later in the instructions.
 
 ## Import Instructions
 

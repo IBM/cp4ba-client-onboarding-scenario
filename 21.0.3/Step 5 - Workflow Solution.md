@@ -30,7 +30,7 @@
 
 10. In Process Designer, click on the **Environment Variables** tab.
 
-11. Fill out credentials to a gmail account in the **emailID** and **emailPassword** fields under the **Default** column. Note that the [less secured app access](https://support.google.com/accounts/answer/6010255?hl=en) must be turned on in your Google account for this to work. 
+11. Fill out credentials for a gmail account in the **emailID** and **emailPassword** fields under the **Default** column. Note that the password here must be an [App Password](https://support.google.com/accounts/answer/185833?hl=en) and not your gmail password. 
 
     ![wf-env-variables](images/wf-env-variables.png)
 

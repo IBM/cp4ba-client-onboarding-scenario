@@ -39,7 +39,7 @@ The following instructions validate that this deployment can be safely executed.
 
 15. Use the contents of the [runModel.json](Solution%20Exports/Automation%20Decision%20Services/ML/runModel.json) file as the request body
 
-16. Update the `{DECISION-ID}` in the json to the `ID` copied before
+16. Update the `$PREDICTION-ID$` in the json to the `ID` copied before
 
 17. Click on `Execute`. The result should be as follows:
 

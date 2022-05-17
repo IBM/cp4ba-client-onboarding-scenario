@@ -2,7 +2,7 @@
   "target": [
     {
       "rel": "endpoint",
-      "href": "/endpoints/{DECISION-ID}"
+      "href": "/endpoints/$PREDICTION-ID$"
     }
   ],
   "parameters": [
