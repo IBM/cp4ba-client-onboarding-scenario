@@ -6,12 +6,17 @@
 
 2. Replace the index names in the downloaded files:
 
-   In the `process-data.json` and `case-data.json` files, the index name parameter must match the index names of your environment. The index names are dependent on the date of the install. For example, one of the index names in the provided data files is `icp4ba-bai-process-summaries-completed-idx-ibm-bai-2021.11.11-000001`. The date `2021.11.11-000001` must be replaced by the date in your environment's index.
+   In the `process-data.json` and `case-data.json` files, the index name parameter must match the index names of your environment. The index names contains a suffix that is dependent on the date of the install. 
+
+   For example, one of the index names in the provided data files is `icp4ba-bai-process-summaries-completed-idx-ibm-bai-$TIMESTAMP$`. The string `$TIMESTAMP$` must be replaced by the suffix in your environment's index. 
 
    You can get the index names for your environment using the following command (Replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
+
    ```
    curl -k -XGET -u {esadmin}:{espassword} '{eshost}/_aliases'
    ```
+
+   In the JSON output, you will see the suffix for the index names. For example, if the index name is in your environment is `icp4ba-bai-process-summaries-completed-idx-ibm-bai-2022.05.24-000001`, then the suffix is `2022.05.24-000001`. In the downloaded files (`process-data.json` and `case-data.json`), replace the string `$TIMESTAMP$` by the suffix of your environment.
 
 3. From the folder where you've downloaded the files and replaced the index names, run the following script to import the data (replace `{esadmin}` with the elasticsearch admin user ID, replace `{espassword}` with the elastichsearch admin user password & replace `{eshost}` with the elasticsearch URL):
 
