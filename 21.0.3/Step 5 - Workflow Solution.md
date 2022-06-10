@@ -6,7 +6,7 @@
 
 2. Login to **IBM Business Automation Studio**
 
-3. In the top-right corner, click on the menu icon and go to **Business automations**.
+3. In the top-left corner, click on the menu icon and go to **Business automations**.
 
    ![wf-studio-automations](images/wf-studio-automations.png)
 
