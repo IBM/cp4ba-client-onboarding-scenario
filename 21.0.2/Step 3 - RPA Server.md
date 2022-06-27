@@ -10,7 +10,7 @@
    ![image-2021gitconnect](images/RPA-ReserveNow.png)
 4. On the reservation page, make the appropriate selections as below. Once done, click **Submit**.  
    ![image-2021gitconnect](images/RPA-ReservationDetails.png)
-5. Once you have reserved an environment, you will receive an email with a link to access the management console for the environment including a password (**Desktop Access Information**). It also contains a **URL to access the IBM RPA Rest Service remotely (Application Service Information)**, please copy the Application Service Information URL and change **HTTP** to **HTTPS**. This will be used in the Workflow solution.  
+5. Once you have reserved an environment, you will receive an email with a link to access the management console including a password (**Desktop URL and Desktop password**). It also contains a **URL to access the IBM RPA Rest Service remotely** cycled in the first redbox, please copy the URL and change **HTTP** to **HTTPS**. This will be used in the Workflow solution.  
    ![image-2021gitconnect](images/RPA-ReservationEmail.png)
 6. Click the **Desktop Access link** above to open your environment. When you are prompted to enter environment password, enter the desktop password above. Wait a few minutes, your environment will be started as below.  
    ![image-2021gitconnect](images/RPA-EnvironmentConsole.png)
