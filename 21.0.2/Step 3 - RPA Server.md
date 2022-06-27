@@ -14,6 +14,7 @@
    ![image-2021gitconnect](images/RPA-ReservationEmail.png)
 6. Click the **Desktop Access link** above to open your environment. When you are prompted to enter environment password, enter the desktop password above. Wait a few minutes, your environment will be started as below.  
    ![image-2021gitconnect](images/RPA-EnvironmentConsole.png)
-7. Click **VM 5 – RPA** to open the RPA environment and check if RPA server and agent services are in running status.
+7. Click **VM 5 – RPA** to open the RPA environment and check if IBM Robotic Process Automation Agent, IBM Robotic Process Automation Service, IBM RPA WDG License Metric Service are in running status.
+   ![image-2021gitconnect](images/RPA-WindowsServices.png)
 
 Once you have setup the RPA server, [import the Workflow solution](Step%204%20-%20Workflow%20Solution.md).
