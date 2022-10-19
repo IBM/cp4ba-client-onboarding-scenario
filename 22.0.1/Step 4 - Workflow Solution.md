@@ -94,7 +94,7 @@
 
 7. Click on the **Add** button to close the dialog.
 
-8. Follow the same step to grant access to **IBM RPA Toolkit** toolkit.
+8. Follow the same steps to grant access to **IBM RPA Toolkit** toolkit.
 
 Once you have imported the Workflow solution, [import the required objects in Filenet Content Manager](Step%205%20-%20Content%20Manager.md).
 
