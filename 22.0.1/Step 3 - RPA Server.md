@@ -2,7 +2,7 @@
 
 **Note:** You only need to perform these steps if you want to demo the RPA execution. You can choose to skip the execution of the RPA bot when you import the Workflow solution.
 
-1. Reserve an environment from [here](https://techzone.ibm.com/collection/cloud-pak-for-business-automation-cp-4-ba-onboarding-rpa) using your IBMID.
+1. Reserve an environment from [here](https://techzone.ibm.com/collection/cloud-pak-for-business-automation-cp4ba-rpa) using your IBMID.
    ![image-2021gitconnect](images/RPA-LandingPage.png)
 2. Click **Environments** on the left panel, and then click **computer icon**.  
    ![image-2021gitconnect](images/RPA-Environments.png)
