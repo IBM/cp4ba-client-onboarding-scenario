@@ -1,0 +1,223 @@
+{
+    "connectionInfo": {
+        "name": "${automation_service_name}",
+        "value": {
+            "auth": {
+                "authType": "BASIC",
+                "username": "${cp4ba_admin_user}",
+                "password": "${cp4ba_admin_passwordBase64UTF16}"
+            },
+            "fullUrl": "${baw_auth_url}",
+            "host": "${baw_auth_host}",
+            "port": 443
+        }
+    },
+    "operations": [
+        {
+            "variableTypeMap": {
+                "inputs": [
+                    {
+                        "targetName": "inputParameters",
+                        "variables": [
+                            {
+                                "name": "client",
+                                "type": "Client",
+                                "isList": false,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "reviewedDocuments",
+                                "type": "DocumentReview",
+                                "isList": true,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "industry",
+                                "type": "String",
+                                "isList": false,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "servicesRequested",
+                                "type": "String",
+                                "isList": true,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "servicesFee",
+                                "type": "Integer",
+                                "isList": false,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "selectedDocumentIDs",
+                                "type": "String",
+                                "isList": true,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "referenceID",
+                                "type": "String",
+                                "isList": false,
+                                "documentation": ""
+                            },
+                            {
+                                "name": "userID",
+                                "type": "String",
+                                "isList": false,
+                                "documentation": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "operationName": "New Client Onboarding Request",
+            "actionID": "1.1cb3f8fe-9c24-4c1c-b063-90a47804ba83",
+            "literalInputParameters": [
+                {
+                    "name": "processApp",
+                    "value": {
+                        "id": "${baw_project_id}",
+                        "name": "Client Onboarding",
+                        "authType": "BASIC",
+                        "username": "${cp4ba_admin_user}",
+                        "password": "${cp4ba_admin_passwordBase64UTF16}"
+                    }
+                },
+                {
+                    "name": "processAppID",
+                    "value": "${baw_project_id}"
+                },
+                {
+                    "name": "processID",
+                    "value": "${baw_process_id}"
+                },
+                {
+                    "name": "processAppName",
+                    "value": "Client Onboarding"
+                }
+            ],
+            "description": "Process that starts a new Client Onboarding Request Case"
+        }
+    ],
+    "typeDeclarations": {
+        "Client": {
+            "type": "object",
+            "properties": {
+                "additionalInformation": {
+                    "$ref": "#/definitions/ClientInformation"
+                },
+                "address": {
+                    "$ref": "#/definitions/Address"
+                },
+                "primaryContact": {
+                    "$ref": "#/definitions/PrimaryContact"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "ClientInformation": {
+            "type": "object",
+            "properties": {
+                "defaultedPayment": {
+                    "type": "boolean"
+                },
+                "companyAge": {
+                    "type": "integer"
+                },
+                "annualRevenue": {
+                    "type": "integer"
+                },
+                "numberOfEmployees": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Address": {
+            "type": "object",
+            "properties": {
+                "zipCode": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            }
+        },
+        "PrimaryContact": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "DocumentReview": {
+            "type": "object",
+            "properties": {
+                "documentStatus": {
+                    "$ref": "#/definitions/DocumentStatus"
+                },
+                "documentName": {
+                    "$ref": "#/definitions/SupportingDocument"
+                }
+            }
+        },
+        "DocumentStatus": {
+            "type": "string",
+            "enum": [
+                "Pending",
+                "Verified",
+                "Not Required"
+            ]
+        },
+        "SupportingDocument": {
+            "type": "string",
+            "enum": [
+                "Banking Information",
+                "Utility Bill"
+            ]
+        }
+    },
+    "toolkitDependencies": [
+        {
+            "name": "Workflow Services",
+            "value": {
+                "snapshotId": "2064.7d1554b6-971d-4234-8012-35e0d39eac06"
+            }
+        }
+    ],
+    "tags": "[{\"connectionType\":\"workflow\"}]",
+    "repo_id": "${baw_repository_id}",
+    "project_details": {
+        "name": "${acronym}",
+        "display_name": "${automation_service_name}",
+        "toolkit": false,
+        "template": false,
+        "type": "automation_srvc",
+        "temp_project_acronym": "${tmpProjectAcronym}"
+    }
+}

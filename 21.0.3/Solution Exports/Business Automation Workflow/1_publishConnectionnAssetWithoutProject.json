@@ -1,0 +1,8 @@
+{
+	"is_default": true,
+	"name": "${automation_connection_name}",
+	"importer_acronym": "BPMW",
+	"generation_type": "nested action",
+	"connection_credentials": "{\"name\":\"${automation_connection_name}\",\"value\":{\"auth\":{\"authType\":\"BASIC\",\"username\":\"${cp4ba_admin_user}\",\"password\":\"${cp4ba_admin_passwordBase64UTF16}\"},\"fullUrl\":\"${baw_auth_url}\",\"host\":\"${baw_auth_host}\",\"port\":443}}",
+	"related_projects": []
+}

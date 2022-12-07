@@ -1,0 +1,83 @@
+{
+    "id": "${automation_service_project_id}",
+    "name": "${automation_service_project_displayname}",
+    "type": "automation_service",
+    "sub_type": "composite",
+    "version": "v1.0",
+    "can_support_default_at_runtime": false,
+    "origin": {
+        "snapshot": {
+            "repo_id": "platformRepo",
+            "repo_type": "workflow",
+            "project_id": "${automation_service_project_id}",
+            "project_name": "${automation_service_project_name}",
+            "project_display_name": "${automation_service_project_displayname}",
+            "branch_name": "${automation_service_branch_name}",
+            "branch_display_name": "${automation_service_branch_displayname}",
+            "snapshot_name": "${automation_service_snapshot_name}",
+            "snapshot_display_name": "${automation_service_snapshot_displayname}"
+        },
+        "connection": {
+            "conn_name": "${automation_connection_name}",
+            "conn_type": "workflow",
+            "conn_url": ""
+        }
+    },
+    "operations": [
+        {
+            "op_name": "New_Client_Onboarding_Request",
+            "op_description": "Process that starts a new Client Onboarding Request Case",
+            "op_parms": [
+                {
+                    "parm_name": "client",
+                    "parm_is_output": false,
+                    "parm_type": "Client",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "reviewedDocuments",
+                    "parm_is_output": false,
+                    "parm_type": "[ DocumentReview ]",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "industry",
+                    "parm_is_output": false,
+                    "parm_type": "String",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "servicesRequested",
+                    "parm_is_output": false,
+                    "parm_type": "[ String ]",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "servicesFee",
+                    "parm_is_output": false,
+                    "parm_type": "Integer",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "selectedDocumentIDs",
+                    "parm_is_output": false,
+                    "parm_type": "[ String ]",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "referenceID",
+                    "parm_is_output": false,
+                    "parm_type": "String",
+                    "parm_description": ""
+                },
+                {
+                    "parm_name": "userID",
+                    "parm_is_output": false,
+                    "parm_type": "String",
+                    "parm_description": ""
+                }
+            ]
+        }
+    ],
+    "interface": "{\"openapi\":\"3.0.1\",\"info\":{\"title\":\"${automation_service_name}\",\"description\":\"\",\"version\":\"v1.0\"},\"servers\":[{\"url\":\"https://cp4ba-pbk-ae-service.${cp4ba-project}.svc/ae-pbk/automationservices/rest/${automation_service_project_name}/${automation_service_snapshot_name}/${automation_service_name_urlencoded}\"}],\"paths\":{\"/New_Client_Onboarding_Request\":{\"post\":{\"summary\":\"Process that starts a new Client Onboarding Request Case\",\"operationId\":\"New_Client_Onboarding_Request\",\"requestBody\":{\"required\":true,\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/New_Client_Onboarding_Request_input\"}}}},\"responses\":{\"204\":{\"description\":\"No Content\"},\"400\":{\"description\":\"Bad Request\",\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/${automation_service_name_spaceunderscore}\"}}}},\"401\":{\"description\":\"Unauthorized\",\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/${automation_service_name_spaceunderscore}\"}}}},\"404\":{\"description\":\"Not Found\",\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/${automation_service_name_spaceunderscore}\"}}}},\"500\":{\"description\":\"Internal server error\",\"content\":{\"application/json\":{\"schema\":{\"$ref\":\"#/components/schemas/${automation_service_name_spaceunderscore}\"}}}}}}}},\"components\":{\"schemas\":{\"PrimaryContact\":{\"type\":\"object\",\"properties\":{\"firstName\":{\"type\":\"string\",\"nullable\":true},\"lastName\":{\"type\":\"string\",\"nullable\":true},\"phoneNumber\":{\"type\":\"string\",\"nullable\":true},\"email\":{\"type\":\"string\",\"nullable\":true}}},\"ClientInformation\":{\"type\":\"object\",\"properties\":{\"defaultedPayment\":{\"type\":\"boolean\",\"nullable\":true},\"companyAge\":{\"type\":\"integer\",\"format\":\"int32\",\"nullable\":true},\"annualRevenue\":{\"type\":\"integer\",\"format\":\"int32\",\"nullable\":true},\"numberOfEmployees\":{\"type\":\"integer\",\"format\":\"int32\",\"nullable\":true}}},\"DocumentStatus\":{\"type\":\"string\",\"nullable\":true,\"enum\":[\"Pending\",\"Verified\",\"Not Required\"]},\"Address\":{\"type\":\"object\",\"properties\":{\"zipCode\":{\"type\":\"string\",\"nullable\":true},\"country\":{\"type\":\"string\",\"nullable\":true},\"unit\":{\"type\":\"string\",\"nullable\":true},\"city\":{\"type\":\"string\",\"nullable\":true},\"street\":{\"type\":\"string\",\"nullable\":true},\"state\":{\"type\":\"string\",\"nullable\":true}}},\"SupportingDocument\":{\"type\":\"string\",\"nullable\":true,\"enum\":[\"Banking Information\",\"Utility Bill\"]},\"DocumentReview\":{\"type\":\"object\",\"properties\":{\"documentStatus\":{\"$ref\":\"#/components/schemas/DocumentStatus\"},\"documentName\":{\"$ref\":\"#/components/schemas/SupportingDocument\"}}},\"Client\":{\"type\":\"object\",\"properties\":{\"additionalInformation\":{\"$ref\":\"#/components/schemas/ClientInformation\"},\"address\":{\"$ref\":\"#/components/schemas/Address\"},\"primaryContact\":{\"$ref\":\"#/components/schemas/PrimaryContact\"},\"name\":{\"type\":\"string\",\"nullable\":true}}},\"New_Client_Onboarding_Request_input\":{\"x-dba-parameter-wrapper\":true,\"type\":\"object\",\"properties\":{\"client\":{\"$ref\":\"#/components/schemas/Client\"},\"reviewedDocuments\":{\"type\":\"array\",\"items\":{\"$ref\":\"#/components/schemas/DocumentReview\"}},\"industry\":{\"type\":\"string\",\"nullable\":true},\"servicesRequested\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"nullable\":true}},\"servicesFee\":{\"type\":\"integer\",\"format\":\"int32\",\"nullable\":true},\"selectedDocumentIDs\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"nullable\":true}},\"referenceID\":{\"type\":\"string\",\"nullable\":true},\"userID\":{\"type\":\"string\",\"nullable\":true}}},\"${automation_service_name_spaceunderscore}\":{\"description\":\"Exception object describing REST API error details.\",\"required\":[\"message\"],\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"string\",\"description\":\"Message ID of the exception.\"},\"message\":{\"type\":\"string\",\"description\":\"Message text of the exception.\"},\"message_parameters\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"description\":\"An array of parameter strings that were inserted into the error message.\"},\"description\":\"Message text parameters of the exception.\"},\"cause\":{\"$ref\":\"#/components/schemas/${automation_service_name_spaceunderscore}\"}}}},\"securitySchemes\":{\"basicAuth\":{\"type\":\"http\",\"scheme\":\"basic\"}}},\"security\":[{\"basicAuth\":[]}]}"
+}

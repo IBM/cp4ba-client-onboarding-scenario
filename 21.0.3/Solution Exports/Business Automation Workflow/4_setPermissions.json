@@ -1,0 +1,13 @@
+{
+	"new_principals": [
+		{
+			"type": "user",
+			"name": "${cp4ba_admin_user}",
+			"permission_details": {
+				"read": true,
+				"write": true,
+				"administration": true
+			}
+		}
+	]
+}
