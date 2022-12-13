@@ -1,6 +1,6 @@
 {
 	"fileVersion": "1.0.0",
-	"fileLocation": "",
+	"fileLocation": "https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/22.0.1/Deployment%20Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.0.0 <1.1.0",
 	"requiredCP4BAVersion": ">=22.1.0 <22.2.0",
 	"requiredCP4BAPattern": "Enterprise",
