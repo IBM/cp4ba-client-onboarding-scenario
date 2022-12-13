@@ -137,9 +137,23 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit",
+										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (COTK)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK",
+										"projectType": "APP_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (using COTK2)",
+										"projectName": "Client Onboarding Toolkit",
+										"projectAcronym": "COTK2",
 										"projectType": "APP_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
@@ -232,9 +246,23 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK",
+										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK2)",
+										"projectName": "Client Onboarding Toolkit",
+										"projectAcronym": "COTK2",
 										"projectType": "WF_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
