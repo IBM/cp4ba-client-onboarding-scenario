@@ -944,7 +944,7 @@
   								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Import 'CONTENT' desktop used in content lab",
 										"enforceImport": false,
 										"name": "CONTENT",
