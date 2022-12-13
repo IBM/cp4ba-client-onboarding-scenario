@@ -1,0 +1,4 @@
+@echo off
+echo.
+rem this file is to be used with CP4BA 22.0.1 starter deployment up to IF006 to deploy the Client Onboarding scenario and associated labs
+java -jar <TIMESTAMP>_DeploymentAutomation.jar -ocpAdminURL=<ocpAdminURL> -ocpAdminToken=<ocpAdminToken> -installBasePath=/Starter -config=config-deploy -automationScript=DeployClientOnboardingEmbeddedGiteaADSWorkaround.json ACTION_wf_cp_adpEnabled=true ACTION_wf_cp_emailID=<gmail email address> ACTION_wf_cp_emailPassword=<gmail app key> ACTION_wf_cp_rpaBotExecutionUser=<user for which to call RPA bot> ACTION_wf_cp_rpaServer=<RPAa server https port>
