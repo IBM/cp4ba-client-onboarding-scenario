@@ -9,13 +9,13 @@
 		{
 			"CONTAINER": {
 				"comment" : "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
-				"enabled": "$enableCleanupClientOnboarding_BAI$",
+				"enabled": "true",
 				"description" : "Remove Client Onboarding Artifacts (scenario & labs)",
 				"actions": [
 					{
 						"BAI": {
 							"comment" : "Clean up BAI data and remove Client Onboarding dashboard and goal",
-							"enabled": "true",
+							"enabled": "$enableCleanupClientOnboarding_BAI$",
 							"description" : "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
 							"relativeBasePath": "7_BAI",
 							"subActions": [
