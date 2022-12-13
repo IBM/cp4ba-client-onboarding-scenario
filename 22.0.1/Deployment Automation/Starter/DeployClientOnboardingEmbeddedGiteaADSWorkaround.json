@@ -26,7 +26,7 @@
    										"name": "Download ADS file",
    										"replaceExistingFiles": true,
    										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip"}
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Automation%20Decision%20Services/CODecisions.zip"}
    										]
   									}
   								},
