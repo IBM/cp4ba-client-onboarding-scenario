@@ -2,7 +2,7 @@
 	"fileVersion": "1.0.0",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.1/Deployment%20Automation/Starter/DeployClientOnboardingEmbeddedGiteaADSWorkaround.json",
 	"requiredToolVersion": ">=1.0.0 <1.1.0",
-	"requiredCP4BAVersion": ">=22.1.0 <21.1.6",
+	"requiredCP4BAVersion": ">=22.1.0 <22.1.6",
 	"requiredCP4BAPattern": "Starter",
 	
 	"actions": [
