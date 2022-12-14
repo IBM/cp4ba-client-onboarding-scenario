@@ -168,7 +168,7 @@
 							]
 						}
 					},
-										{
+					{
 						"FNCM": {
 							"comment" : "Remove 'Client Documents' folder and with that also all contained documents",
 							"enabled": "$enableCleanupClientOnboarding_FNCM$",

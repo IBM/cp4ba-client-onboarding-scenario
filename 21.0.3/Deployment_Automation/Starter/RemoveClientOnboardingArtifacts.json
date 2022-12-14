@@ -170,9 +170,9 @@
 					},
 					{
 						"FNCM": {
-							"comment" : "Remove 'Client Documents' folder and with that also all contained documents but don't revert Content lab changes",
+							"comment" : "Remove 'Client Documents' folder and with that also all contained documents",
 							"enabled": "$enableCleanupClientOnboarding_FNCM$",
-							"description" : "CPE - Delete 'Client Documents' folder and contained documents",
+							"description" : "CPE - Delete 'Client Documents' folder and contained documents from TOS",
 							"objectStoreName": "$BAW_TOS$",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
@@ -185,7 +185,18 @@
 										"deleteSubfolders": true,
 										"deleteDocuments": true
 									}
-								},
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment" : "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
+							"enabled": "$enableCleanupClientOnboarding_FNCM$",
+							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CONTENT",
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
