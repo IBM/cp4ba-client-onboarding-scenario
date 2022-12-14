@@ -550,8 +550,8 @@
 										"description": "Patch 'Client Onboarding Request' app built for enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequest.zip",
 										"simpleTextMappings": {
-											"BAWTOS": "TARGET",
-											"cp4badmin": "$cp4baAdminUsr$"
+											"1": { "BAWTOS": "TARGET" },
+											"2": { "cp4badmin": "$cp4baAdminUsr$" }
 										}
 									}
 								},
@@ -609,9 +609,9 @@
 										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequestDesktop.properties",
 										"simpleTextMappings": {
-											"repositories=icmbawtos": "repositories=icmtarget",
-											"defaultRepository=icmbawtos": "defaultRepository=icmtarget",
-											"repository.navigator.icmbawtos": "&delete&"
+											"1": { "repositories=icmbawtos": "repositories=icmtarget" },
+											"2": { "defaultRepository=icmbawtos": "defaultRepository=icmtarget" },
+											"3": { "repository.navigator.icmbawtos": "&delete&" }
 										}
 									}
 								},
@@ -630,9 +630,9 @@
 										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "CODocumentUploadDesktop.properties",
 										"simpleTextMappings": {
-											"repositories=icmbawtos": "repositories=icmtarget",
-											"defaultRepository=icmbawtos": "defaultRepository=icmtarget",
-											"repository.navigator.icmbawtos": "&delete&"
+											"1": { "repositories=icmbawtos": "repositories=icmtarget" },
+											"2": { "defaultRepository=icmbawtos": "defaultRepository=icmtarget" },
+											"3": { "repository.navigator.icmbawtos": "&delete&" }
 										}
 									}
 								},
