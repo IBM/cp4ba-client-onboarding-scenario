@@ -1044,7 +1044,7 @@
 					},
 					{
 						"ICN": {
-							"enabled": "$enableConfigureSWATLabs_FNCM$",
+							"enabled": "false",
 							"description": "Import 'CONTENT' desktop used in content lab",
 							"name": "Import Desktop for CONTENT into ICN",
 							"relativeBasePath": "7_ICN",
