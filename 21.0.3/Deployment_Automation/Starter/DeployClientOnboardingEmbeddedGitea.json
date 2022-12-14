@@ -335,7 +335,7 @@
 												"name": "client_onboarding_decisions",
 												"type": "process",
 												"simpleTextMappings": {
-													"cp4badmin\\.": "$cp4baAdminUsr$\\."
+													"1": { "cp4badmin\\.": "$cp4baAdminUsr$\\." }
 												}
 											}
 										]
