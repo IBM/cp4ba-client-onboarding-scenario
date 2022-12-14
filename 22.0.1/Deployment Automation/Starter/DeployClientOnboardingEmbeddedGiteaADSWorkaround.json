@@ -936,7 +936,7 @@
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for content lab for Navigator",
    										"name": "Download ICN file",
-   										"replaceExistingFiles": true,
+   										"replaceExistingFiles": false,
    										"files": [
     										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/CONTENTDesktop.properties"}
    										]
@@ -944,7 +944,7 @@
   								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "true",
+										"enabled": "false",
 										"description": "Import 'CONTENT' desktop used in content lab",
 										"enforceImport": false,
 										"name": "CONTENT",
