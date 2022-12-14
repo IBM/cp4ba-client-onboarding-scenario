@@ -287,7 +287,7 @@
 								},
 								{
 									"CLEANUPEXTERNALAUTOMATIONSERVICEARTIFACTS": {
-										"enabled": "false",
+										"enabled": "true",
 										"description" : "Delete External Automation Service 'Client_Onboarding_Workflows_External' and the 'External BAW System' Connection",
 										"listConnections": false,
 										"listAutomationServices": false,
