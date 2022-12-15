@@ -495,7 +495,7 @@
 								{
 									"CREATEFOLDER": {
 										"enabled": "true",
-										"description": "Create 'CLient documents' folder",
+										"description": "Create 'Client documents' folder",
 										"parentFolderPath": "/",
 										"folderClassSymbolicName": "Folder",
 										"folderName": "Client Documents"
