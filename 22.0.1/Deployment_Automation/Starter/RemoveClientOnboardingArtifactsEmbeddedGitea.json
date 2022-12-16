@@ -76,11 +76,11 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove Client Onboarding Request, Client Onboarding Document Upload & CONTENT desktops",
+										"description" : "Remove Client Onboarding Request, Client Onboarding Document Upload & ICN desktops",
 										"artifactNames": [ 
 											"Client Onboarding Request", 
 											"Client Onboarding Document Upload",
-											"CONTENT"
+											"ICN"
 										],
 										"artifactType": "Desktop"
 									}

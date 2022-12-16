@@ -934,21 +934,21 @@
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
-										"description": "Download resources required for content lab for Navigator",
+										"description": "Download resources required for Content/ICN lab for Navigator",
    										"name": "Download ICN file",
    										"replaceExistingFiles": false,
    										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/CONTENTDesktop.properties"}
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktop.properties"}
    										]
   									}
   								},
 								{
 									"IMPORTDESKTOP": {
 										"enabled": "false",
-										"description": "Import 'CONTENT' desktop used in content lab",
+										"description": "Import 'ICN' desktop used in content/ICN lab",
 										"enforceImport": false,
-										"name": "CONTENT",
-										"file": "CONTENTDesktop.properties"
+										"name": "ICN",
+										"file": "ICNDesktop.properties"
 									}
 								}
 							]
