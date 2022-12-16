@@ -941,7 +941,7 @@
 								{
 									"IMPORTDESKTOP": {
 										"enabled": "true",
-										"description": "Import 'ICN' desktop used in content/ICN lab",
+										"description": "Import 'ICN' desktop used in Content/ICN lab",
 										"enforceImport": false,
 										"name": "ICN",
 										"file": "ICNDesktop.properties"
