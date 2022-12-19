@@ -1,6 +1,6 @@
 # Import the Client Onboarding Scenario
 
-**Note:** These instructions assume that you have Cloud Pak for Business Automation 22.0.1 (Enterprise pattern) installed.
+**Note:** These instructions assume that you have Cloud Pak for Business Automation 22.0.1 (Enterprise pattern) installed. **Note that this cannot be imported into the TechZone environments yet as they are all Starter patterns.**
 
 1. [Import the ADS Project](Step%201%20-%20ADS%20Project.md)
 2. [Configure the ADP Project (optional)](Step%202%20-%20ADP%20Project.md)

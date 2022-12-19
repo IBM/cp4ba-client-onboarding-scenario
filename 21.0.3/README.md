@@ -1,6 +1,6 @@
 # Import the Client Onboarding Scenario
 
-**Note:** These instructions assume that you have Cloud Pak for Business Automation 21.0.3 installed along with Open Prediciton Service (OPS).
+**Note:** These instructions assume that you have Cloud Pak for Business Automation 21.0.3 (enterprise version) installed along with Open Prediciton Service (OPS). **Note that this cannot be imported into the TechZone environments yet as they are all Starter patterns.**
 
 1. [Import the ADS ML Model](Step%201%20-%20ADS%20ML%20Model.md)
 2. [Import the ADS Project](Step%202%20-%20ADS%20Project.md)
