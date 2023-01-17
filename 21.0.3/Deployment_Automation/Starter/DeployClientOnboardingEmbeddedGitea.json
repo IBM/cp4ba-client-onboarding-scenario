@@ -376,6 +376,7 @@
 								{
 									"ADDCOLLABORATORS": {
 										"enabled": "true",
+										"description": "Adds general users group as read-only collaborators",
 										"name": "Client Onboarding Toolkit",
 										"type": "WF_TK",
 										"maxBASQueryRetries": 5,
