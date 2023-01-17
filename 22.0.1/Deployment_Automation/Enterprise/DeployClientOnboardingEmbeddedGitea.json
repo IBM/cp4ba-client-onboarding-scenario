@@ -274,7 +274,7 @@
 								{
 									"ADDCOLLABORATORS": {
 										"enabled": "true",
-										"description": "Creates the 'Client_Onboarding_Workflows_External' external Automation Service",
+										"description": "Adds general users group as read-only collaborators",
 										"name": "Client Onboarding Toolkit",
 										"acronym": "COTK",
 										"type": "WF_TK",
