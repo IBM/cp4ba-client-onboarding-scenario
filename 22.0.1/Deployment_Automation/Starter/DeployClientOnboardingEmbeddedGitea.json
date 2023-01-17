@@ -286,6 +286,26 @@
 										"maxPublishCompletionPolls": 20,
 										"delayBetweenPublishCompletionPolls": 5
 									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Adds general users group as read-only collaborators",
+										"name": "Client Onboarding Toolkit",
+										"type": "WF_TK",
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$generalUsersGroupNameShort$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
 								}
 							]
 						}
