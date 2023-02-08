@@ -58,9 +58,9 @@ if not defined validationFailed (
 	if not exist %toolVersion%_DeploymentAutomation.jar (
 		echo Validating configuration failed:
 		set validationFailed=true
+		
+		echo   File '%toolVersion%_DeploymentAutomation.jar' does not exist
 	)
-
-	echo   File '%toolVersion%_DeploymentAutomation.jar' does not exist
 )
 
 if "%ocLoginServer%"=="REQUIRED" ( 
