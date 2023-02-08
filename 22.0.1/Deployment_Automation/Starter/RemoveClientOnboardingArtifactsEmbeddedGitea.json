@@ -326,7 +326,7 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Undeploy Client Onboarding ADS project",
+										"description" : "Undeploy 'Client Onboarding' ADS project",
 										"adsCleanupActions" : [ "Undeploy" ],
 										"projectName": "Client Onboarding",
 										"version": "1.0.0",
@@ -340,7 +340,7 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Delete all ADS projects",
+										"description" : "Delete 'Client Onboarding' ADS project",
 										"adsCleanupActions" : [ "Project" ],
 										"projectName": "Client Onboarding",
 										"unpublishAutomationServices": true,
