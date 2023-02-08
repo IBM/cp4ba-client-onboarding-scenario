@@ -238,7 +238,7 @@
 						"WF": {
 							"comment" : "Delete Client Onboarding solution and toolkits",
 							"enabled": "$enableCleanupClientOnboarding_WF$",
-							"description" : "WF - Delete WF solution, WF templates, and WF TKs",
+							"description" : "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
 							"relativeBasePath": "4_WF",
 							"subActions": [
 								{
@@ -307,7 +307,7 @@
 						"ADS": {
 							"comment" : "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
 							"enabled": "$enableCleanupClientOnboarding_ADS$",
-							"description" : "ADS - Undeploy the Client Onboarding ADS project, delete and, and remove the Git org with repos for the ADS project",
+							"description" : "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
 							"relativeBasePath": "1_ADS",
 							"subActions": [
 								{

@@ -14,7 +14,7 @@
 					{
 						"ADS": {
 							"enabled": "$enableDeployClientOnboarding_ADS$",
-							"description": "Create ADS and fully configure ADS project including Git, Deploy, & Publish",
+							"description": "Create and fully configure ADS project including Git, Deploy, & Publish",
 							"decisionsPrjDisplayName": "Client Onboarding",
 							"relativeBasePath": "1_ADS",
 							"maxBASQueryRetries": 5,
