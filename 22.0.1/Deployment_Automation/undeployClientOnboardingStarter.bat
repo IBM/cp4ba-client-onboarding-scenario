@@ -25,7 +25,10 @@ rem ----------------------------------------------------------------------------
 rem Validation that all variables parameters are set and the jar file for the deployment automation tool exists
 rem ----------------------------------------------------------------------------------------------------------
 
-if "%toolVersion%"=="REQUIRED" ( 
+if "%toolVersion%"=="REQUIRED" set toolVersionRequired=true
+if "%toolVersion%"=="" set toolVersionRequired=true
+
+if defined toolVersionRequired ( 
 	echo Validating configuration failed:
 	set validationFailed=true
 	
@@ -36,12 +39,15 @@ if not defined validationFailed (
 	if not exist %toolVersion%_DeploymentAutomation.jar (
 		echo Validating configuration failed:
 		set validationFailed=true
-		
+	
 		echo   File '%toolVersion%_DeploymentAutomation.jar' does not exist
 	)
 )
 
-if "%ocLoginServer%"=="REQUIRED" ( 
+if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
+if "%ocLoginServer%"=="" set ocLoginServerRequired=true
+
+if defined ocLoginServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -49,7 +55,10 @@ if "%ocLoginServer%"=="REQUIRED" (
 	echo   Variable 'ocLoginServer' has not been set
 )
 
-if "%ocLoginToken%"=="REQUIRED" ( 
+if "%ocLoginToken%"=="REQUIRED" set ocLoginTokenRequired=true
+if "%ocLoginToken%"=="" set ocLoginTokenRequired=true
+
+if defined ocLoginTokenRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true

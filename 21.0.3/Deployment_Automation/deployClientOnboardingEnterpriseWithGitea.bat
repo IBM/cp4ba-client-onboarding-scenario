@@ -47,7 +47,10 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required variables are set and the jar file for the deployment automation tool exists
 rem ----------------------------------------------------------------------------------------------------------
 
-if "%toolVersion%"=="REQUIRED" ( 
+if "%toolVersion%"=="REQUIRED" set toolVersionRequired=true
+if "%toolVersion%"=="" set toolVersionRequired=true
+
+if defined toolVersionRequired ( 
 	echo Validating configuration failed:
 	set validationFailed=true
 	
@@ -58,12 +61,15 @@ if not defined validationFailed (
 	if not exist %toolVersion%_DeploymentAutomation.jar (
 		echo Validating configuration failed:
 		set validationFailed=true
-		
+	
 		echo   File '%toolVersion%_DeploymentAutomation.jar' does not exist
 	)
 )
 
-if "%ocLoginServer%"=="REQUIRED" ( 
+if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
+if "%ocLoginServer%"=="" set ocLoginServerRequired=true
+
+if defined ocLoginServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -71,7 +77,10 @@ if "%ocLoginServer%"=="REQUIRED" (
 	echo   Variable 'ocLoginServer' has not been set
 )
 
-if "%ocLoginToken%"=="REQUIRED" ( 
+if "%ocLoginToken%"=="REQUIRED" set ocLoginTokenRequired=true
+if "%ocLoginToken%"=="" set ocLoginTokenRequired=true
+
+if defined ocLoginTokenRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -79,15 +88,22 @@ if "%ocLoginToken%"=="REQUIRED" (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if "%cp4baAdminPassword%"=="REQUIRED" ( 
+if "%cp4baAdminPassword%"=="REQUIRED" set cp4baAdminPasswordRequired=true
+if "%cp4baAdminPassword%"=="" set cp4baAdminPasswordRequired=true
+
+if defined cp4baAdminPasswordRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
+	
 	echo   Variable 'cp4baAdminPassword' has not been set
 )
 
-if "%gmailAddress%"=="REQUIRED" ( 
+if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
+if "%gmailAddress%"=="" set gmailAddressRequired=true
+
+if defined gmailAddressRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -95,7 +111,10 @@ if "%gmailAddress%"=="REQUIRED" (
 	echo   Variable 'gmailAddress' has not been set
 )
 
-if "%gmailAppKey%"=="REQUIRED" ( 
+if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
+if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+
+if defined gmailAppKeyRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -103,7 +122,10 @@ if "%gmailAppKey%"=="REQUIRED" (
 	echo   Variable 'gmailAppKey' has not been set
 )
 
-if "%rpaBotExecutionUser%"=="" ( 
+if "%rpaBotExecutionUser%"=="REQUIRED" set rpaBotExecutionUserRequired=true
+if "%rpaBotExecutionUser%"=="" set rpaBotExecutionUserRequired=true
+
+if defined rpaBotExecutionUserRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -111,7 +133,10 @@ if "%rpaBotExecutionUser%"=="" (
 	echo   Variable 'rpaBotExecutionUser' has not been set
 )
 
-if "%rpaServer%"=="REQUIRED" ( 
+if "%rpaServer%"=="REQUIRED" set rpaServerRequired=true
+if "%rpaServer%"=="" set rpaServerRequired=true
+
+if defined rpaServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
@@ -119,7 +144,10 @@ if "%rpaServer%"=="REQUIRED" (
 	echo   Variable 'rpaServer' has not been set
 )
 
-if "%adpConfigured%"=="" ( 
+if "%adpConfigured%"=="REQUIRED" set adpConfiguredRequired=true
+if "%adpConfigured%"=="" set adpConfiguredRequired=true
+
+if defined adpConfiguredRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
