@@ -42,7 +42,7 @@ adpConfigured=false
 
 validationSuccess=true
 
-if [[ "${toolVersion}" == "REQUIRED" ]]
+if [[ "${toolVersion}" == "REQUIRED" ]] || [[ "${toolVersion}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -62,7 +62,7 @@ then
 	fi
 fi
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]]
+if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -73,7 +73,7 @@ then
 	echo "  Variable 'ocLoginServer' has not been set"
 fi
 
-if [[ "${ocLoginToken}" == "REQUIRED" ]]
+if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -83,7 +83,7 @@ then
 	echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [[ "${cp4baAdminPassword}" == "REQUIRED" ]]
+if [[ "${cp4baAdminPassword}" == "REQUIRED" ]] || [[ "${cp4baAdminPassword}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -93,7 +93,7 @@ then
 	echo "  Variable 'cp4baAdminPassword' has not been set"
 fi
 
-if [[ "${gmailAddress}" == "REQUIRED" ]]
+if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -103,7 +103,7 @@ then
 	echo "  Variable 'gmailAddress' has not been set"
 fi
 
-if [[ "${gmailAppKey}" == "REQUIRED" ]]
+if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -113,7 +113,7 @@ then
 	echo "  Variable 'gmailAppKey' has not been set"
 fi
 
-if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]]
+if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -123,7 +123,7 @@ then
 	echo "  Variable 'rpaBotExecutionUser' has not been set"
 fi
 
-if [[ "${rpaServer}" == "REQUIRED" ]]
+if [[ "${rpaServer}" == "REQUIRED" ]] || [[ "${rpaServer}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -133,7 +133,7 @@ then
 	echo "  Variable 'rpaServer' has not been set"
 fi
 
-if [[ "${adpConfigured}" == "REQUIRED" ]]
+if [[ "${adpConfigured}" == "REQUIRED" ]] || [[ "${adpConfigured}" == "" ]]
 then
 	if $validationSuccess
 	then

@@ -27,7 +27,7 @@ cp4baAdminPassword=REQUIRED
 
 validationSuccess=true
 
-if [[ "${toolVersion}" == "REQUIRED" ]]
+if [[ "${toolVersion}" == "REQUIRED" ]] || [[ "${toolVersion}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -47,7 +47,7 @@ then
 	fi
 fi
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]]
+if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -58,7 +58,7 @@ then
 	echo "  Variable 'ocLoginServer' has not been set"
 fi
 
-if [[ "${ocLoginToken}" == "REQUIRED" ]]
+if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -68,7 +68,7 @@ then
 	echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [[ "${cp4baAdminPassword}" == "REQUIRED" ]]
+if [[ "${cp4baAdminPassword}" == "REQUIRED" ]] || [[ "${cp4baAdminPassword}" == "" ]]
 then
 	if $validationSuccess
 	then

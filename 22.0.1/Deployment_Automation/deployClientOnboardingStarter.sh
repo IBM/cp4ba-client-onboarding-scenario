@@ -25,9 +25,6 @@ rpaBotExecutionUser=cp4admin2
 #URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 rpaServer=https://rpa-server.com:1111
 
-#Should ADP be used within the Client Oboarding scenario (do not change for now)
-adpConfigured=false
-
 #Proxy settings in case a proxy server needs to be used to access the GitHub resources
 #proxySettings="-proxyScenario=GitHub -proxyHost= -proxyPort="
 
@@ -37,7 +34,7 @@ adpConfigured=false
 
 validationSuccess=true
 
-if [[ "${toolVersion}" == "REQUIRED" ]]
+if [[ "${toolVersion}" == "REQUIRED" ]] || [[ "${toolVersion}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -57,7 +54,7 @@ then
 	fi
 fi
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]]
+if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -68,7 +65,7 @@ then
 	echo "  Variable 'ocLoginServer' has not been set"
 fi
 
-if [[ "${ocLoginToken}" == "REQUIRED" ]]
+if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -78,7 +75,7 @@ then
 	echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [[ "${gmailAddress}" == "REQUIRED" ]]
+if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -88,7 +85,7 @@ then
 	echo "  Variable 'gmailAddress' has not been set"
 fi
 
-if [[ "${gmailAppKey}" == "REQUIRED" ]]
+if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
 then
 	if $validationSuccess
 	then
@@ -98,10 +95,30 @@ then
 	echo "  Variable 'gmailAppKey' has not been set"
 fi
 
+if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
+then
+	if $validationSuccess
+	then
+		echo "Validating configuration failed:"
+		validationSuccess=false
+	fi
+	echo "  Variable 'rpaBotExecutionUser' has not been set"
+fi
+
+if [[ "${rpaServer}" == "REQUIRED" ]] || [[ "${rpaServer}" == "" ]]
+then
+	if $validationSuccess
+	then
+		echo "Validating configuration failed:"
+		validationSuccess=false
+	fi
+	echo "  Variable 'rpaServer' has not been set"
+fi
+
 if ! $validationSuccess
 then
 	echo "Exiting"
 	exit 1
 fi
 
-java ${JVM_SETTINGS} -jar ${toolVersion}_DeploymentAutomation.jar -bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/22.0.1/Deployment_Automation/Starter -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${proxySettings} -installBasePath=Starter -config=config-undeploy -automationScript=DeployClientOnboardingEmbeddedGiteaADSWorkaround.json enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_emailID=${gmailAddress} ACTION_wf_cp_emailPassword=${gmailAppKey} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${JVM_SETTINGS} -jar ${toolVersion}_DeploymentAutomation.jar -bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/22.0.1/Deployment_Automation/Starter -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${proxySettings} -installBasePath=Starter -config=config-undeploy -automationScript=DeployClientOnboardingEmbeddedGiteaADSWorkaround.json ACTION_wf_cp_emailID=${gmailAddress} ACTION_wf_cp_emailPassword=${gmailAppKey} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
