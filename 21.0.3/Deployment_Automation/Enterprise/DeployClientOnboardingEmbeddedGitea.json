@@ -162,7 +162,7 @@
 									"VERSIONPROJECT": {
 										"enabled": "true",
 										"description": "Create a new version of the ADS project",
-										"decisionServiceName": "Client Onboarding Decisions",
+										
 										"version": "v21",
 										"versionDescription": "Initial version of the Client Onboarding Decision Solution"
 									}
@@ -171,6 +171,7 @@
 									"DEPLOYPROJECT": {
 										"enabled": "true",
 										"description": "Deploy the version to the runtime",
+										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "v21",
 										"maxDeployCompletionPolls": 60,
 										"delayBetweenDeployCompletionPolls": 5

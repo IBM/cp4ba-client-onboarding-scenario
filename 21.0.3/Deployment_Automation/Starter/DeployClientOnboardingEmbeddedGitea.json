@@ -162,8 +162,9 @@
 									"VERSIONPROJECT": {
 										"enabled": "true",
 										"description": "Create a new version of the ADS project",
-										"versionDescription": "Initial version of the Client Onboarding Decision Solution",
-										"version": "v21"
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "v21",
+										"versionDescription": "Initial version of the Client Onboarding Decision Solution"
 									}
 								},
 								{

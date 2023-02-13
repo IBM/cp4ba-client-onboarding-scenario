@@ -319,6 +319,7 @@
 										"description" : "Undeploy 'Client Onboarding' ADS project",
 										"adsCleanupActions" : [ "Undeploy" ],
 										"projectName": "Client Onboarding",
+										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "v21",
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,

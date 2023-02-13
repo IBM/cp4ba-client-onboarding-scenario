@@ -90,6 +90,7 @@
 									"DEPLOYPROJECT": {
 										"enabled": "true",
 										"description": "Deploy the version to the runtime",
+										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
 										"maxDeployCompletionPolls": 60,
 										"delayBetweenDeployCompletionPolls": 5
