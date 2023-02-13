@@ -85,6 +85,6 @@ if defined cp4baAdminPasswordRequired (
 
 if defined validationFailed exit /b 1;
 
-java -jar %toolVersion%_DeploymentAutomation.jar -bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/21.0.3/Deployment_Automation/Enterprise -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %proxySettings% -installBasePath=/Enterprise -config=config-undeploy -automationScript=RemoveClientOnboardingArtifactsEmbeddedGitea.json -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
+java -jar %toolVersion%_DeploymentAutomation.jar -bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/21.0.3/Deployment_Automation/Enterprise -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %proxySettings% -installBasePath=/Enterprise -config=config-undeploy-withGitea -automationScript=RemoveClientOnboardingArtifactsEmbeddedGitea.json -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
 
 ENDLOCAL
