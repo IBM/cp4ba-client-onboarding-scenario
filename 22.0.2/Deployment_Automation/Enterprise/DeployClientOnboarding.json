@@ -1,6 +1,6 @@
 {
 	"fileVersion": "1.0.0",
-	"fileLocation": "",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
 	"requiredToolVersion": ">=1.0.0 <1.1.0",
 	"requiredCP4BAVersion": ">=22.2.0 <22.3.0",
 	"requiredCP4BAPattern": "Enterprise",
