@@ -28,7 +28,8 @@
 											"icp4ba-bai-case-summaries-active-idx-ibm-bai", 
 											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
 											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
-											"icp4ba-bai-process-timeseries-idx-ibm-bai" ],
+											"icp4ba-bai-process-timeseries-idx-ibm-bai" 
+										],
 										"artifactType": "Index"
 									}
 								},
@@ -64,22 +65,23 @@
 										"enabled": "true",
 										"description" : "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
 										"appEngineAppConfigName": "APPENG0",
+										"artifactType": "Application",
 										"artifactNames": [ 
 											"Client Onboarding Request",
 											"Client Onboarding Document Upload" 
-										],
-										"artifactType": "Application"
+										]
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove Client Onboarding Request, Client Onboarding Document Upload & CLOS desktops",
+										"description" : "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'BAWDOCS' desktops",
+										"artifactType": "Desktop",
 										"artifactNames": [ 
 											"Client Onboarding Request", 
 											"Client Onboarding Document Upload",
-											"CLOS"],
-										"artifactType": "Desktop"
+											"BAWDOCS"
+										]
 									}
 								}
 							]
@@ -87,7 +89,7 @@
 					},
 					{
 						"BAA": {
-							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
+							"comment": "Delete Client Onboarding APP, APP template, and APP TK",
 							"enabled": "$enableCleanupClientOnboarding_BAA$",
 							"description" : "BAA - Delete Client Onboarding APP, APP template, and APP TK",
 							"relativeBasePath": "6_BAA",
@@ -96,9 +98,8 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete 'Client Onboarding Template' app",
-										"projectName": "Client Onboarding Template",
-										"projectAcronym": "COT",
 										"projectType": "APP",
+										"projectName": "Client Onboarding Template",
 										"unpublishAutomationServices": false,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -110,9 +111,9 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete 'Client Onboarding Document Upload' app",
+										"projectType": "APP",
 										"projectName": "Client Onboarding Document Upload",
 										"projectAcronym": "CODU",
-										"projectType": "APP",
 										"unpublishAutomationServices": false,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -124,9 +125,8 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete the app template 'Client Onboarding Template'",
-										"projectName": "Client Onboarding Template",
-										"projectAcronym": "COT",
 										"projectType": "APP_TEMPLATE",
+										"projectName": "Client Onboarding Template",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -137,24 +137,9 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (COTK)",
-										"projectName": "Client Onboarding Toolkit",
-										"projectAcronym": "COTK",
+										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit",
 										"projectType": "APP_TK",
-										"unpublishAutomationServices": true,
-										"deleteReferencingProjects": true,
-										"maxBASQueryRetries": 5,
-										"maxUnpublishCompletionPolls": 20,
-										"delayBetweenUnpublishCompletionPolls": 5
-									}
-								},
-								{
-									"DELETEPROJECT": {
-										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (using COTK2)",
 										"projectName": "Client Onboarding Toolkit",
-										"projectAcronym": "COTK2",
-										"projectType": "APP_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -190,16 +175,16 @@
 						"FNCM": {
 							"comment" : "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
 							"enabled": "$enableCleanupClientOnboarding_FNCM$",
-							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CLOS",
-							"objectStoreName": "CLOS",
+							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store BAWDOCS",
+							"objectStoreName": "BAWDOCS",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description" : "Delete 'Case Folders' folder and contained documents used in the content lab",
-										"artifactNames": [ "/Case Folders" ],
 										"artifactType": "Folder",
+										"artifactNames": [ "/Case Folders" ],
 										"deleteSubfolders": true,
 										"deleteDocuments": true
 									}
@@ -208,27 +193,27 @@
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
-										"artifactNames": [ "SWAT_JAM_Case_Folder" ],
-										"artifactType": "ClassDefinition"
+										"artifactType": "ClassDefinition",
+										"artifactNames": [ "SWAT_JAM_Case_Folder" ]
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
+										"artifactType": "PropertyTemplate",
 										"artifactNames": [ 
 											"Case_Reference_ID",
 											"Client_Name" 
-										],
-										"artifactType": "PropertyTemplate"
+										]
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the storage policy 'Default Advanced Storage Area' used in the content lab",
-										"artifactNames": [ "Default Advanced Storage Area" ],
-										"artifactType": "StoragePolicy"
+										"artifactType": "StoragePolicy",
+										"artifactNames": [ "Default Advanced Storage Area" ]
 									}
 								}
 							]
@@ -245,9 +230,9 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete 'Client Onboarding' Workflow solution",
+										"projectType": "WF_PA",
 										"projectName": "Client Onboarding",
 										"projectAcronym": "CO",
-										"projectType": "WF_PA",
 										"unpublishAutomationServices": true,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
@@ -257,24 +242,9 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK)",
-										"projectName": "Client Onboarding Toolkit",
-										"projectAcronym": "COTK",
+										"description" : "Delete 'Client Onboarding Toolkit' TK",
 										"projectType": "WF_TK",
-										"unpublishAutomationServices": true,
-										"deleteReferencingProjects": true,
-										"maxBASQueryRetries": 5,
-										"maxUnpublishCompletionPolls": 20,
-										"delayBetweenUnpublishCompletionPolls": 5
-									}
-								},
-								{
-									"DELETEPROJECT": {
-										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK2)",
 										"projectName": "Client Onboarding Toolkit",
-										"projectAcronym": "COTK2",
-										"projectType": "WF_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -286,9 +256,9 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete 'IBM RPA Toolkit' TK",
+										"projectType": "WF_TK",
 										"projectName": "IBM RPA Toolkit",
 										"projectAcronym": "IBMRPAT",
-										"projectType": "WF_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,
@@ -300,9 +270,9 @@
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description" : "Delete 'ADP Utils' TK",
+										"projectType": "WF_TK",
 										"projectName": "ADP Utils",
 										"projectAcronym": "ADPU",
-										"projectType": "WF_TK",
 										"unpublishAutomationServices": true,
 										"deleteReferencingProjects": true,
 										"maxBASQueryRetries": 5,

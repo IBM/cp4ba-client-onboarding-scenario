@@ -4,6 +4,7 @@
 	"requiredToolVersion": ">=1.0.0 <1.1.0",
 	"requiredCP4BAVersion": ">=22.2.0 <22.3.0",
 	"requiredCP4BAPattern": "Enterprise",
+	"comment" : "To be used with CP4BA 22.0.2 deployment with an external GitHub connection and arbitrary LDAP users",
 	
 	"actions": [
 		{
@@ -39,6 +40,12 @@
 										"gitServerUrl": "$adsGitServerUrl$",
 									    "userName": "$adsGitUserName$",
 									    "apiKey": "$adsGitRepoAPIKey$"
+									}
+								},
+								{
+									"CHECKPROJECTISCONNECTEDTOGIT": {
+										"enabled": "true",
+										"description": "Check if ADS decision project already exists and if it is already connected to Git"
 									}
 								},
 								{
@@ -300,7 +307,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -358,7 +365,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -375,7 +382,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -392,7 +399,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -545,12 +552,24 @@
 									}
 								},
 								{
+									"PATCHAPPLICATION": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Request' app to work in current environment",
+										"file": "ClientOnboardingRequest.zip",
+										"simpleTextMappings": {
+											"1" : { "BAWTOS": "$BAW_TOS$" },
+											"2" : { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$cp4baAdminUsr$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" },
+											"3" : { "cp4badmin": "$cp4baAdminUsr$" }
+										}
+									}
+								},
+								{
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
-										"description": "Import 'Client Onboarding Request' app",
+										"description": "Import patched 'Client Onboarding Request' app",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
-										"file": "ClientOnboardingRequest.zip"
+										"file": "!patchedZIPFileName!"
 									}
 								},
 								{
@@ -737,7 +756,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -759,7 +778,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -781,7 +800,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -801,21 +820,21 @@
 							"enabled": "$enableConfigureSWATLabs_FNCM$",
 							"description" : "CPE - Modify security, create property templates, class, and storage policy, and create folders for content lab",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CLOS",
+							"objectStoreName": "BAWDOCS",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"MODIFYOBJECTSTORESECURITY": {
 										"enabled": "true",
-										"description": "Modify security for CLOS Object Store",
-										"name": "Modify security for CLOS Object Store",
+										"description": "Modify security for BAWDOCS Object Store",
+										"name": "Modify security for BAWDOCS Object Store",
 										"replaceAccessRights": false,
 										"granteeSettings": [
 											{
 												"enabled": "true",
 												"action": "Add",
 												"granteeType": "Group",
-												"granteeName": "$generalUsersGroupNameFull$",
+												"granteeName": "$generalUsersGroupName$",
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -826,9 +845,9 @@
 								{
 									"CREATESTORAGEPOLICY": {
 										"enabled": "true",
-										"description": "Create ASA for the CLOS object store",
+										"description": "Create ASA for the BAWDOCS object store",
 										"storagePolicyName": "Default Advanced Storage Area",
-										"storageAreaName": "CLOS_asa"
+										"storageAreaName": "BAWDOCS_asa"
 									}
 								},
 								{
@@ -922,7 +941,7 @@
 						"ICN": {
 							"comment" : "",
 							"enabled": "$enableConfigureSWATLabs_FNCM$",
-							"description": "Navigator - Import Desktop for CLOS for content lab",
+							"description": "Navigator - Import Desktop for BAWDOCS for content lab",
 							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
@@ -939,10 +958,10 @@
 								{
 									"IMPORTDESKTOP": {
 										"enabled": "true",
-										"description": "Import 'CLOS' desktop used in content lab",
+										"description": "Import 'BAWDOCS' desktop used in content lab",
 										"enforceImport": false,
-										"name": "CLOS",
-										"file": "CLOSDesktop.properties"
+										"name": "BAWDOCS",
+										"file": "BAWDOCSDesktop.properties"
 									}
 								}
 							]
@@ -975,11 +994,28 @@
 									}
 								},
 								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the automation service to call ADS as TWX was built in enterprise deployment but is used in starter deployment and to accommodate workaround for problem to publish original long AS name in ADS",
+										"sourceTwxFile": "!twxFileName!",
+										"filePatchInfos": [
+											{
+												"name": "client_onboarding_decisions",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": { "cp4badmin.client_onboarding": "$cp4baAdminUsr$.client_onboarding" },
+													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$cp4baAdminUsr$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+												}
+											}
+										]
+									}
+								},
+								{
 									"IMPORTPROJECT": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Template' BAA template into Studio",
 										"name": "!solutionName!",
-										"file": "!twxFileName!",
+										"file": "!patchedTWXFileName!",
 										"type": "!solutionType!",
 										"acronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
@@ -992,12 +1028,11 @@
 										"enabled": "true",
 										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
 										"name": "Client Onboarding Toolkit",
-										"acronym": "COTK",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -1033,12 +1068,11 @@
 										"enabled": "true",
 										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
 										"name": "Client Onboarding Toolkit",
-										"acronym": "COTK",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
