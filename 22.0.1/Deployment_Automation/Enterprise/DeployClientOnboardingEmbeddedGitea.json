@@ -283,7 +283,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -341,7 +341,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -358,7 +358,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -375,7 +375,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -720,7 +720,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -742,7 +742,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -764,7 +764,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -798,7 +798,7 @@
 												"enabled": "true",
 												"action": "Add",
 												"granteeType": "Group",
-												"granteeName": "$generalUsersGroupNameFull$",
+												"granteeName": "$generalUsersGroupName$",
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -980,7 +980,7 @@
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -1021,7 +1021,7 @@
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,

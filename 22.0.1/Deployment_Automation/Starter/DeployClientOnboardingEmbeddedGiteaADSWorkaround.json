@@ -336,7 +336,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -353,7 +353,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -370,7 +370,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -822,7 +822,7 @@
 												"enabled": "true",
 												"action": "Add",
 												"granteeType": "Group",
-												"granteeName": "$generalUsersGroupNameFull$",
+												"granteeName": "$generalUsersGroupName$",
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
