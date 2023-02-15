@@ -216,17 +216,6 @@ if defined rpaServerRequired (
 	echo   Variable 'rpaServer' has not been set
 )
 
-if "%adpConfigured%"=="REQUIRED" set adpConfiguredRequired=true
-if "%adpConfigured%"=="" set adpConfiguredRequired=true
-
-if defined adpConfiguredRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'adpConfigured' has not been set
-)
-
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
