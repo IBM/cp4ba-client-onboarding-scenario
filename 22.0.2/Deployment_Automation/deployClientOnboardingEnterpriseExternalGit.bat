@@ -88,10 +88,12 @@ rem ----------------------------------------------------------------------------
 
 rem Source URL where the deployment automation jar can be retrieved from
 SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
+rem CP4BA version
+SET CP4BAVERSION=22.0.2
 rem Deployment pattern of the CP4BA instance
 SET DEPLOYMENTPATTERN=Enterprise
 rem Source URL to bootstrap configuration for the deployment tool
-SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/22.0.2/Deployment_Automation/%DEPLOYMENTPATTERN%
+SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/%CP4BAVERSION%/Deployment_Automation/%DEPLOYMENTPATTERN%
 rem Name of the configuration file to use when running the deployment automation tool
 SET CONFIGNAME=config-deploy
 rem Automation script to use when running the deployment automation tool
