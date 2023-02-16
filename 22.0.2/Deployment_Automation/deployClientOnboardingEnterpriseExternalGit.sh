@@ -64,9 +64,9 @@ adpConfigured=false
 # Construct the proxy settings for curl and deployment automation tool if proxy is configured
 # ----------------------------------------------------------------------------------------------------------
 
-if [[ -v proxyHost ]] 
+if [ ! -z "${proxyHost+x}" ]
 then
-  if [[ -v proxyUser ]] 
+  if [ ! -z "${proxyUser+x}" ]
   then
      TOOLPROXYSETTINGS=-"proxyScenario=${proxyScenario} -proxyHost=${proxyHost} -proxyPort=${proxyPort} -proxyUser=${proxyUser} -proxyPwd=${proxyPwd}"
 
@@ -109,7 +109,7 @@ toolValidationSuccess=true
 echo "Bootstrapping deployment automation tool:"
 
 # In case access to GitHub is disabled check if the deployment automation jar is available locally
-if [[ -v disableAccessToGitHub ]] 
+if [ ! -z "${disableAccessToGitHub+x}" ]
 then
   # 
   if ls *DeploymentAutomation.jar 1> /dev/null 2>&1; then
