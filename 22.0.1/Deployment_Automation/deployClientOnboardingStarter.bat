@@ -9,9 +9,6 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
-rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
-rem SET jvmSettings=-Xms4096M
-
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
@@ -28,6 +25,10 @@ rem User for who the RPA bot is executed (specifying a non-existing user basical
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
+
+
+rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
+rem SET jvmSettings=-Xms4096M
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"

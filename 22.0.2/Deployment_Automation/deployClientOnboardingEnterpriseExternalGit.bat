@@ -9,9 +9,6 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
-rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution and set heap size according to JVM used
-rem SET jvmSettings=-Xms4096M
-
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginServer=
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
@@ -46,6 +43,10 @@ SET rpaServer=https://rpa-server.com:1111
 
 rem Should ADP be used within the Client Oboarding scenario (do not change for now)
 SET adpConfigured=false
+
+
+rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution and set heap size according to JVM used
+rem SET jvmSettings=-Xms4096M
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"

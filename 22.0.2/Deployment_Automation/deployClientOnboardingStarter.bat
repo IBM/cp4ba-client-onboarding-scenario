@@ -1,7 +1,7 @@
 @echo off
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.1 enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 22.0.1 starter deployment up to IF006 to deploy the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
@@ -13,11 +13,6 @@ rem Value of the 'server' parameter as shown on the 'Copy login command' page in
 SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
-
-rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=REQUIRED
-rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
-rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
 rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
 SET gmailAddress=REQUIRED
@@ -31,9 +26,6 @@ SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
 
-rem Should ADP be used within the Client Oboarding scenario (do not change for now)
-SET adpConfigured=false
-
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 rem SET jvmSettings=-Xms4096M
@@ -42,9 +34,9 @@ rem Uncomment in case GitHub is not accessible and all resources are already ava
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
 
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
-rem Uncomment at least the proxyScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
+rem Uncomment at least the proxScenatio, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 rem Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
-rem SET proxyScenario=GitHub
+rem SET proxScenatio=GitHub
 rem SET proxyHost=
 rem SET proxyPort=
 rem SET proxyUser=
@@ -59,15 +51,15 @@ rem ----------------------------------------------------------------------------
 
 if defined proxyHost (
 	if defined proxyUser (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort% -proxyUser=%proxyUser% -proxyPwd=%proxyPwd%"
+		SET TOOLPROXYSETTINGS="-proxyScenario=%proxScenatio% -proxyHost=%proxyHost% -proxyPort=%proxyPort% -proxyUser=%proxyUser% -proxyPwd=%proxyPwd%"
 		
-		if "%proxyScenario%"=="GitHub" (
+		if "%proxScenatio%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort% -U %proxyUser%:%proxyPwd%"
 		)
 	) else (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort%"
+		SET TOOLPROXYSETTINGS="-proxyScenario=%proxScenatio% -proxyHost=%proxyHost% -proxyPort=%proxyPort%"
 		
-		if "%proxyScenario%"=="GitHub" (
+		if "%proxScenatio%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort%"
 		)
 	)
@@ -80,15 +72,15 @@ rem ----------------------------------------------------------------------------
 rem Source URL where the deployment automation jar can be retrieved from
 SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
 rem CP4BA version
-SET CP4BAVERSION=22.0.1
+SET CP4BAVERSION=22.0.2
 rem Deployment pattern of the CP4BA instance
-SET DEPLOYMENTPATTERN=Enterprise
+SET DEPLOYMENTPATTERN=Starter
 rem Source URL to bootstrap configuration for the deployment tool
 SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/%CP4BAVERSION%/Deployment_Automation/%DEPLOYMENTPATTERN%
 rem Name of the configuration file to use when running the deployment automation tool
-SET CONFIGNAME=config-deploy-withGitea
+SET CONFIGNAME=config-deploy
 rem Automation script to use when running the deployment automation tool
-SET AUTOMATIONSCRIPT=DeployClientOnboardingEmbeddedGiteaADSWorkaround.json
+SET AUTOMATIONSCRIPT=DeployClientOnboardingEmbeddedGitea.json
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -158,6 +150,7 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required parameters are set
 rem ----------------------------------------------------------------------------------------------------------
 
+
 if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
 if "%ocLoginServer%"=="" set ocLoginServerRequired=true
 
@@ -178,18 +171,6 @@ if defined ocLoginTokenRequired (
 		set validationFailed=true
 	)
 	echo   Variable 'ocLoginToken' has not been set
-)
-
-if "%cp4baAdminPassword%"=="REQUIRED" set cp4baAdminPasswordRequired=true
-if "%cp4baAdminPassword%"=="" set cp4baAdminPasswordRequired=true
-
-if defined cp4baAdminPasswordRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminPassword' has not been set
 )
 
 if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
@@ -236,18 +217,6 @@ if defined rpaServerRequired (
 	echo   Variable 'rpaServer' has not been set
 )
 
-if "%adpConfigured%"=="REQUIRED" set adpConfiguredRequired=true
-if "%adpConfigured%"=="" set adpConfiguredRequired=true
-
-if defined adpConfiguredRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'adpConfigured' has not been set
-)
-
-
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -260,6 +229,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% ACTION_wf_cp_emailID=%gmailAddress% ACTION_wf_cp_emailPassword=%gmailAppKey% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% ACTION_wf_cp_emailID=%gmailAddress% ACTION_wf_cp_emailPassword=%gmailAppKey% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL

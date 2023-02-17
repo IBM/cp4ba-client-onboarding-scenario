@@ -1,7 +1,7 @@
 @echo off
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.1 enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 22.0.2 starter deployment to remove the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
@@ -13,30 +13,6 @@ rem Value of the 'server' parameter as shown on the 'Copy login command' page in
 SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
-
-rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=REQUIRED
-rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
-rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
-
-rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
-SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
-SET gmailAppKey=REQUIRED
-
-
-
-rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
-SET rpaBotExecutionUser=cp4admin2
-rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
-SET rpaServer=https://rpa-server.com:1111
-
-rem Should ADP be used within the Client Oboarding scenario (do not change for now)
-SET adpConfigured=false
-
-
-rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
-rem SET jvmSettings=-Xms4096M
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -80,15 +56,15 @@ rem ----------------------------------------------------------------------------
 rem Source URL where the deployment automation jar can be retrieved from
 SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
 rem CP4BA version
-SET CP4BAVERSION=22.0.1
+SET CP4BAVERSION=22.0.2
 rem Deployment pattern of the CP4BA instance
-SET DEPLOYMENTPATTERN=Enterprise
+SET DEPLOYMENTPATTERN=Starter
 rem Source URL to bootstrap configuration for the deployment tool
 SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/%CP4BAVERSION%/Deployment_Automation/%DEPLOYMENTPATTERN%
 rem Name of the configuration file to use when running the deployment automation tool
-SET CONFIGNAME=config-deploy-withGitea
+SET CONFIGNAME=config-undeploy
 rem Automation script to use when running the deployment automation tool
-SET AUTOMATIONSCRIPT=DeployClientOnboardingEmbeddedGiteaADSWorkaround.json
+SET AUTOMATIONSCRIPT=RemoveClientOnboardingArtifactsEmbeddedGitea.json
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -180,74 +156,6 @@ if defined ocLoginTokenRequired (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if "%cp4baAdminPassword%"=="REQUIRED" set cp4baAdminPasswordRequired=true
-if "%cp4baAdminPassword%"=="" set cp4baAdminPasswordRequired=true
-
-if defined cp4baAdminPasswordRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminPassword' has not been set
-)
-
-if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-if "%gmailAddress%"=="" set gmailAddressRequired=true
-
-if defined gmailAddressRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'gmailAddress' has not been set
-)
-
-if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
-
-if defined gmailAppKeyRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'gmailAppKey' has not been set
-)
-
-if "%rpaBotExecutionUser%"=="REQUIRED" set rpaBotExecutionUserRequired=true
-if "%rpaBotExecutionUser%"=="" set rpaBotExecutionUserRequired=true
-
-if defined rpaBotExecutionUserRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'rpaBotExecutionUser' has not been set
-)
-
-if "%rpaServer%"=="REQUIRED" set rpaServerRequired=true
-if "%rpaServer%"=="" set rpaServerRequired=true
-
-if defined rpaServerRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'rpaServer' has not been set
-)
-
-if "%adpConfigured%"=="REQUIRED" set adpConfiguredRequired=true
-if "%adpConfigured%"=="" set adpConfiguredRequired=true
-
-if defined adpConfiguredRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'adpConfigured' has not been set
-)
-
-
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -260,6 +168,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% ACTION_wf_cp_emailID=%gmailAddress% ACTION_wf_cp_emailPassword=%gmailAppKey% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT%
 
 ENDLOCAL
