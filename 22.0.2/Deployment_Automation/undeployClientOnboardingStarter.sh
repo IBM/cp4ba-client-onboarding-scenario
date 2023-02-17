@@ -144,26 +144,6 @@ then
   echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [[ "${cp4baAdminUserName}" == "REQUIRED" ]] || [[ "${cp4baAdminUserName}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'cp4baAdminUserName' has not been set"
-fi
-
-if [[ "${cp4baAdminPassword}" == "REQUIRED" ]] || [[ "${cp4baAdminPassword}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'cp4baAdminPassword' has not been set"
-fi
-
 if ! $validationSuccess
 then
   echo
