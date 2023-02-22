@@ -307,7 +307,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameFull$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -365,7 +365,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -382,7 +382,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -399,7 +399,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupNameFull$",
+														"granteeName": "$generalUsersGroupName$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -756,7 +756,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameFull$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -778,7 +778,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameFull$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -800,7 +800,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameFull$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -1024,26 +1024,6 @@
 									}
 								},
 								{
-									"ADDCOLLABORATORS": {
-										"enabled": "true",
-										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
-										"name": "Client Onboarding Toolkit",
-										"type": "APP_TK",
-										"ignoreMissingPrincipals": true,
-										"principals": [
-											{
-												"name": "$generalUsersGroupName$",
-												"type": "group",
-												"permissions": {
-													"read": true,
-													"write": false,
-													"administration": false
-												}
-											}
-										]
-									}
-								},
-								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract project information from Client Onboarding Document Upload app file",
@@ -1072,7 +1052,7 @@
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupNameFull$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
