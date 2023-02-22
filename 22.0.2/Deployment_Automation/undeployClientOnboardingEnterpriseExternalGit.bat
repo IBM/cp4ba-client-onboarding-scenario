@@ -21,14 +21,14 @@ rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginServer=https://api.ataxic.cp.fyre.ibm.com:6443
+SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginToken=sha256~9lWbR3EvU4nWVwppO4_izRJ3OetZU-QYSL4Xc5GAq74
+SET ocLoginToken=REQUIRED
 
 rem Fully qualified user id of an admin user for the CP4BA instance
-SET cp4baAdminUserName=cn=p8admin,ou=StaffTest,o=ibm,c=us
+SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=Psiadmin1
+SET cp4baAdminPassword=REQUIRED
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"

@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.1 enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 22.0.2 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 

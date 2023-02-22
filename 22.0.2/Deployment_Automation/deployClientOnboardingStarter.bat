@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.1 starter deployment up to IF006 to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 22.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
