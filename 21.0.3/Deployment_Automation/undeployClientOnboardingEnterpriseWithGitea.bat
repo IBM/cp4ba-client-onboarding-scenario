@@ -1,4 +1,15 @@
 @echo off
+rem ###############################################################################
+rem #
+rem # Licensed Materials - Property of IBM
+rem #
+rem # (C) Copyright IBM Corp. 2023. All Rights Reserved.
+rem #
+rem # US Government Users Restricted Rights - Use, duplication or
+rem # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+rem #
+rem ###############################################################################
+
 echo.
 SETLOCAL
 rem This file is to be used with CP4BA 22.0.1 enterprise deployment with a co-deployed gitea to remove the Client Onboarding scenario and associated labs

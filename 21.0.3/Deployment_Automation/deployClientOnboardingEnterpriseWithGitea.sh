@@ -1,3 +1,15 @@
+#!/bin/bash
+###############################################################################
+#
+# Licensed Materials - Property of IBM
+#
+# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+#
+###############################################################################
+
 #This file is to be used with CP4BA 21.0.3 enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
 
 #Set all variables according to your environment before executing this file
