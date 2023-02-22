@@ -921,7 +921,7 @@
   								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "^false",
+										"enabled": "false",
 										"description": "Import 'CLOS' desktop used in content lab",
 										"enforceImport": false,
 										"name": "CLOS",
