@@ -307,7 +307,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupName$",
+												"name": "$generalUsersGroupNameFull$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -365,7 +365,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupName$",
+														"granteeName": "$generalUsersGroupNameFull$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -382,7 +382,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupName$",
+														"granteeName": "$generalUsersGroupNameFull$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -399,7 +399,7 @@
 												"granteeSettings": [
 													{
 														"enabled": "true",
-														"granteeName": "$generalUsersGroupName$",
+														"granteeName": "$generalUsersGroupNameFull$",
 														"granteeType": "Group",
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
@@ -756,7 +756,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupName$",
+												"name": "$generalUsersGroupNameFull$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -778,7 +778,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupName$",
+												"name": "$generalUsersGroupNameFull$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -800,7 +800,7 @@
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupName$",
+												"name": "$generalUsersGroupNameFull$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -1072,7 +1072,7 @@
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupName$",
+												"name": "$generalUsersGroupNameFull$",
 												"type": "group",
 												"permissions": {
 													"read": true,
