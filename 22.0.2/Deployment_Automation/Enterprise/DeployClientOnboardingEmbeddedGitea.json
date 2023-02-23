@@ -257,7 +257,7 @@
 										"solutionAcronym": "!solutionAcronym!",
 										"dosName": "$BAW_DOS$",
 										"maxDeployCompletionPolls": 20,
-										"delayBetweenDeployCompletionPolls": 5
+										"delayBetweenDeployCompletionPolls": 10
 									}
 								},
 								{
