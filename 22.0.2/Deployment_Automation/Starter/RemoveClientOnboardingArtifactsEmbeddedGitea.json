@@ -1,8 +1,8 @@
 {
 	"fileVersion": "1.0.0",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.1/Deployment_Automation/Starter/RemoveClientOnboardingArtifactsEmbeddedGitea.json",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/RemoveClientOnboardingArtifactsEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.0.0 <1.1.0",
-	"requiredCP4BAVersion": ">=22.1.0 <22.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Starter",
 	
 	"actions": [
