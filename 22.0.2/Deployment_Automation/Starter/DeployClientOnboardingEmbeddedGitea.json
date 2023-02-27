@@ -523,7 +523,7 @@
 								},
 								{
 									"IMPORTAPPLICATION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Import Workplace app",
 										"appEngineAppConfigName": "BASDEMO",
 										"name": "Workplace",
@@ -533,7 +533,7 @@
 								},
 								{
 									"SETAPPPERMISSIONS": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Make Workplace app accessible for all authenticated users",
 										"appEngineAppConfigName": "BASDEMO",
 										"name": "Workplace",
@@ -548,7 +548,7 @@
 								},
 								{
 									"PATCHAPPLICATION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Patch 'Client Onboarding Request' app built for enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequest.zip",
 										"simpleTextMappings": {
@@ -560,7 +560,7 @@
 								},
 								{
 									"IMPORTAPPLICATION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Import patched 'Client Onbaording Request' app",
 										"appEngineAppConfigName": "BASDEMO",
 										"name": "Client Onboarding Request",
@@ -569,7 +569,7 @@
 								},
 								{
 									"IMPORTAPPLICATION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Import 'Client Onboarding Document Upload' app",
 										"appEngineAppConfigName": "BASDEMO",
 										"name": "Client Onboarding Document Upload",
@@ -578,7 +578,7 @@
 								},
 								{
 									"SETAPPPERMISSIONS": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
 										"appEngineAppConfigName": "BASDEMO",
 										"name": "Client Onboarding Request",
@@ -593,7 +593,7 @@
 								},
 								{
 									"SETAPPPERMISSIONS": {
-										"enabled": "false",
+										"enabled": "true",
 										"appEngineAppConfigName": "BASDEMO",
 										"description": "Make 'Client Onboarding Document Upload' app accessible for all authenticated users",
 										"name": "Client Onboarding Document Upload",
