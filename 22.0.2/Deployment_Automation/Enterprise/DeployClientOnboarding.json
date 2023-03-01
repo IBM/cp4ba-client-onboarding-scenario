@@ -573,6 +573,15 @@
 									}
 								},
 								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Document Upload' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Document Upload",
+										"file": "ClientOnboardingDocumentUpload.zip"
+									}
+								},
+								{
 									"SETAPPPERMISSIONS": {
 										"enabled": "true",
 										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
