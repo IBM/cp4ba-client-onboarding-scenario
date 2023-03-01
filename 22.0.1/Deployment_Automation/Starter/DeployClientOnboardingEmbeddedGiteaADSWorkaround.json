@@ -53,18 +53,18 @@
 									}
 								},
 								{
+									"CONNECTWITHGIT": {
+										"enabled": "true",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
 									"IMPORTDECISIONSERVICES": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Decisions' decision service using shortened decision service name for starter deployment",
 										"decisionServiceName": "CO Decisions",
 										"file": "CODecisions.zip"
-									}
-								},
-								{
-									"CONNECTWITHGIT": {
-										"enabled": "true",
-										"description": "Connect ADS project to internal gitea repository",
-										"gitRepoUrl": "!GITREPOURL!"
 									}
 								},
 								{
