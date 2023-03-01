@@ -295,28 +295,18 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Undeploy 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Undeploy" ],
+										"description" : "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions" : [ "Project" ],
 										"projectName": "Client Onboarding",
 										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
+										"unpublishAutomationServices": true,
+										"undeployDecisionService": true,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5,
 										"maxUndeployCompletionPolls": 20,
 										"delayBetweenUndeployCompletionPolls": 5
-									}
-								},
-								{
-									"CLEANUPADS": {
-										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Project" ],
-										"projectName": "Client Onboarding",
-										"unpublishAutomationServices": true,
-										"maxBASQueryRetries": 5,
-										"maxUnpublishCompletionPolls": 20,
-										"delayBetweenUnpublishCompletionPolls": 5
 									}
 								},
 								{

@@ -326,11 +326,13 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Undeploy 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Undeploy" ],
+										"description" : "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions" : [ "Project" ],
 										"projectName": "Client Onboarding",
 										"decisionServiceName": "CO Decisions",
 										"version": "1.0.0",
+										"unpublishAutomationServices": true,
+										"undeployDecisionService": true,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5,
