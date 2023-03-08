@@ -343,18 +343,6 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Project" ],
-										"projectName": "Client Onboarding",
-										"unpublishAutomationServices": true,
-										"maxBASQueryRetries": 5,
-										"maxUnpublishCompletionPolls": 20,
-										"delayBetweenUnpublishCompletionPolls": 5
-									}
-								},
-								{
-									"CLEANUPADS": {
-										"enabled": "true",
 										"description" : "Delete org used by ADS and all contained repos",
 										"adsCleanupActions" : [ "Git" ],
 										"gitDeletionType" : "OrgWithRepos",
