@@ -33,9 +33,9 @@ rem Fully qualified user id of an admin user for the CP4BA instance
 SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
-rem Fully qualified name of a group that contains the admin user/users for the CP4BA instance
+rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains the admin user/users for the CP4BA instance
 SET cp4baAdminGroup=REQUIRED
-rem Fully qualified name of a group that contains normal users for the CP4BA instance
+rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance
 SET generalUsersGroup=REQUIRED
 
 rem Name of the Git organisation to create the ADS repository in

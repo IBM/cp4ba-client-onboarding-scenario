@@ -27,13 +27,13 @@ ocLoginToken=REQUIRED
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 #cp4baNamespace=
 
-# Fully qualified user id of an admin user for the CP4BA instance
+# Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
 cp4baAdminUserName=REQUIRED
 # Password for the CP4BA admin user to use to access the CP4BA environment
 cp4baAdminPassword=REQUIRED
-# Fully qualified name of a group that contains the admin user/users for the CP4BA instance
+# Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains the admin user/users for the CP4BA instance
 cp4baAdminGroup=REQUIRED
-# Fully qualified name of a group that contains normal users for the CP4BA instance
+# Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance
 generalUsersGroup=REQUIRED
 
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini

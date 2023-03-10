@@ -29,7 +29,7 @@ rem Uncomment when the OCP cluster contains more than one namespace/project into
 rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 rem SET cp4baNamespace=
 
-rem Fully qualified user id of an admin user for the CP4BA instance
+rem Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
 SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED

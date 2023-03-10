@@ -27,7 +27,7 @@ ocLoginToken=REQUIRED
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 #cp4baNamespace=
 
-# Fully qualified user id of an admin user for the CP4BA instance
+# Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
 cp4baAdminUserName=REQUIRED
 # Password for the CP4BA admin user to use to access the CP4BA environment
 cp4baAdminPassword=REQUIRED

@@ -25,7 +25,7 @@ SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
 
-rem Fully qualified user id of an admin user for the CP4BA instance
+rem Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
 SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
