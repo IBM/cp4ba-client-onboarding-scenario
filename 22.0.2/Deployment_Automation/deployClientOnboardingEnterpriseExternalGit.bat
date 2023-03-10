@@ -21,30 +21,30 @@ rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginServer=
+SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginToken=
+SET ocLoginToken=REQUIRED
 
 rem Fully qualified user id of an admin user for the CP4BA instance
-SET cp4baAdminUserName=
+SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=
+SET cp4baAdminPassword=REQUIRED
 rem Fully qualified name of a group that contains the admin user/users for the CP4BA instance
-SET cp4baAdminGroup=
+SET cp4baAdminGroup=REQUIRED
 rem Fully qualified name of a group that contains normal users for the CP4BA instance
-SET generalUsersGroup=
+SET generalUsersGroup=REQUIRED
 
 rem Name of the Git organisation to create the ADS repository in
-SET adsGitOrg=
+SET adsGitOrg=REQUIRED
 rem User name of the user used to create the ADS repository with
-SET adsGitUserName=
+SET adsGitUserName=REQUIRED
 rem Git API key to connect to the Git server
-SET adsGitRepoAPIKey=
+SET adsGitRepoAPIKey=REQUIRED
 
 rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
-SET gmailAddress=
+SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails
-SET gmailAppKey=
+SET gmailAppKey=REQUIRED
 
 
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
