@@ -25,6 +25,10 @@ SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
 
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=
+
 rem Fully qualified user id of an admin user for the CP4BA instance
 SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
@@ -212,6 +216,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
 
 ENDLOCAL

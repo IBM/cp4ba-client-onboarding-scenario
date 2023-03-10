@@ -33,6 +33,10 @@ SET cp4baAdminPassword=REQUIRED
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
 
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=
+
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
 rem Uncomment at least the proxyScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 rem Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
@@ -208,6 +212,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword%
 
 ENDLOCAL

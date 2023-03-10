@@ -31,6 +31,10 @@ SET cp4baAdminPassword=REQUIRED
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admin
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=
+
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub=-disableAccessToGitHub=true
 
@@ -197,6 +201,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
 
 ENDLOCAL

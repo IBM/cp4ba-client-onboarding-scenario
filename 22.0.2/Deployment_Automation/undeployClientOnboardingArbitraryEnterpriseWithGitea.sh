@@ -31,6 +31,9 @@ cp4baAdminPassword=REQUIRED
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -195,4 +198,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
