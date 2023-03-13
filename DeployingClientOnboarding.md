@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) to a self-provisioned Jam-in-a-box environment. For more information about Jam-in-a-box refer to the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/JamInABox.md) page.
+Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) to a self-provisioned Jam-in-a-box environment. For more information about Jam-in-a-box refer to the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/JamInABox.md) page.
 
 
 ## Prerequisites
@@ -59,9 +59,11 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 ### Download Required Files
 
    1. **Create a new directory** on your machine from which to start the deployment (e.g. "co_depl")
-      
+
    2. **Save the deployment file** that corresponds to the operating system of your deployment machine into the directory created in step 1 (in the context menu of your browser select **Save as.../Save page as...** or similar)
+
       **Linux/Mac** 	*CP4BA 22.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.1/Deployment_Automation/deployClientOnboardingStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
+
       **Windows** - *CP4BA 22.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.1/Deployment_Automation/deployClientOnboardingStarter.bat)**
 
 ### Update bat/sh File
@@ -135,7 +137,7 @@ In case your deployment fails and you get stuck, please reach out using the cont
 
 ## Performing IBM Cloud Pack for Business Automations Labs
 
-Once you have imported the Client Onboarding scenario successfully, you can perform the demo and labs mentioned in the **Mapping of labs to environments** table of the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/JamInABox.md) page.
+Once you have imported the Client Onboarding scenario successfully, you can perform the demo and labs mentioned in the **Mapping of labs to environments** table of the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/JamInABox.md) page.
 
 ##### Considerations
 
