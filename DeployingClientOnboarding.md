@@ -12,7 +12,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 ## Prerequisites
 
 1. **Cloud Pak for Business Automation (CP4BA) cluster**
-   IBM Business Partners and IBMers can reserve a [Jam-in-a-box for Business Automation](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation) cluster from IBM TechZone (if customer facing).
+   IBM Business Partners and IBMers can reserve a [Jam-in-a-box for Business Automation](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation) cluster from IBM TechZone (in case customer facing).
    (An alternative is to create or use a CP4BA 22.0.1 starter deployment authoring environment that has configured at least the following capabilities: Automation Decision Services, Workflow, Business Automation Insights)
 
    ***Environment verification***
