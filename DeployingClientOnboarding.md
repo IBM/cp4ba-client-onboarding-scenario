@@ -148,7 +148,7 @@ Once you have imported the Client Onboarding scenario successfully, you can perf
 
 **Business Partners and IBMers** 
 
-To engage us, drop us a message at #jam-in-a-box-business-automation.
+To engage us, drop us a message at [#jam-in-a-box-business-automation](https://ibm-cloudpak-partners.slack.com/archives/C04SMFNLA3T).
 
 **All others**
 
