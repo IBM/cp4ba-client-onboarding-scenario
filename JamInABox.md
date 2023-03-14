@@ -1,5 +1,3 @@
-# -- Under Construction --
-
 # Jam-in-a-box for Business Automation
 
 ## Introduction
