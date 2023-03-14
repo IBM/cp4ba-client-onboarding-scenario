@@ -47,7 +47,7 @@ Jam-in-a-box removes hurdles to Business Automation adoption through easing avai
       | [IBM Process Mining](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Process%20Mining) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Process%20Mining) |
       | [IBM Robotic Process Automation](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Robotic%20Process%20Automation) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Robotic%20Process%20Automation) |
 
-   - [All artifacts](https://github.com/IBM/cp4ba-client-onboarding-scenario) for the client onboarding scenario including deployment automation to quickly and easily deploy them
+   - [All artifacts](https://github.com/IBM/cp4ba-client-onboarding-scenario) for the Client Onboarding scenario including deployment automation to quickly and easily deploy them
 
 
 ## Support
