@@ -55,8 +55,6 @@ We aim to support successfully utilizing our Jam-in-a-box.
 **Business Partners and IBMers**
 To engage us, drop us a message at [#jam-in-a-box-business-automation](https://ibm-cloudpak-partners.slack.com/archives/C04SMFNLA3T).
 
-**IBMers**
-Alternatively, if you think you need more than support for the Jam-in-a-box content, you can always submit a SWAT request against Business Automation using this [link](http://ibm.biz/automation-swat).
 
 **All others**
 Open a new issue in this GitHub
