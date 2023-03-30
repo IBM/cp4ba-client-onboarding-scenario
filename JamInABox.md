@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Use the Jam-in-a-box environments to demo the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario), run your own mini-Tech Jam, or get self-educated on Business Automation.
+Use the Jam-in-a-Box environments to demo the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario), run your own mini-Tech Jam, or get self-educated on Business Automation.
 
-Jam-in-a-box removes hurdles to Business Automation adoption through easing availability and sharing of technical enablement. Towards this it offers a set of self-provisionable environments hosted on IBM TechZone, combined with a set of [hands-on technical labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1) spanning all capabilities of Business Automation.
+Jam-in-a-Box removes hurdles to Business Automation adoption through easing availability and sharing of technical enablement. Towards this it offers a set of self-provisionable environments hosted on IBM TechZone, combined with a set of [hands-on technical labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1) spanning all capabilities of Business Automation.
 
-## Use cases for Jam-in-a-box
+## Use cases for Jam-in-a-Box
 
 ### 1. Technical Enablement
 
@@ -50,7 +50,7 @@ Jam-in-a-box removes hurdles to Business Automation adoption through easing avai
 
 ## Support
 
-We aim to support successfully utilizing our Jam-in-a-box.
+We aim to support successfully utilizing our Jam-in-a-Box.
 
 **Business Partners and IBMers**
 To engage us, drop us a message at [#jam-in-a-box-business-automation](https://ibm-cloudpak-partners.slack.com/archives/C04SMFNLA3T).
