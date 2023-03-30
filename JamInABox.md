@@ -1,4 +1,4 @@
-# Jam-in-a-box for Business Automation
+# Jam-in-a-Box for Business Automation
 
 ## Introduction
 
