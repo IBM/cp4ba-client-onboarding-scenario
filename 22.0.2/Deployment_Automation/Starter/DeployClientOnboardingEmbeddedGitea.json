@@ -813,23 +813,11 @@
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
-									"MODIFYOBJECTSTORESECURITY": {
-										"enabled": "true",
-										"description": "Modify security for CONTENT Object Store",
-										"name": "Modify security for CONTENT Object Store",
-										"replaceAccessRights": false,
-										"granteeSettings": [
-											{
-												"enabled": "true",
-												"action": "Add",
-												"granteeType": "Group",
-												"granteeName": "$generalUsersGroupName$",
-												"accessType": "Allow",
-												"inheritableDepth": "No inheritance",
-												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
-											}
-										]
-									}
+									"ADDADMINTOOBJECTSTORE": {
+   										"enabled": "true",
+   										"description": "Add general users group as admins to CONTENT Object Store",
+   										"granteeName": "$generalUsersGroupName$"
+  									}
 								},
 								{
 									"CREATESTORAGEPOLICY": {
