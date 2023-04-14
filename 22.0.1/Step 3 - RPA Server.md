@@ -12,7 +12,7 @@
    ![image-2021gitconnect](images/RPA-ReservationDetails.png)
 5. Once you have reserved an environment, you will receive an email with a link to check your reservation details (**Reservation Details**). It also contains a **URL to access the IBM RPA Rest Service remotely**, please copy the **RPA Asynch Server API** URL . This will be used in the Workflow solution.  
    ![image-2021gitconnect](images/RPA-ReservationEmail.png)
-6. Click the **Reservation Details** above to open your environment reservation details, then click **VM Remote Console** to access your RPA VM where RPA bot will be executed..  
+6. Click the **Reservation Details** above, then click **VM Remote Console** to access your RPA VM where RPA bot will be executed..  
    ![image-2021gitconnect](images/RPA-EnvironmentConsole.png)
 
 Once you have setup the RPA server, [import the Workflow solution](Step%204%20-%20Workflow%20Solution.md).
