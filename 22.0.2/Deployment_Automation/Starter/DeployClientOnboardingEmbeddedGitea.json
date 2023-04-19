@@ -814,7 +814,7 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-   										"enabled": "false",
+   										"enabled": "true",
    										"description": "Add general users group as admins to CONTENT Object Store",
    										"granteeName": "$generalUsersGroupName$"
   									}
