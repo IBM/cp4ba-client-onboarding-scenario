@@ -64,7 +64,7 @@
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description" : "Remove Client Onboarding Request & Client Onboarding Document Upload app",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"artifactNames": [
 											"Client Onboarding Request",
 											"Client Onboarding Document Upload"

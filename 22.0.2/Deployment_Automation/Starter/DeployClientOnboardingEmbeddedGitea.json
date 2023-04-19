@@ -526,7 +526,7 @@
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import Workplace app",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"name": "Workplace",
 										"useCurrentOrEarlierFileVersion": true,
 										"file": "Workplace-$cp4baVersionWithFixpack$.zip"
@@ -536,7 +536,7 @@
 									"SETAPPPERMISSIONS": {
 										"enabled": "true",
 										"description": "Make Workplace app accessible for all authenticated users",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"name": "Workplace",
 										"action": "update",
 										"permissions": [
@@ -563,7 +563,7 @@
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import patched 'Client Onbaording Request' app",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
 										"file": "!patchedZIPFileName!"
 									}
@@ -572,7 +572,7 @@
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Document Upload' app",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Document Upload",
 										"file": "ClientOnboardingDocumentUpload.zip"
 									}
@@ -581,7 +581,7 @@
 									"SETAPPPERMISSIONS": {
 										"enabled": "true",
 										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
 										"action": "update",
 										"permissions": [
@@ -595,7 +595,7 @@
 								{
 									"SETAPPPERMISSIONS": {
 										"enabled": "true",
-										"appEngineAppConfigName": "BASDEMO",
+										"appEngineAppConfigName": "APPENG0",
 										"description": "Make 'Client Onboarding Document Upload' app accessible for all authenticated users",
 										"name": "Client Onboarding Document Upload",
 										"action": "update",
@@ -613,7 +613,7 @@
 										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequestDesktop.properties",
 										"simpleTextMappings": {
-											"APPENG0": "BASDEMO",
+											"APPENG0": "APPENG0",
 											"repositories=icmbawtos": "repositories=icmtarget",
 											"defaultRepository=icmbawtos": "defaultRepository=icmtarget",
 											"repository.navigator.icmbawtos": "&delete&"
@@ -635,7 +635,7 @@
 										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "CODocumentUploadDesktop.properties",
 										"simpleTextMappings": {
-										    "APPENG0": "BASDEMO",
+										    "APPENG0": "APPENG0",
 											"repositories=icmbawtos": "repositories=icmtarget",
 											"defaultRepository=icmbawtos": "defaultRepository=icmtarget",
 											"repository.navigator.icmbawtos": "&delete&"
@@ -814,7 +814,7 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-   										"enabled": "true",
+   										"enabled": "false",
    										"description": "Add general users group as admins to CONTENT Object Store",
    										"granteeName": "$generalUsersGroupName$"
   									}
