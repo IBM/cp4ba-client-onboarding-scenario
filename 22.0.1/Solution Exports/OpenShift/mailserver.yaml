@@ -1,0 +1,637 @@
+#refer to: https://docker-mailserver.github.io/docker-mailserver/edge/config/advanced/kubernetes/
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mailserver.config
+  labels:
+    app: mailserver
+data:
+  postfix-accounts.cf: |
+    cp4badmin@example.com|{PLAIN}passw0rd
+    focuscorp@example.com|{PLAIN}passw0rd
+    zhongtao@example.com|{PLAIN}passw0rd
+    bufeng@example.com|{PLAIN}passw0rd
+    kefeng@example.com|{PLAIN}passw0rd
+    matthias@example.com|{PLAIN}passw0rd
+    clandis@example.com|{PLAIN}passw0rd
+    jorge@example.com|{PLAIN}passw0rd
+    edward@example.com|{PLAIN}passw0rd
+    juergen@example.com|{PLAIN}passw0rd
+    olaf@example.com|{PLAIN}passw0rd
+    paul@example.com|{PLAIN}passw0rd
+    swapnil@example.com|{PLAIN}passw0rd
+    thomas@example.com|{PLAIN}passw0rd
+    sundeep@example.com|{PLAIN}passw0rd
+    tom@example.com|{PLAIN}passw0rd
+    usr001@example.com|{PLAIN}passw0rd
+    usr002@example.com|{PLAIN}passw0rd
+    usr003@example.com|{PLAIN}passw0rd
+    usr004@example.com|{PLAIN}passw0rd
+    usr005@example.com|{PLAIN}passw0rd
+    usr006@example.com|{PLAIN}passw0rd
+    usr007@example.com|{PLAIN}passw0rd
+    usr008@example.com|{PLAIN}passw0rd
+    usr009@example.com|{PLAIN}passw0rd
+    usr010@example.com|{PLAIN}passw0rd
+    usr011@example.com|{PLAIN}passw0rd
+    usr012@example.com|{PLAIN}passw0rd
+    usr013@example.com|{PLAIN}passw0rd
+    usr014@example.com|{PLAIN}passw0rd
+    usr015@example.com|{PLAIN}passw0rd
+    usr016@example.com|{PLAIN}passw0rd
+    usr017@example.com|{PLAIN}passw0rd
+    usr018@example.com|{PLAIN}passw0rd
+    usr019@example.com|{PLAIN}passw0rd
+    usr020@example.com|{PLAIN}passw0rd
+    usr021@example.com|{PLAIN}passw0rd
+    usr022@example.com|{PLAIN}passw0rd
+    usr023@example.com|{PLAIN}passw0rd
+    usr024@example.com|{PLAIN}passw0rd
+    usr025@example.com|{PLAIN}passw0rd
+    usr026@example.com|{PLAIN}passw0rd
+    usr027@example.com|{PLAIN}passw0rd
+    usr028@example.com|{PLAIN}passw0rd
+    usr029@example.com|{PLAIN}passw0rd
+    usr030@example.com|{PLAIN}passw0rd
+    usr031@example.com|{PLAIN}passw0rd
+    usr032@example.com|{PLAIN}passw0rd
+    usr033@example.com|{PLAIN}passw0rd
+    usr034@example.com|{PLAIN}passw0rd
+    usr035@example.com|{PLAIN}passw0rd
+    usr036@example.com|{PLAIN}passw0rd
+    usr037@example.com|{PLAIN}passw0rd
+    usr038@example.com|{PLAIN}passw0rd
+    usr039@example.com|{PLAIN}passw0rd
+    usr040@example.com|{PLAIN}passw0rd
+    usr041@example.com|{PLAIN}passw0rd
+    usr042@example.com|{PLAIN}passw0rd
+    usr043@example.com|{PLAIN}passw0rd
+    usr044@example.com|{PLAIN}passw0rd
+    usr045@example.com|{PLAIN}passw0rd
+    usr046@example.com|{PLAIN}passw0rd
+    usr047@example.com|{PLAIN}passw0rd
+    usr048@example.com|{PLAIN}passw0rd
+    usr049@example.com|{PLAIN}passw0rd
+    usr050@example.com|{PLAIN}passw0rd
+    usr051@example.com|{PLAIN}passw0rd
+    usr052@example.com|{PLAIN}passw0rd
+    usr053@example.com|{PLAIN}passw0rd
+    usr054@example.com|{PLAIN}passw0rd
+    usr055@example.com|{PLAIN}passw0rd
+    usr056@example.com|{PLAIN}passw0rd
+    usr057@example.com|{PLAIN}passw0rd
+    usr058@example.com|{PLAIN}passw0rd
+    usr059@example.com|{PLAIN}passw0rd
+    usr060@example.com|{PLAIN}passw0rd
+    usr061@example.com|{PLAIN}passw0rd
+    usr062@example.com|{PLAIN}passw0rd
+    usr063@example.com|{PLAIN}passw0rd
+    usr064@example.com|{PLAIN}passw0rd
+    usr065@example.com|{PLAIN}passw0rd
+    usr066@example.com|{PLAIN}passw0rd
+    usr067@example.com|{PLAIN}passw0rd
+    usr068@example.com|{PLAIN}passw0rd
+    usr069@example.com|{PLAIN}passw0rd
+    usr070@example.com|{PLAIN}passw0rd
+    usr071@example.com|{PLAIN}passw0rd
+    usr072@example.com|{PLAIN}passw0rd
+    usr073@example.com|{PLAIN}passw0rd
+    usr074@example.com|{PLAIN}passw0rd
+    usr075@example.com|{PLAIN}passw0rd
+    usr076@example.com|{PLAIN}passw0rd
+    usr077@example.com|{PLAIN}passw0rd
+    usr078@example.com|{PLAIN}passw0rd
+    usr079@example.com|{PLAIN}passw0rd
+    usr080@example.com|{PLAIN}passw0rd
+    usr081@example.com|{PLAIN}passw0rd
+    usr082@example.com|{PLAIN}passw0rd
+    usr083@example.com|{PLAIN}passw0rd
+    usr084@example.com|{PLAIN}passw0rd
+    usr085@example.com|{PLAIN}passw0rd
+    usr086@example.com|{PLAIN}passw0rd
+    usr087@example.com|{PLAIN}passw0rd
+    usr088@example.com|{PLAIN}passw0rd
+    usr089@example.com|{PLAIN}passw0rd
+    usr090@example.com|{PLAIN}passw0rd
+    usr091@example.com|{PLAIN}passw0rd
+    usr092@example.com|{PLAIN}passw0rd
+    usr093@example.com|{PLAIN}passw0rd
+    usr094@example.com|{PLAIN}passw0rd
+    usr095@example.com|{PLAIN}passw0rd
+    usr096@example.com|{PLAIN}passw0rd
+    usr097@example.com|{PLAIN}passw0rd
+    usr098@example.com|{PLAIN}passw0rd
+    usr099@example.com|{PLAIN}passw0rd
+    usr100@example.com|{PLAIN}passw0rd
+    usr101@example.com|{PLAIN}passw0rd
+    usr102@example.com|{PLAIN}passw0rd
+    usr103@example.com|{PLAIN}passw0rd
+    usr104@example.com|{PLAIN}passw0rd
+    usr105@example.com|{PLAIN}passw0rd
+    usr106@example.com|{PLAIN}passw0rd
+    usr107@example.com|{PLAIN}passw0rd
+    usr108@example.com|{PLAIN}passw0rd
+    usr109@example.com|{PLAIN}passw0rd
+    usr110@example.com|{PLAIN}passw0rd
+    usr111@example.com|{PLAIN}passw0rd
+    usr112@example.com|{PLAIN}passw0rd
+    usr113@example.com|{PLAIN}passw0rd
+    usr114@example.com|{PLAIN}passw0rd
+    usr115@example.com|{PLAIN}passw0rd
+    usr116@example.com|{PLAIN}passw0rd
+    usr117@example.com|{PLAIN}passw0rd
+    usr118@example.com|{PLAIN}passw0rd
+    usr119@example.com|{PLAIN}passw0rd
+    usr120@example.com|{PLAIN}passw0rd
+    usr121@example.com|{PLAIN}passw0rd
+    usr122@example.com|{PLAIN}passw0rd
+    usr123@example.com|{PLAIN}passw0rd
+    usr124@example.com|{PLAIN}passw0rd
+    usr125@example.com|{PLAIN}passw0rd
+    usr126@example.com|{PLAIN}passw0rd
+    usr127@example.com|{PLAIN}passw0rd
+    usr128@example.com|{PLAIN}passw0rd
+    usr129@example.com|{PLAIN}passw0rd
+    usr130@example.com|{PLAIN}passw0rd
+    usr131@example.com|{PLAIN}passw0rd
+    usr132@example.com|{PLAIN}passw0rd
+    usr133@example.com|{PLAIN}passw0rd
+    usr134@example.com|{PLAIN}passw0rd
+    usr135@example.com|{PLAIN}passw0rd
+    usr136@example.com|{PLAIN}passw0rd
+    usr137@example.com|{PLAIN}passw0rd
+    usr138@example.com|{PLAIN}passw0rd
+    usr139@example.com|{PLAIN}passw0rd
+    usr140@example.com|{PLAIN}passw0rd
+    usr141@example.com|{PLAIN}passw0rd
+    usr142@example.com|{PLAIN}passw0rd
+    usr143@example.com|{PLAIN}passw0rd
+    usr144@example.com|{PLAIN}passw0rd
+    usr145@example.com|{PLAIN}passw0rd
+    usr146@example.com|{PLAIN}passw0rd
+    usr147@example.com|{PLAIN}passw0rd
+    usr148@example.com|{PLAIN}passw0rd
+    usr149@example.com|{PLAIN}passw0rd
+    usr150@example.com|{PLAIN}passw0rd
+    usr151@example.com|{PLAIN}passw0rd
+    usr152@example.com|{PLAIN}passw0rd
+    usr153@example.com|{PLAIN}passw0rd
+    usr154@example.com|{PLAIN}passw0rd
+    usr155@example.com|{PLAIN}passw0rd
+    usr156@example.com|{PLAIN}passw0rd
+    usr157@example.com|{PLAIN}passw0rd
+    usr158@example.com|{PLAIN}passw0rd
+    usr159@example.com|{PLAIN}passw0rd
+    usr160@example.com|{PLAIN}passw0rd
+    usr161@example.com|{PLAIN}passw0rd
+    usr162@example.com|{PLAIN}passw0rd
+    usr163@example.com|{PLAIN}passw0rd
+    usr164@example.com|{PLAIN}passw0rd
+    usr165@example.com|{PLAIN}passw0rd
+    usr166@example.com|{PLAIN}passw0rd
+    usr167@example.com|{PLAIN}passw0rd
+    usr168@example.com|{PLAIN}passw0rd
+    usr169@example.com|{PLAIN}passw0rd
+    usr170@example.com|{PLAIN}passw0rd
+    usr171@example.com|{PLAIN}passw0rd
+    usr172@example.com|{PLAIN}passw0rd
+    usr173@example.com|{PLAIN}passw0rd
+    usr174@example.com|{PLAIN}passw0rd
+    usr175@example.com|{PLAIN}passw0rd
+    usr176@example.com|{PLAIN}passw0rd
+    usr177@example.com|{PLAIN}passw0rd
+    usr178@example.com|{PLAIN}passw0rd
+    usr179@example.com|{PLAIN}passw0rd
+    usr180@example.com|{PLAIN}passw0rd
+    usr181@example.com|{PLAIN}passw0rd
+    usr182@example.com|{PLAIN}passw0rd
+    usr183@example.com|{PLAIN}passw0rd
+    usr184@example.com|{PLAIN}passw0rd
+    usr185@example.com|{PLAIN}passw0rd
+    usr186@example.com|{PLAIN}passw0rd
+    usr187@example.com|{PLAIN}passw0rd
+    usr188@example.com|{PLAIN}passw0rd
+    usr189@example.com|{PLAIN}passw0rd
+    usr190@example.com|{PLAIN}passw0rd
+    usr191@example.com|{PLAIN}passw0rd
+    usr192@example.com|{PLAIN}passw0rd
+    usr193@example.com|{PLAIN}passw0rd
+    usr194@example.com|{PLAIN}passw0rd
+    usr195@example.com|{PLAIN}passw0rd
+    usr196@example.com|{PLAIN}passw0rd
+    usr197@example.com|{PLAIN}passw0rd
+    usr198@example.com|{PLAIN}passw0rd
+    usr199@example.com|{PLAIN}passw0rd
+    usr200@example.com|{PLAIN}passw0rd
+
+  postfix-virtual.cf: |
+    cp4badmin@example.com cp4badmin@example.com
+    focuscorp@example.com focuscorp@example.com
+    zhongtao@example.com zhongtao@example.com
+    bufeng@example.com bufeng@example.com
+    kefeng@example.com kefeng@example.com
+    matthias@example.com matthias@example.com
+    clandis@example.com clandis@example.com
+    jorge@example.com jorge@example.com
+    edward@example.com edward@example.com
+    juergen@example.com juergen@example.com
+    olaf@example.com olaf@example.com
+    paul@example.com paul@example.com
+    swapnil@example.com swapnil@example.com
+    thomas@example.com thomas@example.com
+    sundeep@example.com sundeep@example.com
+    tom@example.com tom@example.com
+    usr001@example.com usr001@example.com
+    usr002@example.com usr002@example.com
+    usr003@example.com usr003@example.com
+    usr004@example.com usr004@example.com
+    usr005@example.com usr005@example.com
+    usr006@example.com usr006@example.com
+    usr007@example.com usr007@example.com
+    usr008@example.com usr008@example.com
+    usr009@example.com usr009@example.com
+    usr010@example.com usr010@example.com
+    usr011@example.com usr011@example.com
+    usr012@example.com usr012@example.com
+    usr013@example.com usr013@example.com
+    usr014@example.com usr014@example.com
+    usr015@example.com usr015@example.com
+    usr016@example.com usr016@example.com
+    usr017@example.com usr017@example.com
+    usr018@example.com usr018@example.com
+    usr019@example.com usr019@example.com
+    usr020@example.com usr020@example.com
+    usr021@example.com usr021@example.com
+    usr022@example.com usr022@example.com
+    usr023@example.com usr023@example.com
+    usr024@example.com usr024@example.com
+    usr025@example.com usr025@example.com
+    usr026@example.com usr026@example.com
+    usr027@example.com usr027@example.com
+    usr028@example.com usr028@example.com
+    usr029@example.com usr029@example.com
+    usr030@example.com usr030@example.com
+    usr031@example.com usr031@example.com
+    usr032@example.com usr032@example.com
+    usr033@example.com usr033@example.com
+    usr034@example.com usr034@example.com
+    usr035@example.com usr035@example.com
+    usr036@example.com usr036@example.com
+    usr037@example.com usr037@example.com
+    usr038@example.com usr038@example.com
+    usr039@example.com usr039@example.com
+    usr040@example.com usr040@example.com
+    usr041@example.com usr041@example.com
+    usr042@example.com usr042@example.com
+    usr043@example.com usr043@example.com
+    usr044@example.com usr044@example.com
+    usr045@example.com usr045@example.com
+    usr046@example.com usr046@example.com
+    usr047@example.com usr047@example.com
+    usr048@example.com usr048@example.com
+    usr049@example.com usr049@example.com
+    usr050@example.com usr050@example.com
+    usr051@example.com usr051@example.com
+    usr052@example.com usr052@example.com
+    usr053@example.com usr053@example.com
+    usr054@example.com usr054@example.com
+    usr055@example.com usr055@example.com
+    usr056@example.com usr056@example.com
+    usr057@example.com usr057@example.com
+    usr058@example.com usr058@example.com
+    usr059@example.com usr059@example.com
+    usr060@example.com usr060@example.com
+    usr061@example.com usr061@example.com
+    usr062@example.com usr062@example.com
+    usr063@example.com usr063@example.com
+    usr064@example.com usr064@example.com
+    usr065@example.com usr065@example.com
+    usr066@example.com usr066@example.com
+    usr067@example.com usr067@example.com
+    usr068@example.com usr068@example.com
+    usr069@example.com usr069@example.com
+    usr070@example.com usr070@example.com
+    usr071@example.com usr071@example.com
+    usr072@example.com usr072@example.com
+    usr073@example.com usr073@example.com
+    usr074@example.com usr074@example.com
+    usr075@example.com usr075@example.com
+    usr076@example.com usr076@example.com
+    usr077@example.com usr077@example.com
+    usr078@example.com usr078@example.com
+    usr079@example.com usr079@example.com
+    usr080@example.com usr080@example.com
+    usr081@example.com usr081@example.com
+    usr082@example.com usr082@example.com
+    usr083@example.com usr083@example.com
+    usr084@example.com usr084@example.com
+    usr085@example.com usr085@example.com
+    usr086@example.com usr086@example.com
+    usr087@example.com usr087@example.com
+    usr088@example.com usr088@example.com
+    usr089@example.com usr089@example.com
+    usr090@example.com usr090@example.com
+    usr091@example.com usr091@example.com
+    usr092@example.com usr092@example.com
+    usr093@example.com usr093@example.com
+    usr094@example.com usr094@example.com
+    usr095@example.com usr095@example.com
+    usr096@example.com usr096@example.com
+    usr097@example.com usr097@example.com
+    usr098@example.com usr098@example.com
+    usr099@example.com usr099@example.com
+    usr100@example.com usr100@example.com
+    usr101@example.com usr101@example.com
+    usr102@example.com usr102@example.com
+    usr103@example.com usr103@example.com
+    usr104@example.com usr104@example.com
+    usr105@example.com usr105@example.com
+    usr106@example.com usr106@example.com
+    usr107@example.com usr107@example.com
+    usr108@example.com usr108@example.com
+    usr109@example.com usr109@example.com
+    usr110@example.com usr110@example.com
+    usr111@example.com usr111@example.com
+    usr112@example.com usr112@example.com
+    usr113@example.com usr113@example.com
+    usr114@example.com usr114@example.com
+    usr115@example.com usr115@example.com
+    usr116@example.com usr116@example.com
+    usr117@example.com usr117@example.com
+    usr118@example.com usr118@example.com
+    usr119@example.com usr119@example.com
+    usr120@example.com usr120@example.com
+    usr121@example.com usr121@example.com
+    usr122@example.com usr122@example.com
+    usr123@example.com usr123@example.com
+    usr124@example.com usr124@example.com
+    usr125@example.com usr125@example.com
+    usr126@example.com usr126@example.com
+    usr127@example.com usr127@example.com
+    usr128@example.com usr128@example.com
+    usr129@example.com usr129@example.com
+    usr130@example.com usr130@example.com
+    usr131@example.com usr131@example.com
+    usr132@example.com usr132@example.com
+    usr133@example.com usr133@example.com
+    usr134@example.com usr134@example.com
+    usr135@example.com usr135@example.com
+    usr136@example.com usr136@example.com
+    usr137@example.com usr137@example.com
+    usr138@example.com usr138@example.com
+    usr139@example.com usr139@example.com
+    usr140@example.com usr140@example.com
+    usr141@example.com usr141@example.com
+    usr142@example.com usr142@example.com
+    usr143@example.com usr143@example.com
+    usr144@example.com usr144@example.com
+    usr145@example.com usr145@example.com
+    usr146@example.com usr146@example.com
+    usr147@example.com usr147@example.com
+    usr148@example.com usr148@example.com
+    usr149@example.com usr149@example.com
+    usr150@example.com usr150@example.com
+    usr151@example.com usr151@example.com
+    usr152@example.com usr152@example.com
+    usr153@example.com usr153@example.com
+    usr154@example.com usr154@example.com
+    usr155@example.com usr155@example.com
+    usr156@example.com usr156@example.com
+    usr157@example.com usr157@example.com
+    usr158@example.com usr158@example.com
+    usr159@example.com usr159@example.com
+    usr160@example.com usr160@example.com
+    usr161@example.com usr161@example.com
+    usr162@example.com usr162@example.com
+    usr163@example.com usr163@example.com
+    usr164@example.com usr164@example.com
+    usr165@example.com usr165@example.com
+    usr166@example.com usr166@example.com
+    usr167@example.com usr167@example.com
+    usr168@example.com usr168@example.com
+    usr169@example.com usr169@example.com
+    usr170@example.com usr170@example.com
+    usr171@example.com usr171@example.com
+    usr172@example.com usr172@example.com
+    usr173@example.com usr173@example.com
+    usr174@example.com usr174@example.com
+    usr175@example.com usr175@example.com
+    usr176@example.com usr176@example.com
+    usr177@example.com usr177@example.com
+    usr178@example.com usr178@example.com
+    usr179@example.com usr179@example.com
+    usr180@example.com usr180@example.com
+    usr181@example.com usr181@example.com
+    usr182@example.com usr182@example.com
+    usr183@example.com usr183@example.com
+    usr184@example.com usr184@example.com
+    usr185@example.com usr185@example.com
+    usr186@example.com usr186@example.com
+    usr187@example.com usr187@example.com
+    usr188@example.com usr188@example.com
+    usr189@example.com usr189@example.com
+    usr190@example.com usr190@example.com
+    usr191@example.com usr191@example.com
+    usr192@example.com usr192@example.com
+    usr193@example.com usr193@example.com
+    usr194@example.com usr194@example.com
+    usr195@example.com usr195@example.com
+    usr196@example.com usr196@example.com
+    usr197@example.com usr197@example.com
+    usr198@example.com usr198@example.com
+    usr199@example.com usr199@example.com
+    usr200@example.com usr200@example.com
+    @example.com cp4badmin@example.com
+
+  postfix-main.cf: |
+    smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mailserver.env.config
+  labels:
+    app: mailserver
+data:
+  # Cannot be set to cp.internal, otherwise postfix is eating mails, some details at https://github.com/docker-mailserver/docker-mailserver/issues/968
+  OVERRIDE_HOSTNAME: relay.local
+  ENABLE_FETCHMAIL: "0"
+  ENABLE_SPAMASSASSIN: "0"
+  ENABLE_CLAMAV: "0"
+  ENABLE_FAIL2BAN: "0"
+  ENABLE_POSTGREY: "0"
+  ENABLE_AMAVIS: "0"
+  ENABLE_SRS: "0"
+  ENABLE_QUOTAS: "0"
+  ENABLE_UPDATE_CHECK: "0"
+  ENABLE_SASLAUTHD: "0"
+  ONE_DIR: "1"
+  DMS_DEBUG: "0"
+  SSL_TYPE: "manual"
+  SSL_CERT_PATH: "/tmp/ssl/tls.crt"
+  SSL_KEY_PATH: "/tmp/ssl/tls.key"
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'mail-privileged'
+subjects:
+  - kind: ServiceAccount
+    name: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:privileged'
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mail-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "managed-nfs-storage"
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mailserver
+  labels:
+    app: mailserver
+spec:
+  selector:
+    app: mailserver
+  ports:
+    - name: smtp
+      port: 25
+      targetPort: smtp
+    - name: smtp-secure
+      port: 465
+      targetPort: smtp-secure
+    - name: smtp-auth
+      port: 587
+      targetPort: smtp-auth
+    - name: imap
+      port: 143
+      targetPort: imap
+    - name: imap-secure
+      port: 993
+      targetPort: imap-secure
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailserver
+  template:
+    metadata:
+      labels:
+        app: mailserver
+        role: mail
+        tier: backend
+    spec:
+      containers:
+        - name: docker-mailserver
+          image: "mailserver/docker-mailserver:11.1.0"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              # If Fail2Ban is not enabled, you can remove NET_ADMIN.
+              # If you are running on CRI-O, you will need the SYS_CHROOT capability,
+              # as it is no longer a default capability.
+              add: ["SYS_PTRACE", "SYS_CHROOT" ]
+          readinessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 45
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          livenessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 45
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10            
+          volumeMounts:
+            - name: config
+              subPath: postfix-accounts.cf
+              mountPath: /tmp/docker-mailserver/postfix-accounts.cf
+              readOnly: true
+            - name: config
+              subPath: postfix-virtual.cf
+              mountPath: /tmp/docker-mailserver/postfix-virtual.cf
+              readOnly: true
+            - name: config
+              subPath: postfix-main.cf            
+              mountPath: /tmp/docker-mailserver/postfix-main.cf
+              readOnly: true
+            - name: data
+              mountPath: /var/mail
+              subPath: data
+            - name: data
+              mountPath: /var/mail-state
+              subPath: state
+            - name: public-dir-pipe-folder
+              mountPath: /var/mail-state/spool-postfix/public
+              subPath: public
+            - name: private-dir-pipe-folder
+              mountPath: /var/mail-state/spool-postfix/private
+              subPath: public
+            - name: data
+              mountPath: /var/log/mail
+              subPath: log
+            - name: tls
+              readOnly: true
+              mountPath: /tmp/ssl            
+          ports:
+            - name: smtp
+              containerPort: 25
+              protocol: TCP
+            - name: smtp-secure
+              containerPort: 465
+              protocol: TCP
+            - name: smtp-auth
+              containerPort: 587
+            - name: imap
+              containerPort: 143
+              protocol: TCP
+            - name: imap-secure
+              containerPort: 993
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mailserver.env.config
+      volumes:
+        - name: config
+          configMap:
+            name: mailserver.config
+        - name: data
+          persistentVolumeClaim:
+            claimName: mail-storage
+        # Cannot create named pipes on connected storage class, must be in. Risk of loosing data.
+        - name: public-dir-pipe-folder
+          emptyDir: {}
+        # Cannot create named pipes on connected storage class, must be in. Risk of loosing data.
+        - name: private-dir-pipe-folder
+          emptyDir: {}
+        - name: tls
+          secret:
+            secretName: mailserver-tls-secret 
+            defaultMode: 256          
+
