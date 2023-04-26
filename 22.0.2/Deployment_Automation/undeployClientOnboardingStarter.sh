@@ -167,4 +167,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=c${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT}
