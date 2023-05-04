@@ -66,17 +66,3 @@ spec:
       - name: temp-data
         persistentVolumeClaim:
           claimName: roundcubemail-temp-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: roundcubemail
-  labels:
-    service: roundcubemail
-spec:
-  type: NodePort
-  ports:
-  - port: 9000
-    protocol: TCP
-  selector:
-    service: roundcubemail
