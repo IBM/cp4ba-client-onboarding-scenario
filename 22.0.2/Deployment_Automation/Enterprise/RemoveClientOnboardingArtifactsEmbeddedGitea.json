@@ -203,7 +203,9 @@
 										"enabled": "true",
 										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
 										"artifactNames": [
-											"SWAT_JAM_Case_Folder"
+											"SWAT_JAM_Case_Folder",
+											"UtilityBill",
+											"ClientDocument"
 										],
 										"artifactType": "ClassDefinition"
 									}
@@ -214,7 +216,9 @@
 										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
 										"artifactNames": [
 											"Case_Reference_ID",
-											"Client_Name"
+											"Client_Name",
+											"ReferenceID",
+											"ServiceAddress"
 										],
 										"artifactType": "PropertyTemplate"
 									}
@@ -331,6 +335,172 @@
 										],
 										"gitDeletionType": "OrgWithRepos",
 										"gitOrgName": "$$(ACTION_adsGitOrg)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"enabled": "$$(enableCleanupEmailCapability)$$",
+							"name": "Remove mail server and client from OCP",
+							"relativeBasePath": "0_OCP",
+							"subActions": [
+								{
+									"MANAGEROUTES": {
+										"enabled": "true",
+										"description": "Delete roundcubenginx route",
+										"namespaceName": "$$(localMailClientNamespace)$$",
+										"routes": [
+											{
+												"action": "delete",
+												"routeName": "roundcubenginx"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDEPLOYMENTS": {
+										"enabled": "true",
+										"description": "Delete roundcubenginx, roundcubemail, and roundcubedb deployment",
+										"namespaceName": "$$(localMailClientNamespace)$$",
+										"deployments": [
+											{
+												"action": "delete",
+												"deploymentName": "roundcubenginx"
+											},
+											{
+												"action": "delete",
+												"deploymentName": "roundcubemail"
+											},
+											{
+												"action": "delete",
+												"deploymentName": "roundcubedb"
+											}
+										]
+									}
+								},
+								{
+									"MANAGESECRETS": {
+										"enabled": "true",
+										"description": "Delete roundcubemail-shared-secret secrets",
+										"namespaceName": "$$(localMailClientNamespace)$$",
+										"secrets": [
+											{
+												"action": "delete",
+												"secretName": "roundcubemail-shared-secret"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPVCS": {
+										"enabled": "true",
+										"description": "Delete roundcubedb-volumeclaim, roundcubemail-temp-pvc, and roundcubemail-www-pvc PVCs",
+										"namespaceName": "$$(localMailClientNamespace)$$",
+										"pvcs": [
+											{
+												"action": "delete",
+												"pvcName": "roundcubedb-volumeclaim"
+											},
+											{
+												"action": "delete",
+												"pvcName": "roundcubemail-temp-pvc"
+											},
+											{
+												"action": "delete",
+												"pvcName": "roundcubemail-www-pvc"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDEPLOYMENTS": {
+										"enabled": "true",
+										"description": "Delete mailserver deployment",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"deployments": [
+											{
+												"action": "delete",
+												"deploymentName": "mailserver"
+											}
+										]
+									}
+								},
+								{
+									"MANAGESERVICES": {
+										"enabled": "true",
+										"description": "Delete mailserver service",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"services": [
+											{
+												"action": "delete",
+												"serviceName": "mailserver"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPVCS": {
+										"enabled": "true",
+										"description": "Delete mail-storage PVC",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"pvcs": [
+											{
+												"action": "delete",
+												"pvcName": "mail-storage"
+											}
+										]
+									}
+								},
+								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "true",
+										"description": "Delete mailserver.env.config ConfigMaps",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "mailserver.env.config"
+											},
+											{
+												"action": "delete",
+												"configMapName": "mailserver.config"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPCLUSTERROLEBINDING": {
+										"enabled": "true",
+										"description": "Remove ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"clusterRoles": [
+											{
+												"action": "delete",
+												"clusterRoleName": "privileged"
+											},
+											{
+												"action": "delete",
+												"clusterRoleName": "anyuid"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "true",
+										"description": "Delete $$(localSmtpServerNamespace)$$ namespace",
+										"action": "delete",
+										"namespaceName": "$$(localSmtpServerNamespace)$$"
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "true",
+										"description": "Delete $$(localMailClientNamespace)$$ namespace",
+										"action": "delete",
+										"namespaceName": "$$(localMailClientNamespace)$$"
 									}
 								}
 							]
