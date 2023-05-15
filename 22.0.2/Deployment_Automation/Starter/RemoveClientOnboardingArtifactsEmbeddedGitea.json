@@ -346,7 +346,7 @@
 									"MANAGEROUTES": {
 										"enabled": "true",
 										"description": "Delete roundcubenginx route",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localMailClientNamespace)$$",
 										"routes": [
 											{
 												"action": "delete",
@@ -359,7 +359,7 @@
 									"MANAGEDEPLOYMENTS": {
 										"enabled": "true",
 										"description": "Delete roundcubenginx, roundcubemail, and roundcubedb deployment",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localMailClientNamespace)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -380,7 +380,7 @@
 									"MANAGESECRETS": {
 										"enabled": "true",
 										"description": "Delete roundcubemail-shared-secret secrets",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localMailClientNamespace)$$",
 										"secrets": [
 											{
 												"action": "delete",
@@ -393,7 +393,7 @@
 									"MANAGEPVCS": {
 										"enabled": "true",
 										"description": "Delete roundcubedb-volumeclaim, roundcubemail-temp-pvc, and roundcubemail-www-pvc PVCs",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localMailClientNamespace)$$",
 										"pvcs": [
 											{
 												"action": "delete",
@@ -414,7 +414,7 @@
 									"MANAGEDEPLOYMENTS": {
 										"enabled": "true",
 										"description": "Delete mailserver deployment",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -427,7 +427,7 @@
 									"MANAGESERVICES": {
 										"enabled": "true",
 										"description": "Delete mailserver service",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
 										"services": [
 											{
 												"action": "delete",
@@ -440,7 +440,7 @@
 									"MANAGEPVCS": {
 										"enabled": "true",
 										"description": "Delete mail-storage PVC",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
 										"pvcs": [
 											{
 												"action": "delete",
@@ -453,7 +453,7 @@
 									"MANAGECONFIGMAPS": {
 										"enabled": "true",
 										"description": "Delete mailserver.env.config ConfigMaps",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
 										"configMaps": [
 											{
 												"action": "delete",
@@ -470,7 +470,7 @@
 									"MANAGEOCPCLUSTERROLEBINDING": {
 										"enabled": "true",
 										"description": "Remove ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
-										"namespaceName": "mail",
+										"namespaceName": "$$(localSmtpServerNamespace)$$",
 										"clusterRoles": [
 											{
 												"action": "delete",
@@ -486,9 +486,17 @@
 								{
 									"MANAGEOCPNAMESPACE": {
 										"enabled": "true",
-										"description": "Delete mail namespace",
+										"description": "Delete $$(localSmtpServerNamespace)$$ namespace",
 										"action": "delete",
-										"namespaceName": "mail"
+										"namespaceName": "$$(localSmtpServerNamespace)$$"
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "true",
+										"description": "Delete $$(localMailClientNamespace)$$ namespace",
+										"action": "delete",
+										"namespaceName": "$$(localMailClientNamespace)$$"
 									}
 								}
 							]
