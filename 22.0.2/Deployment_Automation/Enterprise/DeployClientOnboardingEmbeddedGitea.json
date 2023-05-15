@@ -865,7 +865,7 @@
 								{
 									"PATCHDESKTOP": {
 										"enabled": "true",
-										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in starter deployment",
+										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ClientOnboardingRequestDesktop.properties",
 										"simpleTextMappings": {
 											"APPENG0": "APPENG0",
@@ -887,7 +887,7 @@
 								{
 									"PATCHDESKTOP": {
 										"enabled": "true",
-										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in starter deployment",
+										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in current deployment",
 										"file": "CODocumentUploadDesktop.properties",
 										"simpleTextMappings": {
 											"APPENG0": "APPENG0",
