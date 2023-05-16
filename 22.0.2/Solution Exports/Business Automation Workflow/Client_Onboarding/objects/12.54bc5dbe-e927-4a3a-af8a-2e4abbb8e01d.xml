@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.54bc5dbe-e927-4a3a-af8a-2e4abbb8e01d" name="Supporting Documents">
+        <lastModified>1644716222554</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.54bc5dbe-e927-4a3a-af8a-2e4abbb8e01d</classId>
+        <type>0</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_Supporting Documents</internalName>
+        <extensionType>7</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{B079C0BB-E4CE-42DC-A314-B128B76A7B0D}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:ec8399b5d2ec0a0c:-5854a9d7:178f28f43e0:-7f1c</guid>
+        <versionId>20b34da1-693d-4346-a77f-36a3699b106f</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>ChoiceList</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_Supporting Documents">
+                            <restriction base="Selection">
+                                <option value="Banking Information" display="Banking Information" />
+                                <option value="Utility Bill" display="Utility Bill" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

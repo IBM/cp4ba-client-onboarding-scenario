@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.92bb794a-3ae1-44a4-be7d-cf42849a4b5b" name="BotInputPayload">
+        <lastModified>1653554951463</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.92bb794a-3ae1-44a4-be7d-cf42849a4b5b</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>false</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.92bb794a-3ae1-44a4-be7d-cf42849a4b5b</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData>{"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/CO","complexType":[{"annotation":{"documentation":[{}],"appinfo":[{"shared":[false],"advancedProperties":[{}],"shadow":[false]}]},"sequence":{"element":[{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["onboardingInfo"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{}]}]},"name":"onboardingInfo","type":"{http:\/\/lombardi.ibm.com\/schema\/}String","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.db884a3c-c533-44b7-bb2d-47bec8ad4022"}}]},"name":"BotInputPayload"}],"id":"_12.92bb794a-3ae1-44a4-be7d-cf42849a4b5b"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:6025043689c2138f:-6ecfc176:180fb7dffa6:-7aee</guid>
+        <versionId>e864d5ae-e6b5-4f80-9452-7cc3078b3752</versionId>
+        <definition>
+            <property>
+                <name>onboardingInfo</name>
+                <description isNull="true" />
+                <classRef>5c817616-ef49-41fa-89ce-41f8666ef643/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType isNull="true" />
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName isNull="true" />
+                    <typeNamespace isNull="true" />
+                    <minOccurs isNull="true" />
+                    <maxOccurs isNull="true" />
+                    <nillable isNull="true" />
+                    <order isNull="true" />
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="BotInputPayload">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name isNull="true" />
+                <namespace isNull="true" />
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

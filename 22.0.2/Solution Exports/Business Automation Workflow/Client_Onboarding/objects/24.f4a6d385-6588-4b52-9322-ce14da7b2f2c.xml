@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <participant id="24.f4a6d385-6588-4b52-9322-ce14da7b2f2c" name="Account Manager">
+        <lastModified>1617721947719</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <participantId>24.f4a6d385-6588-4b52-9322-ce14da7b2f2c</participantId>
+        <participantDefinition isNull="true" />
+        <simulationGroupSize>2</simulationGroupSize>
+        <capacityType>1</capacityType>
+        <definitionType>5</definitionType>
+        <percentAvailable isNull="true" />
+        <percentEfficiency isNull="true" />
+        <cost>10.00</cost>
+        <currencyCode isNull="true" />
+        <image isNull="true" />
+        <serviceMembersRef>5c817616-ef49-41fa-89ce-41f8666ef643/1.26d2889e-266f-4622-82d2-6ba6f7f07204</serviceMembersRef>
+        <managersRef isNull="true" />
+        <jsonData isNull="true" />
+        <externalId>CO_AccountManager</externalId>
+        <description>Manager that works on reviewing onboarding applications</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fca</guid>
+        <versionId>76b67ab4-e6e4-4d34-bd1d-4fa9796b76cf</versionId>
+        <teamAssignments>
+            <inputMapping id="bpdid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc9">
+                <name>caseSolutionId</name>
+                <classId>/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                <input>true</input>
+                <value>"CO"</value>
+                <parameterId>2055.9cfa97c8-e5c5-40e5-8bdf-c11196c6b5cf</parameterId>
+            </inputMapping>
+            <inputMapping id="bpdid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc8">
+                <name>caseRoleId</name>
+                <classId>/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                <input>true</input>
+                <value>"CO_AccountManager"</value>
+                <parameterId>2055.4e25602d-7a16-4f02-81d4-e14c0aa1dccf</parameterId>
+            </inputMapping>
+        </teamAssignments>
+    </participant>
+</teamworks>
+

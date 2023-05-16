@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.1e01a3aa-e960-4d7b-a3ef-f8de6390d968" name="Industry">
+        <lastModified>1617721374670</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.1e01a3aa-e960-4d7b-a3ef-f8de6390d968</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_Industry</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{7BD4F624-C694-4CE4-9B91-A735AB2CF736}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>The industry for which services are being offered</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fd6</guid>
+        <versionId>ba6e27d3-ca17-42aa-be34-1cc5a1f0f543</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_Industry">
+                            <restriction base="CO_Industry" baseSimpleType="String" baseClassRef="/12.099110f3-624e-4f5b-8012-8b31142a234f">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

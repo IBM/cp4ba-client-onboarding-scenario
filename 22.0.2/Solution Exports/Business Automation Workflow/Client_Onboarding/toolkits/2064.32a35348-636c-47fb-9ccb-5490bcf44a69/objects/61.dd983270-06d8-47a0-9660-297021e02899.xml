@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <managedAsset id="61.dd983270-06d8-47a0-9660-297021e02899" name="Email.jar">
+        <lastModified>1683711015015</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <managedAssetId>61.dd983270-06d8-47a0-9660-297021e02899</managedAssetId>
+        <assetUuid>bf54ce10-31b0-4b4a-980f-183362d2a22d</assetUuid>
+        <mimeType isNull="true" />
+        <charEncoding isNull="true" />
+        <assetTypeCode>J</assetTypeCode>
+        <length>4385</length>
+        <localLastModification>1683711014868</localLastModification>
+        <description isNull="true" />
+        <isDocumentationFile>false</isDocumentationFile>
+        <guid>4838e6c5-fe57-406f-9d9e-9505a5fc21fb</guid>
+        <versionId>731dc396-ec6f-482d-a531-113ccf9004d7</versionId>
+    </managedAsset>
+</teamworks>
+

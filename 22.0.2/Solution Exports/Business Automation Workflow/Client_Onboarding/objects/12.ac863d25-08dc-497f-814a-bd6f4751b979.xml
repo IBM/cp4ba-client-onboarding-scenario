@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.ac863d25-08dc-497f-814a-bd6f4751b979" name="Approval Status">
+        <lastModified>1618270567307</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.ac863d25-08dc-497f-814a-bd6f4751b979</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_ApprovalStatus</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{2785B68B-0078-4CD6-9C60-F51618CE5D1F}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Status of the client onboarding request</description>
+        <guid>guid:99ad4ebfc4d523b0:653805d:178c80340cb:-7e3e</guid>
+        <versionId>2188a208-f703-420d-8166-da2c90aa15a6</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_ApprovalStatus">
+                            <restriction base="CO_Approval Status" baseSimpleType="String" baseClassRef="/12.4cfb139b-1b44-4967-97c9-3186f8ca33ae">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                        <element name="CO_ApprovalStatus" type="CO_ApprovalStatus" default="Under Review" />
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

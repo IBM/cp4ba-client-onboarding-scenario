@@ -1,0 +1,1758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <process id="1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61" name="Perform Scoreboarding">
+        <lastModified>1663711028465</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+        <image isNull="true" />
+        <tabGroup isNull="true" />
+        <startingProcessItemId>2025.d2c43585-55bd-4336-9f15-5fe487f9b41e</startingProcessItemId>
+        <isRootProcess>false</isRootProcess>
+        <processType>12</processType>
+        <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+        <errorHandlerItemId isNull="true" />
+        <isLoggingVariables>false</isLoggingVariables>
+        <isTransactional>false</isTransactional>
+        <processTimingLevel isNull="true" />
+        <participantRef isNull="true" />
+        <exposedType>0</exposedType>
+        <isTrackingEnabled>true</isTrackingEnabled>
+        <xmlData isNull="true" />
+        <cachingType>false</cachingType>
+        <itemLabel isNull="true" />
+        <cacheLength>0</cacheLength>
+        <mobileReady>false</mobileReady>
+        <sboSyncEnabled>true</sboSyncEnabled>
+        <externalId isNull="true" />
+        <isSecured>true</isSecured>
+        <isAjaxExposed>true</isAjaxExposed>
+        <isInvokedAsynchronously>false</isInvokedAsynchronously>
+        <description isNull="true" />
+        <guid>cf25eb0f-59b7-413a-b7f4-4fa3424548d7</guid>
+        <versionId>f70f6c81-9e42-42f7-b2c9-7878dab81506</versionId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fb0"&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7faf"&gt;
+    &lt;refId&gt;1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fae"&gt;
+      &lt;name&gt;operationId&lt;/name&gt;
+      &lt;value&gt;{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service}_bed25d99-3ef4-4505-9006-a3918a724cec&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"rootElement":[{"flowElement":[{"parallelMultiple":false,"outgoing":["2027.ee14e548-6601-4666-bf29-40532bd937bd"],"isInterrupting":false,"extensionElements":{"nodeVisualInfo":[{"color":"#F8F8F8","width":24,"x":25,"y":80,"declaredType":"TNodeVisualInfo","height":24}]},"name":"Start","declaredType":"startEvent","id":"d099659f-7ef5-4bb7-8983-7bdddb6c8c1d"},{"incoming":["a995196a-789b-417a-8b3f-ef548594cd0c"],"extensionElements":{"nodeVisualInfo":[{"color":"#F8F8F8","width":24,"x":650,"y":80,"declaredType":"TNodeVisualInfo","height":24}],"endStateId":["guid:c181294e1530ea74:-3d3cefb1:179d38e8a51:-7ff8"],"saveExecutionContext":[true]},"name":"End","declaredType":"endEvent","id":"9b284cd2-f5da-43f1-8f2d-3635b0319a0e"},{"targetRef":"d2c43585-55bd-4336-9f15-5fe487f9b41e","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}]},"name":"To Map input","declaredType":"sequenceFlow","id":"2027.ee14e548-6601-4666-bf29-40532bd937bd","sourceRef":"d099659f-7ef5-4bb7-8983-7bdddb6c8c1d"},{"itemSubjectRef":"itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab","name":"client","isCollection":false,"declaredType":"dataObject","id":"2056.2a0f902e-dd7c-4d3e-9a94-a56a6fc2bcba"},{"startQuantity":1,"outgoing":["772b40c1-7349-47a8-9201-d8ed9467b3d6"],"incoming":["2027.ee14e548-6601-4666-bf29-40532bd937bd"],"extensionElements":{"nodeVisualInfo":[{"width":95,"x":140,"y":57,"declaredType":"TNodeVisualInfo","height":70}]},"name":"Map input","isForCompensation":false,"completionQuantity":1,"declaredType":"scriptTask","id":"d2c43585-55bd-4336-9f15-5fe487f9b41e","scriptFormat":"text\/x-javascript","script":{"content":["\/\/ The Decisions Automation Service expects the values in a specific format. \n\/\/ Map the input fields to the required format.\ntw.local.client = new tw.object.ClientInformation();\ntw.local.client.annualRevenue = tw.local.annualRevenue;\ntw.local.client.companyAge = tw.local.companyAge;\ntw.local.client.defaultedPayment = tw.local.defaultedPayment;\ntw.local.client.numberOfEmployees = tw.local.numberOfEmployees;"]}},{"targetRef":"2b949e9d-f287-4166-8809-65eb832da443","extensionElements":{"sequenceFlowImplementation":[{"fireValidation":"Never","sboSyncEnabled":true,"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TSequenceFlowImplementation"}],"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":true,"showLabel":false}]},"name":"To Scoreboard","declaredType":"sequenceFlow","id":"772b40c1-7349-47a8-9201-d8ed9467b3d6","sourceRef":"d2c43585-55bd-4336-9f15-5fe487f9b41e"},{"outgoing":["611056cc-a194-4568-b79f-5874d9509c0e"],"incoming":["772b40c1-7349-47a8-9201-d8ed9467b3d6"],"extensionElements":{"nodeVisualInfo":[{"width":95,"x":303,"y":57,"declaredType":"TNodeVisualInfo","height":70}],"activityType":["ServiceTask"],"externalServiceRefPO":["1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925"],"externalServiceRef":["{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/357618c7-2d68-4d57-b757-34e46a031c14Service}_33b15d86-6786-4eb2-a6c2-566e575a5804"]},"operationRef":"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/357618c7-2d68-4d57-b757-34e46a031c14Service}_bed25d99-3ef4-4505-9006-a3918a724cec","implementation":"##WebService","declaredType":"serviceTask","startQuantity":1,"name":"Scoreboard","dataInputAssociation":[{"targetRef":"_f089d3c6-f1f8-43d0-ab23-cdc94c680521","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab","declaredType":"TFormalExpression","content":["tw.local.client"]}}]},{"targetRef":"_eb23dffd-7af7-4a01-8211-cb941fcc1cb9","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45","declaredType":"TFormalExpression","content":["tw.local.industry"]}}]}],"isForCompensation":false,"completionQuantity":1,"id":"2b949e9d-f287-4166-8809-65eb832da443","dataOutputAssociation":[{"assignment":[{"to":{"evaluatesToTypeRef":"itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5","declaredType":"TFormalExpression","content":["tw.local.scoreboard"]}}],"sourceRef":["_9d444aac-5221-40fd-9440-b8a7c5710546"]}]},{"targetRef":"1ce938ca-55f9-4754-80c6-fa736c7c5292","extensionElements":{"sequenceFlowImplementation":[{"fireValidation":"Never","sboSyncEnabled":true,"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TSequenceFlowImplementation"}],"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":true,"showLabel":false}]},"name":"To Map output","declaredType":"sequenceFlow","id":"611056cc-a194-4568-b79f-5874d9509c0e","sourceRef":"2b949e9d-f287-4166-8809-65eb832da443"},{"startQuantity":1,"outgoing":["a995196a-789b-417a-8b3f-ef548594cd0c"],"incoming":["611056cc-a194-4568-b79f-5874d9509c0e"],"extensionElements":{"nodeVisualInfo":[{"width":95,"x":475,"y":57,"declaredType":"TNodeVisualInfo","height":70}]},"name":"Map output","isForCompensation":false,"completionQuantity":1,"declaredType":"scriptTask","id":"1ce938ca-55f9-4754-80c6-fa736c7c5292","scriptFormat":"text\/x-javascript","script":{"content":["tw.local.confidence = tw.local.scoreboard.confidence;\ntw.local.highRisk = tw.local.scoreboard.highRisk;\ntw.local.segment = tw.local.scoreboard.segment;"]}},{"targetRef":"9b284cd2-f5da-43f1-8f2d-3635b0319a0e","extensionElements":{"sequenceFlowImplementation":[{"fireValidation":"Never","sboSyncEnabled":true,"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TSequenceFlowImplementation"}],"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":true,"showLabel":false}]},"name":"To Manual Override","declaredType":"sequenceFlow","id":"a995196a-789b-417a-8b3f-ef548594cd0c","sourceRef":"1ce938ca-55f9-4754-80c6-fa736c7c5292"},{"itemSubjectRef":"itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5","name":"scoreboard","isCollection":false,"declaredType":"dataObject","id":"2056.571b06e3-d4f6-46f1-8932-5d75160995f7"}],"laneSet":[{"id":"f033fef1-b9eb-4a37-9046-f4417187618e","lane":[{"flowNodeRef":["d099659f-7ef5-4bb7-8983-7bdddb6c8c1d","9b284cd2-f5da-43f1-8f2d-3635b0319a0e","d2c43585-55bd-4336-9f15-5fe487f9b41e","2b949e9d-f287-4166-8809-65eb832da443","1ce938ca-55f9-4754-80c6-fa736c7c5292"],"extensionElements":{"nodeVisualInfo":[{"color":"#F8F8F8","width":3000,"x":0,"y":0,"declaredType":"TNodeVisualInfo","height":184}]},"name":"System","partitionElementRef":"24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b","declaredType":"lane","id":"332153ee-5001-4744-8bbc-00ab608d6b44","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process\/wle}isSystemLane":"true"}}]}],"isClosed":false,"extensionElements":{"isSecured":[true],"isAjaxExposed":[true],"sboSyncEnabled":[true]},"documentation":[{"textFormat":"text\/plain"}],"name":"Perform Scoreboarding","declaredType":"process","id":"1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61","processType":"None","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process}executionMode":"microflow"},"ioSpecification":{"dataOutput":[{"itemSubjectRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","name":"confidence","isCollection":false,"id":"2055.2d3ab132-f714-45db-82e7-b7d180ed228a"},{"itemSubjectRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","name":"highRisk","isCollection":false,"id":"2055.2aca5357-1f95-43c5-8acb-395f65b8adc1"},{"itemSubjectRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","name":"segment","isCollection":false,"id":"2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2"}],"inputSet":[{"dataInputRefs":["2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba","2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78","2055.78382d55-d044-43e2-8a47-78e3ed771557","2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba","2055.13d53a9d-f57d-43a8-aef7-79235f5abec1"]}],"outputSet":[{"dataOutputRefs":["2055.2d3ab132-f714-45db-82e7-b7d180ed228a","2055.2aca5357-1f95-43c5-8acb-395f65b8adc1","2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2"]}],"dataInput":[{"extensionElements":{"defaultValue":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TDefaultValue","useDefault":true,"value":"\"Federal\""}]},"itemSubjectRef":"itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45","name":"industry","isCollection":false,"id":"2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba"},{"extensionElements":{"defaultValue":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TDefaultValue","useDefault":true,"value":"5"}]},"itemSubjectRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","name":"annualRevenue","isCollection":false,"id":"2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78"},{"extensionElements":{"defaultValue":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TDefaultValue","useDefault":true,"value":"5"}]},"itemSubjectRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","name":"companyAge","isCollection":false,"id":"2055.78382d55-d044-43e2-8a47-78e3ed771557"},{"extensionElements":{"defaultValue":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TDefaultValue","useDefault":true,"value":"false"}]},"itemSubjectRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","name":"defaultedPayment","isCollection":false,"id":"2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba"},{"extensionElements":{"defaultValue":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TDefaultValue","useDefault":true,"value":"5"}]},"itemSubjectRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","name":"numberOfEmployees","isCollection":false,"id":"2055.13d53a9d-f57d-43a8-aef7-79235f5abec1"}]}}],"targetNamespace":"","typeLanguage":"http:\/\/www.w3.org\/2001\/XMLSchema","expressionLanguage":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/expression-lang\/javascript"}</jsonData>
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <blobField1 isNull="true" />
+        <processParameter name="industry">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>/12.856e5bd1-15e7-4bcf-afe6-77e2c513be45</classId>
+            <seq>1</seq>
+            <hasDefault>true</hasDefault>
+            <defaultValue>"Federal"</defaultValue>
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>eae443a8-792c-401d-b5e7-4a61aa31ed6c</guid>
+            <versionId>f7e0f79d-a5d0-4833-87a2-5897b3656cd5</versionId>
+        </processParameter>
+        <processParameter name="annualRevenue">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+            <seq>2</seq>
+            <hasDefault>true</hasDefault>
+            <defaultValue>5</defaultValue>
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>98a978b7-de54-4179-b9db-46c5e7e27726</guid>
+            <versionId>333dd199-d4b9-489d-a6f1-f4884db82b51</versionId>
+        </processParameter>
+        <processParameter name="companyAge">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.78382d55-d044-43e2-8a47-78e3ed771557</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+            <seq>3</seq>
+            <hasDefault>true</hasDefault>
+            <defaultValue>5</defaultValue>
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>4c1262ea-6fcf-4e12-9b5c-3958538f05a6</guid>
+            <versionId>52707482-6e63-4885-9a18-e5e8cbde0f58</versionId>
+        </processParameter>
+        <processParameter name="defaultedPayment">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classId>
+            <seq>4</seq>
+            <hasDefault>true</hasDefault>
+            <defaultValue>false</defaultValue>
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>3708c37d-993a-4512-b360-ef72e2108513</guid>
+            <versionId>928f5a9e-0b2d-4cc5-bc4c-3b52e76d4308</versionId>
+        </processParameter>
+        <processParameter name="numberOfEmployees">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.13d53a9d-f57d-43a8-aef7-79235f5abec1</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+            <seq>5</seq>
+            <hasDefault>true</hasDefault>
+            <defaultValue>5</defaultValue>
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>934d1a8e-9f38-45f3-8740-61bed903f0d3</guid>
+            <versionId>aa1bec2c-4132-418b-ab24-f3fb22cd4b84</versionId>
+        </processParameter>
+        <processParameter name="confidence">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.2d3ab132-f714-45db-82e7-b7d180ed228a</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>2</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.536b2aa5-a30f-4eca-87fa-3a28066753ee</classId>
+            <seq>6</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>8c83704e-be76-44f8-968a-71dba4543226</guid>
+            <versionId>573f8807-6ab2-4103-a897-2b3e1b49a8dc</versionId>
+        </processParameter>
+        <processParameter name="highRisk">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.2aca5357-1f95-43c5-8acb-395f65b8adc1</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>2</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classId>
+            <seq>7</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>1e6747f3-7cf9-41b5-bfe3-734234a47480</guid>
+            <versionId>5695c6cf-8ef0-4432-84f4-2dff223ad2df</versionId>
+        </processParameter>
+        <processParameter name="segment">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2</processParameterId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <parameterType>2</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+            <seq>8</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description isNull="true" />
+            <guid>e603981e-7cb0-4796-8634-f1b652f499d0</guid>
+            <versionId>dc913e71-0d32-4bc8-b2ac-15dcb3d33c61</versionId>
+        </processParameter>
+        <processVariable name="client">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processVariableId>2056.2a0f902e-dd7c-4d3e-9a94-a56a6fc2bcba</processVariableId>
+            <description isNull="true" />
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <namespace>2</namespace>
+            <seq>1</seq>
+            <isArrayOf>false</isArrayOf>
+            <isTransient>false</isTransient>
+            <classId>/12.ef5e7f45-f620-487f-be5b-45c9a39be2ab</classId>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <guid>d16b31c4-0c80-4502-9ca6-ccc060971fc2</guid>
+            <versionId>cc44cc57-c2cc-4f39-998d-58e2b47d3dec</versionId>
+        </processVariable>
+        <processVariable name="scoreboard">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processVariableId>2056.571b06e3-d4f6-46f1-8932-5d75160995f7</processVariableId>
+            <description isNull="true" />
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <namespace>2</namespace>
+            <seq>2</seq>
+            <isArrayOf>false</isArrayOf>
+            <isTransient>false</isTransient>
+            <classId>/12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5</classId>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <guid>d4070b90-0532-4c74-827e-3396c17277d0</guid>
+            <versionId>fc368ab8-c027-466a-b354-a480ec12b03a</versionId>
+        </processVariable>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.9b284cd2-f5da-43f1-8f2d-3635b0319a0e</processItemId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <name>End</name>
+            <tWComponentName>ExitPoint</tWComponentName>
+            <tWComponentId>3008.ed4c47d3-cf9c-454a-8d86-f79bae2ef7bd</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>true</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:c181294e1530ea74:-3d3cefb1:179d38e8a51:-7ff8</guid>
+            <versionId>f4523a9e-23ed-4ece-872d-a0db82dba479</versionId>
+            <externalServiceRef isNull="true" />
+            <externalServiceOp isNull="true" />
+            <nodeColor isNull="true" />
+            <layoutData x="650" y="80">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <exitPointId>3008.ed4c47d3-cf9c-454a-8d86-f79bae2ef7bd</exitPointId>
+                <haltProcess>false</haltProcess>
+                <guid>48937ed3-d832-4d68-8d0d-6572161eaeb1</guid>
+                <versionId>6bc04336-325a-4453-a9ab-7e84659a212b</versionId>
+            </TWComponent>
+        </item>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.d2c43585-55bd-4336-9f15-5fe487f9b41e</processItemId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <name>Map input</name>
+            <tWComponentName>Script</tWComponentName>
+            <tWComponentId>3011.17c23c5a-e6fb-4f06-8222-c4bdd0f48e91</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>false</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:c181294e1530ea74:-3d3cefb1:179d38e8a51:-7ff7</guid>
+            <versionId>593744a0-36cc-472b-9806-b3abcd68edfc</versionId>
+            <externalServiceRef isNull="true" />
+            <externalServiceOp isNull="true" />
+            <nodeColor isNull="true" />
+            <layoutData x="140" y="57">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <scriptId>3011.17c23c5a-e6fb-4f06-8222-c4bdd0f48e91</scriptId>
+                <scriptTypeId>2</scriptTypeId>
+                <isActive>true</isActive>
+                <script>// The Decisions Automation Service expects the values in a specific format. 
+// Map the input fields to the required format.
+tw.local.client = new tw.object.ClientInformation();
+tw.local.client.annualRevenue = tw.local.annualRevenue;
+tw.local.client.companyAge = tw.local.companyAge;
+tw.local.client.defaultedPayment = tw.local.defaultedPayment;
+tw.local.client.numberOfEmployees = tw.local.numberOfEmployees;</script>
+                <isRule>false</isRule>
+                <guid>c71c0020-503f-41b3-9330-fa473e90c16a</guid>
+                <versionId>cf4e1b2a-3fb3-45ed-9e15-5e6ad5577f62</versionId>
+            </TWComponent>
+        </item>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.2b949e9d-f287-4166-8809-65eb832da443</processItemId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <name>Scoreboard</name>
+            <tWComponentName>SKELConnector</tWComponentName>
+            <tWComponentId>3034.339e3b57-39f5-45bd-b713-64bbb70b9c96</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>false</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:c181294e1530ea74:-3d3cefb1:179d38e8a51:-7ff9</guid>
+            <versionId>5e5939cd-6a54-4178-8718-6b599a8c7dde</versionId>
+            <externalServiceRef>/1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925</externalServiceRef>
+            <externalServiceOp>_bed25d99-3ef4-4505-9006-a3918a724cec</externalServiceOp>
+            <nodeColor isNull="true" />
+            <layoutData x="303" y="57">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <skelConnectorId>3034.339e3b57-39f5-45bd-b713-64bbb70b9c96</skelConnectorId>
+                <definition>&lt;config type="com.lombardisoftware.client.persistence.SKELConnectorConfiguration"&gt;
+  &lt;inputParameters&gt;
+    &lt;parameter&gt;
+      &lt;name&gt;_f089d3c6-f1f8-43d0-ab23-cdc94c680521&lt;/name&gt;
+      &lt;type&gt;itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab&lt;/type&gt;
+      &lt;description /&gt;
+      &lt;defaultValue /&gt;
+      &lt;argumentVariable&gt;tw.local.client&lt;/argumentVariable&gt;
+      &lt;isArray&gt;&lt;/isArray&gt;
+    &lt;/parameter&gt;
+    &lt;parameter&gt;
+      &lt;name&gt;_eb23dffd-7af7-4a01-8211-cb941fcc1cb9&lt;/name&gt;
+      &lt;type&gt;itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45&lt;/type&gt;
+      &lt;description /&gt;
+      &lt;defaultValue /&gt;
+      &lt;argumentVariable&gt;tw.local.industry&lt;/argumentVariable&gt;
+      &lt;isArray&gt;&lt;/isArray&gt;
+    &lt;/parameter&gt;
+  &lt;/inputParameters&gt;
+  &lt;outputParameters&gt;
+    &lt;parameter&gt;
+      &lt;name&gt;_9d444aac-5221-40fd-9440-b8a7c5710546&lt;/name&gt;
+      &lt;type&gt;itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5&lt;/type&gt;
+      &lt;description /&gt;
+      &lt;defaultValue /&gt;
+      &lt;argumentVariable&gt;tw.local.scoreboard&lt;/argumentVariable&gt;
+      &lt;isArray&gt;&lt;/isArray&gt;
+    &lt;/parameter&gt;
+  &lt;/outputParameters&gt;
+  &lt;extendedProperties /&gt;
+&lt;/config&gt;</definition>
+                <guid>guid:470ce346-bc6b-4f1a-a547-544f56d93c3d</guid>
+                <versionId>1934e121-2203-4c8e-8af6-157b092fd572</versionId>
+            </TWComponent>
+        </item>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.1ce938ca-55f9-4754-80c6-fa736c7c5292</processItemId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <name>Map output</name>
+            <tWComponentName>Script</tWComponentName>
+            <tWComponentId>3011.046f8333-d6c7-4987-82a7-a9fcbaa1074b</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>false</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:ec87b430b959532b:bf2aaaf:17c7394919d:-7ebb</guid>
+            <versionId>6f2b3ea5-a0ce-4e18-8113-c650009bd612</versionId>
+            <externalServiceRef isNull="true" />
+            <externalServiceOp isNull="true" />
+            <nodeColor isNull="true" />
+            <layoutData x="475" y="57">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <scriptId>3011.046f8333-d6c7-4987-82a7-a9fcbaa1074b</scriptId>
+                <scriptTypeId>2</scriptTypeId>
+                <isActive>true</isActive>
+                <script>tw.local.confidence = tw.local.scoreboard.confidence;
+tw.local.highRisk = tw.local.scoreboard.highRisk;
+tw.local.segment = tw.local.scoreboard.segment;</script>
+                <isRule>false</isRule>
+                <guid>dd85c0a8-11a7-49b9-84a3-74b983edb834</guid>
+                <versionId>2a5731b3-792a-490d-a26a-8dd2a09084fe</versionId>
+            </TWComponent>
+        </item>
+        <startingProcessItemId>2025.d2c43585-55bd-4336-9f15-5fe487f9b41e</startingProcessItemId>
+        <errorHandlerItemId isNull="true" />
+        <layoutData noConversion="true">
+            <errorLink>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </errorLink>
+        </layoutData>
+        <startPoint>
+            <layoutData x="25" y="80">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+        </startPoint>
+        <startLink>
+            <fromPort locationId="rightCenter" portType="1" />
+            <toPort locationId="leftCenter" portType="2" />
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+        </startLink>
+        <bpmn2Model>
+            <ns16:definitions xmlns:ns16="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns14="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns15="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns17="http://www.ibm.com/bpm/processappsettings" xmlns:ns18="http://www.ibm.com/xmlns/links" xmlns:ns19="http://www.ibm.com/bpm/CoachDesignerNG" xmlns:ns20="http://www.ibm.com/xmlns/tagging" xmlns:ns21="http://www.ibm.com/bpm/uitheme" xmlns:ns22="http://www.ibm.com/bpm/coachview" targetNamespace="" expressionLanguage="http://www.ibm.com/xmlns/prod/bpm/expression-lang/javascript" typeLanguage="http://www.w3.org/2001/XMLSchema">
+                
+                
+                
+                
+                
+                
+                <ns16:process name="Perform Scoreboarding" id="1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61" ns2:executionMode="microflow">
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:documentation textFormat="text/plain" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:isSecured>true</ns2:isSecured>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:isAjaxExposed>true</ns2:isAjaxExposed>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:sboSyncEnabled>true</ns2:sboSyncEnabled>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:extensionElements>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:ioSpecification>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="industry" itemSubjectRef="itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45" isCollection="false" id="2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns2:defaultValue useDefault="true">"Federal"</ns2:defaultValue>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="annualRevenue" itemSubjectRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d" isCollection="false" id="2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns2:defaultValue useDefault="true">5</ns2:defaultValue>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="companyAge" itemSubjectRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d" isCollection="false" id="2055.78382d55-d044-43e2-8a47-78e3ed771557">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns2:defaultValue useDefault="true">5</ns2:defaultValue>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="defaultedPayment" itemSubjectRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2" isCollection="false" id="2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns2:defaultValue useDefault="true">false</ns2:defaultValue>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="numberOfEmployees" itemSubjectRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d" isCollection="false" id="2055.13d53a9d-f57d-43a8-aef7-79235f5abec1">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns2:defaultValue useDefault="true">5</ns2:defaultValue>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataOutput name="confidence" itemSubjectRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee" isCollection="false" id="2055.2d3ab132-f714-45db-82e7-b7d180ed228a" />
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataOutput name="highRisk" itemSubjectRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2" isCollection="false" id="2055.2aca5357-1f95-43c5-8acb-395f65b8adc1" />
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataOutput name="segment" itemSubjectRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022" isCollection="false" id="2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2" />
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:inputSet>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.78382d55-d044-43e2-8a47-78e3ed771557</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.13d53a9d-f57d-43a8-aef7-79235f5abec1</ns16:dataInputRefs>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:inputSet>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outputSet>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataOutputRefs>2055.2d3ab132-f714-45db-82e7-b7d180ed228a</ns16:dataOutputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataOutputRefs>2055.2aca5357-1f95-43c5-8acb-395f65b8adc1</ns16:dataOutputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataOutputRefs>2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2</ns16:dataOutputRefs>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:outputSet>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:ioSpecification>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:laneSet id="f033fef1-b9eb-4a37-9046-f4417187618e">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:lane name="System" partitionElementRef="24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b" id="332153ee-5001-4744-8bbc-00ab608d6b44" ns3:isSystemLane="true">
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:nodeVisualInfo x="0" y="0" width="3000" height="184" color="#F8F8F8" />
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>d099659f-7ef5-4bb7-8983-7bdddb6c8c1d</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>9b284cd2-f5da-43f1-8f2d-3635b0319a0e</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>d2c43585-55bd-4336-9f15-5fe487f9b41e</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>2b949e9d-f287-4166-8809-65eb832da443</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>1ce938ca-55f9-4754-80c6-fa736c7c5292</ns16:flowNodeRef>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:lane>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:laneSet>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:startEvent isInterrupting="false" parallelMultiple="false" name="Start" id="d099659f-7ef5-4bb7-8983-7bdddb6c8c1d">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="25" y="80" width="24" height="24" color="#F8F8F8" />
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>2027.ee14e548-6601-4666-bf29-40532bd937bd</ns16:outgoing>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:startEvent>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:endEvent name="End" id="9b284cd2-f5da-43f1-8f2d-3635b0319a0e">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="650" y="80" width="24" height="24" color="#F8F8F8" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:saveExecutionContext>true</ns3:saveExecutionContext>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:endStateId>guid:c181294e1530ea74:-3d3cefb1:179d38e8a51:-7ff8</ns2:endStateId>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>a995196a-789b-417a-8b3f-ef548594cd0c</ns16:incoming>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:endEvent>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="d099659f-7ef5-4bb7-8983-7bdddb6c8c1d" targetRef="d2c43585-55bd-4336-9f15-5fe487f9b41e" name="To Map input" id="2027.ee14e548-6601-4666-bf29-40532bd937bd">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>false</ns13:saveExecutionContext>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:dataObject itemSubjectRef="itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab" isCollection="false" name="client" id="2056.2a0f902e-dd7c-4d3e-9a94-a56a6fc2bcba" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:scriptTask scriptFormat="text/x-javascript" name="Map input" id="d2c43585-55bd-4336-9f15-5fe487f9b41e">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="140" y="57" width="95" height="70" />
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>2027.ee14e548-6601-4666-bf29-40532bd937bd</ns16:incoming>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>772b40c1-7349-47a8-9201-d8ed9467b3d6</ns16:outgoing>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:script>// The Decisions Automation Service expects the values in a specific format. 
+// Map the input fields to the required format.
+tw.local.client = new tw.object.ClientInformation();
+tw.local.client.annualRevenue = tw.local.annualRevenue;
+tw.local.client.companyAge = tw.local.companyAge;
+tw.local.client.defaultedPayment = tw.local.defaultedPayment;
+tw.local.client.numberOfEmployees = tw.local.numberOfEmployees;</ns16:script>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:scriptTask>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="d2c43585-55bd-4336-9f15-5fe487f9b41e" targetRef="2b949e9d-f287-4166-8809-65eb832da443" name="To Scoreboard" id="772b40c1-7349-47a8-9201-d8ed9467b3d6">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:sequenceFlowImplementation sboSyncEnabled="true" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>true</ns13:saveExecutionContext>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:serviceTask xmlns:ns23="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service" operationRef="ns23:_bed25d99-3ef4-4505-9006-a3918a724cec" isForCompensation="false" startQuantity="1" completionQuantity="1" name="Scoreboard" id="2b949e9d-f287-4166-8809-65eb832da443">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="303" y="57" width="95" height="70" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:activityType>ServiceTask</ns3:activityType>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:externalServiceRefPO>1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925</ns2:externalServiceRefPO>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:externalServiceRef>ns23:_33b15d86-6786-4eb2-a6c2-566e575a5804</ns2:externalServiceRef>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>772b40c1-7349-47a8-9201-d8ed9467b3d6</ns16:incoming>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>611056cc-a194-4568-b79f-5874d9509c0e</ns16:outgoing>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:targetRef>_f089d3c6-f1f8-43d0-ab23-cdc94c680521</ns16:targetRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab">tw.local.client</ns16:from>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInputAssociation>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:targetRef>_eb23dffd-7af7-4a01-8211-cb941fcc1cb9</ns16:targetRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45">tw.local.industry</ns16:from>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataInputAssociation>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataOutputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:sourceRef>_9d444aac-5221-40fd-9440-b8a7c5710546</ns16:sourceRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:to xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5">tw.local.scoreboard</ns16:to>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:dataOutputAssociation>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:serviceTask>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="2b949e9d-f287-4166-8809-65eb832da443" targetRef="1ce938ca-55f9-4754-80c6-fa736c7c5292" name="To Map output" id="611056cc-a194-4568-b79f-5874d9509c0e">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:sequenceFlowImplementation sboSyncEnabled="true" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>true</ns13:saveExecutionContext>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:scriptTask scriptFormat="text/x-javascript" name="Map output" id="1ce938ca-55f9-4754-80c6-fa736c7c5292">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="475" y="57" width="95" height="70" />
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>611056cc-a194-4568-b79f-5874d9509c0e</ns16:incoming>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>a995196a-789b-417a-8b3f-ef548594cd0c</ns16:outgoing>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:script>tw.local.confidence = tw.local.scoreboard.confidence;
+tw.local.highRisk = tw.local.scoreboard.highRisk;
+tw.local.segment = tw.local.scoreboard.segment;</ns16:script>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:scriptTask>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="1ce938ca-55f9-4754-80c6-fa736c7c5292" targetRef="9b284cd2-f5da-43f1-8f2d-3635b0319a0e" name="To Manual Override" id="a995196a-789b-417a-8b3f-ef548594cd0c">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:sequenceFlowImplementation sboSyncEnabled="true" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>true</ns13:saveExecutionContext>
+                                
+                                
+                                
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:dataObject itemSubjectRef="itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5" isCollection="false" name="scoreboard" id="2056.571b06e3-d4f6-46f1-8932-5d75160995f7" />
+                    
+                    
+                    
+                
+                
+                
+                </ns16:process>
+                
+                
+                
+            
+            
+            
+            </ns16:definitions>
+        </bpmn2Model>
+        <link name="To Map output">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processLinkId>2027.611056cc-a194-4568-b79f-5874d9509c0e</processLinkId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <description isNull="true" />
+            <fromProcessItemId>2025.2b949e9d-f287-4166-8809-65eb832da443</fromProcessItemId>
+            <endStateId>Out</endStateId>
+            <toProcessItemId>2025.1ce938ca-55f9-4754-80c6-fa736c7c5292</toProcessItemId>
+            <guid>2029106b-c1f6-45ec-b00d-3ff646b82ca3</guid>
+            <versionId>83c1ff30-a005-48b3-ae7c-8374c9390f51</versionId>
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+            <fromItemPort locationId="rightCenter" portType="1" />
+            <toItemPort locationId="leftCenter" portType="2" />
+            <fromProcessItemId>2025.2b949e9d-f287-4166-8809-65eb832da443</fromProcessItemId>
+            <toProcessItemId>2025.1ce938ca-55f9-4754-80c6-fa736c7c5292</toProcessItemId>
+        </link>
+        <link name="To Scoreboard">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processLinkId>2027.772b40c1-7349-47a8-9201-d8ed9467b3d6</processLinkId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <description isNull="true" />
+            <fromProcessItemId>2025.d2c43585-55bd-4336-9f15-5fe487f9b41e</fromProcessItemId>
+            <endStateId>Out</endStateId>
+            <toProcessItemId>2025.2b949e9d-f287-4166-8809-65eb832da443</toProcessItemId>
+            <guid>d23927b7-ab1f-4417-bc38-9bd2079ad9ec</guid>
+            <versionId>fa6b27de-c449-4f14-a69d-77e1964a78c3</versionId>
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+            <fromItemPort locationId="rightCenter" portType="1" />
+            <toItemPort locationId="leftCenter" portType="2" />
+            <fromProcessItemId>2025.d2c43585-55bd-4336-9f15-5fe487f9b41e</fromProcessItemId>
+            <toProcessItemId>2025.2b949e9d-f287-4166-8809-65eb832da443</toProcessItemId>
+        </link>
+        <link name="To Manual Override">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processLinkId>2027.a995196a-789b-417a-8b3f-ef548594cd0c</processLinkId>
+            <processId>1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</processId>
+            <description isNull="true" />
+            <fromProcessItemId>2025.1ce938ca-55f9-4754-80c6-fa736c7c5292</fromProcessItemId>
+            <endStateId>Out</endStateId>
+            <toProcessItemId>2025.9b284cd2-f5da-43f1-8f2d-3635b0319a0e</toProcessItemId>
+            <guid>e0560be2-9e18-4b49-88de-ef357a82e43b</guid>
+            <versionId>036b865e-efbd-430e-839f-5b45a422042e</versionId>
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+            <fromItemPort locationId="rightCenter" portType="1" />
+            <toItemPort locationId="leftCenter" portType="2" />
+            <fromProcessItemId>2025.1ce938ca-55f9-4754-80c6-fa736c7c5292</fromProcessItemId>
+            <toProcessItemId>2025.9b284cd2-f5da-43f1-8f2d-3635b0319a0e</toProcessItemId>
+        </link>
+    </process>
+</teamworks>
+

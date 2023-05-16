@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.ad8a10a9-a515-45cd-8ab0-d70296015ac2" name="Perform Scoreboarding">
+        <lastModified>1617731217145</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.ad8a10a9-a515-45cd-8ab0-d70296015ac2</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_PerformScoreboarding</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{6370A7B5-F10E-4FA6-9412-B9FA0DC76B25}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7f39</guid>
+        <versionId>2dbdc128-2f02-457c-bb82-44c68e079b6e</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>Activity</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_PerformScoreboarding">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.ef5e7f45-f620-487f-be5b-45c9a39be2ab" name="ClientInformation">
+        <lastModified>1663710976178</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.ef5e7f45-f620-487f-be5b-45c9a39be2ab</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab</externalId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fce"&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fcd"&gt;
+    &lt;refId&gt;/6023.107327ff-0ac9-4168-bab6-06ad2fc03c4b&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fcc"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fcb"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/357618c7-2d68-4d57-b757-34e46a031c14.xsd","complexType":[{"annotation":{"documentation":[{}],"appinfo":[{"shared":[false],"advancedProperties":[{"namespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/357618c7-2d68-4d57-b757-34e46a031c14.xsd","typeName":"ClientInformation"}],"shadow":[true]}]},"sequence":{"element":[{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["annualRevenue"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":0,"typeName":"int","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":1}]}]},"name":"annualRevenue","type":"{http:\/\/lombardi.ibm.com\/schema\/}Integer","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"}},{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["companyAge"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":0,"typeName":"int","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":2}]}]},"name":"companyAge","type":"{http:\/\/lombardi.ibm.com\/schema\/}Integer","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"}},{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["defaultedPayment"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":0,"typeName":"boolean","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":3}]}]},"name":"defaultedPayment","type":"{http:\/\/lombardi.ibm.com\/schema\/}Boolean","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"}},{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["numberOfEmployees"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":0,"typeName":"int","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":4}]}]},"name":"numberOfEmployees","type":"{http:\/\/lombardi.ibm.com\/schema\/}Integer","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"}}]},"name":"ClientInformation"}],"id":"_12.ef5e7f45-f620-487f-be5b-45c9a39be2ab"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:94241093b8c98370:-10e45d6f:1835c620847:-7fe5</guid>
+        <versionId>8a6376c8-7edf-4410-bc92-aa96b0913028</versionId>
+        <definition>
+            <property>
+                <name>annualRevenue</name>
+                <description isNull="true" />
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>int</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>0</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>1</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <property>
+                <name>companyAge</name>
+                <description isNull="true" />
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>int</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>0</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>2</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <property>
+                <name>defaultedPayment</name>
+                <description isNull="true" />
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>boolean</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>0</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>3</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <property>
+                <name>numberOfEmployees</name>
+                <description isNull="true" />
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>int</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>0</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>4</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="ClientInformation">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name>ClientInformation</name>
+                <namespace>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd</namespace>
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.f83ec881-00e8-4d28-b1ce-7b84a82deb05" name="Msg_5336358_f83ec881_00e8_4d28_b1ce_7b84a82deb05">
+        <lastModified>1663710976236</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.f83ec881-00e8-4d28-b1ce-7b84a82deb05</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>false</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType>2</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data>&lt;ns14:definitions xmlns:ns14="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns15="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns16="http://www.ibm.com/bpm/processappsettings" xmlns:ns17="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns18="http://www.ibm.com/xmlns/links" xmlns:ns19="http://www.ibm.com/bpm/uitheme" xmlns:ns20="http://www.ibm.com/xmlns/tagging" id="_46ee3544-4271-4bf6-ba4a-f15750e321c1" targetNamespace="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service"&gt;&lt;ns14:message name="Msg_5336358_f83ec881_00e8_4d28_b1ce_7b84a82deb05" itemRef="itm.12.0335e23a-120b-4989-b104-1bdbc664a1a4" id="_ef140623-9ef4-48c5-b0c0-b28b76f6064e"&gt;&lt;ns14:extensionElements&gt;&lt;ns2:itemRefPO&gt;12.0335e23a-120b-4989-b104-1bdbc664a1a4&lt;/ns2:itemRefPO&gt;&lt;/ns14:extensionElements&gt;&lt;/ns14:message&gt;&lt;/ns14:definitions&gt;
+</bpmn2Data>
+        <externalId>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service}scoreboardRequestMsg</externalId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc6"&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc5"&gt;
+    &lt;refId&gt;/6023.1df95ad5-0560-4135-89c8-08734b49c94d&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc4"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc3"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;swagger&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc2"&gt;
+    &lt;refId&gt;/12.0335e23a-120b-4989-b104-1bdbc664a1a4&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc1"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;itm.12.0335e23a-120b-4989-b104-1bdbc664a1a4&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc0"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;item&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"rootElement":[{"itemRef":"itm.12.0335e23a-120b-4989-b104-1bdbc664a1a4","extensionElements":{"itemRefPO":["12.0335e23a-120b-4989-b104-1bdbc664a1a4"]},"name":"Msg_5336358_f83ec881_00e8_4d28_b1ce_7b84a82deb05","declaredType":"message","id":"_ef140623-9ef4-48c5-b0c0-b28b76f6064e"}],"targetNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/357618c7-2d68-4d57-b757-34e46a031c14Service","typeLanguage":"http:\/\/www.w3.org\/2001\/XMLSchema","expressionLanguage":"http:\/\/www.w3.org\/1999\/XPath","id":"_46ee3544-4271-4bf6-ba4a-f15750e321c1"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:94241093b8c98370:-10e45d6f:1835c620847:-7fe3</guid>
+        <versionId>6643d1d2-ae29-47a9-b09b-eff0d538149a</versionId>
+        <definition isNull="true" />
+    </twClass>
+</teamworks>
+

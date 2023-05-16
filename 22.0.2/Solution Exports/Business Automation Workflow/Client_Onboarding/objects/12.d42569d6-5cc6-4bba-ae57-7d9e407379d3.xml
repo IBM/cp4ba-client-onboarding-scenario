@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.d42569d6-5cc6-4bba-ae57-7d9e407379d3" name="Email">
+        <lastModified>1619783211889</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.d42569d6-5cc6-4bba-ae57-7d9e407379d3</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_Email</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{D3C4575F-6081-4D0E-A060-C389AD653D1A}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Email</description>
+        <guid>guid:ec8399b5d2ec0a0c:-5854a9d7:178f28f43e0:-7ff4</guid>
+        <versionId>92547598-b61c-460e-a717-691dbf3fa790</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_Email">
+                            <restriction base="String">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

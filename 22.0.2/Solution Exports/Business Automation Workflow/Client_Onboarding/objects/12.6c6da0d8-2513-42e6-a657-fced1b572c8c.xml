@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.6c6da0d8-2513-42e6-a657-fced1b572c8c" name="Document Status">
+        <lastModified>1617721152012</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.6c6da0d8-2513-42e6-a657-fced1b572c8c</classId>
+        <type>0</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_Document Status</internalName>
+        <extensionType>7</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{BC65561F-9773-4535-9A58-42ACEA4738AE}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fdd</guid>
+        <versionId>b07a2ecc-3d0f-40a1-a048-95c55d7f8300</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>ChoiceList</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_Document Status">
+                            <restriction base="Selection">
+                                <option value="Verified" display="Verified" />
+                                <option value="Not Required" display="Not Required" />
+                                <option value="Pending" display="Pending" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

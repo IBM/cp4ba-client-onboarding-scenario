@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.9ed652d8-63ee-4867-a3fc-9cf785b293e3" name="Document Review">
+        <lastModified>1619033293293</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.9ed652d8-63ee-4867-a3fc-9cf785b293e3</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_DocumentReview</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{5DBDEF1A-A3AB-4E5A-A42D-24A270209EC8}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>List of client documents that have been reviewed</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fd9</guid>
+        <versionId>ee5d9636-55af-4d13-89f4-b7af5f3b815a</versionId>
+        <definition>
+            <property>
+                <name>DocumentName</name>
+                <description>Name of the reviewed document</description>
+                <classRef>/12.06caf95b-331c-465f-b3e1-2e144fae54bc</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>DocumentStatus</name>
+                <description>Status of the reviewed document</description>
+                <classRef>/12.f1f94cbe-c36a-45e0-bdd7-c54a457aabc7</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>BusinessObject</externalType>
+                <configData>
+                    <schema>
+                        <complexType name="CO_DocumentReview">
+                            <complexContent>
+                                <extension base="Object" baseClassRef="/12.46ab33d6-3cf8-4cd3-bb72-8258fbc340c6" />
+                            </complexContent>
+                        </complexType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

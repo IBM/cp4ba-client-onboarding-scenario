@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.463c40d1-7f6e-4fe8-95a2-06093ad3808a" name="Review Documents">
+        <lastModified>1644713417202</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.463c40d1-7f6e-4fe8-95a2-06093ad3808a</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_ReviewDocuments</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{1F445D78-CC26-4F37-A562-F9CF9B5C2C17}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Review and validate client documents</description>
+        <guid>guid:207d6ea0639ca8b5:-43694325:17ee69075b7:-7d1b</guid>
+        <versionId>6a02e1b8-3e6e-4756-b25b-1b11dae600af</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>Activity</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_ReviewDocuments">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

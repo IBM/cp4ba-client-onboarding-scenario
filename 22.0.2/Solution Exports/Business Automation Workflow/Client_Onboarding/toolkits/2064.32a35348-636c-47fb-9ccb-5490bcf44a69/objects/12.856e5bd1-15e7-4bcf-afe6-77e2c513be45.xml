@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.856e5bd1-15e7-4bcf-afe6-77e2c513be45" name="industryType">
+        <lastModified>1663710976209</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.856e5bd1-15e7-4bcf-afe6-77e2c513be45</classId>
+        <type>0</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45</externalId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fca"&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc9"&gt;
+    &lt;refId&gt;/6023.107327ff-0ac9-4168-bab6-06ad2fc03c4b&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc8"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fc7"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"simpleType":[{"annotation":{"documentation":[{}],"appinfo":[{"advancedProperties":[{"namespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/357618c7-2d68-4d57-b757-34e46a031c14.xsd","typeName":"industryType"}]}]},"name":"industryType","restriction":{"annotation":{"appinfo":[{"simpleBaseType":["Selection"]}]},"enumeration":[{"annotation":{"appinfo":[{"displayName":["Federal"]}]},"value":"Federal"},{"annotation":{"appinfo":[{"displayName":["Finance"]}]},"value":"Finance"},{"annotation":{"appinfo":[{"displayName":["Healthcare"]}]},"value":"Healthcare"},{"annotation":{"appinfo":[{"displayName":["Insurance"]}]},"value":"Insurance"},{"annotation":{"appinfo":[{"displayName":["Telecom"]}]},"value":"Telecom"}],"base":"{http:\/\/www.w3.org\/2001\/XMLSchema}string"}}],"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/357618c7-2d68-4d57-b757-34e46a031c14.xsd","id":"_12.856e5bd1-15e7-4bcf-afe6-77e2c513be45"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:94241093b8c98370:-10e45d6f:1835c620847:-7fe4</guid>
+        <versionId>2cb6e2e1-b778-4858-a56b-6ed7b2c8531a</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="industryType">
+                            <restriction base="Selection">
+                                <option value="Federal" display="Federal" />
+                                <option value="Finance" display="Finance" />
+                                <option value="Healthcare" display="Healthcare" />
+                                <option value="Insurance" display="Insurance" />
+                                <option value="Telecom" display="Telecom" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name>industryType</name>
+                <namespace>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd</namespace>
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

@@ -1,0 +1,1124 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
+	"requiredToolVersion": ">=1.0.0 <1.1.0",
+	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"comment" : "To be used with CP4BA 22.0.2 deployment with an external GitHub connection and arbitrary LDAP users",
+	
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment" : "This container wraps all actions to deploy the Client Onboarding scenario itself",
+				"enabled": "$$(enableDeployClientOnboarding)$$",
+				"description": "Deploy Client Onboarding Scenario",
+				"actions": [
+					{
+						"ADS": {
+							"comment" : "",
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description" : "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",
+							"decisionsPrjDisplayName": "Client Onboarding",
+							"relativeBasePath": "1_ADS",
+							"maxBASQueryRetries": 5,
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for OPS",
+   										"name": "Download ADS file",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip"}
+   										]
+  									}
+  								},
+  								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test connection to ADS",
+										"gitServerUrl": "$$(adsGitServerUrl)$$",
+									    "userName": "$$(adsGitUserName)$$",
+									    "apiKey": "$$(adsGitRepoAPIKey)$$"
+									}
+								},
+								{
+									"CHECKPROJECTISCONNECTEDTOGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Check if ADS decision project already exists and if it is already connected to Git"
+									}
+								},
+								{
+									"CREATEGITREPO": {
+									    "enabled": "$$(!isADSAutoConnectToGit)$$",
+										"gitServerUrl": "$$(adsGitServerUrl)$$",
+									    "userName": "$$(adsGitUserName)$$",
+									    "apiKey": "$$(adsGitRepoAPIKey)$$",
+									    "orgName": "$$(adsGitOrg)$$",
+									   	"repoName": "$$(adsGitRepo)$$",
+										"repoDescription": "$$(adsGitRepoDescription)$$"
+									}
+								},
+								{
+									"CREATEPROJECT": {
+										"enabled": "true",
+										"description": "Create ADS project in Studio",
+										"name": "Client Onboarding"
+									}
+								},
+								{
+									"IMPORTDECISIONSERVICES": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Decisions' decision service",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"file": "ClientOnboardingDecisions.zip"
+									}
+								},
+								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"gitRepoUrl": "!GITREPOURL!",
+										"gitApiKey": "$$(adsGitRepoAPIKey)$$"
+									}
+								},
+								{
+									"COMMITCHANGES": {
+										"enabled": "true",
+										"description": "Commit changes in ADS project to git",
+										"commitMessage": "Initial automatic setup of Client Onboarding project",
+										"maxCommitCompletionPolls": 20,
+										"delayBetweenCommitCompletionPolls": 10
+									}
+								},
+								{
+									"VERSIONPROJECT": {
+										"enabled": "true",
+										"description": "Create a new version of the ADS project",
+										"versionDescription": "Initial version of the Client Onboarding Decision Solution",
+										"version": "1.0.0"
+									}
+								},
+								{
+									"DEPLOYPROJECT": {
+										"enabled": "true",
+										"description": "Deploy the version to the runtime",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "1.0.0",
+										"maxDeployCompletionPolls": 60,
+										"delayBetweenDeployCompletionPolls": 5,
+										"delayAfter" : 60
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADP": {
+							"comment" : "Tries to configure and deploy the sample ADP project and then extract its project Id. Action will not fail when an error occurs as downstream action can handle the absence of the projectId",
+							"enabled": "$$(enableDeployClientOnboarding_ADP)$$",
+							"description" : "ADP - Configure and deploy default project and extract projectId",
+							"skipRemainingSubactionOnFailure" : "true",
+							"relativeBasePath": "2_ADP",
+							"objectStoreName": "$$(adpObjectStore)$$",
+							"projectDisplayName": "$$(adpProjectName)$$",
+							"projectAcronym" : "$$(adpProjectAcronym)$$",
+							"subActions": [
+  								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test ADP capability"
+									}
+								},
+								{
+									"SETMARKFORDEPLOYMENT": {
+										"enabled": "true",
+										"description": "Mark the UtilityBill class for deployment",
+										"setUndeployForOthers": true,
+										"types": [
+											"UtilityBill"
+										]
+									}
+								},
+								{
+									"DEFINEPROPERTIES": {
+										"enabled": "true",
+										"description": "Define the CustomerName and ServiceAddress property definitions",
+										"propertyDefinitionsByType": {
+											"UtilityBill": {
+												"CustomerName": "ddCustomerName",
+												"ServiceAddress": "ddServiceAddress"
+											}
+										}
+									}
+								},
+								{
+									"CREATEVERSION": {
+										"enabled": "true",
+										"description": "Create a new version of the ADP project",
+										"versionComment": "Enabled Utility Bill and marked Customer Name and Service Address for deployment",
+										"maxPollTimes": 20,
+										"maxDelayBetweenPolls": 10
+									}
+								},
+								{
+									"DEPLOYVERSION": {
+										"enabled": "true",
+										"description": "Deploy the version of the ADP project",
+										"maxPollTimes": 20,
+										"maxDelayBetweenPolls": 10
+									}
+								},
+								{
+									"GETPROJECTID": {
+										"enabled": "true",
+										"description": "Get the project id of the deployed ADP project"
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment" : "ADP will be enabled if previous ADP action was successful otherwise ADP will be disabled",
+							"enabled": "$$(enableDeployClientOnboarding_WF)$$",
+							"description" : "WF - Deploy and publish Client Onboarding solution",
+							"relativeBasePath": "4_WF",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for WF",
+   										"name": "Download Workflow file",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"}
+   										]
+  									}
+  								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract the project information from the Client Onboarding TWX file",
+										"sourceTwxFile": "Client_Onboarding.twx"
+									}
+								},
+								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID",
+										"sourceTwxFile": "!twxFileName!",
+										"environmentVariables": [
+											{
+												"adpEnabled": "$$(wf_cp_adpEnabled)$$ && $(ISSET(adpProjectId))$"
+											},
+											{
+												"adpHost": "$(adpHost|default=)$"
+											},
+											{
+												"adpUsername": "$(adpUsername|default=)$"
+											},
+											{
+												"adpPassword": "$(adpPassword|default=)$"
+											},
+											{
+												"adpProjectID": "$(adpProjectId|default=)$"
+											},
+											{
+												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
+											},
+											{
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost)$)§ELSE§(smtp.gmail.com)ENDIF§"
+											},
+											{
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort)$)§ELSE§(587)ENDIF§"
+											},
+											{
+												"emailID": "$$(wf_cp_emailID)$$"
+											},
+											{
+												"emailPassword": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§()§ELSE§($$(wf_cp_emailPassword)$$)ENDIF§"
+											},
+											{
+												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
+											},
+											{
+												"rpaServer": "$$(wf_cp_rpaServer)$$"
+											},
+											{
+												"tosName": "$$(BAW_TOS)$$"
+											}
+										],
+										"filePatchInfos": [
+											{
+												"tkName": "COTK",
+												"name": "client_onboarding_decisions",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": { "cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding" },
+													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+												}
+											}
+										]
+									}
+								},
+								{
+									"INSTALLSOLUTION": {
+										"enabled": "true",
+										"description": "Install the patched Client Onboarding WF solution",
+										"twxFile": "!patchedTWXFileName!",
+										"paAcronym": "!projectAcronym!",
+										"paSnapshot": "!snapshotAcronym!"
+									}
+								},
+								{
+									"DEPLOYCASESOLUTION": {
+										"enabled": "true",
+										"description": "Deploy the Case part of the Client Onboarding WF solution",
+										"dosName": "$$(BAW_DOS)$$",
+										"solutionName": "!solutionName!",
+										"solutionAcronym": "!solutionAcronym!",
+										"updateSolutionIfRequired": true,
+										"maxDeployCompletionPolls": 20,
+										"delayBetweenDeployCompletionPolls": 5
+									}
+								},
+								{
+									"PUBLISHAUTOMATIONSERVICES": {
+										"enabled": "true",
+										"description": "Publish the Client Onboarding WF Automation Service",
+										"solutionName": "!solutionName!",
+										"solutionAcronym": "!solutionAcronym!",
+										"snapshot": "!snapshotAcronym!",
+										"maxBASQueryRetries": 5,
+										"maxPublishCompletionPolls": 20,
+										"delayBetweenPublishCompletionPolls": 5
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Adds general users group as read-only collaborators",
+										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment" : "Action needs to run after the Case-solution was imported",
+							"enabled": "$$(enableDeployClientOnboarding_FNCM)$$",
+							"description" : "CPE - Update class security, create 'Client Documents' folder, and create documents",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for FNCM",
+   										"name": "Download FNCM files",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Utility%20Bill%20-%20Automation%20Elite%20Inc.pdf"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"}
+   										]
+  									}
+  								},
+  								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test FNCM availability"
+									}
+								},
+								{
+									"MODIFYCLASSSECURITY": {
+										"enabled": "true",
+										"description": "Update instance security and security settings for doc classes CO_ClientDocument, CO_BankingInformation, CO_UtilityBill for multi-user environment",
+										"name": "Modify security for Client Onboarding classes",
+										"classes": [
+											{
+												"enabled": "true",
+												"classSymbolicName": "Document/CO_ClientDocument",
+												"securityReplaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"granteeName": "$$(generalUsersGroupName)$$",
+														"granteeType": "Group",
+														"defaultInstanceSecurityAction": "Remove",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"securityInheritableDepth": "No inheritance",
+														"securityAccessRights": "Modify properties"
+													}
+												]
+											},
+											{
+												"enabled": "true",
+												"classSymbolicName": "Document/CO_ClientDocument/CO_BankingInformation",
+												"securityReplaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"granteeName": "$$(generalUsersGroupName)$$",
+														"granteeType": "Group",
+														"defaultInstanceSecurityAction": "Remove",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"securityInheritableDepth": "No inheritance",
+														"securityAccessRights": "Modify properties"
+													}
+												]
+											},
+											{
+												"enabled": "true",
+												"classSymbolicName": "Document/CO_ClientDocument/CO_UtilityBill",
+												"securityReplaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"granteeName": "$$(generalUsersGroupName)$$",
+														"granteeType": "Group",
+														"defaultInstanceSecurityAction": "Remove",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"securityInheritableDepth": "No inheritance",
+														"securityAccessRights": "Modify properties"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Client documents' folder",
+										"parentFolderPath": "/",
+										"folderClassSymbolicName": "Folder",
+										"folderName": "Client Documents"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Banking Information - Automation Elite Inc' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_BankingInformation",
+										"docTitle": "Banking Information - Automation Elite Inc",
+										"docProps": 
+											{
+												"CO_ClientName": "Automation Elite Inc.",
+												"CO_AccountNumber": "1179476345"
+											},
+										"file": "Banking Information - Automation Elite Inc.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Certificate of Incorporation - Automation Elite Inc' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_ClientDocument",
+										"docTitle": "Certificate of Incorporation - Automation Elite Inc",
+										"docProps": 
+											{
+												"CO_ClientName": "Automation Elite Inc."
+											},
+										"file": "Certificate of Incorporation - Automation Elite Inc.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Utility Bill - Automation Elite Inc' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_UtilityBill",
+										"docTitle": "Utility Bill - Automation Elite Inc",
+										"docProps": 
+											{
+												"CO_ClientName": "Automation Elite Inc.",
+												"CO_ServiceAddress": "3974 Carson St, Lansing, MI 48911"
+											},
+										"file": "Utility Bill - Automation Elite Inc.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'June Marie - Driver's License' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_ClientDocument",
+										"docTitle": "June Marie - Driver's License",
+										"docProps": 
+											{
+												"CO_ClientName": "Automation Elite Inc."
+											},
+										"file": "June Marie - Driver's License.png",
+										"fileContentType": "image/png"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Legacy Consulting - Banking Information' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_BankingInformation",
+										"docTitle": "Legacy Consulting - Banking Information",
+										"docProps": 
+											{
+												"CO_ClientName": "Legacy Consulting",
+												"CO_AccountNumber": "7250512345"
+											},
+										"file": "Legacy Consulting - Banking Information.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Legacy Consulting - Certificate of Incorporation' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_ClientDocument",
+										"docTitle": "Legacy Consulting - Certificate of Incorporation",
+										"docProps":
+											{
+												"CO_ClientName": "Legacy Consulting"
+											},
+										"file": "Legacy Consulting - Certificate of Incorporation.pdf",
+										"fileContentType": "application/pdf"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment" : "Imports two desktops and the two applications and configures access to the first",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
+							"description": "Navigator - Import apps and desktops",
+							"name": "Prepare Apps and Desktops",
+							"relativeBasePath": "6_ICN",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for Navigator",
+   										"name": "Download ICN files",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequestDesktop.properties"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"}
+   										]
+  									}
+  								},
+  								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test Navigator availability"
+									}
+								},
+								{
+									"PATCHAPPLICATION": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Request' app to work in current environment",
+										"file": "ClientOnboardingRequest.zip",
+										"simpleTextMappings": {
+											"1" : { "BAWTOS": "$$(BAW_TOS)$$" },
+											"2" : { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" },
+											"3" : { "cp4badmin": "$$(cp4baAdminUsr)$$" }
+										}
+									}
+								},
+								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import patched 'Client Onboarding Request' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Request",
+										"file": "!patchedZIPFileName!"
+									}
+								},
+								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Document Upload' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Document Upload",
+										"file": "ClientOnboardingDocumentUpload.zip"
+									}
+								},
+								{
+									"SETAPPPERMISSIONS": {
+										"enabled": "true",
+										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Request",
+										"action": "update",
+										"permissions": [
+											{
+												"name": "#AUTHENTICATED-USERS",
+												"action": "add"
+											}
+										]
+									}
+								},
+								{
+									"PATCHDESKTOP": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in starter deployment",
+										"file": "ClientOnboardingRequestDesktop.properties",
+										"simpleTextMappings": {
+											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
+											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
+											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
+										}
+									}
+								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "true",
+										"description": "Import patched 'Client Onboarding Request' desktop",
+										"enforceImport": false,
+										"name": "Client Onboarding Request",
+										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								},
+								{
+									"PATCHDESKTOP": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in starter deployment",
+										"file": "CODocumentUploadDesktop.properties",
+										"simpleTextMappings": {
+											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
+											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
+											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
+										}
+									}
+								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "true",
+										"description": "Import patched 'Client Onboarding Document Upload' desktop",
+										"enforceImport": false,
+										"name": "Client Onboarding Document Upload",
+										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAI": {
+							"comment" : "",
+							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
+							"description" : "BAI - Populate indices, create goal and import dashboard",
+							"relativeBasePath": "7_BAI",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for BAI",
+   										"name": "Download BAI files",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Insights/case-data.json"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Insights/process-data.json"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Insights/ads-data.json"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Insights/Client%20Onboarding%20Completed.json"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Insights/finalDashboardLayout.json"}
+   										]
+  									}
+  								},
+  								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test BAI capability"
+									}
+								},
+								{
+									"IMPORTDATA": {
+										"enabled": "true",
+										"description": "Populate Case data into ElasticSearch index",
+										"clearUsedIndices": false,
+										"name": "Case Data",
+										"file": "case-data.json"
+									}
+								},
+								{
+									"IMPORTDATA": {
+										"enabled": "true",
+										"description": "Populate Process data into ElasticSearch index",
+										"clearUsedIndices": false,
+										"name": "Process Data",
+										"file": "process-data.json"
+									}
+								},
+								{
+									"IMPORTDATA": {
+										"enabled": "true",
+										"description": "Populate ADS data into ElasticSearch index",
+										"clearUsedIndices": false,
+										"name": "ADS Data",
+										"file": "ads-data.json"
+									}
+								},
+								{
+									"IMPORTDASHBOARD": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Complete' dashboard",
+										"name": "Client Onboarding Completed",
+										"file": "Client Onboarding Completed.json",
+										"keepId": false
+									}
+								},
+								{
+									"CREATEGOAL": {
+										"enabled": "true",
+										"description": "Create 'Client Onboarding KPI' goal",
+										"goalName": "Focus Corp's top Client Onboarding KPI Completed",
+										"goalDescription": "Focus on the three top KPI identified by senior management team",
+										"goalCategory": "",
+										"goalPriority": "High",
+										"goalColor": "#6929c4"
+									}
+								},
+								{
+									"EXPORTFINALDASHBOARDLAYOUT": {
+										"enabled": "false",
+										"description": "Export the final layout after applying the goal manually to the dashboard (disabled by default)",
+										"name": "Client Onboarding Completed",
+										"file": "finalDashboardLayout.json"
+									}
+								},
+								{
+									"APPLYGOALSTOVISUALIZATIONS": {
+										"enabled": "true",
+										"description": "Apply the goal to the dashboard",
+										"name": "Client Onboarding Completed",
+										"layoutFile": "finalDashboardLayout.json",
+										"visualizationGoalMapping": [
+											{
+												"visualizationName": "Average Revenue from Service Fees for Approved Clients",
+												"goalName": "Focus Corp's top Client Onboarding KPI Completed"
+											},
+											{
+												"visualizationName": "Highest Service Fee by Industry Sector",
+												"goalName": "Focus Corp's top Client Onboarding KPI Completed"
+											}
+										]
+									}
+								},
+								{
+									"SETDASHBOARDVISIBILITY": {
+										"enabled": "true",
+										"description": "Make dashboard visible to all users",
+										"name": "Client Onboarding Completed",
+										"isShared": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"CONTAINER": {
+				"comment" : "Container bundles all activities to configure the environment for the labs",
+				"enabled": "$$(enableConfigureSWATLabs)$$",
+				"description": "Configure SWAT Labs",
+				"actions": [
+					{
+						"WF": {
+							"comment" : "",
+							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
+							"description" : "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs",
+							"relativeBasePath": "4_WF",
+							"subActions": [
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the Client Onboarding toolkit as reader",
+										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the ADP toolkit as reader",
+										"name": "ADP Utils",
+										"acronym": "ADPU",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the RPA toolkit as reader",
+										"name": "IBM RPA Toolkit",
+										"acronym": "IBMRPAT",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment" : "",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"description" : "CPE - Modify security, create property templates, class, and storage policy, and create folders for content lab",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "BAWDOCS",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
+								{
+									"MODIFYOBJECTSTORESECURITY": {
+										"enabled": "true",
+										"description": "Modify security for BAWDOCS Object Store",
+										"name": "Modify security for BAWDOCS Object Store",
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Add",
+												"granteeType": "Group",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											}
+										]
+									}
+								},
+								{
+									"CREATESTORAGEPOLICY": {
+										"enabled": "true",
+										"description": "Create ASA for the BAWDOCS object store",
+										"storagePolicyName": "Default Advanced Storage Area",
+										"storageAreaName": "BAWDOCS_asa"
+									}
+								},
+								{
+									"UPDATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Update class definition for folder to enable content-based retrieval",
+									    "classSymbolicName": "Document",
+   										"enableCBR": true
+  									}
+  								},
+								{
+									"CREATEPROPERTYTEMPLATE": {
+										"enabled": "true",
+										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
+										"propertyTemplates": [
+											{
+												"name": "Case Reference ID",
+												"symbolicName": "Case_Reference_ID",
+												"dataType": "String",
+												"cardinality": "Single"
+											},
+											{
+												"name": "Client Name",
+												"symbolicName": "Client_Name",
+												"dataType": "String",
+												"cardinality": "Single"
+											}
+										]
+									}
+								},
+								{
+									"CREATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
+										"className": "SWAT Jam Case Folder",
+										"classSymbolicName": "SWAT_JAM_Case_Folder",
+										"baseClassSymbolicName": "Folder",
+										"propertyTemplateNames": [
+											"Case_Reference_ID",
+											"Client_Name"
+										]
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Case Folders' folder in root",
+										"parentFolderPath": "/",
+										"folderName": "Case Folders",
+										"folderClassSymbolicName": "Folder"
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
+										"parentFolderPath": "/Case Folders",
+										"folderName": "Sample Test Folder TEST1",
+										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
+										"folderProperties": [
+											{
+												"Client_Name": "TEST1"
+											},
+											{
+												"Case_Reference_ID": "TEST1"
+											}
+										]
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
+										"parentFolderPath": "/Case Folders",
+										"folderName": "Sample Test Folder TEST2",
+										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
+										"folderProperties": [
+											{
+												"Client_Name": "TEST2"
+											},
+											{
+												"Case_Reference_ID": "TEST2"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment" : "",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"description": "Navigator - Import Desktop for BAWDOCS for content lab",
+							"relativeBasePath": "6_ICN",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for content lab for Navigator",
+   										"name": "Download ICN file",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CLOSDesktop.properties"}
+   										]
+  									}
+  								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "true",
+										"description": "Import 'BAWDOCS' desktop used in content lab",
+										"enforceImport": false,
+										"name": "BAWDOCS",
+										"file": "BAWDOCSDesktop.properties"
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAA": {
+							"comment" : "",
+							"enabled": "$$(enableConfigureSWATLabs_BAA)$$",
+							"description": "BAA - Prepare APP in Studio for BAA lab",
+							"relativeBasePath": "6_BAA",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for the Apps lab",
+   										"name": "Download BAA file",
+   										"replaceExistingFiles": true,
+   										"files": [
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx"},
+    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Document_Upload.twx"}
+   										]
+  									}
+  								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract project information from template file",
+										"sourceTwxFile": "Client_Onboarding_Template.twx"
+									}
+								},
+								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the automation service to call ADS as TWX was built in enterprise deployment but is used in starter deployment and to accommodate workaround for problem to publish original long AS name in ADS",
+										"sourceTwxFile": "!twxFileName!",
+										"filePatchInfos": [
+											{
+												"name": "client_onboarding_decisions",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": { "cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding" },
+													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+												}
+											}
+										]
+									}
+								},
+								{
+									"IMPORTPROJECT": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Template' BAA template into Studio",
+										"name": "!solutionName!",
+										"file": "!patchedTWXFileName!",
+										"type": "!solutionType!",
+										"acronym": "!solutionAcronym!",
+										"snapshot": "!snapshotAcronym!",
+										"maxBASQueryRetries": 3,
+										"verbose": false
+									}
+								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract project information from Client Onboarding Document Upload app file",
+										"sourceTwxFile": "Client_Onboarding_Document_Upload.twx"
+									}
+								},
+								{
+									"IMPORTPROJECT": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Document Upload' BAA template into Studio",
+										"name": "!solutionName!",
+										"file": "!twxFileName!",
+										"type": "!solutionType!",
+										"acronym": "!solutionAcronym!",
+										"snapshot": "!snapshotAcronym!",
+										"maxBASQueryRetries": 3,
+										"verbose": false
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
+										"name": "Client Onboarding Toolkit",
+										"type": "APP_TK",
+										"ignoreMissingPrincipals": true,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"CONTAINER": {
+				"enabled": "$$(enableDeployClientOnboarding)$$",
+				"description": "Complete Deployment of Client Onboarding Scenario",
+				"actions": [
+					{
+						"ADS": {
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description": "Publish ADS automation service",
+							"decisionsPrjDisplayName": "Client Onboarding",
+							"relativeBasePath": "1_ADS",
+							"maxBASQueryRetries": 5,
+							"subActions": [
+								{
+									"PUBLISHAUTOMATIONSERVICES": {
+										"enabled": "true",
+										"description": "Publish the ADS decision service as an automation service",
+										"skipRemainingSubactionOnFailure": "true",
+										"snapshot": "1.0.0",
+										"maxPublishCompletionPolls": 20,
+										"delayBetweenPublishCompletionPolls": 5
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

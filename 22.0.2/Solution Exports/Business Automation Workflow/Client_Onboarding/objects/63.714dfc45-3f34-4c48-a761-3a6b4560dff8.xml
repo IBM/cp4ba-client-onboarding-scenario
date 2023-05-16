@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <projectDefaults id="63.714dfc45-3f34-4c48-a761-3a6b4560dff8" name="Process App Settings">
+        <lastModified>1683711094696</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <projectDefaultsId>63.714dfc45-3f34-4c48-a761-3a6b4560dff8</projectDefaultsId>
+        <description isNull="true" />
+        <guid>398f4c93-d7ed-455d-af5e-6124c4e908e0</guid>
+        <versionId>c16787fa-0bb9-4836-b4e5-f2c1a3b9068b</versionId>
+        <participantRef isNull="true" />
+        <defaultXslRef isNull="true" />
+        <defaultCssRef isNull="true" />
+        <defaultTheme>5c817616-ef49-41fa-89ce-41f8666ef643/72.993e03e9-2574-40fc-807c-65b06be378fd</defaultTheme>
+        <themeVersion isNull="true" />
+        <defaultJsRefs isNull="true" />
+        <isWbmEnabled>false</isWbmEnabled>
+        <namespace>http://CO</namespace>
+        <isIidOptimized>true</isIidOptimized>
+        <isQueueBypass>1</isQueueBypass>
+        <templateAcronymReference isNull="true" />
+        <templateSnapshotReference isNull="true" />
+        <targetEnvironment>BAW_CP4A</targetEnvironment>
+        <subtype isNull="true" />
+    </projectDefaults>
+</teamworks>
+

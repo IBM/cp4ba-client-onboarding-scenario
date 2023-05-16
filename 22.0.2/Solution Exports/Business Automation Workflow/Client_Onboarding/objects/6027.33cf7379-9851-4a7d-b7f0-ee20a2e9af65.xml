@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <refPO id="6027.33cf7379-9851-4a7d-b7f0-ee20a2e9af65" name="Client Onboarding Request Workflow Definition">
+        <lastModified>1683651373450</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <refId>6027.33cf7379-9851-4a7d-b7f0-ee20a2e9af65</refId>
+        <description isNull="true" />
+        <guid>67571bdc-c205-47eb-9d6f-098e511b9868</guid>
+        <versionId>d6a2a6df-32c0-4e54-b85b-c00ccb4fe493</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651364604</createdOn>
+        <type>1</type>
+        <externalId>{E0BDA778-0000-C314-8CBF-0D2F2CDD0FA3}</externalId>
+        <externalVersion>{E0CF237F-0000-C24C-B83A-1F4383C7D28C}</externalVersion>
+    </refPO>
+</teamworks>
+

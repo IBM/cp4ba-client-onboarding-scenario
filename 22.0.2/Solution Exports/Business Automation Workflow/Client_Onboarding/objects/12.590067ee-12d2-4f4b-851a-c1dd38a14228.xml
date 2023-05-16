@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.590067ee-12d2-4f4b-851a-c1dd38a14228" name="Number of Employees">
+        <lastModified>1617734464485</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.590067ee-12d2-4f4b-851a-c1dd38a14228</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_NumberOfEmployees</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{0E1955FB-FFC9-4D5C-8E14-984DCC11E8C0}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Number of employees working for the client</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7c59</guid>
+        <versionId>bc17a71a-afb7-47e4-951a-69791287b42f</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_NumberOfEmployees">
+                            <restriction base="Integer" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

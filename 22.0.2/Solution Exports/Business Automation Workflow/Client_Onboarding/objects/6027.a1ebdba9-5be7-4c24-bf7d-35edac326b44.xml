@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <refPO id="6027.a1ebdba9-5be7-4c24-bf7d-35edac326b44" name="CmAcmCASEDETAILS_DEFAULT_ADAPTER_v2">
+        <lastModified>1683651373450</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <refId>6027.a1ebdba9-5be7-4c24-bf7d-35edac326b44</refId>
+        <description isNull="true" />
+        <guid>guid:a1ebdba9-5be7-4c24-bf7d-35edac326b44</guid>
+        <versionId>078ed113-f148-4188-8d2f-65493207b9a7</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651364604</createdOn>
+        <type>1</type>
+        <externalId>{D0E35C83-0200-C9E5-BEBC-9AA379C5E64F}</externalId>
+        <externalVersion>{D0E35C83-0000-CF1E-BE06-A988DA4094AF}</externalVersion>
+    </refPO>
+</teamworks>
+

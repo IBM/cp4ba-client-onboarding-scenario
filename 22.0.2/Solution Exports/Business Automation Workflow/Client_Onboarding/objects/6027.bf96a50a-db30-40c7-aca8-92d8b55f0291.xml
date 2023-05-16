@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <refPO id="6027.bf96a50a-db30-40c7-aca8-92d8b55f0291" name="Solution Workflow Collection">
+        <lastModified>1683651373450</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <refId>6027.bf96a50a-db30-40c7-aca8-92d8b55f0291</refId>
+        <description isNull="true" />
+        <guid>8d2777d4-cc2c-4a3b-b8d1-b86a33ea6596</guid>
+        <versionId>86a119d5-025d-4aa7-a914-3c59dd210b20</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651364604</createdOn>
+        <type>1</type>
+        <externalId>{6075A778-0100-C555-B701-942F4673B20A}</externalId>
+        <externalVersion>{6075A778-0100-CBAC-9357-DAE53B27ACFE}</externalVersion>
+    </refPO>
+</teamworks>
+

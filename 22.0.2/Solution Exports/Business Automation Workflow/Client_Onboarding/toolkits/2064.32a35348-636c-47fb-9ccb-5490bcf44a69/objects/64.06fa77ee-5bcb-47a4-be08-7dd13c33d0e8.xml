@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <coachView id="64.06fa77ee-5bcb-47a4-be08-7dd13c33d0e8" name="Dotted Line">
+        <lastModified>1619474028876</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <coachViewId>64.06fa77ee-5bcb-47a4-be08-7dd13c33d0e8</coachViewId>
+        <isTemplate>false</isTemplate>
+        <layout>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ns2:layout xmlns:ns2="http://www.ibm.com/bpm/CoachDesignerNG" xmlns:ns3="http://www.ibm.com/bpm/coachview"&gt;&lt;ns2:layoutItem xsi:type="ns2:ViewRef" version="8550" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;ns2:id&gt;c798c29c-a981-40f3-81fd-80bc323da909&lt;/ns2:id&gt;&lt;ns2:layoutItemId&gt;Horizontal_Layout1&lt;/ns2:layoutItemId&gt;&lt;ns2:configData&gt;&lt;ns2:id&gt;3ec42a81-8874-46bf-87b3-8ab05d1cecd3&lt;/ns2:id&gt;&lt;ns2:optionName&gt;@label&lt;/ns2:optionName&gt;&lt;ns2:value&gt;Horizontal layout&lt;/ns2:value&gt;&lt;/ns2:configData&gt;&lt;ns2:configData&gt;&lt;ns2:id&gt;7c501507-b5fd-41eb-88e8-9f0e0ec0e9a5&lt;/ns2:id&gt;&lt;ns2:optionName&gt;@helpText&lt;/ns2:optionName&gt;&lt;ns2:value&gt;&lt;/ns2:value&gt;&lt;/ns2:configData&gt;&lt;ns2:configData&gt;&lt;ns2:id&gt;ce880cd2-850e-415f-81c4-a291ac0f1024&lt;/ns2:id&gt;&lt;ns2:optionName&gt;@labelVisibility&lt;/ns2:optionName&gt;&lt;ns2:value&gt;SHOW&lt;/ns2:value&gt;&lt;/ns2:configData&gt;&lt;ns2:configData&gt;&lt;ns2:id&gt;1cb34bad-ee01-45c9-8ab0-ffb52849801e&lt;/ns2:id&gt;&lt;ns2:optionName&gt;@className&lt;/ns2:optionName&gt;&lt;ns2:value&gt;lightLine&lt;/ns2:value&gt;&lt;/ns2:configData&gt;&lt;ns2:viewUUID&gt;64.44f463cc-615b-43d0-834f-c398a82e0363&lt;/ns2:viewUUID&gt;&lt;/ns2:layoutItem&gt;&lt;/ns2:layout&gt;</layout>
+        <paletteIcon isNull="true" />
+        <previewImage isNull="true" />
+        <hasLabel>false</hasLabel>
+        <labelPosition>0</labelPosition>
+        <nineSliceX1Coord>0</nineSliceX1Coord>
+        <nineSliceX2Coord>0</nineSliceX2Coord>
+        <nineSliceY1Coord>0</nineSliceY1Coord>
+        <nineSliceY2Coord>0</nineSliceY2Coord>
+        <emitBoundary>false</emitBoundary>
+        <isPrototypeFunc>false</isPrototypeFunc>
+        <enableDevMode>false</enableDevMode>
+        <isMobileReady>false</isMobileReady>
+        <loadJsFunction isNull="true" />
+        <unloadJsFunction isNull="true" />
+        <viewJsFunction isNull="true" />
+        <changeJsFunction isNull="true" />
+        <collaborationJsFunction isNull="true" />
+        <description></description>
+        <validateJsFunction isNull="true" />
+        <previewAdvHtml isNull="true" />
+        <previewAdvJs isNull="true" />
+        <useUrlBinding>false</useUrlBinding>
+        <guid>guid:51a0e6b377b24437:793aa690:178a35a4e9c:-7fa9</guid>
+        <versionId>9835d9a8-5e97-4c40-b959-7a92b8aae5b7</versionId>
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <inlineScript name="Inline CSS">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <coachViewInlineScriptId>68.f67e8e9b-e057-43a5-b4e0-18fc90e4cfe3</coachViewInlineScriptId>
+            <coachViewId>64.06fa77ee-5bcb-47a4-be08-7dd13c33d0e8</coachViewId>
+            <scriptType>CSS</scriptType>
+            <scriptBlock>.lightLine {
+	border-bottom: #bbb 1px dashed;
+	padding-bottom: 7px;
+}</scriptBlock>
+            <seq>0</seq>
+            <description></description>
+            <guid>3f029184-9878-477d-9180-6c8f561bd960</guid>
+            <versionId>fd8e8bb7-9ba8-4007-8682-c2986f6bbd59</versionId>
+        </inlineScript>
+    </coachView>
+</teamworks>
+

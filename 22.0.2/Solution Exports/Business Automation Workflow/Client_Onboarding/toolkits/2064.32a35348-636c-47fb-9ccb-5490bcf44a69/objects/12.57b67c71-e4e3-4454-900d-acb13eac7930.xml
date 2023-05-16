@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.57b67c71-e4e3-4454-900d-acb13eac7930" name="ItmDef_1049606695_57b67c71_e4e3_4454_900d_acb13eac7930">
+        <lastModified>1618536855948</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.57b67c71-e4e3-4454-900d-acb13eac7930</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>false</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType>3</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.57b67c71-e4e3-4454-900d-acb13eac7930</externalId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd9"&gt;
+  &lt;artifactReference id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd8"&gt;
+    &lt;refId&gt;/6023.785ae71f-385b-4047-8dc5-3c0a28671ab3&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd7"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd6"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd","complexType":[{"annotation":{"documentation":[{}],"appinfo":[{"shared":[false],"advancedProperties":[{"namespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd","typeName":"StartRPABotResponse"}],"shadow":[false]}]},"sequence":{"element":[{"annotation":{"documentation":[{}],"appinfo":[{"propertyName":["StartRPABot_200"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd","_minOccurs":0,"typeName":"BotOutput","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":1}]}]},"name":"StartRPABot_200","type":"{http:\/\/COU}BrokenReference","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f"}}]},"name":"ItmDef_1049606695_57b67c71_e4e3_4454_900d_acb13eac7930"}],"id":"_12.57b67c71-e4e3-4454-900d-acb13eac7930"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7ff8</guid>
+        <versionId>12d40f4b-e41a-4604-a11b-f0817f1db5fe</versionId>
+        <definition>
+            <property>
+                <name>StartRPABot_200</name>
+                <description isNull="true" />
+                <classRef>/12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>BotOutput</typeName>
+                    <typeNamespace>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd</typeNamespace>
+                    <minOccurs>0</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>1</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name>StartRPABotResponse</name>
+                <namespace>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd</namespace>
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

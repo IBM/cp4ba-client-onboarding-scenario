@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.11c2d3be-69c4-4877-b62f-a8cd1a062d08" name="User ID">
+        <lastModified>1617721697948</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.11c2d3be-69c4-4877-b62f-a8cd1a062d08</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_UserID</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{AB70F7CD-55C4-434F-A576-B304FA435EBD}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>ID of the user to assign tasks to</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fcc</guid>
+        <versionId>2c25d2c5-094e-4d58-a18b-eff7356a5d02</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_UserID">
+                            <restriction base="String">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.4d4e4364-822b-4c00-87cc-794a8645cc90" name="Follow Up with Client">
+        <lastModified>1645573120529</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.4d4e4364-822b-4c00-87cc-794a8645cc90</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_FollowUpwithClient</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{0ACD4A80-9E50-489C-AAC7-C4EA5544523C}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Follow up with the client after the onboarding request has been reviewed</description>
+        <guid>guid:2373385bc47f66de:-396ffd6f:17f00e0f79c:-6d10</guid>
+        <versionId>469896c9-c7be-45d1-9745-f14968a915d5</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>Activity</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_FollowUpwithClient">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

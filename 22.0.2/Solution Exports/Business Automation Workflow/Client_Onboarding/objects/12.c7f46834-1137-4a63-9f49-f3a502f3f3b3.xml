@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.c7f46834-1137-4a63-9f49-f3a502f3f3b3" name="Annual Revenue">
+        <lastModified>1617720883965</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.c7f46834-1137-4a63-9f49-f3a502f3f3b3</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_AnnualRevenue</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{4C97F616-A638-444D-A38B-79041F6B4865}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Client's annual revenue</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fe0</guid>
+        <versionId>6c9c4342-9073-428a-a111-2a6437447830</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_AnnualRevenue">
+                            <restriction base="Integer" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

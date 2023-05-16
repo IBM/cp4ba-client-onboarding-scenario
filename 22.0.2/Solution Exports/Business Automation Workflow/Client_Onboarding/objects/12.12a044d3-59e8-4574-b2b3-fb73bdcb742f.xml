@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.12a044d3-59e8-4574-b2b3-fb73bdcb742f" name="Account Number">
+        <lastModified>1644610408513</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.12a044d3-59e8-4574-b2b3-fb73bdcb742f</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_AccountNumber</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{01A22DB8-88EC-4076-BB9D-C7DBC9AB609D}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Client's banking account number</description>
+        <guid>guid:207d6ea0639ca8b5:-43694325:17ee69075b7:-7d1d</guid>
+        <versionId>6ec5bacc-412d-47d7-bb65-1563d8cbf565</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_AccountNumber">
+                            <restriction base="String">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

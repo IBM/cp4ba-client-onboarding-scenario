@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.e447b34b-a97d-462b-951c-b2932eb16589" name="DocumentStatus">
+        <lastModified>1619484723439</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.e447b34b-a97d-462b-951c-b2932eb16589</classId>
+        <type>0</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>false</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.e447b34b-a97d-462b-951c-b2932eb16589</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData>{"simpleType":[{"annotation":{"documentation":[{}],"appinfo":[{"advancedProperties":[{}]}]},"name":"DocumentStatus","restriction":{"annotation":{"appinfo":[{"simpleBaseType":["Selection"]}]},"enumeration":[{"annotation":{"appinfo":[{"displayName":["Pending"]}]},"value":"Pending"},{"annotation":{"appinfo":[{"displayName":["Verified"]}]},"value":"Verified"},{"annotation":{"appinfo":[{"displayName":["Not Required"]}]},"value":"Not Required"}],"base":"{http:\/\/www.w3.org\/2001\/XMLSchema}string"}}],"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/COU","id":"_12.e447b34b-a97d-462b-951c-b2932eb16589"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:885b6bc0f0ff4706:-484802b:1791033077a:-7ff6</guid>
+        <versionId>db05b831-00e4-4657-90c7-7e730b5e1555</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="DocumentStatus">
+                            <restriction base="Selection">
+                                <option value="Pending" display="Pending" />
+                                <option value="Verified" display="Verified" />
+                                <option value="Not Required" display="Not Required" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name isNull="true" />
+                <namespace isNull="true" />
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

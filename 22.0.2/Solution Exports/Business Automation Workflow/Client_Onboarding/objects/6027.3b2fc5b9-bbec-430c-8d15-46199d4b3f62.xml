@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <refPO id="6027.3b2fc5b9-bbec-430c-8d15-46199d4b3f62" name="Resources.js">
+        <lastModified>1683706075489</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <refId>6027.3b2fc5b9-bbec-430c-8d15-46199d4b3f62</refId>
+        <description isNull="true" />
+        <guid>eecbf02a-f857-4110-b125-7e59d7735907</guid>
+        <versionId>36f1aa4e-d31c-4208-806a-4555f7f91ce6</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651364604</createdOn>
+        <type>1</type>
+        <externalId>{E0AEA878-0000-C0D9-9BE8-CDC8060C6A9C}</externalId>
+        <externalVersion>{88017280-0001-C979-9941-A141D7031C4C}</externalVersion>
+    </refPO>
+</teamworks>
+

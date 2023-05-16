@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <environmentVariableSet id="62.5c23d935-51d7-4a22-93d4-30e310b1b829" name="$$AS$REST$BINDING$1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925">
+        <lastModified>1663710976118</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <envVarSetId>62.5c23d935-51d7-4a22-93d4-30e310b1b829</envVarSetId>
+        <description isNull="true" />
+        <guid>guid:5c23d935-51d7-4a22-93d4-30e310b1b829</guid>
+        <versionId>78c254b1-c61c-49bc-b18f-a7b38a00b9b2</versionId>
+        <envVar name="AS_REST_BINDING FOR 1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <envVarId>2094.ee6c1430-35fa-419f-8a00-4501bfb5092a</envVarId>
+            <envVarSetId>62.5c23d935-51d7-4a22-93d4-30e310b1b829</envVarSetId>
+            <envVarTypeId>2106.16</envVarTypeId>
+            <defaultValue>{"consumeDefaultVersion":true}</defaultValue>
+            <description isNull="true" />
+            <guid>guid:ee6c1430-35fa-419f-8a00-4501bfb5092a</guid>
+            <versionId>00bd4334-a539-4058-92ad-ba2f91fc5ec5</versionId>
+        </envVar>
+    </environmentVariableSet>
+</teamworks>
+

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:package buildId="BPM8600-20230412-010156" buildVersion="8.6.4" buildDescription="IBM Business Process Manager V8.6.4.22020 - 20230412_0348 - BPM8600-20230412-010156" fixPack="22020" containsECM="false" containsBPMN2="false" xmlns:p="http://lombardisoftware.com/schema/teamworks/7.0.0/package.xsd">
+    <target>
+        <project id="2066.07806c00-d241-4232-8d80-cb23b748caf5" name="Client Onboarding" description="&lt;HTML>&lt;p>&lt;/p>&lt;p> This project implements the workflow part of the Client Onboarding End-to-End demo.&lt;/p>&lt;p>&lt;/p>&lt;/HTML>" shortName="CO" isToolkit="false" isHidden="false" isSystem="false" solutionID="{5075A778-0000-CB1B-B948-AB70369EAC12}" solutionServerName="" solutionPrefix="CO" type="solution" isTemplate="false" isIconSet="false"/>
+        <branch id="2063.0e4ddf32-559b-4d31-b7a2-2f7cce04c06b" name="Main" acronym="Main" description=""/>
+        <snapshot id="2064.3c6d2535-2d84-4e10-bac6-02618c5a75e0" name="1.0.3" acronym="1.0.3" originalCreationDate="2023-05-10T09:33:14.928Z" description="&lt;p>Added capability to send to email server that does not require authentication&lt;br />&lt;/p>"/>
+    </target>
+    <dependencies>
+        <dependency rank="9" isManaged="false" id="2069.0c5417fa-c614-4b63-a892-bcd1d6fc5059">
+            <project id="2066.c185d205-fc1b-448e-9709-d25dcf82dc8e" name="IBM RPA Toolkit" shortName="IBMRPAT" isToolkit="true" isHidden="false" isSystem="false"/>
+            <branch id="2063.bda51b02-426d-441c-a9db-226a2c795683" name="Main"/>
+            <snapshot id="2064.23cf96ca-1bd8-4a50-b7cd-5edb0bad92c4" name="1.5" originalCreationDate="2022-06-07T04:50:47.242Z"/>
+        </dependency>
+        <dependency rank="1" isManaged="false" id="2069.15fcce25-c9bc-40fb-b77c-786b838c9b99">
+            <project id="2066.ec5973da-aebe-40f6-aa02-a77962288f52" name="UI Toolkit" shortName="SYSBPMUI" isToolkit="true" isHidden="false" isSystem="true"/>
+            <branch id="2063.83ee2bb2-72b4-4a4d-b8ae-37ecd983c05e" name="Main"/>
+            <snapshot id="2064.304ac881-16c3-47d2-97d5-6e4c4a893177" name="8.6.0.0" originalCreationDate="2017-05-24T23:23:53.574Z"/>
+        </dependency>
+        <dependency rank="7" isManaged="false" id="2069.226c9cab-aaa9-4268-b8df-564b245fc05c">
+            <project id="2066.8304f9f0-d5b4-4528-a8f3-fc335979a213" name="ADP Utils" shortName="ADPU" isToolkit="true" isHidden="false" isSystem="false"/>
+            <branch id="2063.536c5c77-bdd9-4eac-b1b5-9df04f166d87" name="Main"/>
+            <snapshot id="2064.d6d924e5-4adb-4b8f-af69-95f3d48701ea" name="v1.6" originalCreationDate="2022-08-25T17:16:50.622Z"/>
+        </dependency>
+        <dependency rank="4" isManaged="false" id="2069.3198dd5f-98ea-430d-bec3-8cd9477ec3ea">
+            <project id="2066.863af7e5-be22-40c8-8022-671049619a17" name="Client Onboarding Toolkit" shortName="COTK" isToolkit="true" isHidden="false" isSystem="false"/>
+            <branch id="2063.ab52dc73-d09c-4a1c-b20a-1e552e554708" name="Main"/>
+            <snapshot id="2064.32a35348-636c-47fb-9ccb-5490bcf44a69" name="v2.5" originalCreationDate="2023-05-10T09:30:56.919Z"/>
+        </dependency>
+        <dependency rank="0" isManaged="false" id="2069.5c817616-ef49-41fa-89ce-41f8666ef643">
+            <project id="2066.1b351583-e5cb-43b7-baee-340a63130ea7" name="System Data" shortName="TWSYS" isToolkit="true" isHidden="false" isSystem="true"/>
+            <branch id="2063.0798815e-0346-4ef4-8946-ab4301c9f340" name="Main"/>
+            <snapshot id="2064.1080ded6-d153-4654-947c-2d16fce170db" name="8.6.0.0_TC" originalCreationDate="2015-08-25T00:00:00.000Z"/>
+        </dependency>
+        <dependency rank="5" isManaged="false" id="2069.77d43eca-e13a-40dd-8c1e-c5df27cc24a3">
+            <project id="2066.4b3882d9-e886-4f08-9d0c-078ebda719b9" name="Content Management" shortName="SYSCM" isToolkit="true" isHidden="false" isSystem="true"/>
+            <branch id="2063.4961c615-3524-4196-90da-93c49d237009" name="Main"/>
+            <snapshot id="2064.5d120392-1f92-441f-89d6-1f6da7a6e7db" name="8.6.0.0_TC" originalCreationDate="2015-10-29T14:03:19.695Z"/>
+        </dependency>
+        <dependency rank="8" isManaged="false" id="2069.d6befd20-42fc-4d68-9760-d9c42bd5f045">
+            <project id="2066.b94c52be-2f6c-43d3-8044-6db3f4dcd9fa" name="Case Toolkit" shortName="SYSCT" isToolkit="true" isHidden="false" isSystem="true"/>
+            <branch id="2063.0a4882fa-704b-44c5-a91d-7740143fac46" name="Main"/>
+            <snapshot id="2064.cd71239a-9a5e-4124-ad7f-40d6bbf19ab0" name="8.6.0.0" originalCreationDate="2020-07-29T07:35:11.725Z"/>
+        </dependency>
+    </dependencies>
+    <objects>
+        <object id="1.001b03f9-8ca4-4874-8267-92d763809927" versionId="4ae05ba0-cdd1-4d8d-bbef-ea4cce0ab88f" name="Complete Current Stage" type="process"/>
+        <object id="1.070e9ec9-8a62-4d2e-9aba-235dc9432129" versionId="aef77556-20d8-44a4-a8c3-3bca27186e3d" name="Notification" type="process"/>
+        <object id="1.149bdc92-8b43-4b88-8554-8fa84ab76e86" versionId="ed26ce34-1ae4-4103-a3aa-154118a0e3aa" name="Review Client Documents" type="process"/>
+        <object id="1.19042740-f4c8-46c2-ad72-4677e9fba7ba" versionId="58554b6e-2398-498b-b26e-d1c9718936e5" name="1.19042740-f4c8-46c2-ad72-4677e9fba7ba" type="process"/>
+        <object id="1.28196a04-22f3-4ffe-88c3-9fa4b91b0486" versionId="08ec8eda-52ce-4b92-b641-aee488226d26" name="Handle RPA Error" type="process"/>
+        <object id="1.3e702594-db96-4f35-8d92-dea996c1dde4" versionId="0dd7dd7f-d611-4aee-abec-35e953bcd9a5" name="Deployment Service Flow" type="process"/>
+        <object id="1.4d850940-bf73-4993-802e-ab7669724e23" versionId="ef0551ec-22b9-4333-9676-409685a136f7" name="Verify RPA Exception" type="process"/>
+        <object id="1.6944cb70-4639-48af-b287-4539c89fac02" versionId="1dc7d6b7-0b6c-4560-a5e4-190828dd66de" name="1.6944cb70-4639-48af-b287-4539c89fac02" type="process"/>
+        <object id="1.69653659-ff51-41cb-bd44-a77d40e14636" versionId="bed30d99-3374-40f4-9eb5-6a4e5947551b" name="Review Client Request" type="process"/>
+        <object id="1.6a66d1e0-6c22-45c6-bb94-3eafee112091" versionId="87657395-165d-4278-adb0-e59dfc8742d1" name="Create New Client Onboarding Request" type="process"/>
+        <object id="1.7349a0b3-1f18-420d-aa07-decd0b1d6b32" versionId="3f4bf8af-8a0c-4acb-9ba1-9fccee1416ac" name="Case Details UI" type="process"/>
+        <object id="1.7f949dab-2849-4a5c-b818-744b0a5f85af" versionId="2049f003-807b-4a13-84fa-38a2521bee1f" name="1.7f949dab-2849-4a5c-b818-744b0a5f85af" type="process"/>
+        <object id="1.e15488c7-1a28-4acb-a74f-009236f4a89b" versionId="e771544a-2576-40c1-99cc-b2a47d681c29" name="1.e15488c7-1a28-4acb-a74f-009236f4a89b" type="process"/>
+        <object id="12.0658a71c-5ec9-4dd7-8b5c-5665244b4f61" versionId="f28c04d0-433a-4409-a4d9-99d2168ce8f6" name="State" type="twClass"/>
+        <object id="12.06caf95b-331c-465f-b3e1-2e144fae54bc" versionId="4e80620a-fabd-4629-9d32-715bf857026d" name="Document Name" type="twClass"/>
+        <object id="12.0805c95d-a933-4773-905f-146974cc585a" versionId="7d54eaf6-7044-40d0-b7fa-178ddd1b9a77" name="Phone Number" type="twClass"/>
+        <object id="12.09688ead-d0d8-4f12-bfe3-4640c9506ecf" versionId="51c8e0e7-1813-4667-94d5-48f7288755e2" name="First Name" type="twClass"/>
+        <object id="12.099110f3-624e-4f5b-8012-8b31142a234f" versionId="df8d9545-153e-4c45-bf11-4e74e59f7de8" name="Industry" type="twClass"/>
+        <object id="12.0e3a6d6a-ce84-49ed-be0d-125a84bbcba0" versionId="4b330dcd-7120-404f-bf74-120a05157b43" name="Services Fee" type="twClass"/>
+        <object id="12.11c2d3be-69c4-4877-b62f-a8cd1a062d08" versionId="2c25d2c5-094e-4d58-a18b-eff7356a5d02" name="User ID" type="twClass"/>
+        <object id="12.12a044d3-59e8-4574-b2b3-fb73bdcb742f" versionId="6ec5bacc-412d-47d7-bb65-1563d8cbf565" name="Account Number" type="twClass"/>
+        <object id="12.1b121314-5b15-41db-9eb6-2de76a4914c5" versionId="d0734884-9114-4e01-8592-8253aa788c15" name="Zip Code" type="twClass"/>
+        <object id="12.1c1c47b8-55bb-4129-ba8f-e8f402fc2ff8" versionId="b790883b-958b-46fd-b7d0-6177c29b7acf" name="High Risk" type="twClass"/>
+        <object id="12.1e01a3aa-e960-4d7b-a3ef-f8de6390d968" versionId="ba6e27d3-ca17-42aa-be34-1cc5a1f0f543" name="Industry" type="twClass"/>
+        <object id="12.2075662d-1d8b-4a39-b8bc-9ee2948723a4" versionId="cc9dc60c-04df-41e1-8997-afb707e916fa" name="Client Onboarding Request" type="twClass"/>
+        <object id="12.2e043bf9-a09d-4c34-8de1-12afe5ad9465" versionId="69718c18-95f5-43ff-9b23-7c1a961f792e" name="Defaulted Payment" type="twClass"/>
+        <object id="12.367ed468-c5e4-47e1-9458-3f5bc63d0202" versionId="6d2a79bf-3b7e-46fe-8f5b-ae73b90b3e4f" name="Client Name" type="twClass"/>
+        <object id="12.3b780b21-9bba-4e3e-95fc-192dd8b65dc9" versionId="ffd36a5c-32c0-4cde-a577-f9492ebdc8b4" name="Reference ID" type="twClass"/>
+        <object id="12.463c40d1-7f6e-4fe8-95a2-06093ad3808a" versionId="6a02e1b8-3e6e-4756-b25b-1b11dae600af" name="Review Documents" type="twClass"/>
+        <object id="12.4cfb139b-1b44-4967-97c9-3186f8ca33ae" versionId="dcfb373d-aab4-45e7-89c7-3422ffd5653d" name="Approval Status" type="twClass"/>
+        <object id="12.4d4e4364-822b-4c00-87cc-794a8645cc90" versionId="469896c9-c7be-45d1-9745-f14968a915d5" name="Follow Up with Client" type="twClass"/>
+        <object id="12.4e678c37-9047-4f55-9889-97f1592b486d" versionId="07458027-50f2-4b1a-8840-65c6e8e58b95" name="Service Address" type="twClass"/>
+        <object id="12.4eb0bcc5-16aa-42aa-97cf-b7dc537d8d8a" versionId="18cd73ae-b4d5-47fb-8ce7-848e82a29d50" name="Company Age" type="twClass"/>
+        <object id="12.54bc5dbe-e927-4a3a-af8a-2e4abbb8e01d" versionId="20b34da1-693d-4346-a77f-36a3699b106f" name="Supporting Documents" type="twClass"/>
+        <object id="12.554a5e64-86fc-49c7-b931-f17d9b4b1fc9" versionId="5dd7a389-d4f1-42c7-b7fb-8a2d56924aec" name="Country" type="twClass"/>
+        <object id="12.590067ee-12d2-4f4b-851a-c1dd38a14228" versionId="bc17a71a-afb7-47e4-951a-69791287b42f" name="Number of Employees" type="twClass"/>
+        <object id="12.69f3fcf9-27cf-4931-8640-8f2e9768d657" versionId="2be15893-8381-4f37-a13b-d5159a35e7bf" name="Services Requested" type="twClass"/>
+        <object id="12.6c6da0d8-2513-42e6-a657-fced1b572c8c" versionId="b07a2ecc-3d0f-40a1-a048-95c55d7f8300" name="Document Status" type="twClass"/>
+        <object id="12.84ab871f-c6af-41c1-8a79-1442bc58143d" versionId="00732cfc-7b76-4106-9833-2f46dcc1a421" name="Last Name" type="twClass"/>
+        <object id="12.92bb794a-3ae1-44a4-be7d-cf42849a4b5b" versionId="e864d5ae-e6b5-4f80-9452-7cc3078b3752" name="BotInputPayload" type="twClass"/>
+        <object id="12.9ed652d8-63ee-4867-a3fc-9cf785b293e3" versionId="ee5d9636-55af-4d13-89f4-b7af5f3b815a" name="Document Review" type="twClass"/>
+        <object id="12.9eee0e28-bf4b-45ae-9342-6f70f66d27a2" versionId="1c3eb770-4390-40ca-ac7f-7d9ccb448944" name="Reviewed Documents" type="twClass"/>
+        <object id="12.9fe128db-3a5f-4808-b566-47ae80ebd577" versionId="a3f1724d-9781-4637-8ef2-5d22819e8bb3" name="Segment" type="twClass"/>
+        <object id="12.a3e0b0f2-7259-46c0-8e84-bd39a146ba71" versionId="35579010-839d-46b1-bf2c-dbe6c8a3a0a5" name="Update Backend Systems" type="twClass"/>
+        <object id="12.ab6101c0-41c6-498e-8a20-93a618a71cc1" versionId="8e0189a1-1e6a-4448-900a-1aeef2911ec5" name="Segment" type="twClass"/>
+        <object id="12.ac863d25-08dc-497f-814a-bd6f4751b979" versionId="2188a208-f703-420d-8166-da2c90aa15a6" name="Approval Status" type="twClass"/>
+        <object id="12.ad8a10a9-a515-45cd-8ab0-d70296015ac2" versionId="2dbdc128-2f02-457c-bb82-44c68e079b6e" name="Perform Scoreboarding" type="twClass"/>
+        <object id="12.bf9529fd-3a2c-4f1d-911e-fdd471a8cb29" versionId="f68bfccd-c1c3-4b73-8b95-1324f1a0edb1" name="Create New Proposal" type="twClass"/>
+        <object id="12.c42a29a6-2c04-4126-aa69-be2cb2187517" versionId="63473d29-cfb9-4c5d-a6af-e4d2a4b31580" name="Notification" type="twClass"/>
+        <object id="12.c7f46834-1137-4a63-9f49-f3a502f3f3b3" versionId="6c9c4342-9073-428a-a111-2a6437447830" name="Annual Revenue" type="twClass"/>
+        <object id="12.c87e33d9-8527-40b7-b34e-606b22d51108" versionId="9f0d299f-c1fe-4e83-b6ef-2fd48629ebfc" name="Risk Confidence" type="twClass"/>
+        <object id="12.cc35d121-d0b0-4fcf-aa68-9f5440b6bc9a" versionId="c23f1e25-a304-42a7-8cb5-69397aafa68a" name="Selected Document IDs" type="twClass"/>
+        <object id="12.cf6213d3-9277-43f3-8b0f-0a504724cf90" versionId="9d961c47-ca2e-492e-a95d-52c4a5fb2a9c" name="Street" type="twClass"/>
+        <object id="12.d42569d6-5cc6-4bba-ae57-7d9e407379d3" versionId="92547598-b61c-460e-a717-691dbf3fa790" name="Email" type="twClass"/>
+        <object id="12.f1f94cbe-c36a-45e0-bdd7-c54a457aabc7" versionId="b7477cd2-2936-4062-933e-a023a343c6c8" name="Document Status" type="twClass"/>
+        <object id="12.f8a02fe7-79f9-4bb3-b3f9-495f0cd9db79" versionId="d32201ca-795b-4de0-937d-3819aada6137" name="Unit" type="twClass"/>
+        <object id="12.f8c91682-316c-4f7e-a03c-11f8bbe12373" versionId="7380829a-ce7b-453d-bd9a-965892d1b50f" name="City" type="twClass"/>
+        <object id="14.43c2b7da-1f30-47a7-9671-c254483b1364" versionId="8aaf87e3-6693-41e5-bb5e-7b3887c580df" name="CO" type="trackingGroup"/>
+        <object id="24.626fa01c-75c7-4137-9b1f-0a0e9542c4ee" versionId="4684cff6-8543-4394-8735-4c3801e4b897" name="Client Rep" type="participant"/>
+        <object id="24.f4a6d385-6588-4b52-9322-ce14da7b2f2c" versionId="76b67ab4-e6e4-4d34-bd1d-4fa9796b76cf" name="Account Manager" type="participant"/>
+        <object id="25.06128cf3-4d4b-4ac0-bd33-a83c0eee9238" versionId="4a3db74e-8694-4b77-a7ac-7342318dc8f5" name="Review Documents" type="bpd"/>
+        <object id="25.204d485d-8233-443e-80fe-f8b5743410ae" versionId="a605eda2-6195-46c4-82c0-7c0b08b44629" name="Follow Up with Client" type="bpd"/>
+        <object id="25.2083ab3a-865a-4b8c-835a-10c8493de35a" versionId="62601dbb-f54a-449c-b8f3-c12fff74c3e7" name="Update Backend Systems" type="bpd"/>
+        <object id="25.3b58ff99-5118-4584-8ece-00994a91ce7a" versionId="e1d9d2dc-a8fe-4094-a6bc-ccd31b6ed40b" name="Create New Proposal" type="bpd"/>
+        <object id="25.6deebbed-c477-4ce8-8f9c-9dac5e4ed1cb" versionId="2cdc4af9-5920-4ffc-a5d5-e6422bce76fc" name="Review Documents_Validate Utility Bill" type="bpd"/>
+        <object id="25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571" versionId="39c6035a-962e-4eca-a170-c3ad9b5d1f12" name="Perform Scoreboarding" type="bpd"/>
+        <object id="25.776f89c6-6b5c-4e02-93ff-4b87fcabb77e" versionId="1e434de3-dc12-4698-bdd4-3ab1e78e91c8" name="New Client Onboarding Request" type="bpd"/>
+        <object id="25.e5b9fe21-f830-4ef9-9cae-55db4881c6a6" versionId="a3d7600d-219b-46fc-b47b-33474cbdf5e6" name="Notification" type="bpd"/>
+        <object id="61.1c87c762-9fa3-4ae2-8c07-52e32607e645" versionId="39f756df-20c0-430f-a6a0-9921b13603df" name="993e03e9-2574-40fc-807c-65b06be378fd.zip" type="managedAsset"/>
+        <object id="62.c92498c8-2d9c-4ae7-bee6-9b17f1e08566" versionId="ac53d00f-6121-4cbc-bd79-6547777e57b3" name="Environment Variables" type="environmentVariableSet"/>
+        <object id="63.714dfc45-3f34-4c48-a761-3a6b4560dff8" versionId="c16787fa-0bb9-4836-b4e5-f2c1a3b9068b" name="Process App Settings" type="projectDefaults"/>
+        <object id="64.3667926e-609e-4f95-a20b-31441380de69" versionId="2ff1b606-03d6-4d7d-bfe3-5d0a21afb757" name="Custom Case Properties" type="coachView"/>
+        <object id="64.4680262c-14b7-4d22-8481-aeb2698edc2e" versionId="59dead62-eb14-4e4c-b1c9-cd220d99c500" name="Case Details Template" type="coachView"/>
+        <object id="64.c36f3ba5-d034-4f7e-835f-17bacff702fb" versionId="a03749ac-96bb-4e6e-bba6-ab289c7ec823" name="Task Details Template" type="coachView"/>
+        <object id="2051.288f8189-7132-4f78-a904-7a6f2f5b99f2" versionId="248a8eba-c74a-4d2e-a710-01e6f46ef135" name="Client_Onboarding_Workflows" type="restService"/>
+        <object id="2131.e4992c01-9e9e-4a82-908a-2fde013578df" versionId="63c0982d-7cf5-4d26-abc9-395368b5c466" name="Searchable Case Properties" type="searchableCaseProperties"/>
+        <object id="6027.109dcd91-cab0-4f09-b106-e42a8f3946a0" versionId="162865a2-0a9b-47f6-a9e9-7bdbec7b042c" name="CmAcmCASESPLIT_DEFAULT_ADAPTER" type="refPO"/>
+        <object id="6027.10b878cc-f3b5-4d80-98aa-19b9aedb4a15" versionId="3d4bc1ed-37f0-4120-8ff6-543e5f2c45e9" name="CmAcmSTEP_ATTACHMENT_PAGE" type="refPO"/>
+        <object id="6027.33cf7379-9851-4a7d-b7f0-ee20a2e9af65" versionId="d6a2a6df-32c0-4e54-b85b-c00ccb4fe493" name="Client Onboarding Request Workflow Definition" type="refPO"/>
+        <object id="6027.39ef1cbb-be87-4525-b2b8-27b149625ae4" versionId="d385713b-ad7d-482b-acdc-dd90d31f8dc3" name="CmAcmCASE_NEW_DEFAULT_ADAPTER" type="refPO"/>
+        <object id="6027.3b2fc5b9-bbec-430c-8d15-46199d4b3f62" versionId="36f1aa4e-d31c-4208-806a-4555f7f91ce6" name="Resources.js" type="refPO"/>
+        <object id="6027.3d1b036e-4031-4e74-85e2-5ad6cf34403c" versionId="583b8203-f594-4935-aaec-d1cfb169d3fd" name="CmAcmWORK_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.4de20351-7f23-4605-aace-dce2579227b9" versionId="f29a8616-92fd-4efc-8eaf-e2159af55403" name="Solution Definition" type="refPO"/>
+        <object id="6027.5604854d-6ed0-452f-b57c-e85c5f8762ee" versionId="f54924d7-583b-4a55-a8c7-5454592cb3e5" name="CmAcmPROCESS_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.73e0c6ba-63ff-40b7-8194-dc0a17ad314d" versionId="dce698ea-e95e-4255-ba0c-b1525185d7c6" name="CmAcmCASE_PAGE" type="refPO"/>
+        <object id="6027.81504b3d-3c0e-4b4a-bd6b-f04fa4404b94" versionId="dfcca441-27d3-4683-98e6-e1449d5d9c3d" name="CmAcmCASE_NEW_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.8556aa24-1c20-43f2-9ee6-fdcf90020832" versionId="e535bdf3-8655-4a2d-bc7e-56d5f5916862" name="CmAcmCASEDETAILS_DEFAULT_ADAPTER" type="refPO"/>
+        <object id="6027.8a57727f-0a56-40b3-ba71-47173d1fa472" versionId="c86c4c3a-1405-4af9-b414-680e77f7ef22" name="CmAcmSTEP_PAGE" type="refPO"/>
+        <object id="6027.90eedf2c-fb04-4b49-9a54-c410a83a0d74" versionId="9428b9b9-fd3c-4036-831e-f40235003217" name="CmAcmSTEP_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.997e5bc7-43e1-4311-ac40-d00af09d7949" versionId="7f5c634b-e2ab-4b64-a33b-3b6f9eed1068" name="CmAcmCASE_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.a1ebdba9-5be7-4c24-bf7d-35edac326b44" versionId="078ed113-f148-4188-8d2f-65493207b9a7" name="CmAcmCASEDETAILS_DEFAULT_ADAPTER_v2" type="refPO"/>
+        <object id="6027.a3744883-ef6a-40d6-95d0-496c3a0a7601" versionId="d81d4486-4c83-46c5-b701-0bd89abe6683" name="CmAcmPROCESS_INSTANCE_DEFAULT_ADAPTER" type="refPO"/>
+        <object id="6027.aeed004f-2277-4230-b0b6-0fd03fa88300" versionId="8d63d2b6-bad8-449c-b991-fe74805be28a" name="CmAcmCASES_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.bf96a50a-db30-40c7-aca8-92d8b55f0291" versionId="86a119d5-025d-4aa7-a914-3c59dd210b20" name="Solution Workflow Collection" type="refPO"/>
+        <object id="6027.c467a9af-d8cf-4e9e-a920-1ad4b32011fd" versionId="43e5e1c8-b8f9-47bb-8561-c8dfec04300d" name="CmAcmSTEP_LAUNCH_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.c6f43b97-2bf2-4216-b5ed-a85399ad1afe" versionId="7f031e99-38ec-4924-82dc-5d18f82cb89f" name="CmAcmCASE_SPLIT_DEFAULT_PAGE" type="refPO"/>
+        <object id="6027.dc07d6ca-2b5c-48ed-826d-82a3b9e78bae" versionId="b9ad87da-bf06-478e-9273-8193121ffb27" name="CmAcmCASE_NEW_PAGE" type="refPO"/>
+        <object id="6027.de55dc99-c721-4c5f-bce4-1e6467a44759" versionId="4d3fcd61-b85f-487b-87c4-359ed94fcd2b" name="CmAcmSTEP_LAUNCH_PAGE" type="refPO"/>
+        <object id="6027.e4e5a3a4-e35c-4c44-83d7-103f64630223" versionId="9fc662a9-6d48-464e-8a5b-1f8e31e8b066" name="PE Configuration" type="refPO"/>
+        <object id="6027.f8abcb49-9f91-444f-91c3-a38bb15fd5f2" versionId="01949159-187b-4cf7-8477-73bdb1720909" name="CmAcmSTEP_DYNAMIC_DEFAULT_PAGE" type="refPO"/>
+    </objects>
+    <files>
+        <file path="edb70f93-22a9-4adf-a195-f3c47eca7bfe" id="61.1c87c762-9fa3-4ae2-8c07-52e32607e645"/>
+    </files>
+    <migrationPolicies/>
+</p:package>

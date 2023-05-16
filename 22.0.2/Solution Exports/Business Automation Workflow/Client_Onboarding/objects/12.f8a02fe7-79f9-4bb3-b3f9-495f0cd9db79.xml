@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.f8a02fe7-79f9-4bb3-b3f9-495f0cd9db79" name="Unit">
+        <lastModified>1617720752471</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.f8a02fe7-79f9-4bb3-b3f9-495f0cd9db79</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_AddressUnit</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{B9464C6A-B0DC-4A0A-A589-1AE033A20608}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Address - Unit</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fe2</guid>
+        <versionId>d32201ca-795b-4de0-937d-3819aada6137</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_AddressUnit">
+                            <restriction base="String">
+                                <maxLength value="64" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

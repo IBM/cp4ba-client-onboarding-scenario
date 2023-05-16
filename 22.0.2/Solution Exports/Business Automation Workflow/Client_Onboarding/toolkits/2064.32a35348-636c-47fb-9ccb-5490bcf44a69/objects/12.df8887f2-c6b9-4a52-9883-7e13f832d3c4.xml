@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.df8887f2-c6b9-4a52-9883-7e13f832d3c4" name="Visibility">
+        <lastModified>1618245353344</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.df8887f2-c6b9-4a52-9883-7e13f832d3c4</classId>
+        <type>0</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>false</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.df8887f2-c6b9-4a52-9883-7e13f832d3c4</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData>{"simpleType":[{"annotation":{"documentation":[{}],"appinfo":[{"advancedProperties":[{}]}]},"name":"Visibility","restriction":{"annotation":{"appinfo":[{"simpleBaseType":["Selection"]}]},"enumeration":[{"annotation":{"appinfo":[{"displayName":["Same as parent"]}]},"value":"Same as parent"},{"annotation":{"appinfo":[{"displayName":["None"]}]},"value":"None"}],"base":"{http:\/\/www.w3.org\/2001\/XMLSchema}string"}}],"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/CO","id":"_12.1cb3181a-0ff3-465c-ac64-3c64b26f4646"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>65e55019-c46e-4630-80b0-ca572d4019d3</guid>
+        <versionId>1a496a00-4486-473d-8a68-8bd8d256b634</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="Visibility">
+                            <restriction base="Selection">
+                                <option value="Same as parent" display="Same as parent" />
+                                <option value="None" display="None" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name isNull="true" />
+                <namespace isNull="true" />
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <eSArtifact id="6023.1509c4f1-86c3-4cfa-821a-b8ad9122cdf4" name="file:/opt/ibm/wlp/output/defaultServer/temp/tmp_2861458575/ass">
+        <lastModified>1621395062954</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <esArtifactId>6023.1509c4f1-86c3-4cfa-821a-b8ad9122cdf4</esArtifactId>
+        <ESArtifactDataUUID>8195cfbe-f603-414f-816a-669f8e5b783e</ESArtifactDataUUID>
+        <mediaType>application/json</mediaType>
+        <charEncoding isNull="true" />
+        <length>1231</length>
+        <digest>unknown</digest>
+        <externalId>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService</externalId>
+        <description isNull="true" />
+        <guid>9c12dc25-4f01-4928-a94c-8b8f3b97d7d4</guid>
+        <versionId>fd007300-6c8f-47c1-9c62-22ec79507c35</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651360377</createdOn>
+    </eSArtifact>
+</teamworks>
+

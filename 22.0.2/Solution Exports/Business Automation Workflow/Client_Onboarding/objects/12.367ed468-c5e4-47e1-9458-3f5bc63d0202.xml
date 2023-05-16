@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.367ed468-c5e4-47e1-9458-3f5bc63d0202" name="Client Name">
+        <lastModified>1617719723533</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.367ed468-c5e4-47e1-9458-3f5bc63d0202</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_ClientName</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{8170C711-2048-4E69-87D7-722238DD2D3D}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Client's name</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7ff0</guid>
+        <versionId>6d2a79bf-3b7e-46fe-8f5b-ae73b90b3e4f</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="CO_ClientName">
+                            <restriction base="String">
+                                <maxLength value="128" />
+                            </restriction>
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

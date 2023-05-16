@@ -1,0 +1,2127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <process id="1.5daca7c5-056f-4459-afe8-ed30f69c5d3c" name="Submit Client Document">
+        <lastModified>1644714054107</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+        <image isNull="true" />
+        <tabGroup isNull="true" />
+        <startingProcessItemId>2025.5aa225e8-efd8-4915-b087-05a64d142d70</startingProcessItemId>
+        <isRootProcess>false</isRootProcess>
+        <processType>12</processType>
+        <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+        <errorHandlerItemId isNull="true" />
+        <isLoggingVariables>false</isLoggingVariables>
+        <isTransactional>false</isTransactional>
+        <processTimingLevel isNull="true" />
+        <participantRef isNull="true" />
+        <exposedType>0</exposedType>
+        <isTrackingEnabled>true</isTrackingEnabled>
+        <xmlData isNull="true" />
+        <cachingType>false</cachingType>
+        <itemLabel isNull="true" />
+        <cacheLength>0</cacheLength>
+        <mobileReady>false</mobileReady>
+        <sboSyncEnabled>true</sboSyncEnabled>
+        <externalId isNull="true" />
+        <isSecured>true</isSecured>
+        <isAjaxExposed>true</isAjaxExposed>
+        <isInvokedAsynchronously>false</isInvokedAsynchronously>
+        <description isNull="true" />
+        <guid>3e912fe5-dfe1-4edb-aa3c-bcf8aed56d85</guid>
+        <versionId>6544fb86-ec50-40f5-9834-1abfcb56faaf</versionId>
+        <dependencySummary>&lt;dependencySummary id="3e6e2ae1-9662-436a-b1d2-577d9b4ae856" /&gt;</dependencySummary>
+        <jsonData isNull="true" />
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <blobField1 isNull="true" />
+        <processParameter name="fileName">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.a4aded7d-ab17-4bf8-8c6e-0b480e3c59d3</processParameterId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+            <seq>1</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description>Name of the submitted file including the extension</description>
+            <guid>62c89702-df79-4ab9-a655-734b533af50e</guid>
+            <versionId>da126f3d-f69b-4676-b231-0c4312ed6ddf</versionId>
+        </processParameter>
+        <processParameter name="fileContent">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.2be464d2-8cd5-4135-ba0d-19942db22a99</processParameterId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+            <seq>2</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description>Contents of the file encoded in Base64</description>
+            <guid>bb686f99-285f-42b8-a882-b71c5be1e920</guid>
+            <versionId>fe68dff7-53f7-409f-904b-514441d9bd18</versionId>
+        </processParameter>
+        <processParameter name="referenceID">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processParameterId>2055.9cff2954-2d69-4310-811d-1fe49ab30a9c</processParameterId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+            <seq>3</seq>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isLocked>false</isLocked>
+            <description>ReferenceID of the client onboarding request with which the document is associated</description>
+            <guid>06082bc3-bebc-4827-aaff-c7df050b7076</guid>
+            <versionId>c0b3de4a-d3ff-436e-9fb4-560f7a33b44b</versionId>
+        </processParameter>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.5aa225e8-efd8-4915-b087-05a64d142d70</processItemId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <name>Send Message Event</name>
+            <tWComponentName>InvokeUca</tWComponentName>
+            <tWComponentId>3009.1893713b-f805-4b85-b443-fe52f6214dec</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>false</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:207d6ea0639ca8b5:-43694325:17ee69075b7:-5083</guid>
+            <versionId>c42d18d9-f472-4249-a10c-9f6adec7fabb</versionId>
+            <externalServiceRef isNull="true" />
+            <externalServiceOp isNull="true" />
+            <nodeColor isNull="true" />
+            <layoutData x="307" y="80">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <invokeUcaId>3009.1893713b-f805-4b85-b443-fe52f6214dec</invokeUcaId>
+                <isUcaActive>false</isUcaActive>
+                <ucaRef>/4.3c7ec7e2-55c7-4e72-ab70-fad5c69987c1</ucaRef>
+                <triggerTargetInSnapshotCtx>false</triggerTargetInSnapshotCtx>
+                <guid>b9316d3f-ff07-4a6b-b65b-e492f127a075</guid>
+                <versionId>5429ba89-3d12-414a-8c33-89953052c2bb</versionId>
+                <parameterMapping name="fileName">
+                    <lastModified isNull="true" />
+                    <lastModifiedBy isNull="true" />
+                    <tenantId isNull="true" />
+                    <parameterMappingId>2054.37ab2845-b8eb-4c78-9a93-0a274139b9f8</parameterMappingId>
+                    <processParameterId>2055.f09bc8d2-fa6e-4b45-8e78-e8f906c8fe5b</processParameterId>
+                    <parameterMappingParentId>3009.1893713b-f805-4b85-b443-fe52f6214dec</parameterMappingParentId>
+                    <useDefault>false</useDefault>
+                    <value>tw.local.fileName</value>
+                    <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                    <isList>false</isList>
+                    <isInput>true</isInput>
+                    <mappingMode isNull="true" />
+                    <sourcePath isNull="true" />
+                    <targetPath isNull="true" />
+                    <guid>5fd7d74d-e20e-44b0-860e-4cba1d37a6f2</guid>
+                    <versionId>66b4c127-83f1-459f-badc-ee6d500a7c5b</versionId>
+                    <description isNull="true" />
+                </parameterMapping>
+                <parameterMapping name="referenceID">
+                    <lastModified isNull="true" />
+                    <lastModifiedBy isNull="true" />
+                    <tenantId isNull="true" />
+                    <parameterMappingId>2054.8db247bc-a3e9-4caa-b774-dbb4d9a92e42</parameterMappingId>
+                    <processParameterId>2055.086ba745-0811-4ad5-8033-cbc29f2f8e41</processParameterId>
+                    <parameterMappingParentId>3009.1893713b-f805-4b85-b443-fe52f6214dec</parameterMappingParentId>
+                    <useDefault>false</useDefault>
+                    <value>tw.local.referenceID</value>
+                    <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                    <isList>false</isList>
+                    <isInput>true</isInput>
+                    <mappingMode isNull="true" />
+                    <sourcePath isNull="true" />
+                    <targetPath isNull="true" />
+                    <guid>711e5695-a66c-463f-abf4-a7a7660c3393</guid>
+                    <versionId>0bd45ee8-d3b8-45ac-a093-10b7cb407802</versionId>
+                    <description isNull="true" />
+                </parameterMapping>
+                <parameterMapping name="fileContent">
+                    <lastModified isNull="true" />
+                    <lastModifiedBy isNull="true" />
+                    <tenantId isNull="true" />
+                    <parameterMappingId>2054.abd946f8-22be-4561-9645-725c23861bee</parameterMappingId>
+                    <processParameterId>2055.571e81d9-a0af-49c3-9eef-163ff5a7dee4</processParameterId>
+                    <parameterMappingParentId>3009.1893713b-f805-4b85-b443-fe52f6214dec</parameterMappingParentId>
+                    <useDefault>false</useDefault>
+                    <value>tw.local.fileContent</value>
+                    <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                    <isList>false</isList>
+                    <isInput>true</isInput>
+                    <mappingMode isNull="true" />
+                    <sourcePath isNull="true" />
+                    <targetPath isNull="true" />
+                    <guid>6281b6a7-209c-4024-9975-b24eec563d14</guid>
+                    <versionId>70494dd5-adcb-4f74-ad12-cdae60a30e24</versionId>
+                    <description isNull="true" />
+                </parameterMapping>
+            </TWComponent>
+        </item>
+        <item>
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processItemId>2025.0e681cd5-630c-454f-8edd-adcb3b47c69e</processItemId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <name>End</name>
+            <tWComponentName>ExitPoint</tWComponentName>
+            <tWComponentId>3008.6c197aae-5983-4e40-8082-583d6feb8a76</tWComponentId>
+            <isLogEnabled>false</isLogEnabled>
+            <isTraceEnabled>false</isTraceEnabled>
+            <traceCategory isNull="true" />
+            <traceLevel isNull="true" />
+            <traceMessage isNull="true" />
+            <traceSymbolTable isNull="true" />
+            <isExecutionContextTraced>false</isExecutionContextTraced>
+            <saveExecutionContext>true</saveExecutionContext>
+            <documentation isNull="true" />
+            <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+            <errorHandlerItemId isNull="true" />
+            <guid>guid:207d6ea0639ca8b5:-43694325:17ee69075b7:-5084</guid>
+            <versionId>95e4c310-a0f4-4247-ab6d-07a0198952fd</versionId>
+            <externalServiceRef isNull="true" />
+            <externalServiceOp isNull="true" />
+            <nodeColor isNull="true" />
+            <layoutData x="650" y="80">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+            <TWComponent>
+                <lastModified isNull="true" />
+                <lastModifiedBy isNull="true" />
+                <tenantId isNull="true" />
+                <exitPointId>3008.6c197aae-5983-4e40-8082-583d6feb8a76</exitPointId>
+                <haltProcess>false</haltProcess>
+                <guid>ca598a93-6fbc-4834-8620-91f5b4f4d413</guid>
+                <versionId>f989ed18-aff4-4a24-a3c6-9b5db2d77c67</versionId>
+            </TWComponent>
+        </item>
+        <startingProcessItemId>2025.5aa225e8-efd8-4915-b087-05a64d142d70</startingProcessItemId>
+        <errorHandlerItemId isNull="true" />
+        <layoutData noConversion="true">
+            <errorLink>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </errorLink>
+        </layoutData>
+        <startPoint>
+            <layoutData x="25" y="80">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+        </startPoint>
+        <startLink>
+            <fromPort locationId="rightCenter" portType="1" />
+            <toPort locationId="leftCenter" portType="2" />
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+        </startLink>
+        <bpmn2Model>
+            <ns16:definitions xmlns:ns16="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns14="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns15="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns17="http://www.ibm.com/bpm/processappsettings" xmlns:ns18="http://www.ibm.com/xmlns/links" xmlns:ns19="http://www.ibm.com/bpm/CoachDesignerNG" xmlns:ns20="http://www.ibm.com/xmlns/tagging" xmlns:ns21="http://www.ibm.com/bpm/uitheme" xmlns:ns22="http://www.ibm.com/bpm/coachview" targetNamespace="" expressionLanguage="http://www.ibm.com/xmlns/prod/bpm/expression-lang/javascript" typeLanguage="http://www.w3.org/2001/XMLSchema">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <ns16:process name="Submit Client Document" id="1.5daca7c5-056f-4459-afe8-ed30f69c5d3c" ns2:executionMode="microflow">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:documentation textFormat="text/plain" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:isSecured>true</ns2:isSecured>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:isAjaxExposed>true</ns2:isAjaxExposed>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns2:sboSyncEnabled>true</ns2:sboSyncEnabled>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:extensionElements>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:ioSpecification>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="fileName" itemSubjectRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022" isCollection="false" id="2055.a4aded7d-ab17-4bf8-8c6e-0b480e3c59d3">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:documentation textFormat="text/plain">Name of the submitted file including the extension</ns16:documentation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="fileContent" itemSubjectRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022" isCollection="false" id="2055.2be464d2-8cd5-4135-ba0d-19942db22a99">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:documentation textFormat="text/plain">Contents of the file encoded in Base64</ns16:documentation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInput name="referenceID" itemSubjectRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022" isCollection="false" id="2055.9cff2954-2d69-4310-811d-1fe49ab30a9c">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:documentation textFormat="text/plain">ReferenceID of the client onboarding request with which the document is associated</ns16:documentation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInput>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:inputSet>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.a4aded7d-ab17-4bf8-8c6e-0b480e3c59d3</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.2be464d2-8cd5-4135-ba0d-19942db22a99</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:dataInputRefs>2055.9cff2954-2d69-4310-811d-1fe49ab30a9c</ns16:dataInputRefs>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:inputSet>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outputSet />
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:ioSpecification>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:laneSet id="ad533b35-7c75-4a27-9d9b-4e5be6f4bf85">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:lane name="System" partitionElementRef="24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b" id="951cc758-6609-4d01-9511-f07be6b33caf" ns3:isSystemLane="true">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:extensionElements>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:nodeVisualInfo x="0" y="0" width="3000" height="500" color="#F8F8F8" />
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>48a32e4f-41cf-48a3-b22b-6761434bf954</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>0e681cd5-630c-454f-8edd-adcb3b47c69e</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:flowNodeRef>5aa225e8-efd8-4915-b087-05a64d142d70</ns16:flowNodeRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:lane>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:laneSet>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:startEvent isInterrupting="false" parallelMultiple="false" name="Start" id="48a32e4f-41cf-48a3-b22b-6761434bf954">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="25" y="80" width="24" height="24" color="#F8F8F8" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>2027.c33580d4-25aa-4a7d-98c7-8139b63d7518</ns16:outgoing>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:startEvent>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:endEvent name="End" id="0e681cd5-630c-454f-8edd-adcb3b47c69e">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="650" y="80" width="24" height="24" color="#F8F8F8" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:saveExecutionContext>true</ns3:saveExecutionContext>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:endStateId>guid:207d6ea0639ca8b5:-43694325:17ee69075b7:-5084</ns2:endStateId>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>f5a873cb-734f-41f3-abc5-9a1d73d8f6f4</ns16:incoming>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:endEvent>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="48a32e4f-41cf-48a3-b22b-6761434bf954" targetRef="5aa225e8-efd8-4915-b087-05a64d142d70" name="To Send Message Event" id="2027.c33580d4-25aa-4a7d-98c7-8139b63d7518">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>false</ns13:saveExecutionContext>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:intermediateThrowEvent name="Send Message Event" id="5aa225e8-efd8-4915-b087-05a64d142d70">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:nodeVisualInfo x="307" y="80" width="24" height="24" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:incoming>2027.c33580d4-25aa-4a7d-98c7-8139b63d7518</ns16:incoming>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:outgoing>f5a873cb-734f-41f3-abc5-9a1d73d8f6f4</ns16:outgoing>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:targetRef>2055.086ba745-0811-4ad5-8033-cbc29f2f8e41</ns16:targetRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022">tw.local.referenceID</ns16:from>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInputAssociation>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:targetRef>2055.f09bc8d2-fa6e-4b45-8e78-e8f906c8fe5b</ns16:targetRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022">tw.local.fileName</ns16:from>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInputAssociation>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:dataInputAssociation>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:targetRef>2055.571e81d9-a0af-49c3-9eef-163ff5a7dee4</ns16:targetRef>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:assignment>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns16:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns16:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022">tw.local.fileContent</ns16:from>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns16:assignment>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:dataInputAssociation>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns3:ucaMessageEventDefinition id="47dd91d6-5691-404a-a597-97170e35cd5e" eventImplId="59f89725-6c80-4b08-8fa9-b4d52be92431">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:attachedUCA>4.3c7ec7e2-55c7-4e72-ab70-fad5c69987c1</ns3:attachedUCA>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns16:script />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:consumeMessage>false</ns3:consumeMessage>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:durableSubscription>false</ns3:durableSubscription>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:triggerTargetInSnapshotCtx>false</ns3:triggerTargetInSnapshotCtx>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns3:bpdEventId>bee72e37-7b8b-4fe3-8a1d-dd7eb12e4961</ns3:bpdEventId>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns3:ucaMessageEventDefinition>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:intermediateThrowEvent>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns16:sequenceFlow sourceRef="5aa225e8-efd8-4915-b087-05a64d142d70" targetRef="0e681cd5-630c-454f-8edd-adcb3b47c69e" name="To End" id="f5a873cb-734f-41f3-abc5-9a1d73d8f6f4">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns16:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:sequenceFlowImplementation sboSyncEnabled="true" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns13:linkVisualInfo>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:sourcePortLocation>rightCenter</ns13:sourcePortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:targetPortLocation>leftCenter</ns13:targetPortLocation>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showLabel>false</ns13:showLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:showCoachControlLabel>false</ns13:showCoachControlLabel>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:labelPosition>0.0</ns13:labelPosition>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns13:saveExecutionContext>true</ns13:saveExecutionContext>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns13:linkVisualInfo>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns16:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns16:sequenceFlow>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                
+                
+                
+                
+                
+                
+                
+                </ns16:process>
+                
+                
+                
+                
+                
+                
+                
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            </ns16:definitions>
+        </bpmn2Model>
+        <link name="To End">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <processLinkId>2027.2d7eec43-fbb4-485e-aafa-1df9ce30e428</processLinkId>
+            <processId>1.5daca7c5-056f-4459-afe8-ed30f69c5d3c</processId>
+            <description isNull="true" />
+            <fromProcessItemId>2025.5aa225e8-efd8-4915-b087-05a64d142d70</fromProcessItemId>
+            <endStateId>Out</endStateId>
+            <toProcessItemId>2025.0e681cd5-630c-454f-8edd-adcb3b47c69e</toProcessItemId>
+            <guid>421152c1-136a-4beb-a85d-33dd597d32c3</guid>
+            <versionId>4d993fc3-8903-4e6e-92fc-faaae4477476</versionId>
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+            <fromItemPort locationId="rightCenter" portType="1" />
+            <toItemPort locationId="leftCenter" portType="2" />
+            <fromProcessItemId>2025.5aa225e8-efd8-4915-b087-05a64d142d70</fromProcessItemId>
+            <toProcessItemId>2025.0e681cd5-630c-454f-8edd-adcb3b47c69e</toProcessItemId>
+        </link>
+    </process>
+</teamworks>
+

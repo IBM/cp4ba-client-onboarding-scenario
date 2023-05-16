@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <managedAsset id="61.ce1a70be-bcbc-41db-b3a6-eba5e0289103" name="client-rep.png">
+        <lastModified>1617757489942</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <managedAssetId>61.ce1a70be-bcbc-41db-b3a6-eba5e0289103</managedAssetId>
+        <assetUuid>1ff514c3-1e9a-4dfe-b166-54b0e860951d</assetUuid>
+        <mimeType>image/png</mimeType>
+        <charEncoding isNull="true" />
+        <assetTypeCode>W</assetTypeCode>
+        <length>54450</length>
+        <localLastModification>1617757489511</localLastModification>
+        <description isNull="true" />
+        <isDocumentationFile>false</isDocumentationFile>
+        <guid>d84972eb-4880-4cec-81ad-ca350535efec</guid>
+        <versionId>e4b3a465-761e-49e4-a0a1-d65ae3f93bdb</versionId>
+    </managedAsset>
+</teamworks>
+

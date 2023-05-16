@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <eSArtifact id="6023.1df95ad5-0560-4135-89c8-08734b49c94d" name="file:/opt/ibm/wlp/output/defaultServer/temp/automationSer.json">
+        <lastModified>1663710976131</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <esArtifactId>6023.1df95ad5-0560-4135-89c8-08734b49c94d</esArtifactId>
+        <ESArtifactDataUUID>8dc6db49-ca9b-4a8b-88cd-792eebc5931c</ESArtifactDataUUID>
+        <mediaType>application/json</mediaType>
+        <charEncoding isNull="true" />
+        <length>7989</length>
+        <digest>unknown</digest>
+        <externalId>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service</externalId>
+        <description isNull="true" />
+        <guid>guid:fbce8ce6-3f7f-4552-b512-7599f0db3ab0</guid>
+        <versionId>02661575-2ead-45d6-95ee-bb67bc862b80</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651360377</createdOn>
+    </eSArtifact>
+</teamworks>
+

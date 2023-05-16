@@ -1,0 +1,1284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <bpd id="25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571" name="Perform Scoreboarding">
+        <bpdParameter name="caseProperties">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <bpdParameterId>2007.2bf49f6c-849e-4c7b-89dc-a4c0f08023df</bpdParameterId>
+            <bpdId>25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571</bpdId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>/12.2075662d-1d8b-4a39-b8bc-9ee2948723a4</classId>
+            <seq>0</seq>
+            <documentation></documentation>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isReadOnly>false</isReadOnly>
+            <guid>guid:a2575ad1-d5b8-4246-99ee-7efd74838e8f</guid>
+            <versionId>79fcf66d-62e5-44c1-bab1-8a91920e271b</versionId>
+        </bpdParameter>
+        <bpdParameter name="activityProperties">
+            <lastModified isNull="true" />
+            <lastModifiedBy isNull="true" />
+            <tenantId isNull="true" />
+            <bpdParameterId>2007.1d33f395-245b-46b4-bee8-85c09171c71b</bpdParameterId>
+            <bpdId>25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571</bpdId>
+            <parameterType>1</parameterType>
+            <isArrayOf>false</isArrayOf>
+            <classId>/12.ad8a10a9-a515-45cd-8ab0-d70296015ac2</classId>
+            <seq>1</seq>
+            <documentation></documentation>
+            <hasDefault>false</hasDefault>
+            <defaultValue isNull="true" />
+            <isReadOnly>false</isReadOnly>
+            <guid>guid:21ddd5b6-cc13-4b11-b82d-f2e560a9099c</guid>
+            <versionId>d3a61ceb-f840-403a-bdc9-ba05a8a839e2</versionId>
+        </bpdParameter>
+        <lastModified>1664303728017</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <bpdId>25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571</bpdId>
+        <isTrackingEnabled>false</isTrackingEnabled>
+        <isSpcEnabled>false</isSpcEnabled>
+        <restrictedName isNull="true" />
+        <isCriticalPathEnabled>false</isCriticalPathEnabled>
+        <participantRef isNull="true" />
+        <businessDataParticipantRef isNull="true" />
+        <perfMetricParticipantRef isNull="true" />
+        <ownerTeamParticipantRef isNull="true" />
+        <timeScheduleType isNull="true" />
+        <timeScheduleName isNull="true" />
+        <timeScheduleExpression isNull="true" />
+        <holidayScheduleType isNull="true" />
+        <holidayScheduleName isNull="true" />
+        <holidayScheduleExpression isNull="true" />
+        <timezoneType isNull="true" />
+        <timezone isNull="true" />
+        <timezoneExpression isNull="true" />
+        <internalName isNull="true" />
+        <description>&lt;html&gt;&lt;body&gt;Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)&lt;/body&gt;&lt;/html&gt;</description>
+        <type>1</type>
+        <rootBpdId isNull="true" />
+        <parentBpdId isNull="true" />
+        <parentFlowObjectId isNull="true" />
+        <xmlData isNull="true" />
+        <bpmn2Data>&lt;ns15:definitions xmlns:ns15="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns14="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns16="http://www.ibm.com/bpm/processappsettings" xmlns:ns17="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns18="http://www.ibm.com/bpm/CoachDesignerNG" xmlns:ns19="http://www.ibm.com/xmlns/links" xmlns:ns20="http://www.ibm.com/bpm/uitheme" xmlns:ns21="http://www.ibm.com/bpm/coachview" xmlns:ns22="http://www.ibm.com/xmlns/tagging" id="5ba41cec-6158-4c88-9a78-d231735691a7" targetNamespace="" expressionLanguage="http://www.ibm.com/xmlns/prod/bpm/expression-lang/javascript"&gt;&lt;ns15:process name="Perform Scoreboarding" id="25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571" ns2:executionMode="longRunning"&gt;&lt;ns15:documentation&gt;Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)&lt;/ns15:documentation&gt;&lt;ns15:extensionElements&gt;&lt;ns3:bpdExtension instanceName="&amp;quot;Perform Scoreboarding:&amp;quot; + tw.system.process.instanceId" dueDateEnabled="true" atRiskCalcEnabled="true" enableTracking="true" allowProjectedPathManagement="false" optimizeExecForLatency="false" sBOSyncEnabled="true" allowContentOperations="false" autoTrackingEnabled="false" autoTrackingName="at1617731217543"&gt;&lt;ns3:dueDateSettings type="TimeCalculation"&gt;&lt;ns3:dueDate unit="Hours" timeOfDay="00:00"&gt;8&lt;/ns3:dueDate&gt;&lt;/ns3:dueDateSettings&gt;&lt;ns3:workSchedule&gt;&lt;ns3:timeScheduleType&gt;0&lt;/ns3:timeScheduleType&gt;&lt;ns3:timezoneType&gt;0&lt;/ns3:timezoneType&gt;&lt;ns3:holidayScheduleType&gt;0&lt;/ns3:holidayScheduleType&gt;&lt;/ns3:workSchedule&gt;&lt;/ns3:bpdExtension&gt;&lt;ns4:caseExtension&gt;&lt;ns4:caseFolder id="bb4abfee-0046-4729-9992-4dbe51d73dfb" /&gt;&lt;/ns4:caseExtension&gt;&lt;ns4:isConvergedProcess&gt;true&lt;/ns4:isConvergedProcess&gt;&lt;ns4:parentCaseActivityId&gt;{6370A7B5-F10E-4FA6-9412-B9FA0DC76B25}&lt;/ns4:parentCaseActivityId&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:ioSpecification&gt;&lt;ns15:dataInput name="caseProperties" itemSubjectRef="itm.12.2075662d-1d8b-4a39-b8bc-9ee2948723a4" isCollection="false" id="2007.2bf49f6c-849e-4c7b-89dc-a4c0f08023df" ns2:readOnly="true"&gt;&lt;ns15:extensionElements&gt;&lt;ns4:parameterType&gt;CaseObject&lt;/ns4:parameterType&gt;&lt;ns3:searchableField id="060c0a57-c1e6-4a51-8ab9-f67a3b0b0400" alias="Client" path=".ClientName.value" type="12.db884a3c-c533-44b7-bb2d-47bec8ad4022" /&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:dataInput&gt;&lt;ns15:dataInput name="activityProperties" itemSubjectRef="itm.12.ad8a10a9-a515-45cd-8ab0-d70296015ac2" isCollection="false" id="2007.1d33f395-245b-46b4-bee8-85c09171c71b" ns2:readOnly="true"&gt;&lt;ns15:extensionElements&gt;&lt;ns4:parameterType&gt;CaseObject&lt;/ns4:parameterType&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:dataInput&gt;&lt;ns15:inputSet id="_0278f239-9ad2-4f0c-b175-994a2572ad49" /&gt;&lt;ns15:outputSet id="_7f6f24fd-c884-4423-8b77-a00bc66b6c29" /&gt;&lt;/ns15:ioSpecification&gt;&lt;ns15:laneSet id="c18f2df1-c6be-4ca0-969e-919fa3425274"&gt;&lt;ns15:lane name="Account Manager" partitionElementRef="24.f4a6d385-6588-4b52-9322-ce14da7b2f2c" id="0606ce88-6580-4c97-86fb-e186585293d8" ns3:isSystemLane="false"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="0" y="0" width="3000" height="200" color="#F8F8F8" /&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:flowNodeRef&gt;f1fe64e1-b83a-4cd8-8053-0779ea5212e2&lt;/ns15:flowNodeRef&gt;&lt;/ns15:lane&gt;&lt;ns15:lane name="System" partitionElementRef="24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b" id="03384ab6-bdab-4941-94f6-a255465b43be" ns3:isSystemLane="true"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="0" y="201" width="3000" height="279" color="#F8F8F8" /&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:flowNodeRef&gt;12d86035-5658-4230-9d10-331b5908a268&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;128ddd62-73aa-42c7-80ae-f03d77d3e1cc&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;ba29631b-dd74-49d3-8e0a-05d309c5f100&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;01d9352a-6ab1-4006-8235-219c8d17f7bb&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;07ade9b6-c9ce-4e27-8b68-d74bc3d2d168&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7&lt;/ns15:flowNodeRef&gt;&lt;ns15:flowNodeRef&gt;21374e01-d080-4067-8e49-0f8d0c82bcba&lt;/ns15:flowNodeRef&gt;&lt;/ns15:lane&gt;&lt;/ns15:laneSet&gt;&lt;ns15:startEvent name="Start" id="12d86035-5658-4230-9d10-331b5908a268"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="26" y="92" width="24" height="24" color="#F8F8F8" /&gt;&lt;ns2:default&gt;674c06b5-07c5-460f-8821-7c5198cd60d8&lt;/ns2:default&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:outgoing&gt;674c06b5-07c5-460f-8821-7c5198cd60d8&lt;/ns15:outgoing&gt;&lt;/ns15:startEvent&gt;&lt;ns15:callActivity calledElement="1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61" default="36d583e0-d8c3-499e-8353-944c0a839e24" name="Perform Scoreboarding" id="128ddd62-73aa-42c7-80ae-f03d77d3e1cc"&gt;&lt;ns15:extensionElements&gt;&lt;ns3:deleteTaskOnCompletion&gt;true&lt;/ns3:deleteTaskOnCompletion&gt;&lt;ns13:nodeVisualInfo x="142" y="69" width="95" height="70" /&gt;&lt;ns3:userTaskSettings&gt;&lt;ns3:activityPriority type="Priority"&gt;&lt;ns3:priority&gt;Normal&lt;/ns3:priority&gt;&lt;/ns3:activityPriority&gt;&lt;ns3:activityDueDate type="TimeCalculation"&gt;&lt;ns3:dueDate unit="Hours" timeOfDay="00:00"&gt;1&lt;/ns3:dueDate&gt;&lt;ns3:timeZone type="TimeZone"&gt;&lt;ns3:value&gt;(use default)&lt;/ns3:value&gt;&lt;/ns3:timeZone&gt;&lt;/ns3:activityDueDate&gt;&lt;ns3:activityAssignmentType&gt;Lane&lt;/ns3:activityAssignmentType&gt;&lt;ns3:activityWorkSchedule&gt;&lt;ns3:timeScheduleType&gt;0&lt;/ns3:timeScheduleType&gt;&lt;ns3:timezoneType&gt;0&lt;/ns3:timezoneType&gt;&lt;ns3:holidayScheduleType&gt;0&lt;/ns3:holidayScheduleType&gt;&lt;/ns3:activityWorkSchedule&gt;&lt;/ns3:userTaskSettings&gt;&lt;ns3:activityType&gt;ServiceTask&lt;/ns3:activityType&gt;&lt;ns3:activityExtension conditional="false"&gt;&lt;ns3:conditionScript /&gt;&lt;/ns3:activityExtension&gt;&lt;ns3:postTracking trackingGroupRef="14.43c2b7da-1f30-47a7-9671-c254483b1364" externalUniqueId="15b9c582-7260-4bb7-8db2-b3f4e91c9e0d"&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.0732cecf-014c-48b9-83ad-8a2b630e38e3&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.AddressCountry.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.29146fd4-bb37-473b-8c6e-22dcb1e361ed&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ApprovalStatus.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ClientName.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.5b827af2-6c20-4bdf-891a-d17dc965ee58&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt; tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.d9b4ed60-a68b-41f9-8af9-8bcb05247672&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.00ea4fa8-2600-4e1d-87db-978288886492&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a69faed4-c855-4be1-8307-b89b05feafdd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.63483d1a-ac1d-446c-8a81-870bb63d64a1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcess.name&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ReferenceID.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.53846b13-77a9-40ac-88ef-2919ea887e6b&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt; tw.local.caseProperties.RiskConfidence.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a2c3391a-8d6f-4178-8748-e3116513ec9e&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.ServicesFee.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.964b10af-962a-4ccb-8670-730c06b8e42d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ServicesRequested.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;/ns3:postTracking&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;674c06b5-07c5-460f-8821-7c5198cd60d8&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;36d583e0-d8c3-499e-8353-944c0a839e24&lt;/ns15:outgoing&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.78382d55-d044-43e2-8a47-78e3ed771557&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.13d53a9d-f57d-43a8-aef7-79235f5abec1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataOutputAssociation&gt;&lt;ns15:sourceRef&gt;2055.2d3ab132-f714-45db-82e7-b7d180ed228a&lt;/ns15:sourceRef&gt;&lt;ns15:assignment&gt;&lt;ns15:to xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt;tw.local.caseProperties.RiskConfidence.value&lt;/ns15:to&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataOutputAssociation&gt;&lt;ns15:dataOutputAssociation&gt;&lt;ns15:sourceRef&gt;2055.2aca5357-1f95-43c5-8acb-395f65b8adc1&lt;/ns15:sourceRef&gt;&lt;ns15:assignment&gt;&lt;ns15:to xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:to&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataOutputAssociation&gt;&lt;ns15:dataOutputAssociation&gt;&lt;ns15:sourceRef&gt;2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2&lt;/ns15:sourceRef&gt;&lt;ns15:assignment&gt;&lt;ns15:to xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:to&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataOutputAssociation&gt;&lt;ns3:activityPerformer distribution="None" name="Lane"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns3:activityPerformer distribution="None" name="Team"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns15:performer name="Expert" /&gt;&lt;/ns15:callActivity&gt;&lt;ns15:sequenceFlow sourceRef="12d86035-5658-4230-9d10-331b5908a268" targetRef="128ddd62-73aa-42c7-80ae-f03d77d3e1cc" name="To Perform Scoreboarding" id="674c06b5-07c5-460f-8821-7c5198cd60d8"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;rightCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:exclusiveGateway default="dc2eb869-8737-4e6b-86ce-6425a2339088" name="Confidence" id="ba29631b-dd74-49d3-8e0a-05d309c5f100"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="308" y="88" width="32" height="32" /&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;36d583e0-d8c3-499e-8353-944c0a839e24&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;45c771a7-44cf-470d-8fdc-1dba122da13f&lt;/ns15:outgoing&gt;&lt;ns15:outgoing&gt;dc2eb869-8737-4e6b-86ce-6425a2339088&lt;/ns15:outgoing&gt;&lt;/ns15:exclusiveGateway&gt;&lt;ns15:sequenceFlow sourceRef="128ddd62-73aa-42c7-80ae-f03d77d3e1cc" targetRef="ba29631b-dd74-49d3-8e0a-05d309c5f100" name="To Confidence" id="36d583e0-d8c3-499e-8353-944c0a839e24"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;rightCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:sequenceFlow sourceRef="ba29631b-dd74-49d3-8e0a-05d309c5f100" targetRef="21374e01-d080-4067-8e49-0f8d0c82bcba" name="Low Confidence" id="45c771a7-44cf-470d-8fdc-1dba122da13f"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;rightCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;true&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:conditionExpression xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression"&gt;tw.local.caseProperties.RiskConfidence.value	  &amp;lt;	  80&lt;/ns15:conditionExpression&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:scriptTask scriptFormat="text/x-javascript" default="26b742d5-3902-4c8c-88b2-c845073f88ef" name="Handle Request" id="01d9352a-6ab1-4006-8235-219c8d17f7bb"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="501" y="169" width="95" height="70" /&gt;&lt;ns3:postTracking trackingGroupRef="14.43c2b7da-1f30-47a7-9671-c254483b1364" externalUniqueId="d1456916-b7e9-4363-84b2-cfe44973c6d4"&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.0732cecf-014c-48b9-83ad-8a2b630e38e3&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.AddressCountry.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.29146fd4-bb37-473b-8c6e-22dcb1e361ed&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ApprovalStatus.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ClientName.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.5b827af2-6c20-4bdf-891a-d17dc965ee58&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.d9b4ed60-a68b-41f9-8af9-8bcb05247672&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.00ea4fa8-2600-4e1d-87db-978288886492&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a69faed4-c855-4be1-8307-b89b05feafdd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.63483d1a-ac1d-446c-8a81-870bb63d64a1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcess.name&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ReferenceID.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.53846b13-77a9-40ac-88ef-2919ea887e6b&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt;tw.local.caseProperties.RiskConfidence.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a2c3391a-8d6f-4178-8748-e3116513ec9e&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.ServicesFee.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.964b10af-962a-4ccb-8670-730c06b8e42d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ServicesRequested.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;/ns3:postTracking&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;dc2eb869-8737-4e6b-86ce-6425a2339088&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;26b742d5-3902-4c8c-88b2-c845073f88ef&lt;/ns15:outgoing&gt;&lt;ns15:script&gt;// This is a low-risk request. Approve it without human intervention
+if(!tw.local.caseProperties.HighRisk.value) {
+	tw.local.caseProperties.ApprovalStatus.value = "Approved";
+} else {
+	tw.local.caseProperties.ApprovalStatus.value = "Rejected";
+}&lt;/ns15:script&gt;&lt;/ns15:scriptTask&gt;&lt;ns15:sequenceFlow sourceRef="ba29631b-dd74-49d3-8e0a-05d309c5f100" targetRef="01d9352a-6ab1-4006-8235-219c8d17f7bb" name="High Confidence" id="dc2eb869-8737-4e6b-86ce-6425a2339088"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;bottomCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;true&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:callActivity calledElement="1.001b03f9-8ca4-4874-8267-92d763809927" default="eec00b3f-42f0-4d4b-860a-cce614a9914d" name="Complete Scoreboarding Stage" id="07ade9b6-c9ce-4e27-8b68-d74bc3d2d168"&gt;&lt;ns15:extensionElements&gt;&lt;ns3:deleteTaskOnCompletion&gt;true&lt;/ns3:deleteTaskOnCompletion&gt;&lt;ns13:nodeVisualInfo x="725" y="169" width="95" height="70" /&gt;&lt;ns3:userTaskSettings&gt;&lt;ns3:activityPriority type="Priority"&gt;&lt;ns3:priority&gt;Normal&lt;/ns3:priority&gt;&lt;/ns3:activityPriority&gt;&lt;ns3:activityDueDate type="TimeCalculation"&gt;&lt;ns3:dueDate unit="Hours" timeOfDay="00:00"&gt;1&lt;/ns3:dueDate&gt;&lt;ns3:timeZone type="TimeZone"&gt;&lt;ns3:value&gt;(use default)&lt;/ns3:value&gt;&lt;/ns3:timeZone&gt;&lt;/ns3:activityDueDate&gt;&lt;ns3:activityAssignmentType&gt;Lane&lt;/ns3:activityAssignmentType&gt;&lt;ns3:activityWorkSchedule&gt;&lt;ns3:timeScheduleType&gt;0&lt;/ns3:timeScheduleType&gt;&lt;ns3:timezoneType&gt;0&lt;/ns3:timezoneType&gt;&lt;ns3:holidayScheduleType&gt;0&lt;/ns3:holidayScheduleType&gt;&lt;/ns3:activityWorkSchedule&gt;&lt;/ns3:userTaskSettings&gt;&lt;ns3:activityType&gt;ServiceTask&lt;/ns3:activityType&gt;&lt;ns3:activityExtension conditional="false"&gt;&lt;ns3:conditionScript /&gt;&lt;/ns3:activityExtension&gt;&lt;ns3:postTracking trackingGroupRef="14.43c2b7da-1f30-47a7-9671-c254483b1364" externalUniqueId="fc69ddec-af9a-48b4-8ef1-04da2a240976"&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.0732cecf-014c-48b9-83ad-8a2b630e38e3&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.AddressCountry.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.29146fd4-bb37-473b-8c6e-22dcb1e361ed&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ApprovalStatus.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ClientName.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.5b827af2-6c20-4bdf-891a-d17dc965ee58&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.d9b4ed60-a68b-41f9-8af9-8bcb05247672&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.00ea4fa8-2600-4e1d-87db-978288886492&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a69faed4-c855-4be1-8307-b89b05feafdd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.63483d1a-ac1d-446c-8a81-870bb63d64a1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcess.name&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ReferenceID.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.53846b13-77a9-40ac-88ef-2919ea887e6b&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt;tw.local.caseProperties.RiskConfidence.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a2c3391a-8d6f-4178-8748-e3116513ec9e&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.ServicesFee.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.964b10af-962a-4ccb-8670-730c06b8e42d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ServicesRequested.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;/ns3:postTracking&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;26b742d5-3902-4c8c-88b2-c845073f88ef&lt;/ns15:incoming&gt;&lt;ns15:incoming&gt;37773f9d-10e6-40bd-8a1f-616e5889d300&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;eec00b3f-42f0-4d4b-860a-cce614a9914d&lt;/ns15:outgoing&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.3562c248-386a-48bc-8195-e02bc9485c93&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297"&gt;null&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns3:activityPerformer distribution="None" name="Lane"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns3:activityPerformer distribution="None" name="Team"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns15:performer name="Expert" /&gt;&lt;/ns15:callActivity&gt;&lt;ns15:sequenceFlow sourceRef="01d9352a-6ab1-4006-8235-219c8d17f7bb" targetRef="07ade9b6-c9ce-4e27-8b68-d74bc3d2d168" name="To Complete Scoreboarding Stage" id="26b742d5-3902-4c8c-88b2-c845073f88ef"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;rightCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:callActivity calledElement="1.69653659-ff51-41cb-bd44-a77d40e14636" default="37773f9d-10e6-40bd-8a1f-616e5889d300" name="Review Cient Request" id="f1fe64e1-b83a-4cd8-8053-0779ea5212e2"&gt;&lt;ns15:extensionElements&gt;&lt;ns3:activityExtension conditional="false"&gt;&lt;ns3:conditionScript /&gt;&lt;/ns3:activityExtension&gt;&lt;ns13:nodeVisualInfo x="728" y="101" width="95" height="70" /&gt;&lt;ns3:userTaskSettings&gt;&lt;ns3:subject&gt;Review Client Onboarding Request&lt;/ns3:subject&gt;&lt;ns3:activityPriority type="Priority"&gt;&lt;ns3:priority&gt;Normal&lt;/ns3:priority&gt;&lt;/ns3:activityPriority&gt;&lt;ns3:activityDueDate type="TimeCalculation"&gt;&lt;ns3:dueDate unit="Hours" timeOfDay="00:00"&gt;1&lt;/ns3:dueDate&gt;&lt;ns3:timeZone type="TimeZone"&gt;&lt;ns3:value&gt;(use default)&lt;/ns3:value&gt;&lt;/ns3:timeZone&gt;&lt;/ns3:activityDueDate&gt;&lt;ns3:activityAssignmentType&gt;Custom&lt;/ns3:activityAssignmentType&gt;&lt;ns3:activityWorkSchedule&gt;&lt;ns3:timeScheduleType&gt;0&lt;/ns3:timeScheduleType&gt;&lt;ns3:timezoneType&gt;0&lt;/ns3:timezoneType&gt;&lt;ns3:holidayScheduleType&gt;0&lt;/ns3:holidayScheduleType&gt;&lt;/ns3:activityWorkSchedule&gt;&lt;/ns3:userTaskSettings&gt;&lt;ns3:activityType&gt;UserTask&lt;/ns3:activityType&gt;&lt;ns3:postTracking trackingGroupRef="14.43c2b7da-1f30-47a7-9671-c254483b1364" externalUniqueId="bfc19573-8b5e-4a94-8594-d542b4717355"&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.0732cecf-014c-48b9-83ad-8a2b630e38e3&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.AddressCountry.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.29146fd4-bb37-473b-8c6e-22dcb1e361ed&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ApprovalStatus.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ClientName.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.5b827af2-6c20-4bdf-891a-d17dc965ee58&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.d9b4ed60-a68b-41f9-8af9-8bcb05247672&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.00ea4fa8-2600-4e1d-87db-978288886492&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a69faed4-c855-4be1-8307-b89b05feafdd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.63483d1a-ac1d-446c-8a81-870bb63d64a1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcess.name&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ReferenceID.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.53846b13-77a9-40ac-88ef-2919ea887e6b&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt;tw.local.caseProperties.RiskConfidence.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a2c3391a-8d6f-4178-8748-e3116513ec9e&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.ServicesFee.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.964b10af-962a-4ccb-8670-730c06b8e42d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ServicesRequested.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;/ns3:postTracking&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;a69503aa-4365-48d8-82f5-5bed0b4edf9c&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;37773f9d-10e6-40bd-8a1f-616e5889d300&lt;/ns15:outgoing&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.2f8a38a9-a1b8-40cd-b0bb-19022cb8af4c&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcessInstance.parentCase.caseId.replace(/[{}]/g, "");&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.b9a4c43c-8ea8-4abd-ae8c-f00228e81663&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297"&gt;tw.env.tosName&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.0d72d3b4-8531-470a-a1ad-1491e2d12ff5&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;true&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.e36c476d-c40c-4bac-8a44-aa4ed2184bee&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.2075662d-1d8b-4a39-b8bc-9ee2948723a4"&gt;tw.local.caseProperties&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns3:activityPerformer distribution="None" name="Lane"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns3:activityPerformer distribution="None" name="Team"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns15:performer name="Expert" /&gt;&lt;ns3:activityPerformer distribution="None" teamAssignmentType="Dynamic" name="Custom"&gt;&lt;ns15:resourceAssignmentExpression&gt;&lt;ns15:expression&gt;"USER:" + tw.local.caseProperties.UserID.value&lt;/ns15:expression&gt;&lt;/ns15:resourceAssignmentExpression&gt;&lt;/ns3:activityPerformer&gt;&lt;/ns15:callActivity&gt;&lt;ns15:sequenceFlow sourceRef="f1fe64e1-b83a-4cd8-8053-0779ea5212e2" targetRef="07ade9b6-c9ce-4e27-8b68-d74bc3d2d168" name="To Complete Scoreboarding Stage" id="37773f9d-10e6-40bd-8a1f-616e5889d300"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;bottomCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;topCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:endEvent name="End" id="bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:nodeVisualInfo x="944" y="192" width="24" height="24" /&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;eec00b3f-42f0-4d4b-860a-cce614a9914d&lt;/ns15:incoming&gt;&lt;/ns15:endEvent&gt;&lt;ns15:sequenceFlow sourceRef="07ade9b6-c9ce-4e27-8b68-d74bc3d2d168" targetRef="bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7" name="To End" id="eec00b3f-42f0-4d4b-860a-cce614a9914d"&gt;&lt;ns15:extensionElements&gt;&lt;ns2:sequenceFlowImplementation sboSyncEnabled="true" /&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;rightCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;true&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:callActivity calledElement="1.2c316c8c-89dc-4f5f-b253-587481655c17" default="a69503aa-4365-48d8-82f5-5bed0b4edf9c" name="Inform Client" id="21374e01-d080-4067-8e49-0f8d0c82bcba"&gt;&lt;ns15:extensionElements&gt;&lt;ns3:deleteTaskOnCompletion&gt;true&lt;/ns3:deleteTaskOnCompletion&gt;&lt;ns13:nodeVisualInfo x="501" y="70" width="95" height="70" /&gt;&lt;ns3:userTaskSettings&gt;&lt;ns3:activityPriority type="Priority"&gt;&lt;ns3:priority&gt;Normal&lt;/ns3:priority&gt;&lt;/ns3:activityPriority&gt;&lt;ns3:activityDueDate type="TimeCalculation"&gt;&lt;ns3:dueDate unit="Hours" timeOfDay="00:00"&gt;1&lt;/ns3:dueDate&gt;&lt;ns3:timeZone type="TimeZone"&gt;&lt;ns3:value&gt;(use default)&lt;/ns3:value&gt;&lt;/ns3:timeZone&gt;&lt;/ns3:activityDueDate&gt;&lt;ns3:activityAssignmentType&gt;Lane&lt;/ns3:activityAssignmentType&gt;&lt;ns3:activityWorkSchedule&gt;&lt;ns3:timeScheduleType&gt;0&lt;/ns3:timeScheduleType&gt;&lt;ns3:timezoneType&gt;0&lt;/ns3:timezoneType&gt;&lt;ns3:holidayScheduleType&gt;0&lt;/ns3:holidayScheduleType&gt;&lt;/ns3:activityWorkSchedule&gt;&lt;/ns3:userTaskSettings&gt;&lt;ns3:activityType&gt;ServiceTask&lt;/ns3:activityType&gt;&lt;ns3:activityExtension conditional="false"&gt;&lt;ns3:conditionScript /&gt;&lt;/ns3:activityExtension&gt;&lt;ns3:postTracking trackingGroupRef="14.43c2b7da-1f30-47a7-9671-c254483b1364" externalUniqueId="69bb3a5f-5011-4229-8337-e0952fd23c19"&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.0732cecf-014c-48b9-83ad-8a2b630e38e3&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.AddressCountry.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.29146fd4-bb37-473b-8c6e-22dcb1e361ed&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.AnnualRevenue.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ApprovalStatus.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ClientName.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.5b827af2-6c20-4bdf-891a-d17dc965ee58&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.CompanyAge.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.DefaultedPayment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.d9b4ed60-a68b-41f9-8af9-8bcb05247672&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2"&gt;tw.local.caseProperties.HighRisk.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.00ea4fa8-2600-4e1d-87db-978288886492&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Industry.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a69faed4-c855-4be1-8307-b89b05feafdd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.NumberOfEmployees.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.63483d1a-ac1d-446c-8a81-870bb63d64a1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.system.currentProcess.name&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ReferenceID.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.53846b13-77a9-40ac-88ef-2919ea887e6b&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee"&gt;tw.local.caseProperties.RiskConfidence.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.a2c3391a-8d6f-4178-8748-e3116513ec9e&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Segment.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d"&gt;tw.local.caseProperties.ServicesFee.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;17.964b10af-962a-4ccb-8670-730c06b8e42d&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.ServicesRequested.value.toString()&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;/ns3:postTracking&gt;&lt;/ns15:extensionElements&gt;&lt;ns15:incoming&gt;45c771a7-44cf-470d-8fdc-1dba122da13f&lt;/ns15:incoming&gt;&lt;ns15:outgoing&gt;a69503aa-4365-48d8-82f5-5bed0b4edf9c&lt;/ns15:outgoing&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.347e5038-c58a-45f2-83ee-9ba5d624f284&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297"&gt;null&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.9fdf2613-2417-46da-8039-e36ffb03b252&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;tw.local.caseProperties.Email.value&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.b423f63a-ab0e-49c7-8148-2e10084dcaf6&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;"Your request is under review [Reference ID: " + tw.local.caseProperties.ReferenceID.value + "]"&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns15:dataInputAssociation&gt;&lt;ns15:targetRef&gt;2055.c6e50b47-b386-42e9-8ef8-26e375031ff1&lt;/ns15:targetRef&gt;&lt;ns15:assignment&gt;&lt;ns15:from xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns15:tFormalExpression" evaluatesToTypeRef="itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022"&gt;"Hello " + tw.local.caseProperties.FirstName.value + ",&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;This is with reference to your request with reference ID: " + tw.local.caseProperties.ReferenceID.value + "&amp;lt;br/&amp;gt;Your request is being manually reviewed by one of our account managers. We will reach out to you in 2 to 3 business days. Thank you for your patience.&amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;Regards,&amp;lt;br/&amp;gt;Focus Corp"&lt;/ns15:from&gt;&lt;/ns15:assignment&gt;&lt;/ns15:dataInputAssociation&gt;&lt;ns3:activityPerformer distribution="None" name="Lane"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns3:activityPerformer distribution="None" name="Team"&gt;&lt;ns3:teamFilterService /&gt;&lt;/ns3:activityPerformer&gt;&lt;ns15:performer name="Expert" /&gt;&lt;/ns15:callActivity&gt;&lt;ns15:sequenceFlow sourceRef="21374e01-d080-4067-8e49-0f8d0c82bcba" targetRef="f1fe64e1-b83a-4cd8-8053-0779ea5212e2" name="To Inform Client" id="a69503aa-4365-48d8-82f5-5bed0b4edf9c"&gt;&lt;ns15:extensionElements&gt;&lt;ns13:linkVisualInfo&gt;&lt;ns13:sourcePortLocation&gt;topCenter&lt;/ns13:sourcePortLocation&gt;&lt;ns13:targetPortLocation&gt;leftCenter&lt;/ns13:targetPortLocation&gt;&lt;ns13:showLabel&gt;false&lt;/ns13:showLabel&gt;&lt;ns13:showCoachControlLabel&gt;false&lt;/ns13:showCoachControlLabel&gt;&lt;ns13:labelPosition&gt;0.0&lt;/ns13:labelPosition&gt;&lt;ns13:saveExecutionContext&gt;false&lt;/ns13:saveExecutionContext&gt;&lt;/ns13:linkVisualInfo&gt;&lt;ns2:happySequence&gt;true&lt;/ns2:happySequence&gt;&lt;/ns15:extensionElements&gt;&lt;/ns15:sequenceFlow&gt;&lt;ns15:resourceRole name="participantRef" /&gt;&lt;ns15:resourceRole name="businessDataParticipantRef" /&gt;&lt;ns15:resourceRole name="perfMetricParticipantRef" /&gt;&lt;ns15:resourceRole name="ownerTeamParticipantRef" /&gt;&lt;/ns15:process&gt;&lt;ns15:interface name="Perform ScoreboardingInterface" id="_db7b8b01-853f-4519-99ec-01023a7c6d7f" /&gt;&lt;/ns15:definitions&gt;
+</bpmn2Data>
+        <dependencySummary isNull="true" />
+        <jsonData>{"rootElement":[{"flowElement":[{"parallelMultiple":false,"outgoing":["674c06b5-07c5-460f-8821-7c5198cd60d8"],"isInterrupting":true,"extensionElements":{"default":["674c06b5-07c5-460f-8821-7c5198cd60d8"],"nodeVisualInfo":[{"color":"#F8F8F8","width":24,"x":26,"y":92,"declaredType":"TNodeVisualInfo","height":24}]},"name":"Start","declaredType":"startEvent","id":"12d86035-5658-4230-9d10-331b5908a268"},{"outgoing":["36d583e0-d8c3-499e-8353-944c0a839e24"],"incoming":["674c06b5-07c5-460f-8821-7c5198cd60d8"],"extensionElements":{"postTracking":[{"externalUniqueId":"15b9c582-7260-4bb7-8db2-b3f4e91c9e0d","dataInputAssociation":[{"targetRef":"17.0732cecf-014c-48b9-83ad-8a2b630e38e3","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AddressCountry.value"]}}]},{"targetRef":"17.29146fd4-bb37-473b-8c6e-22dcb1e361ed","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ApprovalStatus.value.toString()"]}}]},{"targetRef":"17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ClientName.value"]}}]},{"targetRef":"17.5b827af2-6c20-4bdf-891a-d17dc965ee58","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":[" tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"17.d9b4ed60-a68b-41f9-8af9-8bcb05247672","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}]},{"targetRef":"17.00ea4fa8-2600-4e1d-87db-978288886492","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"17.a69faed4-c855-4be1-8307-b89b05feafdd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]},{"targetRef":"17.63483d1a-ac1d-446c-8a81-870bb63d64a1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcess.name"]}}]},{"targetRef":"17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ReferenceID.value"]}}]},{"targetRef":"17.53846b13-77a9-40ac-88ef-2919ea887e6b","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":[" tw.local.caseProperties.RiskConfidence.value"]}}]},{"targetRef":"17.a2c3391a-8d6f-4178-8748-e3116513ec9e","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}]},{"targetRef":"17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesFee.value"]}}]},{"targetRef":"17.964b10af-962a-4ccb-8670-730c06b8e42d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesRequested.value.toString()"]}}]}],"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TTrackingPoint","trackingGroupRef":"14.43c2b7da-1f30-47a7-9671-c254483b1364"}],"activityExtension":[{"conditionScript":"","conditional":false,"transactionalBehavior":"NotSet","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityExtension"}],"deleteTaskOnCompletion":[true],"nodeVisualInfo":[{"width":95,"x":142,"y":69,"declaredType":"TNodeVisualInfo","height":70}],"userTaskSettings":[{"activityAssignmentType":"Lane","activityWorkSchedule":{"timezoneType":0,"timeScheduleType":0,"holidayScheduleType":0},"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TUserTaskSettings","activityPriority":{"type":"Priority","priority":"Normal"},"activityDueDate":{"dueDate":{"unit":"Hours","value":"1","timeOfDay":"00:00"},"timeZone":{"type":"TimeZone","value":"(use default)"},"type":"TimeCalculation"}}],"activityType":["ServiceTask"]},"declaredType":"callActivity","startQuantity":1,"resourceRole":[{"teamAssignmentType":"Reference","name":"Lane","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"teamAssignmentType":"Reference","name":"Team","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"name":"Expert","declaredType":"performer"}],"default":"36d583e0-d8c3-499e-8353-944c0a839e24","name":"Perform Scoreboarding","dataInputAssociation":[{"targetRef":"2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78","assignment":[{"from":{"evaluatesToTypeRef":"12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"2055.78382d55-d044-43e2-8a47-78e3ed771557","assignment":[{"from":{"evaluatesToTypeRef":"12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba","assignment":[{"from":{"evaluatesToTypeRef":"12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"2055.13d53a9d-f57d-43a8-aef7-79235f5abec1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]}],"isForCompensation":false,"completionQuantity":1,"id":"128ddd62-73aa-42c7-80ae-f03d77d3e1cc","dataOutputAssociation":[{"assignment":[{"to":{"evaluatesToTypeRef":"12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value"]}}],"sourceRef":["2055.2d3ab132-f714-45db-82e7-b7d180ed228a"]},{"assignment":[{"to":{"evaluatesToTypeRef":"12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}],"sourceRef":["2055.2aca5357-1f95-43c5-8acb-395f65b8adc1"]},{"assignment":[{"to":{"evaluatesToTypeRef":"12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}],"sourceRef":["2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2"]}],"calledElement":"1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61"},{"targetRef":"128ddd62-73aa-42c7-80ae-f03d77d3e1cc","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}],"happySequence":[true]},"name":"To Perform Scoreboarding","declaredType":"sequenceFlow","id":"674c06b5-07c5-460f-8821-7c5198cd60d8","sourceRef":"12d86035-5658-4230-9d10-331b5908a268"},{"outgoing":["45c771a7-44cf-470d-8fdc-1dba122da13f","dc2eb869-8737-4e6b-86ce-6425a2339088"],"incoming":["36d583e0-d8c3-499e-8353-944c0a839e24"],"default":"dc2eb869-8737-4e6b-86ce-6425a2339088","gatewayDirection":"Unspecified","extensionElements":{"nodeVisualInfo":[{"width":32,"x":308,"y":88,"declaredType":"TNodeVisualInfo","height":32}]},"name":"Confidence","declaredType":"exclusiveGateway","id":"ba29631b-dd74-49d3-8e0a-05d309c5f100"},{"targetRef":"ba29631b-dd74-49d3-8e0a-05d309c5f100","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}],"happySequence":[true]},"name":"To Confidence","declaredType":"sequenceFlow","id":"36d583e0-d8c3-499e-8353-944c0a839e24","sourceRef":"128ddd62-73aa-42c7-80ae-f03d77d3e1cc"},{"targetRef":"21374e01-d080-4067-8e49-0f8d0c82bcba","conditionExpression":{"declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value\t  &lt;\t  80"]},"extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":true}],"happySequence":[true]},"name":"Low Confidence","declaredType":"sequenceFlow","id":"45c771a7-44cf-470d-8fdc-1dba122da13f","sourceRef":"ba29631b-dd74-49d3-8e0a-05d309c5f100"},{"startQuantity":1,"outgoing":["26b742d5-3902-4c8c-88b2-c845073f88ef"],"incoming":["dc2eb869-8737-4e6b-86ce-6425a2339088"],"default":"26b742d5-3902-4c8c-88b2-c845073f88ef","extensionElements":{"postTracking":[{"externalUniqueId":"d1456916-b7e9-4363-84b2-cfe44973c6d4","dataInputAssociation":[{"targetRef":"17.0732cecf-014c-48b9-83ad-8a2b630e38e3","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AddressCountry.value"]}}]},{"targetRef":"17.29146fd4-bb37-473b-8c6e-22dcb1e361ed","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ApprovalStatus.value.toString()"]}}]},{"targetRef":"17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ClientName.value"]}}]},{"targetRef":"17.5b827af2-6c20-4bdf-891a-d17dc965ee58","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"17.d9b4ed60-a68b-41f9-8af9-8bcb05247672","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}]},{"targetRef":"17.00ea4fa8-2600-4e1d-87db-978288886492","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"17.a69faed4-c855-4be1-8307-b89b05feafdd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]},{"targetRef":"17.63483d1a-ac1d-446c-8a81-870bb63d64a1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcess.name"]}}]},{"targetRef":"17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ReferenceID.value"]}}]},{"targetRef":"17.53846b13-77a9-40ac-88ef-2919ea887e6b","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value"]}}]},{"targetRef":"17.a2c3391a-8d6f-4178-8748-e3116513ec9e","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}]},{"targetRef":"17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesFee.value"]}}]},{"targetRef":"17.964b10af-962a-4ccb-8670-730c06b8e42d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesRequested.value.toString()"]}}]}],"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TTrackingPoint","trackingGroupRef":"14.43c2b7da-1f30-47a7-9671-c254483b1364"}],"nodeVisualInfo":[{"width":95,"x":501,"y":169,"declaredType":"TNodeVisualInfo","height":70}]},"name":"Handle Request","isForCompensation":false,"completionQuantity":1,"declaredType":"scriptTask","id":"01d9352a-6ab1-4006-8235-219c8d17f7bb","scriptFormat":"text\/x-javascript","script":{"content":["\/\/ This is a low-risk request. Approve it without human intervention\nif(!tw.local.caseProperties.HighRisk.value) {\n\ttw.local.caseProperties.ApprovalStatus.value = \"Approved\";\n} else {\n\ttw.local.caseProperties.ApprovalStatus.value = \"Rejected\";\n}"]}},{"targetRef":"01d9352a-6ab1-4006-8235-219c8d17f7bb","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"bottomCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":true}],"happySequence":[true]},"name":"High Confidence","declaredType":"sequenceFlow","id":"dc2eb869-8737-4e6b-86ce-6425a2339088","sourceRef":"ba29631b-dd74-49d3-8e0a-05d309c5f100"},{"outgoing":["eec00b3f-42f0-4d4b-860a-cce614a9914d"],"incoming":["26b742d5-3902-4c8c-88b2-c845073f88ef","37773f9d-10e6-40bd-8a1f-616e5889d300"],"extensionElements":{"postTracking":[{"externalUniqueId":"fc69ddec-af9a-48b4-8ef1-04da2a240976","dataInputAssociation":[{"targetRef":"17.0732cecf-014c-48b9-83ad-8a2b630e38e3","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AddressCountry.value"]}}]},{"targetRef":"17.29146fd4-bb37-473b-8c6e-22dcb1e361ed","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ApprovalStatus.value.toString()"]}}]},{"targetRef":"17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ClientName.value"]}}]},{"targetRef":"17.5b827af2-6c20-4bdf-891a-d17dc965ee58","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"17.d9b4ed60-a68b-41f9-8af9-8bcb05247672","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}]},{"targetRef":"17.00ea4fa8-2600-4e1d-87db-978288886492","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"17.a69faed4-c855-4be1-8307-b89b05feafdd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]},{"targetRef":"17.63483d1a-ac1d-446c-8a81-870bb63d64a1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcess.name"]}}]},{"targetRef":"17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ReferenceID.value"]}}]},{"targetRef":"17.53846b13-77a9-40ac-88ef-2919ea887e6b","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value"]}}]},{"targetRef":"17.a2c3391a-8d6f-4178-8748-e3116513ec9e","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}]},{"targetRef":"17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesFee.value"]}}]},{"targetRef":"17.964b10af-962a-4ccb-8670-730c06b8e42d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesRequested.value.toString()"]}}]}],"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TTrackingPoint","trackingGroupRef":"14.43c2b7da-1f30-47a7-9671-c254483b1364"}],"activityExtension":[{"conditionScript":"","conditional":false,"transactionalBehavior":"NotSet","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityExtension"}],"deleteTaskOnCompletion":[true],"nodeVisualInfo":[{"width":95,"x":725,"y":169,"declaredType":"TNodeVisualInfo","height":70}],"userTaskSettings":[{"activityAssignmentType":"Lane","activityWorkSchedule":{"timezoneType":0,"timeScheduleType":0,"holidayScheduleType":0},"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TUserTaskSettings","activityPriority":{"type":"Priority","priority":"Normal"},"activityDueDate":{"dueDate":{"unit":"Hours","value":"1","timeOfDay":"00:00"},"timeZone":{"type":"TimeZone","value":"(use default)"},"type":"TimeCalculation"}}],"activityType":["ServiceTask"]},"declaredType":"callActivity","startQuantity":1,"resourceRole":[{"teamAssignmentType":"Reference","name":"Lane","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"teamAssignmentType":"Reference","name":"Team","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"name":"Expert","declaredType":"performer"}],"default":"eec00b3f-42f0-4d4b-860a-cce614a9914d","name":"Complete Scoreboarding Stage","dataInputAssociation":[{"targetRef":"2055.3562c248-386a-48bc-8195-e02bc9485c93","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297","declaredType":"TFormalExpression","content":["null"]}}]}],"isForCompensation":false,"completionQuantity":1,"id":"07ade9b6-c9ce-4e27-8b68-d74bc3d2d168","calledElement":"1.001b03f9-8ca4-4874-8267-92d763809927"},{"targetRef":"07ade9b6-c9ce-4e27-8b68-d74bc3d2d168","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}],"happySequence":[true]},"name":"To Complete Scoreboarding Stage","declaredType":"sequenceFlow","id":"26b742d5-3902-4c8c-88b2-c845073f88ef","sourceRef":"01d9352a-6ab1-4006-8235-219c8d17f7bb"},{"outgoing":["37773f9d-10e6-40bd-8a1f-616e5889d300"],"incoming":["a69503aa-4365-48d8-82f5-5bed0b4edf9c"],"extensionElements":{"postTracking":[{"externalUniqueId":"bfc19573-8b5e-4a94-8594-d542b4717355","dataInputAssociation":[{"targetRef":"17.0732cecf-014c-48b9-83ad-8a2b630e38e3","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AddressCountry.value"]}}]},{"targetRef":"17.29146fd4-bb37-473b-8c6e-22dcb1e361ed","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ApprovalStatus.value.toString()"]}}]},{"targetRef":"17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ClientName.value"]}}]},{"targetRef":"17.5b827af2-6c20-4bdf-891a-d17dc965ee58","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"17.d9b4ed60-a68b-41f9-8af9-8bcb05247672","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}]},{"targetRef":"17.00ea4fa8-2600-4e1d-87db-978288886492","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"17.a69faed4-c855-4be1-8307-b89b05feafdd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]},{"targetRef":"17.63483d1a-ac1d-446c-8a81-870bb63d64a1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcess.name"]}}]},{"targetRef":"17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ReferenceID.value"]}}]},{"targetRef":"17.53846b13-77a9-40ac-88ef-2919ea887e6b","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value"]}}]},{"targetRef":"17.a2c3391a-8d6f-4178-8748-e3116513ec9e","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}]},{"targetRef":"17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesFee.value"]}}]},{"targetRef":"17.964b10af-962a-4ccb-8670-730c06b8e42d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesRequested.value.toString()"]}}]}],"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TTrackingPoint","trackingGroupRef":"14.43c2b7da-1f30-47a7-9671-c254483b1364"}],"activityExtension":[{"conditionScript":"","conditional":false,"transactionalBehavior":"NotSet","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityExtension"}],"nodeVisualInfo":[{"width":95,"x":728,"y":101,"declaredType":"TNodeVisualInfo","height":70}],"userTaskSettings":[{"activityAssignmentType":"Custom","subject":"Review Client Onboarding Request","activityWorkSchedule":{"timezoneType":0,"timeScheduleType":0,"holidayScheduleType":0},"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TUserTaskSettings","activityPriority":{"type":"Priority","priority":"Normal"},"activityDueDate":{"dueDate":{"unit":"Hours","value":"1","timeOfDay":"00:00"},"timeZone":{"type":"TimeZone","value":"(use default)"},"type":"TimeCalculation"}}],"activityType":["UserTask"]},"declaredType":"callActivity","startQuantity":1,"resourceRole":[{"teamAssignmentType":"Reference","name":"Lane","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"teamAssignmentType":"Reference","name":"Team","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"name":"Expert","declaredType":"performer"},{"resourceAssignmentExpression":{"expression":{"declaredType":"TExpression","content":["\"USER:\" + tw.local.caseProperties.UserID.value"]}},"teamAssignmentType":"Dynamic","name":"Custom","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None"}],"default":"37773f9d-10e6-40bd-8a1f-616e5889d300","name":"Review Cient Request","dataInputAssociation":[{"targetRef":"2055.2f8a38a9-a1b8-40cd-b0bb-19022cb8af4c","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcessInstance.parentCase.caseId.replace(\/[{}]\/g, \"\");"]}}]},{"targetRef":"2055.b9a4c43c-8ea8-4abd-ae8c-f00228e81663","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297","declaredType":"TFormalExpression","content":["tw.env.tosName"]}}]},{"targetRef":"2055.0d72d3b4-8531-470a-a1ad-1491e2d12ff5","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["true"]}}]},{"targetRef":"2055.e36c476d-c40c-4bac-8a44-aa4ed2184bee","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.2075662d-1d8b-4a39-b8bc-9ee2948723a4","declaredType":"TFormalExpression","content":["tw.local.caseProperties"]}}]}],"isForCompensation":false,"completionQuantity":1,"id":"f1fe64e1-b83a-4cd8-8053-0779ea5212e2","calledElement":"1.69653659-ff51-41cb-bd44-a77d40e14636"},{"targetRef":"07ade9b6-c9ce-4e27-8b68-d74bc3d2d168","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"bottomCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"topCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}],"happySequence":[true]},"name":"To Complete Scoreboarding Stage","declaredType":"sequenceFlow","id":"37773f9d-10e6-40bd-8a1f-616e5889d300","sourceRef":"f1fe64e1-b83a-4cd8-8053-0779ea5212e2"},{"incoming":["eec00b3f-42f0-4d4b-860a-cce614a9914d"],"extensionElements":{"nodeVisualInfo":[{"width":24,"x":944,"y":192,"declaredType":"TNodeVisualInfo","height":24}]},"name":"End","declaredType":"endEvent","id":"bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7"},{"targetRef":"bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7","extensionElements":{"sequenceFlowImplementation":[{"fireValidation":"Never","sboSyncEnabled":true,"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmext.TSequenceFlowImplementation"}],"linkVisualInfo":[{"sourcePortLocation":"rightCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":true,"showLabel":false}],"happySequence":[true]},"name":"To End","declaredType":"sequenceFlow","id":"eec00b3f-42f0-4d4b-860a-cce614a9914d","sourceRef":"07ade9b6-c9ce-4e27-8b68-d74bc3d2d168"},{"outgoing":["a69503aa-4365-48d8-82f5-5bed0b4edf9c"],"incoming":["45c771a7-44cf-470d-8fdc-1dba122da13f"],"extensionElements":{"postTracking":[{"externalUniqueId":"69bb3a5f-5011-4229-8337-e0952fd23c19","dataInputAssociation":[{"targetRef":"17.0732cecf-014c-48b9-83ad-8a2b630e38e3","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AddressCountry.value"]}}]},{"targetRef":"17.29146fd4-bb37-473b-8c6e-22dcb1e361ed","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.AnnualRevenue.value"]}}]},{"targetRef":"17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ApprovalStatus.value.toString()"]}}]},{"targetRef":"17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ClientName.value"]}}]},{"targetRef":"17.5b827af2-6c20-4bdf-891a-d17dc965ee58","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.CompanyAge.value"]}}]},{"targetRef":"17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.DefaultedPayment.value"]}}]},{"targetRef":"17.d9b4ed60-a68b-41f9-8af9-8bcb05247672","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.83ff975e-8dbc-42e5-b738-fa8bc08274a2","declaredType":"TFormalExpression","content":["tw.local.caseProperties.HighRisk.value"]}}]},{"targetRef":"17.00ea4fa8-2600-4e1d-87db-978288886492","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Industry.value.toString()"]}}]},{"targetRef":"17.a69faed4-c855-4be1-8307-b89b05feafdd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.NumberOfEmployees.value"]}}]},{"targetRef":"17.63483d1a-ac1d-446c-8a81-870bb63d64a1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.system.currentProcess.name"]}}]},{"targetRef":"17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ReferenceID.value"]}}]},{"targetRef":"17.53846b13-77a9-40ac-88ef-2919ea887e6b","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.536b2aa5-a30f-4eca-87fa-3a28066753ee","declaredType":"TFormalExpression","content":["tw.local.caseProperties.RiskConfidence.value"]}}]},{"targetRef":"17.a2c3391a-8d6f-4178-8748-e3116513ec9e","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Segment.value"]}}]},{"targetRef":"17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesFee.value"]}}]},{"targetRef":"17.964b10af-962a-4ccb-8670-730c06b8e42d","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.ServicesRequested.value.toString()"]}}]}],"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TTrackingPoint","trackingGroupRef":"14.43c2b7da-1f30-47a7-9671-c254483b1364"}],"activityExtension":[{"conditionScript":"","conditional":false,"transactionalBehavior":"NotSet","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityExtension"}],"deleteTaskOnCompletion":[true],"nodeVisualInfo":[{"width":95,"x":501,"y":70,"declaredType":"TNodeVisualInfo","height":70}],"userTaskSettings":[{"activityAssignmentType":"Lane","activityWorkSchedule":{"timezoneType":0,"timeScheduleType":0,"holidayScheduleType":0},"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TUserTaskSettings","activityPriority":{"type":"Priority","priority":"Normal"},"activityDueDate":{"dueDate":{"unit":"Hours","value":"1","timeOfDay":"00:00"},"timeZone":{"type":"TimeZone","value":"(use default)"},"type":"TimeCalculation"}}],"activityType":["ServiceTask"]},"declaredType":"callActivity","startQuantity":1,"resourceRole":[{"teamAssignmentType":"Reference","name":"Lane","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"teamAssignmentType":"Reference","name":"Team","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TActivityPerformer","distribution":"None","teamFilterService":{}},{"name":"Expert","declaredType":"performer"}],"default":"a69503aa-4365-48d8-82f5-5bed0b4edf9c","name":"Inform Client","dataInputAssociation":[{"targetRef":"2055.347e5038-c58a-45f2-83ee-9ba5d624f284","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.c09c9b6e-aabd-4897-bef2-ed61db106297","declaredType":"TFormalExpression","content":["null"]}}]},{"targetRef":"2055.9fdf2613-2417-46da-8039-e36ffb03b252","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["tw.local.caseProperties.Email.value"]}}]},{"targetRef":"2055.b423f63a-ab0e-49c7-8148-2e10084dcaf6","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["\"Your request is under review [Reference ID: \" + tw.local.caseProperties.ReferenceID.value + \"]\""]}}]},{"targetRef":"2055.c6e50b47-b386-42e9-8ef8-26e375031ff1","assignment":[{"from":{"evaluatesToTypeRef":"itm.12.db884a3c-c533-44b7-bb2d-47bec8ad4022","declaredType":"TFormalExpression","content":["\"Hello \" + tw.local.caseProperties.FirstName.value + \",&lt;br\/&gt;&lt;br\/&gt;This is with reference to your request with reference ID: \" + tw.local.caseProperties.ReferenceID.value + \"&lt;br\/&gt;Your request is being manually reviewed by one of our account managers. We will reach out to you in 2 to 3 business days. Thank you for your patience.&lt;br\/&gt;&lt;br\/&gt;Regards,&lt;br\/&gt;Focus Corp\""]}}]}],"isForCompensation":false,"completionQuantity":1,"id":"21374e01-d080-4067-8e49-0f8d0c82bcba","calledElement":"1.2c316c8c-89dc-4f5f-b253-587481655c17"},{"targetRef":"f1fe64e1-b83a-4cd8-8053-0779ea5212e2","extensionElements":{"linkVisualInfo":[{"sourcePortLocation":"topCenter","showCoachControlLabel":false,"labelPosition":0.0,"targetPortLocation":"leftCenter","declaredType":"TLinkVisualInfo","saveExecutionContext":false,"showLabel":false}],"happySequence":[true]},"name":"To Inform Client","declaredType":"sequenceFlow","id":"a69503aa-4365-48d8-82f5-5bed0b4edf9c","sourceRef":"21374e01-d080-4067-8e49-0f8d0c82bcba"}],"laneSet":[{"id":"c18f2df1-c6be-4ca0-969e-919fa3425274","lane":[{"flowNodeRef":["f1fe64e1-b83a-4cd8-8053-0779ea5212e2"],"extensionElements":{"nodeVisualInfo":[{"color":"#F8F8F8","width":3000,"x":0,"y":0,"declaredType":"TNodeVisualInfo","height":200}]},"name":"Account Manager","partitionElementRef":"24.f4a6d385-6588-4b52-9322-ce14da7b2f2c","declaredType":"lane","id":"0606ce88-6580-4c97-86fb-e186585293d8","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process\/wle}isSystemLane":"false"}},{"flowNodeRef":["12d86035-5658-4230-9d10-331b5908a268","128ddd62-73aa-42c7-80ae-f03d77d3e1cc","ba29631b-dd74-49d3-8e0a-05d309c5f100","01d9352a-6ab1-4006-8235-219c8d17f7bb","07ade9b6-c9ce-4e27-8b68-d74bc3d2d168","bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7","21374e01-d080-4067-8e49-0f8d0c82bcba"],"extensionElements":{"nodeVisualInfo":[{"color":"#F8F8F8","width":3000,"x":0,"y":201,"declaredType":"TNodeVisualInfo","height":279}]},"name":"System","partitionElementRef":"24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b","declaredType":"lane","id":"03384ab6-bdab-4941-94f6-a255465b43be","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process\/wle}isSystemLane":"true"}}]}],"resourceRole":[{"name":"participantRef","declaredType":"resourceRole"},{"name":"businessDataParticipantRef","declaredType":"resourceRole"},{"name":"perfMetricParticipantRef","declaredType":"resourceRole"},{"name":"ownerTeamParticipantRef","declaredType":"resourceRole"}],"isClosed":false,"extensionElements":{"parentCaseActivityId":["{6370A7B5-F10E-4FA6-9412-B9FA0DC76B25}"],"bpdExtension":[{"allowContentOperations":false,"enableTracking":true,"workSchedule":{"timezoneType":0,"timeScheduleType":0,"holidayScheduleType":0},"instanceName":"\"Perform Scoreboarding:\" + tw.system.process.instanceId","dueDateSettings":{"dueDate":{"unit":"Hours","value":"8","timeOfDay":"00:00"},"type":"TimeCalculation"},"autoTrackingName":"at1617731217543","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TBPDExtension","optimizeExecForLatency":false,"dueDateEnabled":true,"atRiskCalcEnabled":true,"allowProjectedPathManagement":false,"autoTrackingEnabled":false,"sboSyncEnabled":true}],"caseExtension":[{"declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmcaseext.TCaseExtension","caseFolder":{"allowSubfoldersCreation":false,"allowLocalDoc":false,"id":"bb4abfee-0046-4729-9992-4dbe51d73dfb","allowExternalFolder":false,"allowExternalDoc":false}}],"isConvergedProcess":[true]},"documentation":[{"content":["Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)"],"textFormat":"text\/plain"}],"name":"Perform Scoreboarding","declaredType":"process","id":"25.7754a0e9-5b3e-41c7-ae0b-3929b9e0d571","processType":"None","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process}executionMode":"longRunning"},"ioSpecification":{"inputSet":[{"id":"_0278f239-9ad2-4f0c-b175-994a2572ad49"}],"outputSet":[{"id":"_7f6f24fd-c884-4423-8b77-a00bc66b6c29"}],"dataInput":[{"extensionElements":{"parameterType":["CaseObject"],"searchableField":[{"path":".ClientName.value","alias":"Client","declaredType":"com.ibm.bpmsdk.model.bpmn20.ibmwleext.TSearchableField","id":"060c0a57-c1e6-4a51-8ab9-f67a3b0b0400","type":"12.db884a3c-c533-44b7-bb2d-47bec8ad4022"}]},"itemSubjectRef":"itm.12.2075662d-1d8b-4a39-b8bc-9ee2948723a4","name":"caseProperties","isCollection":false,"id":"2007.2bf49f6c-849e-4c7b-89dc-a4c0f08023df","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process}readOnly":"true"}},{"extensionElements":{"parameterType":["CaseObject"]},"itemSubjectRef":"itm.12.ad8a10a9-a515-45cd-8ab0-d70296015ac2","name":"activityProperties","isCollection":false,"id":"2007.1d33f395-245b-46b4-bee8-85c09171c71b","otherAttributes":{"{http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/process}readOnly":"true"}}]}},{"name":"Perform ScoreboardingInterface","declaredType":"interface","id":"_db7b8b01-853f-4519-99ec-01023a7c6d7f"}],"targetNamespace":"","typeLanguage":"http:\/\/www.w3.org\/2001\/XMLSchema","expressionLanguage":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/expression-lang\/javascript","id":"5ba41cec-6158-4c88-9a78-d231735691a7"}</jsonData>
+        <migrationData isNull="true" />
+        <rwfData isNull="true" />
+        <rwfStatus isNull="true" />
+        <templateId isNull="true" />
+        <externalId>{6370A7B5-F10E-4FA6-9412-B9FA0DC76B25}</externalId>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7f37</guid>
+        <versionId>39c6035a-962e-4eca-a170-c3ad9b5d1f12</versionId>
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <blobField1 isNull="true" />
+        <BusinessProcessDiagram id="bpdid:89416636f7ce572e:-54eaee34:187e6df992f:-7e52">
+            <metadata>
+                <entry>
+                    <key>SAP_META.SHOULDRECOVER</key>
+                    <value>no</value>
+                </entry>
+            </metadata>
+            <name>Perform Scoreboarding</name>
+            <documentation>&lt;html&gt;&lt;body&gt;Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)&lt;/body&gt;&lt;/html&gt;</documentation>
+            <name>Perform Scoreboarding</name>
+            <dimension>
+                <size w="600" h="150" />
+            </dimension>
+            <author>cpadmin</author>
+            <isTrackingEnabled>true</isTrackingEnabled>
+            <isCriticalPathEnabled>false</isCriticalPathEnabled>
+            <isSpcEnabled>false</isSpcEnabled>
+            <isDueDateEnabled>true</isDueDateEnabled>
+            <isAtRiskCalcEnabled>true</isAtRiskCalcEnabled>
+            <creationDate>1617731217556</creationDate>
+            <modificationDate>1683651363915</modificationDate>
+            <metricSettings itemType="2" />
+            <instanceNameExpression>"Perform Scoreboarding:" + tw.system.process.instanceId</instanceNameExpression>
+            <dueDateType>1</dueDateType>
+            <dueDateTime>8</dueDateTime>
+            <dueDateTimeResolution>1</dueDateTimeResolution>
+            <dueDateTimeTOD>00:00</dueDateTimeTOD>
+            <officeIntegration>
+                <sharePointParentSiteDisabled>true</sharePointParentSiteDisabled>
+                <sharePointParentSiteName>&lt;#= tw.system.process.name #&gt;</sharePointParentSiteName>
+                <sharePointParentSiteTemplate>ParentSiteTemplate.stp</sharePointParentSiteTemplate>
+                <sharePointWorkspaceSiteName>&lt;#= tw.system.process.name #&gt; &lt;#= tw.system.process.instanceId #&gt;</sharePointWorkspaceSiteName>
+                <sharePointWorkspaceSiteDescription>This site has been automatically generated for managing collaborations and documents 
+for the Lombardi TeamWorks process instance: &lt;#= tw.system.process.name #&gt; &lt;#= tw.system.process.instanceId #&gt;
+
+TeamWorks Link:  ~APPSERVER_URL~/portal/jsp/getProcessDetails.do?bpdInstanceId=&lt;#= tw.system.process.instanceId #&gt;
+
+</sharePointWorkspaceSiteDescription>
+                <sharePointWorkspaceSiteTemplate>WorkspaceSiteTemplate.stp</sharePointWorkspaceSiteTemplate>
+                <sharePointLCID>1033</sharePointLCID>
+            </officeIntegration>
+            <timeScheduleType>0</timeScheduleType>
+            <holidayScheduleType>0</holidayScheduleType>
+            <timezoneType>0</timezoneType>
+            <executionProfile>default</executionProfile>
+            <isSBOSyncEnabled>true</isSBOSyncEnabled>
+            <allowContentOperations>false</allowContentOperations>
+            <parentCaseActivityId>{6370A7B5-F10E-4FA6-9412-B9FA0DC76B25}</parentCaseActivityId>
+            <isLegacyCaseMigrated>false</isLegacyCaseMigrated>
+            <hasCaseObjectParams>false</hasCaseObjectParams>
+            <defaultPool>
+                <BpmnObjectId id="c18f2df1-c6be-4ca0-969e-919fa3425274" />
+            </defaultPool>
+            <defaultInstanceUI id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72ab" />
+            <ownerTeamInstanceUI id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72ac" />
+            <simulationScenario id="bpdid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7f24">
+                <name>Default</name>
+                <simNumInstances>100</simNumInstances>
+                <simMinutesBetween>30</simMinutesBetween>
+                <maxInstances>100</maxInstances>
+                <useMaxInstances>true</useMaxInstances>
+                <continueFromReal>false</continueFromReal>
+                <useParticipantCalendars>false</useParticipantCalendars>
+                <useDuration>false</useDuration>
+                <duration>86400</duration>
+                <startTime>1617731217718</startTime>
+            </simulationScenario>
+            <flow id="36d583e0-d8c3-499e-8353-944c0a839e24" connectionType="SequenceFlow">
+                <name>To Confidence</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7223" />
+                </connection>
+            </flow>
+            <flow id="26b742d5-3902-4c8c-88b2-c845073f88ef" connectionType="SequenceFlow">
+                <name>To Complete Scoreboarding Stage</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7222" />
+                </connection>
+            </flow>
+            <flow id="dc2eb869-8737-4e6b-86ce-6425a2339088" connectionType="SequenceFlow">
+                <name>High Confidence</name>
+                <documentation></documentation>
+                <nameVisible>true</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7221" />
+                </connection>
+            </flow>
+            <flow id="a69503aa-4365-48d8-82f5-5bed0b4edf9c" connectionType="SequenceFlow">
+                <name>To Inform Client</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7220" />
+                </connection>
+            </flow>
+            <flow id="674c06b5-07c5-460f-8821-7c5198cd60d8" connectionType="SequenceFlow">
+                <name>To Perform Scoreboarding</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-721f" />
+                </connection>
+            </flow>
+            <flow id="eec00b3f-42f0-4d4b-860a-cce614a9914d" connectionType="SequenceFlow">
+                <name>To End</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-721e" />
+                </connection>
+            </flow>
+            <flow id="45c771a7-44cf-470d-8fdc-1dba122da13f" connectionType="SequenceFlow">
+                <name>Low Confidence</name>
+                <documentation></documentation>
+                <nameVisible>true</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722e">
+                        <expression>tw.local.caseProperties.RiskConfidence.value	  &lt;	  80</expression>
+                    </condition>
+                </connection>
+            </flow>
+            <flow id="37773f9d-10e6-40bd-8a1f-616e5889d300" connectionType="SequenceFlow">
+                <name>To Complete Scoreboarding Stage</name>
+                <documentation></documentation>
+                <nameVisible>false</nameVisible>
+                <metricSettings itemType="32" />
+                <connection>
+                    <lineType>0</lineType>
+                    <condition id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-721d" />
+                </connection>
+            </flow>
+            <pool id="c18f2df1-c6be-4ca0-969e-919fa3425274">
+                <name>Pool</name>
+                <documentation>&lt;html&gt;&lt;body&gt;Scoreboard the client (Classifies them into a segment and assess risk of onboarding them)&lt;/body&gt;&lt;/html&gt;</documentation>
+                <restrictedName>at1617731217543</restrictedName>
+                <dimension>
+                    <size w="3000" h="479" />
+                </dimension>
+                <autoTrackingEnabled>false</autoTrackingEnabled>
+                <lane id="0606ce88-6580-4c97-86fb-e186585293d8">
+                    <name>Account Manager</name>
+                    <height>200</height>
+                    <laneColor>0</laneColor>
+                    <systemLane>false</systemLane>
+                    <attachedParticipant>/24.f4a6d385-6588-4b52-9322-ce14da7b2f2c</attachedParticipant>
+                    <flowObject id="f1fe64e1-b83a-4cd8-8053-0779ea5212e2" componentType="Activity">
+                        <name>Review Cient Request</name>
+                        <position>
+                            <location x="728" y="101" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <loopType>0</loopType>
+                            <loopMaximum>1</loopMaximum>
+                            <startQuantity>1</startQuantity>
+                            <isAutoflowable>false</isAutoflowable>
+                            <MIOrdering>1</MIOrdering>
+                            <MIFlowCondition>0</MIFlowCondition>
+                            <cancelRemainingInstances>false</cancelRemainingInstances>
+                            <metricSettings itemType="4" />
+                            <implementationType>1</implementationType>
+                            <isConditional>false</isConditional>
+                            <conditionScript></conditionScript>
+                            <bpmnTaskType>1</bpmnTaskType>
+                            <activityOptionType>REQUIRED</activityOptionType>
+                            <activityExecutionType>NONE</activityExecutionType>
+                            <activityExecutionTypePreviousValue>AUTOMATIC</activityExecutionTypePreviousValue>
+                            <isHidden>false</isHidden>
+                            <isRepeatable>false</isRepeatable>
+                            <transactionalBehavior>0</transactionalBehavior>
+                            <isRobotTask>false</isRobotTask>
+                            <implementation>
+                                <attachedActivityId>/1.69653659-ff51-41cb-bd44-a77d40e14636</attachedActivityId>
+                                <sendToType>3</sendToType>
+                                <sendTo>"USER:" + tw.local.caseProperties.UserID.value</sendTo>
+                                <taskRouting>0</taskRouting>
+                                <dueDateType>1</dueDateType>
+                                <dueDateTime>1</dueDateTime>
+                                <dueDateTimeResolution>1</dueDateTimeResolution>
+                                <dueDateTimeTOD>00:00</dueDateTimeTOD>
+                                <priorityType>0</priorityType>
+                                <priority>30.30</priority>
+                                <subject>Review Client Onboarding Request</subject>
+                                <forceSend>true</forceSend>
+                                <timeSchedule>(use default)</timeSchedule>
+                                <timeScheduleType>0</timeScheduleType>
+                                <timeZone>(use default)</timeZone>
+                                <timeZoneType>0</timeZoneType>
+                                <holidaySchedule>(use default)</holidaySchedule>
+                                <holidayScheduleType>0</holidayScheduleType>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7253">
+                                    <name>caseId</name>
+                                    <classId>5c817616-ef49-41fa-89ce-41f8666ef643/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <value>tw.system.currentProcessInstance.parentCase.caseId.replace(/[{}]/g, "");</value>
+                                    <parameterId>2055.2f8a38a9-a1b8-40cd-b0bb-19022cb8af4c</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7252">
+                                    <name>tosName</name>
+                                    <classId>5c817616-ef49-41fa-89ce-41f8666ef643/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <value>tw.env.tosName</value>
+                                    <parameterId>2055.b9a4c43c-8ea8-4abd-ae8c-f00228e81663</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7251">
+                                    <name>isCaseClient</name>
+                                    <classId>5c817616-ef49-41fa-89ce-41f8666ef643/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classId>
+                                    <input>true</input>
+                                    <value>true</value>
+                                    <parameterId>2055.0d72d3b4-8531-470a-a1ad-1491e2d12ff5</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7250">
+                                    <name>caseProperties</name>
+                                    <classId>/12.2075662d-1d8b-4a39-b8bc-9ee2948723a4</classId>
+                                    <input>true</input>
+                                    <value>tw.local.caseProperties</value>
+                                    <parameterId>2055.e36c476d-c40c-4bac-8a44-aa4ed2184bee</parameterId>
+                                </inputActivityParameterMapping>
+                                <laneFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724f">
+                                    <serviceType>1</serviceType>
+                                    <teamRef>/24.f4a6d385-6588-4b52-9322-ce14da7b2f2c</teamRef>
+                                </laneFilter>
+                                <teamFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724e">
+                                    <serviceType>1</serviceType>
+                                </teamFilter>
+                            </implementation>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7225">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="a69503aa-4365-48d8-82f5-5bed0b4edf9c" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722a">
+                            <positionId>bottomCenter</positionId>
+                            <flow ref="37773f9d-10e6-40bd-8a1f-616e5889d300" />
+                        </outputPort>
+                        <attachedEvent id="6b87d88b-dce4-478c-a345-c1423eb79dbb" componentType="Event">
+                            <name>Review Cient Request_postTracking</name>
+                            <position>
+                                <location x="0" y="0" />
+                            </position>
+                            <positionId>rightTop</positionId>
+                            <dropIconUrl>0</dropIconUrl>
+                            <colorInput>Color</colorInput>
+                            <component>
+                                <nameVisible>true</nameVisible>
+                                <eventType>3</eventType>
+                                <cancelActivity>true</cancelActivity>
+                                <repeatable>false</repeatable>
+                                <doCloseTask>false</doCloseTask>
+                                <EventAction id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7265">
+                                    <actionType>100</actionType>
+                                    <actionSubType>0</actionSubType>
+                                    <EventActionImplementation id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7264">
+                                        <trackingGroupId>/14.43c2b7da-1f30-47a7-9671-c254483b1364</trackingGroupId>
+                                        <externalUniqueId>bfc19573-8b5e-4a94-8594-d542b4717355</externalUniqueId>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7263">
+                                            <trackedVariableId>17.0732cecf-014c-48b9-83ad-8a2b630e38e3</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AddressCountry.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7262">
+                                            <trackedVariableId>17.29146fd4-bb37-473b-8c6e-22dcb1e361ed</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AnnualRevenue.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7261">
+                                            <trackedVariableId>17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ApprovalStatus.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7260">
+                                            <trackedVariableId>17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ClientName.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725f">
+                                            <trackedVariableId>17.5b827af2-6c20-4bdf-891a-d17dc965ee58</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.CompanyAge.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725e">
+                                            <trackedVariableId>17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.DefaultedPayment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725d">
+                                            <trackedVariableId>17.d9b4ed60-a68b-41f9-8af9-8bcb05247672</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.HighRisk.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725c">
+                                            <trackedVariableId>17.00ea4fa8-2600-4e1d-87db-978288886492</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Industry.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725b">
+                                            <trackedVariableId>17.a69faed4-c855-4be1-8307-b89b05feafdd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.NumberOfEmployees.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-725a">
+                                            <trackedVariableId>17.63483d1a-ac1d-446c-8a81-870bb63d64a1</trackedVariableId>
+                                            <valueExpression>tw.system.currentProcess.name</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7259">
+                                            <trackedVariableId>17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ReferenceID.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7258">
+                                            <trackedVariableId>17.53846b13-77a9-40ac-88ef-2919ea887e6b</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.RiskConfidence.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7257">
+                                            <trackedVariableId>17.a2c3391a-8d6f-4178-8748-e3116513ec9e</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Segment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7256">
+                                            <trackedVariableId>17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesFee.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7255">
+                                            <trackedVariableId>17.964b10af-962a-4ccb-8670-730c06b8e42d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesRequested.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                    </EventActionImplementation>
+                                </EventAction>
+                            </component>
+                        </attachedEvent>
+                    </flowObject>
+                </lane>
+                <lane id="03384ab6-bdab-4941-94f6-a255465b43be">
+                    <name>System</name>
+                    <height>279</height>
+                    <laneColor>0</laneColor>
+                    <systemLane>true</systemLane>
+                    <attachedParticipant>5c817616-ef49-41fa-89ce-41f8666ef643/24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b</attachedParticipant>
+                    <flowObject id="01d9352a-6ab1-4006-8235-219c8d17f7bb" componentType="Activity">
+                        <name>Handle Request</name>
+                        <documentation></documentation>
+                        <position>
+                            <location x="501" y="169" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <loopType>0</loopType>
+                            <loopMaximum>1</loopMaximum>
+                            <startQuantity>1</startQuantity>
+                            <isAutoflowable>false</isAutoflowable>
+                            <MIOrdering>1</MIOrdering>
+                            <MIFlowCondition>0</MIFlowCondition>
+                            <cancelRemainingInstances>false</cancelRemainingInstances>
+                            <metricSettings itemType="4" />
+                            <implementationType>3</implementationType>
+                            <isConditional>false</isConditional>
+                            <bpmnTaskType>4</bpmnTaskType>
+                            <activityOptionType>REQUIRED</activityOptionType>
+                            <activityExecutionType>NONE</activityExecutionType>
+                            <activityExecutionTypePreviousValue>AUTOMATIC</activityExecutionTypePreviousValue>
+                            <isHidden>false</isHidden>
+                            <isRepeatable>false</isRepeatable>
+                            <transactionalBehavior>0</transactionalBehavior>
+                            <isRobotTask>false</isRobotTask>
+                            <implementation>
+                                <script>// This is a low-risk request. Approve it without human intervention
+if(!tw.local.caseProperties.HighRisk.value) {
+	tw.local.caseProperties.ApprovalStatus.value = "Approved";
+} else {
+	tw.local.caseProperties.ApprovalStatus.value = "Rejected";
+}</script>
+                            </implementation>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722d">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="dc2eb869-8737-4e6b-86ce-6425a2339088" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722c">
+                            <positionId>rightCenter</positionId>
+                            <flow ref="26b742d5-3902-4c8c-88b2-c845073f88ef" />
+                        </outputPort>
+                        <attachedEvent id="8e52ba5b-3834-46cc-bd3c-be086f592fab" componentType="Event">
+                            <name>Handle Request_postTracking</name>
+                            <position>
+                                <location x="0" y="0" />
+                            </position>
+                            <positionId>rightTop</positionId>
+                            <dropIconUrl>0</dropIconUrl>
+                            <colorInput>Color</colorInput>
+                            <component>
+                                <nameVisible>true</nameVisible>
+                                <eventType>3</eventType>
+                                <cancelActivity>true</cancelActivity>
+                                <repeatable>false</repeatable>
+                                <doCloseTask>false</doCloseTask>
+                                <EventAction id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a8">
+                                    <actionType>100</actionType>
+                                    <actionSubType>0</actionSubType>
+                                    <EventActionImplementation id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a7">
+                                        <trackingGroupId>/14.43c2b7da-1f30-47a7-9671-c254483b1364</trackingGroupId>
+                                        <externalUniqueId>d1456916-b7e9-4363-84b2-cfe44973c6d4</externalUniqueId>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a6">
+                                            <trackedVariableId>17.0732cecf-014c-48b9-83ad-8a2b630e38e3</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AddressCountry.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a5">
+                                            <trackedVariableId>17.29146fd4-bb37-473b-8c6e-22dcb1e361ed</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AnnualRevenue.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a4">
+                                            <trackedVariableId>17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ApprovalStatus.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a3">
+                                            <trackedVariableId>17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ClientName.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a2">
+                                            <trackedVariableId>17.5b827af2-6c20-4bdf-891a-d17dc965ee58</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.CompanyAge.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a1">
+                                            <trackedVariableId>17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.DefaultedPayment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-72a0">
+                                            <trackedVariableId>17.d9b4ed60-a68b-41f9-8af9-8bcb05247672</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.HighRisk.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729f">
+                                            <trackedVariableId>17.00ea4fa8-2600-4e1d-87db-978288886492</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Industry.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729e">
+                                            <trackedVariableId>17.a69faed4-c855-4be1-8307-b89b05feafdd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.NumberOfEmployees.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729d">
+                                            <trackedVariableId>17.63483d1a-ac1d-446c-8a81-870bb63d64a1</trackedVariableId>
+                                            <valueExpression>tw.system.currentProcess.name</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729c">
+                                            <trackedVariableId>17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ReferenceID.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729b">
+                                            <trackedVariableId>17.53846b13-77a9-40ac-88ef-2919ea887e6b</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.RiskConfidence.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-729a">
+                                            <trackedVariableId>17.a2c3391a-8d6f-4178-8748-e3116513ec9e</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Segment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7299">
+                                            <trackedVariableId>17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesFee.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7298">
+                                            <trackedVariableId>17.964b10af-962a-4ccb-8670-730c06b8e42d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesRequested.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                    </EventActionImplementation>
+                                </EventAction>
+                            </component>
+                        </attachedEvent>
+                    </flowObject>
+                    <flowObject id="128ddd62-73aa-42c7-80ae-f03d77d3e1cc" componentType="Activity">
+                        <name>Perform Scoreboarding</name>
+                        <position>
+                            <location x="142" y="69" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <loopType>0</loopType>
+                            <loopMaximum>1</loopMaximum>
+                            <startQuantity>1</startQuantity>
+                            <isAutoflowable>false</isAutoflowable>
+                            <MIOrdering>1</MIOrdering>
+                            <MIFlowCondition>0</MIFlowCondition>
+                            <cancelRemainingInstances>false</cancelRemainingInstances>
+                            <metricSettings itemType="4" />
+                            <implementationType>4</implementationType>
+                            <isConditional>false</isConditional>
+                            <conditionScript></conditionScript>
+                            <bpmnTaskType>3</bpmnTaskType>
+                            <activityOptionType>REQUIRED</activityOptionType>
+                            <activityExecutionType>NONE</activityExecutionType>
+                            <activityExecutionTypePreviousValue>AUTOMATIC</activityExecutionTypePreviousValue>
+                            <isHidden>false</isHidden>
+                            <isRepeatable>false</isRepeatable>
+                            <transactionalBehavior>0</transactionalBehavior>
+                            <isRobotTask>false</isRobotTask>
+                            <implementation>
+                                <attachedActivityId>3198dd5f-98ea-430d-bec3-8cd9477ec3ea/1.8a9a656d-8f3e-4e2a-952b-ce82f36bca61</attachedActivityId>
+                                <sendToType>1</sendToType>
+                                <taskRouting>0</taskRouting>
+                                <dueDateType>1</dueDateType>
+                                <dueDateTime>1</dueDateTime>
+                                <dueDateTimeResolution>1</dueDateTimeResolution>
+                                <dueDateTimeTOD>00:00</dueDateTimeTOD>
+                                <priorityType>0</priorityType>
+                                <priority>30.30</priority>
+                                <forceSend>true</forceSend>
+                                <noTask>true</noTask>
+                                <timeSchedule>(use default)</timeSchedule>
+                                <timeScheduleType>0</timeScheduleType>
+                                <timeZone>(use default)</timeZone>
+                                <timeZoneType>0</timeZoneType>
+                                <holidaySchedule>(use default)</holidaySchedule>
+                                <holidayScheduleType>0</holidayScheduleType>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7284">
+                                    <name>industry</name>
+                                    <classId>/12.856e5bd1-15e7-4bcf-afe6-77e2c513be45</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.Industry.value.toString()</value>
+                                    <parameterId>2055.a60716fa-f870-46dc-bf5d-746bd2ab3cba</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7283">
+                                    <name>annualRevenue</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.AnnualRevenue.value</value>
+                                    <parameterId>2055.8cc6a0b4-6a82-4ba6-b235-aa79cedb0d78</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7282">
+                                    <name>companyAge</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.CompanyAge.value</value>
+                                    <parameterId>2055.78382d55-d044-43e2-8a47-78e3ed771557</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7281">
+                                    <name>defaultedPayment</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.DefaultedPayment.value</value>
+                                    <parameterId>2055.46e733c7-f3c7-4774-a7c7-6b401ab629ba</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7280">
+                                    <name>numberOfEmployees</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.3fa0d7a0-828a-4d60-99cc-db5ed143fc2d</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.NumberOfEmployees.value</value>
+                                    <parameterId>2055.13d53a9d-f57d-43a8-aef7-79235f5abec1</parameterId>
+                                </inputActivityParameterMapping>
+                                <outputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727f">
+                                    <name>confidence</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.536b2aa5-a30f-4eca-87fa-3a28066753ee</classId>
+                                    <value>tw.local.caseProperties.RiskConfidence.value</value>
+                                    <parameterId>2055.2d3ab132-f714-45db-82e7-b7d180ed228a</parameterId>
+                                </outputActivityParameterMapping>
+                                <outputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727e">
+                                    <name>highRisk</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.83ff975e-8dbc-42e5-b738-fa8bc08274a2</classId>
+                                    <value>tw.local.caseProperties.HighRisk.value</value>
+                                    <parameterId>2055.2aca5357-1f95-43c5-8acb-395f65b8adc1</parameterId>
+                                </outputActivityParameterMapping>
+                                <outputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727d">
+                                    <name>segment</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <value>tw.local.caseProperties.Segment.value</value>
+                                    <parameterId>2055.211cf99d-a429-4f60-8616-1ac6bb4f0df2</parameterId>
+                                </outputActivityParameterMapping>
+                                <laneFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727c">
+                                    <serviceType>1</serviceType>
+                                    <teamRef>5c817616-ef49-41fa-89ce-41f8666ef643/24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b</teamRef>
+                                </laneFilter>
+                                <teamFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727b">
+                                    <serviceType>1</serviceType>
+                                </teamFilter>
+                            </implementation>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7234">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="674c06b5-07c5-460f-8821-7c5198cd60d8" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7233">
+                            <positionId>rightCenter</positionId>
+                            <flow ref="36d583e0-d8c3-499e-8353-944c0a839e24" />
+                        </outputPort>
+                        <attachedEvent id="5b244e25-1575-42b0-8741-8a2704b06b6e" componentType="Event">
+                            <name>Perform Scoreboarding_postTracking</name>
+                            <position>
+                                <location x="0" y="0" />
+                            </position>
+                            <positionId>rightTop</positionId>
+                            <dropIconUrl>0</dropIconUrl>
+                            <colorInput>Color</colorInput>
+                            <component>
+                                <nameVisible>true</nameVisible>
+                                <eventType>3</eventType>
+                                <cancelActivity>true</cancelActivity>
+                                <repeatable>false</repeatable>
+                                <doCloseTask>false</doCloseTask>
+                                <EventAction id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7296">
+                                    <actionType>100</actionType>
+                                    <actionSubType>0</actionSubType>
+                                    <EventActionImplementation id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7295">
+                                        <trackingGroupId>/14.43c2b7da-1f30-47a7-9671-c254483b1364</trackingGroupId>
+                                        <externalUniqueId>15b9c582-7260-4bb7-8db2-b3f4e91c9e0d</externalUniqueId>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7294">
+                                            <trackedVariableId>17.0732cecf-014c-48b9-83ad-8a2b630e38e3</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AddressCountry.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7293">
+                                            <trackedVariableId>17.29146fd4-bb37-473b-8c6e-22dcb1e361ed</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AnnualRevenue.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7292">
+                                            <trackedVariableId>17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ApprovalStatus.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7291">
+                                            <trackedVariableId>17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ClientName.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7290">
+                                            <trackedVariableId>17.5b827af2-6c20-4bdf-891a-d17dc965ee58</trackedVariableId>
+                                            <valueExpression> tw.local.caseProperties.CompanyAge.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728f">
+                                            <trackedVariableId>17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.DefaultedPayment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728e">
+                                            <trackedVariableId>17.d9b4ed60-a68b-41f9-8af9-8bcb05247672</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.HighRisk.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728d">
+                                            <trackedVariableId>17.00ea4fa8-2600-4e1d-87db-978288886492</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Industry.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728c">
+                                            <trackedVariableId>17.a69faed4-c855-4be1-8307-b89b05feafdd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.NumberOfEmployees.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728b">
+                                            <trackedVariableId>17.63483d1a-ac1d-446c-8a81-870bb63d64a1</trackedVariableId>
+                                            <valueExpression>tw.system.currentProcess.name</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-728a">
+                                            <trackedVariableId>17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ReferenceID.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7289">
+                                            <trackedVariableId>17.53846b13-77a9-40ac-88ef-2919ea887e6b</trackedVariableId>
+                                            <valueExpression> tw.local.caseProperties.RiskConfidence.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7288">
+                                            <trackedVariableId>17.a2c3391a-8d6f-4178-8748-e3116513ec9e</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Segment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7287">
+                                            <trackedVariableId>17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesFee.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7286">
+                                            <trackedVariableId>17.964b10af-962a-4ccb-8670-730c06b8e42d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesRequested.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                    </EventActionImplementation>
+                                </EventAction>
+                            </component>
+                        </attachedEvent>
+                    </flowObject>
+                    <flowObject id="07ade9b6-c9ce-4e27-8b68-d74bc3d2d168" componentType="Activity">
+                        <name>Complete Scoreboarding Stage</name>
+                        <position>
+                            <location x="725" y="169" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <loopType>0</loopType>
+                            <loopMaximum>1</loopMaximum>
+                            <startQuantity>1</startQuantity>
+                            <isAutoflowable>false</isAutoflowable>
+                            <MIOrdering>1</MIOrdering>
+                            <MIFlowCondition>0</MIFlowCondition>
+                            <cancelRemainingInstances>false</cancelRemainingInstances>
+                            <metricSettings itemType="4" />
+                            <implementationType>4</implementationType>
+                            <isConditional>false</isConditional>
+                            <conditionScript></conditionScript>
+                            <bpmnTaskType>3</bpmnTaskType>
+                            <activityOptionType>REQUIRED</activityOptionType>
+                            <activityExecutionType>NONE</activityExecutionType>
+                            <activityExecutionTypePreviousValue>AUTOMATIC</activityExecutionTypePreviousValue>
+                            <isHidden>false</isHidden>
+                            <isRepeatable>false</isRepeatable>
+                            <transactionalBehavior>0</transactionalBehavior>
+                            <isRobotTask>false</isRobotTask>
+                            <implementation>
+                                <attachedActivityId>/1.001b03f9-8ca4-4874-8267-92d763809927</attachedActivityId>
+                                <sendToType>1</sendToType>
+                                <taskRouting>0</taskRouting>
+                                <dueDateType>1</dueDateType>
+                                <dueDateTime>1</dueDateTime>
+                                <dueDateTimeResolution>1</dueDateTimeResolution>
+                                <dueDateTimeTOD>00:00</dueDateTimeTOD>
+                                <priorityType>0</priorityType>
+                                <priority>30.30</priority>
+                                <forceSend>true</forceSend>
+                                <noTask>true</noTask>
+                                <timeSchedule>(use default)</timeSchedule>
+                                <timeScheduleType>0</timeScheduleType>
+                                <timeZone>(use default)</timeZone>
+                                <timeZoneType>0</timeZoneType>
+                                <holidaySchedule>(use default)</holidaySchedule>
+                                <holidayScheduleType>0</holidayScheduleType>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7268">
+                                    <name>comment</name>
+                                    <classId>5c817616-ef49-41fa-89ce-41f8666ef643/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <value>null</value>
+                                    <parameterId>2055.3562c248-386a-48bc-8195-e02bc9485c93</parameterId>
+                                </inputActivityParameterMapping>
+                                <laneFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7267">
+                                    <serviceType>1</serviceType>
+                                    <teamRef>5c817616-ef49-41fa-89ce-41f8666ef643/24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b</teamRef>
+                                </laneFilter>
+                                <teamFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7266">
+                                    <serviceType>1</serviceType>
+                                </teamFilter>
+                            </implementation>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722b">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="26b742d5-3902-4c8c-88b2-c845073f88ef" />
+                        </inputPort>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7229">
+                            <positionId>topCenter</positionId>
+                            <input>true</input>
+                            <flow ref="37773f9d-10e6-40bd-8a1f-616e5889d300" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7228">
+                            <positionId>rightCenter</positionId>
+                            <flow ref="eec00b3f-42f0-4d4b-860a-cce614a9914d" />
+                        </outputPort>
+                        <attachedEvent id="f260bb21-46b5-4903-8228-3265a66fa1fb" componentType="Event">
+                            <name>Complete Scoreboarding Stage_postTracking</name>
+                            <position>
+                                <location x="0" y="0" />
+                            </position>
+                            <positionId>rightTop</positionId>
+                            <dropIconUrl>0</dropIconUrl>
+                            <colorInput>Color</colorInput>
+                            <component>
+                                <nameVisible>true</nameVisible>
+                                <eventType>3</eventType>
+                                <cancelActivity>true</cancelActivity>
+                                <repeatable>false</repeatable>
+                                <doCloseTask>false</doCloseTask>
+                                <EventAction id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-727a">
+                                    <actionType>100</actionType>
+                                    <actionSubType>0</actionSubType>
+                                    <EventActionImplementation id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7279">
+                                        <trackingGroupId>/14.43c2b7da-1f30-47a7-9671-c254483b1364</trackingGroupId>
+                                        <externalUniqueId>fc69ddec-af9a-48b4-8ef1-04da2a240976</externalUniqueId>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7278">
+                                            <trackedVariableId>17.0732cecf-014c-48b9-83ad-8a2b630e38e3</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AddressCountry.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7277">
+                                            <trackedVariableId>17.29146fd4-bb37-473b-8c6e-22dcb1e361ed</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AnnualRevenue.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7276">
+                                            <trackedVariableId>17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ApprovalStatus.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7275">
+                                            <trackedVariableId>17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ClientName.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7274">
+                                            <trackedVariableId>17.5b827af2-6c20-4bdf-891a-d17dc965ee58</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.CompanyAge.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7273">
+                                            <trackedVariableId>17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.DefaultedPayment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7272">
+                                            <trackedVariableId>17.d9b4ed60-a68b-41f9-8af9-8bcb05247672</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.HighRisk.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7271">
+                                            <trackedVariableId>17.00ea4fa8-2600-4e1d-87db-978288886492</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Industry.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7270">
+                                            <trackedVariableId>17.a69faed4-c855-4be1-8307-b89b05feafdd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.NumberOfEmployees.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726f">
+                                            <trackedVariableId>17.63483d1a-ac1d-446c-8a81-870bb63d64a1</trackedVariableId>
+                                            <valueExpression>tw.system.currentProcess.name</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726e">
+                                            <trackedVariableId>17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ReferenceID.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726d">
+                                            <trackedVariableId>17.53846b13-77a9-40ac-88ef-2919ea887e6b</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.RiskConfidence.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726c">
+                                            <trackedVariableId>17.a2c3391a-8d6f-4178-8748-e3116513ec9e</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Segment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726b">
+                                            <trackedVariableId>17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesFee.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-726a">
+                                            <trackedVariableId>17.964b10af-962a-4ccb-8670-730c06b8e42d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesRequested.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                    </EventActionImplementation>
+                                </EventAction>
+                            </component>
+                        </attachedEvent>
+                    </flowObject>
+                    <flowObject id="21374e01-d080-4067-8e49-0f8d0c82bcba" componentType="Activity">
+                        <name>Inform Client</name>
+                        <documentation>Sends an email with HTML content and optional attachment.</documentation>
+                        <position>
+                            <location x="501" y="70" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <loopType>0</loopType>
+                            <loopMaximum>1</loopMaximum>
+                            <startQuantity>1</startQuantity>
+                            <isAutoflowable>false</isAutoflowable>
+                            <MIOrdering>1</MIOrdering>
+                            <MIFlowCondition>0</MIFlowCondition>
+                            <cancelRemainingInstances>false</cancelRemainingInstances>
+                            <metricSettings itemType="4" />
+                            <implementationType>4</implementationType>
+                            <isConditional>false</isConditional>
+                            <conditionScript></conditionScript>
+                            <bpmnTaskType>3</bpmnTaskType>
+                            <activityOptionType>REQUIRED</activityOptionType>
+                            <activityExecutionType>NONE</activityExecutionType>
+                            <activityExecutionTypePreviousValue>AUTOMATIC</activityExecutionTypePreviousValue>
+                            <isHidden>false</isHidden>
+                            <isRepeatable>false</isRepeatable>
+                            <transactionalBehavior>0</transactionalBehavior>
+                            <isRobotTask>false</isRobotTask>
+                            <implementation>
+                                <attachedActivityId>3198dd5f-98ea-430d-bec3-8cd9477ec3ea/1.2c316c8c-89dc-4f5f-b253-587481655c17</attachedActivityId>
+                                <sendToType>1</sendToType>
+                                <taskRouting>0</taskRouting>
+                                <dueDateType>1</dueDateType>
+                                <dueDateTime>1</dueDateTime>
+                                <dueDateTimeResolution>1</dueDateTimeResolution>
+                                <dueDateTimeTOD>00:00</dueDateTimeTOD>
+                                <priorityType>0</priorityType>
+                                <priority>30.30</priority>
+                                <forceSend>true</forceSend>
+                                <noTask>true</noTask>
+                                <timeSchedule>(use default)</timeSchedule>
+                                <timeScheduleType>0</timeScheduleType>
+                                <timeZone>(use default)</timeZone>
+                                <timeZoneType>0</timeZoneType>
+                                <holidaySchedule>(use default)</holidaySchedule>
+                                <holidayScheduleType>0</holidayScheduleType>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-723b">
+                                    <name>attachmentFilePath</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <value>null</value>
+                                    <parameterId>2055.347e5038-c58a-45f2-83ee-9ba5d624f284</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-723a">
+                                    <name>to</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>tw.local.caseProperties.Email.value</value>
+                                    <parameterId>2055.9fdf2613-2417-46da-8039-e36ffb03b252</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7239">
+                                    <name>subject</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>"Your request is under review [Reference ID: " + tw.local.caseProperties.ReferenceID.value + "]"</value>
+                                    <parameterId>2055.b423f63a-ab0e-49c7-8148-2e10084dcaf6</parameterId>
+                                </inputActivityParameterMapping>
+                                <inputActivityParameterMapping id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7238">
+                                    <name>htmlContent</name>
+                                    <classId>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                                    <input>true</input>
+                                    <useDefault>true</useDefault>
+                                    <value>"Hello " + tw.local.caseProperties.FirstName.value + ",&lt;br/&gt;&lt;br/&gt;This is with reference to your request with reference ID: " + tw.local.caseProperties.ReferenceID.value + "&lt;br/&gt;Your request is being manually reviewed by one of our account managers. We will reach out to you in 2 to 3 business days. Thank you for your patience.&lt;br/&gt;&lt;br/&gt;Regards,&lt;br/&gt;Focus Corp"</value>
+                                    <parameterId>2055.c6e50b47-b386-42e9-8ef8-26e375031ff1</parameterId>
+                                </inputActivityParameterMapping>
+                                <laneFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7237">
+                                    <serviceType>1</serviceType>
+                                    <teamRef>5c817616-ef49-41fa-89ce-41f8666ef643/24.6fd38d02-81cf-48ab-bd42-8ff4c0a1628b</teamRef>
+                                </laneFilter>
+                                <teamFilter id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7236">
+                                    <serviceType>1</serviceType>
+                                </teamFilter>
+                            </implementation>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-722f">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="45c771a7-44cf-470d-8fdc-1dba122da13f" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7226">
+                            <positionId>topCenter</positionId>
+                            <flow ref="a69503aa-4365-48d8-82f5-5bed0b4edf9c" />
+                        </outputPort>
+                        <attachedEvent id="fd7129f8-2b9f-4a91-90d3-4eadb5b85898" componentType="Event">
+                            <name>Inform Client_postTracking</name>
+                            <position>
+                                <location x="0" y="0" />
+                            </position>
+                            <positionId>rightTop</positionId>
+                            <dropIconUrl>0</dropIconUrl>
+                            <colorInput>Color</colorInput>
+                            <component>
+                                <nameVisible>true</nameVisible>
+                                <eventType>3</eventType>
+                                <cancelActivity>true</cancelActivity>
+                                <repeatable>false</repeatable>
+                                <doCloseTask>false</doCloseTask>
+                                <EventAction id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724d">
+                                    <actionType>100</actionType>
+                                    <actionSubType>0</actionSubType>
+                                    <EventActionImplementation id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724c">
+                                        <trackingGroupId>/14.43c2b7da-1f30-47a7-9671-c254483b1364</trackingGroupId>
+                                        <externalUniqueId>69bb3a5f-5011-4229-8337-e0952fd23c19</externalUniqueId>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724b">
+                                            <trackedVariableId>17.0732cecf-014c-48b9-83ad-8a2b630e38e3</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AddressCountry.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-724a">
+                                            <trackedVariableId>17.29146fd4-bb37-473b-8c6e-22dcb1e361ed</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.AnnualRevenue.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7249">
+                                            <trackedVariableId>17.cfd3f8b8-26fb-417c-8297-8e17960f1ca4</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ApprovalStatus.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7248">
+                                            <trackedVariableId>17.3e69eb1d-245f-4c0e-8d6a-ddcef44c1e5a</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ClientName.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7247">
+                                            <trackedVariableId>17.5b827af2-6c20-4bdf-891a-d17dc965ee58</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.CompanyAge.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7246">
+                                            <trackedVariableId>17.8d4db2ee-2a02-4b7a-8cb5-6f97e052614d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.DefaultedPayment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7245">
+                                            <trackedVariableId>17.d9b4ed60-a68b-41f9-8af9-8bcb05247672</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.HighRisk.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7244">
+                                            <trackedVariableId>17.00ea4fa8-2600-4e1d-87db-978288886492</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Industry.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7243">
+                                            <trackedVariableId>17.a69faed4-c855-4be1-8307-b89b05feafdd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.NumberOfEmployees.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7242">
+                                            <trackedVariableId>17.63483d1a-ac1d-446c-8a81-870bb63d64a1</trackedVariableId>
+                                            <valueExpression>tw.system.currentProcess.name</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7241">
+                                            <trackedVariableId>17.2d3def5b-9afe-462f-8a80-8f9a3e8b49bd</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ReferenceID.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7240">
+                                            <trackedVariableId>17.53846b13-77a9-40ac-88ef-2919ea887e6b</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.RiskConfidence.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-723f">
+                                            <trackedVariableId>17.a2c3391a-8d6f-4178-8748-e3116513ec9e</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.Segment.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-723e">
+                                            <trackedVariableId>17.1e490f91-b0f5-43a8-8b18-fb0b62acabf2</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesFee.value</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                        <trackedVariableUse id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-723d">
+                                            <trackedVariableId>17.964b10af-962a-4ccb-8670-730c06b8e42d</trackedVariableId>
+                                            <valueExpression>tw.local.caseProperties.ServicesRequested.value.toString()</valueExpression>
+                                            <enabled>true</enabled>
+                                        </trackedVariableUse>
+                                    </EventActionImplementation>
+                                </EventAction>
+                            </component>
+                        </attachedEvent>
+                    </flowObject>
+                    <flowObject id="12d86035-5658-4230-9d10-331b5908a268" componentType="Event">
+                        <name>Start</name>
+                        <documentation></documentation>
+                        <position>
+                            <location x="26" y="92" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#F8F8F8</colorInput>
+                        <component>
+                            <nameVisible>true</nameVisible>
+                            <eventType>1</eventType>
+                            <cancelActivity>true</cancelActivity>
+                            <repeatable>false</repeatable>
+                            <doCloseTask>true</doCloseTask>
+                        </component>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7235">
+                            <positionId>rightCenter</positionId>
+                            <flow ref="674c06b5-07c5-460f-8821-7c5198cd60d8" />
+                        </outputPort>
+                    </flowObject>
+                    <flowObject id="bb3a9e62-a308-4608-87d2-3d0f8dd0e7e7" componentType="Event">
+                        <name>End</name>
+                        <documentation></documentation>
+                        <position>
+                            <location x="944" y="192" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <nameVisible>true</nameVisible>
+                            <eventType>2</eventType>
+                            <cancelActivity>true</cancelActivity>
+                            <repeatable>false</repeatable>
+                            <doCloseTask>true</doCloseTask>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7227">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="eec00b3f-42f0-4d4b-860a-cce614a9914d" />
+                        </inputPort>
+                    </flowObject>
+                    <flowObject id="ba29631b-dd74-49d3-8e0a-05d309c5f100" componentType="Gateway">
+                        <name>Confidence</name>
+                        <documentation></documentation>
+                        <position>
+                            <location x="308" y="88" />
+                        </position>
+                        <dropIconUrl>0</dropIconUrl>
+                        <colorInput>#A5B7CD</colorInput>
+                        <component>
+                            <nameVisible>true</nameVisible>
+                            <gatewayType>1</gatewayType>
+                            <splitJoinType>0</splitJoinType>
+                        </component>
+                        <inputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7232">
+                            <positionId>leftCenter</positionId>
+                            <input>true</input>
+                            <flow ref="36d583e0-d8c3-499e-8353-944c0a839e24" />
+                        </inputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7231">
+                            <positionId>rightCenter</positionId>
+                            <flow ref="45c771a7-44cf-470d-8fdc-1dba122da13f" />
+                        </outputPort>
+                        <outputPort id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7230">
+                            <positionId>bottomCenter</positionId>
+                            <flow ref="dc2eb869-8737-4e6b-86ce-6425a2339088" />
+                        </outputPort>
+                    </flowObject>
+                </lane>
+                <inputParameter id="2bf49f6c-849e-4c7b-89dc-a4c0f08023df">
+                    <bpdParameterId>2007.2bf49f6c-849e-4c7b-89dc-a4c0f08023df</bpdParameterId>
+                    <isProcessInstanceCorrelator>false</isProcessInstanceCorrelator>
+                </inputParameter>
+                <inputParameter id="1d33f395-245b-46b4-bee8-85c09171c71b">
+                    <bpdParameterId>2007.1d33f395-245b-46b4-bee8-85c09171c71b</bpdParameterId>
+                    <isProcessInstanceCorrelator>false</isProcessInstanceCorrelator>
+                </inputParameter>
+                <searchableField id="060c0a57-c1e6-4a51-8ab9-f67a3b0b0400">
+                    <name>Client</name>
+                    <type>2</type>
+                    <symbolicName>CO_ClientName</symbolicName>
+                    <expression id="bpdid:89416636f7ce572e:-54eaee34:187e6df992f:-7d9f">
+                        <expression>tw.local.caseProperties.ClientName.value</expression>
+                    </expression>
+                </searchableField>
+            </pool>
+            <extension id="bpdid:7cbdc5d8c70bf22a:-2dcdf158:183655bb412:-7224" type="CASE">
+                <caseFolder id="bb4abfee-0046-4729-9992-4dbe51d73dfb">
+                    <allowLocalDoc>false</allowLocalDoc>
+                    <allowExternalDoc>false</allowExternalDoc>
+                    <allowSubfoldersCreation>false</allowSubfoldersCreation>
+                    <allowExternalFolder>false</allowExternalFolder>
+                </caseFolder>
+            </extension>
+        </BusinessProcessDiagram>
+    </bpd>
+</teamworks>
+

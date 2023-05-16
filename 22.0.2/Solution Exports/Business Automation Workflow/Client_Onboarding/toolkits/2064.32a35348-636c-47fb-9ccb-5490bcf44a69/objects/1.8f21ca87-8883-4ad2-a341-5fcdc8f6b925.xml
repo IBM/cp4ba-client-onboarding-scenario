@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <process id="1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925" name="client_onboarding_decisions">
+        <lastModified>1663710976062</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <processId>1.8f21ca87-8883-4ad2-a341-5fcdc8f6b925</processId>
+        <image isNull="true" />
+        <tabGroup isNull="true" />
+        <startingProcessItemId isNull="true" />
+        <isRootProcess>false</isRootProcess>
+        <processType>11</processType>
+        <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+        <errorHandlerItemId isNull="true" />
+        <isLoggingVariables>false</isLoggingVariables>
+        <isTransactional>false</isTransactional>
+        <processTimingLevel isNull="true" />
+        <participantRef isNull="true" />
+        <exposedType isNull="true" />
+        <isTrackingEnabled>true</isTrackingEnabled>
+        <xmlData isNull="true" />
+        <cachingType>false</cachingType>
+        <itemLabel isNull="true" />
+        <cacheLength isNull="true" />
+        <mobileReady>false</mobileReady>
+        <sboSyncEnabled>true</sboSyncEnabled>
+        <externalId>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service}_33b15d86-6786-4eb2-a6c2-566e575a5804</externalId>
+        <isSecured>false</isSecured>
+        <isAjaxExposed>false</isAjaxExposed>
+        <isInvokedAsynchronously>false</isInvokedAsynchronously>
+        <description isNull="true" />
+        <guid>guid:94241093b8c98370:-10e45d6f:1835c620847:-7fe7</guid>
+        <versionId>7abb710d-9c90-457e-b4b1-d120034cf7c4</versionId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fdf"&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fde"&gt;
+    &lt;refId&gt;/6023.1df95ad5-0560-4135-89c8-08734b49c94d&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fdd"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fdc"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;swagger&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fdb"&gt;
+    &lt;refId&gt;/6023.107327ff-0ac9-4168-bab6-06ad2fc03c4b&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fda"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd9"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd8"&gt;
+    &lt;refId&gt;/12.f83ec881-00e8-4d28-b1ce-7b84a82deb05&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd7"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service}scoreboardRequestMsg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd6"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;msg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd5"&gt;
+    &lt;refId&gt;/12.b6c8af70-02b6-4557-9f33-37369421ae9d&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd4"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service}scoreboardResponseMsg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:94241093b8c98370:-10e45d6f:1835c620847:-7fd3"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;msg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData isNull="true" />
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <blobField1 isNull="true" />
+        <startingProcessItemId isNull="true" />
+        <errorHandlerItemId isNull="true" />
+        <layoutData noConversion="true">
+            <errorLink>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </errorLink>
+        </layoutData>
+        <startPoint>
+            <layoutData x="0" y="0">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+        </startPoint>
+        <startLink>
+            <fromPort locationId="rightCenter" portType="1" />
+            <toPort locationId="rightCenter" portType="2" />
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+        </startLink>
+        <bpmn2Model>
+            <ns14:definitions xmlns:ns14="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns15="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns16="http://www.ibm.com/bpm/processappsettings" xmlns:ns17="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns18="http://www.ibm.com/xmlns/links" xmlns:ns19="http://www.ibm.com/bpm/uitheme" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns20="http://www.ibm.com/xmlns/tagging" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" expressionLanguage="http://www.ibm.com/xmlns/prod/bpm/expression-lang/javascript" id="_437f2121-30a1-4af0-8ada-5b4c81f08d2f" targetNamespace="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service">
+                
+                                    
+                
+                
+                
+                
+                    
+                <ns14:interface id="_e6f0dd71-d79e-4f2f-967f-72763300f53c" name="IFace.55d28a7f-cc24-476c-8aff-e99f3fcebaad">
+                    
+                                             
+                    
+                    
+                    
+                    
+                         
+                    <ns14:documentation>cp4badmin.client_onboarding.client_onboarding_decisions</ns14:documentation>
+                    
+                                             
+                    
+                    
+                    
+                    
+                         
+                    <ns14:operation id="_bed25d99-3ef4-4505-9006-a3918a724cec" name="scoreboard">
+                        
+                                                      
+                        
+                        
+                        
+                        
+                              
+                        <ns14:documentation />
+                        
+                                                      
+                        
+                        
+                        
+                        
+                              
+                        <ns14:extensionElements>
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns15:interactionPattern>request_response_sync</ns15:interactionPattern>
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns2:inMessageRefPO>12.f83ec881-00e8-4d28-b1ce-7b84a82deb05</ns2:inMessageRefPO>
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns2:outMessageRefPO>12.b6c8af70-02b6-4557-9f33-37369421ae9d</ns2:outMessageRefPO>
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns17:businessSignature>
+                                
+                                                                        
+                                
+                                
+                                
+                                
+                                        
+                                <ns17:input id="_f089d3c6-f1f8-43d0-ab23-cdc94c680521">
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:name>client</ns17:name>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRef>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd}ClientInformation</ns17:typeRef>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRefPO>itm.12.ef5e7f45-f620-487f-be5b-45c9a39be2ab</ns17:typeRefPO>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:path>client</ns17:path>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isCollection>false</ns17:isCollection>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isOptional>false</ns17:isOptional>
+                                    
+                                                                                 
+                                    
+                                
+                                
+                                
+                                        
+                                </ns17:input>
+                                
+                                                                        
+                                
+                                
+                                
+                                
+                                        
+                                <ns17:input id="_eb23dffd-7af7-4a01-8211-cb941fcc1cb9">
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:name>industry</ns17:name>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRef>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd}industryType</ns17:typeRef>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRefPO>itm.12.856e5bd1-15e7-4bcf-afe6-77e2c513be45</ns17:typeRefPO>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:path>industry</ns17:path>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isCollection>false</ns17:isCollection>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isOptional>false</ns17:isOptional>
+                                    
+                                                                                 
+                                    
+                                
+                                
+                                
+                                        
+                                </ns17:input>
+                                
+                                                                        
+                                
+                                
+                                
+                                
+                                        
+                                <ns17:output id="_9d444aac-5221-40fd-9440-b8a7c5710546">
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:name>scoreboard</ns17:name>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:description>Decision execution success</ns17:description>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRef>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/357618c7-2d68-4d57-b757-34e46a031c14.xsd}Scoreboard</ns17:typeRef>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:typeRefPO>itm.12.30bfbaeb-b94d-4a71-ab7d-1faac010e1e5</ns17:typeRefPO>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:path>scoreboard</ns17:path>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isCollection>false</ns17:isCollection>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:isOptional>false</ns17:isOptional>
+                                    
+                                                                                 
+                                    
+                                    
+                                    
+                                    
+                                             
+                                    <ns17:httpResponseCode>200</ns17:httpResponseCode>
+                                    
+                                                                                 
+                                    
+                                
+                                
+                                
+                                        
+                                </ns17:output>
+                                
+                                                                        
+                                
+                            
+                            
+                            
+                                   
+                            </ns17:businessSignature>
+                            
+                                                               
+                            
+                        
+                        
+                        
+                              
+                        </ns14:extensionElements>
+                        
+                                                      
+                        
+                        
+                        
+                        
+                              
+                        <ns14:inMessageRef xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service">ns21:scoreboardRequestMsg</ns14:inMessageRef>
+                        
+                                                      
+                        
+                        
+                        
+                        
+                              
+                        <ns14:outMessageRef xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service">ns21:scoreboardResponseMsg</ns14:outMessageRef>
+                        
+                                                      
+                        
+                    
+                    
+                    
+                         
+                    </ns14:operation>
+                    
+                                             
+                    
+                
+                
+                
+                    
+                </ns14:interface>
+                
+                                    
+                
+                
+                
+                
+                    
+                <ns14:endPoint>
+                    
+                                             
+                    
+                    
+                    
+                    
+                         
+                    <ns14:extensionElements>
+                        
+                                                      
+                        
+                        
+                        
+                        
+                              
+                        <ns15:externalService id="_33b15d86-6786-4eb2-a6c2-566e575a5804" interfaceRef="_e6f0dd71-d79e-4f2f-967f-72763300f53c" name="client_onboarding_decisions">
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns15:automationServiceRestBinding bindingEnvVarSetRef="62.5c23d935-51d7-4a22-93d4-30e310b1b829" canUseDefaultVersion="true" displayVersion="1.0.0" name="client_onboarding_decisions" project="cp4admin.client_onboarding" type="decision" version="1.0.0">
+                                
+                                                                        
+                                
+                                
+                                
+                                
+                                        
+                                <ns15:restBinding xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/357618c7-2d68-4d57-b757-34e46a031c14Service" openAPIVersion="v3" swaggerRef="ns21:6023.1df95ad5-0560-4135-89c8-08734b49c94d" />
+                                
+                                                                        
+                                
+                            
+                            
+                            
+                                   
+                            </ns15:automationServiceRestBinding>
+                            
+                                                               
+                            
+                            
+                            
+                            
+                                   
+                            <ns15:cachingType>false</ns15:cachingType>
+                            
+                                                               
+                            
+                        
+                        
+                        
+                              
+                        </ns15:externalService>
+                        
+                                                      
+                        
+                    
+                    
+                    
+                         
+                    </ns14:extensionElements>
+                    
+                                             
+                    
+                
+                
+                
+                    
+                </ns14:endPoint>
+                
+                                    
+                
+            
+            
+            
+               
+            </ns14:definitions>
+        </bpmn2Model>
+    </process>
+</teamworks>
+

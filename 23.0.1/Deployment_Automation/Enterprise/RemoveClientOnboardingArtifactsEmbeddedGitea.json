@@ -1,0 +1,326 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/RemoveClientOnboardingArtifactsEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.0.0 <1.1.0",
+	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
+	"requiredCP4BAPattern": "Enterprise",
+	
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment" : "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
+				"enabled": "true",
+				"description" : "Remove Client Onboarding Artifacts (scenario & labs)",
+				"actions": [
+					{
+						"BAI": {
+							"comment" : "Clean up BAI data and remove Client Onboarding dashboard and goal",
+							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
+							"description" : "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
+							"relativeBasePath": "7_BAI",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Delete all ADS, Case, WF data from indices",
+										"artifactNames": [ 
+											"icp4ba-bai-ads-decision-execution-common-data-idx", 
+											"icp4ba-bai-case-summaries-active-idx-ibm-bai", 
+											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-timeseries-idx-ibm-bai" ],
+										"artifactType": "Index"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding Completed' dashboard",
+										"artifactNames": [ "Client Onboarding Completed" ],
+										"artifactType": "Dashboard"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
+										"artifactNames": [ "Focus Corp's top Client Onboarding KPI Completed" ],
+										"artifactType": "Goal",
+										"deleteReferencingDashboard": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment" : "Remove the two applications and three desktops from Navigator",
+							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
+							"description" : "Navigator - Delete Client Onboarding Applications and Desktops",
+							"relativeBasePath": "6_ICN",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
+										"appEngineAppConfigName": "APPENG0",
+										"artifactNames": [ 
+											"Client Onboarding Request",
+											"Client Onboarding Document Upload" 
+										],
+										"artifactType": "Application"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Remove Client Onboarding Request, Client Onboarding Document Upload & CLOS desktops",
+										"artifactNames": [ 
+											"Client Onboarding Request", 
+											"Client Onboarding Document Upload",
+											"CLOS"],
+										"artifactType": "Desktop"
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAA": {
+							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
+							"enabled": "$$(enableCleanupClientOnboarding_BAA)$$",
+							"description" : "BAA - Delete Client Onboarding APP, APP template, and APP TK",
+							"relativeBasePath": "6_BAA",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding Template' app",
+										"projectName": "Client Onboarding Template",
+										"projectAcronym": "COT",
+										"projectType": "APP",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding Document Upload' app",
+										"projectName": "Client Onboarding Document Upload",
+										"projectAcronym": "CODU",
+										"projectType": "APP",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete the app template 'Client Onboarding Template'",
+										"projectName": "Client Onboarding Template",
+										"projectAcronym": "COT",
+										"projectType": "APP_TEMPLATE",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit",
+										"projectName": "Client Onboarding Toolkit",
+										"projectType": "APP_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment" : "Remove 'Client Documents' folder and with that also all contained documents",
+							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
+							"description" : "CPE - Delete 'Client Documents' folder and contained documents from TOS",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Documents' folder and contained documents",
+										"artifactNames": [ "/Client Documents" ],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment" : "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
+							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
+							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CLOS",
+							"objectStoreName": "CLOS",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description" : "Delete 'Case Folders' folder and contained documents used in the content lab",
+										"artifactNames": [ "/Case Folders" ],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
+										"artifactNames": [ "SWAT_JAM_Case_Folder" ],
+										"artifactType": "ClassDefinition"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
+										"artifactNames": [ 
+											"Case_Reference_ID",
+											"Client_Name" 
+										],
+										"artifactType": "PropertyTemplate"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the storage policy 'Default Advanced Storage Area' used in the content lab",
+										"artifactNames": [ "Default Advanced Storage Area" ],
+										"artifactType": "StoragePolicy"
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment" : "Delete Client Onboarding solution and toolkits",
+							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
+							"description" : "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
+							"relativeBasePath": "4_WF",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding' Workflow solution",
+										"projectName": "Client Onboarding",
+										"projectAcronym": "CO",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding Toolkit' TK",
+										"projectName": "Client Onboarding Toolkit",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'IBM RPA Toolkit' TK",
+										"projectName": "IBM RPA Toolkit",
+										"projectAcronym": "IBMRPAT",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description" : "Delete 'ADP Utils' TK",
+										"projectName": "ADP Utils",
+										"projectAcronym": "ADPU",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"comment" : "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
+							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
+							"description" : "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
+							"relativeBasePath": "1_ADS",
+							"subActions": [
+								{
+									"CLEANUPADS": {
+										"enabled": "true",
+										"description" : "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions" : [ "Project" ],
+										"projectName": "Client Onboarding",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "1.0.0",
+										"unpublishAutomationServices": true,
+										"undeployDecisionService": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5,
+										"maxUndeployCompletionPolls": 20,
+										"delayBetweenUndeployCompletionPolls": 5
+									}
+								},
+								{
+									"CLEANUPADS": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description" : "Delete org used by ADS and all contained repos",
+										"adsCleanupActions" : [ "Git" ],
+										"gitDeletionType" : "OrgWithRepos",
+										"gitOrgName": "$$(ACTION_adsGitOrg)$$"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

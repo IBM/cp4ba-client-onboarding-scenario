@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.c42a29a6-2c04-4126-aa69-be2cb2187517" name="Notification">
+        <lastModified>1618242692576</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.c42a29a6-2c04-4126-aa69-be2cb2187517</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_Notification</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{2635B4A5-2B52-4735-B34B-0633E64C8E0E}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Notify the client and client rep that the review has been completed</description>
+        <guid>guid:dba5581ef354d44a:1f73f40c:178bf43fc2c:-7ebc</guid>
+        <versionId>63473d29-cfb9-4c5d-a6af-e4d2a4b31580</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>Activity</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_Notification">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

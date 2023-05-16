@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <refPO id="6027.e4e5a3a4-e35c-4c44-83d7-103f64630223" name="PE Configuration">
+        <lastModified>1683651373450</lastModified>
+        <lastModifiedBy>cpadmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <refId>6027.e4e5a3a4-e35c-4c44-83d7-103f64630223</refId>
+        <description isNull="true" />
+        <guid>cb15ca07-30e8-4cdd-a9e6-bf877ce0b06c</guid>
+        <versionId>9fc662a9-6d48-464e-8a5b-1f8e31e8b066</versionId>
+        <createdByUserId>2048.2</createdByUserId>
+        <createdOn>1683651364604</createdOn>
+        <type>1</type>
+        <externalId>{6075A778-0000-C7B8-B4EC-E4C9C86D1F92}</externalId>
+        <externalVersion>{57CAD3FD-4136-4FF0-983C-D1366FEF4BDF}</externalVersion>
+    </refPO>
+</teamworks>
+

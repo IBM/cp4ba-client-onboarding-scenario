@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <participant id="24.626fa01c-75c7-4137-9b1f-0a0e9542c4ee" name="Client Rep">
+        <lastModified>1617721947719</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <participantId>24.626fa01c-75c7-4137-9b1f-0a0e9542c4ee</participantId>
+        <participantDefinition isNull="true" />
+        <simulationGroupSize>2</simulationGroupSize>
+        <capacityType>1</capacityType>
+        <definitionType>5</definitionType>
+        <percentAvailable isNull="true" />
+        <percentEfficiency isNull="true" />
+        <cost>10.00</cost>
+        <currencyCode isNull="true" />
+        <image isNull="true" />
+        <serviceMembersRef>5c817616-ef49-41fa-89ce-41f8666ef643/1.26d2889e-266f-4622-82d2-6ba6f7f07204</serviceMembersRef>
+        <managersRef isNull="true" />
+        <jsonData isNull="true" />
+        <externalId>CO_ClientRep</externalId>
+        <description>Representative who works with the client</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc6</guid>
+        <versionId>4684cff6-8543-4394-8735-4c3801e4b897</versionId>
+        <teamAssignments>
+            <inputMapping id="bpdid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc5">
+                <name>caseSolutionId</name>
+                <classId>/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                <input>true</input>
+                <value>"CO"</value>
+                <parameterId>2055.9cfa97c8-e5c5-40e5-8bdf-c11196c6b5cf</parameterId>
+            </inputMapping>
+            <inputMapping id="bpdid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc4">
+                <name>caseRoleId</name>
+                <classId>/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classId>
+                <input>true</input>
+                <value>"CO_ClientRep"</value>
+                <parameterId>2055.4e25602d-7a16-4f02-81d4-e14c0aa1dccf</parameterId>
+            </inputMapping>
+        </teamAssignments>
+    </participant>
+</teamworks>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.9eee0e28-bf4b-45ae-9342-6f70f66d27a2" name="Reviewed Documents">
+        <lastModified>1617721374670</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.9eee0e28-bf4b-45ae-9342-6f70f66d27a2</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_ReviewedDocuments</internalName>
+        <extensionType>5</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{A2EE9082-A7F7-47E1-BD24-15F92C7C5735}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>List of documents that have been reviewed along with their status</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fd3</guid>
+        <versionId>1c3eb770-4390-40ca-ac7f-7d9ccb448944</versionId>
+        <definition>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <complexType name="CO_ReviewedDocuments">
+                            <complexContent>
+                                <extension base="CO_DocumentReview" baseClassRef="/12.9ed652d8-63ee-4867-a3fc-9cf785b293e3" />
+                            </complexContent>
+                        </complexType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+

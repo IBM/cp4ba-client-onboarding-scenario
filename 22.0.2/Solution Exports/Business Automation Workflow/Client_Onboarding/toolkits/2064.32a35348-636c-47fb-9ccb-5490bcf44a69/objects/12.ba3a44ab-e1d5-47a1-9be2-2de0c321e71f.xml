@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f" name="BotOutput">
+        <lastModified>1618536855972</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName isNull="true" />
+        <extensionType isNull="true" />
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>itm.12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f</externalId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd5"&gt;
+  &lt;artifactReference id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd4"&gt;
+    &lt;refId&gt;/6023.785ae71f-385b-4047-8dc5-3c0a28671ab3&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd3"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7fd2"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData>{"attributeFormDefault":"unqualified","elementFormDefault":"unqualified","targetNamespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd","complexType":[{"annotation":{"documentation":[{}],"appinfo":[{"shared":[false],"advancedProperties":[{"namespace":"http:\/\/www.ibm.com\/xmlns\/prod\/bpm\/bpmn\/ext\/externalservice\/swagger\/xsd\/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd","typeName":"BotOutput"}],"shadow":[true]}]},"sequence":{"element":[{"annotation":{"documentation":[{"content":["success\/failed to indicate if bot execution is success or not"]}],"appinfo":[{"propertyName":["botExecutionStatus"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":1,"typeName":"string","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":1}]}]},"name":"botExecutionStatus","type":"String","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.db884a3c-c533-44b7-bb2d-47bec8ad4022"}},{"annotation":{"documentation":[{"content":["error message when calling RPA bot"]}],"appinfo":[{"propertyName":["errorMessage"],"propertyRequired":[false],"propertyHidden":[false],"advancedParameterProperties":[{"typeNamespace":"http:\/\/www.w3.org\/2001\/XMLSchema","_minOccurs":1,"typeName":"string","_nillable":false,"nodeType":1,"_maxOccurs":1,"order":2}]}]},"name":"errorMessage","type":"String","otherAttributes":{"{http:\/\/www.ibm.com\/bpmsdk}refid":"12.db884a3c-c533-44b7-bb2d-47bec8ad4022"}}]},"name":"BotOutput"}],"id":"_12.ba3a44ab-e1d5-47a1-9be2-2de0c321e71f"}</jsonData>
+        <dataName isNull="true" />
+        <description isNull="true" />
+        <guid>guid:d322d3fb2f764748:-1b03ae50:178d769ba48:-7ff7</guid>
+        <versionId>1e097bc6-f098-492e-afb4-7634f70307fa</versionId>
+        <definition>
+            <property>
+                <name>botExecutionStatus</name>
+                <description>success/failed to indicate if bot execution is success or not</description>
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>string</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>1</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>1</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <property>
+                <name>errorMessage</name>
+                <description>error message when calling RPA bot</description>
+                <classRef>16fb4758-7b99-4167-8850-990ad48b4e07/12.db884a3c-c533-44b7-bb2d-47bec8ad4022</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+                <annotation type="com.lombardisoftware.core.xml.XMLFieldAnnotation" version="2.0">
+                    <exclude isNull="true" />
+                    <nodeType>1</nodeType>
+                    <name isNull="true" />
+                    <namespace isNull="true" />
+                    <typeName>string</typeName>
+                    <typeNamespace>http://www.w3.org/2001/XMLSchema</typeNamespace>
+                    <minOccurs>1</minOccurs>
+                    <maxOccurs>1</maxOccurs>
+                    <nillable>false</nillable>
+                    <order>2</order>
+                    <wrapArray isNull="true" />
+                    <arrayTypeName isNull="true" />
+                    <arrayTypeAnonymous isNull="true" />
+                    <arrayItemName isNull="true" />
+                    <arrayItemWildcard isNull="true" />
+                    <wildcard isNull="true" />
+                    <wildcardVariety isNull="true" />
+                    <wildcardMode isNull="true" />
+                    <wildcardNamespace isNull="true" />
+                    <parentModelGroupCompositor isNull="true" />
+                    <timeZone isNull="true" />
+                </annotation>
+            </property>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType isNull="true" />
+                <configData>
+                    <schema>
+                        <simpleType name="BotOutput">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+            <annotation type="com.lombardisoftware.core.xml.XMLTypeAnnotation" version="2.0">
+                <exclude isNull="true" />
+                <anonymous isNull="true" />
+                <local isNull="true" />
+                <name>BotOutput</name>
+                <namespace>http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/8b987aff-9b83-4b34-a1e8-7a3a8f88c828.xsd</namespace>
+                <elementName isNull="true" />
+                <elementNamespace isNull="true" />
+                <protoTypeName isNull="true" />
+                <baseTypeName isNull="true" />
+                <specialType isNull="true" />
+                <contentTypeVariety isNull="true" />
+                <xscRef isNull="true" />
+            </annotation>
+        </definition>
+    </twClass>
+</teamworks>
+

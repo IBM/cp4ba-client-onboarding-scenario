@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <process id="1.a96b3cb9-1084-41d7-9f92-3162f7a4e113" name="Send Email via API Connect">
+        <lastModified>1621395062874</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <processId>1.a96b3cb9-1084-41d7-9f92-3162f7a4e113</processId>
+        <image isNull="true" />
+        <tabGroup isNull="true" />
+        <startingProcessItemId isNull="true" />
+        <isRootProcess>false</isRootProcess>
+        <processType>11</processType>
+        <isErrorHandlerEnabled>false</isErrorHandlerEnabled>
+        <errorHandlerItemId isNull="true" />
+        <isLoggingVariables>false</isLoggingVariables>
+        <isTransactional>false</isTransactional>
+        <processTimingLevel isNull="true" />
+        <participantRef isNull="true" />
+        <exposedType isNull="true" />
+        <isTrackingEnabled>true</isTrackingEnabled>
+        <xmlData isNull="true" />
+        <cachingType>false</cachingType>
+        <itemLabel isNull="true" />
+        <cacheLength isNull="true" />
+        <mobileReady>false</mobileReady>
+        <sboSyncEnabled>true</sboSyncEnabled>
+        <externalId>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService}_8f2d6546-01fa-4e41-b2fe-379ac3287b18</externalId>
+        <isSecured>false</isSecured>
+        <isAjaxExposed>false</isAjaxExposed>
+        <isInvokedAsynchronously>false</isInvokedAsynchronously>
+        <description isNull="true" />
+        <guid>guid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f0f</guid>
+        <versionId>0642dfa7-0162-4e9e-965d-a6f63693b943</versionId>
+        <dependencySummary>&lt;dependencySummary id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f09"&gt;
+  &lt;artifactReference id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f08"&gt;
+    &lt;refId&gt;/6023.1509c4f1-86c3-4cfa-821a-b8ad9122cdf4&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f07"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f06"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;swagger&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f05"&gt;
+    &lt;refId&gt;/6023.999931d8-1070-49da-9187-69a4fc87e5e9&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f04"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/d1227934-2d3f-4369-878e-f69a9efb22fc.xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f03"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;xsd&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f02"&gt;
+    &lt;refId&gt;/12.f2a9645a-1276-4216-93c8-07f216f2406a&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f01"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService}APItoEmail.createRequestMsg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7f00"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;msg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+  &lt;artifactReference id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7eff"&gt;
+    &lt;refId&gt;/12.20b87e3a-0a23-4c2e-9c0f-d8249ed543e4&lt;/refId&gt;
+    &lt;refType&gt;1&lt;/refType&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7efe"&gt;
+      &lt;name&gt;externalId&lt;/name&gt;
+      &lt;value&gt;{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService}APItoEmail.createResponseMsg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+    &lt;nameValuePair id="bpdid:2d0fd1086c65a2b6:5248608a:1797ac16c0c:-7efd"&gt;
+      &lt;name&gt;mimeType&lt;/name&gt;
+      &lt;value&gt;msg&lt;/value&gt;
+    &lt;/nameValuePair&gt;
+  &lt;/artifactReference&gt;
+&lt;/dependencySummary&gt;</dependencySummary>
+        <jsonData isNull="true" />
+        <field1 isNull="true" />
+        <field2 isNull="true" />
+        <field3>0</field3>
+        <field4 isNull="true" />
+        <field5>false</field5>
+        <clobField1 isNull="true" />
+        <blobField1 isNull="true" />
+        <startingProcessItemId isNull="true" />
+        <errorHandlerItemId isNull="true" />
+        <layoutData noConversion="true">
+            <errorLink>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </errorLink>
+        </layoutData>
+        <startPoint>
+            <layoutData x="0" y="0">
+                <errorLink>
+                    <controlPoints />
+                    <showEndState>false</showEndState>
+                    <showName>false</showName>
+                </errorLink>
+            </layoutData>
+        </startPoint>
+        <startLink>
+            <fromPort locationId="rightCenter" portType="1" />
+            <toPort locationId="rightCenter" portType="2" />
+            <layoutData>
+                <controlPoints />
+                <showEndState>false</showEndState>
+                <showName>false</showName>
+            </layoutData>
+        </startLink>
+        <bpmn2Model>
+            <ns14:definitions xmlns:ns14="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns2="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process" xmlns:ns3="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/wle" xmlns:ns4="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/case" xmlns:ns5="http://www.ibm.com/bpm/Extensions" xmlns:ns6="http://www.ibm.com/xmlns/prod/bpm/uca" xmlns:ns7="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/team" xmlns:ns8="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/trackinggroup" xmlns:ns9="http://www.ibm.com/xmlns/bpmnx/20100524/v1/BusinessVocabulary" xmlns:ns10="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns11="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns12="http://www.omg.org/spec/BPMN/20100524/BPMNDI" xmlns:ns13="http://www.ibm.com/xmlns/prod/bpm/graph" xmlns:ns15="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/extservice" xmlns:ns16="http://www.ibm.com/bpm/processappsettings" xmlns:ns17="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/process/auth" xmlns:ns18="http://www.ibm.com/xmlns/links" xmlns:ns19="http://www.ibm.com/bpm/uitheme" xmlns:ns20="http://www.ibm.com/xmlns/tagging" id="_a7932d04-2cc0-4a2b-8f32-126b4e0394db" targetNamespace="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService" expressionLanguage="http://www.ibm.com/xmlns/prod/bpm/expression-lang/javascript">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <ns14:interface name="IFace.add19690-b30a-4ba0-915a-369dbecfbed4" id="_65161783-5a12-44b9-a7f6-d2bb5852c112">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns14:documentation />
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns14:operation name="APItoEmail.create" id="_7f3f7e50-0408-415b-91f3-4570077d1e26">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns14:documentation />
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns14:extensionElements>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:inMessageRefPO>12.f2a9645a-1276-4216-93c8-07f216f2406a</ns2:inMessageRefPO>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns2:outMessageRefPO>12.20b87e3a-0a23-4c2e-9c0f-d8249ed543e4</ns2:outMessageRefPO>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns17:businessSignature>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns17:input id="_24108eab-0bce-4568-8181-4fdd4bc9c123">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:name>body</ns17:name>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:typeRef>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/d1227934-2d3f-4369-878e-f69a9efb22fc.xsd}APItoEmail</ns17:typeRef>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:typeRefPO>itm.12.a8dafb53-b029-4af6-a53f-b7b454ecbb4f</ns17:typeRefPO>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:path>body</ns17:path>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:isCollection>false</ns17:isCollection>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                </ns17:input>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <ns17:output id="_af5ceee8-0d98-4194-8e8b-00c9bef80683">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:name>APItoEmail_create_200</ns17:name>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:typeRef>{http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/xsd/d1227934-2d3f-4369-878e-f69a9efb22fc.xsd}APItoEmail</ns17:typeRef>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:typeRefPO>itm.12.a8dafb53-b029-4af6-a53f-b7b454ecbb4f</ns17:typeRefPO>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:path>APItoEmail_create_200</ns17:path>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <ns17:isCollection>false</ns17:isCollection>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                </ns17:output>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            </ns17:businessSignature>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns14:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns14:inMessageRef xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService">ns21:APItoEmail.createRequestMsg</ns14:inMessageRef>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns14:outMessageRef xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService">ns21:APItoEmail.createResponseMsg</ns14:outMessageRef>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns14:operation>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                </ns14:interface>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <ns14:endPoint>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <ns14:extensionElements>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <ns15:externalService interfaceRef="_65161783-5a12-44b9-a7f6-d2bb5852c112" name="Send Email via API Connect" id="_8f2d6546-01fa-4e41-b2fe-379ac3287b18">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns15:restBinding xmlns:ns21="http://www.ibm.com/xmlns/prod/bpm/bpmn/ext/externalservice/swagger/d1227934-2d3f-4369-878e-f69a9efb22fcService" swaggerRef="ns21:6023.1509c4f1-86c3-4cfa-821a-b8ad9122cdf4" openAPIVersion="v3" descriptorSrcLocation="APIConnect-Email.json" bindingRef="2094.e4c3f7d0-a65d-46c2-95cb-a8f2f78438a8" bindingRefV2="62.62baba99-b101-46d4-b589-ff90c834592d" />
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <ns15:cachingType>false</ns15:cachingType>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </ns15:externalService>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </ns14:extensionElements>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                </ns14:endPoint>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </ns14:definitions>
+        </bpmn2Model>
+    </process>
+</teamworks>
+

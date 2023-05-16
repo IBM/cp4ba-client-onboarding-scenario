@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamworks>
+    <twClass id="12.2075662d-1d8b-4a39-b8bc-9ee2948723a4" name="Client Onboarding Request">
+        <lastModified>1659131355917</lastModified>
+        <lastModifiedBy>cp4badmin</lastModifiedBy>
+        <tenantId isNull="true" />
+        <classId>12.2075662d-1d8b-4a39-b8bc-9ee2948723a4</classId>
+        <type>1</type>
+        <isSystem>false</isSystem>
+        <shared>false</shared>
+        <isShadow>true</isShadow>
+        <globalLifetime>false</globalLifetime>
+        <internalName>CO_ClientOnboardingRequest</internalName>
+        <extensionType>6</extensionType>
+        <saveServiceRef isNull="true" />
+        <bpmn2Data isNull="true" />
+        <externalId>{6DCE1023-190B-4385-A94B-335C3B5972E7}</externalId>
+        <dependencySummary isNull="true" />
+        <jsonData isNull="true" />
+        <dataName isNull="true" />
+        <description>Contains activities to review a client onboarding request</description>
+        <guid>guid:cee366119cde014c:-668ff5bb:178a35b0a2d:-7fc3</guid>
+        <versionId>cc9dc60c-04df-41e1-8997-afb707e916fa</versionId>
+        <definition>
+            <property>
+                <name>AddressZipCode</name>
+                <description>Address - Zip Code</description>
+                <classRef>/12.1b121314-5b15-41db-9eb6-2de76a4914c5</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>UserID</name>
+                <description>ID of the user to assign tasks to</description>
+                <classRef>/12.11c2d3be-69c4-4877-b62f-a8cd1a062d08</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AddressUnit</name>
+                <description>Address - Unit</description>
+                <classRef>/12.f8a02fe7-79f9-4bb3-b3f9-495f0cd9db79</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AddressStreet</name>
+                <description>Address - Street</description>
+                <classRef>/12.cf6213d3-9277-43f3-8b0f-0a504724cf90</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AddressState</name>
+                <description>Address - State</description>
+                <classRef>/12.0658a71c-5ec9-4dd7-8b5c-5665244b4f61</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ServicesRequested</name>
+                <description>The services requested by the client</description>
+                <classRef>/12.69f3fcf9-27cf-4931-8640-8f2e9768d657</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>Segment</name>
+                <description>The segment that the client belongs to</description>
+                <classRef>/12.ab6101c0-41c6-498e-8a20-93a618a71cc1</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ReviewedDocuments</name>
+                <description>List of documents that have been reviewed along with their status</description>
+                <classRef>/12.9eee0e28-bf4b-45ae-9342-6f70f66d27a2</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ReferenceID</name>
+                <description>Unique reference ID for the onboarding request</description>
+                <classRef>/12.3b780b21-9bba-4e3e-95fc-192dd8b65dc9</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>Industry</name>
+                <description>The industry for which services are being offered</description>
+                <classRef>/12.1e01a3aa-e960-4d7b-a3ef-f8de6390d968</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>DefaultedPayment</name>
+                <description>Client has a previously defaulted payment</description>
+                <classRef>/12.2e043bf9-a09d-4c34-8de1-12afe5ad9465</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AddressCountry</name>
+                <description>Address - Country</description>
+                <classRef>/12.554a5e64-86fc-49c7-b931-f17d9b4b1fc9</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ClientName</name>
+                <description>Client's name</description>
+                <classRef>/12.367ed468-c5e4-47e1-9458-3f5bc63d0202</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AddressCity</name>
+                <description>Address - City</description>
+                <classRef>/12.f8c91682-316c-4f7e-a03c-11f8bbe12373</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>AnnualRevenue</name>
+                <description>Client's annual revenue</description>
+                <classRef>/12.c7f46834-1137-4a63-9f49-f3a502f3f3b3</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ServicesFee</name>
+                <description>Fee being chaged for the services requested</description>
+                <classRef>/12.0e3a6d6a-ce84-49ed-be0d-125a84bbcba0</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>NumberOfEmployees</name>
+                <description>Number of employees working for the client</description>
+                <classRef>/12.590067ee-12d2-4f4b-851a-c1dd38a14228</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>ApprovalStatus</name>
+                <description>Status of the client onboarding request</description>
+                <classRef>/12.ac863d25-08dc-497f-814a-bd6f4751b979</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>CompanyAge</name>
+                <description>Age of the client's company in years</description>
+                <classRef>/12.4eb0bcc5-16aa-42aa-97cf-b7dc537d8d8a</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>RiskConfidence</name>
+                <description>Confidence level of the risk decision</description>
+                <classRef>/12.c87e33d9-8527-40b7-b34e-606b22d51108</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>HighRisk</name>
+                <description>Decision on whether the client is high risk or not</description>
+                <classRef>/12.1c1c47b8-55bb-4129-ba8f-e8f402fc2ff8</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>SelectedDocumentIDs</name>
+                <description>List of document IDs to be added to the case folder</description>
+                <classRef>/12.cc35d121-d0b0-4fcf-aa68-9f5440b6bc9a</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>PhoneNumber</name>
+                <description>Phone number</description>
+                <classRef>/12.0805c95d-a933-4773-905f-146974cc585a</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>LastName</name>
+                <description>Last name</description>
+                <classRef>/12.84ab871f-c6af-41c1-8a79-1442bc58143d</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>FirstName</name>
+                <description>First name</description>
+                <classRef>/12.09688ead-d0d8-4f12-bfe3-4640c9506ecf</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <property>
+                <name>Email</name>
+                <description>Email</description>
+                <classRef>/12.d42569d6-5cc6-4bba-ae57-7d9e407379d3</classRef>
+                <arrayProperty>false</arrayProperty>
+                <propertyDefault isNull="true" />
+                <propertyRequired>false</propertyRequired>
+                <propertyHidden>false</propertyHidden>
+            </property>
+            <validator>
+                <className isNull="true" />
+                <errorMessage isNull="true" />
+                <webWidgetJavaClass isNull="true" />
+                <externalType>Case</externalType>
+                <configData>
+                    <schema>
+                        <simpleType name="CO_ClientOnboardingRequest">
+                            <restriction base="String" />
+                        </simpleType>
+                    </schema>
+                </configData>
+            </validator>
+        </definition>
+    </twClass>
+</teamworks>
+
