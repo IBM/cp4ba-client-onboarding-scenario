@@ -348,9 +348,9 @@
 							"subActions": [
 								{
 									"MANAGEROUTES": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete roundcubenginx route",
-										"namespaceName": "$$(localMailClientNamespace)$$",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
 										"routes": [
 											{
 												"action": "delete",
@@ -361,9 +361,9 @@
 								},
 								{
 									"MANAGEDEPLOYMENTS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete roundcubenginx, roundcubemail, and roundcubedb deployment",
-										"namespaceName": "$$(localMailClientNamespace)$$",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -382,9 +382,9 @@
 								},
 								{
 									"MANAGESECRETS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete roundcubemail-shared-secret secrets",
-										"namespaceName": "$$(localMailClientNamespace)$$",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
 										"secrets": [
 											{
 												"action": "delete",
@@ -395,9 +395,9 @@
 								},
 								{
 									"MANAGEPVCS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete roundcubedb-volumeclaim, roundcubemail-temp-pvc, and roundcubemail-www-pvc PVCs",
-										"namespaceName": "$$(localMailClientNamespace)$$",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
 										"pvcs": [
 											{
 												"action": "delete",
@@ -416,9 +416,9 @@
 								},
 								{
 									"MANAGEDEPLOYMENTS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete mailserver deployment",
-										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -429,9 +429,9 @@
 								},
 								{
 									"MANAGESERVICES": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete mailserver service",
-										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
 										"services": [
 											{
 												"action": "delete",
@@ -442,9 +442,9 @@
 								},
 								{
 									"MANAGEPVCS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete mail-storage PVC",
-										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
 										"pvcs": [
 											{
 												"action": "delete",
@@ -455,9 +455,9 @@
 								},
 								{
 									"MANAGECONFIGMAPS": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete mailserver.env.config ConfigMaps",
-										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
 										"configMaps": [
 											{
 												"action": "delete",
@@ -472,9 +472,9 @@
 								},
 								{
 									"MANAGEOCPCLUSTERROLEBINDING": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Remove ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
-										"namespaceName": "$$(localSmtpServerNamespace)$$",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
 										"clusterRoles": [
 											{
 												"action": "delete",
@@ -489,18 +489,18 @@
 								},
 								{
 									"MANAGEOCPNAMESPACE": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete $$(localSmtpServerNamespace)$$ namespace",
 										"action": "delete",
-										"namespaceName": "$$(localSmtpServerNamespace)$$"
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$"
 									}
 								},
 								{
 									"MANAGEOCPNAMESPACE": {
-										"enabled": "true",
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete $$(localMailClientNamespace)$$ namespace",
 										"action": "delete",
-										"namespaceName": "$$(localMailClientNamespace)$$"
+										"namespaceName": "$$(localMailClientNamespace|default=)$$"
 									}
 								}
 							]
