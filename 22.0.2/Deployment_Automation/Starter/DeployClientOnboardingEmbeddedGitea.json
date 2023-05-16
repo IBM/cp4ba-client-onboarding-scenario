@@ -18,7 +18,7 @@
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
-										"enabled": "$enableArtifactDownloadFromGit$",
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
 										"description": "Download resources required for OCP",
 										"name": "Download OCP file",
 										"replaceExistingFiles": true,
@@ -130,10 +130,7 @@
 												"fileName": "roundcube-db.yaml"
 											},
 											{
-												"fileName": "roundcube-mail.yaml"
-											},
-											{
-												"fileName": "roundcube-nginx.yaml"
+												"fileName": "roundcube-mail-deployment.yaml"
 											}
 										]
 									}
@@ -468,19 +465,19 @@
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
 											},
 											{
-												"smtpHost": "§IF($$(isLocalMailAvailable)$$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpHost)$$)§ELSE§(smtp.gmail.com)ENDIF§"
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpHost)$$)§ELSE§(smtp.gmail.com)ENDIF§"
 											},
 											{
-												"smtpPort": "§IF($$(isLocalMailAvailable)$$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpPort)$$)§ELSE§(587)ENDIF§"
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpPort)$$)§ELSE§(587)ENDIF§"
 											},
 											{
 												"emailID": "$$(wf_cp_emailIDInternal)$$"
 											},
 											{
-												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($$(isLocalMailAvailable)$$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
+												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
 											},
 											{
-												"clientEmailAddress": "§IF($$(isLocalMailAvailable)$$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$$(localMailDomain)$$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$$(localMailDomain)$$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
 											},
 											{
 												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
@@ -1191,7 +1188,7 @@
 										"enabled": "true",
 										"description": "Create ASA for the Documents object store",
 										"storagePolicyName": "Default Advanced Storage Area",
-										"storageAreaName": "$$(BAW_DOCS_LOWER)$$_asa"
+										"storageAreaName": "$$(BAW_DOCS_LOWER)$$_storage"
 									}
 								},
 								{
@@ -1342,7 +1339,7 @@
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "true",
 										"description": "Update P8 repository settings to enable Entry Template Management",
-										"repoName": "$$(BAW_DOCS)$$",
+										"repoName": "$$(BAW_DOCS_LOWER)$$",
 										"allowEntryTemplateManagement": true
 									}
 								},
@@ -1388,7 +1385,7 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx"
 											},
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Document_Upload.twx"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Document_Upload.twx"
 											}
 										]
 									}
