@@ -477,7 +477,7 @@
 												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
 											},
 											{
-												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$$§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
 											},
 											{
 												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
