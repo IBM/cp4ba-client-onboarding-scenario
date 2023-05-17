@@ -214,7 +214,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID",
+										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID and automation service as TWX was built in enterprise deployment but is used in starter deployment",
 										"sourceTwxFile": "!twxFileName!",
 										"environmentVariables": [
 											{
@@ -236,19 +236,22 @@
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
 											},
 											{
-												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost)$)§ELSE§(smtp.gmail.com)ENDIF§"
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost|default=)$)§ELSE§(smtp.gmail.com)ENDIF§"
 											},
 											{
-												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort)$)§ELSE§(587)ENDIF§"
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort|default=)$)§ELSE§(587)ENDIF§"
 											},
 											{
-												"emailID": "$$(wf_cp_emailID)$$"
+												"emailID": "$$(wf_cp_emailIDInternal)$$"
 											},
 											{
-												"emailPassword": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§()§ELSE§($$(wf_cp_emailPassword)$$)ENDIF§"
+												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
 											},
 											{
-												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
+												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+											},
+											{
+												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
 											},
 											{
 												"rpaServer": "$$(wf_cp_rpaServer)$$"
@@ -263,8 +266,12 @@
 												"name": "client_onboarding_decisions",
 												"type": "process",
 												"automationServiceMappings": {
-													"project": { "cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding" },
-													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+													"project": {
+														"cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding"
+													},
+													"url": {
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
+													}
 												}
 											}
 										]

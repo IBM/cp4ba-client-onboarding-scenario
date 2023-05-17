@@ -465,10 +465,10 @@
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
 											},
 											{
-												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpHost)$$)§ELSE§(smtp.gmail.com)ENDIF§"
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost|default=)$)§ELSE§(smtp.gmail.com)ENDIF§"
 											},
 											{
-												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($$(localSmtpPort)$$)§ELSE§(587)ENDIF§"
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort|default=)$)§ELSE§(587)ENDIF§"
 											},
 											{
 												"emailID": "$$(wf_cp_emailIDInternal)$$"
@@ -477,7 +477,7 @@
 												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
 											},
 											{
-												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$$(localMailDomain)$$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$$§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
 											},
 											{
 												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
