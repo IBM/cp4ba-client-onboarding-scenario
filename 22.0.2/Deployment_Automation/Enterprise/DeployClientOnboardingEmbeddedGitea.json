@@ -4,6 +4,7 @@
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
+	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
 	"actions": [
 		{
 			"CONTAINER": {
@@ -428,16 +429,7 @@
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract the project information from the Client Onboarding TWX file",
-										"sourceTwxFile": "Client_Onboarding.twx",
-										"additionalIds": [
-											{
-												"label": "serviceFlow",
-												"name": "New Client Onboarding Request",
-												"type": "bpd",
-												"getObjectId": true,
-												"getVersionId": false
-											}
-										]
+										"sourceTwxFile": "Client_Onboarding.twx"
 									}
 								},
 								{
@@ -909,7 +901,7 @@
 					{
 						"BAI": {
 							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
-							"description": "Populate the ADS, Process, and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
+							"description": "BAI - Populate the ADS, Process, and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
 							"relativeBasePath": "7_BAI",
 							"subActions": [
 								{
@@ -1299,7 +1291,7 @@
 						"ICN": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
 							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
