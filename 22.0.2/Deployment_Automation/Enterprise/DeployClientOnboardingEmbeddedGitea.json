@@ -86,8 +86,8 @@
 								},
 								{
 									"MANAGEMAILUSERS": {
-										"enabled": "true",
-										"description": "Modify mail server users to match users and password from server LDIF file",
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"description": "Modify mail server users to match users and password from server LDIF file (only supported for Starter, Apollo/Pak Installer",
 										"yamlFile": "mailserver.yaml",
 										"synchronizeWithLDIF": true,
 										"removeAllOtherUsers": true
@@ -1113,29 +1113,37 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "false && $$(enableConfigureSWATLabs_FNCM)$$",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "$$(BAW_DOCS)$$",
+							"objectStoreName": "CONTENT",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
+									"CHECKOBJECTSTOREEXISTS": {
+										"enabled": "true",
+										"description": "Check Object Store Exists",
+										"osSymbolicName": "CONTENT",
+										"variableName": "contentOSAvailable"
+									}
+								},
+								{
 									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
-										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
+										"enabled": "($$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(contentOSAvailable)$",
+										"description": "Add general users group as admins to CONTENT Object Store",
 										"granteeName": "$$(generalUsersGroupName)$$"
 									}
 								},
 								{
 									"CREATEINDEXAREA": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create Index Area for object store to be able to enable text search for object store",
-										"indexAreaName": "$$(BAW_DOCS_LOWER)$$_index_area"
+										"indexAreaName": "content_index_area"
 									}
 								},
 								{
 									"MODIFYOBJECTSTORE": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Modify text search setting and security for WF Documents Object Store",
 										"name": "Modify text search setting and security for WF Documents Object Store",
 										"defaultTextSearchIndexingLanguage": "en",
@@ -1156,16 +1164,16 @@
 								},
 								{
 									"CREATESTORAGEPOLICY": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create ASA for the Documents object store",
 										"storagePolicyName": "Default Advanced Storage Area",
-										"storageAreaName": "$$(BAW_DOCS_LOWER)$$_asa",
+										"storageAreaName": "content_asa",
 										"ignoreCaseForStorageAreaName": true
 									}
 								},
 								{
 									"UPDATECLASSDEFINITION": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Update class definition for folder to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
@@ -1173,7 +1181,7 @@
 								},
 								{
 									"CREATEPROPERTYTEMPLATE": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
 										"propertyTemplates": [
 											{
@@ -1205,7 +1213,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
 										"className": "SWAT Jam Case Folder",
 										"classSymbolicName": "SWAT_JAM_Case_Folder",
@@ -1218,7 +1226,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create new document class 'Client Document' using previously created property templates",
 										"className": "Client Document",
 										"classSymbolicName": "ClientDocument",
@@ -1231,7 +1239,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create new document class 'Utility Bill' using previously created property templates",
 										"className": "Utility Bill",
 										"classSymbolicName": "UtilityBill",
@@ -1243,7 +1251,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create 'Case Folders' folder in root",
 										"parentFolderPath": "/",
 										"folderName": "Case Folders",
@@ -1252,7 +1260,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST1",
@@ -1269,7 +1277,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST2",
@@ -1295,8 +1303,16 @@
 							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
+									"CHECKOBJECTSTOREEXISTS": {
+										"enabled": "true",
+										"description": "Check Object Store Exists",
+										"osSymbolicName": "CONTENT",
+										"variableName": "contentOSAvailable"
+									}
+								},
+								{
 									"DOWNLOADRESOURCES": {
-										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
 										"description": "Download resources required for Content/ICN lab for Navigator",
 										"name": "Download ICN file",
 										"replaceExistingFiles": true,
@@ -1309,26 +1325,26 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Determine ICN repository information based on object store symbolic name",
-										"osSymbolicName": "$$(BAW_DOCS)$$"
+										"osSymbolicName": "CONTENT"
 									}
 								},
 								{
 									"UPDATEP8REPOSETTINGS": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Update P8 repository settings to enable Entry Template Management",
-										"repoId": "$(REPOSITORY_ID)$",
+										"repoId": "CONTENT",
 										"allowEntryTemplateManagement": true
 									}
 								},
 								{
 									"PATCHDESKTOP": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Patch 'ICN' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ICNDesktop.properties",
 										"simpleTextMappings": {
-											"CONTENTrepo": "$(REPOSITORY_ID)$",
+											"CONTENTrepo": "CONTENT",
 											"https://icp4adeploy-cpe-stateless-svc:9443": "$$(cpe-stlessSrvURL)$$",
 											"https://icp4adeploy-bastudio-service.ibm-cp4ba.svc:443": "$$(bastudioSRVURL)$$",
 											"cpd-ibm-cp4ba.apps.swat01.cp.fyre.ibm.com": "$$(cpdURLWithoutProtocol)$$"
@@ -1337,7 +1353,7 @@
 								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store $$(BAW_DOCS)$$)",
 										"enforceImport": false,
 										"name": "ICN",
