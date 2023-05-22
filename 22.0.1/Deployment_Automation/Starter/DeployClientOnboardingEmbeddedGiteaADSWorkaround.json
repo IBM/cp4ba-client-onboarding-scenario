@@ -4,7 +4,6 @@
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.1.0 <22.1.6",
 	"requiredCP4BAPattern": "Starter",
-	
 	"actions": [
 		{
 			"CONTAINER": {
@@ -23,14 +22,16 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for ADS",
-   										"name": "Download ADS file",
-   										"replaceExistingFiles": true,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Automation%20Decision%20Services/CODecisions.zip"}
-   										]
-  									}
-  								},
-  								{
+										"name": "Download ADS file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Automation%20Decision%20Services/CODecisions.zip"
+											}
+										]
+									}
+								},
+								{
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test ADS capability"
@@ -98,7 +99,7 @@
 									"PUBLISHAUTOMATIONSERVICES": {
 										"enabled": "true",
 										"description": "Publish the ADS decision service as an automation service",
-										"skipRemainingSubactionOnFailure" : "true",
+										"skipRemainingSubactionOnFailure": "true",
 										"snapshot": "1.0.0",
 										"maxPublishCompletionPolls": 20,
 										"delayBetweenPublishCompletionPolls": 5
@@ -111,13 +112,13 @@
 						"ADP": {
 							"enabled": "$enableDeployClientOnboarding_ADP$",
 							"description": "Configure and deploy the ADP project for usage with Client Onboarding and determine the project Id",
-							"skipRemainingSubactionOnFailure" : "true",
+							"skipRemainingSubactionOnFailure": "true",
 							"relativeBasePath": "2_ADP",
 							"objectStoreName": "$adpObjectStore$",
 							"projectDisplayName": "$adpProjectName$",
-							"projectAcronym" : "$adpProjectAcronym$",
+							"projectAcronym": "$adpProjectAcronym$",
 							"subActions": [
-  								{
+								{
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test ADP capability"
@@ -181,13 +182,15 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for WF",
-   										"name": "Download Workflow file",
-   										"replaceExistingFiles": true,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"}
-   										]
-  									}
-  								},
+										"name": "Download Workflow file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
+											}
+										]
+									}
+								},
 								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
@@ -250,9 +253,15 @@
 												"name": "client_onboarding_decisions",
 												"type": "process",
 												"automationServiceMappings": {
-													"name": { "client_onboarding_decisions": "co_decisions" },
-													"project": { "cp4badmin.client_onboarding": "cp4admin.client_onboarding" },
-													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+													"name": {
+														"client_onboarding_decisions": "co_decisions"
+													},
+													"project": {
+														"cp4badmin.client_onboarding": "cp4admin.client_onboarding"
+													},
+													"url": {
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
+													}
 												}
 											}
 										]
@@ -264,7 +273,8 @@
 										"description": "Install the patched Client Onboarding WF solution",
 										"twxFile": "!patchedTWXFileName!",
 										"paAcronym": "!projectAcronym!",
-										"paSnapshot": "!snapshotAcronym!"
+										"paSnapshot": "!snapshotAcronym!",
+										"checkForUpdatedEnvironmentVariables": true
 									}
 								},
 								{
@@ -289,6 +299,28 @@
 										"maxPublishCompletionPolls": 20,
 										"delayBetweenPublishCompletionPolls": 5
 									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Adds general users group as read-only collaborators",
+										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$generalUsersGroupName$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
 								}
 							]
 						}
@@ -305,19 +337,31 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for FNCM",
-   										"name": "Download FNCM files",
-   										"replaceExistingFiles": true,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Utility%20Bill%20-%20Automation%20Elite%20Inc.pdf"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"}
-   										]
-  									}
-  								},
-  								{
+										"name": "Download FNCM files",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Utility%20Bill%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"
+											}
+										]
+									}
+								},
+								{
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test FNCM availability"
@@ -400,11 +444,10 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_BankingInformation",
 										"docTitle": "Banking Information - Automation Elite Inc",
-										"docProps": 
-											{
-												"CO_ClientName": "Automation Elite Inc.",
-												"CO_AccountNumber": "1179476345"
-											},
+										"docProps": {
+											"CO_ClientName": "Automation Elite Inc.",
+											"CO_AccountNumber": "1179476345"
+										},
 										"file": "Banking Information - Automation Elite Inc.pdf",
 										"fileContentType": "application/pdf"
 									}
@@ -417,10 +460,9 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_ClientDocument",
 										"docTitle": "Certificate of Incorporation - Automation Elite Inc",
-										"docProps": 
-											{
-												"CO_ClientName": "Automation Elite Inc."
-											},
+										"docProps": {
+											"CO_ClientName": "Automation Elite Inc."
+										},
 										"file": "Certificate of Incorporation - Automation Elite Inc.pdf",
 										"fileContentType": "application/pdf"
 									}
@@ -433,11 +475,10 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_UtilityBill",
 										"docTitle": "Utility Bill - Automation Elite Inc",
-										"docProps": 
-											{
-												"CO_ClientName": "Automation Elite Inc.",
-												"CO_ServiceAddress": "3974 Carson St, Lansing, MI 48911"
-											},
+										"docProps": {
+											"CO_ClientName": "Automation Elite Inc.",
+											"CO_ServiceAddress": "3974 Carson St, Lansing, MI 48911"
+										},
 										"file": "Utility Bill - Automation Elite Inc.pdf",
 										"fileContentType": "application/pdf"
 									}
@@ -450,10 +491,9 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_ClientDocument",
 										"docTitle": "June Marie - Driver's License",
-										"docProps": 
-											{
-												"CO_ClientName": "Automation Elite Inc."
-											},
+										"docProps": {
+											"CO_ClientName": "Automation Elite Inc."
+										},
 										"file": "June Marie - Driver's License.png",
 										"fileContentType": "image/png"
 									}
@@ -466,11 +506,10 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_BankingInformation",
 										"docTitle": "Legacy Consulting - Banking Information",
-										"docProps": 
-											{
-												"CO_ClientName": "Legacy Consulting",
-												"CO_AccountNumber": "7250512345"
-											},
+										"docProps": {
+											"CO_ClientName": "Legacy Consulting",
+											"CO_AccountNumber": "7250512345"
+										},
 										"file": "Legacy Consulting - Banking Information.pdf",
 										"fileContentType": "application/pdf"
 									}
@@ -483,10 +522,9 @@
 										"folderName": "/Client Documents",
 										"docClass": "CO_ClientDocument",
 										"docTitle": "Legacy Consulting - Certificate of Incorporation",
-										"docProps":
-											{
-												"CO_ClientName": "Legacy Consulting"
-											},
+										"docProps": {
+											"CO_ClientName": "Legacy Consulting"
+										},
 										"file": "Legacy Consulting - Certificate of Incorporation.pdf",
 										"fileContentType": "application/pdf"
 									}
@@ -508,15 +546,26 @@
 										"name": "Download ICN files",
 										"replaceExistingFiles": true,
 										"files": [
-											{ "url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/Workplace-$cp4baVersionWithFixpack$.zip", "useCurrentOrEarlierFileVersion": true },
-											{ "url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip" },
-											{ "url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip" },
-											{ "url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequestDesktop.properties" },
-											{ "url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties" }
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/Workplace-$cp4baVersionWithFixpack$.zip",
+												"useCurrentOrEarlierFileVersion": true
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequestDesktop.properties"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"
+											}
 										]
 									}
 								},
-  								{
+								{
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test Navigator availability"
@@ -553,10 +602,18 @@
 										"description": "Patch 'Client Onboarding Request' app built for enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequest.zip",
 										"simpleTextMappings": {
-											"1" : { "BAWTOS": "TARGET" },
-											"2" : { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" },
-											"3" : { "cp4badmin": "$cp4baAdminUsr$" },
-											"4" : { "client_onboarding_decisions": "co_decisions" }
+											"1": {
+												"BAWTOS": "$BAW_TOS$"
+											},
+											"2": {
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
+											},
+											"3": {
+												"cp4badmin": "$cp4baAdminUsr$"
+											},
+											"4": {
+												"client_onboarding_decisions": "co_decisions"
+											}
 										}
 									}
 								},
@@ -567,15 +624,6 @@
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
 										"file": "!patchedZIPFileName!"
-									}
-								},
-								{
-									"IMPORTAPPLICATION": {
-										"enabled": "true",
-										"description": "Import 'Client Onboarding Document Upload' app",
-										"appEngineAppConfigName": "APPENG0",
-										"name": "Client Onboarding Document Upload",
-										"file": "ClientOnboardingDocumentUpload.zip"
 									}
 								},
 								{
@@ -594,18 +642,12 @@
 									}
 								},
 								{
-									"SETAPPPERMISSIONS": {
+									"IMPORTAPPLICATION": {
 										"enabled": "true",
+										"description": "Import 'Client Onboarding Document Upload' app",
 										"appEngineAppConfigName": "APPENG0",
-										"description": "Make 'Client Onboarding Document Upload' app accessible for all authenticated users",
 										"name": "Client Onboarding Document Upload",
-										"action": "update",
-										"permissions": [
-											{
-												"name": "#AUTHENTICATED-USERS",
-												"action": "add"
-											}
-										]
+										"file": "ClientOnboardingDocumentUpload.zip"
 									}
 								},
 								{
@@ -663,18 +705,28 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for BAI",
-   										"name": "Download BAI files",
-   										"replaceExistingFiles": true,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/case-data.json"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/process-data.json"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/ads-data.json"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/Client%20Onboarding%20Completed.json"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/finalDashboardLayout.json"}
-   										]
-  									}
-  								},
-  								{
+										"name": "Download BAI files",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/case-data.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/process-data.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/ads-data.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/Client%20Onboarding%20Completed.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Insights/finalDashboardLayout.json"
+											}
+										]
+									}
+								},
+								{
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test BAI capability"
@@ -782,14 +834,58 @@
 								{
 									"ADDCOLLABORATORS": {
 										"enabled": "true",
-										"description": "Add the GeneralUsers group to the collaborators of the Client Onboarding toolkit as reader",
+										"description": "Add the general users group to the collaborators of the Client Onboarding toolkit as reader",
 										"name": "Client Onboarding Toolkit",
 										"type": "WF_TK",
 										"ignoreMissingPrincipals": true,
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
-												"name": "$generalUsersGroupShort$",
+												"name": "$generalUsersGroupName$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the ADP toolkit as reader",
+										"name": "ADP Utils",
+										"acronym": "ADPU",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$generalUsersGroupName$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the RPA toolkit as reader",
+										"name": "IBM RPA Toolkit",
+										"acronym": "IBMRPAT",
+										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,
@@ -813,10 +909,10 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-   										"enabled": "true",
-   										"description": "Add general users group as admins to CONTENT Object Store",
-   										"granteeName": "$generalUsersGroupName$"
-  									}
+										"enabled": "true",
+										"description": "Add general users group as admins to CONTENT Object Store",
+										"granteeName": "$generalUsersGroupName$"
+									}
 								},
 								{
 									"CREATESTORAGEPOLICY": {
@@ -830,8 +926,8 @@
 									"UPDATECLASSDEFINITION": {
 										"enabled": "true",
 										"description": "Update class definition for folder to enable content-based retrieval",
-									    "classSymbolicName": "Document",
-   										"enableCBR": true
+										"classSymbolicName": "Document",
+										"enableCBR": true
 									}
 								},
 								{
@@ -924,13 +1020,15 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for Content/ICN lab for Navigator",
-   										"name": "Download ICN file",
-   										"replaceExistingFiles": false,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktop.properties"}
-   										]
-  									}
-  								},
+										"name": "Download ICN file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktop.properties"
+											}
+										]
+									}
+								},
 								{
 									"IMPORTDESKTOP": {
 										"enabled": "true",
@@ -954,14 +1052,18 @@
 									"DOWNLOADRESOURCES": {
 										"enabled": "$enableArtifactDownloadFromGit$",
 										"description": "Download resources required for the Apps lab",
-   										"name": "Download BAA file",
-   										"replaceExistingFiles": true,
-   										"files": [
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx"},
-    										{"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Document_Upload.twx"}
-   										]
-  									}
-  								},
+										"name": "Download BAA file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Template.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$cp4baVersion$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Document_Upload.twx"
+											}
+										]
+									}
+								},
 								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
@@ -979,9 +1081,15 @@
 												"name": "client_onboarding_decisions",
 												"type": "process",
 												"automationServiceMappings": {
-													"name": { "client_onboarding_decisions": "co_decisions" },
-													"project": { "cp4badmin.client_onboarding": "cp4admin.client_onboarding" },
-													"url": { "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar" }
+													"name": {
+														"client_onboarding_decisions": "co_decisions"
+													},
+													"project": {
+														"cp4badmin.client_onboarding": "cp4admin.client_onboarding"
+													},
+													"url": {
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4admin%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
+													}
 												}
 											}
 										]
@@ -1029,7 +1137,7 @@
 										"ignoreMissingPrincipals": true,
 										"principals": [
 											{
-												"name": "$generalUsersGroupShort$",
+												"name": "$generalUsersGroupName$",
 												"type": "group",
 												"permissions": {
 													"read": true,

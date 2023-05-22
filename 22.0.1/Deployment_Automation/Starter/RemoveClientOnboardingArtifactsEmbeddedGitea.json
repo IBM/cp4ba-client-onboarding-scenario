@@ -4,31 +4,30 @@
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.1.0 <22.2.0",
 	"requiredCP4BAPattern": "Starter",
-	
 	"actions": [
 		{
 			"CONTAINER": {
-				"comment" : "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
+				"comment": "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
 				"enabled": "true",
-				"description" : "Remove Client Onboarding Artifacts (scenario & labs)",
+				"description": "Remove Client Onboarding Artifacts (scenario & labs)",
 				"actions": [
 					{
 						"BAI": {
-							"comment" : "Clean up BAI data and remove Client Onboarding dashboard and goal",
+							"comment": "Clean up BAI data and remove Client Onboarding dashboard and goal",
 							"enabled": "$enableCleanupClientOnboarding_BAI$",
-							"description" : "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
+							"description": "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
 							"relativeBasePath": "7_BAI",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete all ADS, Case, WF data from indices",
-										"artifactNames": [ 
-											"icp4ba-bai-ads-decision-execution-common-data-idx", 
-											"icp4ba-bai-case-summaries-active-idx-ibm-bai", 
+										"description": "Delete all ADS, Case, WF data from indices",
+										"artifactNames": [
+											"icp4ba-bai-ads-decision-execution-common-data-idx",
+											"icp4ba-bai-case-summaries-active-idx-ibm-bai",
 											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
 											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
-											"icp4ba-bai-process-timeseries-idx-ibm-bai" 
+											"icp4ba-bai-process-timeseries-idx-ibm-bai"
 										],
 										"artifactType": "Index"
 									}
@@ -36,16 +35,20 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Completed' dashboard",
-										"artifactNames": [ "Client Onboarding Completed" ],
+										"description": "Delete 'Client Onboarding Completed' dashboard",
+										"artifactNames": [
+											"Client Onboarding Completed"
+										],
 										"artifactType": "Dashboard"
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
-										"artifactNames": [ "Focus Corp's top Client Onboarding KPI Completed" ],
+										"description": "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
+										"artifactNames": [
+											"Focus Corp's top Client Onboarding KPI Completed"
+										],
 										"artifactType": "Goal",
 										"deleteReferencingDashboard": true
 									}
@@ -55,15 +58,15 @@
 					},
 					{
 						"ICN": {
-							"comment" : "Remove the two applications and three desktops from Navigator",
+							"comment": "Remove the two applications and three desktops from Navigator",
 							"enabled": "$enableCleanupClientOnboarding_ICN$",
-							"description" : "Navigator - Delete Client Onboarding Applications and Desktops",
+							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
 							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove Client Onboarding Request & Client Onboarding Document Upload app",
+										"description": "Remove Client Onboarding Request & Client Onboarding Document Upload app",
 										"appEngineAppConfigName": "APPENG0",
 										"artifactNames": [
 											"Workplace",
@@ -76,9 +79,9 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove Client Onboarding Request, Client Onboarding Document Upload & ICN desktops",
-										"artifactNames": [ 
-											"Client Onboarding Request", 
+										"description": "Remove Client Onboarding Request, Client Onboarding Document Upload & ICN desktops",
+										"artifactNames": [
+											"Client Onboarding Request",
 											"Client Onboarding Document Upload",
 											"ICN"
 										],
@@ -92,13 +95,13 @@
 						"BAA": {
 							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
 							"enabled": "$enableCleanupClientOnboarding_BAA$",
-							"description" : "BAA - Delete Client Onboarding APP, APP template, and APP TK",
+							"description": "BAA - Delete Client Onboarding APP, APP template, and APP TK",
 							"relativeBasePath": "6_BAA",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Template' apps",
+										"description": "Delete 'Client Onboarding Template' apps",
 										"projectName": "Client Onboarding Template",
 										"projectAcronym": "COT",
 										"projectType": "APP",
@@ -112,7 +115,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the app template 'Client Onboarding Template'",
+										"description": "Delete the app template 'Client Onboarding Template'",
 										"projectName": "Client Onboarding Template",
 										"projectAcronym": "COT",
 										"projectType": "APP_TEMPLATE",
@@ -126,7 +129,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the app template 'Client Onboarding Document Upload'",
+										"description": "Delete the app template 'Client Onboarding Document Upload'",
 										"projectName": "Client Onboarding Document Upload",
 										"projectAcronym": "CODU",
 										"projectType": "APP",
@@ -140,7 +143,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (COTK)",
+										"description": "Delete the 'Client Onboarding Toolkit' app toolkit (COTK)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK",
 										"projectType": "APP_TK",
@@ -154,7 +157,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit (using COTK2)",
+										"description": "Delete the 'Client Onboarding Toolkit' app toolkit (using COTK2)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK2",
 										"projectType": "APP_TK",
@@ -170,17 +173,19 @@
 					},
 					{
 						"FNCM": {
-							"comment" : "Remove 'Client Documents' folder and with that also all contained documents",
+							"comment": "Remove 'Client Documents' folder and with that also all contained documents",
 							"enabled": "$enableCleanupClientOnboarding_FNCM$",
-							"description" : "CPE - Delete 'Client Documents' folder and contained documents from TOS",
+							"description": "CPE - Delete 'Client Documents' folder and contained documents from TOS",
 							"objectStoreName": "$BAW_TOS$",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Documents' folder and contained documents",
-										"artifactNames": [ "/Client Documents" ],
+										"description": "Delete 'Client Documents' folder and contained documents",
+										"artifactNames": [
+											"/Client Documents"
+										],
 										"artifactType": "Folder",
 										"deleteSubfolders": true,
 										"deleteDocuments": true
@@ -191,17 +196,19 @@
 					},
 					{
 						"FNCM": {
-							"comment" : "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
+							"comment": "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
 							"enabled": "$enableCleanupClientOnboarding_FNCM$",
-							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CONTENT",
+							"description": "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CONTENT",
 							"objectStoreName": "CONTENT",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Case Folders' folder and contained documents used in the content lab",
-										"artifactNames": [ "/Case Folders" ],
+										"description": "Delete 'Case Folders' folder and contained documents used in the content lab",
+										"artifactNames": [
+											"/Case Folders"
+										],
 										"artifactType": "Folder",
 										"deleteSubfolders": true,
 										"deleteDocuments": true
@@ -211,7 +218,9 @@
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
-										"artifactNames": [ "SWAT_JAM_Case_Folder" ],
+										"artifactNames": [
+											"SWAT_JAM_Case_Folder"
+										],
 										"artifactType": "ClassDefinition"
 									}
 								},
@@ -219,9 +228,9 @@
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
-										"artifactNames": [ 
+										"artifactNames": [
 											"Case_Reference_ID",
-											"Client_Name" 
+											"Client_Name"
 										],
 										"artifactType": "PropertyTemplate"
 									}
@@ -230,7 +239,9 @@
 									"DELETEARTIFACT": {
 										"enabled": "true",
 										"description": "Delete the storage policy 'Default Advanced Storage Area' used in the content lab",
-										"artifactNames": [ "Default Advanced Storage Area" ],
+										"artifactNames": [
+											"Default Advanced Storage Area"
+										],
 										"artifactType": "StoragePolicy"
 									}
 								}
@@ -239,15 +250,15 @@
 					},
 					{
 						"WF": {
-							"comment" : "Delete Client Onboarding solution and toolkits",
+							"comment": "Delete Client Onboarding solution and toolkits",
 							"enabled": "$enableCleanupClientOnboarding_WF$",
-							"description" : "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
+							"description": "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
 							"relativeBasePath": "4_WF",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' Workflow solution",
+										"description": "Delete 'Client Onboarding' Workflow solution",
 										"projectName": "Client Onboarding",
 										"projectAcronym": "CO",
 										"projectType": "WF_PA",
@@ -260,7 +271,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK)",
+										"description": "Delete 'Client Onboarding Toolkit' TK (COTK)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK",
 										"projectType": "WF_TK",
@@ -274,7 +285,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK (COTK2)",
+										"description": "Delete 'Client Onboarding Toolkit' TK (COTK2)",
 										"projectName": "Client Onboarding Toolkit",
 										"projectAcronym": "COTK2",
 										"projectType": "WF_TK",
@@ -288,7 +299,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'IBM RPA Toolkit' TK",
+										"description": "Delete 'IBM RPA Toolkit' TK",
 										"projectName": "IBM RPA Toolkit",
 										"projectAcronym": "IBMRPAT",
 										"projectType": "WF_TK",
@@ -302,7 +313,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'ADP Utils' TK",
+										"description": "Delete 'ADP Utils' TK",
 										"projectName": "ADP Utils",
 										"projectAcronym": "ADPU",
 										"projectType": "WF_TK",
@@ -318,16 +329,18 @@
 					},
 					{
 						"ADS": {
-							"comment" : "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
+							"comment": "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
 							"enabled": "$enableCleanupClientOnboarding_ADS$",
-							"description" : "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
+							"description": "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
 							"relativeBasePath": "1_ADS",
 							"subActions": [
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Project" ],
+										"description": "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions": [
+											"Project"
+										],
 										"projectName": "Client Onboarding",
 										"decisionServiceName": "CO Decisions",
 										"version": "1.0.0",
@@ -343,9 +356,11 @@
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Delete org used by ADS and all contained repos",
-										"adsCleanupActions" : [ "Git" ],
-										"gitDeletionType" : "OrgWithRepos",
+										"description": "Delete org used by ADS and all contained repos",
+										"adsCleanupActions": [
+											"Git"
+										],
+										"gitDeletionType": "OrgWithRepos",
 										"gitOrgName": "$ACTION_adsGitOrg$"
 									}
 								}
