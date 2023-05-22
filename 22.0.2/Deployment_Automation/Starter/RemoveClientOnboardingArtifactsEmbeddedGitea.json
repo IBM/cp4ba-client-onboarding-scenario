@@ -201,9 +201,10 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
+										"description": "Delete the folder class 'SWAT Jam Case Folder' and document class 'ClientDocument' used in the Content/ICN labs",
 										"artifactNames": [
-											"SWAT_JAM_Case_Folder"
+											"SWAT_JAM_Case_Folder",
+											"ClientDocument"
 										],
 										"artifactType": "ClassDefinition"
 									}
