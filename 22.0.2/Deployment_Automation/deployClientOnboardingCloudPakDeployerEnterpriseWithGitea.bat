@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with an arbitrary CP4BA 22.0.2 Enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
+rem This file is to be used with CP4BA 22.0.2 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
@@ -25,40 +25,30 @@ SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
 
-rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-rem SET cp4baNamespace=
-
-rem Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
-SET cp4baAdminUserName=REQUIRED
-rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=REQUIRED
-rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains the admin user/users for the CP4BA instance
-SET cp4baAdminGroup=REQUIRED
-rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance
-SET generalUsersGroup=REQUIRED
-rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
-rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
-
-
-rem Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
-
-rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
-SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
-SET gmailAppKey=REQUIRED
-
-
 
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
 
+
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=
+
+rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
+rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
+
+rem Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+
+rem Email address of the gmail account to send emails
+rem SET gmailAddress=REQUIRED
+rem App key for accessing the gmail account to send emails
+rem SET gmailAppKey=REQUIRED
+
 rem Should ADP be used within the Client Oboarding scenario (do not change for now)
 SET adpConfigured=false
-rem Should the Content labs be configured (requires the expected object store to exist)
-SET configureContentLab=false
+
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 rem SET jvmSettings=-Xms4096M
@@ -205,54 +195,6 @@ if defined ocLoginTokenRequired (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if "%cp4baAdminUserName%"=="REQUIRED" set cp4baAdminUserNameRequired=true
-if "%cp4baAdminUserName%"=="" set cp4baAdminUserNameRequired=true
-
-if defined cp4baAdminUserNameRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminUserName' has not been set
-)
-
-if "%cp4baAdminPassword%"=="REQUIRED" set cp4baAdminPasswordRequired=true
-if "%cp4baAdminPassword%"=="" set cp4baAdminPasswordRequired=true
-
-if defined cp4baAdminPasswordRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminPassword' has not been set
-)
-
-if "%cp4baAdminGroup%"=="REQUIRED" set cp4baAdminGroupRequired=true
-if "%cp4baAdminGroup%"=="" set cp4baAdminGroupRequired=true
-
-if defined cp4baAdminGroupRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminGroup' has not been set
-)
-
-if "%generalUsersGroup%"=="REQUIRED" set generalUsersGroupRequired=true
-if "%generalUsersGroup%"=="" set generalUsersGroupequired=true
-
-if defined generalUsersGroupRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'generalUsersGroup' has not been set
-)
-
 if defined gmailAddress (
 	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
 	if "%gmailAddress%"=="" set gmailAddressRequired=true
@@ -316,16 +258,6 @@ if defined adpConfiguredRequired (
 	echo   Variable 'adpConfigured' has not been set
 )
 
-if "%configureContentLab%"=="REQUIRED" set configuredContentLabRequired=true
-if "%configureContentLab%"=="" set configuredContentLabRequired=true
-
-if defined configuredContentLabRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'configureContentLab' has not been set
-)
 
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
@@ -339,6 +271,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL

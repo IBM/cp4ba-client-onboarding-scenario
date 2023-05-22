@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 22.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
 
 rem Set all variables according to your environment before executing this file
 
@@ -25,17 +25,18 @@ SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
 
-rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
-SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
-SET gmailAppKey=REQUIRED
-
-
-
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
+
+rem Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+
+rem Email address of the gmail account to send emails
+rem SET gmailAddress=REQUIRED
+rem App key for accessing the gmail account to send emails
+rem SET gmailAppKey=REQUIRED
+
 
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
@@ -184,26 +185,34 @@ if defined ocLoginTokenRequired (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-if "%gmailAddress%"=="" set gmailAddressRequired=true
+if defined gmailAddress (
+	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
+	if "%gmailAddress%"=="" set gmailAddressRequired=true
 
-if defined gmailAddressRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
+	if defined gmailAddressRequired ( 
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'gmailAddress' has not been set
+	) else (
+		set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
 	)
-	echo   Variable 'gmailAddress' has not been set
 )
 
-if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+if defined gmailAppKey (
+	if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
+	if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
 
-if defined gmailAppKeyRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
+	if defined gmailAppKeyRequired ( 
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'gmailAppKey' has not been set
+	) else (
+		set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
 	)
-	echo   Variable 'gmailAppKey' has not been set
 )
 
 if "%rpaBotExecutionUser%"=="REQUIRED" set rpaBotExecutionUserRequired=true
@@ -240,6 +249,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% ACTION_wf_cp_emailID=%gmailAddress% ACTION_wf_cp_emailPassword=%gmailAppKey% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
