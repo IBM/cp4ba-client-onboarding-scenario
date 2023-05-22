@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 22.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
+# This file is to be used with CP4BA 22.0.2 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
 
 # Set all variables according to your environment before executing this file
 
@@ -28,14 +28,22 @@ rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 rpaServer=https://rpa-server.com:1111
 
-# Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=
+
+# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
 
 # Email address of the gmail account to send emails
 # gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails
 # gmailAppKey=REQUIRED
 
+# Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
+#giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+# Should ADP be used within the Client Oboarding scenario (do not change for now)
+adpConfigured=false
 
 # Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 #jvmSettings="-Xms4096M"
@@ -87,11 +95,11 @@ TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/co
 # CP4BA version
 CP4BAVERSION="22.0.2"
 # Deployment pattern of the CP4BA instance
-DEPLOYMENTPATTERN="Starter"
+DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
 BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/${CP4BAVERSION}/Deployment_Automation/${DEPLOYMENTPATTERN}"
 # Name of the configuration file to use when running the deployment automation tool
-CONFIGNAME="config-deploy"
+CONFIGNAME="config-deploy-withGitea"
 # Automation script to use when running the deployment automation tool
 AUTOMATIONSCRIPT="DeployClientOnboardingEmbeddedGitea.json"
 
@@ -222,6 +230,16 @@ then
   echo "  Variable 'rpaServer' has not been set"
 fi
 
+if [[ "${adpConfigured}" == "REQUIRED" ]] || [[ "${adpConfigured}" == "" ]]
+then
+  if $validationSuccess
+  then
+    echo "Validating configuration failed:"
+    validationSuccess=false
+  fi
+  echo "  Variable 'adpConfigured' has not been set"
+fi
+
 if ! $validationSuccess
 then
   echo
@@ -233,4 +251,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

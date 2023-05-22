@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 22.0.2 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+# This file is to be used with CP4BA 22.0.2 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
 
 # Set all variables according to your environment before executing this file
 
@@ -29,6 +29,9 @@ ocLoginToken=REQUIRED
 
 # Password for the CP4BA admin user to use to access the CP4BA environment
 cp4baAdminPassword=REQUIRED
+
+
+# Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
 
 # Email address of a gmail account to be used to send emails in the Client Onboarding scenario
 gmailAddress=REQUIRED
@@ -191,24 +194,34 @@ then
   echo "  Variable 'cp4baAdminPassword' has not been set"
 fi
 
-if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+if [ ! -z "${gmailAddress+x}" ]
 then
-  if $validationSuccess
+  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
   then
-    echo "Validating configuration failed:"
-    validationSuccess=false
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Variable 'gmailAddress' has not been set"
+  else
+    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
   fi
-  echo "  Variable 'gmailAddress' has not been set"
 fi
 
-if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+if [ ! -z "${gmailAppKey+x}" ]
 then
-   if $validationSuccess
-   then
-     echo "Validating configuration failed:"
-     validationSuccess=false
+  if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'gmailAppKey' has not been set"
+  else
+    gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi
-  echo "  Variable 'gmailAppKey' has not been set"
 fi
 
 if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
@@ -252,4 +265,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_emailID=${gmailAddress} ACTION_wf_cp_emailPassword=${gmailAppKey} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
