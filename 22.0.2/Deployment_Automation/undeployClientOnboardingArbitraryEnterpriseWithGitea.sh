@@ -78,7 +78,7 @@ fi
 # ----------------------------------------------------------------------------------------------------------
 
 # Source URL where the deployment automation jar can be retrieved from
-TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation"
+TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/OldVersions"
 # CP4BA version
 CP4BAVERSION="22.0.2"
 # Deployment pattern of the CP4BA instance
