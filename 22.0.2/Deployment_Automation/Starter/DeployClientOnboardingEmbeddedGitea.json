@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -610,14 +610,14 @@
 								{
 									"MODIFYOBJECTSTORE": {
 										"enabled": "true",
-										"description": "Modify security for all authenticated users so that case history works for all users",
+										"description": "Add general users group and set security for so that case history works for all users",
 										"replaceAccessRights": false,
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Update",
+												"action": "Add",
 												"granteeType": "Group",
-												"granteeName": "#AUTHENTICATED-USERS",
+												"granteeName": "$$(generalUsersGroupName)$$",
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Use object store, Set owner of any object, Read permissions"
