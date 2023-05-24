@@ -88,6 +88,14 @@ CONFIGNAME="config-undeploy-withGitea"
 # Automation script to use when running the deployment automation tool
 AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsEmbeddedGitea.json"
 
+
+# Name of the script file passed to execution environment
+SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
+# Version of this script file passed to execution environment
+SCRIPTVERSION=1.1.0
+# Download URL for this script
+SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
 # GitHub access is disabled. Validate that the deployment tool jar is available
@@ -186,4 +194,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -scriptDownloadPath=${SCRIPTDOWNLOADPATH} -scriptName=${SCRIPTNAME} -scriptVersion=${SCRIPTVERSION} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}

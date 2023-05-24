@@ -117,6 +117,13 @@ SET CONFIGNAME=config-deploy
 rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=DeployClientOnboarding.json
 
+rem Name of the script file passed to execution environment
+SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
+rem Version of this script file passed to execution environment
+SET SCRIPTVERSION=1.1.0
+rem Download URL for this script
+SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
 rem GitHub access is disabled. Validate that the deployment tool jar is available
@@ -366,6 +373,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% ACTION_adsGitOrg=%adsGitOrg% ACTION_adsGitUserName=%adsGitUserName% ACTION_adsGitRepoAPIKey=%adsGitRepoAPIKey% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -scriptDownloadPath=%SCRIPTDOWNLOADPATH% -scriptName=%SCRIPTNAME% -scriptVersion=%SCRIPTVERSION% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% ACTION_adsGitOrg=%adsGitOrg% ACTION_adsGitUserName=%adsGitUserName% ACTION_adsGitRepoAPIKey=%adsGitRepoAPIKey% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
