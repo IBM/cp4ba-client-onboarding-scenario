@@ -371,7 +371,7 @@
 												"enabled": "true",
 												"action": "Add",
 												"granteeType": "Group",
-												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeName": "$generalUsersGroupName$",
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Use object store, Set owner of any object, Read permissions"
