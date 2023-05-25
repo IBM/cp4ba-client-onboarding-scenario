@@ -242,6 +242,29 @@
 				"description": "Deploy Client Onboarding Scenario",
 				"actions": [
 					{
+						"OCP": {
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description": "Grant 'Deployed Decision Manager' role to admin user",
+							"subActions": [
+								{
+									"PLATFORM_USERMGT": {
+										"enabled": "true",
+										"description": "Update Zen roles for adin user",
+										"entities": [
+											{
+												"action": "update",
+												"name": "$$(cp4baAdminUsr)$$",
+												"roles": [
+													"Deployed Decision Manager"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
 						"ADS": {
 							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
 							"description": "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",

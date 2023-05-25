@@ -243,7 +243,7 @@
 					{
 						"OCP": {
 							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
-							"description": "Grant Deployed Decision Manager role to admin user",
+							"description": "Grant 'Deployed Decision Manager' role to admin user",
 							"subActions": [
 								{
 									"PLATFORM_USERMGT": {
