@@ -103,7 +103,7 @@ rem Global settings for the script (not to be modified by user)
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Source URL where the deployment automation jar can be retrieved from
-SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
+SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current
 rem CP4BA version
 SET CP4BAVERSION=22.0.2
 rem Deployment pattern of the CP4BA instance
@@ -115,8 +115,10 @@ SET CONFIGNAME=config-deploy-withGitea
 rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=DeployClientOnboardingEmbeddedGitea.json
 
-rem Name of the script file passed to execution environment
+rem Name of the source batch file passed to execution environment
 SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
+rem Name of the actual batch file passed to execution environment
+SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
 SET SCRIPTVERSION=1.1.0
 rem Download URL for this script
@@ -346,6 +348,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -scriptDownloadPath=%SCRIPTDOWNLOADPATH% -scriptName=%SCRIPTNAME% -scriptVersion=%SCRIPTVERSION% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
