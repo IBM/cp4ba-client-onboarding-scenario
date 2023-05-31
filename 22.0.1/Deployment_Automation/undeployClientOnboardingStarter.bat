@@ -65,7 +65,7 @@ rem Global settings for the script (not to be modified by user)
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Source URL where the deployment automation jar can be retrieved from
-SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
+SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current
 rem CP4BA version
 SET CP4BAVERSION=22.0.1
 rem Deployment pattern of the CP4BA instance
@@ -77,8 +77,10 @@ SET CONFIGNAME=config-undeploy
 rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=RemoveClientOnboardingArtifactsEmbeddedGitea.json
 
-rem Name of the script file passed to execution environment
+rem Name of the source batch file passed to execution environment
 SET SCRIPTNAME=undeployClientOnboardingStarter.bat
+rem Name of the actual batch file passed to execution environment
+SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
 SET SCRIPTVERSION=1.1.0
 rem Download URL for this script
@@ -186,6 +188,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -scriptDownloadPath=%SCRIPTDOWNLOADPATH% -scriptName=%SCRIPTNAME% -scriptVersion=%SCRIPTVERSION% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT%
 
 ENDLOCAL
