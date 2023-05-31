@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with an arbitrary CP4BA 22.0.2 Enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+# This file is to be used with an arbitrary CP4BA 23.0.1 Enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
 
 # Set all variables according to your environment before executing this file
 
@@ -39,6 +39,8 @@ generalUsersGroup=REQUIRED
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+
+# Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
 
 # Email address of a gmail account to be used to send emails in the Client Onboarding scenario
 gmailAddress=REQUIRED
@@ -101,9 +103,9 @@ fi
 # ----------------------------------------------------------------------------------------------------------
 
 # Source URL where the deployment automation jar can be retrieved from
-TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation"
+TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current"
 # CP4BA version
-CP4BAVERSION="22.0.2"
+CP4BAVERSION="23.0.1"
 # Deployment pattern of the CP4BA instance
 DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
@@ -112,6 +114,15 @@ BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboar
 CONFIGNAME="config-deploy-withGitea"
 # Automation script to use when running the deployment automation tool
 AUTOMATIONSCRIPT="DeployClientOnboardingEmbeddedGitea.json"
+
+# Name of the source sh file passed to execution environment
+SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.sh
+# Name of the actual sh file passed to execution environment
+FILENAME=$0
+# Version of this script file passed to execution environment
+SCRIPTVERSION=1.1.0
+# Download URL for this script
+SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -137,7 +148,7 @@ then
   fi
 else
   # Retrieve the download URL of the only deployment automation jar that is available in the GitHub repository
-  GITHUBENTRIES=$(curl -s -X GET https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation)
+  GITHUBENTRIES=$(curl -s -X GET ${TOOLSOURCE})
 
   # Extract the download URL and the actual name of the deployment automation jar that is started later on
   DOWNLOADURL="download_url\": \""
@@ -230,24 +241,34 @@ then
    echo "  Variable 'generalUsersGroup' has not been set"
 fi
 
-if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+if [ ! -z "${gmailAddress+x}" ]
 then
-  if $validationSuccess
+  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
   then
-    echo "Validating configuration failed:"
-    validationSuccess=false
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Variable 'gmailAddress' has not been set"
+  else
+    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
   fi
-  echo "  Variable 'gmailAddress' has not been set"
 fi
 
-if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+if [ ! -z "${gmailAppKey+x}" ]
 then
-   if $validationSuccess
-   then
-     echo "Validating configuration failed:"
-     validationSuccess=false
+  if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'gmailAppKey' has not been set"
+  else
+    gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi
-  echo "  Variable 'gmailAppKey' has not been set"
 fi
 
 if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
@@ -301,4 +322,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_emailID=${gmailAddress} ACTION_wf_cp_emailPassword=${gmailAppKey} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

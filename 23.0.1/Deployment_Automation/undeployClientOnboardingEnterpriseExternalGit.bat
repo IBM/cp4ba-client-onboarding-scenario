@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 22.0.2 enterprise deployment with an external Git repository for the ADS project to remove the Client Onboarding scenario and associated labs
+rem This file is to be used with CP4BA 23.0.1 enterprise deployment with an external Git repository for the ADS project to remove the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
@@ -74,9 +74,9 @@ rem Global settings for the script (not to be modified by user)
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Source URL where the deployment automation jar can be retrieved from
-SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
+SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current
 rem CP4BA version
-SET CP4BAVERSION=22.0.2
+SET CP4BAVERSION=23.0.1
 rem Deployment pattern of the CP4BA instance
 SET DEPLOYMENTPATTERN=Enterprise
 rem Source URL to bootstrap configuration for the deployment tool
@@ -85,6 +85,15 @@ rem Name of the configuration file to use when running the deployment automation
 SET CONFIGNAME=config-undeploy
 rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=RemoveClientOnboardingArtifacts.json
+
+rem Name of the source batch file passed to execution environment
+SET SCRIPTNAME=undeployClientOnboardingEnterpriseExternalGit.bat
+rem Name of the actual batch file passed to execution environment
+SET FILENAME=%~nx0
+rem Version of this script file passed to execution environment
+SET SCRIPTVERSION=1.1.0
+rem Download URL for this script
+SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -212,6 +221,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword%
 
 ENDLOCAL

@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 23.0.1 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
+rem This file is to be used with CP4BA 23.0.1 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
 
 # Set all variables according to your environment before executing this file
 
@@ -23,22 +23,13 @@ ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginToken=REQUIRED
 
-# User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
-rpaBotExecutionUser=cp4admin2
-# URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
-rpaServer=https://rpa-server.com:1111
 
-# Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
+#giteaCredentials="-giteaUserName= -giteaUserPwd="
 
-# Email address of the gmail account to send emails
-# gmailAddress=REQUIRED
-# App key for accessing the gmail account to send emails
-# gmailAppKey=REQUIRED
-
-
-
-# Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
-#jvmSettings="-Xms4096M"
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -87,16 +78,16 @@ TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/co
 # CP4BA version
 CP4BAVERSION="23.0.1"
 # Deployment pattern of the CP4BA instance
-DEPLOYMENTPATTERN="Starter"
+DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
 BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/${CP4BAVERSION}/Deployment_Automation/${DEPLOYMENTPATTERN}"
 # Name of the configuration file to use when running the deployment automation tool
-CONFIGNAME="config-deploy"
+CONFIGNAME="config-undeploy-withGitea"
 # Automation script to use when running the deployment automation tool
-AUTOMATIONSCRIPT="DeployClientOnboardingEmbeddedGitea.json"
+AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsEmbeddedGitea.json"
 
 # Name of the source sh file passed to execution environment
-SCRIPTNAME=deployClientOnboardingStarter.sh
+SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
@@ -181,56 +172,6 @@ then
   echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [ ! -z "${gmailAddress+x}" ]
-then
-  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
-  then
-    if $validationSuccess
-    then
-      echo "Validating configuration failed:"
-      validationSuccess=false
-    fi
-    echo "  Variable 'gmailAddress' has not been set"
-  else
-    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
-  fi
-fi
-
-if [ ! -z "${gmailAppKey+x}" ]
-then
-  if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
-  then
-     if $validationSuccess
-     then
-       echo "Validating configuration failed:"
-       validationSuccess=false
-     fi
-    echo "  Variable 'gmailAppKey' has not been set"
-  else
-    gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
-  fi
-fi
-
-if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'rpaBotExecutionUser' has not been set"
-fi
-
-if [[ "${rpaServer}" == "REQUIRED" ]] || [[ "${rpaServer}" == "" ]]
-then
-   if $validationSuccess
-   then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'rpaServer' has not been set"
-fi
-
 if ! $validationSuccess
 then
   echo
@@ -242,4 +183,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials}

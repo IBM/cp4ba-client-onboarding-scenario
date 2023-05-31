@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 23.0.1 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
+rem This file is to be used with CP4BA 23.0.1 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
 
 rem Set all variables according to your environment before executing this file
 
@@ -25,48 +25,16 @@ SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginToken=REQUIRED
 
+
+rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admin
+rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
+
 rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
 rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 rem SET cp4baNamespace=
 
-rem Fully qualified user id of an admin user for the CP4BA instance
-SET cp4baAdminUserName=REQUIRED
-rem Password for the CP4BA admin user to use to access the CP4BA environment
-SET cp4baAdminPassword=REQUIRED
-rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains the admin user/users for the CP4BA instance
-SET cp4baAdminGroup=REQUIRED
-rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance
-SET generalUsersGroup=REQUIRED
-
-rem Name of the Git organisation to create the ADS repository in
-SET adsGitOrg=REQUIRED
-rem User name of the user used to create the ADS repository with
-SET adsGitUserName=REQUIRED
-rem Git API key to connect to the Git server
-SET adsGitRepoAPIKey=REQUIRED
-
-rem Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
-
-rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
-SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
-SET gmailAppKey=REQUIRED
-
-
-rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
-SET rpaBotExecutionUser=cp4admin2
-rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
-SET rpaServer=https://rpa-server.com:1111
-
-rem Should ADP be used within the Client Oboarding scenario (do not change for now)
-SET adpConfigured=false
-
-
-rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution and set heap size according to JVM used
-rem SET jvmSettings=-Xms4096M
-
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
-rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
+rem SET disableAccessToGitHub=-disableAccessToGitHub=true
 
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
 rem Uncomment at least the proxyScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
@@ -113,12 +81,12 @@ SET DEPLOYMENTPATTERN=Enterprise
 rem Source URL to bootstrap configuration for the deployment tool
 SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/%CP4BAVERSION%/Deployment_Automation/%DEPLOYMENTPATTERN%
 rem Name of the configuration file to use when running the deployment automation tool
-SET CONFIGNAME=config-deploy
+SET CONFIGNAME=config-undeploy-withGitea
 rem Automation script to use when running the deployment automation tool
-SET AUTOMATIONSCRIPT=DeployClientOnboarding.json
+SET AUTOMATIONSCRIPT=RemoveClientOnboardingArtifactsEmbeddedGitea.json
 
 rem Name of the source batch file passed to execution environment
-SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
+SET SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
@@ -192,7 +160,7 @@ rem Check if the deployment automation jar is available locally
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Validation that all required parameters are set
-rem ----------------------------------------------------------------------------------------------------------
+rem ---------------------------------------------------------
 
 if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
 if "%ocLoginServer%"=="" set ocLoginServerRequired=true
@@ -216,153 +184,6 @@ if defined ocLoginTokenRequired (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if "%cp4baAdminUserName%"=="REQUIRED" set cp4baAdminUserNameRequired=true
-if "%cp4baAdminUserName%"=="" set cp4baAdminUserNameRequired=true
-
-if defined cp4baAdminUserNameRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminUserName' has not been set
-)
-
-if "%cp4baAdminPassword%"=="REQUIRED" set cp4baAdminPasswordRequired=true
-if "%cp4baAdminPassword%"=="" set cp4baAdminPasswordRequired=true
-
-if defined cp4baAdminPasswordRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminPassword' has not been set
-)
-
-if "%cp4baAdminGroup%"=="REQUIRED" set cp4baAdminGroupRequired=true
-if "%cp4baAdminGroup%"=="" set cp4baAdminGroupRequired=true
-
-if defined cp4baAdminGroupRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'cp4baAdminGroup' has not been set
-)
-
-if "%generalUsersGroup%"=="REQUIRED" set generalUsersGroupRequired=true
-if "%generalUsersGroup%"=="" set generalUsersGroupequired=true
-
-if defined generalUsersGroupRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'generalUsersGroup' has not been set
-)
-
-if "%adsGitOrg%"=="REQUIRED" set adsGitOrgRequired=true
-if "%adsGitOrg%"=="" set adsGitOrgRequired=true
-
-if defined adsGitOrgRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'adsGitOrg' has not been set
-)
-
-if "%adsGitUserName%"=="REQUIRED" set adsGitUserNameRequired=true
-if "%adsGitUserName%"=="" set adsGitUserNameRequired=true
-
-if defined adsGitUserNameRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'adsGitUserName' has not been set
-)
-
-if "%adsGitRepoAPIKey%"=="REQUIRED" set adsGitRepoAPIKeyRequired=true
-if "%adsGitRepoAPIKey%"=="" set adsGitRepoAPIKeyRequired=true
-
-if defined adsGitRepoAPIKeyRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	
-	echo   Variable 'adsGitRepoAPIKey' has not been set
-)
-
-if defined gmailAddress (
-	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-	if "%gmailAddress%"=="" set gmailAddressRequired=true
-
-	if defined gmailAddressRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
-		)
-		echo   Variable 'gmailAddress' has not been set
-	) else (
-		set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
-	)
-)
-
-if defined gmailAppKey (
-	if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-	if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
-
-	if defined gmailAppKeyRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
-		)
-		echo   Variable 'gmailAppKey' has not been set
-	) else (
-		set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
-	)
-)
-
-if "%rpaBotExecutionUser%"=="REQUIRED" set rpaBotExecutionUserRequired=true
-if "%rpaBotExecutionUser%"=="" set rpaBotExecutionUserRequired=true
-
-if defined rpaBotExecutionUserRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'rpaBotExecutionUser' has not been set
-)
-
-if "%rpaServer%"=="REQUIRED" set rpaServerRequired=true
-if "%rpaServer%"=="" set rpaServerRequired=true
-
-if defined rpaServerRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'rpaServer' has not been set
-)
-
-if "%adpConfigured%"=="REQUIRED" set adpConfiguredRequired=true
-if "%adpConfigured%"=="" set adpConfiguredRequired=true
-
-if defined adpConfiguredRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
-	)
-	echo   Variable 'adpConfigured' has not been set
-)
-
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -375,6 +196,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% ACTION_adsGitOrg=%adsGitOrg% ACTION_adsGitUserName=%adsGitUserName% ACTION_adsGitRepoAPIKey=%adsGitRepoAPIKey% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials%
 
 ENDLOCAL

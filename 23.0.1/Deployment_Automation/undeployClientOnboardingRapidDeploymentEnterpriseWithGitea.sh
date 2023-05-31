@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 22.0.2 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
+# This file is to be used with CP4BA 23.0.1 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
 
 # Set all variables according to your environment before executing this file
 
@@ -76,9 +76,9 @@ fi
 # ----------------------------------------------------------------------------------------------------------
 
 # Source URL where the deployment automation jar can be retrieved from
-TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation"
+TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current"
 # CP4BA version
-CP4BAVERSION="22.0.2"
+CP4BAVERSION="23.0.1"
 # Deployment pattern of the CP4BA instance
 DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
@@ -87,6 +87,16 @@ BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboar
 CONFIGNAME="config-undeploy-withGitea"
 # Automation script to use when running the deployment automation tool
 AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsEmbeddedGitea.json"
+
+
+# Name of the source sh file passed to execution environment
+SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
+# Name of the actual sh file passed to execution environment
+FILENAME=$0
+# Version of this script file passed to execution environment
+SCRIPTVERSION=1.1.0
+# Download URL for this script
+SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -112,7 +122,7 @@ then
   fi
 else
   # Retrieve the download URL of the only deployment automation jar that is available in the GitHub repository
-  GITHUBENTRIES=$(curl -s -X GET https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation)
+  GITHUBENTRIES=$(curl -s -X GET ${TOOLSOURCE})
 
   # Extract the download URL and the actual name of the deployment automation jar that is started later on
   DOWNLOADURL="download_url\": \""
@@ -186,4 +196,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}

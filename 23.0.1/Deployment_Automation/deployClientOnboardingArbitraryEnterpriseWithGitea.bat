@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with an arbitrary CP4BA 22.0.2 Enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs
+rem This file is to be used with an arbitrary CP4BA 23.0.1 Enterprise deployment with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
 
 rem Set all variables according to your environment before executing this file
 
@@ -40,6 +40,8 @@ SET generalUsersGroup=REQUIRED
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+
+rem Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
 
 rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
 SET gmailAddress=REQUIRED
@@ -101,9 +103,9 @@ rem Global settings for the script (not to be modified by user)
 rem ----------------------------------------------------------------------------------------------------------
 
 rem Source URL where the deployment automation jar can be retrieved from
-SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation
+SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current
 rem CP4BA version
-SET CP4BAVERSION=22.0.2
+SET CP4BAVERSION=23.0.1
 rem Deployment pattern of the CP4BA instance
 SET DEPLOYMENTPATTERN=Enterprise
 rem Source URL to bootstrap configuration for the deployment tool
@@ -112,6 +114,15 @@ rem Name of the configuration file to use when running the deployment automation
 SET CONFIGNAME=config-deploy-withGitea
 rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=DeployClientOnboardingEmbeddedGitea.json
+
+rem Name of the source batch file passed to execution environment
+SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
+rem Name of the actual batch file passed to execution environment
+SET FILENAME=%~nx0
+rem Version of this script file passed to execution environment
+SET SCRIPTVERSION=1.1.0
+rem Download URL for this script
+SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -251,26 +262,34 @@ if defined generalUsersGroupRequired (
 	echo   Variable 'generalUsersGroup' has not been set
 )
 
-if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-if "%gmailAddress%"=="" set gmailAddressRequired=true
+if defined gmailAddress (
+	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
+	if "%gmailAddress%"=="" set gmailAddressRequired=true
 
-if defined gmailAddressRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
+	if defined gmailAddressRequired ( 
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'gmailAddress' has not been set
+	) else (
+		set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
 	)
-	echo   Variable 'gmailAddress' has not been set
 )
 
-if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+if defined gmailAppKey (
+	if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
+	if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
 
-if defined gmailAppKeyRequired ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
+	if defined gmailAppKeyRequired ( 
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'gmailAppKey' has not been set
+	) else (
+		set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
 	)
-	echo   Variable 'gmailAppKey' has not been set
 )
 
 if "%rpaBotExecutionUser%"=="REQUIRED" set rpaBotExecutionUserRequired=true
@@ -329,6 +348,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% ACTION_wf_cp_emailID=%gmailAddress% ACTION_wf_cp_emailPassword=%gmailAppKey% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
