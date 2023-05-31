@@ -76,7 +76,7 @@ fi
 # ----------------------------------------------------------------------------------------------------------
 
 # Source URL where the deployment automation jar can be retrieved from
-TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation"
+TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current"
 # CP4BA version
 CP4BAVERSION="22.0.2"
 # Deployment pattern of the CP4BA instance
@@ -89,8 +89,10 @@ CONFIGNAME="config-undeploy-withGitea"
 AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsEmbeddedGitea.json"
 
 
-# Name of the script file passed to execution environment
+# Name of the source sh file passed to execution environment
 SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
+# Name of the actual sh file passed to execution environment
+FILENAME=$0
 # Version of this script file passed to execution environment
 SCRIPTVERSION=1.1.0
 # Download URL for this script
@@ -120,7 +122,7 @@ then
   fi
 else
   # Retrieve the download URL of the only deployment automation jar that is available in the GitHub repository
-  GITHUBENTRIES=$(curl -s -X GET https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation)
+  GITHUBENTRIES=$(curl -s -X GET ${TOOLSOURCE})
 
   # Extract the download URL and the actual name of the deployment automation jar that is started later on
   DOWNLOADURL="download_url\": \""
@@ -194,4 +196,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} -scriptDownloadPath=${SCRIPTDOWNLOADPATH} -scriptName=${SCRIPTNAME} -scriptVersion=${SCRIPTVERSION} -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials}
