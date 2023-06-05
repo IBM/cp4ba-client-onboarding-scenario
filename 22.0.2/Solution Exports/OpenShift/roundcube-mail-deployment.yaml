@@ -66,3 +66,6 @@ spec:
       - name: temp-data
         persistentVolumeClaim:
           claimName: roundcubemail-temp-pvc
+      - name: mail-config
+        configMap:
+          name: roundcubemail-config
