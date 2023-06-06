@@ -17,4 +17,4 @@ data:
            'verify_peer_name' => false,
         ),
       );
-      $config['username_domain'] = '$(localMailDomain)$';
+      $config['username_domain'] = '$(localMailDomainNoAtSign)$';
