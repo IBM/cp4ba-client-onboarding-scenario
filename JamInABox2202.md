@@ -34,18 +34,18 @@ Jam-in-a-Box removes hurdles to Business Automation adoption through easing avai
 
 - **Assets**
 
-   - [Nine hands-on labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1)
+   - [Nine hands-on labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2)
 
       **Mapping of labs to environments**
 
       | Lab(s)                                                       | Environment (IBM TechZone - Business Partners and IBMers only) |
       | ------------------------------------------------------------ | ------------------------------------------------------------ |
-      | [IBM Cloud Pak for Business Automation (End-to-End)](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/IBM%20Cloud%20Pak%20for%20Business%20Automation%20(End-to-End))<br/>[IBM Business Automation Application](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Business%20Automation%20Application)<br/>[IBM Business Automation Insights](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Business%20Automation%20Insights)<br/>[IBM FileNet Content Services](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Content)<br/>[IBM Automation Decision Services](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Decisions)<br/>[IBM Business Automation Workflow](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Workflow) | [Jam-in-a-box on CP4BA - V22.0.2 on Red Hat OpenShift on IBM Cloud](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation) (in case of client-facing activity)<br/><br/>After successfully provisioning the environment<br/>follow the [instructions to deploy the Client Onboarding scenario](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/DeployingClientOnboarding2202.md)<br/>(Also see instructions in case you don't have access to/can't get a IBM TechZone environment) |
-      | [IBM CP4BA - Bring-up Lab](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Bring-up) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Bring-up) |
-      | [IBM Process Mining](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Process%20Mining) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Process%20Mining) |
+      | [IBM Cloud Pak for Business Automation (End-to-End)](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/IBM%20Cloud%20Pak%20for%20Business%20Automation%20(End-to-End))<br/>[IBM Business Automation Application](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Business%20Automation%20Application)<br/>[IBM Business Automation Insights](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Business%20Automation%20Insights)<br/>[IBM FileNet Content Services](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Content)<br/>[IBM Automation Decision Services](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Decisions)<br/>[IBM Business Automation Workflow](https://github.com/IBM/cp4ba-labs/blob/main/22.0.2/Workflow) | Follow the instructions on how-to provision a CP4BA 22.0.2 environment and to deploy the Client Onboarding scenario as described in this [document](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/DeployingClientOnboarding2202.md).<br/>(Also contains hints in case you don't have access to/can't get a IBM TechZone environment.) |
+      | [IBM CP4BA - Bring-up Lab](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Bring-up) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Bring-up) (CP4BA 22.0.1) |
+      | [IBM Process Mining](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Process%20Mining) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2/Process%20Mining) |
       | [IBM Robotic Process Automation](https://github.com/IBM/cp4ba-labs/blob/main/22.0.1/Robotic%20Process%20Automation) | Follow the instructions provided on the respective [lab overview page](https://github.com/IBM/cp4ba-labs/tree/main/22.0.1/Robotic%20Process%20Automation) |
 
-   - [All artifacts](https://github.com/IBM/cp4ba-client-onboarding-scenario) for the Client Onboarding scenario including deployment automation to quickly and easily deploy them
+   - [All artifacts](https://github.com/IBM/cp4ba-client-onboarding-scenario) by CP4BA version for the Client Onboarding scenario including deployment automation to quickly and easily deploy them
 
 
 ## Support
