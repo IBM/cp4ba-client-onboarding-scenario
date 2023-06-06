@@ -394,6 +394,23 @@
 									}
 								},
 								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Remove 'roundcube-mail-config' and 'roundcubenginx-config' ConfigMaps",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "roundcube-mail-config"
+											},
+											{
+												"action": "delete",
+												"configMapName": "roundcubenginx-config"
+											}
+										]
+									}
+								},
+								{
 									"MANAGEPVCS": {
 										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
 										"description": "Delete roundcubedb-volumeclaim, roundcubemail-temp-pvc, and roundcubemail-www-pvc PVCs",

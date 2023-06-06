@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -14,7 +14,7 @@
 						"OCP": {
 							"enabled": "true",
 							"name": "Configure mail server and client in OCP",
-							"relativeBasePath": "0_OCP",
+							"relativeBasePath": "OpenShift",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -40,6 +40,9 @@
 											},
 											{
 												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-deployment.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-config.yaml"
 											},
 											{
 												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-service.yaml"
@@ -125,6 +128,9 @@
 											},
 											{
 												"fileName": "roundcube-shared-secret.yaml"
+											},
+																						{
+												"fileName": "roundcube-mail-config.yaml"
 											},
 											{
 												"fileName": "roundcube-db.yaml"
@@ -268,7 +274,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
 							"description": "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",
 							"decisionsPrjDisplayName": "Client Onboarding",
-							"relativeBasePath": "1_ADS",
+							"relativeBasePath": "Automation Decision Services",
 							"maxBASQueryRetries": 5,
 							"subActions": [
 								{
@@ -368,7 +374,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_ADP)$$",
 							"description": "ADP - Configure and deploy default project and extract projectId",
 							"skipRemainingSubactionOnFailure": "true",
-							"relativeBasePath": "2_ADP",
+							"relativeBasePath": "Automation Document Processing",
 							"objectStoreName": "$$(adpObjectStore)$$",
 							"projectDisplayName": "$$(adpProjectName)$$",
 							"projectAcronym": "$$(adpProjectAcronym)$$",
@@ -432,7 +438,7 @@
 							"comment": "ADP will be enabled if previous ADP action was successful otherwise ADP will be disabled",
 							"enabled": "$$(enableDeployClientOnboarding_WF)$$",
 							"description": "WF - Deploy and publish Client Onboarding solution",
-							"relativeBasePath": "4_WF",
+							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -594,7 +600,7 @@
 							"description": "CPE - Update class security, create 'Client Documents' folder, and create documents",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(BAW_TOS)$$",
-							"relativeBasePath": "5_FNCM",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -819,7 +825,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Navigator - Import apps and desktops",
 							"name": "Prepare Apps and Desktops",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -980,7 +986,7 @@
 						"BAI": {
 							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
 							"description": "Populate the ADS, Process, and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
-							"relativeBasePath": "7_BAI",
+							"relativeBasePath": "Business Automation Insights",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -1110,7 +1116,7 @@
 						"WF": {
 							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
 							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs",
-							"relativeBasePath": "4_WF",
+							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
 									"ADDCOLLABORATORS": {
@@ -1187,7 +1193,7 @@
 							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(BAW_DOCS)$$",
-							"relativeBasePath": "5_FNCM",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
@@ -1362,7 +1368,7 @@
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
 							"description": "Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -1421,7 +1427,7 @@
 						"BAA": {
 							"enabled": "$$(enableConfigureSWATLabs_BAA)$$",
 							"description": "BAA - Prepare APP in Studio for BAA lab",
-							"relativeBasePath": "6_BAA",
+							"relativeBasePath": "Business Automation Application",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {

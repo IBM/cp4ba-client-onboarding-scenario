@@ -4,31 +4,30 @@
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
-	
 	"actions": [
 		{
 			"CONTAINER": {
-				"comment" : "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
+				"comment": "Clean up Client Onboarding scenario and labs related artifacts in reverse order",
 				"enabled": "true",
-				"description" : "Remove Client Onboarding Artifacts (scenario & labs)",
+				"description": "Remove Client Onboarding Artifacts (scenario & labs)",
 				"actions": [
 					{
 						"BAI": {
-							"comment" : "Clean up BAI data and remove Client Onboarding dashboard and goal",
+							"comment": "Clean up BAI data and remove Client Onboarding dashboard and goal",
 							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
-							"description" : "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
+							"description": "BAI - Delete all ADS, Case, WF data, and Goal and Dashboard",
 							"relativeBasePath": "7_BAI",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete all ADS, Case, WF data from indices",
-										"artifactNames": [ 
-											"icp4ba-bai-ads-decision-execution-common-data-idx", 
-											"icp4ba-bai-case-summaries-active-idx-ibm-bai", 
+										"description": "Delete all ADS, Case, WF data from indices",
+										"artifactNames": [
+											"icp4ba-bai-ads-decision-execution-common-data-idx",
+											"icp4ba-bai-case-summaries-active-idx-ibm-bai",
 											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
 											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
-											"icp4ba-bai-process-timeseries-idx-ibm-bai" 
+											"icp4ba-bai-process-timeseries-idx-ibm-bai"
 										],
 										"artifactType": "Index"
 									}
@@ -36,16 +35,20 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Completed' dashboard",
-										"artifactNames": [ "Client Onboarding Completed" ],
+										"description": "Delete 'Client Onboarding Completed' dashboard",
+										"artifactNames": [
+											"Client Onboarding Completed"
+										],
 										"artifactType": "Dashboard"
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
-										"artifactNames": [ "Focus Corp's top Client Onboarding KPI Completed" ],
+										"description": "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
+										"artifactNames": [
+											"Focus Corp's top Client Onboarding KPI Completed"
+										],
 										"artifactType": "Goal",
 										"deleteReferencingDashboard": true
 									}
@@ -55,30 +58,30 @@
 					},
 					{
 						"ICN": {
-							"comment" : "Remove the two applications and three desktops from Navigator",
+							"comment": "Remove the two applications and three desktops from Navigator",
 							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
-							"description" : "Navigator - Delete Client Onboarding Applications and Desktops",
+							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
 							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
+										"description": "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
 										"appEngineAppConfigName": "APPENG0",
 										"artifactType": "Application",
-										"artifactNames": [ 
+										"artifactNames": [
 											"Client Onboarding Request",
-											"Client Onboarding Document Upload" 
+											"Client Onboarding Document Upload"
 										]
 									}
 								},
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'BAWDOCS' desktops",
+										"description": "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'BAWDOCS' desktops",
 										"artifactType": "Desktop",
-										"artifactNames": [ 
-											"Client Onboarding Request", 
+										"artifactNames": [
+											"Client Onboarding Request",
 											"Client Onboarding Document Upload",
 											"BAWDOCS"
 										]
@@ -91,13 +94,13 @@
 						"BAA": {
 							"comment": "Delete Client Onboarding APP, APP template, and APP TK",
 							"enabled": "$$(enableCleanupClientOnboarding_BAA)$$",
-							"description" : "BAA - Delete Client Onboarding APP, APP template, and APP TK",
+							"description": "BAA - Delete Client Onboarding APP, APP template, and APP TK",
 							"relativeBasePath": "6_BAA",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Template' app",
+										"description": "Delete 'Client Onboarding Template' app",
 										"projectType": "APP",
 										"projectName": "Client Onboarding Template",
 										"unpublishAutomationServices": false,
@@ -110,7 +113,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Document Upload' app",
+										"description": "Delete 'Client Onboarding Document Upload' app",
 										"projectType": "APP",
 										"projectName": "Client Onboarding Document Upload",
 										"projectAcronym": "CODU",
@@ -124,7 +127,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the app template 'Client Onboarding Template'",
+										"description": "Delete the app template 'Client Onboarding Template'",
 										"projectType": "APP_TEMPLATE",
 										"projectName": "Client Onboarding Template",
 										"unpublishAutomationServices": true,
@@ -137,7 +140,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete the 'Client Onboarding Toolkit' app toolkit",
+										"description": "Delete the 'Client Onboarding Toolkit' app toolkit",
 										"projectType": "APP_TK",
 										"projectName": "Client Onboarding Toolkit",
 										"unpublishAutomationServices": true,
@@ -152,17 +155,19 @@
 					},
 					{
 						"FNCM": {
-							"comment" : "Remove 'Client Documents' folder and with that also all contained documents",
+							"comment": "Remove 'Client Documents' folder and with that also all contained documents",
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
-							"description" : "CPE - Delete 'Client Documents' folder and contained documents from TOS",
+							"description": "CPE - Delete 'Client Documents' folder and contained documents from TOS",
 							"objectStoreName": "$$(BAW_TOS)$$",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Documents' folder and contained documents",
-										"artifactNames": [ "/Client Documents" ],
+										"description": "Delete 'Client Documents' folder and contained documents",
+										"artifactNames": [
+											"/Client Documents"
+										],
 										"artifactType": "Folder",
 										"deleteSubfolders": true,
 										"deleteDocuments": true
@@ -173,18 +178,20 @@
 					},
 					{
 						"FNCM": {
-							"comment" : "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
+							"comment": "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
-							"description" : "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store BAWDOCS",
+							"description": "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store BAWDOCS",
 							"objectStoreName": "BAWDOCS",
 							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description" : "Delete 'Case Folders' folder and contained documents used in the content lab",
+										"description": "Delete 'Case Folders' folder and contained documents used in the content lab",
 										"artifactType": "Folder",
-										"artifactNames": [ "/Case Folders" ],
+										"artifactNames": [
+											"/Case Folders"
+										],
 										"deleteSubfolders": true,
 										"deleteDocuments": true
 									}
@@ -194,7 +201,9 @@
 										"enabled": "true",
 										"description": "Delete the folder class 'SWAT Jam Case Folder' used in the content lab",
 										"artifactType": "ClassDefinition",
-										"artifactNames": [ "SWAT_JAM_Case_Folder" ]
+										"artifactNames": [
+											"SWAT_JAM_Case_Folder"
+										]
 									}
 								},
 								{
@@ -202,9 +211,9 @@
 										"enabled": "true",
 										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
 										"artifactType": "PropertyTemplate",
-										"artifactNames": [ 
+										"artifactNames": [
 											"Case_Reference_ID",
-											"Client_Name" 
+											"Client_Name"
 										]
 									}
 								},
@@ -213,7 +222,9 @@
 										"enabled": "true",
 										"description": "Delete the storage policy 'Default Advanced Storage Area' used in the content lab",
 										"artifactType": "StoragePolicy",
-										"artifactNames": [ "Default Advanced Storage Area" ]
+										"artifactNames": [
+											"Default Advanced Storage Area"
+										]
 									}
 								}
 							]
@@ -221,15 +232,15 @@
 					},
 					{
 						"WF": {
-							"comment" : "Delete Client Onboarding solution and toolkits",
+							"comment": "Delete Client Onboarding solution and toolkits",
 							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
-							"description" : "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
+							"description": "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
 							"relativeBasePath": "4_WF",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' Workflow solution",
+										"description": "Delete 'Client Onboarding' Workflow solution",
 										"projectType": "WF_PA",
 										"projectName": "Client Onboarding",
 										"projectAcronym": "CO",
@@ -242,7 +253,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding Toolkit' TK",
+										"description": "Delete 'Client Onboarding Toolkit' TK",
 										"projectType": "WF_TK",
 										"projectName": "Client Onboarding Toolkit",
 										"unpublishAutomationServices": true,
@@ -255,7 +266,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'IBM RPA Toolkit' TK",
+										"description": "Delete 'IBM RPA Toolkit' TK",
 										"projectType": "WF_TK",
 										"projectName": "IBM RPA Toolkit",
 										"projectAcronym": "IBMRPAT",
@@ -269,7 +280,7 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description" : "Delete 'ADP Utils' TK",
+										"description": "Delete 'ADP Utils' TK",
 										"projectType": "WF_TK",
 										"projectName": "ADP Utils",
 										"projectAcronym": "ADPU",
@@ -285,16 +296,18 @@
 					},
 					{
 						"ADS": {
-							"comment" : "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
+							"comment": "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
 							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
-							"description" : "ADS - Undeploy and delete the Client Onboarding ADS project and but not the Git repository for the ADS project",
+							"description": "ADS - Undeploy and delete the Client Onboarding ADS project and but not the Git repository for the ADS project",
 							"relativeBasePath": "1_ADS",
 							"subActions": [
 								{
 									"CLEANUPADS": {
 										"enabled": "true",
-										"description" : "Delete 'Client Onboarding' ADS project",
-										"adsCleanupActions" : [ "Project" ],
+										"description": "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions": [
+											"Project"
+										],
 										"projectName": "Client Onboarding",
 										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
@@ -305,6 +318,189 @@
 										"delayBetweenUnpublishCompletionPolls": 5,
 										"maxUndeployCompletionPolls": 20,
 										"delayBetweenUndeployCompletionPolls": 5
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"enabled": "$$(enableCleanupEmailCapability)$$",
+							"name": "Remove mail server and client from OCP",
+							"relativeBasePath": "0_OCP",
+							"subActions": [
+								{
+									"MANAGEROUTES": {
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete roundcubenginx route",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
+										"routes": [
+											{
+												"action": "delete",
+												"routeName": "roundcubenginx"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDEPLOYMENTS": {
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete roundcubenginx, roundcubemail, and roundcubedb deployment",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
+										"deployments": [
+											{
+												"action": "delete",
+												"deploymentName": "roundcubenginx"
+											},
+											{
+												"action": "delete",
+												"deploymentName": "roundcubemail"
+											},
+											{
+												"action": "delete",
+												"deploymentName": "roundcubedb"
+											}
+										]
+									}
+								},
+								{
+									"MANAGESECRETS": {
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete roundcubemail-shared-secret secrets",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
+										"secrets": [
+											{
+												"action": "delete",
+												"secretName": "roundcubemail-shared-secret"
+											}
+										]
+									}
+								},
+								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Remove 'roundcube-mail-config' and 'roundcubenginx-config' ConfigMaps",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "roundcube-mail-config"
+											},
+											{
+												"action": "delete",
+												"configMapName": "roundcubenginx-config"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPVCS": {
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete roundcubedb-volumeclaim, roundcubemail-temp-pvc, and roundcubemail-www-pvc PVCs",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$",
+										"pvcs": [
+											{
+												"action": "delete",
+												"pvcName": "roundcubedb-volumeclaim"
+											},
+											{
+												"action": "delete",
+												"pvcName": "roundcubemail-temp-pvc"
+											},
+											{
+												"action": "delete",
+												"pvcName": "roundcubemail-www-pvc"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDEPLOYMENTS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete mailserver deployment",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"deployments": [
+											{
+												"action": "delete",
+												"deploymentName": "mailserver"
+											}
+										]
+									}
+								},
+								{
+									"MANAGESERVICES": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete mailserver service",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"services": [
+											{
+												"action": "delete",
+												"serviceName": "mailserver"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPVCS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete mail-storage PVC",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"pvcs": [
+											{
+												"action": "delete",
+												"pvcName": "mail-storage"
+											}
+										]
+									}
+								},
+								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete mailserver.env.config ConfigMaps",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "mailserver.env.config"
+											},
+											{
+												"action": "delete",
+												"configMapName": "mailserver.config"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPCLUSTERROLEBINDING": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Remove ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"clusterRoles": [
+											{
+												"action": "delete",
+												"clusterRoleName": "privileged"
+											},
+											{
+												"action": "delete",
+												"clusterRoleName": "anyuid"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete $$(localSmtpServerNamespace)$$ namespace",
+										"action": "delete",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$"
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "§IF($$(ISSET(localMailClientNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete $$(localMailClientNamespace)$$ namespace",
+										"action": "delete",
+										"namespaceName": "$$(localMailClientNamespace|default=)$$"
 									}
 								}
 							]
