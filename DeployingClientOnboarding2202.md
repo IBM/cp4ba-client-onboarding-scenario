@@ -15,7 +15,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    Provide and select the required information. Ensure that you keep the default selection '**all**' in the 'techzone-reservation' dropdown.
 
-   <img src="images\techzone-reservation.jpg" style="zoom:40%;" />
+   <img src="images\techzone-reservation.jpg" />
 
    Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after some time it finally becomes **Ready**. Overall this may take up to 6 hours. You will receive several emails during that period. 
 
@@ -25,17 +25,17 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    The final email has the subject '**Your environment is ready**'. The email contains a link to the PakInstaller Portal.
 
-   <img src="images\your-environment-is-ready.jpg" style="zoom:67%;" />
+   <img src="images\your-environment-is-ready.jpg"/>
 
    On the **OpenShift Console** tab of the PakInstaller Portal, you find the link to the **OpenShift Web Console** together with the **admin user** (always ocpadmin) and the **password** (unique to each provisioned environment).
 
-   <img src="images\pakinstaller-portal.jpg" style="zoom:35%;" />
+   <img src="images\pakinstaller-portal.jpg" />
 
    You require the OpenShift Web Console to validate that the Cloud Pak is fully installed and to get the access information for the environment required to deploy the Client Onboarding artifacts.
 
    When logging into the OpenShift Web Console make sure to select **Daffy htpasswd Provider**.
 
-   <img src="images\openshift-login-selection.jpg" style="zoom:70%;" />
+   <img src="images\openshift-login-selection.jpg" />
 
    
 
@@ -78,9 +78,9 @@ On Windows open the file **deployClientOnboardingStarter.bat**/on Linux or Mac o
 **Update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the file with your specific details**:
 
 1. **Login** to the OpenShift Web Console (for a TechZone environment follow the instructions provided above)
-2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner <img src="images\openshift-copy-log-in-command.jpg" style="zoom:70%;" />
+2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner <img src="images\openshift-copy-log-in-command.jpg" />
 3. Click on **Display Token** link shown on the next page 
-4. For `ocLoginServer` set the value displayed after `server=`. For `ocLoginToken` set the value displayed after `token=`<img src="images\openshift-log-in-token.jpg" style="zoom:70%;" />
+4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`<img src="images\openshift-log-in-token.jpg" />
 
 ### Perform Import
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
@@ -196,7 +196,7 @@ Provision an instance of [**IBM Business Automation - Traditional and On-premise
 
 Once the environment is ready select your reservation. At the bottom of the screen you find a large blue button below the header 'VM Remote Console'. It will bring up the Windows desktop as part of the browser window. **This is the recommended way to connect to the RPA VM for demoing the bot execution.** 
 
-<img src="images\rpa-vm-browser-rdp.jpg" style="zoom:70%;" />
+<img src="images\rpa-vm-browser-rdp.jpg" />
 
 ***Prior to testing/demoing:*** Start Firefox, the browser used by the bot, once and ensure that no update or similar is pending. This could interfere with executing the bot. Afterwards close the browser again.
 
@@ -206,7 +206,7 @@ You need to set the following two variables in the bat/sh-file you downloaded pr
 
 1. `rpaBotExecutionUser` - Set to the user for who the RPA bot should be executed for (would normally be `cp4admin`). Setting it to a non-existing user like cp4admin2 will always skip the actual bot invocation.
 2. `rpaServer` - Set this to the URL of the RPA environment that you provisioned as described above. Use the URL listed as `RPA Asynch Server API` in the email that you received when your environment became ready. 
-   <img src="images\rpa-reservation-sync-url.jpg" style="zoom:50%;" />
+   <img src="images\rpa-reservation-sync-url.jpg" />
 
 If you have previously run the deployment, run it again. It will recognize that your RPA configuration has changed and will redeploy the artifact that contains the changed RPA information.
 
