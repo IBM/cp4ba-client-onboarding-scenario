@@ -351,8 +351,7 @@
 										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
 										"maxDeployCompletionPolls": 60,
-										"delayBetweenDeployCompletionPolls": 5,
-										"delayAfter": 60
+										"delayBetweenDeployCompletionPolls": 5
 									}
 								},
 								{
