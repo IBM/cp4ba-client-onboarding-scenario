@@ -1429,7 +1429,7 @@
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "$(contentOSAvailable)$",
 										"description": "Update P8 repository settings to enable Entry Template Management",
-										"repoId": "CONTENT",
+										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true
 									}
 								},
@@ -1439,7 +1439,7 @@
 										"description": "Patch 'ICN' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ICNDesktop.properties",
 										"simpleTextMappings": {
-											"CONTENTrepo": "CONTENT",
+											"CONTENTrepo": "$(REPOSITORY_ID)$",
 											"https://icp4adeploy-cpe-stateless-svc:9443": "$$(cpe-stlessSrvURL)$$",
 											"https://icp4adeploy-bastudio-service.ibm-cp4ba.svc:443": "$$(bastudioSRVURL)$$",
 											"cpd-ibm-cp4ba.apps.swat01.cp.fyre.ibm.com": "$$(cpdURLWithoutProtocol)$$"
