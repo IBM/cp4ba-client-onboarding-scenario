@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.6",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -1379,7 +1379,7 @@
 								},
 								{
 									"COPYFILES": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
@@ -1410,14 +1410,6 @@
 							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
-								{
-									"CHECKOBJECTSTOREEXISTS": {
-										"enabled": "true",
-										"description": "Check Object Store Exists",
-										"osSymbolicName": "CONTENT",
-										"variableName": "contentOSAvailable"
-									}
-								},
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
@@ -1470,7 +1462,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Add custom EDS data source plugin",
 										"action": "add",
 										"pluginName": "EDS Data Source",
@@ -1482,7 +1474,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Add EDS base plugin referencing custom plugin",
 										"action": "add",
 										"pluginName": "External Data Services Support",
