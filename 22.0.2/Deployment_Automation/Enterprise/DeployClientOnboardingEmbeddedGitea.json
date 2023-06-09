@@ -1,11 +1,30 @@
 {
-	"fileVersion": "1.0.4",
+	"fileVersion": "1.0.5",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
 	"actions": [
+		{
+			"FNCM": {
+				"enabled": "true",
+				"description": "CPE - Check if CONTENT Object store exists",
+				"replaceExistingDocuments": false,
+				"objectStoreName": "CONTENT",
+				"relativeBasePath": "FileNet Content Manager",
+				"subActions": [
+					{
+						"CHECKOBJECTSTOREEXISTS": {
+							"enabled": "true",
+							"description": "Check Object Store Exists",
+							"osSymbolicName": "CONTENT",
+							"variableName": "contentOSAvailable"
+						}
+					}
+				]
+			}
+		},
 		{
 			"CONTAINER": {
 				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
@@ -1158,14 +1177,6 @@
 							"objectStoreName": "CONTENT",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
-								{
-									"CHECKOBJECTSTOREEXISTS": {
-										"enabled": "true",
-										"description": "Check Object Store Exists",
-										"osSymbolicName": "CONTENT",
-										"variableName": "contentOSAvailable"
-									}
-								},
 								{
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "($$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(contentOSAvailable)$",
