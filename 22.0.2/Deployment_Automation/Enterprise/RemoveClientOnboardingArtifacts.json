@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/RemoveClientOnboardingArtifacts.json",
-	"requiredToolVersion": ">=1.1.0 <1.2.0",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -85,6 +85,22 @@
 											"Client Onboarding Document Upload",
 											"BAWDOCS"
 										]
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove EDS base plugin",
+										"action": "delete",
+										"pluginName": "External Data Services Support"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove custom EDS data source plugin",
+										"action": "delete",
+										"pluginName": "EDS Data Source"
 									}
 								}
 							]
