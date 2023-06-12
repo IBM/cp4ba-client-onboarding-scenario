@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) to a self-provisioned Jam-in-a-box environment. For more information about Jam-in-a-box refer to the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/JamInABox.md) page.
+Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) to a self-provisioned Jam-in-a-box environment. For more information about Jam-in-a-box refer to the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 
 ## Prerequisites
@@ -133,7 +133,7 @@ In case your deployment fails and you get stuck, please reach out using the cont
 
 ## Performing IBM Cloud Pack for Business Automations Labs
 
-Once you have imported the Client Onboarding scenario successfully, you can perform the demo and labs mentioned in the **Mapping of labs to environments** table of the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/JamInABox.md#table-of-content) page.
+Once you have imported the Client Onboarding scenario successfully, you can perform the demo and labs mentioned in the **Mapping of labs to environments** table of the [Jam-in-a-box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 ##### Considerations
 
