@@ -21,13 +21,15 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    
 
-   ***Getting access to the OpenShift Web Console***
-
-   The final email has the subject '**Your environment is ready**'. The email contains a link to the PakInstaller Portal.
+   The final email has the subject '**Your environment is ready**'. The email contains a link to the **PakInstaller Portal** that you require.
 
    <img src="..\images\your-environment-is-ready.jpg"/>
 
-   On the **OpenShift Console** tab of the PakInstaller Portal, you find the link to the **OpenShift Web Console** together with the **admin user** (always ocpadmin) and the **password** (unique to each provisioned environment).
+   
+
+   ***Getting access to the OpenShift Web Console (optional)***
+
+   On the **OpenShift Console** tab of the PakInstaller Portal, you'll find the link to the **OpenShift Web Console** together with the **admin user** (always ocpadmin) and the **password** (unique to each provisioned environment).
 
    <img src="..\images\pakinstaller-portal.jpg" />
 
@@ -75,19 +77,9 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 ### Update bat/sh File
 On Windows open the file **deployClientOnboardingStarter.bat**/on Linux or Mac open the file **deployClientOnboardingStarter.sh** in the text editor of your choice. 
 
-**Update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the file with your specific details**:
+Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from the '**Your environment is ready**' email provided for the **PakInstaller Portal URL**.
 
-1. **Login** to the OpenShift Web Console (for a TechZone environment follow the instructions provided above)
-
-2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner 
-
-   <img src="..\images\openshift-copy-log-in-command.jpg" />
-
-3. Click on **Display Token** link shown on the next page 
-
-4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`
-
-   <img src="..\images\openshift-log-in-token.jpg" />
+<img src="..\images\your-environment-is-ready.jpg"/>
 
 ### Perform Import
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
@@ -178,6 +170,24 @@ For the purpose of analyzing issues the deployment tool creates four files in th
 In case your deployment fails and you get stuck, please reach out using the contact information that is given when the deployment fails and provide the `<date>_collector.zip` file created in this instance.
 
 ## Advanced Configuration
+
+### Updating bat/sh File for non-Pak Installer Starter Deployment Environments
+
+In case you have a starter deployment environment of CP4BA 22.0.2 that was not deployed using Pak Installer, update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the file with your specific details:
+
+1. **Login** to the OpenShift Web Console
+
+2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner 
+
+   <img src="..\images\openshift-copy-log-in-command.jpg" />
+
+3. Click on **Display Token** link shown on the next page 
+
+4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`
+
+   <img src="..\images\openshift-log-in-token.jpg" />
+
+5. Start the deployment on the Client Onboarding artifacts
 
 ### Configuring an RPA environment 
 
