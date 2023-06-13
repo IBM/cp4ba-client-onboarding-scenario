@@ -64,7 +64,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
 ## Import Instructions
 
-### Download Required Bat/Sh-File
+### Download Required bat/sh File
 
    1. **Create a new directory** on your machine from which you want to start the deployment (e.g. "co_depl")
 
