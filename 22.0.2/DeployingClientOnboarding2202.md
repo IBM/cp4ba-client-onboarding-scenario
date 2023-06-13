@@ -115,7 +115,7 @@ Due to a defect in IBM Automation Decision Services (ADS), publishing the ADS au
 Once the deployment tool completes without a fatal error, it will output a status message that declares successful deployment of the Client Onboarding scenario. In addition it provides key links and user names/passwords for you to use. These links/values are specific to your environment.
 
 ```
-Overall execution completed after 10 mins, 42 secs
+Overall execution completed after 14 mins, 42 secs
 
 Deploying the Client Onboarding scenario artifacts was successful.
 
@@ -162,10 +162,10 @@ The deployment tool performs a lot of validation upfront and will report any iss
 **Sometimes the deployment fails because of timing or network issues. These may not occur again when triggering the deployment a second time.** Other failures have been observed where the CP4BA environment or some of its PODs had issues and needed to be restarted.
 
 For the purpose of analyzing issues the deployment tool creates four files in the directory where it is located:
-- deployClientOnboarding_22.0.1_Starter_output.txt - Contains the messages printed to the console
-- deployClientOnboarding_22.0.1_Starter_detailedOutput.txt - Everything printed to the console plus details about the deployment steps
-- deployClientOnboarding_22.0.1_Starter_trace.txt - Contains very detailed trace messages about everthing that is done as part of running a deployment
-- deployClientOnboarding_22.0.1_Starter_combined.txt - Contains a combination of the detailedOutput and trace files
+- deployClientOnboarding_22.0.2_Starter_output.txt - Contains the messages printed to the console
+- deployClientOnboarding_22.0.2_Starter_detailedOutput.txt - Everything printed to the console plus details about the deployment steps
+- deployClientOnboarding_22.0.2_Starter_trace.txt - Contains very detailed trace messages about everthing that is done as part of running a deployment
+- deployClientOnboarding_22.0.2_Starter_combined.txt - Contains a combination of the detailedOutput and trace files
 
 In case your deployment fails and you get stuck, please reach out using the contact information that is given when the deployment fails and provide the `<date>_collector.zip` file created in this instance.
 
