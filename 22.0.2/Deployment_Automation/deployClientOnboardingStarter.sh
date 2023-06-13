@@ -23,11 +23,10 @@
 # URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
 pakInstallerPortalURL=REQUIRED
 
-
 # Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-ocLoginServer=REQUIRED
+#ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-ocLoginToken=REQUIRED
+#ocLoginToken=REQUIRED
 
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
@@ -106,7 +105,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.1
+SCRIPTVERSION=1.1.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -167,28 +166,29 @@ echo
 
 validationSuccess=true
 
-if [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
+# if 'pakInstallerPortalURL' is not defined or set as default or empty then check that 'ocLoginServer' and 'ocLoginToken' are properly defined
+if [ -z "${pakInstallerPortalURL+x}" ] || [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
 then
-	if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+	if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 	then
 		if $validationSuccess
 		then
 			echo "Validating configuration failed:"
 			validationSuccess=false
 		fi
-		echo "  Variable 'ocLoginServer' has not been set (nor is variable 'pakInstallerPortalURL' set)"
+		echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 	else
 		INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
 	fi
 	
-	if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+	if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 	then
 		if $validationSuccess
 		then
 			echo "Validating configuration failed:"
 			validationSuccess=false
 		fi
-		echo "  Variable 'ocLoginToken' has not been set (nor is variable 'pakInstallerPortalURL' set)"
+		echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 	else
 		INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
 	fi
@@ -200,13 +200,11 @@ else
 			echo "Validating configuration failed:"
 			validationSuccess=false
 		fi
-		echo "Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
+		echo "  Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
 	else
 		INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=${pakInstallerPortalURL}
 	fi
 fi
-
-
 
 if [ ! -z "${gmailAddress+x}" ]
 then
