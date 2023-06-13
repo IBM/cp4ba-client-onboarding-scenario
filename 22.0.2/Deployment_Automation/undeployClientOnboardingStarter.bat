@@ -20,10 +20,15 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
+rem Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+
+rem URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
+SET pakInstallerPortalURL=REQUIRED
+
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginServer=REQUIRED
+rem SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginToken=REQUIRED
+rem SET ocLoginToken=REQUIRED
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -82,7 +87,7 @@ SET SCRIPTNAME=undeployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.0
+SET SCRIPTVERSION=1.1.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -154,26 +159,110 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required parameters are set
 rem ----------------------------------------------------------------------------------------------------------
 
-if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
-if "%ocLoginServer%"=="" set ocLoginServerRequired=true
+rem if pakInstallerPortalURL is defined and default or value not specified check that both ocLoginServer and ocLoginToken are defined properly
+if defined pakInstallerPortalURL (
+	rem if pakInstallerPortalURL has default value then need to ensure oc variables are properly defined
+	if "%pakInstallerPortalURL%"=="REQUIRED" (
+		rem if ocLoginServer variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+		if defined ocLoginServer (
+			if "%ocLoginServer%"=="REQUIRED" (
+				set ocLoginServerRequired=true
+			) else (
+				if "%ocLoginServer%"=="" (
+					set ocLoginServerRequired=true
+				) else (
+					set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+				)
+			)
+		) else (
+			set ocLoginServerRequired=true
+		)
+	
+		rem if ocLoginToken variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+		if defined ocLoginToken (
+			if "%ocLoginToken%"=="REQUIRED" (
+				set ocLoginTokenRequired=true
+			) else (
+				if "%ocLoginToken%"=="" (
+					set ocLoginTokenRequired=true
+				) else (
+					set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+				)
+			)
+		) else (
+			set ocLoginTokenRequired=true
+		)
+	rem pakInstallerPortalURL is set a to a value ensure that 'ocLoginServer' and 'ocLoginToken' are either not defined (commented out) or remain at the default value
+	) else (
+		if defined ocLoginServer (
+			if NOT "%ocLoginServer%"=="REQUIRED" (
+				set multipleLoginMethod=true
+			)
+		)
+
+		if defined ocLoginToken (
+			if NOT "%ocLoginToken%"=="REQUIRED" (
+				set multipleLoginMethod=true
+			)
+		)
+		
+		set INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=%pakInstallerPortalURL%
+	)
+rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginServer' and 'ocLoginToken' are properly defined
+) else (
+	rem if 'ocLoginServer' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+	if defined ocLoginServer (
+		if "%ocLoginServer%"=="REQUIRED" (
+			set ocLoginServerRequired=true
+		) else (
+			if "%ocLoginServer%"=="" (
+				set ocLoginServerRequired=true
+			) else (
+				set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+			)
+		)
+	) else (
+		set ocLoginServerRequired=true
+	)
+	
+	rem if 'ocLoginToken' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+	if defined ocLoginToken (
+		if "%ocLoginToken%"=="REQUIRED" (
+			set ocLoginTokenRequired=true
+		) else (
+			if "%ocLoginToken%"=="" (
+				set ocLoginTokenRequired=true
+			) else (
+				set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+			)
+		)
+	) else (
+		set ocLoginTokenRequired=true
+	)
+)
+
+if defined multipleLoginMethod ( 
+	if not defined validationFailed (
+		echo Validating configuration failed:
+		set validationFailed=true
+	)
+	echo   Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both
+)
 
 if defined ocLoginServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginServer' has not been set
+	echo   Variable 'ocLoginServer' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
 )
-
-if "%ocLoginToken%"=="REQUIRED" set ocLoginTokenRequired=true
-if "%ocLoginToken%"=="" set ocLoginTokenRequired=true
 
 if defined ocLoginTokenRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginToken' has not been set
+	echo   Variable 'ocLoginToken' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
 )
 
 if defined toolValidationFailed set overallValidationFailed=true
@@ -188,6 +277,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT%
 
 ENDLOCAL
