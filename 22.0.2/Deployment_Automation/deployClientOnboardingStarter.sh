@@ -18,6 +18,12 @@
 # Specify below variables to launch the deployment automation with
 #----------------------------------------------------------------------------------------------------------
 
+# Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+
+# URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
+pakInstallerPortalURL=REQUIRED
+
+
 # Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
@@ -100,7 +106,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.0
+SCRIPTVERSION=1.1.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -161,25 +167,46 @@ echo
 
 validationSuccess=true
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+if [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
 then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'ocLoginServer' has not been set"
+	if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "  Variable 'ocLoginServer' has not been set (nor is variable 'pakInstallerPortalURL' set)"
+	else
+		INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+	fi
+	
+	if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "  Variable 'ocLoginToken' has not been set (nor is variable 'pakInstallerPortalURL' set)"
+	else
+		INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
+	fi
+else 
+	if ([[ "${ocLoginServer}" != "REQUIRED" ]] && [[ "${ocLoginServer}" != "" ]]) || ([[ "${ocLoginToken}" != "REQUIRED" ]] && [[ "${ocLoginToken}" != "" ]])
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
+	else
+		INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=${pakInstallerPortalURL}
+	fi
 fi
 
-if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'ocLoginToken' has not been set"
-fi
+
 
 if [ ! -z "${gmailAddress+x}" ]
 then
@@ -242,4 +269,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

@@ -20,6 +20,12 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
+rem Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+
+rem URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
+SET pakInstallerPortalURL=REQUIRED
+
+
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
 SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
@@ -99,7 +105,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.0
+SET SCRIPTVERSION=1.1.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -171,27 +177,61 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required parameters are set
 rem ----------------------------------------------------------------------------------------------------------
 
+rem if pakInstallerPortalURL is default or not specified check that both ocLoginServer and ocLoginToken are specified
+if "%pakInstallerPortalURL%"=="REQUIRED" (
+	if "%ocLoginServer%"=="REQUIRED" (
+		set ocLoginServerRequired=true
+	) else (
+		if "%ocLoginServer%"=="" (
+			set ocLoginServerRequired=true
+		) else (
+			set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+		)
+	)
+	
+	if "%ocLoginToken%"=="REQUIRED" (
+		set ocLoginTokenRequired=true
+	) else (
+		if "%ocLoginToken%"=="" (
+			set ocLoginTokenRequired=true
+		) else (
+			set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+		)
+	)
+) else (
+	if NOT "%ocLoginServer%"=="REQUIRED" (
+		set multipleLoginMethod=true
+	)
 
-if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
-if "%ocLoginServer%"=="" set ocLoginServerRequired=true
+	if NOT "%ocLoginToken%"=="REQUIRED" (
+		set multipleLoginMethod=true
+	)
+
+	set INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=%pakInstallerPortalURL%
+)
+
+if defined multipleLoginMethod ( 
+	if not defined validationFailed (
+		echo Validating configuration failed:
+		set validationFailed=true
+	)
+	echo   Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both
+)
 
 if defined ocLoginServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginServer' has not been set
+	echo   Variable 'ocLoginServer' has not been set ^(nor is variable 'pakInstallerPortalURL' set^)
 )
-
-if "%ocLoginToken%"=="REQUIRED" set ocLoginTokenRequired=true
-if "%ocLoginToken%"=="" set ocLoginTokenRequired=true
 
 if defined ocLoginTokenRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginToken' has not been set
+	echo   Variable 'ocLoginToken' has not been set ^(nor is variable 'pakInstallerPortalURL' set^)
 )
 
 if defined gmailAddress (
@@ -258,6 +298,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+ECHO java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
