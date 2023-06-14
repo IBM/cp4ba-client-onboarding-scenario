@@ -253,6 +253,18 @@ In case you experience an Out Of Memory (OOM) situation while deploying the Clie
 1. Uncomment the line containing `jvmSettings=`
 2. Set an appropriate heap size
 
+### Removing the Client Onboarding Artifacts from the Environment
+
+In case you want to clean up your environment and remove the Client Onboarding artifacts you previously imported perform these steps:
+
+1. **Save the undeployment file** that corresponds to the operating system of your deployment machine into the directory created in step 1 (in the context menu of your browser select **Save as.../Save page as...** or similar)
+
+   **Linux/Mac** 	*CP4BA 22.0.2* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/undeployClientOnboardingStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
+
+   **Windows** - *CP4BA 22.0.2* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/undeployClientOnboardingStarter.bat)**
+
+2. Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from the '**Your environment is ready**' email provided for the **PakInstaller Portal URL**. Alternatively use the approach described above in the 'Updating bat/sh File for non-Pak Installer Starter Deployment Environments' section.
+
 ## Support
 
 **Business Partners and IBMers** 
