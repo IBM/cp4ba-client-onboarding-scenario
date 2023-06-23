@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.22",
+	"fileVersion": "1.0.23",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.0 <1.2.0",
 	"requiredCP4BAVersion": ">=22.1.0 <22.2.0",
@@ -12,29 +12,6 @@
 				"enabled": "$enableDeployClientOnboarding$",
 				"description": "Deploy Client Onboarding Scenario",
 				"actions": [
-					{
-						"OCP": {
-							"enabled": "$enableDeployClientOnboarding_ADS$",
-							"description": "Grant 'Deployed Decision Manager' role to admin user",
-							"subActions": [
-								{
-									"PLATFORM_USERMGT": {
-										"enabled": "true",
-										"description": "Update Zen roles for adin user",
-										"entities": [
-											{
-												"action": "update",
-												"name": "$cp4baAdminUsr$",
-												"roles": [
-													"Deployed Decision Manager"
-												]
-											}
-										]
-									}
-								}
-							]
-						}
-					},
 					{
 						"ADS": {
 							"comment" : "",
