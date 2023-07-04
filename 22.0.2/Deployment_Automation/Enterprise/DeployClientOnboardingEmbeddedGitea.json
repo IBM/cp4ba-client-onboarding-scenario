@@ -333,18 +333,18 @@
 									}
 								},
 								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
 									"IMPORTDECISIONSERVICES": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Decisions' decision service",
 										"decisionServiceName": "Client Onboarding Decisions",
 										"file": "ClientOnboardingDecisions.zip"
-									}
-								},
-								{
-									"CONNECTWITHGIT": {
-										"enabled": "$$(!isADSAutoConnectToGit)$$",
-										"description": "Connect ADS project to internal gitea repository",
-										"gitRepoUrl": "!GITREPOURL!"
 									}
 								},
 								{
@@ -1215,7 +1215,7 @@
 								{
 									"CREATESTORAGEPOLICY": {
 										"enabled": "$(contentOSAvailable)$",
-										"description": "Create ASA for the Documents object store",
+										"description": "Create ASA for the CONTENT object store",
 										"storagePolicyName": "Default Advanced Storage Area",
 										"storageAreaName": "content_asa",
 										"ignoreCaseForStorageAreaName": true
@@ -1359,14 +1359,14 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/22.0.2/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
 											}
 										]
 									}
 								},
 								{
 									"COPYFILES": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
@@ -1457,7 +1457,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Add custom EDS data source plugin",
 										"action": "add",
 										"pluginName": "EDS Data Source",
@@ -1469,7 +1469,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "true",
+										"enabled": "$(contentOSAvailable)$",
 										"description": "Add EDS base plugin referencing custom plugin",
 										"action": "add",
 										"pluginName": "External Data Services Support",
