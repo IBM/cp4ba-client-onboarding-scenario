@@ -1,265 +1,10 @@
 {
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredToolVersion": ">=1.0.0 <1.1.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
-	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
 	"actions": [
-		{
-			"FNCM": {
-				"enabled": "true",
-				"description": "CPE - Check if CONTENT Object store exists",
-				"replaceExistingDocuments": false,
-				"objectStoreName": "CONTENT",
-				"relativeBasePath": "FileNet Content Manager",
-				"subActions": [
-					{
-						"CHECKOBJECTSTOREEXISTS": {
-							"enabled": "true",
-							"description": "Check Object Store Exists",
-							"osSymbolicName": "CONTENT",
-							"variableName": "contentOSAvailable"
-						}
-					}
-				]
-			}
-		},
-		{
-			"CONTAINER": {
-				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
-				"description": "Deploy local email server and client",
-				"actions": [
-					{
-						"OCP": {
-							"enabled": "true",
-							"name": "Configure mail server and client in OCP",
-							"relativeBasePath": "OpenShift",
-							"subActions": [
-								{
-									"DOWNLOADRESOURCES": {
-										"enabled": "$$(enableArtifactDownloadFromGit)$$",
-										"description": "Download resources required for OCP",
-										"name": "Download OCP file",
-										"replaceExistingFiles": true,
-										"files": [
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver-tls-secret.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-pvc.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-shared-secret.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-db.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-config.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-deployment.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-service.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-nginx.yaml"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver.pem"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/config.cert.inc.php"
-											},
-											{
-												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/config.inc.php"
-											}
-										]
-									}
-								},
-								{
-									"MANAGEOCPNAMESPACE": {
-										"enabled": "true",
-										"description": "Add mail namespace",
-										"action": "add",
-										"namespaceName": "mail"
-									}
-								},
-								{
-									"MANAGEOCPCLUSTERROLEBINDING": {
-										"enabled": "true",
-										"description": "Add ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
-										"namespaceName": "mail",
-										"clusterRoles": [
-											{
-												"action": "add",
-												"clusterRoleName": "privileged"
-											},
-											{
-												"action": "add",
-												"clusterRoleName": "anyuid"
-											}
-										]
-									}
-								},
-								{
-									"MANAGEMAILUSERS": {
-										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
-										"description": "Modify mail server users to match users and password from server LDIF file (only supported for Starter, Apollo/Pak Installer",
-										"yamlFile": "mailserver.yaml",
-										"synchronizeWithLDIF": true,
-										"removeAllOtherUsers": true
-									}
-								},
-								{
-									"APPLYYAMLACTION": {
-										"enabled": "true",
-										"description": "Apply YAML files for mail server",
-										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
-										"yamlFiles": [
-											{
-												"fileName": "mailserver-tls-secret.yaml"
-											},
-											{
-												"fileName": "!yamlFileName!"
-											}
-										]
-									}
-								},
-								{
-									"APPLYYAMLACTION": {
-										"enabled": "true",
-										"description": "Apply YAML files for mail client",
-										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
-										"yamlFiles": [
-											{
-												"fileName": "roundcube-pvc.yaml"
-											},
-											{
-												"fileName": "roundcube-shared-secret.yaml"
-											},
-											{
-												"fileName": "roundcube-mail-config.yaml"
-											},
-											{
-												"fileName": "roundcube-db.yaml"
-											},
-											{
-												"fileName": "roundcube-mail-deployment.yaml"
-											}
-										]
-									}
-								},
-								{
-									"COPYFILES": {
-										"enabled": "true",
-										"id": "copyFilesToFromPod",
-										"description": "Copy files for mail client to and path file on pod",
-										"delayBefore": 0,
-										"namespaceName": "mail",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
-										"copyActions": [
-											{
-												"action": "toContainer",
-												"podLabelName": "service",
-												"podLabelSelector": "roundcubemail",
-												"containerName": "roundcubemail",
-												"localFileName": "mailserver.pem",
-												"remotePath": "/var/www/html/config",
-												"overExistingFile": false
-											},
-											{
-												"action": "toContainer",
-												"podLabelName": "service",
-												"podLabelSelector": "roundcubemail",
-												"containerName": "roundcubemail",
-												"localFileName": "config.cert.inc.php",
-												"remotePath": "/var/www/html/config",
-												"overExistingFile": false
-											},
-											{
-												"action": "fromContainer",
-												"podLabelName": "service",
-												"podLabelSelector": "roundcubemail",
-												"containerName": "roundcubemail",
-												"remotePath": "/var/www/html/config",
-												"remoteFileName": "config.inc.php",
-												"localFileName": "config.inc.php_orig",
-												"overExistingFile": true,
-												"restartPods": false,
-												"fileEdit": {
-													"tmpFileName": "config.inc.php_mod",
-													"action": "afterLastEmptyLineCheckExists",
-													"content": "    include(__DIR__ . '/config.cert.inc.php');",
-													"copyBackWithOriginalName": true
-												}
-											}
-										]
-									}
-								},
-								{
-									"MANAGEDEPLOYMENTS": {
-										"enabled": "true",
-										"description": "Delete 'roundcubemail' deployment after patching files in PVC",
-										"dependentOnId": "copyFilesToFromPod",
-										"dependencyType": "skip",
-										"namespaceName": "mail",
-										"deployments": [
-											{
-												"action": "delete",
-												"deploymentName": "roundcubemail"
-											}
-										]
-									}
-								},
-								{
-									"APPLYYAMLACTION": {
-										"enabled": "true",
-										"description": "Apply remaining YAML files for mail client",
-										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
-										"yamlFiles": [
-											{
-												"fileName": "roundcube-mail-deployment.yaml"
-											},
-											{
-												"fileName": "roundcube-mail-service.yaml"
-											},
-											{
-												"fileName": "roundcube-nginx.yaml"
-											}
-										]
-									}
-								},
-								{
-									"RELOADOCPCONFIGURATION": {
-										"enabled": "true",
-										"description": "Reload OCP Configuration for Deployment Tool after installing mail server and client",
-										"skipIfPreviousAreSkipOrSucessSkip": true
-									}
-								}
-							]
-						}
-					}
-				]
-			}
-		},
 		{
 			"CONTAINER": {
 				"comment": "This container wraps all actions to deploy the Client Onboarding scenario itself",
@@ -267,40 +12,18 @@
 				"description": "Deploy Client Onboarding Scenario",
 				"actions": [
 					{
-						"OCP": {
-							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
-							"description": "Grant 'Deployed Decision Manager' role to admin user",
-							"subActions": [
-								{
-									"PLATFORM_USERMGT": {
-										"enabled": "true",
-										"description": "Update Zen roles for adin user",
-										"entities": [
-											{
-												"action": "update",
-												"name": "$$(cp4baAdminUsr)$$",
-												"roles": [
-													"Deployed Decision Manager"
-												]
-											}
-										]
-									}
-								}
-							]
-						}
-					},
-					{
 						"ADS": {
+							"comment": "",
 							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
 							"description": "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",
 							"decisionsPrjDisplayName": "Client Onboarding",
-							"relativeBasePath": "Automation Decision Services",
+							"relativeBasePath": "1_ADS",
 							"maxBASQueryRetries": 5,
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$$(enableArtifactDownloadFromGit)$$",
-										"description": "Download resources required for ADS",
+										"description": "Download resources required for OPS",
 										"name": "Download ADS file",
 										"replaceExistingFiles": true,
 										"files": [
@@ -313,7 +36,7 @@
 								{
 									"TESTCONNECTION": {
 										"enabled": "true",
-										"description": "Test ADS capability"
+										"description": "Test connection to ADS"
 									}
 								},
 								{
@@ -392,7 +115,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_ADP)$$",
 							"description": "ADP - Configure and deploy default project and extract projectId",
 							"skipRemainingSubactionOnFailure": "true",
-							"relativeBasePath": "Automation Document Processing",
+							"relativeBasePath": "2_ADP",
 							"objectStoreName": "$$(adpObjectStore)$$",
 							"projectDisplayName": "$$(adpProjectName)$$",
 							"projectAcronym": "$$(adpProjectAcronym)$$",
@@ -456,7 +179,7 @@
 							"comment": "ADP will be enabled if previous ADP action was successful otherwise ADP will be disabled",
 							"enabled": "$$(enableDeployClientOnboarding_WF)$$",
 							"description": "WF - Deploy and publish Client Onboarding solution",
-							"relativeBasePath": "Business Automation Workflow",
+							"relativeBasePath": "4_WF",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -481,7 +204,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID and automation service as TWX was built in enterprise deployment but is used in starter deployment",
+										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID",
 										"sourceTwxFile": "!twxFileName!",
 										"environmentVariables": [
 											{
@@ -503,22 +226,19 @@
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
 											},
 											{
-												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost|default=)$)§ELSE§(smtp.gmail.com)ENDIF§"
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost)$)§ELSE§(smtp.gmail.com)ENDIF§"
 											},
 											{
-												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort|default=)$)§ELSE§(587)ENDIF§"
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort)$)§ELSE§(587)ENDIF§"
 											},
 											{
-												"emailID": "$$(wf_cp_emailIDInternal)$$"
+												"emailID": "$$(wf_cp_emailID)$$"
 											},
 											{
-												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
+												"emailPassword": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§()§ELSE§($$(wf_cp_emailPassword)$$)ENDIF§"
 											},
 											{
-												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
-											},
-											{
-												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
+												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
 											},
 											{
 												"rpaServer": "$$(wf_cp_rpaServer)$$"
@@ -550,8 +270,7 @@
 										"description": "Install the patched Client Onboarding WF solution",
 										"twxFile": "!patchedTWXFileName!",
 										"paAcronym": "!projectAcronym!",
-										"paSnapshot": "!snapshotAcronym!",
-										"checkForUpdatedEnvironmentVariables": true
+										"paSnapshot": "!snapshotAcronym!"
 									}
 								},
 								{
@@ -609,7 +328,7 @@
 							"description": "CPE - Update class security, create 'Client Documents' folder, and create documents",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(BAW_TOS)$$",
-							"relativeBasePath": "FileNet Content Manager",
+							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -643,24 +362,6 @@
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test FNCM availability"
-									}
-								},
-								{
-									"MODIFYOBJECTSTORE": {
-										"enabled": "true",
-										"description": "Add general users group and set security for so that case history works for all users",
-										"replaceAccessRights": false,
-										"granteeSettings": [
-											{
-												"enabled": "true",
-												"action": "Add",
-												"granteeType": "Group",
-												"granteeName": "$$(generalUsersGroupName)$$",
-												"accessType": "Allow",
-												"inheritableDepth": "No inheritance",
-												"accessRights": "Use object store, Set owner of any object, Read permissions"
-											}
-										]
 									}
 								},
 								{
@@ -834,7 +535,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Navigator - Import apps and desktops",
 							"name": "Prepare Apps and Desktops",
-							"relativeBasePath": "Business Automation Navigator",
+							"relativeBasePath": "6_ICN",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -874,7 +575,7 @@
 												"BAWTOS": "$$(BAW_TOS)$$"
 											},
 											"2": {
-												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
 											},
 											"3": {
 												"cp4badmin": "$$(cp4baAdminUsr)$$"
@@ -918,10 +619,9 @@
 								{
 									"PATCHDESKTOP": {
 										"enabled": "true",
-										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in current deployment",
+										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "ClientOnboardingRequestDesktop.properties",
 										"simpleTextMappings": {
-											"APPENG0": "APPENG0",
 											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
 											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
 											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
@@ -940,10 +640,9 @@
 								{
 									"PATCHDESKTOP": {
 										"enabled": "true",
-										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in current deployment",
+										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in starter deployment",
 										"file": "CODocumentUploadDesktop.properties",
 										"simpleTextMappings": {
-											"APPENG0": "APPENG0",
 											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
 											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
 											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
@@ -964,9 +663,10 @@
 					},
 					{
 						"BAI": {
+							"comment": "",
 							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
-							"description": "BAI - Populate the Process and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
-							"relativeBasePath": "Business Automation Insights",
+							"description": "BAI - Populate indices, create goal and import dashboard",
+							"relativeBasePath": "7_BAI",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -1078,13 +778,14 @@
 			"CONTAINER": {
 				"comment": "Container bundles all activities to configure the environment for the labs",
 				"enabled": "$$(enableConfigureSWATLabs)$$",
-				"description": "Apply additional steps to prepare environment for labs after Client Onboarding solution is deployed",
+				"description": "Configure SWAT Labs",
 				"actions": [
 					{
 						"WF": {
+							"comment": "",
 							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
 							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs",
-							"relativeBasePath": "Business Automation Workflow",
+							"relativeBasePath": "4_WF",
 							"subActions": [
 								{
 									"ADDCOLLABORATORS": {
@@ -1157,33 +858,18 @@
 					},
 					{
 						"FNCM": {
+							"comment": "",
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
-							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
+							"description": "CPE - Modify security, create property templates, class, and storage policy, and create folders for content lab",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
-							"relativeBasePath": "FileNet Content Manager",
+							"objectStoreName": "CLOS",
+							"relativeBasePath": "5_FNCM",
 							"subActions": [
 								{
-									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "($$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(contentOSAvailable)$",
-										"description": "Add general users group as admins to CONTENT Object Store",
-										"granteeName": "$$(generalUsersGroupName)$$"
-									}
-								},
-								{
-									"CREATEINDEXAREA": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Create Index Area for object store to be able to enable text search for object store",
-										"indexAreaName": "content_index_area"
-									}
-								},
-								{
-									"MODIFYOBJECTSTORE": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Modify text search setting and security for WF Documents Object Store",
-										"name": "Modify text search setting and security for WF Documents Object Store",
-										"defaultTextSearchIndexingLanguage": "en",
-										"enableTextSearch": true,
+									"MODIFYOBJECTSTORESECURITY": {
+										"enabled": "true",
+										"description": "Modify security for CLOS Object Store",
+										"name": "Modify security for CLOS Object Store",
 										"replaceAccessRights": false,
 										"granteeSettings": [
 											{
@@ -1200,16 +886,15 @@
 								},
 								{
 									"CREATESTORAGEPOLICY": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Create ASA for the CONTENT object store",
+										"enabled": "true",
+										"description": "Create ASA for the CLOS object store",
 										"storagePolicyName": "Default Advanced Storage Area",
-										"storageAreaName": "content_asa",
-										"ignoreCaseForStorageAreaName": true
+										"storageAreaName": "CLOS_asa"
 									}
 								},
 								{
 									"UPDATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Update class definition for folder to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
@@ -1217,7 +902,7 @@
 								},
 								{
 									"CREATEPROPERTYTEMPLATE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
 										"propertyTemplates": [
 											{
@@ -1231,25 +916,13 @@
 												"symbolicName": "Client_Name",
 												"dataType": "String",
 												"cardinality": "Single"
-											},
-											{
-												"name": "Reference ID",
-												"symbolicName": "ReferenceID",
-												"dataType": "String",
-												"cardinality": "Single"
-											},
-											{
-												"name": "Service Address",
-												"symbolicName": "ServiceAddress",
-												"dataType": "String",
-												"cardinality": "Single"
 											}
 										]
 									}
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
 										"className": "SWAT Jam Case Folder",
 										"classSymbolicName": "SWAT_JAM_Case_Folder",
@@ -1261,33 +934,8 @@
 									}
 								},
 								{
-									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Create new document class 'Client Document' using previously created property templates",
-										"className": "Client Document",
-										"classSymbolicName": "ClientDocument",
-										"baseClassSymbolicName": "Document",
-										"propertyTemplateNames": [
-											"Client_Name",
-											"ReferenceID"
-										]
-									}
-								},
-								{
-									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Create new document class 'Utility Bill' using previously created property templates",
-										"className": "Utility Bill",
-										"classSymbolicName": "UtilityBill",
-										"baseClassSymbolicName": "ClientDocument",
-										"propertyTemplateNames": [
-											"ServiceAddress"
-										]
-									}
-								},
-								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Case Folders' folder in root",
 										"parentFolderPath": "/",
 										"folderName": "Case Folders",
@@ -1296,7 +944,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST1",
@@ -1313,7 +961,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST2",
@@ -1383,14 +1031,6 @@
 							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
-								{
-									"CHECKOBJECTSTOREEXISTS": {
-										"enabled": "true",
-										"description": "Check Object Store Exists",
-										"osSymbolicName": "CONTENT",
-										"variableName": "contentOSAvailable"
-									}
-								},
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
@@ -1469,9 +1109,10 @@
 					},
 					{
 						"BAA": {
+							"comment": "",
 							"enabled": "$$(enableConfigureSWATLabs_BAA)$$",
 							"description": "BAA - Prepare APP in Studio for BAA lab",
-							"relativeBasePath": "Business Automation Application",
+							"relativeBasePath": "6_BAA",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {

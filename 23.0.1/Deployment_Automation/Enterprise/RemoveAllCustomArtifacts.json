@@ -1,20 +1,20 @@
 {
-	"fileVersion": "1.0.2",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/RemoveAllCustomArtifacts.json",
-	"requiredToolVersion": ">=1.0.0 <1.1.0",
+	"fileVersion": "1.0.3",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/RemoveAllCustomArtifacts.json",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
 		{
 			"CONTAINER": {
-				"comment": "Clean up Client Onboarding related artifacts in reverse order (only the additional ",
+				"comment": "Clean up Client Onboarding related artifacts in reverse order (only the additional ones) ",
 				"enabled": "true",
 				"description": "Remove Client Onboarding Artifacts",
 				"actions": [
 					{
 						"BAI": {
 							"comment": "Clean up BAI data and remove all non-system provided dashboards and goals",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
 							"description": "BAI - Delete all Case and WF data, and Goals and Dashboards (except pre-deployed ones)",
 							"relativeBasePath": "7_BAI",
 							"subActions": [
@@ -58,7 +58,7 @@
 					{
 						"ICN": {
 							"comment": "Remove the two applications and three desktops from Navigator",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
 							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
 							"relativeBasePath": "6_ICN",
 							"subActions": [
@@ -92,7 +92,7 @@
 					{
 						"BAA": {
 							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_BAA)$$",
 							"description": "BAA - Delete all APPs, APP templates, and APP TKs (except pre-deployed ones)",
 							"relativeBasePath": "6_BAA",
 							"subActions": [
@@ -141,7 +141,7 @@
 					{
 						"FNCM": {
 							"comment": "Remove 'Client Documents' folder and with that also all contained documents but don't revert Content lab changes",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
 							"description": "CPE - Delete 'Client Documents' folder and contained documents",
 							"objectStoreName": "$$(BAW_TOS)$$",
 							"relativeBasePath": "5_FNCM",
@@ -164,7 +164,7 @@
 					{
 						"WF": {
 							"comment": "Delete all non-predeployed solution, templates and toolkits",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
 							"description": "WF - Delete all WF solutions, WF templates, and WF TKs (except pre-deployed ones)",
 							"relativeBasePath": "4_WF",
 							"subActions": [
@@ -216,7 +216,7 @@
 					{
 						"ADS": {
 							"comment": "Delete the ADS project",
-							"enabled": "true",
+							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
 							"description": "ADS - Delete all ADS projects",
 							"relativeBasePath": "1_ADS",
 							"subActions": [
@@ -229,6 +229,7 @@
 										],
 										"projectName": "Client Onboarding",
 										"projectAcronym": "",
+										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
