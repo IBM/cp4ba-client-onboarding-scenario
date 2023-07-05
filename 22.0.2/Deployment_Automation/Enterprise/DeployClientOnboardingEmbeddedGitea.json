@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.6",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -121,7 +121,7 @@
 										"enabled": "true",
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
@@ -139,7 +139,7 @@
 										"enabled": "true",
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
@@ -231,7 +231,7 @@
 										"enabled": "true",
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
