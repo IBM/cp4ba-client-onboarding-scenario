@@ -122,11 +122,11 @@
 										"description": "Modify mail server users to match users and password from external LDIF file",
 										"yamlFile": "mailserver.yaml",
 										"synchronizeWithLDIF": true,
-										"externalLDIF1" : "$$(externalLDIF1)$$",
-										"externalLDIF1" : "$$(externalLDIF2|default=)$$",
-										"userBase" : "$$(externalLDIF_userBase)$$",
-										"userDC" : "$$(externalLDIF_userDC)$$",
-										"userNumberingFormatter" : "$$(externalLDIF_userNumberingFormatter)$$",
+										"externalLDIF1": "$$(externalLDIF1)$$",
+										"externalLDIF1": "$$(externalLDIF2|default=)$$",
+										"userBase": "$$(externalLDIF_userBase)$$",
+										"userDC": "$$(externalLDIF_userDC)$$",
+										"userNumberingFormatter": "$$(externalLDIF_userNumberingFormatter)$$",
 										"removeAllOtherUsers": true
 									}
 								},
