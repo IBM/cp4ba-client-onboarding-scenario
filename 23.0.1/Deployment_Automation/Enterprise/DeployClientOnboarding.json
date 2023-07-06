@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -110,9 +110,23 @@
 								{
 									"MANAGEMAILUSERS": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
-										"description": "Modify mail server users to match users and password from server LDIF file (only supported for Starter, Apollo/Pak Installer",
+										"description": "Modify mail server users to match users and password from server LDIF file (only supported for Starter, Apollo/Pak Installer)",
 										"yamlFile": "mailserver.yaml",
 										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(!isStarterDeployment)$$ && $$(!isApolloDeployment)$$ && $$(!isCloudPakDeployerDeployment)$$ && ($$(ISSET(externalLDIF1))$$ || $$(ISSET(externalLDIF2))$$)",
+										"description": "Modify mail server users to match users and password from external LDIF file",
+										"yamlFile": "mailserver.yaml",
+										"synchronizeWithLDIF": true,
+										"externalLDIF1" : "$$(externalLDIF1)$$",
+										"externalLDIF2" : "$$(externalLDIF2|default=)$$",
+										"userBase" : "$$(externalLDIF_userBase)$$",
+										"userDC" : "$$(externalLDIF_userDC)$$",
+										"userNumberingFormatter" : "$$(externalLDIF_userNumberingFormatter)$$",
 										"removeAllOtherUsers": true
 									}
 								},
@@ -121,7 +135,7 @@
 										"enabled": "true",
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
@@ -139,7 +153,7 @@
 										"enabled": "true",
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
@@ -231,7 +245,7 @@
 										"enabled": "true",
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
-										"storageClassName": "ocs-storagecluster-cephfs",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
 										"maxNumPollsForCompletion": 10,
 										"sleepInSecBetweenPools": 30,
 										"yamlFiles": [
