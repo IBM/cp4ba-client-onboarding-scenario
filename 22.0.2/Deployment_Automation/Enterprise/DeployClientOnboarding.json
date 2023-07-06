@@ -118,11 +118,12 @@
 								},
 								{
 									"MANAGEMAILUSERS": {
-										"enabled": "$$(!isStarterDeployment)$$ && $$(!isApolloDeployment)$$ && $$(!isCloudPakDeployerDeployment)$$ && $$(ISSET(externalLDIF))$$",
+										"enabled": "$$(!isStarterDeployment)$$ && $$(!isApolloDeployment)$$ && $$(!isCloudPakDeployerDeployment)$$ && ($$(ISSET(externalLDIF1))$$ || $$(ISSET(externalLDIF2))$$)",
 										"description": "Modify mail server users to match users and password from external LDIF file",
 										"yamlFile": "mailserver.yaml",
 										"synchronizeWithLDIF": true,
-										"externalLDIF" : "$$(externalLDIF)$$",
+										"externalLDIF1" : "$$(externalLDIF1)$$",
+										"externalLDIF1" : "$$(externalLDIF2|default=)$$",
 										"userBase" : "$$(externalLDIF_userBase)$$",
 										"userDC" : "$$(externalLDIF_userDC)$$",
 										"userNumberingFormatter" : "$$(externalLDIF_userNumberingFormatter)$$",
