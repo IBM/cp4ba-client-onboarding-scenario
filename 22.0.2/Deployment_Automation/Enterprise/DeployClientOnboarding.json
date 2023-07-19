@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.8",
+	"fileVersion": "1.0.9",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.13 <1.2.0",
+	"requiredToolVersion": ">=1.1.14 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -1245,7 +1245,8 @@
 										"description": "Create ASA for the Documents object store",
 										"storagePolicyName": "Default Advanced Storage Area",
 										"storageAreaName": "content_asa",
-										"ignoreCaseForStorageAreaName": true
+										"ignoreCaseForStorageAreaName": true,
+										"fallbackToAvailableStorageArea": "Advanced"
 									}
 								},
 								{
