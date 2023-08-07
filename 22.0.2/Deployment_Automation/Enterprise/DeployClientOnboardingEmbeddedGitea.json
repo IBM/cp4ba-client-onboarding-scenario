@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.8",
+	"fileVersion": "1.0.9",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.14 <1.2.0",
+	"requiredToolVersion": ">=1.1.16 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -136,8 +136,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -154,8 +158,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -246,8 +254,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
