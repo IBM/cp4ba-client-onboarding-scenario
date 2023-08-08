@@ -97,10 +97,11 @@ metadata:
     service: roundcubenginx
   name: roundcubenginx
 spec:
-  port:
-    targetPort: http
   to:
     kind: Service
     name: roundcubenginx
     weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
   wildcardPolicy: None

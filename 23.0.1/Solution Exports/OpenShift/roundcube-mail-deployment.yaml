@@ -57,6 +57,9 @@ spec:
           name: www-data
         - mountPath: /tmp/roundcube-temp
           name: temp-data
+        - name: mail-config
+          mountPath: /var/roundcube/config/custom.php
+          subPath: custom.php 
       restartPolicy: Always
       # serviceAccountName: ""
       volumes:
@@ -66,3 +69,6 @@ spec:
       - name: temp-data
         persistentVolumeClaim:
           claimName: roundcubemail-temp-pvc
+      - name: mail-config
+        configMap:
+          name: roundcubemail-config
