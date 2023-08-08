@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.6",
+	"fileVersion": "1.0.7",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.16 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -1014,7 +1014,7 @@
 					},
 					{
 						"ICN": {
-							"enabled": "$enableDeployClientOnboarding_BAA$",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Import Workplace, Client Onboarding Request, and Client Onboarding Document Upload apps and set permissions and import Client Onboarding Request, and Client Onboarding Document Upload desktops",
 							"name": "Prepare Apps and Desktops",
 							"relativeBasePath": "6_ICN",
