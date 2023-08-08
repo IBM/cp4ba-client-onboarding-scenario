@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.6",
+	"fileVersion": "1.0.7",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.16 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -745,6 +745,7 @@
 										"solutionName": "!solutionName!",
 										"solutionAcronym": "!solutionAcronym!",
 										"dosName": "$$(BAW_DOS)$$",
+										"ignoreSolutionVersion": true,
 										"maxDeployCompletionPolls": 20,
 										"delayBetweenDeployCompletionPolls": 10
 									}
