@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.6",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredToolVersion": ">=1.1.16 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -102,8 +102,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -120,8 +124,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -151,7 +159,7 @@
 										"maxNumRetries": 5,
 										"sleepInSecBetweenRetries": 5,
 										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"sleepInSecBetweenPolls": 10,
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -212,8 +220,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 30,
+										"maxNumPollsForCompletionPVC": 30,
+										"sleepInSecBetweenPollsPVC": 2,
+										"maxNumPollsForCompletionDeployment": 20,
+										"sleepInSecBetweenPollsDeployment": 15,
+										"maxNumPollsForCompletionRoute": 30,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -243,7 +255,7 @@
 		{
 			"CONTAINER": {
 				"comment": "Container bundles activities to configure the environment for the WF lab that should be executed before importing the WF solution",
-				"enabled": "$$(enableConfigureSWATLabs_WF)$$",
+				"enabled": "$$(enableConfigureSWATLabs)$$ && $$(enableConfigureSWATLabs_WF)$$",
 				"description": "Configure environment so that user in group '$$(generalUsersGroupName)$$' can create WF solutions including case capability",
 				"actions": [
 					{
