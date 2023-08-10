@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/JamInABox.md#table-of-content) to a self-provisioned Jam-in-a-Box environment (based on Cloud Pak for Business Automation (CP4BA) 22.0.2). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
+Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2) to a self-provisioned Jam-in-a-Box environment (based on Cloud Pak for Business Automation (CP4BA) 22.0.2). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 
 ## Prerequisites
@@ -11,29 +11,31 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    **a) IBM Business Partners and IBMers**
 
-   Reserve a [Jam-in-a-Box for Business Automation](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation) environment from IBM TechZone. For that select the **Cloud Pak for Business Automation 22.0.2 - IF002 VMWare Public (Powered by Pak Installer)** tile from the [Resources](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation/resources) tab. 
+   Reserve a [Jam-in-a-Box for Business Automation](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation) environment from IBM TechZone. For that select the **Cloud Pak for Business Automation 22.0.2 IF005 - VMWare Public (OCP 4.12) (Powered by Pak Installer)** tile from the [Resources](https://techzone.ibm.com/collection/jam-in-a-box-for-business-automation/resources) tab.
 
-   Provide and select the required information. Ensure that you keep the default selection '**all**' in the 'techzone-reservation' dropdown.
+   Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
+
+   Ensure that you keep the default selection '**all**' in the 'Starter Service' dropdown.
 
    <img src="..\images\techzone-reservation.jpg" />
 
    Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after some time it finally becomes **Ready**. Overall this may take up to 6 hours. You will receive several emails during that period. 
 
-   
-
-   The final email has the subject '**Your environment is ready**'. The email contains a link to the **PakInstaller Portal** that you require.
+   The final email has the subject '**Reservation Ready on IBM Technology Zone**'. It contains a link 'View My Reservations' to get to your reservations. Click on this link and click on the tile that represents your reservation.
 
    <img src="..\images\your-environment-is-ready.jpg"/>
 
-   
+   At the bottom of the screen for your environment, you'll find the **PakInstaller Portal URL** that you require.
+
+   <img src="..\images\techzone-reserved-env.jpg"/>
 
    ***Getting access to the OpenShift Web Console (optional)***
 
-   On the **OpenShift Console** tab of the PakInstaller Portal, you'll find the link to the **OpenShift Web Console** together with the **admin user** (always ocpadmin) and the **password** (unique to each provisioned environment).
+   Open the PakInstaller Portal using the link shown on the reservation details page in IBM TechZone. On the **OpenShift Console** tab of the PakInstaller Portal, you'll find the link to the **OpenShift Web Console** together with the **admin user** (always ocpadmin) and the **password** (unique to each provisioned environment).
 
    <img src="..\images\pakinstaller-portal.jpg" />
 
-   You require the OpenShift Web Console to validate that the Cloud Pak is fully installed and to get the access information for the environment required to deploy the Client Onboarding artifacts.
+   You can use the OpenShift Web Console to validate that the Cloud Pak is fully installed.
 
    When logging into the OpenShift Web Console make sure to select **Daffy htpasswd Provider**.
 
@@ -55,7 +57,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    **b) Everybody else**
 
-   Create or use a CP4BA 22.0.2 starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, and optionally Automation Document Processing.
+   Create or use a CP4BA 22.0.2 Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, and optionally Automation Document Processing.
 
    
 
@@ -77,12 +79,12 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 ### Update bat/sh File
 On Windows open the file **deployClientOnboardingStarter.bat**/on Linux or Mac open the file **deployClientOnboardingStarter.sh** in the text editor of your choice. 
 
-Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from the '**Your environment is ready**' email provided for the **PakInstaller Portal URL**.
+Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from your TechZone reservation details (**PakInstaller Portal URL** at the bottom of the page).
 
-<img src="..\images\your-environment-is-ready.jpg"/>
+<img src="..\images\techzone-reserved-env.jpg"/>
 
 ### Perform Import
-*As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
+*As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access (e.g. is not blocked by a firewall or requires a proxy server) both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
 
 In a console window execute either **`deployClientOnboardingStarter.bat`** or **`./deployClientOnboardingStarter.sh`** to perform the import of the Client Onboarding scenario and lab artifacts.
 
@@ -92,7 +94,7 @@ While executing the deployment tool prints an overview of the actions it perform
 
 #### Error an initial import
 
-After about 10-15 minutes the import should complete with the message 
+After about 20-30 minutes the import should complete with the message 
 
 ```
 Overall Summary - Result: 1 action failed but processing continued as requested and completed successfully
@@ -104,7 +106,9 @@ If you scroll to the top of your console output, you will see the error message 
 Failure publishing automation service of solution 'Client Onboarding', snapshot '1.0.0' 
 ```
 
-Due to a defect in IBM Automation Decision Services (ADS), publishing the ADS automation service fails initially. This problem will be fixed in a later IF of CP4BA 22.0.2.
+Due to a defect in IBM Automation Decision Services (ADS) including CP4BA 22.0.2 IF005, publishing the ADS automation service fails initially. This problem has been fixed CP4BA 22.0.2 IF006.
+
+(The deployment takes considerable amount of time as the security settings for elements in two Content Service object stores need to be updated.)
 
 #### Performing the deployment a second time to fix the initial error
 
@@ -115,7 +119,7 @@ Due to a defect in IBM Automation Decision Services (ADS), publishing the ADS au
 Once the deployment tool completes without a fatal error, it will output a status message that declares successful deployment of the Client Onboarding scenario. In addition it provides key links and user names/passwords for you to use. These links/values are specific to your environment.
 
 ```
-Overall execution completed after 14 mins, 42 secs
+Overall execution completed after 25 mins, 42 secs
 
 Deploying the Client Onboarding scenario artifacts was successful.
 
@@ -171,9 +175,9 @@ In case your deployment fails and you get stuck, please reach out using the cont
 
 ## Advanced Configuration
 
-### Updating bat/sh File for non-Pak Installer Starter Deployment Environments
+### Updating bat/sh File for non-PakInstaller Starter Deployment Environments
 
-In case you have a starter deployment environment of CP4BA 22.0.2 that was not deployed using Pak Installer, update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the file with your specific details:
+In case you have a starter deployment environment of CP4BA 22.0.2 that was not deployed using PakInstaller, update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the bat/sh file with your specific details:
 
 1. **Login** to the OpenShift Web Console
 
@@ -187,7 +191,7 @@ In case you have a starter deployment environment of CP4BA 22.0.2 that was not d
 
    <img src="..\images\openshift-log-in-token.jpg" />
 
-5. Start the deployment on the Client Onboarding artifacts
+5. Start the deployment of the Client Onboarding artifacts
 
 ### Configuring an RPA environment 
 
@@ -196,9 +200,9 @@ To experience or demo how the RPA bot is executed as part of running the Client 
 
 **Prerequisite**
 
-Provision an instance of [**IBM Business Automation - Traditional and On-premise. V4 Updated 2023-02-14** ](https://techzone.ibm.com/collection/ibm-business-automation-traditional-and-on-premise/environments) (make sure to use **V4**). Wait until you receive an email from IBM TechZone with the title "Your environment is ready". 
+Provision an instance of [**IBM Business Automation - Traditional and On-premise. V4 Updated 2023-02-14** ](https://techzone.ibm.com/collection/ibm-business-automation-traditional-and-on-premise/environments) (make sure to use **V4**). Wait until you receive an email from IBM TechZone with the title "Reservation Ready on IBM Technology Zone". 
 
-Once the environment is ready select your reservation. At the bottom of the screen you find a large blue button below the header 'VM Remote Console'. It will bring up the Windows desktop as part of the browser window. **This is the recommended way to connect to the RPA VM for demoing the bot execution.** 
+Once the environment is ready, select open your reservation on the IBM TechZone 'My Reservations' page. At the bottom of the screen you find a large blue button below the header 'VM Remote Console'. It will bring up the Windows desktop as part of the browser window. **This is the recommended way to connect to the RPA VM for demoing the bot execution.** 
 
 <img src="..\images\rpa-vm-browser-rdp.jpg" />
 
@@ -206,13 +210,13 @@ Once the environment is ready select your reservation. At the bottom of the scre
 
 **Configuration** 
 
-You need to set the following two variables in the bat/sh-file you downloaded previously:
+You need to set the following two variables in the bat/sh-file you downloaded and edited previously:
 
 1. `rpaBotExecutionUser` - Set to the user for who the RPA bot should be executed for (would normally be `cp4admin`). Setting it to a non-existing user like cp4admin2 will always skip the actual bot invocation.
 
-2. `rpaServer` - Set this to the URL of the RPA environment that you provisioned as described above. Use the URL listed as `RPA Asynch Server API` in the email that you received when your environment became ready. 
+2. `rpaServer` - Set this to the URL of the RPA environment that you provisioned as described above. Use the URL listed as `RPA Asynch Server API` at the top of your reservation on IBM TechZone. 
 
-   <img src="..\images\rpa-reservation-sync-url.jpg" />
+   <img src="..\images\rpa-reservation-async-url.jpg" />
 
 If you have previously run the deployment, run it again. It will recognize that your RPA configuration has changed and will redeploy the artifact that contains the changed RPA information.
 
@@ -228,7 +232,7 @@ In case emails should be send to public/external email addresses, you can option
 
 In the sh/bat file uncomment the two lines with the parameters`gmailAddress` and `gmailAppKey`. Set them to the values of your gmail account as described above.
 
-If you have previously run the deployment, run it again. It will recognize that your RPA configuration has changed and will redeploy the artifact that contains the changed RPA information.
+If you have previously run the deployment, run it again. It will recognize that your email server configuration has changed and will redeploy the artifact that contains the changed email server information.
 
 ### Using a proxy server to access github.com
 
@@ -263,7 +267,7 @@ In case you want to clean up your environment and remove the Client Onboarding a
 
    **Windows** - *CP4BA 22.0.2* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/undeployClientOnboardingStarter.bat)**
 
-2. Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from the '**Your environment is ready**' email provided for the **PakInstaller Portal URL**. Alternatively use the approach described above in the 'Updating bat/sh File for non-Pak Installer Starter Deployment Environments' section.
+2. Update the variable `pakInstallerPortalURL` defined at the top of the file with the link from your TechZone reservation details (**PakInstaller Portal URL** at the bottom of the page). Alternatively use the approach described above in the 'Updating bat/sh File for non-Pak Installer Starter Deployment Environments' section.
 
 ## Support
 
