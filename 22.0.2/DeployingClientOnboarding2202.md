@@ -83,6 +83,8 @@ Update the variable `pakInstallerPortalURL` defined at the top of the file with 
 
 <img src="..\images\techzone-reserved-env.jpg"/>
 
+In case you want to use the environment to **perform the Workflow labs with the business users** instead of the admin user, set `enableWorkflowLabsForBusinessUsers` to `true`. This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
+
 ### Perform Import
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access (e.g. is not blocked by a firewall or requires a proxy server) both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
 
@@ -94,7 +96,7 @@ While executing the deployment tool prints an overview of the actions it perform
 
 #### Error an initial import
 
-After about 20-30 minutes the import should complete with the message 
+After about 15 minutes the import should complete with the message 
 
 ```
 Overall Summary - Result: 1 action failed but processing continued as requested and completed successfully
@@ -107,8 +109,6 @@ Failure publishing automation service of solution 'Client Onboarding', snapshot 
 ```
 
 Due to a defect in IBM Automation Decision Services (ADS) including CP4BA 22.0.2 IF005, publishing the ADS automation service fails initially. This problem has been fixed CP4BA 22.0.2 IF006.
-
-(The deployment takes considerable amount of time as the security settings for elements in two Content Service object stores need to be updated.)
 
 #### Performing the deployment a second time to fix the initial error
 
@@ -192,6 +192,12 @@ In case you have a starter deployment environment of CP4BA 22.0.2 that was not d
    <img src="..\images\openshift-log-in-token.jpg" />
 
 5. Start the deployment of the Client Onboarding artifacts
+
+### Performing the Workflow labs using business users (instead of admin user)
+
+As part of editing the **deployClientOnboardingStarter.bat** or **deployClientOnboardingStarter.sh** file, ensure to set the `enableWorkflowLabsForBusinessUsers` variable to `true`.
+
+This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
 
 ### Configuring an RPA environment 
 
