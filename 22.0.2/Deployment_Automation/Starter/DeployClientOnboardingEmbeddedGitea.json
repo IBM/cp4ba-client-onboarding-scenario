@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.11",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.19 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -528,18 +528,18 @@
 									}
 								},
 								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
 									"IMPORTDECISIONSERVICES": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Decisions' decision service",
 										"decisionServiceName": "Client Onboarding Decisions",
 										"file": "ClientOnboardingDecisions.zip"
-									}
-								},
-								{
-									"CONNECTWITHGIT": {
-										"enabled": "$$(!isADSAutoConnectToGit)$$",
-										"description": "Connect ADS project to internal gitea repository",
-										"gitRepoUrl": "!GITREPOURL!"
 									}
 								},
 								{
@@ -1039,7 +1039,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Navigator - Import apps and desktops",
 							"name": "Prepare Apps and Desktops",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -1199,7 +1199,7 @@
 					{
 						"BAI": {
 							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
-							"description": "Populate the ADS, Process, and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
+							"description": "BAI - Populate the ADS, Process, and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
 							"relativeBasePath": "Business Automation Insights",
 							"subActions": [
 								{
@@ -1495,7 +1495,7 @@
 								{
 									"UPDATECLASSDEFINITION": {
 										"enabled": "true",
-										"description": "Update class definition for folder to enable content-based retrieval",
+										"description": "Update class definition for Document class to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
 									}
@@ -1555,7 +1555,8 @@
 										"propertyTemplateNames": [
 											"Client_Name",
 											"ReferenceID"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
@@ -1567,7 +1568,8 @@
 										"baseClassSymbolicName": "ClientDocument",
 										"propertyTemplateNames": [
 											"ServiceAddress"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
@@ -1630,7 +1632,7 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/22.0.2/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
 											}
 										]
 									}
@@ -1665,7 +1667,7 @@
 						"ICN": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{

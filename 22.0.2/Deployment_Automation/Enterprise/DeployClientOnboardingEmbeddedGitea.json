@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.9",
+	"fileVersion": "1.0.10",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.16 <1.2.0",
+	"requiredToolVersion": ">=1.1.19 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -397,8 +397,7 @@
 										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
 										"maxDeployCompletionPolls": 60,
-										"delayBetweenDeployCompletionPolls": 5,
-										"delayAfter": 60
+										"delayBetweenDeployCompletionPolls": 5
 									}
 								},
 								{
@@ -1197,7 +1196,7 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
 							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "CONTENT",
@@ -1205,21 +1204,22 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "($$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(contentOSAvailable)$",
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to CONTENT Object Store",
-										"granteeName": "$$(generalUsersGroupName)$$"
+										"granteeName": "$$(generalUsersGroupName)$$",
+										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
 								{
 									"CREATEINDEXAREA": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create Index Area for object store to be able to enable text search for object store",
 										"indexAreaName": "content_index_area"
 									}
 								},
 								{
 									"MODIFYOBJECTSTORE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Modify text search setting and security for WF Documents Object Store",
 										"name": "Modify text search setting and security for WF Documents Object Store",
 										"defaultTextSearchIndexingLanguage": "en",
@@ -1240,7 +1240,7 @@
 								},
 								{
 									"CREATESTORAGEPOLICY": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create ASA for the CONTENT object store",
 										"storagePolicyName": "Default Advanced Storage Area",
 										"storageAreaName": "content_asa",
@@ -1250,15 +1250,15 @@
 								},
 								{
 									"UPDATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Update class definition for folder to enable content-based retrieval",
+										"enabled": "true",
+										"description": "Update class definition for Document class to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
 									}
 								},
 								{
 									"CREATEPROPERTYTEMPLATE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
 										"propertyTemplates": [
 											{
@@ -1290,7 +1290,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
 										"className": "SWAT Jam Case Folder",
 										"classSymbolicName": "SWAT_JAM_Case_Folder",
@@ -1303,7 +1303,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new document class 'Client Document' using previously created property templates",
 										"className": "Client Document",
 										"classSymbolicName": "ClientDocument",
@@ -1311,24 +1311,26 @@
 										"propertyTemplateNames": [
 											"Client_Name",
 											"ReferenceID"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new document class 'Utility Bill' using previously created property templates",
 										"className": "Utility Bill",
 										"classSymbolicName": "UtilityBill",
 										"baseClassSymbolicName": "ClientDocument",
 										"propertyTemplateNames": [
 											"ServiceAddress"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Case Folders' folder in root",
 										"parentFolderPath": "/",
 										"folderName": "Case Folders",
@@ -1337,7 +1339,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST1",
@@ -1354,7 +1356,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST2",
@@ -1374,7 +1376,7 @@
 					},
 					{
 						"OCP": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
 							"name": "Copy ICN custom plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -1393,7 +1395,7 @@
 								},
 								{
 									"COPYFILES": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
@@ -1457,7 +1459,8 @@
 										"enabled": "$(contentOSAvailable)$",
 										"description": "Update P8 repository settings to enable Entry Template Management",
 										"repoId": "$(REPOSITORY_ID)$",
-										"allowEntryTemplateManagement": true
+										"allowEntryTemplateManagement": true,
+										"enableEditService": true
 									}
 								},
 								{
