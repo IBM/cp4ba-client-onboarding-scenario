@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.11",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.19 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -1197,7 +1197,7 @@
 					{
 						"FNCM": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
-							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
+							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in CONTENT object store",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "CONTENT",
 							"relativeBasePath": "FileNet Content Manager",
@@ -1205,7 +1205,7 @@
 								{
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
-										"description": "Add general users group as admins to CONTENT Object Store",
+										"description": "Add general users group as admins to CONTENT object store",
 										"granteeName": "$$(generalUsersGroupName)$$",
 										"message": "This activity may take up to minutes without visible progress"
 									}
@@ -1423,7 +1423,7 @@
 						"ICN": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
@@ -1506,6 +1506,146 @@
 										"jarFilePath": "/opt/ibm/intPlugins/eDS/edsPlugin.jar",
 										"edsIsRequired": false,
 										"dataSourcePluginName": "EDS Data Source"
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "$$(cp4baAdminUsr)$$",
+														"entityType": "User",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number admins",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group admins",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles admins",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "$$(cp4baAdminGroupShort)$$",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy Admins",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number admins"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles admins"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group admins"
+													}
+												]
+											}
+										]
 									}
 								}
 							]

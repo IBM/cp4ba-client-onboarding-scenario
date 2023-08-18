@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.11",
+	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.19 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -1742,6 +1742,76 @@
 										"jarFilePath": "/opt/ibm/intPlugins/eDS/edsPlugin.jar",
 										"edsIsRequired": false,
 										"dataSourcePluginName": "EDS Data Source"
+									}
+								},
+																{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number admins",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group admins",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles admins",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "P8Administrators",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy Admins",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number admins"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles admins"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group admins"
+													}
+												]
+											}
+										]
 									}
 								}
 							]

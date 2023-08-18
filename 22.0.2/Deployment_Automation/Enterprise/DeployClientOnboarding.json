@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.11",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.16 <1.2.0",
+	"requiredToolVersion": ">=1.1.19 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -122,11 +122,11 @@
 										"description": "Modify mail server users to match users and password from external LDIF file",
 										"yamlFile": "mailserver.yaml",
 										"synchronizeWithLDIF": true,
-										"externalLDIF1" : "$$(externalLDIF1)$$",
-										"externalLDIF2" : "$$(externalLDIF2|default=)$$",
-										"userBase" : "$$(externalLDIF_userBase)$$",
-										"userDC" : "$$(externalLDIF_userDC)$$",
-										"userNumberingFormatter" : "$$(externalLDIF_userNumberingFormatter)$$",
+										"externalLDIF1": "$$(externalLDIF1)$$",
+										"externalLDIF2": "$$(externalLDIF2|default=)$$",
+										"userBase": "$$(externalLDIF_userBase)$$",
+										"userDC": "$$(externalLDIF_userDC)$$",
+										"userNumberingFormatter": "$$(externalLDIF_userNumberingFormatter)$$",
 										"removeAllOtherUsers": true
 									}
 								},
@@ -259,7 +259,7 @@
 										"maxNumPollsForCompletionDeployment": 20,
 										"sleepInSecBetweenPollsDeployment": 15,
 										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 3,
+										"sleepInSecBetweenPollsRoute": 2,
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -410,8 +410,7 @@
 										"decisionServiceName": "Client Onboarding Decisions",
 										"version": "1.0.0",
 										"maxDeployCompletionPolls": 60,
-										"delayBetweenDeployCompletionPolls": 5,
-										"delayAfter": 60
+										"delayBetweenDeployCompletionPolls": 5
 									}
 								},
 								{
@@ -1210,29 +1209,30 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
-							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
+							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in CONTENT object store",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "CONTENT",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "($$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(contentOSAvailable)$",
-										"description": "Add general users group as admins to CONTENT Object Store",
-										"granteeName": "$$(generalUsersGroupName)$$"
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"description": "Add general users group as admins to CONTENT object store",
+										"granteeName": "$$(generalUsersGroupName)$$",
+										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
 								{
 									"CREATEINDEXAREA": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create Index Area for object store to be able to enable text search for object store",
 										"indexAreaName": "content_index_area"
 									}
 								},
 								{
 									"MODIFYOBJECTSTORE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Modify text search setting and security for WF Documents Object Store",
 										"name": "Modify text search setting and security for WF Documents Object Store",
 										"defaultTextSearchIndexingLanguage": "en",
@@ -1253,8 +1253,8 @@
 								},
 								{
 									"CREATESTORAGEPOLICY": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Create ASA for the Documents object store",
+										"enabled": "true",
+										"description": "Create ASA for the CONTENT object store",
 										"storagePolicyName": "Default Advanced Storage Area",
 										"storageAreaName": "content_asa",
 										"ignoreCaseForStorageAreaName": true,
@@ -1263,15 +1263,15 @@
 								},
 								{
 									"UPDATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Update class definition for folder to enable content-based retrieval",
+										"enabled": "true",
+										"description": "Update class definition for Document class to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
 									}
 								},
 								{
 									"CREATEPROPERTYTEMPLATE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
 										"propertyTemplates": [
 											{
@@ -1303,7 +1303,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
 										"className": "SWAT Jam Case Folder",
 										"classSymbolicName": "SWAT_JAM_Case_Folder",
@@ -1316,7 +1316,7 @@
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new document class 'Client Document' using previously created property templates",
 										"className": "Client Document",
 										"classSymbolicName": "ClientDocument",
@@ -1324,24 +1324,26 @@
 										"propertyTemplateNames": [
 											"Client_Name",
 											"ReferenceID"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
 									"CREATECLASSDEFINITION": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create new document class 'Utility Bill' using previously created property templates",
 										"className": "Utility Bill",
 										"classSymbolicName": "UtilityBill",
 										"baseClassSymbolicName": "ClientDocument",
 										"propertyTemplateNames": [
 											"ServiceAddress"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Case Folders' folder in root",
 										"parentFolderPath": "/",
 										"folderName": "Case Folders",
@@ -1350,7 +1352,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST1",
@@ -1367,7 +1369,7 @@
 								},
 								{
 									"CREATEFOLDER": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
 										"parentFolderPath": "/Case Folders",
 										"folderName": "Sample Test Folder TEST2",
@@ -1387,7 +1389,7 @@
 					},
 					{
 						"OCP": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
 							"name": "Copy ICN custom plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -1406,7 +1408,7 @@
 								},
 								{
 									"COPYFILES": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
@@ -1434,9 +1436,17 @@
 						"ICN": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
+								{
+									"CHECKOBJECTSTOREEXISTS": {
+										"enabled": "true",
+										"description": "Check Object Store Exists",
+										"osSymbolicName": "CONTENT",
+										"variableName": "contentOSAvailable"
+									}
+								},
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
@@ -1462,7 +1472,8 @@
 										"enabled": "$(contentOSAvailable)$",
 										"description": "Update P8 repository settings to enable Entry Template Management",
 										"repoId": "$(REPOSITORY_ID)$",
-										"allowEntryTemplateManagement": true
+										"allowEntryTemplateManagement": true,
+										"enableEditService": true
 									}
 								},
 								{
@@ -1508,6 +1519,146 @@
 										"jarFilePath": "/opt/ibm/intPlugins/eDS/edsPlugin.jar",
 										"edsIsRequired": false,
 										"dataSourcePluginName": "EDS Data Source"
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "$$(cp4baAdminUsr)$$",
+														"entityType": "User",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number admins",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group admins",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles admins",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "$$(cp4baAdminGroupShort)$$",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy Admins",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number admins"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles admins"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group admins"
+													}
+												]
+											}
+										]
 									}
 								}
 							]
