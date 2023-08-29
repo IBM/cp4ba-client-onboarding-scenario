@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.12",
+	"fileVersion": "1.0.13",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.19 <1.2.0",
+	"requiredToolVersion": ">=1.1.21 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -102,12 +102,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -124,12 +124,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -156,10 +156,10 @@
 										"description": "Copy files for mail client to and path file on pod",
 										"delayBefore": 0,
 										"namespaceName": "mail",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPolls": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -220,12 +220,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -269,8 +269,8 @@
 										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding administrators and general users group to the groups",
 										"id": "ModifyStarterLDAP",
 										"restartPod": true,
-										"maximumNumPollsForRestart": 15,
-										"sleepBetweenPollsInSecondsForRestart": 10,
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"entities": [
 											{
 												"action": "add",
@@ -316,8 +316,8 @@
 										"namespace": "$$(cp4baNamespace)$$",
 										"labelName": "app",
 										"labelValue": "$$(cp4baClusterName)$$-cpe-deploy",
-										"maximumNumPollsForRestart": 15,
-										"sleepBetweenPollsInSecondsForRestart": 30
+										"maximumNumPollsForRestart": "$$(restartCPEPods_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(restartCPEPods_sleepBetweenPollsInSecondsForRestart)$$"
 									}
 								}
 							]
@@ -399,7 +399,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								}
@@ -408,9 +410,8 @@
 					},
 					{
 						"FNCM": {
-							"comment": "Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
 							"enabled": "true",
-							"description": "CPE - Modify Workflow System Security Groups",
+							"description": "CPE - Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
 							"objectStoreName": "$$(BAW_TOS)$$",
 							"subActions": [
 								{
@@ -436,7 +437,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
@@ -446,7 +449,9 @@
 										"description": "Manage WF System Security Groups",
 										"administrationGroup": "P8WFAdmins",
 										"configurationGroup": "P8WFConfigurators",
-										"restartCPEPods": true
+										"restartCPEPods": true,
+										"maximumNumPollsForRestart": "$$(p8SecurityGroups_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(p8SecurityGroups_sleepBetweenPollsInSecondsForRestart)$$"
 									}
 								}
 							]
@@ -469,7 +474,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Update Zen roles for adin user",
+										"description": "Update Zen roles for admin user",
 										"entities": [
 											{
 												"action": "update",
@@ -575,8 +580,8 @@
 										"description": "Publish the ADS decision service as an automation service",
 										"skipRemainingSubactionOnFailure": "true",
 										"snapshot": "1.0.0",
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								}
 							]
@@ -766,6 +771,7 @@
 										"solutionName": "!solutionName!",
 										"solutionAcronym": "!solutionAcronym!",
 										"dosName": "$$(BAW_DOS)$$",
+										"ignoreSolutionVersion": false,
 										"maxDeployCompletionPolls": 20,
 										"delayBetweenDeployCompletionPolls": 10
 									}
@@ -778,8 +784,8 @@
 										"solutionAcronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
 										"maxBASQueryRetries": 5,
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								},
 								{
@@ -1404,6 +1410,7 @@
 					{
 						"FNCM": {
 							"enabled": "false",
+							"comment": "Disabled",
 							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object store $$(BAW_TOS)$$",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(BAW_TOS)$$",
@@ -1432,7 +1439,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								}
@@ -1451,7 +1460,23 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All, !EntryTemplates",
+										"exclusionsByType": [
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											}
+										],
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
@@ -1643,10 +1668,10 @@
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -1693,7 +1718,7 @@
 								{
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "true",
-										"description": "Update P8 repository settings to enable Entry Template Management and enable edit services",
+										"description": "Update P8 repository settings to enable Entry Template Management and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
 										"enableEditService": true
@@ -1744,7 +1769,7 @@
 										"dataSourcePluginName": "EDS Data Source"
 									}
 								},
-																{
+								{
 									"MANAGEREDACTION": {
 										"enabled": "true",
 										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",

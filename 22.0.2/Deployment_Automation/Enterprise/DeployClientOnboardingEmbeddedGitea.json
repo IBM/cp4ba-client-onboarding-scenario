@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.11",
+	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.19 <1.2.0",
+	"requiredToolVersion": ">=1.1.21 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -136,12 +136,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -158,12 +158,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -254,12 +254,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -1206,7 +1206,23 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to CONTENT object store",
+										"configMapName": "client-onboarding-state-admin-content-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All, !EntryTemplates",
+										"exclusionsByType": [
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											}
+										],
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
@@ -1457,7 +1473,7 @@
 								{
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "$(contentOSAvailable)$",
-										"description": "Update P8 repository settings to enable Entry Template Management",
+										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
 										"enableEditService": true

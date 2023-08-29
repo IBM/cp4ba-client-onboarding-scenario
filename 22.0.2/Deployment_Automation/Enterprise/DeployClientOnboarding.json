@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.11",
+	"fileVersion": "1.0.13",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.19 <1.2.0",
+	"requiredToolVersion": ">=1.1.21 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -136,12 +136,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -158,12 +158,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -190,10 +190,10 @@
 										"description": "Copy files for mail client to and path file on pod",
 										"delayBefore": 0,
 										"namespaceName": "mail",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -254,12 +254,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -300,7 +300,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Update Zen roles for adin user",
+										"description": "Update Zen roles for admin user",
 										"entities": [
 											{
 												"action": "update",
@@ -419,8 +419,8 @@
 										"description": "Publish the ADS decision service as an automation service",
 										"skipRemainingSubactionOnFailure": "true",
 										"snapshot": "1.0.0",
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								}
 							]
@@ -601,6 +601,7 @@
 										"solutionName": "!solutionName!",
 										"solutionAcronym": "!solutionAcronym!",
 										"dosName": "$$(BAW_DOS)$$",
+										"ignoreSolutionVersion": false,
 										"maxDeployCompletionPolls": 20,
 										"delayBetweenDeployCompletionPolls": 10
 									}
@@ -613,8 +614,8 @@
 										"solutionAcronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
 										"maxBASQueryRetries": 5,
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								},
 								{
@@ -1219,7 +1220,23 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to CONTENT object store",
+										"configMapName": "client-onboarding-state-admin-content-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All, !EntryTemplates",
+										"exclusionsByType": [
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											}
+										],
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
@@ -1412,10 +1429,10 @@
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -1470,7 +1487,7 @@
 								{
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "$(contentOSAvailable)$",
-										"description": "Update P8 repository settings to enable Entry Template Management",
+										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
 										"enableEditService": true

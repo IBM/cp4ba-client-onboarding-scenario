@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.8",
+	"fileVersion": "1.0.13",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.16 <1.2.0",
+	"requiredToolVersion": ">=1.1.21 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -102,12 +102,12 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "mailserver-tls-secret.yaml"
@@ -124,12 +124,12 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-pvc.yaml"
@@ -156,10 +156,10 @@
 										"description": "Copy files for mail client to and path file on pod",
 										"delayBefore": 0,
 										"namespaceName": "mail",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPolls": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -220,12 +220,12 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "ocs-storagecluster-cephfs",
-										"maxNumPollsForCompletionPVC": 30,
-										"sleepInSecBetweenPollsPVC": 2,
-										"maxNumPollsForCompletionDeployment": 20,
-										"sleepInSecBetweenPollsDeployment": 15,
-										"maxNumPollsForCompletionRoute": 30,
-										"sleepInSecBetweenPollsRoute": 2,
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
 										"yamlFiles": [
 											{
 												"fileName": "roundcube-mail-deployment.yaml"
@@ -254,22 +254,23 @@
 		},
 		{
 			"CONTAINER": {
-				"comment": "Container bundles activities to configure the environment for the WF lab that should be executed before importing the WF solution",
-				"enabled": "$$(enableConfigureSWATLabs)$$ && $$(enableConfigureSWATLabs_WF)$$",
+				"enabled": "$$(enableConfigureSWATLabs)$$ && $$(enableConfigureSWATLabs_WF)$$ && $$(enableWFLabForBusinessUsers)$$",
 				"description": "Configure environment so that user in group '$$(generalUsersGroupName)$$' can create WF solutions including case capability",
+				"comment": "Container bundles activities to configure the environment for the WF lab for business users that should be executed before importing the WF solution",
 				"actions": [
 					{
 						"OCP": {
 							"enabled": "true",
-							"description": "OCP - Add two groups containing both admin and general users group to LDIF and restart LDAP pod",
+							"description": "OCP - Add two groups containing both admin and general users group to LDIF, restart LDAP pod, and CPE pods",
 							"subActions": [
 								{
 									"MODIFYSTARTERLDAP": {
 										"enabled": "true",
 										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding administrators and general users group to the groups",
+										"id": "ModifyStarterLDAP",
 										"restartPod": true,
-										"maximumNumPollsForRestart": 15,
-										"sleepBetweenPollsInSecondsForRestart": 10,
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"entities": [
 											{
 												"action": "add",
@@ -305,21 +306,41 @@
 											}
 										]
 									}
+								},
+								{
+									"RESTARTPODS": {
+										"enabled": "true",
+										"description": "Restart CPE pods after LDAP was modified so it does not cache groups and group membership",
+										"dependentOnId": "ModifyStarterLDAP",
+										"dependencyType": "skip",
+										"namespace": "$$(cp4baNamespace)$$",
+										"labelName": "app",
+										"labelValue": "$$(cp4baClusterName)$$-cpe-deploy",
+										"maximumNumPollsForRestart": "$$(restartCPEPods_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(restartCPEPods_sleepBetweenPollsInSecondsForRestart)$$"
+									}
 								}
 							]
 						}
 					},
 					{
 						"WF": {
-							"comment": "Add general user group '$$(generalUsersGroupShort)$$' to tw_authors and project area to be able to create projects",
+							"comment": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins, tw_authors, and project area to be able to create projects",
 							"enabled": "true",
 							"description": "WF - Add general user group '$$(generalUsersGroupShort)$$' to tw_authors and project area",
 							"subActions": [
 								{
 									"MANAGEGROUPS": {
 										"enabled": "true",
-										"description": "Add general user group '$$(generalUsersGroupShort)$$' to tw_authors",
+										"description": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins and tw_authors",
 										"activities": [
+											{
+												"action": "AddMembers",
+												"groupName": "tw_admins",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											},
 											{
 												"action": "AddMembers",
 												"groupName": "tw_authors",
@@ -378,7 +399,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								}
@@ -387,9 +410,8 @@
 					},
 					{
 						"FNCM": {
-							"comment": "Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions",
-							"enabled": "false",
-							"description": "CPE - Modify Workflow System Security Groups",
+							"enabled": "true",
+							"description": "CPE - Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
 							"objectStoreName": "$$(BAW_TOS)$$",
 							"subActions": [
 								{
@@ -415,7 +437,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
@@ -425,7 +449,9 @@
 										"description": "Manage WF System Security Groups",
 										"administrationGroup": "P8WFAdmins",
 										"configurationGroup": "P8WFConfigurators",
-										"restartCPEPods": true
+										"restartCPEPods": true,
+										"maximumNumPollsForRestart": "$$(p8SecurityGroups_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(p8SecurityGroups_sleepBetweenPollsInSecondsForRestart)$$"
 									}
 								}
 							]
@@ -448,7 +474,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Update Zen roles for adin user",
+										"description": "Update Zen roles for admin user",
 										"entities": [
 											{
 												"action": "update",
@@ -507,18 +533,18 @@
 									}
 								},
 								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
 									"IMPORTDECISIONSERVICES": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Decisions' decision service",
 										"decisionServiceName": "Client Onboarding Decisions",
 										"file": "ClientOnboardingDecisions.zip"
-									}
-								},
-								{
-									"CONNECTWITHGIT": {
-										"enabled": "$$(!isADSAutoConnectToGit)$$",
-										"description": "Connect ADS project to internal gitea repository",
-										"gitRepoUrl": "!GITREPOURL!"
 									}
 								},
 								{
@@ -554,8 +580,8 @@
 										"description": "Publish the ADS decision service as an automation service",
 										"skipRemainingSubactionOnFailure": "true",
 										"snapshot": "1.0.0",
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								}
 							]
@@ -758,8 +784,8 @@
 										"solutionAcronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
 										"maxBASQueryRetries": 5,
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								},
 								{
@@ -1019,7 +1045,7 @@
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Navigator - Import apps and desktops",
 							"name": "Prepare Apps and Desktops",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
@@ -1028,10 +1054,6 @@
 										"name": "Download ICN files",
 										"replaceExistingFiles": true,
 										"files": [
-											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/Workplace-$$(cp4baVersionWithFixpack)$$.zip",
-												"useCurrentOrEarlierFileVersion": true
-											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"
 											},
@@ -1055,7 +1077,7 @@
 								},
 								{
 									"IMPORTAPPLICATION": {
-										"enabled": "true",
+										"enabled": "false",
 										"description": "Import Workplace app",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Workplace",
@@ -1065,7 +1087,7 @@
 								},
 								{
 									"SETAPPPERMISSIONS": {
-										"enabled": "true",
+										"enabled": "false",
 										"description": "Make Workplace app accessible for all authenticated users",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Workplace",
@@ -1179,7 +1201,7 @@
 					{
 						"BAI": {
 							"enabled": "$$(enableDeployClientOnboarding_BAI)$$",
-							"description": "Populate the Process and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
+							"description": "BAI - Populate the Process and Case indices, create Client Onboarding goal and dashboard, and make dashboard visible for all users",
 							"relativeBasePath": "Business Automation Insights",
 							"subActions": [
 								{
@@ -1371,7 +1393,8 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
+							"enabled": "false",
+							"comment": "Disabled",
 							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object store $$(BAW_TOS)$$",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(BAW_TOS)$$",
@@ -1400,7 +1423,9 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
 								}
@@ -1419,7 +1444,24 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
-										"granteeName": "$$(generalUsersGroupName)$$"
+										"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS)$$-os",
+										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All, !EntryTemplates",
+										"exclusionsByType": [
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											}
+										],
+										"message": "This activity may take up to minutes without visible progress"
 									}
 								},
 								{
@@ -1462,7 +1504,7 @@
 								{
 									"UPDATECLASSDEFINITION": {
 										"enabled": "true",
-										"description": "Update class definition for folder to enable content-based retrieval",
+										"description": "Update class definition for Document class to enable content-based retrieval",
 										"classSymbolicName": "Document",
 										"enableCBR": true
 									}
@@ -1522,7 +1564,8 @@
 										"propertyTemplateNames": [
 											"Client_Name",
 											"ReferenceID"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
@@ -1534,7 +1577,8 @@
 										"baseClassSymbolicName": "ClientDocument",
 										"propertyTemplateNames": [
 											"ServiceAddress"
-										]
+										],
+										"enableCBR": true
 									}
 								},
 								{
@@ -1597,7 +1641,7 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/22.0.2/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
 											}
 										]
 									}
@@ -1608,10 +1652,10 @@
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -1632,7 +1676,7 @@
 						"ICN": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(BAW_DOCS)$$)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
@@ -1658,9 +1702,10 @@
 								{
 									"UPDATEP8REPOSETTINGS": {
 										"enabled": "true",
-										"description": "Update P8 repository settings to enable Entry Template Management",
+										"description": "Update P8 repository settings to enable Entry Template Management and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
-										"allowEntryTemplateManagement": true
+										"allowEntryTemplateManagement": true,
+										"enableEditService": true
 									}
 								},
 								{
@@ -1706,6 +1751,76 @@
 										"jarFilePath": "/opt/ibm/intPlugins/eDS/edsPlugin.jar",
 										"edsIsRequired": false,
 										"dataSourcePluginName": "EDS Data Source"
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": false,
+										"redactionReasons": [
+											{
+												"action": "add",
+												"name": "Driver License Number admins",
+												"description": "Hide the DL number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "add",
+												"type": "Viewer",
+												"name": "viewer group admins",
+												"description": "this viewer group cannot see the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "GeneralUsers",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "Editor",
+												"name": "Editor user group roles admins",
+												"description": "this user group helps to redact the sensitive information",
+												"entities": [
+													{
+														"action": "add",
+														"entityName": "P8Administrators",
+														"entityType": "Group",
+														"permission": "Allow"
+													}
+												]
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "add",
+												"name": "Driver License Policy Admins",
+												"description": "Hide the DL sensitive information",
+												"reasons": [
+													{
+														"action": "add",
+														"name": "Driver License Number admins"
+													}
+												],
+												"editors": [
+													{
+														"action": "add",
+														"name": "Editor user group roles admins"
+													}
+												],
+												"viewers": [
+													{
+														"action": "add",
+														"name": "viewer group admins"
+													}
+												]
+											}
+										]
 									}
 								}
 							]
