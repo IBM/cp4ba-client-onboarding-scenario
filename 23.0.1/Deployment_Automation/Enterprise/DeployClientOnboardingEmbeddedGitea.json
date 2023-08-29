@@ -190,10 +190,10 @@
 										"description": "Copy files for mail client to and path file on pod",
 										"delayBefore": 0,
 										"namespaceName": "mail",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
@@ -1403,10 +1403,10 @@
 										"description": "Copy custom plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
-										"maxNumRetries": 5,
-										"sleepInSecBetweenRetries": 5,
-										"maxNumPollsForCompletion": 10,
-										"sleepInSecBetweenPools": 10,
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
 										"copyActions": [
 											{
 												"action": "toContainer",
