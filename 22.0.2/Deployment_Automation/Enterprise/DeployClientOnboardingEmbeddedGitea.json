@@ -406,8 +406,8 @@
 										"description": "Publish the ADS decision service as an automation service",
 										"skipRemainingSubactionOnFailure": "true",
 										"snapshot": "1.0.0",
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								}
 							]
@@ -600,8 +600,8 @@
 										"solutionAcronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
 										"maxBASQueryRetries": 5,
-										"maxPublishCompletionPolls": 20,
-										"delayBetweenPublishCompletionPolls": 5
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
 									}
 								},
 								{
