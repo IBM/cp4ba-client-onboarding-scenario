@@ -1,7 +1,7 @@
 {
 	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.21 <1.2.0",
+	"requiredToolVersion": ">=1.1.22 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -240,6 +240,8 @@
 										"dependentOnId": "copyFilesToFromPod",
 										"dependencyType": "skip",
 										"namespaceName": "mail",
+										"maximumNumPollsForDeletion": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepBetweenPollsInSecondsForDeletion": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -1476,6 +1478,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
 										"enableEditService": true
 									}
 								},
