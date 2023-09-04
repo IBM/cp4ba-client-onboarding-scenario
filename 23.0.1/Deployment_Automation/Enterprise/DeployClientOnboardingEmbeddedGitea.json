@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.12",
+	"fileVersion": "1.0.14",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.21 <1.2.0",
+	"requiredToolVersion": ">=1.1.23 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -27,7 +27,7 @@
 		},
 		{
 			"CONTAINER": {
-				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
+				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$ && $$(ISNOTSET(wf_cp_emailPassword))$$",
 				"description": "Deploy local email server and client",
 				"actions": [
 					{
@@ -240,6 +240,8 @@
 										"dependentOnId": "copyFilesToFromPod",
 										"dependencyType": "skip",
 										"namespaceName": "mail",
+										"maximumNumPollsForDeletion": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepBetweenPollsInSecondsForDeletion": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -300,7 +302,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Update Zen roles for adin user",
+										"description": "Update Zen roles for admin user",
 										"entities": [
 											{
 												"action": "update",
@@ -561,10 +563,10 @@
 												"type": "process",
 												"automationServiceMappings": {
 													"project": {
-														"cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
+														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
 													},
 													"url": {
-														"ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
 											}
@@ -588,6 +590,7 @@
 										"solutionName": "!solutionName!",
 										"solutionAcronym": "!solutionAcronym!",
 										"dosName": "$$(BAW_DOS)$$",
+										"ignoreSolutionVersion": true,
 										"maxDeployCompletionPolls": 20,
 										"delayBetweenDeployCompletionPolls": 10
 									}
@@ -681,8 +684,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Use object store, Set owner of any object, Read permissions"
@@ -705,6 +709,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -722,6 +727,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -739,6 +745,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -901,7 +908,7 @@
 												"BAWTOS": "$$(BAW_TOS)$$"
 											},
 											"2": {
-												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar/operations": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar/operations"
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 											},
 											"3": {
 												"cp4badmin": "$$(cp4baAdminUsr)$$"
@@ -911,7 +918,7 @@
 								},
 								{
 									"IMPORTAPPLICATION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Import patched 'Client Onboarding Request' app",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
@@ -920,7 +927,7 @@
 								},
 								{
 									"SETAPPPERMISSIONS": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Request",
@@ -1233,8 +1240,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -1464,6 +1472,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
+										"enableRedaction": false,
 										"enableEditService": true
 									}
 								},
@@ -1514,7 +1523,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "true",
+										"enabled": "false",
 										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
@@ -1584,7 +1593,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "true",
+										"enabled": "false",
 										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
@@ -1685,11 +1694,32 @@
 									}
 								},
 								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the automation service to call ADS as TWX was built in enterprise deployment but is used in starter deployment and to accommodate workaround for problem to publish original long AS name in ADS",
+										"sourceTwxFile": "!twxFileName!",
+										"filePatchInfos": [
+											{
+												"name": "client_onboarding_decisions",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": {
+														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
+													},
+													"url": {
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+													}
+												}
+											}
+										]
+									}
+								},
+								{
 									"IMPORTPROJECT": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Template' BAA template into Studio",
 										"name": "!solutionName!",
-										"file": "!twxFileName!",
+										"file": "!patchedTWXFileName!",
 										"type": "!solutionType!",
 										"acronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
