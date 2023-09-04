@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.13",
+	"fileVersion": "1.0.14",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.21 <1.2.0",
+	"requiredToolVersion": ">=1.1.23 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -206,6 +206,8 @@
 										"dependentOnId": "copyFilesToFromPod",
 										"dependencyType": "skip",
 										"namespaceName": "mail",
+										"maximumNumPollsForDeletion": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepBetweenPollsInSecondsForDeletion": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
 										"deployments": [
 											{
 												"action": "delete",
@@ -386,8 +388,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -424,8 +427,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -578,7 +582,7 @@
 									"PUBLISHAUTOMATIONSERVICES": {
 										"enabled": "true",
 										"description": "Publish the ADS decision service as an automation service",
-										"skipRemainingSubactionOnFailure": "true",
+										"skipRemainingSubactionOnFailure": "false",
 										"snapshot": "1.0.0",
 										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
 										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
@@ -676,16 +680,7 @@
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract the project information from the Client Onboarding TWX file",
-										"sourceTwxFile": "Client_Onboarding.twx",
-										"additionalIds": [
-											{
-												"label": "serviceFlow",
-												"name": "New Client Onboarding Request",
-												"type": "bpd",
-												"getObjectId": true,
-												"getVersionId": false
-											}
-										]
+										"sourceTwxFile": "Client_Onboarding.twx"
 									}
 								},
 								{
@@ -744,10 +739,10 @@
 												"type": "process",
 												"automationServiceMappings": {
 													"project": {
-														"cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding"
+														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
 													},
 													"url": {
-														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fco_decisions%252FCODecisionsDecisionService%252F1.0.0%252FCODecisionsDecisionService-1.0.0.jar"
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
 											}
@@ -865,8 +860,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Use object store, Set owner of any object, Read permissions"
@@ -889,6 +885,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -906,6 +903,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -923,6 +921,7 @@
 														"enabled": "true",
 														"granteeName": "$$(generalUsersGroupName)$$",
 														"granteeType": "Group",
+														"isNonCaseSensitive": true,
 														"defaultInstanceSecurityAction": "Remove",
 														"securityAction": "Update",
 														"securityAccessType": "Allow",
@@ -1076,31 +1075,6 @@
 									}
 								},
 								{
-									"IMPORTAPPLICATION": {
-										"enabled": "false",
-										"description": "Import Workplace app",
-										"appEngineAppConfigName": "APPENG0",
-										"name": "Workplace",
-										"useCurrentOrEarlierFileVersion": true,
-										"file": "Workplace-$$(cp4baVersionWithFixpack)$$.zip"
-									}
-								},
-								{
-									"SETAPPPERMISSIONS": {
-										"enabled": "false",
-										"description": "Make Workplace app accessible for all authenticated users",
-										"appEngineAppConfigName": "APPENG0",
-										"name": "Workplace",
-										"action": "update",
-										"permissions": [
-											{
-												"name": "#AUTHENTICATED-USERS",
-												"action": "add"
-											}
-										]
-									}
-								},
-								{
 									"PATCHAPPLICATION": {
 										"enabled": "true",
 										"description": "Patch 'Client Onboarding Request' app to work in current environment",
@@ -1110,7 +1084,7 @@
 												"BAWTOS": "$$(BAW_TOS)$$"
 											},
 											"2": {
-												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 											},
 											"3": {
 												"cp4badmin": "$$(cp4baAdminUsr)$$"
@@ -1410,8 +1384,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -1483,8 +1458,9 @@
 											{
 												"enabled": "true",
 												"action": "Add",
-												"granteeType": "Group",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
 												"accessType": "Allow",
 												"inheritableDepth": "No inheritance",
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
@@ -1866,10 +1842,10 @@
 												"type": "process",
 												"automationServiceMappings": {
 													"project": {
-														"cp4badmin.client_onboarding": "$$(cp4baAdminUsr)$$.client_onboarding"
+														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
 													},
 													"url": {
-														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%252Fclient_onboarding%252Fclient_onboarding_decisions%252FclientOnboardingDecisionsDecisionService%252F1.0.0%252FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
 											}
