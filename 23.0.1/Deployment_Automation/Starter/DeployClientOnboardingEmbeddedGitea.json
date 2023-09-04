@@ -1681,6 +1681,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
 										"enableEditService": true
 									}
 								},
