@@ -302,7 +302,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Update Zen roles for adin user",
+										"description": "Update Zen roles for admin user",
 										"entities": [
 											{
 												"action": "update",
