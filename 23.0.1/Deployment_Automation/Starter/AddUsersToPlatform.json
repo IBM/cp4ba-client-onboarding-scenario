@@ -1,0 +1,25 @@
+{
+	"comment": "Specify an array of users that should be added to the LDAP including their roles that will be assigned when onboarded to the Cloud Pak",
+	"entities": [
+		{
+			"enabled": true,
+			"type": "user",
+			"dn": "uid=henry,dc=example,dc=org",
+			"cn": "henry",
+			"sn": "henry",
+			"uid": "henry",
+			"userPassword": "pwd",
+			"homeDirectory": "/home/henry/",
+			"mail": "henry@example.org",
+			"members": [
+				{
+					"dn": "cn=GeneralUsers,dc=example,dc=org"
+				}
+			],
+			"roles": [
+				"iaf-automation-admin",
+				"iaf-automation-developer"
+			]
+		}
+	]
+}

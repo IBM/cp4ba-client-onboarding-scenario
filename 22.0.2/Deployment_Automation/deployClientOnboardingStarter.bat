@@ -38,13 +38,15 @@ SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
 
-rem Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+rem Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
 
 rem Email address of the gmail account to send emails
 rem SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails
 rem SET gmailAppKey=REQUIRED
 
+rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+SET createUsers=false
 
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
@@ -107,7 +109,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.3
+SET SCRIPTVERSION=1.1.4
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -337,6 +339,23 @@ if defined rpaServerRequired (
 	echo   Variable 'rpaServer' has not been set
 )
 
+if defined enableWorkflowLabsForBusinessUsers set workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=%enableWorkflowLabsForBusinessUsers%
+
+if defined createUsers (
+	if "%createUsers%"=="true" (
+		set createUsersFile=createUsersFile=AddUsersToPlatform.json
+		
+		rem Determine if the json file exist
+		for /f "tokens=*" %%i in ('dir /b * ^| findstr /l "AddUsersToPlatform.json"') do set USERFILENAME=%%i
+		
+		rem In case not available/found print error and mark as validation failed
+		if not defined USERFILENAME (
+			set validationFailed=true
+			echo   Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory
+		)
+	)
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -346,11 +365,9 @@ if defined overallValidationFailed (
 	exit /b 1;
 )
 
-if defined enableWorkflowLabsForBusinessUsers set workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=%enableWorkflowLabsForBusinessUsers%
-
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% %createUsersFile% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL

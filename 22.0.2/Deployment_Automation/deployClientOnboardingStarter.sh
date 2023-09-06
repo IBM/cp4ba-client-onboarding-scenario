@@ -36,13 +36,15 @@ rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 rpaServer=https://rpa-server.com:1111
 
-# Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
 
 # Email address of the gmail account to send emails
 # gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails
 # gmailAppKey=REQUIRED
 
+# Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+createUsers=false
 
 
 # Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
@@ -108,7 +110,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.3
+SCRIPTVERSION=1.1.4
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -259,6 +261,22 @@ then
   echo "  Variable 'rpaServer' has not been set"
 fi
 
+if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
+then
+   createUsersFile=createUsersFile=AddUsersToPlatform.json
+
+   if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
+   then
+     if $validationSuccess
+     then
+	echo "Validating configuration failed:"
+        validationSuccess=false
+     fi
+     echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
+   fi
+fi
+
+
 if ! $validationSuccess
 then
   echo
@@ -275,4 +293,4 @@ then
 	workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

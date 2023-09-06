@@ -18,23 +18,33 @@
 # Specify below variables to launch the deployment automation with
 #----------------------------------------------------------------------------------------------------------
 
+# Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+
+# URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
+pakInstallerPortalURL=REQUIRED
+
 # Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-ocLoginServer=REQUIRED
+#ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-ocLoginToken=REQUIRED
+#ocLoginToken=REQUIRED
+
+# Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
+enableWorkflowLabsForBusinessUsers=false
 
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 rpaServer=https://rpa-server.com:1111
 
-# Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
 
 # Email address of the gmail account to send emails
 # gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails
 # gmailAppKey=REQUIRED
 
+# Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+createUsers=false
 
 
 # Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
@@ -100,7 +110,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.0
+SCRIPTVERSION=1.1.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -161,24 +171,44 @@ echo
 
 validationSuccess=true
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+# if 'pakInstallerPortalURL' is not defined or set as default or empty then check that 'ocLoginServer' and 'ocLoginToken' are properly defined
+if [ -z "${pakInstallerPortalURL+x}" ] || [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
 then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'ocLoginServer' has not been set"
-fi
-
-if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'ocLoginToken' has not been set"
+	if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+	else
+		INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+	fi
+	
+	if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+	else
+		INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
+	fi
+else 
+	if ([[ "${ocLoginServer}" != "REQUIRED" ]] && [[ "${ocLoginServer}" != "" ]]) || ([[ "${ocLoginToken}" != "REQUIRED" ]] && [[ "${ocLoginToken}" != "" ]])
+	then
+		if $validationSuccess
+		then
+			echo "Validating configuration failed:"
+			validationSuccess=false
+		fi
+		echo "  Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
+	else
+		INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=${pakInstallerPortalURL}
+	fi
 fi
 
 if [ ! -z "${gmailAddress+x}" ]
@@ -231,6 +261,22 @@ then
   echo "  Variable 'rpaServer' has not been set"
 fi
 
+if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
+then
+   createUsersFile=createUsersFile=AddUsersToPlatform.json
+
+   if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
+   then
+     if $validationSuccess
+     then
+	echo "Validating configuration failed:"
+        validationSuccess=false
+     fi
+     echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
+   fi
+fi
+
+
 if ! $validationSuccess
 then
   echo
@@ -242,4 +288,10 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+if [ ! -z "${enableWorkflowLabsForBusinessUsers+x}" ]
+then
+	workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
+fi
+
+
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

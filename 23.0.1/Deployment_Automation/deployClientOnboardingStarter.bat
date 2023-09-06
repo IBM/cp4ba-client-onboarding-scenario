@@ -20,23 +20,33 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
+rem Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+
+rem URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
+SET pakInstallerPortalURL=REQUIRED
+
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginServer=REQUIRED
+rem SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-SET ocLoginToken=REQUIRED
+rem SET ocLoginToken=REQUIRED
+
+rem Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
+SET enableWorkflowLabsForBusinessUsers=false
 
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
 SET rpaServer=https://rpa-server.com:1111
 
-rem Uncomment below to properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+rem Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
 
 rem Email address of the gmail account to send emails
 rem SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails
 rem SET gmailAppKey=REQUIRED
 
+rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+SET createUsers=false
 
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
@@ -99,7 +109,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.0
+SET SCRIPTVERSION=1.1.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -171,27 +181,110 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required parameters are set
 rem ----------------------------------------------------------------------------------------------------------
 
+rem if pakInstallerPortalURL is defined and default or value not specified check that both ocLoginServer and ocLoginToken are defined properly
+if defined pakInstallerPortalURL (
+	rem if pakInstallerPortalURL has default value then need to ensure oc variables are properly defined
+	if "%pakInstallerPortalURL%"=="REQUIRED" (
+		rem if ocLoginServer variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+		if defined ocLoginServer (
+			if "%ocLoginServer%"=="REQUIRED" (
+				set ocLoginServerRequired=true
+			) else (
+				if "%ocLoginServer%"=="" (
+					set ocLoginServerRequired=true
+				) else (
+					set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+				)
+			)
+		) else (
+			set ocLoginServerRequired=true
+		)
+	
+		rem if ocLoginToken variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+		if defined ocLoginToken (
+			if "%ocLoginToken%"=="REQUIRED" (
+				set ocLoginTokenRequired=true
+			) else (
+				if "%ocLoginToken%"=="" (
+					set ocLoginTokenRequired=true
+				) else (
+					set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+				)
+			)
+		) else (
+			set ocLoginTokenRequired=true
+		)
+	rem pakInstallerPortalURL is set a to a value ensure that 'ocLoginServer' and 'ocLoginToken' are either not defined (commented out) or remain at the default value
+	) else (
+		if defined ocLoginServer (
+			if NOT "%ocLoginServer%"=="REQUIRED" (
+				set multipleLoginMethod=true
+			)
+		)
 
-if "%ocLoginServer%"=="REQUIRED" set ocLoginServerRequired=true
-if "%ocLoginServer%"=="" set ocLoginServerRequired=true
+		if defined ocLoginToken (
+			if NOT "%ocLoginToken%"=="REQUIRED" (
+				set multipleLoginMethod=true
+			)
+		)
+		
+		set INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=%pakInstallerPortalURL%
+	)
+rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginServer' and 'ocLoginToken' are properly defined
+) else (
+	rem if 'ocLoginServer' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+	if defined ocLoginServer (
+		if "%ocLoginServer%"=="REQUIRED" (
+			set ocLoginServerRequired=true
+		) else (
+			if "%ocLoginServer%"=="" (
+				set ocLoginServerRequired=true
+			) else (
+				set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+			)
+		)
+	) else (
+		set ocLoginServerRequired=true
+	)
+	
+	rem if 'ocLoginToken' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+	if defined ocLoginToken (
+		if "%ocLoginToken%"=="REQUIRED" (
+			set ocLoginTokenRequired=true
+		) else (
+			if "%ocLoginToken%"=="" (
+				set ocLoginTokenRequired=true
+			) else (
+				set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+			)
+		)
+	) else (
+		set ocLoginTokenRequired=true
+	)
+)
+
+if defined multipleLoginMethod ( 
+	if not defined validationFailed (
+		echo Validating configuration failed:
+		set validationFailed=true
+	)
+	echo   Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both
+)
 
 if defined ocLoginServerRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginServer' has not been set
+	echo   Variable 'ocLoginServer' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
 )
-
-if "%ocLoginToken%"=="REQUIRED" set ocLoginTokenRequired=true
-if "%ocLoginToken%"=="" set ocLoginTokenRequired=true
 
 if defined ocLoginTokenRequired ( 
 	if not defined validationFailed (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginToken' has not been set
+	echo   Variable 'ocLoginToken' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
 )
 
 if defined gmailAddress (
@@ -246,6 +339,23 @@ if defined rpaServerRequired (
 	echo   Variable 'rpaServer' has not been set
 )
 
+if defined enableWorkflowLabsForBusinessUsers set workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=%enableWorkflowLabsForBusinessUsers%
+
+if defined createUsers (
+	if "%createUsers%"=="true" (
+		set createUsersFile=createUsersFile=AddUsersToPlatform.json
+		
+		rem Determine if the json file exist
+		for /f "tokens=*" %%i in ('dir /b * ^| findstr /l "AddUsersToPlatform.json"') do set USERFILENAME=%%i
+		
+		rem In case not available/found print error and mark as validation failed
+		if not defined USERFILENAME (
+			set validationFailed=true
+			echo   Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory
+		)
+	)
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -258,6 +368,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% %createUsersFile% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
