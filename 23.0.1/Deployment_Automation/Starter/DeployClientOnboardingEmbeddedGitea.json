@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.15",
+	"fileVersion": "1.0.16",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.23 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -23,7 +23,7 @@
 										"restartPod": true,
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
-										"configFile": "$(onboardUsersFile|default=)$"
+										"configFile": "$$(onboardUsersFile|default=)$$"
 									}
 								}
 							]

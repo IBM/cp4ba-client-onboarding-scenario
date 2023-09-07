@@ -110,7 +110,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.1
+SCRIPTVERSION=1.1.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -263,7 +263,7 @@ fi
 
 if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
 then
-   createUsersFile=createUsersFile=AddUsersToPlatform.json
+   createUsersFile=onboardUsersFile=AddUsersToPlatform.json
 
    if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
    then

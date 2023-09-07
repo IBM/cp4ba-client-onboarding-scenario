@@ -109,7 +109,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.1
+SET SCRIPTVERSION=1.1.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -343,7 +343,7 @@ if defined enableWorkflowLabsForBusinessUsers set workflowLabsForBusinessUsers=e
 
 if defined createUsers (
 	if "%createUsers%"=="true" (
-		set createUsersFile=createUsersFile=AddUsersToPlatform.json
+		set createUsersFile=onboardUsersFile=AddUsersToPlatform.json
 		
 		rem Determine if the json file exist
 		for /f "tokens=*" %%i in ('dir /b * ^| findstr /l "AddUsersToPlatform.json"') do set USERFILENAME=%%i
