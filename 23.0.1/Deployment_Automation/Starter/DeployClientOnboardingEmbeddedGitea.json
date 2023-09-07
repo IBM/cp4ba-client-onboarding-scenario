@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.14",
+	"fileVersion": "1.0.15",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.23 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -16,13 +16,15 @@
 							"name": "Configure mail server and client in OCP",
 							"relativeBasePath": "OpenShift",
 							"subActions": [
-								"ADDUSERSGROUPSTOENV": {
-									"enabled": "true",
-									"description": "Add Users",
-									"restartPod": true,
-									"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
-									"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
-									"configFile": "$(onboardUsersFile|default=)$"
+								{
+									"ADDUSERSGROUPSTOENV": {
+										"enabled": "true",
+										"description": "Add Users",
+										"restartPod": true,
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"configFile": "$(onboardUsersFile|default=)$"
+									}
 								}
 							]
 						}
