@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.14",
+	"fileVersion": "1.0.15",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.23 <1.2.0",
+	"requiredToolVersion": ">=1.1.26 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -1432,11 +1432,12 @@
 						}
 					},
 					{
-						"ICN": {
+						"FNCM": {
 							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
-							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
-							"relativeBasePath": "Business Automation Navigator",
+							"description": "CPE - Check if GeneralUsers group exist",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"CHECKOBJECTSTOREEXISTS": {
@@ -1446,6 +1447,29 @@
 										"variableName": "contentOSAvailable"
 									}
 								},
+								{
+									"CHECKCPEUSERORGROUPEXISTS": {
+										"enabled": "$(contentOSAvailable)$",
+										"description": "Check if GeneralUsers group exists",
+										"variableName": "generalUsersGroupExists",
+										"usersAndGroups": [
+											{
+												"name": "GeneralUsers",
+												"type": "group"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"name": "Import ICN Desktop for Content/ICN lab into ICN",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
 										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
@@ -1527,6 +1551,7 @@
 										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
+										"warning": "§IF($(generalUsersGroupExists)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
@@ -1557,7 +1582,7 @@
 												"entities": [
 													{
 														"action": "add",
-														"entityName": "GeneralUsers",
+														"entityName": "§IF($(generalUsersGroupExists)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
 														"entityType": "Group",
 														"permission": "Allow"
 													}
@@ -1597,6 +1622,7 @@
 										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
+										"warning": "§IF($(generalUsersGroupExists)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
@@ -1613,7 +1639,7 @@
 												"entities": [
 													{
 														"action": "add",
-														"entityName": "GeneralUsers",
+														"entityName": "§IF($(generalUsersGroupExists)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
 														"entityType": "Group",
 														"permission": "Allow"
 													}
@@ -1696,7 +1722,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the automation service to call ADS as TWX was built in enterprise deployment but is used in starter deployment and to accommodate workaround for problem to publish original long AS name in ADS",
+										"description": "Patch the automation service to call ADS to match the user with which the ADS project got imported",
 										"sourceTwxFile": "!twxFileName!",
 										"filePatchInfos": [
 											{
