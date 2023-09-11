@@ -510,7 +510,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID and automation service as TWX was built in enterprise deployment but is used in starter deployment",
+										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID, email, and RPA config and automation service based on user used to import ADS solution",
 										"sourceTwxFile": "!twxFileName!",
 										"environmentVariables": [
 											{
