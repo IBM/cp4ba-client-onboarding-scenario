@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.16",
+	"fileVersion": "1.0.17",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.22 <1.2.0",
+	"requiredToolVersion": ">=1.1.27 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -1750,6 +1750,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
 										"enableEditService": true
 									}
 								},

@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.13",
+	"fileVersion": "1.0.14",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.26 <1.2.0",
+	"requiredToolVersion": ">=1.1.27 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -1508,7 +1508,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
-										"enableRedaction": false,
+										"enableRedaction": true,
 										"enableEditService": true
 									}
 								},
@@ -1559,7 +1559,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
@@ -1630,7 +1630,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,

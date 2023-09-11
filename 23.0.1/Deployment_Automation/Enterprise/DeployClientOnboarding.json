@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.15",
+	"fileVersion": "1.0.16",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.26 <1.2.0",
+	"requiredToolVersion": ">=1.1.27 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -1509,7 +1509,7 @@
 										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
-										"enableRedaction": false,
+										"enableRedaction": true,
 										"enableEditService": true
 									}
 								},
@@ -1560,7 +1560,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
@@ -1631,7 +1631,7 @@
 								},
 								{
 									"MANAGEREDACTION": {
-										"enabled": "false",
+										"enabled": "true",
 										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
