@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2) to a self-provisioned Jam-in-a-Box environment (based on Cloud Pak for Business Automation (CP4BA) 22.0.2). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
+Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 22.0.2**). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 
 ## Prerequisites
 
-1. **Cloud Pak for Business Automation (CP4BA) 22.0.2 environment**
+1. **Cloud Pak for Business Automation (CP4BA) 22.0.2 environment** - CP4BA 23.0.1 is not yet supported!
 
    **a) IBM Business Partners and IBMers**
 
@@ -239,6 +239,19 @@ In case emails should be send to public/external email addresses, you can option
 In the sh/bat file uncomment the two lines with the parameters`gmailAddress` and `gmailAppKey`. Set them to the values of your gmail account as described above.
 
 If you have previously run the deployment, run it again. It will recognize that your email server configuration has changed and will redeploy the artifact that contains the changed email server information.
+
+### Creating users during deployment / Setting admin and/or regular user passwords
+
+In case you want to create one or multiple users to  have user names other than user1-user10 or cp4admin and/or you want to set your own password for the administrator and/or all users (user1-user10), follow these steps:
+
+1. Download the file [AddUsersToPlatform.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/AddUsersToPlatform.json) and place it in the same directory where you placed the bat/sh file
+2. Edit the AddUsersToPlatform.json in your favorite text editor
+   1. If you want to **add a single user**, modify the existing entry for user "Henry" to match your needs (using the "members" array, you can add the new user to any of the pre-existing groups/using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak)
+   2. If you want to **add multiple users**, just duplicate the user definition and make your modifications
+   3. If you **don't want to add users** **but modify the password of the admin and/or regular users**, then either remove the whole "entities" array or set the attribute "enabled" to false
+   4. If you want to **set the password for the admin user** "cp4admin" to a value of your choice, add element "adminPwd" with the password to be set on the same level as the "entities" attribute. (e.g. "adminPwd": "password")
+   5. If you want to **set the password for all regular users** ("user1" to "user10") to a value of your choice, add element "userPwd" with the password to be set on the same level as the "entities" attribute. (e.g. "userPwd": "password"). Be aware that all of the users 1-10 will get the same password
+3. In the sh/bat file modify the line "**createUsers**=" and set the value from false to true
 
 ### Using a proxy server to access github.com
 
