@@ -1835,38 +1835,6 @@
 						}
 					},
 					{
-						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
-							"description": "CPE - Check if GeneralUsers group exist",
-							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
-							"relativeBasePath": "FileNet Content Manager",
-							"subActions": [
-								{
-									"CHECKOBJECTSTOREEXISTS": {
-										"enabled": "true",
-										"description": "Check Object Store Exists",
-										"osSymbolicName": "CONTENT",
-										"variableName": "contentOSAvailable"
-									}
-								},
-								{
-									"CHECKCPEUSERORGROUPEXISTS": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Check if GeneralUsers group exists",
-										"variableName": "generalUsersGroupExists",
-										"usersAndGroups": [
-											{
-												"name": "GeneralUsers",
-												"type": "group"
-											}
-										]
-									}
-								}
-							]
-						}
-					},
-					{
 						"ICN": {
 							"comment": "Steps that required by both the CPE & ICN content labs",
 							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
