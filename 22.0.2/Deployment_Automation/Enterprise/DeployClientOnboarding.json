@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.14",
+	"fileVersion": "1.0.17",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
 	"requiredToolVersion": ">=1.1.27 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -1216,36 +1216,12 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
-							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in CONTENT object store",
-							"replaceExistingDocuments": false,
+							"comment": "Steps that are required by all content labs",
+							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
+							"description": "CPE - Steps common to the CPE, GraphQL, and ICN labs: Enable CBR for OS, create index area, and enable CBR for document class in OS CONTENT",
 							"objectStoreName": "CONTENT",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
-								{
-									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
-										"description": "Add general users group as admins to CONTENT object store",
-										"configMapName": "client-onboarding-state-admin-content-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
-										"updateTypes": "All, !EntryTemplates",
-										"exclusionsByType": [
-											{
-												"exclusionsType": "ClassDefinitions",
-												"exclusions": [
-													"/Document/EntryTemplate/"
-												]
-											},
-											{
-												"exclusionsType": "ClassDefinitionInstances",
-												"exclusions": [
-													"/Document/EntryTemplate/"
-												]
-											}
-										],
-										"message": "This activity may take up to minutes without visible progress"
-									}
-								},
 								{
 									"CREATEINDEXAREA": {
 										"enabled": "true",
@@ -1256,8 +1232,8 @@
 								{
 									"MODIFYOBJECTSTORE": {
 										"enabled": "true",
-										"description": "Modify text search setting and security for WF Documents Object Store",
-										"name": "Modify text search setting and security for WF Documents Object Store",
+										"description": "Modify text search setting and security for object store CONTENT",
+										"name": "Modify text search setting and security for object store CONTENT",
 										"defaultTextSearchIndexingLanguage": "en",
 										"enableTextSearch": true,
 										"replaceAccessRights": false,
@@ -1276,6 +1252,229 @@
 									}
 								},
 								{
+									"UPDATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Ensure class definition for Document class has CBR enabled",
+										"classSymbolicName": "Document",
+										"enableCBR": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Steps that are only required by the CPE and GraphQL content labs",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$",
+							"description": "CPE - Steps common for CPE und GraphQL labs: Modify object store search settings and security, create property templates, class, and create folders in object store CONTENT",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"ADDADMINTOOBJECTSTORE": {
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"description": "Add general users group as admins to CONTENT Object Store",
+										"configMapName": "client-onboarding-state-admin-content-os",
+										"granteeName": "$$(generalUsersGroupName)$$",
+										"updateTypes": "All, !EntryTemplates",
+										"exclusionsByType": [
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/EntryTemplate/"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitions",
+												"exclusions": [
+													"/Document/StoredSearch"
+												]
+											},
+											{
+												"exclusionsType": "ClassDefinitionInstances",
+												"exclusions": [
+													"/Document/StoredSearch"
+												]
+											}
+										],
+										"message": "This activity may take up to minutes without visible progress"
+									}
+								},
+								{
+									"CREATEPROPERTYTEMPLATE": {
+										"enabled": "true",
+										"description": "Predefine some of the property templates for the Client Document document class and its subclasses",
+										"propertyTemplates": [
+											{
+												"name": "Client Name",
+												"symbolicName": "SWAT_Client_Name",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											},
+											{
+												"name": "Reference ID",
+												"symbolicName": "SWAT_Reference_ID",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 10
+													},
+													{
+														"IsValueRequired": true
+													}
+												]
+											},
+											{
+												"name": "First Name",
+												"symbolicName": "SWAT_First_Name",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											},
+											{
+												"name": "Last Name",
+												"symbolicName": "SWAT_Last_Name",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											},
+											{
+												"name": "Identification Number",
+												"symbolicName": "SWAT_Identification_Number",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 32
+													}
+												]
+											},
+											{
+												"name": "Account Number",
+												"symbolicName": "SWAT_Account_Number",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											},
+											{
+												"name": "Routing Number",
+												"symbolicName": "SWAT_Routing_Number",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											},
+											{
+												"name": "Bank Name",
+												"symbolicName": "SWAT_Bank_Name",
+												"dataType": "String",
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 40
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"CREATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
+										"className": "SWAT Jam Case Folder",
+										"classSymbolicName": "SWAT_JAM_Case_Folder",
+										"baseClassSymbolicName": "Folder",
+										"propertyTemplateNames": [
+											"SWAT_Reference_ID",
+											"SWAT_Client_Name"
+										]
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Case Folders' folder in root",
+										"parentFolderPath": "/",
+										"folderName": "Case Folders",
+										"folderClassSymbolicName": "Folder"
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
+										"parentFolderPath": "/Case Folders",
+										"folderName": "Sample Test Folder TEST1",
+										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
+										"folderProperties": [
+											{
+												"SWAT_Client_Name": "TEST1"
+											},
+											{
+												"SWAT_Reference_ID": "TEST1"
+											}
+										]
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
+										"parentFolderPath": "/Case Folders",
+										"folderName": "Sample Test Folder TEST2",
+										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
+										"folderProperties": [
+											{
+												"SWAT_Client_Name": "TEST2"
+											},
+											{
+												"SWAT_Reference_ID": "TEST2"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Steps that are only required by the CPE content lab",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_CPE)$$ && $(contentOSAvailable)$",
+							"description": "CPE - Steps unique to the CPE lab: Create storage policy in object store CONTENT",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
 									"CREATESTORAGEPOLICY": {
 										"enabled": "true",
 										"description": "Create ASA for the CONTENT object store",
@@ -1284,26 +1483,236 @@
 										"ignoreCaseForStorageAreaName": true,
 										"fallbackToAvailableStorageArea": "Advanced"
 									}
-								},
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Steps that are only required by the GraphQL content lab",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_GQL)$$ && $(contentOSAvailable)$",
+							"description": "GQL - Steps unique to the GraphQL lab: Create property templates, class definitions, folders, and document upload",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
 								{
-									"UPDATECLASSDEFINITION": {
-										"enabled": "true",
-										"description": "Update class definition for Document class to enable content-based retrieval",
-										"classSymbolicName": "Document",
-										"enableCBR": true
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for FNCM",
+										"name": "Download FNCM files",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Banking%20Information%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Certificate%20of%20Incorporation%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Utility%20Bill%20-%20Automation%20Elite%20Inc.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/June%20Marie%20-%20Driver's%20License.png"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Banking%20Information.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"
+											}
+										]
 									}
 								},
 								{
 									"CREATEPROPERTYTEMPLATE": {
 										"enabled": "true",
-										"description": "Define two property templates 'Case Reference ID' & 'Client Name' for usage in new folder class",
+										"description": "Define Property Templates for GraphQL lab",
 										"propertyTemplates": [
 											{
-												"name": "Case Reference ID",
-												"symbolicName": "Case_Reference_ID",
+												"name": "SOLUTION Account Type",
+												"symbolicName": "SOLUTION_Account_Type",
 												"dataType": "String",
-												"cardinality": "Single"
+												"cardinality": "Single",
+												"additionalProperties": [
+													{
+														"MaximumLength": 10
+													}
+												]
 											},
+											{
+												"name": "SOLUTION Date Of Birth",
+												"symbolicName": "SOLUTION_Date_Of_Birth",
+												"dataType": "Date",
+												"cardinality": "Single",
+												"additionalProperties": []
+											}
+										]
+									}
+								},
+								{
+									"CREATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Create new folder class 'SOLUTION Client Document' using previously created property templates",
+										"className": "SOLUTION Client Document",
+										"classSymbolicName": "SOLUTION_Client_Document",
+										"baseClassSymbolicName": "Document",
+										"propertyTemplateNames": [
+											"SWAT_Reference_ID",
+											"SWAT_Client_Name"
+										],
+										"enableCBR": true
+									}
+								},
+								{
+									"CREATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Create new folder class 'SOLUTION Client Information' using previously created property templates",
+										"className": "SOLUTION Client Information",
+										"classSymbolicName": "SOLUTION_Client_Information",
+										"baseClassSymbolicName": "SOLUTION_Client_Document",
+										"propertyTemplateNames": [
+											"SOLUTION_Date_Of_Birth",
+											"SWAT_First_Name",
+											"SWAT_Last_Name",
+											"SWAT_Identification_Number"
+										],
+										"enableCBR": true
+									}
+								},
+								{
+									"CREATECLASSDEFINITION": {
+										"enabled": "true",
+										"description": "Create new folder class 'SOLUTION Bank Information' using previously created property templates",
+										"className": "SOLUTION Bank Information",
+										"classSymbolicName": "SOLUTION_Bank_Information",
+										"baseClassSymbolicName": "SOLUTION_Client_Document",
+										"propertyTemplateNames": [
+											"SWAT_Account_Number",
+											"SWAT_Routing_Number",
+											"SWAT_Bank_Name",
+											"SOLUTION_Account_Type"
+										],
+										"enableCBR": true
+									}
+								},
+								{
+									"CREATEFOLDER": {
+										"enabled": "true",
+										"description": "Create 'SOLUTION Client Onboarding' folder in root",
+										"parentFolderPath": "/",
+										"folderName": "SOLUTION Client Onboarding",
+										"folderClassSymbolicName": "Folder"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Banking Information - Automation Elite Inc' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Bank_Information",
+										"docTitle": "Banking Information - Automation Elite Inc",
+										"docProps": {
+											"SWAT_Reference_ID": "1000",
+											"SWAT_Client_Name": "Automation Elite Inc.",
+											"SWAT_Account_Number": "1179476345",
+											"SOLUTION_Account_Type": "Checking",
+											"SWAT_Routing_Number": "12658642",
+											"SWAT_Bank_Name": "Automation Elite Bank"
+										},
+										"file": "Banking Information - Automation Elite Inc.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Certificate of Incorporation - Automation Elite Inc' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Client_Document",
+										"docTitle": "Certificate of Incorporation - Automation Elite Inc",
+										"docProps": {
+											"SWAT_Reference_ID": "1000",
+											"SWAT_Client_Name": "Automation Elite Inc."
+										},
+										"file": "Certificate of Incorporation - Automation Elite Inc.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'June Marie - Driver's License' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Client_Information",
+										"docTitle": "June Marie - Driver's License",
+										"docProps": {
+											"SWAT_Reference_ID": "1000",
+											"SWAT_Client_Name": "Automation Elite Inc.",
+											"SWAT_First_Name": "June",
+											"SWAT_Last_Name": "Marie",
+											"SWAT_Identification_Number": "455688599267004"
+										},
+										"file": "June Marie - Driver's License.png",
+										"fileContentType": "image/png"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Legacy Consulting - Banking Information' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Bank_Information",
+										"docTitle": "Legacy Consulting - Banking Information",
+										"docProps": {
+											"SWAT_Reference_ID": "2000",
+											"SWAT_Client_Name": "Legacy Consulting",
+											"SWAT_Account_Number": "7250512345",
+											"SOLUTION_Account_Type": "Saving",
+											"SWAT_Routing_Number": "2547642",
+											"SWAT_Bank_Name": "Legacy Bank"
+										},
+										"file": "Legacy Consulting - Banking Information.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Legacy Consulting - Certificate of Incorporation' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Client_Document",
+										"docTitle": "Legacy Consulting - Certificate of Incorporation",
+										"docProps": {
+											"SWAT_Reference_ID": "2000",
+											"SWAT_Client_Name": "Legacy Consulting"
+										},
+										"file": "Legacy Consulting - Certificate of Incorporation.pdf",
+										"fileContentType": "application/pdf"
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Steps that are only required by the ICN content lab",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
+							"description": "CPE - Create property templates and classes for the ICN lab in object store CONTENT",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"CREATEPROPERTYTEMPLATE": {
+										"enabled": "true",
+										"description": "Define three property templates for usage in document classes",
+										"propertyTemplates": [
 											{
 												"name": "Client Name",
 												"symbolicName": "Client_Name",
@@ -1322,19 +1731,6 @@
 												"dataType": "String",
 												"cardinality": "Single"
 											}
-										]
-									}
-								},
-								{
-									"CREATECLASSDEFINITION": {
-										"enabled": "true",
-										"description": "Create new folder class 'SWAT Jam Case Folder' using previously created property templates",
-										"className": "SWAT Jam Case Folder",
-										"classSymbolicName": "SWAT_JAM_Case_Folder",
-										"baseClassSymbolicName": "Folder",
-										"propertyTemplateNames": [
-											"Case_Reference_ID",
-											"Client_Name"
 										]
 									}
 								},
@@ -1364,56 +1760,14 @@
 										],
 										"enableCBR": true
 									}
-								},
-								{
-									"CREATEFOLDER": {
-										"enabled": "true",
-										"description": "Create 'Case Folders' folder in root",
-										"parentFolderPath": "/",
-										"folderName": "Case Folders",
-										"folderClassSymbolicName": "Folder"
-									}
-								},
-								{
-									"CREATEFOLDER": {
-										"enabled": "true",
-										"description": "Create 'Sample Test Folder TEST1' folder in 'Case Folders' folder",
-										"parentFolderPath": "/Case Folders",
-										"folderName": "Sample Test Folder TEST1",
-										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
-										"folderProperties": [
-											{
-												"Client_Name": "TEST1"
-											},
-											{
-												"Case_Reference_ID": "TEST1"
-											}
-										]
-									}
-								},
-								{
-									"CREATEFOLDER": {
-										"enabled": "true",
-										"description": "Create 'Sample Test Folder TEST2' folder in 'Case Folders' folder",
-										"parentFolderPath": "/Case Folders",
-										"folderName": "Sample Test Folder TEST2",
-										"folderClassSymbolicName": "SWAT_JAM_Case_Folder",
-										"folderProperties": [
-											{
-												"Client_Name": "TEST2"
-											},
-											{
-												"Case_Reference_ID": "TEST2"
-											}
-										]
-									}
 								}
 							]
 						}
 					},
 					{
 						"OCP": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$ && $(contentOSAvailable)$",
+							"comment": "Steps that are only required by the ICN content lab",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
 							"name": "Copy ICN custom plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -1458,7 +1812,7 @@
 					},
 					{
 						"FNCM": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
 							"description": "CPE - Check if GeneralUsers group exist",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "CONTENT",
@@ -1490,14 +1844,15 @@
 					},
 					{
 						"ICN": {
-							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"comment": "Steps that required by both the CPE & ICN content labs",
+							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store CONTENT)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DOWNLOADRESOURCES": {
-										"enabled": "$$(enableArtifactDownloadFromGit)$$ && $(contentOSAvailable)$",
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
 										"description": "Download resources required for Content/ICN lab for Navigator",
 										"name": "Download ICN file",
 										"replaceExistingFiles": true,
@@ -1510,24 +1865,14 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
 										"osSymbolicName": "CONTENT"
 									}
 								},
 								{
-									"UPDATEP8REPOSETTINGS": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Update P8 repository settings to enable Entry Template Management and Edit Service",
-										"repoId": "$(REPOSITORY_ID)$",
-										"allowEntryTemplateManagement": true,
-										"enableRedaction": true,
-										"enableEditService": true
-									}
-								},
-								{
 									"PATCHDESKTOP": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Patch 'ICN' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ICNDesktop.properties",
 										"simpleTextMappings": {
@@ -1540,16 +1885,44 @@
 								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "$(contentOSAvailable)$",
-										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store $$(BAW_DOCS)$$)",
+										"enabled": "true",
+										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store CONTENT)",
 										"enforceImport": false,
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Steps that are only required by the ICN content lab",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
+							"name": "Import ICN Desktop for Content/ICN lab into ICN",
+							"description": "Navigator - Enable entry template, redaction, edit services, register plugins and redactions for object store CONTENT",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Determine ICN repository information based on object store symbolic name",
+										"osSymbolicName": "CONTENT"
+									}
+								},
+								{
+									"UPDATEP8REPOSETTINGS": {
+										"enabled": "true",
+										"description": "Update P8 repository settings to enable Entry Template Management, Redaction, and Edit Services",
+										"repoId": "$(REPOSITORY_ID)$",
+										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
+										"enableEditService": true
+									}
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Add custom EDS data source plugin",
 										"action": "add",
 										"pluginName": "EDS Data Source",
@@ -1561,7 +1934,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "$(contentOSAvailable)$",
+										"enabled": "true",
 										"description": "Add EDS base plugin referencing custom plugin",
 										"action": "add",
 										"pluginName": "External Data Services Support",
