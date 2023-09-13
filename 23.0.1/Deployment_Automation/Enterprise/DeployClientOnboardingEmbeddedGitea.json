@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.17",
+	"fileVersion": "1.0.18",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.27 <1.2.0",
+	"requiredToolVersion": ">=1.1.28 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -1198,6 +1198,20 @@
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
+									"CHECKCPEUSERORGROUPEXISTS": {
+										"enabled": "true",
+										"description": "Check if GeneralUsers group exists",
+										"variableName": "generalUsersGroupExists",
+										"entityVariableName": "generalUsersGroupDN",
+										"usersAndGroups": [
+											{
+												"name": "GeneralUsers",
+												"type": "group"
+											}
+										]
+									}
+								},
+								{
 									"CREATEINDEXAREA": {
 										"enabled": "true",
 										"description": "Create Index Area for object store to be able to enable text search for object store",
@@ -1217,6 +1231,16 @@
 												"enabled": "true",
 												"action": "Add",
 												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											},
+											{
+												"enabled": "$(generalUsersGroupExists)$",
+												"action": "Update",
+												"granteeName": "$(generalUsersGroupDN)$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
 												"accessType": "Allow",
