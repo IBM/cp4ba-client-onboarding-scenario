@@ -1242,7 +1242,7 @@
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Add",
+												"action": "Update",
 												"granteeName": "$$(generalUsersGroupName)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
