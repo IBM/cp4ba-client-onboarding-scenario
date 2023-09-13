@@ -34,7 +34,7 @@
 		},
 		{
 			"CONTAINER": {
-				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$ && $$(ISNOTSET(wf_cp_emailPassword))$$",
+				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
 				"description": "Deploy local email server and client",
 				"actions": [
 					{
@@ -2234,7 +2234,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the automation service to call ADS as TWX was built in enterprise deployment but is used in starter deployment and to accommodate workaround for problem to publish original long AS name in ADS",
+										"description": "Patch the automation service to call ADS to match the user with which the ADS project got imported",
 										"sourceTwxFile": "!twxFileName!",
 										"filePatchInfos": [
 											{
