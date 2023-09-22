@@ -56,9 +56,9 @@ rem Uncomment in case GitHub is not accessible and all resources are already ava
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
 
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
-rem Uncomment at least the proxScenatio, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
+rem Uncomment at least the proxScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 rem Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
-rem SET proxScenatio=GitHub
+rem SET proxScenario=GitHub
 rem SET proxyHost=
 rem SET proxyPort=
 rem SET proxyUser=

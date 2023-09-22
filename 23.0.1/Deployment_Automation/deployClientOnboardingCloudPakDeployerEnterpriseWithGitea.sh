@@ -52,7 +52,7 @@ adpConfigured=false
 #disableAccessToGitHub="-disableAccessToGitHub=true"
 
 # Proxy settings in case a proxy server needs to be used to access the GitHub resources
-# Uncomment at least the proxScenatio, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
+# Uncomment at least the proxScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 # Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
 #proxyScenario=GitHub
 #proxyHost=
