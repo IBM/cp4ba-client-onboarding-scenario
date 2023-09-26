@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.18",
+	"fileVersion": "1.0.19",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.28 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -2143,6 +2143,7 @@
 										"enabled": "true",
 										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
 										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK2",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
 										"principals": [
