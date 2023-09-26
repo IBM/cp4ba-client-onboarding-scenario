@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.19",
+	"fileVersion": "1.0.20",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.28 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -908,7 +908,7 @@
 												"BAWTOS": "$$(BAW_TOS)$$"
 											},
 											"2": {
-												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 											},
 											"3": {
 												"cp4badmin": "$$(cp4baAdminUsr)$$"
