@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.20",
+	"fileVersion": "1.0.22",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.28 <1.2.0",
+	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -1202,7 +1202,8 @@
 										"enabled": "true",
 										"description": "Check if GeneralUsers group exists",
 										"variableName": "generalUsersGroupExists",
-										"entityVariableName": "generalUsersGroupDN",
+										"fullyQualifiedEntityVariableName": "generalUsersGroupDN",
+										"cnEntityVariableName": "generalUsersGroupCN",
 										"usersAndGroups": [
 											{
 												"name": "GeneralUsers",
@@ -1272,10 +1273,13 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"enabled": "true",
 										"description": "Add general users group as admins to CONTENT Object Store",
 										"configMapName": "client-onboarding-state-admin-content-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$",
+											"§IF($(generalUsersGroupExists)$)§($(generalUsersGroupDN)$)§ELSE§()ENDIF§"
+										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
 											{

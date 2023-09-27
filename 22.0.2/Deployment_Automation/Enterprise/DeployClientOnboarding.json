@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.18",
+	"fileVersion": "1.0.19",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.28 <1.2.0",
+	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -1227,7 +1227,8 @@
 										"enabled": "true",
 										"description": "Check if GeneralUsers group exists",
 										"variableName": "generalUsersGroupExists",
-										"entityVariableName": "generalUsersGroupDN",
+										"fullyQualifiedEntityVariableName": "generalUsersGroupDN",
+										"cnEntityVariableName": "generalUsersGroupCN",
 										"usersAndGroups": [
 											{
 												"name": "GeneralUsers",
@@ -1297,10 +1298,13 @@
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
-										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"enabled": "true",
 										"description": "Add general users group as admins to CONTENT Object Store",
 										"configMapName": "client-onboarding-state-admin-content-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$",
+											"§IF($(generalUsersGroupExists)$)§($(generalUsersGroupDN)$)§ELSE§()ENDIF§"
+										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
 											{
@@ -2168,6 +2172,7 @@
 										"enabled": "true",
 										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
 										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK2",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
 										"principals": [

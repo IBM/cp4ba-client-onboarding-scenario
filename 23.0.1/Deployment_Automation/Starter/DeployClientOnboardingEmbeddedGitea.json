@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.19",
+	"fileVersion": "1.0.20",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.27 <1.2.0",
+	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -430,7 +430,9 @@
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$",
+										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
@@ -469,7 +471,9 @@
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$",
+										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
 									}
@@ -1454,7 +1458,9 @@
 										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
 										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS)$$-os",
-										"granteeName": "$$(generalUsersGroupName)$$",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$",
+										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
 											{
@@ -2249,6 +2255,7 @@
 										"enabled": "true",
 										"description": "Add group for general users as readers to 'Client Onboarding Toolkit' APP TK",
 										"name": "Client Onboarding Toolkit",
+										"acronym": "COTK2",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
 										"principals": [
