@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.22",
+	"fileVersion": "1.0.23",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -1548,7 +1548,11 @@
 												"symbolicName": "SOLUTION_Date_Of_Birth",
 												"dataType": "Date",
 												"cardinality": "Single",
-												"additionalProperties": []
+												"additionalProperties": [
+													{
+														"IsDateOnly": true
+													}
+												]
 											}
 										]
 									}
