@@ -41,11 +41,16 @@ rem Uncomment when the admin credentials for the embedded Gitea differ from the 
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
 
-rem Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
+rem Flag that determines if the internal email server is used or the external gmail service
+rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+SET useInternalMailServer=true
 
-rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario
+rem Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
+SET ocpStorageClassForInternalMailServer=cp4a-file-delete-gold-gid
+
+rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
+rem App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 SET gmailAppKey=REQUIRED
 
 
@@ -120,7 +125,7 @@ SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.0
+SET SCRIPTVERSION=1.2.0
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -262,33 +267,107 @@ if defined generalUsersGroupRequired (
 	echo   Variable 'generalUsersGroup' has not been set
 )
 
-if defined gmailAddress (
-	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-	if "%gmailAddress%"=="" set gmailAddressRequired=true
+if defined useInternalMailServer (
+	if "%useInternalMailServer%"=="true" (
+		set enableDeployEmailCapabilityInternal=enableDeployEmailCapability=true
+	
+		rem determine the number of ldif files in the current directory
+		for /f "delims=" %%A in (
+			' dir *.ldif /B /a-d /s 2^>nul ^| find /c /v "" '
+		) do set numLDIFs=%%A&goto next0
+		:next0
+		rem echo Number of LDIF files COUNT = %numLDIFs%
 
-	if defined gmailAddressRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
+		rem if it is 1 or 2 need to read first outputline, if it is two need to also read the second output line
+		if "%numLDIFs%" == "1" SET FIRSTLINE=true
+		if "%numLDIFs%" == "2" SET FIRSTLINE=true
+		if "%numLDIFs%" == "2" SET SECONDLINE=true
+
+		rem if first line needs to be read
+		if defined FIRSTLINE (
+			for /f %%a in (
+				'dir /A:-D /B *.ldif 2^>nul'
+			) do set "ldif1=%%a"&goto next1
+			:next1
+			rem nothing
+			
+			if not defined SECONDLINE (
+				set ldifFileLineInternal=externalLDIF1=%ldif1%
+			)
+		rem either zero or more than 2 ldif files which constitutes an error
+		) 
+		
+		if not defined FIRSTLINE (
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+	
+			echo   Variable 'useInternalMailServer' is set to 'true' but %numLDIFs% ldif file^(s^) found in the directory. 1 or 2 ldif files are required.
 		)
-		echo   Variable 'gmailAddress' has not been set
-	) else (
-		set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
+	
+		rem if second line needs to be read
+		if defined SECONDLINE (
+			for /f "skip=1delims=" %%a in (
+				'dir /A:-D /B *.ldif 2^>nul'
+			) do set "ldif2=%%a"&goto next2
+			:next2
+			rem nothing
+			set ldifFileLineInternal=externalLDIF1=%ldif1% externalLDIF2=%ldif2%
+		)
+	
+		rem echo ldifFileLineInternal = %ldifFileLineInternal%
+		
+		if "%ocpStorageClassForInternalMailServer%"=="REQUIRED" set ocpStorageClassForInternalMailServerRequired=true
+		if "%ocpStorageClassForInternalMailServer%"=="" set ocpStorageClassForInternalMailServerRequired=true
+
+		if defined ocpStorageClassForInternalMailServerRequired ( 
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'useInternalMailServer' is set to 'true' but variable 'ocpStorageClassForInternalMailServer' has not been set
+		) else (
+			set ocpStorageClassForInternalMailServerInternal=ocpStorageClassForMail=%ocpStorageClassForInternalMailServer%
+		)
 	)
 )
 
-if defined gmailAppKey (
-	if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-	if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+if defined useInternalMailServer (
+	if "%useInternalMailServer%"=="false" (
+		if defined gmailAddress (
+			if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
+			if "%gmailAddress%"=="" set gmailAddressRequired=true
 
-	if defined gmailAppKeyRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
+			if defined gmailAddressRequired ( 
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAddress' has not been set
+			) else (
+				set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
+			)
 		)
-		echo   Variable 'gmailAppKey' has not been set
-	) else (
-		set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
+	)
+)
+
+if defined useInternalMailServer (
+	if "%useInternalMailServer%"=="false" (
+		if defined gmailAddress (
+			if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
+			if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+
+			if defined gmailAppKeyRequired ( 
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set
+			) else (
+				set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
+			)
+		)
 	)
 )
 
@@ -348,6 +427,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL

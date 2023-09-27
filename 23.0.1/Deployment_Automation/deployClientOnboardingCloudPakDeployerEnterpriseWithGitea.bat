@@ -39,12 +39,14 @@ rem SET cp4baNamespace=
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
-rem Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+rem Flag that determines if the internal email server is used or the external gmail service
+rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+SET useInternalMailServer=true
 
-rem Email address of the gmail account to send emails
-rem SET gmailAddress=REQUIRED
-rem App key for accessing the gmail account to send emails
-rem SET gmailAppKey=REQUIRED
+rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
+SET gmailAddress=REQUIRED
+rem App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
+SET gmailAppKey=REQUIRED
 
 rem Should ADP be used within the Client Oboarding scenario (do not change for now)
 SET adpConfigured=false
@@ -110,7 +112,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.0
+SET SCRIPTVERSION=1.2.0
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -204,33 +206,41 @@ if defined ocLoginTokenRequired (
 	echo   Variable 'ocLoginToken' has not been set
 )
 
-if defined gmailAddress (
-	if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
-	if "%gmailAddress%"=="" set gmailAddressRequired=true
+if defined useInternalMailServer (
+	if "%useInternalMailServer%"=="false" (
+		if defined gmailAddress (
+			if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
+			if "%gmailAddress%"=="" set gmailAddressRequired=true
 
-	if defined gmailAddressRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
+			if defined gmailAddressRequired ( 
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAddress' has not been set
+			) else (
+				set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
+			)
 		)
-		echo   Variable 'gmailAddress' has not been set
-	) else (
-		set gmailAddressInternal=wf_cp_emailID=%gmailAddress%
 	)
 )
 
-if defined gmailAppKey (
-	if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
-	if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
+if defined useInternalMailServer (
+	if "%useInternalMailServer%"=="false" (
+		if defined gmailAddress (
+			if "%gmailAppKey%"=="REQUIRED" set gmailAppKeyRequired=true
+			if "%gmailAppKey%"=="" set gmailAppKeyRequired=true
 
-	if defined gmailAppKeyRequired ( 
-		if not defined validationFailed (
-			echo Validating configuration failed:
-			set validationFailed=true
+			if defined gmailAppKeyRequired ( 
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set
+			) else (
+				set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
+			)
 		)
-		echo   Variable 'gmailAppKey' has not been set
-	) else (
-		set gmailAppKeyInternal=wf_cp_emailPassword=%gmailAppKey%
 	)
 )
 
@@ -280,6 +290,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
