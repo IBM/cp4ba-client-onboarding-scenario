@@ -32,12 +32,14 @@ rpaServer=https://rpa-server.com:1111
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 #cp4baNamespace=
 
-# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Flag that determines if the internal email server is used or the external gmail service
+# (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+useInternalMailServer=true
 
-# Email address of the gmail account to send emails
-# gmailAddress=REQUIRED
-# App key for accessing the gmail account to send emails
-# gmailAppKey=REQUIRED
+# Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
+gmailAddress=REQUIRED
+# App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
+gmailAppKey=REQUIRED
 
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
@@ -108,7 +110,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.0
+SCRIPTVERSION=1.2.0
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -190,22 +192,25 @@ then
   echo "  Variable 'ocLoginToken' has not been set"
 fi
 
-if [ ! -z "${gmailAddress+x}" ]
+if [[ "${useInternalMailServer}" == "false" ]]
 then
-  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+  if [ ! -z "${gmailAddress+x}" ]
   then
-    if $validationSuccess
+    if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
     then
-      echo "Validating configuration failed:"
-      validationSuccess=false
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAddress' has not been set"
+    else
+      gmailAddressInternal=wf_cp_emailID=${gmailAddress}
     fi
-    echo "  Variable 'gmailAddress' has not been set"
-  else
-    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
   fi
 fi
 
-if [ ! -z "${gmailAppKey+x}" ]
+if [[ "${useInternalMailServer}" == "false" ]] && [ ! -z "${gmailAppKey+x}" ]
 then
   if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
   then
@@ -214,7 +219,7 @@ then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  Variable 'gmailAppKey' has not been set"
+    echo "  VVariable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
   else
     gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi
@@ -261,4 +266,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

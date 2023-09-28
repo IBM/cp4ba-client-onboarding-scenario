@@ -31,12 +31,18 @@ ocLoginToken=REQUIRED
 cp4baAdminPassword=REQUIRED
 
 
-# Comment out below two properties if an internal mail server/client should be used to send emails or provide credentials for an external gmail account if emails should be sent to external email addresses
+# Flag that determines if the internal email server is used or the external gmail service
+# (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+useInternalMailServer=true
 
-# Email address of a gmail account to be used to send emails in the Client Onboarding scenario
+# Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
+ocpStorageClassForInternalMailServer=REQUIRED
+
+# Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 gmailAddress=REQUIRED
-# App key for accessing the gmail account to send emails
+# App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 gmailAppKey=REQUIRED
+
 
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
@@ -112,7 +118,7 @@ SCRIPTNAME=deployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.0
+SCRIPTVERSION=1.2.0
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -203,22 +209,62 @@ then
   echo "  Variable 'cp4baAdminPassword' has not been set"
 fi
 
-if [ ! -z "${gmailAddress+x}" ]
+if [[ "${useInternalMailServer}" == "true" ]]
 then
-  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+  enableDeployEmailCapabilityInternal=enableDeployEmailCapability=true
+
+  COUNTLDIFFILES=$(ls *.ldif 2>null | wc -l)
+
+  if [[ "${COUNTLDIFFILES}" == "1" ]]
   then
+    LDIFFILE1=$(ls *.ldif | sed -n '1 p')
+    ldifFileLineInternal=externalLDIF1=${LDIFFILE1}
+  elif [[ "${COUNTLDIFFILES}" == "2" ]]
+  then
+    LDIFFILE1=$(ls *.ldif | sed -n '1 p')
+    LDIFFILE2=$(ls *.ldif | sed -n '2 p')
+    ldifFileLineInternal="externalLDIF1=${LDIFFILE1} externalLDIF2=${LDIFFILE2}"
+  else
     if $validationSuccess
     then
-      echo "Validating configuration failed:"
-      validationSuccess=false
+        echo "Validating configuration failed:"
+        validationSuccess=false
     fi
-    echo "  Variable 'gmailAddress' has not been set"
+    echo "  Variable 'useInternalMailServer' is set to 'true' but ${COUNTLDIFFILES} ldif file(s) found in the directory. 1 or 2 ldif files are required."
+  fi
+  
+  if [[ "${ocpStorageClassForInternalMailServer}" == "REQUIRED" ]] || [[ "${ocpStorageClassForInternalMailServer}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'ocpStorageClassForInternalMailServer' has not been set"
   else
-    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
+    ocpStorageClassForInternalMailServerInternal=ocpStorageClassForMail=${ocpStorageClassForInternalMailServer}
   fi
 fi
 
-if [ ! -z "${gmailAppKey+x}" ]
+if [[ "${useInternalMailServer}" == "false" ]]
+then
+  if [ ! -z "${gmailAddress+x}" ]
+  then
+    if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+    then
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAddress' has not been set"
+    else
+      gmailAddressInternal=wf_cp_emailID=${gmailAddress}
+    fi
+  fi
+fi
+
+if [[ "${useInternalMailServer}" == "false" ]] && [ ! -z "${gmailAppKey+x}" ]
 then
   if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
   then
@@ -227,7 +273,7 @@ then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  Variable 'gmailAppKey' has not been set"
+    echo "  VVariable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
   else
     gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi
@@ -274,4 +320,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
