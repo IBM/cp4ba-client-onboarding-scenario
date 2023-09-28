@@ -118,7 +118,7 @@ SCRIPTNAME=deployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.2.0
+SCRIPTVERSION=1.2.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -213,7 +213,7 @@ if [[ "${useInternalMailServer}" == "true" ]]
 then
   enableDeployEmailCapabilityInternal=enableDeployEmailCapability=true
 
-  COUNTLDIFFILES=$(ls *.ldif 2>null | wc -l)
+  COUNTLDIFFILES=$(ls *.ldif 2>/dev/null | wc -l | tr -d " ")
 
   if [[ "${COUNTLDIFFILES}" == "1" ]]
   then
