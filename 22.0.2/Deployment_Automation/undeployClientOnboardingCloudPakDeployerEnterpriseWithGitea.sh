@@ -29,7 +29,7 @@ ocLoginToken=REQUIRED
 
 # Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-#cp4baNamespace=
+#cp4baNamespace=REQUIRED
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -172,6 +172,19 @@ then
   echo "  Variable 'ocLoginToken' has not been set"
 fi
 
+if defined cp4baNamespace (
+	if "%cp4baNamespace%"=="REQUIRED" set cp4baNamespaceRequired=true
+	if defined cp4baNamespaceRequired (
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'cp4baNamespace' has not been set
+	) else (
+		set cp4baNamespaceInternal="-cp4baNamespace=%cp4baNamespace%"
+	)
+)
+
 if ! $validationSuccess
 then
   echo
@@ -183,4 +196,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials}

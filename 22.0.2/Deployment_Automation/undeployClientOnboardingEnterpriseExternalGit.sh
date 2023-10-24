@@ -33,7 +33,7 @@ cp4baAdminPassword=REQUIRED
 
 # Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-#cp4baNamespace=
+#cp4baNamespace=REQUIRED
 
 # Proxy settings in case a proxy server needs to be used to access the GitHub resources
 # Uncomment at least the proxScenatio, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
@@ -92,7 +92,7 @@ SCRIPTNAME=undeployClientOnboardingEnterpriseExternalGit.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.0
+SCRIPTVERSION=1.1.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -193,6 +193,19 @@ then
   echo "  Variable 'cp4baAdminPassword' has not been set"
 fi
 
+if defined cp4baNamespace (
+	if "%cp4baNamespace%"=="REQUIRED" set cp4baNamespaceRequired=true
+	if defined cp4baNamespaceRequired (
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'cp4baNamespace' has not been set
+	) else (
+		set cp4baNamespaceInternal="-cp4baNamespace=%cp4baNamespace%"
+	)
+)
+
 if ! $validationSuccess
 then
   echo
@@ -204,4 +217,4 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespace} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword}
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword}
