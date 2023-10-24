@@ -27,7 +27,7 @@ SET ocLoginToken=REQUIRED
 
 rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
 rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-rem SET cp4baNamespace=
+rem SET cp4baNamespace=REQUIRED
 
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
@@ -118,7 +118,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.0
+SET SCRIPTVERSION=1.2.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -361,6 +361,18 @@ if defined adpConfiguredRequired (
 	echo   Variable 'adpConfigured' has not been set
 )
 
+if defined cp4baNamespace (
+	if "%cp4baNamespace%"=="REQUIRED" set cp4baNamespaceRequired=true
+	if defined cp4baNamespaceRequired (
+		if not defined validationFailed (
+			echo Validating configuration failed:
+			set validationFailed=true
+		)
+		echo   Variable 'cp4baNamespace' has not been set
+	) else (
+		set cp4baNamespaceInternal="-cp4baNamespace=%cp4baNamespace%"
+	)
+)
 
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
@@ -374,6 +386,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespace% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
