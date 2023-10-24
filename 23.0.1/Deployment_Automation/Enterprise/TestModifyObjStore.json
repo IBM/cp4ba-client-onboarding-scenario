@@ -1,0 +1,101 @@
+{
+	"fileVersion": "1.0.17",
+	"requiredToolVersion": ">=1.1.27 <1.2.0",
+	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
+	"actions": [
+		{
+			"FNCM": {
+				"enabled": "true",
+				"description": "CPE - Check if CONTENT Object store exists",
+				"replaceExistingDocuments": false,
+				"objectStoreName": "CONTENT",
+				"relativeBasePath": "FileNet Content Manager",
+				"subActions": [
+					{
+						"CHECKOBJECTSTOREEXISTS": {
+							"enabled": "true",
+							"description": "Check Object Store Exists",
+							"osSymbolicName": "CONTENT",
+							"variableName": "contentOSAvailable"
+						}
+					}
+				]
+			}
+		},
+		{
+			"CONTAINER": {
+				"comment": "Container bundles all activities to configure the environment for the labs",
+				"enabled": "$$(enableConfigureSWATLabs)$$",
+				"description": "Apply additional steps to prepare environment for labs after Client Onboarding solution is deployed",
+				"actions": [
+					{
+						"FNCM": {
+							"comment": "Steps that are required by all content labs",
+							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
+							"description": "CPE - Steps common to the CPE, GraphQL, and ICN labs: Enable CBR for OS, create index area, and enable CBR for document class in OS CONTENT",
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"CHECKCPEUSERORGROUPEXISTS": {
+										"enabled": "true",
+										"description": "Check if GeneralUsers group exists",
+										"variableName": "generalUsersGroupExists",
+										"entityVariableName": "generalUsersGroupDN",
+										"usersAndGroups": [
+											{
+												"name": "GeneralUsers",
+												"type": "group"
+											}
+										]
+									}
+								},
+								{
+									"CREATEINDEXAREA": {
+										"enabled": "true",
+										"description": "Create Index Area for object store to be able to enable text search for object store",
+										"indexAreaName": "content_index_area"
+									}
+								},
+								{
+									"MODIFYOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Modify text search setting and security for object store CONTENT",
+										"name": "Modify text search setting and security for object store CONTENT",
+										"defaultTextSearchIndexingLanguage": "en",
+										"enableTextSearch": true,
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Update",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											},
+											{
+												"enabled": "$(generalUsersGroupExists)$",
+												"action": "Update",
+												"granteeName": "$(generalUsersGroupDN)$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

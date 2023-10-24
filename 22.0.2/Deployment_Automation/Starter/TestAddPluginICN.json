@@ -1,0 +1,102 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Create plugins in ICN",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Copy ICN custom plugin to plugins folder in ICN pod",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for OCP",
+										"name": "Download custom plugin file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/22.0.2/Solution%20Exports/Business%20Automation%20Navigator/edsDataSourceSamplePlugin.jar"
+											}
+										]
+									}
+								},
+								{
+									"COPYFILES": {
+										"enabled": "true",
+										"description": "Copy custom plugin file to navigator pod",
+										"delayBefore": 0,
+										"namespaceName": "$$(cp4baNamespace)$$",
+										"maxNumRetries": 5,
+										"sleepInSecBetweenRetries": 5,
+										"maxNumPollsForCompletion": 10,
+										"sleepInSecBetweenPools": 10,
+										"copyActions": [
+											{
+												"action": "toContainer",
+												"podLabelName": "app",
+												"podLabelSelector": "$$(cp4baClusterName)$$-navigator-deploy",
+												"containerName": "$$(cp4baClusterName)$$-navigator-deploy",
+												"localFileName": "edsDataSourceSamplePlugin.jar",
+												"remotePath": "/opt/ibm/plugins",
+												"overExistingFile": false
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Create two plugins, custom EDS data source plugin and default EDS plugin referencing custom one",
+							"enabled": "true",
+							"description": "Navigator - Import apps and desktops",
+							"name": "Prepare Apps and Desktops",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test Navigator availability"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Add custom EDS data source plugin",
+										"action": "add",
+										"pluginName": "EDS Data Source",
+										"jarFilePath": "/opt/ibm/plugins/edsDataSourceSamplePlugin.jar",
+										"configParameters": {
+											"param1Field": "ClientDocument"
+										}
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Add EDS base plugin referencing custom plugin",
+										"action": "add",
+										"pluginName": "External Data Services Support",
+										"jarFilePath": "/opt/ibm/intPlugins/eDS/edsPlugin.jar",
+										"edsIsRequired": false,
+										"dataSourcePluginName": "EDS Data Source"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

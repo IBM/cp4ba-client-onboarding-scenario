@@ -1,0 +1,40 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Manage Case Project Area",
+				"actions": [
+					{
+						"WF": {
+							"enabled": "true",
+							"description": "WF - Add general user group '$$(generalUsersGroupShort)$$' to tw_authorsdefault project area",
+							"subActions": [
+								{
+									"MANAGEPROJECTAREA": {
+										"enabled": "true",
+										"description": "Manage default Case Project Area adding GeneralUsers group to it",
+										"useDefaultProjectArea": true,
+										"security": [
+											{
+												"action": "AddMembers",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

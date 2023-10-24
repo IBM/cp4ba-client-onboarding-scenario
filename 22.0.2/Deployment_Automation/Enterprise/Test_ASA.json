@@ -1,0 +1,59 @@
+{
+	"fileVersion": "1.0.7",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.13 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
+	"actions": [
+		{
+			"FNCM": {
+				"enabled": "true",
+				"description": "CPE - Check if CONTENT Object store exists",
+				"replaceExistingDocuments": false,
+				"objectStoreName": "CONTENT",
+				"relativeBasePath": "FileNet Content Manager",
+				"subActions": [
+					{
+						"CHECKOBJECTSTOREEXISTS": {
+							"enabled": "true",
+							"description": "Check Object Store Exists",
+							"osSymbolicName": "CONTENT",
+							"variableName": "contentOSAvailable"
+						}
+					}
+				]
+			}
+		},
+		{
+			"CONTAINER": {
+				"comment": "Container bundles all activities to configure the environment for the labs",
+				"enabled": "$$(enableConfigureSWATLabs)$$",
+				"description": "Apply additional steps to prepare environment for labs after Client Onboarding solution is deployed",
+				"actions": [
+					{
+						"FNCM": {
+							"enabled": "$$(enableConfigureSWATLabs_FNCM)$$",
+							"description": "CPE - Modify object store search settings and security, create property templates, class, and storage policy, and create folders for content lab in object store $$(BAW_DOCS)$$",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"CREATESTORAGEPOLICY": {
+										"enabled": "$(contentOSAvailable)$",
+										"description": "Create ASA for the CONTENT object store",
+										"storagePolicyName": "Default Advanced Storage Area",
+										"storageAreaName": "content_asa",
+										"ignoreCaseForStorageAreaName": true,
+										"fallbackToAvailableStorageArea": "Advanced"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

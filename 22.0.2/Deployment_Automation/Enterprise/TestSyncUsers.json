@@ -1,0 +1,39 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Modify mail server users",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "true",
+										"description": "Modify mail server users to match users and password from ocal LDIF file",
+										"yamlFile": "mailserver.yaml",
+										"synchronizeWithLDIF": true,
+										"externalLDIF1": "$$(externalLDIF1)$$",
+										"externalLDIF2": "$$(externalLDIF2|default=)$$",
+										"userBase" : "cn=usr",
+										"userDC" : ",dc=example,dc=com",
+										"userNumberingFormatter" : "%03d",
+										"removeAllOtherUsers": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

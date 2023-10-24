@@ -60,7 +60,7 @@
 							"comment": "Remove the two applications and three desktops from Navigator",
 							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
 							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -77,12 +77,12 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description": "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'BAWDOCS' desktops",
+										"description": "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'ICN' desktops",
 										"artifactType": "Desktop",
 										"artifactNames": [
 											"Client Onboarding Request",
 											"Client Onboarding Document Upload",
-											"BAWDOCS"
+											"ICN"
 										]
 									}
 								},
@@ -115,11 +115,12 @@
 								{
 									"DELETEPROJECT": {
 										"enabled": "true",
-										"description": "Delete 'Client Onboarding Template' app",
+										"description": "Delete 'Client Onboarding Request' app",
 										"projectType": "APP",
-										"projectName": "Client Onboarding Template",
+										"projectName": "Client Onboarding Request",
+										"projectAcronym": "COR",
 										"unpublishAutomationServices": false,
-										"deleteReferencingProjects": true,
+										"deleteReferencingProjects": false,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5
@@ -133,7 +134,7 @@
 										"projectName": "Client Onboarding Document Upload",
 										"projectAcronym": "CODU",
 										"unpublishAutomationServices": false,
-										"deleteReferencingProjects": true,
+										"deleteReferencingProjects": false,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5
@@ -145,8 +146,9 @@
 										"description": "Delete the app template 'Client Onboarding Template'",
 										"projectType": "APP_TEMPLATE",
 										"projectName": "Client Onboarding Template",
-										"unpublishAutomationServices": true,
-										"deleteReferencingProjects": true,
+										"projectAcronym": "COT",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": false,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5
@@ -158,8 +160,9 @@
 										"description": "Delete the 'Client Onboarding Toolkit' app toolkit",
 										"projectType": "APP_TK",
 										"projectName": "Client Onboarding Toolkit",
-										"unpublishAutomationServices": true,
-										"deleteReferencingProjects": true,
+										projectAcronym": "COTK2",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": false,
 										"maxBASQueryRetries": 5,
 										"maxUnpublishCompletionPolls": 20,
 										"delayBetweenUnpublishCompletionPolls": 5
@@ -170,22 +173,45 @@
 					},
 					{
 						"FNCM": {
-							"comment": "Remove 'Client Documents' folder and with that also all contained documents",
+							"comment": "Remove 'SOLUTION Client Onboarding' folder and delete design artifacts created for GraphQL and CPE labs from object store CONTENT",
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
-							"description": "CPE - Delete 'Client Documents' folder and contained documents from TOS",
-							"objectStoreName": "$$(BAW_TOS)$$",
-							"relativeBasePath": "5_FNCM",
+							"description": "Remove 'SOLUTION Client Onboarding' folder and delete design artifacts created for GraphQL and CPE labs from object store CONTENT",
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description": "Delete 'Client Documents' folder and contained documents",
+										"description": "Delete 'SOLUTION Client Onboarding' folder and contained documents",
 										"artifactNames": [
-											"/Client Documents"
+											"/SOLUTION Client Onboarding"
 										],
 										"artifactType": "Folder",
 										"deleteSubfolders": true,
 										"deleteDocuments": true
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the document classes used in the GraphQL & CPE labs",
+										"artifactType": "ClassDefinition",
+										"artifactNames": [
+											"SOLUTION_Bank_Information",
+											"SOLUTION_Client_Information",
+											"SOLUTION_Client_Document"
+										]
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the property templates used in the GraphQL & CPE labs",
+										"artifactType": "PropertyTemplate",
+										"artifactNames": [
+											"SOLUTION_Date_Of_Birth",
+											"SOLUTION_Account_Type"
+										]
 									}
 								}
 							]
@@ -193,11 +219,11 @@
 					},
 					{
 						"FNCM": {
-							"comment": "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and sotrage policy from object store CLOS",
+							"comment": "Remove 'Case Folders' folder and its sub folders and with all contained documents plus removal of folder class definition, property templates and storage policy from object store CONTENT",
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
-							"description": "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store BAWDOCS",
-							"objectStoreName": "BAWDOCS",
-							"relativeBasePath": "5_FNCM",
+							"description": "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store CONTENT",
+							"objectStoreName": "CONTENT",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -227,8 +253,14 @@
 										"description": "Delete the property templates 'Case Reference ID' and 'Client Name' used in the content lab",
 										"artifactType": "PropertyTemplate",
 										"artifactNames": [
-											"Case_Reference_ID",
-											"Client_Name"
+											"SWAT_Client_Name",
+											"SWAT_Reference_ID",
+											"SWAT_First_Name",
+											"SWAT_Last_Name",
+											"SWAT_Identification_Number",
+											"SWAT_Account_Number",
+											"SWAT_Routing_Number",
+											"SWAT_Bank_Name"
 										]
 									}
 								},

@@ -1,0 +1,58 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Manage BPM internal groups",
+				"actions": [
+					{
+						"WF": {
+							"comment": "Add general user group '$$(generalUsersGroupShort)$$' to tw_authors",
+							"enabled": "true",
+							"description": "Navigator - Import apps and desktops",
+							"name": "Prepare Apps and Desktops",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"MANAGEGROUPS": {
+										"enabled": "true",
+										"description": "Add general user group '$$(generalUsersGroupShort)$$' to tw_authors",
+										"activities": [
+											{
+												"action": "AddMembers",
+												"groupName": "tw_authors",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEGROUPS": {
+										"enabled": "false",
+										"description": "Remove general user group '$$(generalUsersGroupShort)$$' to tw_authors",
+										"activities": [
+											{
+												"action": "RemoveMembers",
+												"groupName": "tw_authors",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

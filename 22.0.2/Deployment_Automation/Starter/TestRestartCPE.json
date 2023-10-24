@@ -1,0 +1,36 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Create plugins in ICN",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"description": "OCP - Add two groups containing both admin and general users group to LDIF and restart LDAP pod",
+							"subActions": [
+								{
+									"RESTARTPODS": {
+										"enabled": "true",
+										"description": "Restart CPE pods after LDAP was modified",
+										"namespace": "$$(cp4baNamespace)$$",
+										"labelName": "app",
+										"labelValue": "$$(cp4baClusterName)$$-cpe-deploy",
+										"maximumNumPollsForRestart": 10,
+										"sleepBetweenPollsInSecondsForRestart": 30
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

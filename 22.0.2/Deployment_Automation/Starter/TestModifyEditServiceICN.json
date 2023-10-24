@@ -1,0 +1,33 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Create plugins in ICN",
+				"actions": [
+					{
+						"ICN": {
+							"enabled": "true",
+							"description": "Configure P8 repository 'content'",
+							"subActions": [
+								{
+									"UPDATEP8REPOSETTINGS": {
+										"enabled": "true",
+										"description": "Update P8 repository settings",
+										"repoId": "content",
+										"enableEditService": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,207 @@
+{
+	"fileVersion": "1.0.2",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.1.0 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "This container wraps all actions to deploy the Client Onboarding scenario itself",
+				"enabled": "$$(enableDeployClientOnboarding)$$",
+				"description": "Deploy Client Onboarding Scenario",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description": "Grant 'Deployed Decision Manager' role to admin user",
+							"subActions": [
+								{
+									"PLATFORM_USERMGT": {
+										"enabled": "true",
+										"description": "Update Zen roles for adin user",
+										"entities": [
+											{
+												"action": "update",
+												"name": "$$(cp4baAdminUsr)$$",
+												"roles": [
+													"Deployed Decision Manager"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description": "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",
+							"decisionsPrjDisplayName": "Client Onboarding",
+							"relativeBasePath": "1_ADS",
+							"maxBASQueryRetries": 5,
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for ADS",
+										"name": "Download ADS file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip"
+											}
+										]
+									}
+								},
+								{
+									"CREATEGITREPO": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Create Git org and repo in internal Gitea",
+										"orgName": "$$(adsGitOrg)$$",
+										"repoName": "$$(adsGitRepo)$$_1",
+										"repoDescription": "$$(adsGitRepoDescription)$$"
+									}
+								},
+								{
+									"CREATEPROJECT": {
+										"enabled": "true",
+										"description": "Create ADS project in Studio",
+										"name": "Client Onboarding"
+									}
+								},
+								{
+									"IMPORTDECISIONSERVICES": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Decisions' decision service",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"file": "ClientOnboardingDecisions.zip"
+									}
+								},
+								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
+									"COMMITCHANGES": {
+										"enabled": "true",
+										"description": "Commit changes in ADS project to git",
+										"commitMessage": "Initial automatic setup of Client Onboarding project",
+										"maxCommitCompletionPolls": 20,
+										"delayBetweenCommitCompletionPolls": 10
+									}
+								},
+								{
+									"VERSIONPROJECT": {
+										"enabled": "true",
+										"description": "Create a new version of the ADS project",
+										"versionDescription": "Initial version of the Client Onboarding Decision Solution",
+										"version": "1.0.0"
+									}
+								},
+								{
+									"DEPLOYPROJECT": {
+										"enabled": "true",
+										"description": "Deploy the version to the runtime",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "1.0.0",
+										"maxDeployCompletionPolls": 60,
+										"delayBetweenDeployCompletionPolls": 5,
+										"delayAfter": 60
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"enabled": "$$(enableDeployClientOnboarding_ADS)$$",
+							"description": "ADS - Create and fully configure ADS project including Git, Deploy, & Publish",
+							"decisionsPrjDisplayName": "Client Onboarding2",
+							"relativeBasePath": "1_ADS",
+							"maxBASQueryRetries": 5,
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for ADS",
+										"name": "Download ADS file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip"
+											}
+										]
+									}
+								},
+								{
+									"CREATEGITREPO": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Create Git org and repo in internal Gitea",
+										"orgName": "$$(adsGitOrg)$$",
+										"repoName": "$$(adsGitRepo)$$_2",
+										"repoDescription": "$$(adsGitRepoDescription)$$"
+									}
+								},
+								{
+									"CREATEPROJECT": {
+										"enabled": "true",
+										"description": "Create ADS project in Studio",
+										"name": "Client Onboarding2"
+									}
+								},
+								{
+									"IMPORTDECISIONSERVICES": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Decisions' decision service",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"file": "ClientOnboardingDecisions.zip"
+									}
+								},
+								{
+									"CONNECTWITHGIT": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Connect ADS project to internal gitea repository",
+										"gitRepoUrl": "!GITREPOURL!"
+									}
+								},
+								{
+									"COMMITCHANGES": {
+										"enabled": "true",
+										"description": "Commit changes in ADS project to git",
+										"commitMessage": "Initial automatic setup of Client Onboarding project",
+										"maxCommitCompletionPolls": 20,
+										"delayBetweenCommitCompletionPolls": 10
+									}
+								},
+								{
+									"VERSIONPROJECT": {
+										"enabled": "true",
+										"description": "Create a new version of the ADS project",
+										"versionDescription": "Initial version of the Client Onboarding Decision Solution",
+										"version": "1.0.0"
+									}
+								},
+								{
+									"DEPLOYPROJECT": {
+										"enabled": "true",
+										"description": "Deploy the version to the runtime",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "1.0.0",
+										"maxDeployCompletionPolls": 60,
+										"delayBetweenDeployCompletionPolls": 5,
+										"delayAfter": 60
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

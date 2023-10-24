@@ -1,0 +1,108 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Add groups to LDAP",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"description": "Add users and their group membership to LDIF and restart LDAP pod",
+							"subActions": [
+								{
+									"MODIFYSTARTERLDAP": {
+										"enabled": "true",
+										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding P8Administrators and GeneralUsers to the groups",
+										"restartPod": true,
+										"maximumNumPollsForRestart": 15,
+										"sleepBetweenPollsInSecondsForRestart": 10,
+										"entities": [
+											{
+												"action": "add",
+												"type": "group",
+												"dn": "cn=P8WFAdmins,dc=example,dc=org",
+												"cn": "P8WFAdmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "cn=GeneralUsers,dc=example,dc=org"
+													},
+													{
+														"action": "add",
+														"dn": "cn=P8Administrators,dc=example,dc=org"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "group",
+												"dn": "cn=P8WFConfigurators,dc=example,dc=org",
+												"cn": "P8WFConfigurators",
+												"members": [
+													{
+														"action": "add",
+														"dn": "cn=GeneralUsers,dc=example,dc=org"
+													},
+													{
+														"action": "add",
+														"dn": "cn=P8Administrators,dc=example,dc=org"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"MODIFYSTARTERLDAP": {
+										"enabled": "false",
+										"description": "Modify LDAP by deleting two groups used for P8 WF sub-system",
+										"restartPod": false,
+										"maximumNumPollsForRestart": 15,
+										"sleepBetweenPollsInSecondsForRestart": 10,
+										"entities": [
+											{
+												"action": "delete",
+												"type": "group",
+												"dn": "cn=P8WFAdmins,dc=example,dc=org"
+											},
+											{
+												"action": "delete",
+												"type": "group",
+												"dn": "cn=P8WFConfigurators,dc=example,dc=org"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Modify Workflow System Security Groups",
+							"enabled": "true",
+							"description": "CPE - Modify Workflow System Security Groups",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"subActions": [
+								{
+									"MANAGEWFSECURITYGROUPS": {
+										"enabled": "true",
+										"description": "Manage WF System Security Groups",
+										"administrationGroup": "P8WFAdmins",
+										"configurationGroup": "P8WFConfigurators",
+										"restartCPEPods": true										
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

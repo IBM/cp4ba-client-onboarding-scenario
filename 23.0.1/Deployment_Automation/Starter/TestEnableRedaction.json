@@ -1,0 +1,44 @@
+{
+	"fileVersion": "1.0.3",
+	"fileLocation": "",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "true",
+				"description": "Create plugins in ICN",
+				"actions": [
+					{
+						"ICN": {
+							"enabled": "true",
+							"name": "Import ICN Desktop for Content/ICN lab into ICN",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for CONTENT object store)",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Determine ICN repository information based on object store symbolic name",
+										"osSymbolicName": "CONTENT"
+									}
+								},
+								{
+									"UPDATEP8REPOSETTINGS": {
+										"enabled": "true",
+										"description": "Update P8 repository settings to enable Entry Template Management and Edit Services",
+										"repoId": "$(REPOSITORY_ID)$",
+										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
+										"enableEditService": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
