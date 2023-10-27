@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 23.0.1 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
+# This file is to be used with CP4BA 23.0.1 starter deployment to deploy the an email server/client
 
 # Set all variables according to your environment before executing this file
 
@@ -28,20 +28,6 @@ pakInstallerPortalURL=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 #ocLoginToken=REQUIRED
 
-# Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
-enableWorkflowLabsForBusinessUsers=false
-
-# User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
-rpaBotExecutionUser=cp4admin2
-# URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
-rpaServer=https://rpa-server.com:1111
-
-# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
-
-# Email address of the gmail account to send emails
-# gmailAddress=REQUIRED
-# App key for accessing the gmail account to send emails
-# gmailAppKey=REQUIRED
 
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
@@ -101,16 +87,16 @@ DEPLOYMENTPATTERN="Starter"
 # Source URL to bootstrap configuration for the deployment tool
 BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/${CP4BAVERSION}/Deployment_Automation/${DEPLOYMENTPATTERN}"
 # Name of the configuration file to use when running the deployment automation tool
-CONFIGNAME="config-deploy"
+CONFIGNAME="config-deployEmail"
 # Automation script to use when running the deployment automation tool
-AUTOMATIONSCRIPT="DeployClientOnboardingEmbeddedGitea.json"
+AUTOMATIONSCRIPT="DeployEmailCapability.json"
 
 # Name of the source sh file passed to execution environment
-SCRIPTNAME=deployClientOnboardingStarter.sh
+SCRIPTNAME=deployEmailServerStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.2
+SCRIPTVERSION=1.0.0
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -211,56 +197,6 @@ else
 	fi
 fi
 
-if [ ! -z "${gmailAddress+x}" ]
-then
-  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
-  then
-    if $validationSuccess
-    then
-      echo "Validating configuration failed:"
-      validationSuccess=false
-    fi
-    echo "  Variable 'gmailAddress' has not been set"
-  else
-    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
-  fi
-fi
-
-if [ ! -z "${gmailAppKey+x}" ]
-then
-  if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
-  then
-     if $validationSuccess
-     then
-       echo "Validating configuration failed:"
-       validationSuccess=false
-     fi
-    echo "  Variable 'gmailAppKey' has not been set"
-  else
-    gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
-  fi
-fi
-
-if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
-then
-  if $validationSuccess
-  then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'rpaBotExecutionUser' has not been set"
-fi
-
-if [[ "${rpaServer}" == "REQUIRED" ]] || [[ "${rpaServer}" == "" ]]
-then
-   if $validationSuccess
-   then
-    echo "Validating configuration failed:"
-    validationSuccess=false
-  fi
-  echo "  Variable 'rpaServer' has not been set"
-fi
-
 if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
 then
    createUsersFile=onboardUsersFile=AddUsersToPlatform.json
@@ -288,10 +224,5 @@ then
   exit 1
 fi
 
-if [ ! -z "${enableWorkflowLabsForBusinessUsers+x}" ]
-then
-	workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
-fi
 
-
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${createUsersFile}
