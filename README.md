@@ -16,6 +16,7 @@ The client onboarding scenario is an end-to-end solution that showcases the art 
 
 Instructions to import the Client Onboarding solution are available for the following CP4BA versions:
 
+- [CP4BA v23.0.1](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/23.0.1/DeployingClientOnboarding2301.md)
 - [CP4BA v22.0.2](https://github.com/IBM/cp4ba-client-onboarding-scenario/blob/main/22.0.2/DeployingClientOnboarding2202.md)
 
 
