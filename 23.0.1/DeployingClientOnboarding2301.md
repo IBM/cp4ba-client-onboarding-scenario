@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 23.0.1**). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
+Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/23.0.1) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 23.0.1**). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 
 ## Prerequisites
@@ -21,7 +21,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
    Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after some time it finally becomes **Ready**. Overall this may take up to 6 hours. You will receive several emails during that period. 
 
-   The final email has the subject '**Reservation Ready on IBM Technology Zone**'. It contains a link 'View My Reservations' to get to your reservations. Click on this link and click on the tile that represents your reservation.
+   The final email has the subject '**Reservation Ready on IBM Technology Zone**'. It contains a link '**View My Reservations**' to get to your reservations. Click on this link and click on the tile that represents your reservation.
 
    <img src="..\images\your-environment-is-ready_2301.jpg"/>
 
@@ -83,7 +83,8 @@ Update the variable `pakInstallerPortalURL` defined at the top of the file with 
 
 <img src="..\images\techzone-reserved-env_2301.jpg"/>
 
-In case you want to use the environment to **perform the Workflow labs with the business users** instead of the admin user, set `enableWorkflowLabsForBusinessUsers` to `true`. This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
+> In case you want to use the environment to **perform the Workflow labs with the business users** instead of the admin user, set `enableWorkflowLabsForBusinessUsers` to `true`. This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
+>
 
 ### Perform Import
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access (e.g. is not blocked by a firewall or requires a proxy server) both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
@@ -262,7 +263,7 @@ In case you want to clean up your environment and remove the Client Onboarding a
 
 1. **Save the undeployment file** that corresponds to the operating system of your deployment machine into the directory created in step 1 (in the context menu of your browser select **Save as.../Save page as...** or similar)
 
-   **Linux/Mac** 	*CP4BA 23.0.1* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/undeployClientOnboardingStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
+   **Linux/Mac** *CP4BA 23.0.1* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/undeployClientOnboardingStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
 
    **Windows** - *CP4BA 23.0.1* - Starter deployment - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/undeployClientOnboardingStarter.bat)**
 
