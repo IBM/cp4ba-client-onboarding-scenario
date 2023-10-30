@@ -74,11 +74,11 @@ The email server can only send a receive emails internally and not communicate w
 
       **Linux/Mac** 	
 
-      *CP4BA 22.0.2* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/deployEmailServerStarter.sh)**  or *CP4BA 23.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/deployEmailServerStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
+      *CP4BA 22.0.2* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/deployEmailServerStarter.sh)**  or *CP4BA 23.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/deployEmailServerStarter.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
       
       **Windows**
       
-      CP4BA 22.0.2* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/deployEmailServerStarter.bat)** or *CP4BA 23.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/deployEmailServerStarter.bat)**
+      *CP4BA 22.0.2* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/deployEmailServerStarter.bat)** or *CP4BA 23.0.1* - Starter deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/deployEmailServerStarter.bat)**
 
 ### Update bat/sh File
 On Windows open the file **deployEmailServerStarter.bat**/on Linux or Mac open the file **deployEmailServerStarter.sh** in the text editor of your choice. 
