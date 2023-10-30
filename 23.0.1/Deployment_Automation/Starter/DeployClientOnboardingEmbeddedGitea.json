@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.21",
+	"fileVersion": "1.0.22",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -754,7 +754,7 @@
 												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
 											},
 											{
-												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$2"
+												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
 											},
 											{
 												"rpaServer": "$$(wf_cp_rpaServer)$$"
