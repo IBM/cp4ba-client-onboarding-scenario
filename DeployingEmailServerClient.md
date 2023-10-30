@@ -108,16 +108,16 @@ Deploying the email server and client was successful.
 Key resources to access are:
 
 OpenShift Web Console:
-- URL:  https://console-openshift-console.apps.daffy-e9fo7b2p.cloud.techzone.ibm.com
+- URL:  https://console-openshift-console.apps.<clustername>.cloud.techzone.ibm.com
 - User: 'ocpadmin'
-- Pwd:  'YErEBoRQ9k3SUIgj1lMr'
+- Pwd:  '<pwd>'
 
 User Credentials:
-- Using user 'cp4admin' with password '6aNVWOXrGcFKsF44JJfg'
-- Additional Users: User 'user1', Pwd 'LwhSrGqVmCI9GnojQsIg'; User 'user2', Pwd 'rczZeHozl377lSHCVG9a'; User 'user3', Pwd 'ZCmbKV2aNYjQstGVkC5e'; User 'user4', Pwd 'yoGG0eB7Q0K2XatBvxb5'; User 'user5', Pwd 'nUh8LuAEbmPgKRWLtRAX'
+- Using user 'cp4admin' with password '<pwd>'
+- Additional Users: User 'user1', Pwd '<pwd>'; User 'user2', Pwd '<pwd>'; User 'user3', Pwd '<pwd>'; User 'user4', Pwd '<pwd>'; User 'user5', Pwd '<pwd>'
 
 Local Mail Server/Client:
-- Mail Client URL: https://roundcubenginx-mail.apps.daffy-e9fo7b2p.cloud.techzone.ibm.com
+- Mail Client URL: https://roundcubenginx-mail.apps.<clustername>.cloud.techzone.ibm.com
 - User Ids: '<username>' or '<username>@example.org'
 - Passwords: 'same as above'
 - Only these internal email addresses (<username>@example.org) are allowed to be specified in the Client Onboarding app!
