@@ -1,36 +1,10 @@
 {
-	"fileVersion": "1.0.21",
+	"fileVersion": "1.0.22",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployEmailCapability.json",
 	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
-		{
-			"CONTAINER": {
-				"enabled": "true",
-				"description": "Onboard new users to the Cloud Pak",
-				"actions": [
-					{
-						"OCP": {
-							"enabled": "true",
-							"name": "Configure mail server and client in OCP",
-							"relativeBasePath": "OpenShift",
-							"subActions": [
-								{
-									"MANAGEMAILUSERS": {
-										"enabled": "true",
-										"description": "Modify mail server users to match users and password from server LDIF file",
-										"yamlFile": "mailserver.yaml",
-										"synchronizeWithLDIF": true,
-										"removeAllOtherUsers": true
-									}
-								}
-							]
-						}
-					}
-				]
-			}
-		},
 		{
 			"CONTAINER": {
 				"enabled": "$(ISSET(onboardUsersFile))$",
