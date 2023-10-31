@@ -25,7 +25,7 @@ ocLoginToken=REQUIRED
 
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
-# URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
+# URL of the RPA server to be invoked for the RPA bot execution
 rpaServer=https://rpa-server.com:1111
 
 # Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
@@ -112,7 +112,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.2.1
+SCRIPTVERSION=1.2.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 

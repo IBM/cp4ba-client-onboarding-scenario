@@ -33,7 +33,7 @@ enableWorkflowLabsForBusinessUsers=false
 
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
-# URL of the RPA server to be invoked for the RPA bot execution (currently not supported/tested, keep dummy value)
+# URL of the RPA server to be invoked for the RPA bot execution
 rpaServer=https://rpa-server.com:1111
 
 # Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
@@ -110,7 +110,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.2
+SCRIPTVERSION=1.1.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
