@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.21",
+	"fileVersion": "1.0.22",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.29 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
@@ -683,7 +683,7 @@
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Add",
+												"action": "Update",
 												"granteeName": "$$(generalUsersGroupName)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
