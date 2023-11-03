@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.22",
+	"fileVersion": "1.0.24",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.29 <1.2.0",
+	"requiredToolVersion": ">=1.1.31 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -696,7 +696,7 @@
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Update",
+												"action": "Atleast",
 												"granteeName": "$$(generalUsersGroupName)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
@@ -1891,6 +1891,15 @@
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "true",
+										"description": "Update 'ICN' desktop to use desktop email client",
+										"desktopName": "ICN",
+										"action": "update",
+										"enabledDesktopEmailClient": true
+									}
 								}
 							]
 						}
@@ -1917,6 +1926,8 @@
 										"repoId": "$(REPOSITORY_ID)$",
 										"allowEntryTemplateManagement": true,
 										"enableRedaction": true,
+										"allowMergeSplitForRoleBasedRedaction": true,
+										"deliverRedactedPDFAsPDF": false,
 										"enableEditService": true
 									}
 								},

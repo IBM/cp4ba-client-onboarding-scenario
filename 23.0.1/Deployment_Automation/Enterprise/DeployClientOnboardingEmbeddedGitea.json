@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.25",
+	"fileVersion": "1.0.28",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.29 <1.2.0",
+	"requiredToolVersion": ">=1.1.31 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -683,7 +683,7 @@
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Update",
+												"action": "Atleast",
 												"granteeName": "$$(generalUsersGroupName)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
@@ -1767,6 +1767,51 @@
 										],
 										"enableCBR": true
 									}
+								},
+								{
+									"MANAGEAUDITDEFINITIONS": {
+										"enabled": "true",
+										"description": "Manage audit definitions for document class 'ClientDocument'",
+										"enableObjectStoreAuditHistory": true,
+										"auditConfigDefinition": [
+											{
+												"objectType": "document class",
+												"objectTypeName": "ClientDocument",
+												"definitions": [
+													{
+														"isEnabled": true,
+														"eventType": "checkin",
+														"auditEventName": "Checked-in Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "change class",
+														"auditEventName": "Change Class Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "move content",
+														"auditEventName": "Move Content Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													}
+												]
+											}
+										]
+									}
 								}
 							]
 						}
@@ -1866,6 +1911,17 @@
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "true",
+										"description": "Update 'ICN' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
+										"desktopName": "ICN",
+										"action": "update",
+										"enabledDesktopEmailClient": true,
+										"allowUsersToChangeEntryTemplateDuringCheckIn": true,
+										"showDocumentHistory": true
+									}
 								}
 							]
 						}
@@ -1890,8 +1946,11 @@
 										"enabled": "true",
 										"description": "Update P8 repository settings to enable Entry Template Management, Redaction, and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
+										"enableDocumentHistory": true,
 										"allowEntryTemplateManagement": true,
 										"enableRedaction": true,
+										"allowMergeSplitForRoleBasedRedaction": true,
+										"deliverRedactedPDFAsPDF": false,
 										"enableEditService": true
 									}
 								},

@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.24",
+	"fileVersion": "1.0.27",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.29 <1.2.0",
+	"requiredToolVersion": ">=1.1.31 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -431,7 +431,7 @@
 										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
@@ -472,7 +472,7 @@
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
@@ -890,7 +890,7 @@
 										"granteeSettings": [
 											{
 												"enabled": "true",
-												"action": "Update",
+												"action": "Atleast",
 												"granteeName": "$$(generalUsersGroupName)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
@@ -1459,7 +1459,7 @@
 										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
@@ -1947,6 +1947,51 @@
 										],
 										"enableCBR": true
 									}
+								},
+								{
+									"MANAGEAUDITDEFINITIONS": {
+										"enabled": "true",
+										"description": "Manage audit definitions for document class 'ClientDocument'",
+										"enableObjectStoreAuditHistory": true,
+										"auditConfigDefinition": [
+											{
+												"objectType": "document class",
+												"objectTypeName": "ClientDocument",
+												"definitions": [
+													{
+														"isEnabled": true,
+														"eventType": "checkin",
+														"auditEventName": "Checked-in Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "change class",
+														"auditEventName": "Change Class Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "move content",
+														"auditEventName": "Move Content Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													}
+												]
+											}
+										]
+									}
 								}
 							]
 						}
@@ -2046,6 +2091,17 @@
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "true",
+										"description": "Update 'ICN' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
+										"desktopName": "ICN",
+										"action": "update",
+										"enabledDesktopEmailClient": true,
+										"allowUsersToChangeEntryTemplateDuringCheckIn": true,
+										"showDocumentHistory": true
+									}
 								}
 							]
 						}
@@ -2070,8 +2126,11 @@
 										"enabled": "true",
 										"description": "Update P8 repository settings to enable Entry Template Management, Redaction, and Edit Services",
 										"repoId": "$(REPOSITORY_ID)$",
+										"enableDocumentHistory": true,
 										"allowEntryTemplateManagement": true,
 										"enableRedaction": true,
+										"allowMergeSplitForRoleBasedRedaction": true,
+										"deliverRedactedPDFAsPDF": false,
 										"enableEditService": true
 									}
 								},
