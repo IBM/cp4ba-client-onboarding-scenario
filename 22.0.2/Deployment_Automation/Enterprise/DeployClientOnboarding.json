@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.24",
+	"fileVersion": "1.0.25",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.31 <1.2.0",
+	"requiredToolVersion": ">=1.1.32 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 22.0.2 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -91,6 +91,22 @@
 									}
 								},
 								{
+									"MANAGEDOCKERPULLSECRETS": {
+										"enabled": "$(ISSET(dockerUserName))$ && $(ISSET(dockerToken))$",
+										"description": "If configured add docker pull secret",
+										"namespaceName": "mail",
+										"secrets": [
+											{
+												"action": "add",
+												"dockerServer": "docker.io",
+												"secretName": "mail-docker-pull-secret",
+												"dockerUserName": "$$(dockerUserName)$$",
+												"dockerToken": "$$(dockerToken)$$"
+											}
+										]
+									}
+								},
+								{
 									"MANAGEOCPCLUSTERROLEBINDING": {
 										"enabled": "true",
 										"description": "Add ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
@@ -136,6 +152,7 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
@@ -158,6 +175,7 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
@@ -256,6 +274,7 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",

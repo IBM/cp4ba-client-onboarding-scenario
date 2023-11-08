@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.28",
+	"fileVersion": "1.0.29",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.31 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -7,18 +7,45 @@
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
 	"actions": [
 		{
+			"CONTAINER": {
+				"enabled": "$(ISSET(isPakInstallerDeployment))$",
+				"description": "Ensure groups are available and optionally onboard additional users for Pak Deployer environments",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "$(isLocalLDAPAvailable|default=false)$",
+							"name": "Add required and optopnally additional users and groups to LDAP and Cloud Pak",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"ADDUSERSGROUPSTOENV": {
+										"enabled": "$(ISSET(onboardUsersFile))$",
+										"description": "Add Users",
+										"restartPod": true,
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"configFile": "$$(onboardUsersFile|default=)$$"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
 			"FNCM": {
 				"enabled": "true",
-				"description": "CPE - Check if CONTENT Object store exists",
+				"description": "CPE - Check if $$(CPEICNLABOBJECTSTORE)$$ Object store exists",
 				"replaceExistingDocuments": false,
-				"objectStoreName": "CONTENT",
+				"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 				"relativeBasePath": "FileNet Content Manager",
 				"subActions": [
 					{
 						"CHECKOBJECTSTOREEXISTS": {
 							"enabled": "true",
 							"description": "Check Object Store Exists",
-							"osSymbolicName": "CONTENT",
+							"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"variableName": "contentOSAvailable"
 						}
 					}
@@ -91,6 +118,22 @@
 									}
 								},
 								{
+									"MANAGEDOCKERPULLSECRETS": {
+										"enabled": "$(ISSET(dockerUserName))$ && $(ISSET(dockerToken))$",
+										"description": "If configured add docker pull secret",
+										"namespaceName": "mail",
+										"secrets": [
+											{
+												"action": "add",
+												"dockerServer": "docker.io",
+												"secretName": "mail-docker-pull-secret",
+												"dockerUserName": "$$(dockerUserName)$$",
+												"dockerToken": "$$(dockerToken)$$"
+											}
+										]
+									}
+								},
+								{
 									"MANAGEOCPCLUSTERROLEBINDING": {
 										"enabled": "true",
 										"description": "Add ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
@@ -136,6 +179,7 @@
 										"description": "Apply YAML files for mail server",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
@@ -158,6 +202,7 @@
 										"description": "Apply YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
@@ -256,6 +301,7 @@
 										"description": "Apply remaining YAML files for mail client",
 										"namespaceName": "mail",
 										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
 										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
 										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
 										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
@@ -1193,8 +1239,8 @@
 						"FNCM": {
 							"comment": "Steps that are required by all content labs",
 							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
-							"description": "CPE - Steps common to the CPE, GraphQL, and ICN labs: Enable CBR for OS, create index area, and enable CBR for document class in OS CONTENT",
-							"objectStoreName": "CONTENT",
+							"description": "CPE - Steps common to the CPE, GraphQL, and ICN labs: Enable CBR for OS, create index area, and enable CBR for document class in OS $$(CPEICNLABOBJECTSTORE)$$",
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
@@ -1222,8 +1268,8 @@
 								{
 									"MODIFYOBJECTSTORE": {
 										"enabled": "true",
-										"description": "Modify text search setting and security for object store CONTENT",
-										"name": "Modify text search setting and security for object store CONTENT",
+										"description": "Modify text search setting and security for object store $$(CPEICNLABOBJECTSTORE)$$",
+										"name": "Modify text search setting and security for object store $$(CPEICNLABOBJECTSTORE)$$",
 										"defaultTextSearchIndexingLanguage": "en",
 										"enableTextSearch": true,
 										"replaceAccessRights": false,
@@ -1231,7 +1277,7 @@
 											{
 												"enabled": "true",
 												"action": "Update",
-												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeName": "$$(generalUsersGroupName|default=)$$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
 												"accessType": "Allow",
@@ -1239,9 +1285,9 @@
 												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
 											},
 											{
-												"enabled": "$(generalUsersGroupExists)$",
+												"enabled": "$(generalUsersGroupExists|default=false)$",
 												"action": "Update",
-												"granteeName": "$(generalUsersGroupDN)$",
+												"granteeName": "$(generalUsersGroupDN|default=)$",
 												"granteeType": "Group",
 												"isNonCaseSensitive": true,
 												"accessType": "Allow",
@@ -1265,20 +1311,20 @@
 					{
 						"FNCM": {
 							"comment": "Steps that are only required by the CPE and GraphQL content labs",
-							"enabled": "$$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$",
-							"description": "CPE - Steps common for CPE und GraphQL labs: Modify object store search settings and security, create property templates, class, and create folders in object store CONTENT",
+							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_GQL)$$) && $(contentOSAvailable)$",
+							"description": "CPE - Steps common for CPE und GraphQL labs: Modify object store search settings and security, create property templates, class, and create folders in object store $$(CPEICNLABOBJECTSTORE)$$",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "true",
-										"description": "Add general users group as admins to CONTENT Object Store",
+										"description": "Add general users group as admins to $$(CPEICNLABOBJECTSTORE)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-content-os",
 										"granteeNames": [
 											"$$(generalUsersGroupName)$$",
-											"§IF($(generalUsersGroupExists)$)§($(generalUsersGroupDN)$)§ELSE§()ENDIF§"
+											"§IF($(generalUsersGroupExists|default=false)$)§($(generalUsersGroupDN|default=)$)§ELSE§()ENDIF§"
 										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
@@ -1472,15 +1518,15 @@
 						"FNCM": {
 							"comment": "Steps that are only required by the CPE content lab",
 							"enabled": "$$(enableConfigureSWATLabs_CONTENT_CPE)$$ && $(contentOSAvailable)$",
-							"description": "CPE - Steps unique to the CPE lab: Create storage policy in object store CONTENT",
+							"description": "CPE - Steps unique to the CPE lab: Create storage policy in object store $$(CPEICNLABOBJECTSTORE)$$",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"CREATESTORAGEPOLICY": {
 										"enabled": "true",
-										"description": "Create ASA for the CONTENT object store",
+										"description": "Create ASA for the $$(CPEICNLABOBJECTSTORE)$$ object store",
 										"storagePolicyName": "Default Advanced Storage Area",
 										"storageAreaName": "content_asa",
 										"ignoreCaseForStorageAreaName": true,
@@ -1496,7 +1542,7 @@
 							"enabled": "$$(enableConfigureSWATLabs_CONTENT_GQL)$$ && $(contentOSAvailable)$",
 							"description": "GQL - Steps unique to the GraphQL lab: Create property templates, class definitions, folders, and document upload",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
@@ -1710,9 +1756,9 @@
 						"FNCM": {
 							"comment": "Steps that are only required by the ICN content lab",
 							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
-							"description": "CPE - Create property templates and classes for the ICN lab in object store CONTENT",
+							"description": "CPE - Create property templates and classes for the ICN lab in object store $$(CPEICNLABOBJECTSTORE)$$",
 							"replaceExistingDocuments": false,
-							"objectStoreName": "CONTENT",
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
@@ -1867,7 +1913,7 @@
 							"comment": "Steps that required by both the CPE & ICN content labs",
 							"enabled": "($$(enableConfigureSWATLabs_CONTENT_CPE)$$ || $$(enableConfigureSWATLabs_CONTENT_ICN)$$) && $(contentOSAvailable)$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store CONTENT)",
+							"description": "Navigator - Import 'ICN' desktop used in Content/ICN labs (for object store $$(CPEICNLABOBJECTSTORE)$$)",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
@@ -1887,7 +1933,7 @@
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
-										"osSymbolicName": "CONTENT"
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
 									}
 								},
 								{
@@ -1906,7 +1952,7 @@
 								{
 									"IMPORTDESKTOP": {
 										"enabled": "true",
-										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store CONTENT)",
+										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store $$(CPEICNLABOBJECTSTORE)$$)",
 										"enforceImport": false,
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
@@ -1931,14 +1977,14 @@
 							"comment": "Steps that are only required by the ICN content lab",
 							"enabled": "$$(enableConfigureSWATLabs_CONTENT_ICN)$$ && $(contentOSAvailable)$",
 							"name": "Import ICN Desktop for Content/ICN lab into ICN",
-							"description": "Navigator - Enable entry template, redaction, edit services, register plugins and redactions for object store CONTENT",
+							"description": "Navigator - Enable entry template, redaction, edit services, register plugins and redactions for object store $$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
-										"osSymbolicName": "CONTENT"
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
 									}
 								},
 								{
@@ -1980,10 +2026,10 @@
 								{
 									"MANAGEREDACTION": {
 										"enabled": "true",
-										"description": "Manage role-based redaction for driver license for general users for 'CONTENT' repository",
+										"description": "Manage role-based redaction for driver license for general users for '$$(CPEICNLABOBJECTSTORE)$$' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
-										"warning": "§IF($(generalUsersGroupExists)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
+										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
@@ -2014,7 +2060,7 @@
 												"entities": [
 													{
 														"action": "add",
-														"entityName": "§IF($(generalUsersGroupExists)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
+														"entityName": "§IF($(generalUsersGroupExists|default=false)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
 														"entityType": "Group",
 														"permission": "Allow"
 													}
@@ -2051,10 +2097,10 @@
 								{
 									"MANAGEREDACTION": {
 										"enabled": "true",
-										"description": "Manage role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"description": "Manage role-based redaction for driver license for admin users for '$$(CPEICNLABOBJECTSTORE)$$' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
-										"warning": "§IF($(generalUsersGroupExists)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
+										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
@@ -2071,7 +2117,7 @@
 												"entities": [
 													{
 														"action": "add",
-														"entityName": "§IF($(generalUsersGroupExists)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
+														"entityName": "§IF($(generalUsersGroupExists|default=false)$)§(GeneralUsers)§ELSE§($(generalUsersGroupShort)$)ENDIF§",
 														"entityType": "Group",
 														"permission": "Allow"
 													}
