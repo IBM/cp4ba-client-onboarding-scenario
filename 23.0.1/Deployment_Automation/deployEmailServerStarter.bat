@@ -34,6 +34,10 @@ rem Should one or multiple users be added to the Cloud Pak as part of deploying 
 SET createUsers=false
 
 
+rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+rem SET dockerUserName=REQUIRED
+rem SET dockerToken=REQUIRED
+
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 rem SET jvmSettings=-Xms4096M
 
@@ -94,7 +98,7 @@ SET SCRIPTNAME=deployEmailServerStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -287,6 +291,54 @@ if defined createUsers (
 	)
 )
 
+if defined dockerUserName (
+	if "%dockerUserName%"=="REQUIRED" (
+		if not defined validationFailed (
+			set validationFailed=true
+			echo Validating configuration failed:			
+		)
+		echo   Variable 'dockerUserName' is defined but is not set correctly
+		
+		if defined dockerToken (
+			if "%dockerToken%"=="REQUIRED" (
+				echo   Variable 'dockerToken' is defined but has not been set correctly
+			)
+		) else (
+			echo   Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined
+		)
+	) else (
+		if defined dockerToken (
+			if "%dockerToken%"=="REQUIRED" (
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'dockerUserName' is defined but is not set correctly
+			) else (
+				set INTERNALDOCKERINFO=dockerUserName=%dockerUserName% dockerToken=%dockerToken%
+			)
+		) else (
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined
+		)
+	)
+) else (
+	if defined dockerToken (
+		if not defined validationFailed (
+			set validationFailed=true
+			echo Validating configuration failed:			
+		)
+		echo   Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined
+		
+		if "%dockerToken%"=="REQUIRED" (
+			echo   Variable 'dockerUserName' is defined but is not set correctly
+		) 
+	)
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -299,6 +351,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %createUsersFile%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %createUsersFile% %INTERNALDOCKERINFO%
 
 ENDLOCAL

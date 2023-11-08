@@ -39,6 +39,10 @@ rem SET cp4baNamespace=REQUIRED
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
+rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+rem SET dockerUserName=REQUIRED
+rem SET dockerToken=REQUIRED
+
 rem Flag that determines if the internal email server is used or the external gmail service
 rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 SET useInternalMailServer=true
@@ -112,7 +116,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.2
+SET SCRIPTVERSION=1.2.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -290,6 +294,54 @@ if defined cp4baNamespace (
 	)
 )
 
+if defined dockerUserName (
+	if "%dockerUserName%"=="REQUIRED" (
+		if not defined validationFailed (
+			set validationFailed=true
+			echo Validating configuration failed:			
+		)
+		echo   Variable 'dockerUserName' is defined but is not set correctly
+		
+		if defined dockerToken (
+			if "%dockerToken%"=="REQUIRED" (
+				echo   Variable 'dockerToken' is defined but has not been set correctly
+			)
+		) else (
+			echo   Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined
+		)
+	) else (
+		if defined dockerToken (
+			if "%dockerToken%"=="REQUIRED" (
+				if not defined validationFailed (
+					echo Validating configuration failed:
+					set validationFailed=true
+				)
+				echo   Variable 'dockerUserName' is defined but is not set correctly
+			) else (
+				set INTERNALDOCKERINFO=dockerUserName=%dockerUserName% dockerToken=%dockerToken%
+			)
+		) else (
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined
+		)
+	)
+) else (
+	if defined dockerToken (
+		if not defined validationFailed (
+			set validationFailed=true
+			echo Validating configuration failed:			
+		)
+		echo   Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined
+		
+		if "%dockerToken%"=="REQUIRED" (
+			echo   Variable 'dockerUserName' is defined but is not set correctly
+		) 
+	)
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -302,6 +354,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
