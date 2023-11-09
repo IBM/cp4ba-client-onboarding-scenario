@@ -37,6 +37,10 @@ rpaServer=https://rpa-server.com:1111
 # (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 useInternalMailServer=true
 
+# Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+#dockerUserName=REQUIRED
+#dockerToken=REQUIRED
+
 # Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
@@ -112,7 +116,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.2.2
+SCRIPTVERSION=1.2.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -272,6 +276,90 @@ then
   fi
 fi
 
+if [[ ! -z "${createUsers+x}" ]] && "${createUsers}" == "true"
+then
+  createUsersFile=onboardUsersFile=AddUsersToPlatform.json
+
+  if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+   fi
+   echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
+ fi
+fi
+
+# if dockerUserName is defined check if not equal default value required
+if [[ ! -z "${dockerUserName+x}" ]]
+then
+  if [[ "${dockerUserName}" == "REQUIRED" ]]
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Variable 'dockerUserName' is defined but is not set correctly"
+
+    # check dockerToken variable is set and if so if set to non default value
+    if [[ ! -z "${dockerToken+x}" ]]
+    then
+      if [[ "${dockerToken}" == "REQUIRED" ]]
+      then
+	echo "  Variable 'dockerToken' is defined but is not set correctly"
+      fi
+    else
+      echo "  Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined"
+    fi
+  else
+    if [[ ! -z "${dockerToken+x}" ]]
+    then
+      if [[ "${dockerToken}" == "REQUIRED" ]]
+      then
+        if $validationSuccess
+        then
+          echo "Validating configuration failed:"
+          validationSuccess=false
+        fi
+	echo "  Variable 'dockerToken' is defined but is not set correctly"
+      else
+        INTERNALDOCKERINFO="dockerUserName=${dockerUserName} dockerToken=${dockerToken}"
+      fi
+    else
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined"
+    fi
+  fi
+# dockerUserName is not defined, check dockerToken variable
+else
+  if [[ ! -z "${dockerToken+x}" ]]
+  then
+    if [[ "${dockerToken}" == "REQUIRED" ]]
+    then
+      if $validationSuccess
+      then
+	echo "Validating configuration failed:"
+	validationSuccess=false
+      fi
+      echo "  Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined"
+      echo "  Variable 'dockerToken' is defined but is not set correctly"
+    else
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined"
+    fi
+  fi
+fi
+
 if ! $validationSuccess
 then
   echo
@@ -283,4 +371,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

@@ -46,6 +46,9 @@ rpaServer=https://rpa-server.com:1111
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
 
+# Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+#dockerUserName=REQUIRED
+#dockerToken=REQUIRED
 
 # Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 #jvmSettings="-Xms4096M"
@@ -110,7 +113,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.3
+SCRIPTVERSION=1.1.4
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -276,6 +279,89 @@ then
    fi
 fi
 
+if [[ ! -z "${createUsers+x}" ]] && "${createUsers}" == "true"
+then
+  createUsersFile=onboardUsersFile=AddUsersToPlatform.json
+
+  if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+   fi
+   echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
+ fi
+fi
+
+# if dockerUserName is defined check if not equal default value required
+if [[ ! -z "${dockerUserName+x}" ]]
+then
+  if [[ "${dockerUserName}" == "REQUIRED" ]]
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Variable 'dockerUserName' is defined but is not set correctly"
+
+    # check dockerToken variable is set and if so if set to non default value
+    if [[ ! -z "${dockerToken+x}" ]]
+    then
+      if [[ "${dockerToken}" == "REQUIRED" ]]
+      then
+	echo "  Variable 'dockerToken' is defined but is not set correctly"
+      fi
+    else
+      echo "  Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined"
+    fi
+  else
+    if [[ ! -z "${dockerToken+x}" ]]
+    then
+      if [[ "${dockerToken}" == "REQUIRED" ]]
+      then
+        if $validationSuccess
+        then
+          echo "Validating configuration failed:"
+          validationSuccess=false
+        fi
+	echo "  Variable 'dockerToken' is defined but is not set correctly"
+      else
+        INTERNALDOCKERINFO="dockerUserName=${dockerUserName} dockerToken=${dockerToken}"
+      fi
+    else
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined"
+    fi
+  fi
+# dockerUserName is not defined, check dockerToken variable
+else
+  if [[ ! -z "${dockerToken+x}" ]]
+  then
+    if [[ "${dockerToken}" == "REQUIRED" ]]
+    then
+      if $validationSuccess
+      then
+	echo "Validating configuration failed:"
+	validationSuccess=false
+      fi
+      echo "  Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined"
+      echo "  Variable 'dockerToken' is defined but is not set correctly"
+    else
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined"
+    fi
+  fi
+fi
 
 if ! $validationSuccess
 then
@@ -294,4 +380,4 @@ then
 fi
 
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
