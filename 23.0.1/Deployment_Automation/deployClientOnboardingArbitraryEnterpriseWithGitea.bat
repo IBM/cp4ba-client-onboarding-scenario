@@ -67,6 +67,8 @@ rem Should ADP be used within the Client Oboarding scenario (do not change for n
 SET adpConfigured=false
 rem Should the Content labs be configured (requires the expected object store to exist)
 SET configureContentLab=false
+rem Should the CP4BA-side artifacts for the watsonx Orchestrate lab should be deployed (requires an additional watsonx Orchestrate SaaS server to execute the lab)
+SET configureWatonsxOrchestrateLab=false
 
 rem Uncomment in case JVM throws an "Out Of Memory"-exception during the execution
 rem SET jvmSettings=-Xms4096M
@@ -128,7 +130,7 @@ SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.3
+SET SCRIPTVERSION=1.2.4
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -418,6 +420,12 @@ if defined configuredContentLabRequired (
 	echo   Variable 'configureContentLab' has not been set
 )
 
+if defined configureWatonsxOrchestrateLab (
+	if "%configureWatonsxOrchestrateLab%"=="true" (
+		set INTERNALCONFIGUREWXO=enableConfigureSWATLabs_WO=true
+	)
+)
+
 if defined cp4baNamespace (
 	if "%cp4baNamespace%"=="REQUIRED" set cp4baNamespaceRequired=true
 	if defined cp4baNamespaceRequired (
@@ -491,6 +499,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %INTERNALCONFIGUREWXO%
 
 ENDLOCAL

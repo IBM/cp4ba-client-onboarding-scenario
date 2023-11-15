@@ -48,6 +48,9 @@ rem SET gmailAppKey=REQUIRED
 rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 SET createUsers=false
 
+rem Should the CP4BA-side artifacts for the watsonx Orchestrate lab should be deployed (requires an additional watsonx Orchestrate SaaS server to execute the lab)
+SET configureWatonsxOrchestrateLab=false
+
 rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 rem SET dockerUserName=REQUIRED
 rem SET dockerToken=REQUIRED
@@ -112,7 +115,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.4
+SET SCRIPTVERSION=1.1.5
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -359,6 +362,12 @@ if defined createUsers (
 	)
 )
 
+if defined configureWatonsxOrchestrateLab (
+	if "%configureWatonsxOrchestrateLab%"=="true" (
+		set INTERNALCONFIGUREWXO=enableConfigureSWATLabs_WO=true
+	)
+)
+
 if defined dockerUserName (
 	if "%dockerUserName%"=="REQUIRED" (
 		if not defined validationFailed (
@@ -419,6 +428,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %INTERNALCONFIGUREWXO%
 
 ENDLOCAL

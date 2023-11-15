@@ -31,6 +31,7 @@ pakInstallerPortalURL=REQUIRED
 # Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
 enableWorkflowLabsForBusinessUsers=false
 
+
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution
@@ -45,6 +46,9 @@ rpaServer=https://rpa-server.com:1111
 
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
+
+# Should the CP4BA-side artifacts for the watsonx Orchestrate lab should be deployed (requires an additional watsonx Orchestrate SaaS server to execute the lab)
+configureWatonsxOrchestrateLab=false
 
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
@@ -113,7 +117,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.4
+SCRIPTVERSION=1.1.5
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -279,19 +283,9 @@ then
    fi
 fi
 
-if [[ ! -z "${createUsers+x}" ]] && "${createUsers}" == "true"
+if [[ "${configureWatonsxOrchestrateLab}" == "true" ]]
 then
-  createUsersFile=onboardUsersFile=AddUsersToPlatform.json
-
-  if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
-  then
-    if $validationSuccess
-    then
-      echo "Validating configuration failed:"
-      validationSuccess=false
-   fi
-   echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
- fi
+  INTERNALCONFIGUREWXO=enableConfigureSWATLabs_WO=true
 fi
 
 # if dockerUserName is defined check if not equal default value required
@@ -380,4 +374,4 @@ then
 fi
 
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${INTERNALCONFIGUREWXO}
