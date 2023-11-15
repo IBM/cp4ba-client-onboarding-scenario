@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.29",
+	"fileVersion": "1.0.31",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.31 <1.2.0",
+	"requiredToolVersion": ">=1.1.34 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -2254,6 +2254,82 @@
 													"write": false,
 													"administration": false
 												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"enabled": "$$(enableConfigureSWATLabs_WO)$$",
+							"description": "WF - Create and populate db table and deploy app for watsonx Orchestrate lab",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for the watsonx Orchestrate lab",
+										"name": "Download WO lab",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/DBExecutionHelper.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/WXC_SERVICE.twx"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Solution%20Exports/Business%20Automation%20Workflow/WOLab-TableData.csv"
+											}
+										]
+									}
+								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract project information from WOX service file",
+										"sourceTwxFile": "WXC_SERVICE.twx"
+									}
+								},
+								{
+									"INSTALLSOLUTION": {
+										"enabled": "true",
+										"description": "Import 'Watsonx Orchestrate Service' service solution into Studio",
+										"twxFile": "!twxFileName!",
+										"paAcronym": "!projectAcronym!",
+										"paSnapshot": "!snapshotAcronym!"
+									}
+								},
+								{
+									"PUBLISHAUTOMATIONSERVICES": {
+										"enabled": "true",
+										"description": "Publish the 'Watsonx Orchestrate Service' Automation Service",
+										"solutionName": "!solutionName!",
+										"solutionAcronym": "!solutionAcronym!",
+										"snapshot": "!snapshotAcronym!",
+										"maxBASQueryRetries": 5,
+										"maxPublishCompletionPolls": "$$(publishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenPublishCompletionPolls": "$$(publishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"EXECUTESQL": {
+										"enabled": "true",
+										"description": "Execute SQL for watsonx Orchestrate to create and populate db table",
+										"configMapName": "client-onboarding-state-wo-lab",
+										"actions": [
+											{
+												"debug": true,
+												"action": "CreateTable",
+												"tableName": "CREATE TABLE CODATA (SERVICE_FEE INTEGER, INDUSTRY VARCHAR(20), COUNTRY VARCHAR(20), APPROVED VARCHAR(10), CO_ANNUALREVENUE INTEGER, CO_CLIENTNAME VARCHAR(20), CO_EMAIL VARCHAR(50), CO_FIRSTNAME VARCHAR(20), CO_LASTNAME VARCHAR(20), CO_SEGMENT VARCHAR(10), CO_NUMBEROFEMPLOYEES INTEGER, CO_SERVICESREQUESTED VARCHAR(200), CO_RISKCONFIDENCE DECIMAL(7,4), CO_COMPANYAGE SMALLINT, CO_DEFAULTPAYMENT BOOLEAN )"
+											},
+											{
+												"debug": true,
+												"action": "ImportCSVCheckCount",
+												"tableName": "CODATA",
+												"csvFileName": "WOLab-TableData.csv"
 											}
 										]
 									}

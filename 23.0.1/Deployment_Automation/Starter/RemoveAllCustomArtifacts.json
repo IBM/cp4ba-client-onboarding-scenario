@@ -1,16 +1,53 @@
 {
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/RemoveAllCustomArtifacts.json",
-	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredToolVersion": ">=1.1.34 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
 		{
 			"CONTAINER": {
-				"comment": "Clean up Client Onboarding related artifacts in reverse order (only the additional ",
+				"comment": "Clean up Client Onboarding related artifacts in reverse order",
 				"enabled": "true",
 				"description": "Remove Client Onboarding Artifacts",
 				"actions": [
+					{
+						"WF": {
+							"comment": "Delete watsonx Orchestrate artifacts",
+							"enabled": "$$(enableCleanupClientOnboarding_WO)$$",
+							"description": "WF - Delete watsonx Orchestrate service PA and remove table",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'WXC SERVICE' Workflow solution",
+										"projectName": "WXC SERVICE",
+										"projectAcronym": "WXCSERV",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"EXECUTESQL": {
+										"enabled": "true",
+										"description": "Execute SQL for watsonx Orchestrate to create and populate db table",
+										"removeConfigMapName": "client-onboarding-state-wo-lab",
+										"actions": [
+											{
+												"debug": true,
+												"action": "DropTable",
+												"tableName": "CODATA"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
 					{
 						"BAI": {
 							"comment": "Clean up BAI data and remove all non-system provided dashboards and goals",

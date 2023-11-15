@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/RemoveClientOnboardingArtifactsEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredToolVersion": ">=1.1.33 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -12,11 +12,48 @@
 				"description": "Remove Client Onboarding Artifacts (scenario & labs)",
 				"actions": [
 					{
+						"WF": {
+							"comment": "Delete watsonx Orchestrate artifacts",
+							"enabled": "$$(enableCleanupClientOnboarding_WO)$$",
+							"description": "WF - Delete watsonx Orchestrate service PA and remove table",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'WXC SERVICE' Workflow solution",
+										"projectName": "WXC SERVICE",
+										"projectAcronym": "WXCSERV",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"EXECUTESQL": {
+										"enabled": "true",
+										"description": "Execute SQL for watsonx Orchestrate to create and populate db table",
+										"removeConfigMapName": "client-onboarding-state-wo-lab",
+										"actions": [
+											{
+												"debug": true,
+												"action": "DropTable",
+												"tableName": "CODATA"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
 						"BAI": {
 							"comment": "Clean up BAI data and remove Client Onboarding dashboard and goal",
 							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
 							"description": "BAI - Delete all Case amd WF data, and Goal and Dashboard",
-							"relativeBasePath": "7_BAI",
+							"relativeBasePath": "Business Automation Insights",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -60,7 +97,7 @@
 							"comment": "Remove the two applications and three desktops from Navigator",
 							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
 							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
-							"relativeBasePath": "6_ICN",
+							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -110,7 +147,7 @@
 							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
 							"enabled": "$$(enableCleanupClientOnboarding_BAA)$$",
 							"description": "BAA - Delete Client Onboarding APP, APP template, and APP TK",
-							"relativeBasePath": "6_BAA",
+							"relativeBasePath": "Business Automation Application",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
@@ -176,7 +213,7 @@
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
 							"description": "CPE - Delete 'Client Documents' folder and contained documents from TOS",
 							"objectStoreName": "$$(BAW_TOS)$$",
-							"relativeBasePath": "5_FNCM",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -199,7 +236,7 @@
 							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
 							"description": "CPE - Delete 'Case Folders' folder, and design artifacts for content lab from object store $$(BAW_DOCS)$$",
 							"objectStoreName": "$$(BAW_DOCS)$$",
-							"relativeBasePath": "5_FNCM",
+							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
 									"DELETEARTIFACT": {
@@ -256,7 +293,7 @@
 							"comment": "Delete Client Onboarding solution and toolkits",
 							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
 							"description": "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
-							"relativeBasePath": "4_WF",
+							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
@@ -320,7 +357,7 @@
 							"comment": "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
 							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
 							"description": "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
-							"relativeBasePath": "1_ADS",
+							"relativeBasePath": "Automation Decision Services",
 							"subActions": [
 								{
 									"CLEANUPADS": {
@@ -359,7 +396,7 @@
 						"OCP": {
 							"enabled": "$$(enableCleanupEmailCapability)$$",
 							"name": "Remove mail server and client from OCP",
-							"relativeBasePath": "0_OCP",
+							"relativeBasePath": "OpenShift",
 							"subActions": [
 								{
 									"MANAGEROUTES": {
