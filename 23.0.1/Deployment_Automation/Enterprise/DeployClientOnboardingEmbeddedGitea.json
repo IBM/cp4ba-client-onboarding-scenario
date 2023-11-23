@@ -1,30 +1,110 @@
 {
-	"fileVersion": "1.0.31",
+	"fileVersion": "1.0.32",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.34 <1.2.0",
+	"requiredToolVersion": ">=1.1.35 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(isPakInstallerDeployment))$",
-				"description": "Ensure groups are available and optionally onboard additional users for Pak Deployer environments",
+				"enabled": "$(ISSET(isPakInstallerDeployment))$ && $(isLocalLDAPAvailable|default=false)$",
+				"description": "Ensure groups are available, optionally onboard additional users, and synchronize mail server users for Cloud Pak Deployer environments",
+				"comment": "Will only be executed for Cloud Pak Deployer environments and when the local LDAP could be found",
 				"actions": [
 					{
 						"OCP": {
-							"enabled": "$(isLocalLDAPAvailable|default=false)$",
-							"name": "Add required and optopnally additional users and groups to LDAP and Cloud Pak",
+							"enabled": "true",
+							"name": "Add 'wodemo' user and 'GeneralUsers' & 'P8Administrators' groups required by Client Onboarding labs and optionally add additional users and groups as requested by user to LDAP and Cloud Pak and sync user with email server",
 							"relativeBasePath": "OpenShift",
 							"subActions": [
 								{
+									"MODIFYLOCALLDAP": {
+										"enabled": "true",
+										"description": "Modify LDAP by adding 'GeneralUsers' and 'P8Administrators' groups",
+										"restartPod": "false",
+										"entities": [
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=wodemo,ou=Users,dc=cp,dc=internal",
+												"uid": "wodemo",
+												"cn": "wodemo",
+												"sn": "wodemo",
+												"userPassword": "$(cp4baAdminPwd)$",
+												"mail": "wodemo@cp.internal",
+												"displayName": "Watson Orchestrate Demo"
+											},
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=june,ou=Users,dc=cp,dc=internal",
+												"uid": "june",
+												"cn": "june",
+												"sn": "june",
+												"userPassword": "$(cp4baAdminPwd)$",
+												"homeDirectory": "/home/june/",
+												"mail": "june@cp.internal",
+												"displayName": "June Marie"
+											},
+											{
+												"action": "update",
+												"type": "group",
+												"dn": "cn=cpusers1,ou=Groups,dc=cp,dc=internal",
+												"cn": "cpusers1",
+												"members": [
+													{
+														"action": "add",
+														"dn": "uid=wodemo,ou=Users,dc=cp,dc=internal"
+													}
+												]
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpusers1,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=GeneralUsers,ou=Groups,dc=cp,dc=internal",
+												"cn": "GeneralUsers"
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=P8Administrators,ou=Groups,dc=cp,dc=internal",
+												"cn": "P8Administrators"
+											}
+										]
+									}
+								},
+								{
 									"ADDUSERSGROUPSTOENV": {
 										"enabled": "$(ISSET(onboardUsersFile))$",
-										"description": "Add Users",
-										"restartPod": true,
-										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
-										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"description": "Add additional users as requested by user",
+										"restartPod": "false",
 										"configFile": "$$(onboardUsersFile|default=)$$"
+									}
+								},
+								{
+									"PLATFORM_USERMGT": {
+										"enabled": "$$(enableConfigureSWATLabs_WO)$$",
+										"description": "Add previously added 'wodemo' user to Cloud Pak Platform",
+										"entities": [
+											{
+												"action": "add",
+												"name": "wodemo",
+												"roles": [
+													"Automation Developer"
+												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(isLocalMailAvailable)$$",
+										"description": "Modify running mail server users to match users and password from server LDIF file",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
 									}
 								}
 							]
