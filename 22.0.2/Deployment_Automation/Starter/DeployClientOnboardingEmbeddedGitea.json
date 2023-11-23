@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.27",
+	"fileVersion": "1.0.28",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/22.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.32 <1.2.0",
+	"requiredToolVersion": ">=1.1.35 <1.2.0",
 	"requiredCP4BAVersion": ">=22.2.0 <23.1.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -20,7 +20,7 @@
 									"ADDUSERSGROUPSTOENV": {
 										"enabled": "true",
 										"description": "Add Users",
-										"restartPod": true,
+										"restartPod": "true",
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"configFile": "$$(onboardUsersFile|default=)$$"
@@ -316,7 +316,7 @@
 										"enabled": "true",
 										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding administrators and general users group to the groups",
 										"id": "ModifyStarterLDAP",
-										"restartPod": true,
+										"restartPod": "true",
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"entities": [
@@ -450,7 +450,7 @@
 										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
@@ -491,7 +491,7 @@
 										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All",
 										"message": "This activity may take up to minutes without visible progress"
@@ -1519,7 +1519,7 @@
 										"description": "Add general users group as admins to $$(BAW_DOCS)$$ Object Store",
 										"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS)$$-os",
 										"granteeNames": [
-											"$$(generalUsersGroupName)$$",
+											"$$(generalUsersGroupName)$$"
 										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
