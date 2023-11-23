@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.30",
+	"fileVersion": "1.0.31",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.34 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -19,9 +19,9 @@
 									"MODIFYLOCALLDAP": {
 										"enabled": "true",
 										"description": "Modify LDAP by adding 'wodemo' user and adding it to 'generalusers' group",
-										"restartPod": true,
-										"maximumNumPollsForRestart": 15,
-										"sleepBetweenPollsInSecondsForRestart": 10,
+										"restartPod": "true",
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"entities": [
 											{
 												"action": "add",
@@ -30,10 +30,22 @@
 												"uid": "wodemo",
 												"cn": "wodemo",
 												"sn": "wodemo",
-												"userPassword": "passw0rd",
+												"userPassword": "$(cp4baAdminPwd)$",
 												"homeDirectory": "/home/wodemo/",
 												"mail": "wodemo@example.org",
 												"displayName": "Watson Orchestrate Demo"
+											},
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=june,dc=example,dc=org",
+												"uid": "june",
+												"cn": "june",
+												"sn": "june",
+												"userPassword": "$(cp4baAdminPwd)$",
+												"homeDirectory": "/home/june/",
+												"mail": "june@example.com",
+												"displayName": "June Marie"
 											},
 											{
 												"action": "update",
@@ -64,6 +76,14 @@
 											}
 										]
 									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(isLocalMailAvailable)$$",
+										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
+									}
 								}
 							]
 						}
@@ -86,10 +106,18 @@
 									"ADDUSERSGROUPSTOENV": {
 										"enabled": "true",
 										"description": "Add Users",
-										"restartPod": true,
+										"restartPod": "true",
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"configFile": "$$(onboardUsersFile|default=)$$"
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(isLocalMailAvailable)$$",
+										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
 									}
 								}
 							]
@@ -382,7 +410,7 @@
 										"enabled": "true",
 										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding administrators and general users group to the groups",
 										"id": "ModifyStarterLDAP",
-										"restartPod": true,
+										"restartPod": "true",
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
 										"entities": [
