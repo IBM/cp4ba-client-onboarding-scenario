@@ -1856,8 +1856,8 @@
 												"definitions": [
 													{
 														"isEnabled": true,
-														"eventType": "checkin",
-														"auditEventName": "Checked-in Event",
+														"eventType": "update",
+														"auditEventName": "Update Event",
 														"recordingLevel": "original and modify objects",
 														"auditTypes": [
 															"Success"
@@ -1866,8 +1866,38 @@
 													},
 													{
 														"isEnabled": true,
+														"eventType": "checkin",
+														"auditEventName": "Checked-in Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success", "Failure"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
 														"eventType": "change class",
 														"auditEventName": "Change Class Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "checkout",
+														"auditEventName": "Check-out Event",
+														"recordingLevel": "original and modify objects",
+														"auditTypes": [
+															"Success"
+														],
+														"includeSubclasses": true
+													},
+													{
+														"isEnabled": true,
+														"eventType": "get content",
+														"auditEventName": "Get Content Event",
 														"recordingLevel": "original and modify objects",
 														"auditTypes": [
 															"Success"
@@ -2071,8 +2101,8 @@
 											{
 												"action": "add",
 												"type": "Viewer",
-												"name": "viewer group",
-												"description": "this viewer group cannot see the sensitive information",
+												"name": "Viewer group",
+												"description": "This viewer group cannot see the sensitive information",
 												"entities": [
 													{
 														"action": "add",
@@ -2086,7 +2116,7 @@
 												"action": "add",
 												"type": "Editor",
 												"name": "Editor user group roles",
-												"description": "this user group helps to redact the sensitive information",
+												"description": "This user group helps to redact the sensitive information",
 												"entities": [
 													{
 														"action": "add",
@@ -2117,7 +2147,7 @@
 												"viewers": [
 													{
 														"action": "add",
-														"name": "viewer group"
+														"name": "Viewer group"
 													}
 												]
 											}
@@ -2142,8 +2172,8 @@
 											{
 												"action": "add",
 												"type": "Viewer",
-												"name": "viewer group admins",
-												"description": "this viewer group cannot see the sensitive information",
+												"name": "Viewer group admins",
+												"description": "This viewer group cannot see the sensitive information",
 												"entities": [
 													{
 														"action": "add",
@@ -2157,7 +2187,7 @@
 												"action": "add",
 												"type": "Editor",
 												"name": "Editor user group roles admins",
-												"description": "this user group helps to redact the sensitive information",
+												"description": "This user group helps to redact the sensitive information",
 												"entities": [
 													{
 														"action": "add",
@@ -2188,7 +2218,7 @@
 												"viewers": [
 													{
 														"action": "add",
-														"name": "viewer group admins"
+														"name": "Viewer group admins"
 													}
 												]
 											}
