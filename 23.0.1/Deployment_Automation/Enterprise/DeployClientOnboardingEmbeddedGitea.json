@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.32",
+	"fileVersion": "1.0.33",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.35 <1.2.0",
+	"requiredToolVersion": ">=1.1.36 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -15,50 +15,15 @@
 					{
 						"OCP": {
 							"enabled": "true",
-							"name": "Add 'wodemo' user and 'GeneralUsers' & 'P8Administrators' groups required by Client Onboarding labs and optionally add additional users and groups as requested by user to LDAP and Cloud Pak and sync user with email server",
+							"name": "Add 'GeneralUsers' & 'P8Administrators' groups required by Client Onboarding labs and optionally add additional users and groups as requested by user to LDAP and Cloud Pak and sync user with email server",
 							"relativeBasePath": "OpenShift",
 							"subActions": [
 								{
 									"MODIFYLOCALLDAP": {
 										"enabled": "true",
-										"description": "Modify LDAP by adding 'GeneralUsers' and 'P8Administrators' groups",
+										"description": "Modify LDAP by adding 'GeneralUsers' and 'P8Administrators' groups as copy of existing groups",
 										"restartPod": "false",
 										"entities": [
-											{
-												"action": "add",
-												"type": "user",
-												"dn": "uid=wodemo,ou=Users,dc=cp,dc=internal",
-												"uid": "wodemo",
-												"cn": "wodemo",
-												"sn": "wodemo",
-												"userPassword": "$(cp4baAdminPwd)$",
-												"mail": "wodemo@cp.internal",
-												"displayName": "Watson Orchestrate Demo"
-											},
-											{
-												"action": "add",
-												"type": "user",
-												"dn": "uid=june,ou=Users,dc=cp,dc=internal",
-												"uid": "june",
-												"cn": "june",
-												"sn": "june",
-												"userPassword": "$(cp4baAdminPwd)$",
-												"homeDirectory": "/home/june/",
-												"mail": "june@cp.internal",
-												"displayName": "June Marie"
-											},
-											{
-												"action": "update",
-												"type": "group",
-												"dn": "cn=cpusers1,ou=Groups,dc=cp,dc=internal",
-												"cn": "cpusers1",
-												"members": [
-													{
-														"action": "add",
-														"dn": "uid=wodemo,ou=Users,dc=cp,dc=internal"
-													}
-												]
-											},
 											{
 												"action": "clone",
 												"type": "group",
@@ -82,21 +47,6 @@
 										"description": "Add additional users as requested by user",
 										"restartPod": "false",
 										"configFile": "$$(onboardUsersFile|default=)$$"
-									}
-								},
-								{
-									"PLATFORM_USERMGT": {
-										"enabled": "$$(enableConfigureSWATLabs_WO)$$",
-										"description": "Add previously added 'wodemo' user to Cloud Pak Platform",
-										"entities": [
-											{
-												"action": "add",
-												"name": "wodemo",
-												"roles": [
-													"Automation Developer"
-												]
-											}
-										]
 									}
 								},
 								{
@@ -2348,6 +2298,37 @@
 													"write": false,
 													"administration": false
 												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"enabled": "$$(enableConfigureSWATLabs_WO)$$",
+							"name": "Onboard if they exist usr1-usr200 or for Cloud Pak Deployer its business users to Cloud Pak Platform (required for watsonx Orchestrate lab)",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"PLATFORM_USERMGT": {
+										"enabled": "true",
+										"description": "Onboard users with respective roles to Cloud Pak Platform",
+										"comment": "Sub action will be skipped if first user is not found which might be true",
+										"entities": [
+											{
+												"action": "update",
+												"type": "user",
+												"skipIfFirstUserDoesNotExist" : true,
+												"roleCopySourceIsGroup": true,
+												"roleCopySourceName": "§IF($$(ISSET(isPakInstallerDeployment))$$)§(cpusers1)§ELSE§($$(cp4bausers)$$)ENDIF§",
+												"deriveUsersFromLDAPIfAvailable": true,
+												"userBaseName": "usr",
+												"userNumberingFormatter": "%03d",
+												"userStartNumber": 1,
+												"userTargetNumber": 200,
+												"replaceExistingRoles": false
 											}
 										]
 									}
