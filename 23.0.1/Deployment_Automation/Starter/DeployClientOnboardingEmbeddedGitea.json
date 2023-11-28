@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.34",
+	"fileVersion": "1.0.35",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.38 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
@@ -2516,6 +2516,9 @@
 											},
 											{
 												"smtpHost": "$(localSmtpHost|default=)$"
+											},
+											{
+												"emailPassword": ""
 											}
 										]
 									}
