@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.34",
+	"fileVersion": "1.0.36",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.37 <1.2.0",
+	"requiredToolVersion": ">=1.1.38 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an internal Gitea and arbitrary LDAP users",
@@ -1856,6 +1856,7 @@
 												"definitions": [
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "update",
 														"auditEventName": "Update Event",
 														"recordingLevel": "original and modify objects",
@@ -1866,6 +1867,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "checkin",
 														"auditEventName": "Checked-in Event",
 														"recordingLevel": "original and modify objects",
@@ -1876,6 +1878,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "change class",
 														"auditEventName": "Change Class Event",
 														"recordingLevel": "original and modify objects",
@@ -1886,6 +1889,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "checkout",
 														"auditEventName": "Check-out Event",
 														"recordingLevel": "original and modify objects",
@@ -1896,6 +1900,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "get content",
 														"auditEventName": "Get Content Event",
 														"recordingLevel": "original and modify objects",
@@ -1906,6 +1911,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "move content",
 														"auditEventName": "Move Content Event",
 														"recordingLevel": "original and modify objects",
@@ -2412,6 +2418,9 @@
 											},
 											{
 												"smtpHost": "$(localSmtpHost|default=)$"
+											},
+											{
+												"emailPassword": ""
 											}
 										]
 									}

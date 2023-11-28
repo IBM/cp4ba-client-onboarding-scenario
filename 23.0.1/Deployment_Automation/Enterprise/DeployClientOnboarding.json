@@ -1,7 +1,7 @@
 {
-	"fileVersion": "1.0.31",
+	"fileVersion": "1.0.33",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboarding.json",
-	"requiredToolVersion": ">=1.1.34 <1.2.0",
+	"requiredToolVersion": ">=1.1.38 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"comment": "To be used with CP4BA 23.0.1 Enterprise deployment with an external GitHub connection and arbitrary LDAP users",
@@ -1812,6 +1812,7 @@
 												"definitions": [
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "update",
 														"auditEventName": "Update Event",
 														"recordingLevel": "original and modify objects",
@@ -1822,6 +1823,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "checkin",
 														"auditEventName": "Checked-in Event",
 														"recordingLevel": "original and modify objects",
@@ -1832,6 +1834,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "change class",
 														"auditEventName": "Change Class Event",
 														"recordingLevel": "original and modify objects",
@@ -1842,6 +1845,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "checkout",
 														"auditEventName": "Check-out Event",
 														"recordingLevel": "original and modify objects",
@@ -1852,6 +1856,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "get content",
 														"auditEventName": "Get Content Event",
 														"recordingLevel": "original and modify objects",
@@ -1862,6 +1867,7 @@
 													},
 													{
 														"isEnabled": true,
+														"action": "update",
 														"eventType": "move content",
 														"auditEventName": "Move Content Event",
 														"recordingLevel": "original and modify objects",
@@ -2324,12 +2330,34 @@
 									}
 								},
 								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the Environment Variable 'clientEmailDomain'",
+										"sourceTwxFile": "!twxFileName!",
+										"environmentVariables": [
+											{
+												"emailID": "$$(wf_cp_emailIDInternal)$$"
+											},
+											{
+												"clientEmailDomain": "$(localMailDomain|default=)$"
+											},
+											{
+												"smtpHost": "$(localSmtpHost|default=)$"
+											},
+											{
+												"emailPassword": ""
+											}
+										]
+									}
+								},
+								{
 									"INSTALLSOLUTION": {
 										"enabled": "true",
-										"description": "Import 'Watsonx Orchestrate Service' service solution into Studio",
-										"twxFile": "!twxFileName!",
+										"description": "Install the patched WOX services WF solution",
+										"twxFile": "!patchedTWXFileName!",
 										"paAcronym": "!projectAcronym!",
-										"paSnapshot": "!snapshotAcronym!"
+										"paSnapshot": "!snapshotAcronym!",
+										"checkForUpdatedEnvironmentVariables": true
 									}
 								},
 								{
