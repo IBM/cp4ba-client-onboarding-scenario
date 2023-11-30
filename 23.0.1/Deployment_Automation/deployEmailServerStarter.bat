@@ -45,9 +45,9 @@ rem Uncomment in case GitHub is not accessible and all resources are already ava
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
 
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
-rem Uncomment at least the proxScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
+rem Uncomment at least the proxyScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 rem Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
-rem SET proxScenario=GitHub
+rem SET proxyScenario=GitHub
 rem SET proxyHost=
 rem SET proxyPort=
 rem SET proxyUser=
@@ -62,15 +62,15 @@ rem ----------------------------------------------------------------------------
 
 if defined proxyHost (
 	if defined proxyUser (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxScenatio% -proxyHost=%proxyHost% -proxyPort=%proxyPort% -proxyUser=%proxyUser% -proxyPwd=%proxyPwd%"
+		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort% -proxyUser=%proxyUser% -proxyPwd=%proxyPwd%"
 		
-		if "%proxScenatio%"=="GitHub" (
+		if "%proxyScenario%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort% -U %proxyUser%:%proxyPwd%"
 		)
 	) else (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxScenatio% -proxyHost=%proxyHost% -proxyPort=%proxyPort%"
+		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort%"
 		
-		if "%proxScenatio%"=="GitHub" (
+		if "%proxyScenario%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort%"
 		)
 	)
