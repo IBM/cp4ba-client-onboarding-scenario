@@ -47,8 +47,6 @@ rpaServer=https://rpa-server.com:1111
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
 
-# Should the CP4BA-side artifacts for the watsonx Orchestrate lab should be deployed (requires an additional watsonx Orchestrate SaaS server to execute the lab)
-configureWatonsxOrchestrateLab=false
 
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
@@ -117,7 +115,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.5
+SCRIPTVERSION=1.1.6
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -283,11 +281,6 @@ then
    fi
 fi
 
-if [[ "${configureWatonsxOrchestrateLab}" == "true" ]]
-then
-  INTERNALCONFIGUREWXO=enableConfigureSWATLabs_WO=true
-fi
-
 # if dockerUserName is defined check if not equal default value required
 if [[ ! -z "${dockerUserName+x}" ]]
 then
@@ -374,4 +367,4 @@ then
 fi
 
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${INTERNALCONFIGUREWXO}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${gmailAddressInternal} ${gmailAppKeyInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
