@@ -25,6 +25,41 @@
 										"restartPod": "false",
 										"entities": [
 											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal",
+												"uid": "cp4admin",
+												"cn": "cp4admin",
+												"sn": "cp4admin",
+												"userPassword": "cp4admin",
+												"homeDirectory": "/home/cp4admin/",
+												"mail": "cp4admin@cp.internal"
+											},
+											{
+												"action": "update",
+												"type": "group",
+												"dn": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"cn": "cpadmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal"
+													}
+												]
+											},
+											{
+												"action": "update",
+												"type": "group",
+												"dn": "cn=cpusers,ou=Groups,dc=cp,dc=internal",
+												"cn": "cpadmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal"
+													}
+												]
+											},
+											{
 												"action": "clone",
 												"type": "group",
 												"cloneSourceDN": "cn=cpusers1,ou=Groups,dc=cp,dc=internal",
@@ -37,6 +72,13 @@
 												"cloneSourceDN": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
 												"dn": "cn=P8Administrators,ou=Groups,dc=cp,dc=internal",
 												"cn": "P8Administrators"
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=CE_EnvironmentOwners,ou=Groups,dc=cp,dc=internal",
+												"cn": "CE_EnvironmentOwners"
 											}
 										]
 									}
@@ -1351,7 +1393,7 @@
 									"ADDADMINTOOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Add general users group as admins to $$(CPEICNLABOBJECTSTORE)$$ Object Store",
-										"configMapName": "client-onboarding-state-admin-content-os",
+										"configMapName": "client-onboarding-state-admin-$$(CPEICNLABOBJECTSTORE_LOWER)$$-os",
 										"granteeNames": [
 											"$$(generalUsersGroupName)$$",
 											"§IF($(generalUsersGroupExists|default=false)$)§($(generalUsersGroupDN|default=)$)§ELSE§()ENDIF§"
