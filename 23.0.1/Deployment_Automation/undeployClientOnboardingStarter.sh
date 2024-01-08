@@ -28,6 +28,16 @@ pakInstallerPortalURL=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 #ocLoginToken=REQUIRED
 
+# Modify below three properties according to your needs. Only if the previous option is set to true, the next option can be set to true, too 
+# (e.g. only when cleanupClientOnboardingLabs_UserData is set to true, cleanupClientOnboardingLabs can be set to true)
+# Potential use-cases:
+# - You ran a workshop and want to reuse the environment, you may want to only remove user-data but keep the lab and scenario artifacts deployed (change the second and third option to false)
+# - You want to remove the whole Client Onboarding Artifacts including! custom artifacts created by business users leave all three properties set to true
+# Warning: cleanupClientOnboardingLabs_UserData does not remove data in CPE that was created using the admin user of the environment, only data created by the business users. If the admin user
+# created data undeploying the content lab artfiacts may fail and manual cleanup may be required of the data created by the admin user before content lab artifcats can be undeployed successfully
+cleanupClientOnboardingLabs_UserData=true
+cleanupClientOnboardingLabs=true
+cleanupClientOnboardingScenario=true
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -89,7 +99,7 @@ SCRIPTNAME=undeployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.1
+SCRIPTVERSION=1.1.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -201,4 +211,19 @@ then
   exit 1
 fi
 
-java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT}
+if [ ! -z "${cleanupClientOnboardingLabs_UserData+x}" ]
+then
+	cleanupClientOnboardingLabs_UserDataInternal=enableCleanupSWATLabs_UserData=${cleanupClientOnboardingLabs_UserData}
+fi
+
+if [ ! -z "${cleanupClientOnboardingLabs+x}" ]
+then
+	cleanupClientOnboardingLabsInternal=enableCleanupSWATLabs=${cleanupClientOnboardingLabs}
+fi
+
+if [ ! -z "${cleanupClientOnboardingScenario+x}" ]
+then
+	cleanupClientOnboardingInternal=enableCleanupClientOnboarding=${cleanupClientOnboardingScenario}
+fi
+
+java -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${cleanupClientOnboardingLabs_UserDataInternal} ${cleanupClientOnboardingLabsInternal} ${cleanupClientOnboardingInternal}
