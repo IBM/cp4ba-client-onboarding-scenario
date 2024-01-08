@@ -30,6 +30,9 @@ rem SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 rem SET ocLoginToken=REQUIRED
 
+rem Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
+SET configureLabs=true
+
 rem Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
 SET enableWorkflowLabsForBusinessUsers=false
 
@@ -116,7 +119,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.9
+SET SCRIPTVERSION=1.1.10
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -348,6 +351,8 @@ if defined rpaServerRequired (
 
 if defined enableWorkflowLabsForBusinessUsers set workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=%enableWorkflowLabsForBusinessUsers%
 
+if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs=%configureLabs%
+
 if defined createUsers (
 	if "%createUsers%"=="true" (
 		set createUsersFile=onboardUsersFile=AddUsersToPlatform.json
@@ -425,6 +430,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %OCPSTORAGECLASSFOREMAILINTERNAL% %gmailAddressInternal% %gmailAppKeyInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %OCPSTORAGECLASSFOREMAILINTERNAL% %gmailAddressInternal% %gmailAppKeyInternal% %enableConfigureLabsInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
