@@ -8,41 +8,6 @@
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(onboardUsersFile))$",
-				"description": "Onboard new users to the Cloud Pak",
-				"actions": [
-					{
-						"OCP": {
-							"enabled": "true",
-							"name": "Configure mail server and client in OCP",
-							"relativeBasePath": "OpenShift",
-							"subActions": [
-								{
-									"ADDUSERSGROUPSTOENV": {
-										"enabled": "true",
-										"description": "Add Users",
-										"restartPod": "true",
-										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
-										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
-										"configFile": "$$(onboardUsersFile|default=)$$"
-									}
-								},
-								{
-									"MANAGEMAILUSERS": {
-										"enabled": "$$(isLocalMailAvailable)$$ && $$(LDAPModified|default=false)$$",
-										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
-										"synchronizeWithLDIF": true,
-										"removeAllOtherUsers": true
-									}
-								}
-							]
-						}
-					}
-				]
-			}
-		},
-		{
-			"CONTAINER": {
 				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
 				"description": "Deploy local email server and client",
 				"actions": [
