@@ -1,0 +1,45 @@
+{
+	"comment": "Contains/references the steps required to optionally onboard users/groups, optionally deploy an email server & client, deploy the Client Onboarding scenario itself, and the Client Onboarding labs",
+	"fileVersion": "1.0.38",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingGeneric.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"INCLUDE": {
+				"comment": "For Pak Deployer deployed environments ensure required groups exist",
+				"enabled": "true",
+				"file": "DeployClientOnboardingManagePakDeployerGroups.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally add/remove users and groups from environment and synchronize mail server users with LDAP users if mail server is running",
+				"enabled": "true",
+				"file": "DeployOnboardUsersAndGroups.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally deploy mail server & client",
+				"enabled": "true",
+				"file": "DeployEmailCapability.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding scenario itself",
+				"enabled": "true",
+				"file": "DeployClientOnboardingScenarioGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding labs",
+				"enabled": "true",
+				"file": "DeployClientOnboardingLabsGeneric.json"
+			}
+		}
+	]
+}
