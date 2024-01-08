@@ -86,7 +86,7 @@ BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboar
 # Name of the configuration file to use when running the deployment automation tool
 CONFIGNAME="config-undeploy-withGitea"
 # Automation script to use when running the deployment automation tool
-AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsEmbeddedGitea.json"
+AUTOMATIONSCRIPT="RemoveClientOnboardingArtifactsGeneric.json"
 
 
 # Name of the source sh file passed to execution environment
@@ -94,7 +94,7 @@ SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.1
+SCRIPTVERSION=1.1.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 

@@ -88,11 +88,11 @@ rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=RemoveClientOnboardingArtifactsEmbeddedGitea.json
 
 rem Name of the source batch file passed to execution environment
-SET SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseWithGitea.bat
+SET SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseGeneric.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.1
+SET SCRIPTVERSION=1.1.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
