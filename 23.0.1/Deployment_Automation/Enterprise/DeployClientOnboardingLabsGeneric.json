@@ -13,6 +13,25 @@
 				"description": "Apply additional steps to prepare environment for labs after Client Onboarding solution is deployed",
 				"actions": [
 					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Check if $$(CPEICNLABOBJECTSTORE)$$ Object store exists",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"CHECKOBJECTSTOREEXISTS": {
+										"enabled": "true",
+										"description": "Check Object Store Exists",
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$",
+										"variableName": "contentOSAvailable"
+									}
+								}
+							]
+						}
+					},
+					{
 						"WF": {
 							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
 							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs",
