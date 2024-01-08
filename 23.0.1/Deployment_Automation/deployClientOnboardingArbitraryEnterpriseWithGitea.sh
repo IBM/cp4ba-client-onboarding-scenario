@@ -39,17 +39,16 @@ generalUsersGroup=REQUIRED
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
 
-
 # Flag that determines if the internal email server is used or the external gmail service
 # (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 useInternalMailServer=true
 
+# Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
+ocpStorageClassForInternalMailServer=REQUIRED
+
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
 #dockerToken=REQUIRED
-
-# Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
-ocpStorageClassForInternalMailServer=REQUIRED
 
 # Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 gmailAddress=REQUIRED
@@ -62,6 +61,8 @@ rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution
 rpaServer=https://rpa-server.com:1111
 
+# Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
+configureLabs=true
 # Should ADP be used within the Client Oboarding scenario (do not change for now)
 adpConfigured=false
 # Should the Content labs be configured (requires the expected object store to exist)
@@ -123,14 +124,14 @@ BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboar
 # Name of the configuration file to use when running the deployment automation tool
 CONFIGNAME="config-deploy-withGitea"
 # Automation script to use when running the deployment automation tool
-AUTOMATIONSCRIPT="DeployClientOnboardingEmbeddedGitea.json"
+AUTOMATIONSCRIPT="DeployClientOnboardingGeneric.json"
 
 # Name of the source sh file passed to execution environment
 SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.2.6
+SCRIPTVERSION=1.2.7
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -460,6 +461,11 @@ else
   fi
 fi
 
+if [ ! -z "${configureLabs+x}" ]
+then
+	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
+fi
+
 if ! $validationSuccess
 then
   echo
@@ -471,4 +477,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

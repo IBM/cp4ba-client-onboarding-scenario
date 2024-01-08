@@ -46,13 +46,17 @@ rem Git API key to connect to the Git server
 SET adsGitRepoAPIKey=REQUIRED
 
 
-rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
-rem SET dockerUserName=REQUIRED
-rem SET dockerToken=REQUIRED
+rem Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
+SET configureLabs=true
 
 rem Flag that determines if the internal email server is used or the external gmail service
 rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 SET useInternalMailServer=true
+
+rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+rem SET dockerUserName=REQUIRED
+rem SET dockerToken=REQUIRED
+
 
 rem Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
 SET ocpStorageClassForInternalMailServer=REQUIRED
@@ -125,14 +129,14 @@ SET BOOTSTRAPURL=-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onb
 rem Name of the configuration file to use when running the deployment automation tool
 SET CONFIGNAME=config-deploy
 rem Automation script to use when running the deployment automation tool
-SET AUTOMATIONSCRIPT=DeployClientOnboarding.json
+SET AUTOMATIONSCRIPT=DeployClientOnboardingGeneric.json
 
 rem Name of the source batch file passed to execution environment
 SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.5
+SET SCRIPTVERSION=1.2.6
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -517,9 +521,11 @@ if defined overallValidationFailed (
 	exit /b 1;
 )
 
+if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs=%configureLabs%
+
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% ACTION_adsGitOrg=%adsGitOrg% ACTION_adsGitUserName=%adsGitUserName% ACTION_adsGitRepoAPIKey=%adsGitRepoAPIKey% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% ACTION_adsGitOrg=%adsGitOrg% ACTION_adsGitUserName=%adsGitUserName% ACTION_adsGitRepoAPIKey=%adsGitRepoAPIKey% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
