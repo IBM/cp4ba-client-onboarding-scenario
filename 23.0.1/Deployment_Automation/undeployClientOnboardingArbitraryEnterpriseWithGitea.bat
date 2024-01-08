@@ -34,6 +34,17 @@ SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
 
+rem Modify below three properties according to your needs. Only if the previous option is set to true, the next option can be set to true, too 
+rem (e.g. only when cleanupClientOnboardingLabs_UserData is set to true, cleanupClientOnboardingLabs can be set to true)
+rem Potential use-cases:
+rem - You ran a workshop and want to reuse the environment, you may want to only remove user-data but keep the lab and scenario artifacts deployed (change the second and third option to false)
+rem - You want to remove the whole Client Onboarding Artifacts including! custom artifacts created by business users leave all three properties set to true
+rem Warning: cleanupClientOnboardingLabs_UserData does not remove data in CPE that was created using the admin user of the environment, only data created by the business users. If the admin user
+rem created data undeploying the content lab artfiacts may fail and manual cleanup may be required of the data created by the admin user before content lab artifcats can be undeployed successfully
+SET cleanupClientOnboardingLabs_UserData=true
+SET cleanupClientOnboardingLabs=true
+SET cleanupClientOnboardingScenario=true
+
 
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admin
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
@@ -95,7 +106,7 @@ SET SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.2
+SET SCRIPTVERSION=1.1.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -235,9 +246,13 @@ if defined overallValidationFailed (
 	exit /b 1;
 )
 
+if defined cleanupClientOnboardingLabs_UserData set cleanupClientOnboardingLabs_UserDataInternal=enableCleanupSWATLabs_UserData=%cleanupClientOnboardingLabs_UserData%
+if defined cleanupClientOnboardingLabs set cleanupClientOnboardingLabsInternal=enableCleanupSWATLabs=%cleanupClientOnboardingLabs%
+if defined cleanupClientOnboardingScenario set cleanupClientOnboardingInternal=enableCleanupClientOnboarding=%cleanupClientOnboardingScenario%
+
 echo Starting deployment automation tool...
 echo:
 
-java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials%
+java -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% %cleanupClientOnboardingLabs_UserDataInternal% %cleanupClientOnboardingLabsInternal% %cleanupClientOnboardingInternal%
 
 ENDLOCAL
