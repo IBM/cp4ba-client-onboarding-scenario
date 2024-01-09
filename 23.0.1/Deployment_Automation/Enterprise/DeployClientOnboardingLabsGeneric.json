@@ -1199,7 +1199,7 @@
 												"type": "user",
 												"skipIfFirstUserDoesNotExist" : true,
 												"roleCopySourceIsGroup": true,
-												"roleCopySourceName": "§IF($$(ISSET(isPakInstallerDeployment))$$)§(cpusers1)§ELSE§($$(cp4bausers)$$)ENDIF§",
+												"roleCopySourceName": "§IF($$(ISSET(isCloudPakDeployerDeployment))$$)§(cpusers1)§ELSE§($$(cp4bausers)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": true,
 												"userBaseName": "usr",
 												"userNumberingFormatter": "%03d",
