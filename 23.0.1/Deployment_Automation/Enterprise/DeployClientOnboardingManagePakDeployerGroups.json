@@ -8,7 +8,7 @@
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(isPakInstallerDeployment))$ && $(isLocalLDAPAvailable|default=false)$",
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$ && $(isLocalLDAPAvailable|default=false)$",
 				"description": "Ensure groups are available for Cloud Pak Deployer deployed environments",
 				"comment": "Will only be executed for Cloud Pak Deployer deployed environments and when the local LDAP could be found",
 				"actions": [
