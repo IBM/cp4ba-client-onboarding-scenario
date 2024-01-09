@@ -1199,7 +1199,7 @@
 												"type": "user",
 												"skipIfFirstUserDoesNotExist" : true,
 												"roleCopySourceIsGroup": true,
-												"roleCopySourceName": "§IF($$(ISSET(isCloudPakDeployerDeployment))$$)§(cpusers1)§ELSE§($$(cp4bausers)$$)ENDIF§",
+												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": true,
 												"userBaseName": "usr",
 												"userNumberingFormatter": "%03d",
@@ -1207,7 +1207,8 @@
 												"userTargetNumber": 200,
 												"replaceExistingRoles": false
 											}
-										]
+										],
+										"configMapName" : "client-onboarding-state-onboard-users"
 									}
 								}
 							]
