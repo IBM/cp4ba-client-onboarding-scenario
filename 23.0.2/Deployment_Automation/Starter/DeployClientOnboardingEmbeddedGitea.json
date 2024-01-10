@@ -1,0 +1,38 @@
+{
+	"comment": "Contains/references the steps required to deploy the Client Onboarding scenario and labs optionally including a local email server/client and allowing business users to create, deploy, and test case solutions",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"INCLUDE": {
+				"comment": "Optionally add/remove users from environment and deploy mail server & client",
+				"enabled": "true",
+				"file": "DeployEmailCapability.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally configure WF and CPE so that business users can create, deploy, and test WF solutions including case",
+				"enabled": "true",
+				"file": "DeployClientOnboardingLabsConfigureWFForBusinessUsers.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding scenario itself",
+				"enabled": "true",
+				"file": "DeployClientOnboardingScenarioEmbeddedGitea.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding labs",
+				"enabled": "true",
+				"file": "DeployClientOnboardingLabsEmbeddedGitea.json"
+			}
+		}
+	]
+}

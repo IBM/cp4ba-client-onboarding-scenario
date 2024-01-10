@@ -1,0 +1,224 @@
+{
+	"comment": "Contains the steps required to allow business users to create, deploy, and test case solutions",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingLabsConfigureWFForBusinessUsers.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$$(enableConfigureSWATLabs)$$ && $$(enableConfigureSWATLabs_WF)$$ && $$(enableWFLabForBusinessUsers)$$",
+				"description": "Configure environment so that user in group '$$(generalUsersGroupName)$$' can create WF solutions including case capability",
+				"comment": "Container bundles activities to configure the environment for the WF lab for business users that should be executed before importing the WF solution",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"description": "OCP - Add two groups containing both admin and general users group to LDIF, restart LDAP pod, and CPE pods",
+							"subActions": [
+								{
+									"MODIFYLOCALLDAP": {
+										"enabled": "true",
+										"description": "Modify LDAP by adding two groups used for P8 WF sub-system adding administrators and general users group to the groups",
+										"id": "ModifyStarterLDAP",
+										"restartPod": "true",
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"entities": [
+											{
+												"action": "add",
+												"type": "group",
+												"dn": "cn=P8WFAdmins,dc=example,dc=org",
+												"cn": "P8WFAdmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "$$(generalUsersGroupName)$$"
+													},
+													{
+														"action": "add",
+														"dn": "$$(cp4baAdminGroup)$$"
+													}
+												]
+											},
+											{
+												"action": "add",
+												"type": "group",
+												"dn": "cn=P8WFConfigurators,dc=example,dc=org",
+												"cn": "P8WFConfigurators",
+												"members": [
+													{
+														"action": "add",
+														"dn": "$$(generalUsersGroupName)$$"
+													},
+													{
+														"action": "add",
+														"dn": "$$(cp4baAdminGroup)$$"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"RESTARTPODS": {
+										"enabled": "true",
+										"description": "Restart CPE pods after LDAP was modified so it does not cache groups and group membership",
+										"dependentOnId": "ModifyStarterLDAP",
+										"dependencyType": "skip",
+										"namespace": "$$(cp4baNamespace)$$",
+										"labelName": "app",
+										"labelValue": "$$(cp4baClusterName)$$-cpe-deploy",
+										"maximumNumPollsForRestart": "$$(restartCPEPods_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(restartCPEPods_sleepBetweenPollsInSecondsForRestart)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins, tw_authors, and project area to be able to create projects",
+							"enabled": "true",
+							"description": "WF - Add general user group '$$(generalUsersGroupShort)$$' to tw_authors and project area",
+							"subActions": [
+								{
+									"MANAGEGROUPS": {
+										"enabled": "true",
+										"description": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins and tw_authors",
+										"activities": [
+											{
+												"action": "AddMembers",
+												"groupName": "tw_admins",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											},
+											{
+												"action": "AddMembers",
+												"groupName": "tw_authors",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPROJECTAREA": {
+										"enabled": "true",
+										"description": "Add '$$(generalUsersGroupShort)$$' group to default Case Project Area",
+										"useDefaultProjectArea": true,
+										"security": [
+											{
+												"action": "AddMembers",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object store $$(BAW_DOS)$$",
+							"objectStoreName": "$$(BAW_DOS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"MODIFYOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Modify security for $$(BAW_DOS)$$ Object Store",
+										"name": "Modify security for $$(BAW_DOS)$$ Object Store",
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Update",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											}
+										]
+									}
+								},
+								{
+									"ADDADMINTOOBJECTSTORE": {
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"description": "Add general users group as admins to $$(BAW_DOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_DOS)$$-os",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$"
+										],
+										"updateTypes": "All",
+										"message": "This activity may take up to minutes without visible progress"
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"subActions": [
+								{
+									"MODIFYOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Modify security for $$(BAW_TOS)$$ Object Store",
+										"name": "Modify security for $$(BAW_TOS)$$ Object Store",
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Update",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control"
+											}
+										]
+									}
+								},
+								{
+									"ADDADMINTOOBJECTSTORE": {
+										"enabled": "$$(isStarterDeployment)$$ || $$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$",
+										"description": "Add general users group as admins to $$(BAW_TOS)$$ Object Store",
+										"configMapName": "client-onboarding-state-admin-$$(BAW_TOS)$$-os",
+										"granteeNames": [
+											"$$(generalUsersGroupName)$$"
+										],
+										"updateTypes": "All",
+										"message": "This activity may take up to minutes without visible progress"
+									}
+								},
+								{
+									"MANAGEWFSECURITYGROUPS": {
+										"enabled": "true",
+										"description": "Manage WF System Security Groups",
+										"administrationGroup": "P8WFAdmins",
+										"configurationGroup": "P8WFConfigurators",
+										"restartCPEPods": true,
+										"maximumNumPollsForRestart": "$$(p8SecurityGroups_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(p8SecurityGroups_sleepBetweenPollsInSecondsForRestart)$$"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

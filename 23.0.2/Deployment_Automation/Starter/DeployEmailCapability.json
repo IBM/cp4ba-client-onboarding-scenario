@@ -1,0 +1,313 @@
+{
+	"comment": "Contains the steps to deploy the email server and client capability",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployEmailCapability.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$(ISSET(onboardUsersFile))$",
+				"description": "Onboard new users to the Cloud Pak",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Configure mail server and client in OCP",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"ADDUSERSGROUPSTOENV": {
+										"enabled": "true",
+										"description": "Add Users",
+										"restartPod": "true",
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"configFile": "$$(onboardUsersFile|default=)$$"
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(isLocalMailAvailable)$$ && $$(LDAPModified|default=false)$$",
+										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"CONTAINER": {
+				"enabled": "$$(enableDeployEmailCapability)$$ && $$(!isLocalMailAvailable)$$",
+				"description": "Deploy local email server and client",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Configure mail server and client in OCP",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for OCP",
+										"name": "Download OCP file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver-tls-secret.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-pvc.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-shared-secret.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-db.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-deployment.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-config.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-mail-service.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/roundcube-nginx.yaml"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/mailserver.pem"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/config.cert.inc.php"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/OpenShift/config.inc.php"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPNAMESPACE": {
+										"enabled": "true",
+										"description": "Add mail namespace",
+										"action": "add",
+										"namespaceName": "mail"
+									}
+								},
+								{
+									"MANAGEDOCKERPULLSECRETS": {
+										"enabled": "$(ISSET(dockerUserName))$ && $(ISSET(dockerToken))$",
+										"description": "If configured add docker pull secret",
+										"namespaceName": "mail",
+										"secrets": [
+											{
+												"action": "add",
+												"dockerServer": "docker.io",
+												"secretName": "mail-docker-pull-secret",
+												"dockerUserName": "$$(dockerUserName)$$",
+												"dockerToken": "$$(dockerToken)$$"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEOCPCLUSTERROLEBINDING": {
+										"enabled": "true",
+										"description": "Add ClusterRoleBinding for 'privileged' and 'anyuid' cluster roles",
+										"namespaceName": "mail",
+										"clusterRoles": [
+											{
+												"action": "add",
+												"clusterRoleName": "privileged"
+											},
+											{
+												"action": "add",
+												"clusterRoleName": "anyuid"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "true",
+										"description": "Modify mail server users to match users and password from server LDIF file",
+										"yamlFile": "mailserver.yaml",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
+									}
+								},
+								{
+									"APPLYYAMLACTION": {
+										"enabled": "true",
+										"description": "Apply YAML files for mail server",
+										"namespaceName": "mail",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
+										"yamlFiles": [
+											{
+												"fileName": "mailserver-tls-secret.yaml"
+											},
+											{
+												"fileName": "!yamlFileName!"
+											}
+										]
+									}
+								},
+								{
+									"APPLYYAMLACTION": {
+										"enabled": "true",
+										"description": "Apply YAML files for mail client",
+										"namespaceName": "mail",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
+										"yamlFiles": [
+											{
+												"fileName": "roundcube-pvc.yaml"
+											},
+											{
+												"fileName": "roundcube-shared-secret.yaml"
+											},
+											{
+												"fileName": "roundcube-mail-config.yaml"
+											},
+											{
+												"fileName": "roundcube-db.yaml"
+											},
+											{
+												"fileName": "roundcube-mail-deployment.yaml"
+											}
+										]
+									}
+								},
+								{
+									"COPYFILES": {
+										"enabled": "true",
+										"id": "copyFilesToFromPod",
+										"description": "Copy files for mail client to and path file on pod",
+										"delayBefore": 0,
+										"namespaceName": "mail",
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
+										"copyActions": [
+											{
+												"action": "toContainer",
+												"podLabelName": "service",
+												"podLabelSelector": "roundcubemail",
+												"containerName": "roundcubemail",
+												"localFileName": "mailserver.pem",
+												"remotePath": "/var/www/html/config",
+												"overExistingFile": false
+											},
+											{
+												"action": "toContainer",
+												"podLabelName": "service",
+												"podLabelSelector": "roundcubemail",
+												"containerName": "roundcubemail",
+												"localFileName": "config.cert.inc.php",
+												"remotePath": "/var/www/html/config",
+												"overExistingFile": false
+											},
+											{
+												"action": "fromContainer",
+												"podLabelName": "service",
+												"podLabelSelector": "roundcubemail",
+												"containerName": "roundcubemail",
+												"remotePath": "/var/www/html/config",
+												"remoteFileName": "config.inc.php",
+												"localFileName": "config.inc.php_orig",
+												"overExistingFile": true,
+												"restartPods": false,
+												"fileEdit": {
+													"tmpFileName": "config.inc.php_mod",
+													"action": "afterLastEmptyLineCheckExists",
+													"content": "    include(__DIR__ . '/config.cert.inc.php');",
+													"copyBackWithOriginalName": true
+												}
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDEPLOYMENTS": {
+										"enabled": "true",
+										"description": "Delete 'roundcubemail' deployment after patching files in PVC",
+										"dependentOnId": "copyFilesToFromPod",
+										"dependencyType": "skip",
+										"namespaceName": "mail",
+										"maximumNumPollsForDeletion": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepBetweenPollsInSecondsForDeletion": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"deployments": [
+											{
+												"action": "delete",
+												"deploymentName": "roundcubemail"
+											}
+										]
+									}
+								},
+								{
+									"APPLYYAMLACTION": {
+										"enabled": "true",
+										"description": "Apply remaining YAML files for mail client",
+										"namespaceName": "mail",
+										"storageClassName": "$$(ocpStorageClassForMail)$$",
+										"imagePullSecretName": "§IF($$(ISSET(dockerUserName))$$ && $$(ISSET(dockerToken))$$)§(mail-docker-pull-secret)ENDIF§",
+										"maxNumPollsForCompletionPVC": "$$(applyYAML_maxNumPollsForCompletionPVC)$$",
+										"sleepInSecBetweenPollsPVC": "$$(applyYAML_sleepInSecBetweenPollsPVC)$$",
+										"maxNumPollsForCompletionDeployment": "$$(applyYAML_maxNumPollsForCompletionDeployment)$$",
+										"sleepInSecBetweenPollsDeployment": "$$(applyYAML_sleepInSecBetweenPollsDeployment)$$",
+										"maxNumPollsForCompletionRoute": "$$(applyYAML_maxNumPollsForCompletionRoute)$$",
+										"sleepInSecBetweenPollsRoute": "$$(applyYAML_sleepInSecBetweenPollsRoute)$$",
+										"yamlFiles": [
+											{
+												"fileName": "roundcube-mail-deployment.yaml"
+											},
+											{
+												"fileName": "roundcube-mail-service.yaml"
+											},
+											{
+												"fileName": "roundcube-nginx.yaml"
+											}
+										]
+									}
+								},
+								{
+									"RELOADOCPCONFIGURATION": {
+										"enabled": "true",
+										"description": "Reload OCP Configuration for Deployment Tool after installing mail server and client",
+										"skipIfPreviousAreSkipOrSucessSkip": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
