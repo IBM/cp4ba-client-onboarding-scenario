@@ -138,7 +138,7 @@
 										"resourceTypes": "all",
 										"deleteNonAdminArtifactsInCPE": true,
 										"useCutOffDate": true,
-										"userBase": "§IF($$(ISSET(isPakInstallerDeployment))$$)§(cpuser)§ELSE§($$(usr)$$)ENDIF§",
+										"userBase": "§IF($$(isCloudPakDeployerDeployment|default=false)$$)§(cpuser)§ELSE§(usr)ENDIF§",
 										"listOnly": false,
 										"debug": false,
 										"maxNumRetries": "5",
@@ -153,7 +153,7 @@
 							"comment": "Delete all non-predeployed solution, templates and toolkits created as part of WF or RPA labs",
 							"enabled": "$$(enableCleanupSWATLabs_UserData_WF)$$",
 							"description": "WF - Delete all WF solutions, WF templates, and WF TKs (except pre-deployed ones and those belonging to the Client Onboarding scenario)",
-							"relativeBasePath": "4_WF",
+							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
 									"DELETEPROJECT": {
@@ -241,7 +241,7 @@
 										"excludeProjectNames": [
 											"Client Onboarding"
 										],
-										"handleAllProjects": "false",
+										"handleAllProjects": "true",
 										"decisionServiceName": "*",
 										"version": "*",
 										"unpublishAutomationServices": true,
