@@ -10,7 +10,7 @@
 			"CONTAINER": {
 				"comment": "Clean up lab artifacts",
 				"enabled": "$$(enableCleanupSWATLabs)$$",
-				"description": "Remove artifcats created to run Client Onboarding labs (BAI, BAA, ICN, CPE, WF, ADS)",
+				"description": "Remove artifacts created to run Client Onboarding labs (BAI, BAA, ICN, CPE, WF, ADS)",
 				"actions": [
 					{
 						"WF": {
