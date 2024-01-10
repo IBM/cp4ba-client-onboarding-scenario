@@ -241,7 +241,7 @@
 										"excludeProjectNames": [
 											"Client Onboarding"
 										],
-										"handleAllProjects": "false",
+										"handleAllProjects": "true",
 										"decisionServiceName": "*",
 										"version": "*",
 										"unpublishAutomationServices": true,
