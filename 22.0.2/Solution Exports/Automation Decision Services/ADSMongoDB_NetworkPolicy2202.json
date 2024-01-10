@@ -3,7 +3,7 @@
 	"kind": "NetworkPolicy",
 	"metadata": {
 		"name": "allow-baw-adsmongo",
-		"namespace": "ibm-cp4ba"
+		"namespace": "$$(cp4baNamespace)$$"
 	},
 	"spec": {
 		"podSelector": {
