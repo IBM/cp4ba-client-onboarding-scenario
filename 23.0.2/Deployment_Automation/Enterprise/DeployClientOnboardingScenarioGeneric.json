@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
@@ -68,9 +68,9 @@
 										"comment": "Used when no internal gitea is available or external git server is specified",
 										"enabled": "$$(!isGiteaAvailable)$$ || $$(ISSET(adsGitServerUrl))$$",
 										"description": "Test ADS capability",
-										"gitServerUrl": "$$(adsGitServerUrl)$$",
-										"userName": "$$(adsGitUserName)$$",
-										"apiKey": "$$(adsGitRepoAPIKey)$$"
+										"gitServerUrl": "$$(adsGitServerUrl|default=)$$",
+										"userName": "$$(adsGitUserName|default=)$$",
+										"apiKey": "$$(adsGitRepoAPIKey|default=)$$"
 									}
 								},
 								{
@@ -95,9 +95,9 @@
 										"comment": "Used when no ADS auto connect to Git is configured and no internal gitea is available or external git server is specified",
 										"enabled": "$$(!isADSAutoConnectToGit)$$ && ($$(!isGiteaAvailable)$$ || $$(ISSET(adsGitServerUrl))$$)",
 										"description": "Create Git repo in external Git repository",
-										"gitServerUrl": "$$(adsGitServerUrl)$$",
-										"userName": "$$(adsGitUserName)$$",
-										"apiKey": "$$(adsGitRepoAPIKey)$$",
+										"gitServerUrl": "$$(adsGitServerUrl|default=)$$",
+										"userName": "$$(adsGitUserName|default=)$$",
+										"apiKey": "$$(adsGitRepoAPIKey|default=)$$",
 										"orgName": "$$(adsGitOrg)$$",
 										"repoName": "$$(adsGitRepo)$$",
 										"repoDescription": "$$(adsGitRepoDescription)$$"
@@ -124,7 +124,7 @@
 										"enabled": "$$(!isADSAutoConnectToGit)$$ && ($$(!isGiteaAvailable)$$ || $$(ISSET(adsGitServerUrl))$$)",
 										"description": "Connect ADS project to external git repository",
 										"gitRepoUrl": "!GITREPOURL!",
-										"gitApiKey": "$$(adsGitRepoAPIKey)$$"
+										"gitApiKey": "$$(adsGitRepoAPIKey|default=)$$"
 									}
 								},
 								{
