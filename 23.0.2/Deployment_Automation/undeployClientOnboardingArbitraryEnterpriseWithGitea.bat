@@ -106,7 +106,7 @@ SET SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.3
+SET SCRIPTVERSION=1.0.0
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 

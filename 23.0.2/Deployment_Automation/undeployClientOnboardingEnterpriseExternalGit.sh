@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 23.0.1 Enterprise deployment with an external Git repository for the ADS project to remove the Client Onboarding scenario and associated labs
+# This file is to be used with CP4BA 23.0.2 Enterprise deployment with an external Git repository for the ADS project to remove the Client Onboarding scenario and associated labs
 
 # Set all variables according to your environment before executing this file
 
@@ -88,7 +88,7 @@ fi
 # Source URL where the deployment automation jar can be retrieved from
 TOOLSOURCE="https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current"
 # CP4BA version
-CP4BAVERSION="23.0.1"
+CP4BAVERSION="23.0.2"
 # Deployment pattern of the CP4BA instance
 DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
@@ -103,7 +103,7 @@ SCRIPTNAME=undeployClientOnboardingEnterpriseExternalGit.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.3
+SCRIPTVERSION=1.0.0
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 

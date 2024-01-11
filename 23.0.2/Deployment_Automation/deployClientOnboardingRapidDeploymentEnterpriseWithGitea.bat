@@ -12,7 +12,7 @@ rem ############################################################################
 
 echo.
 SETLOCAL
-rem This file is to be used with CP4BA 23.0.1 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
+rem This file is to be used with CP4BA 23.0.2 Enterprise deployment according to the SWAT rapid deployment scripts with a co-deployed gitea to deploy the Client Onboarding scenario and associated labs (by default using an  external mail server)
 
 rem Set all variables according to your environment before executing this file
 
@@ -110,7 +110,7 @@ rem ----------------------------------------------------------------------------
 rem Source URL where the deployment automation jar can be retrieved from
 SET TOOLSOURCE=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/Deployment_Automation/Current
 rem CP4BA version
-SET CP4BAVERSION=23.0.1
+SET CP4BAVERSION=23.0.2
 rem Deployment pattern of the CP4BA instance
 SET DEPLOYMENTPATTERN=Enterprise
 rem Source URL to bootstrap configuration for the deployment tool
@@ -125,7 +125,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.6
+SET SCRIPTVERSION=1.0.0
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
