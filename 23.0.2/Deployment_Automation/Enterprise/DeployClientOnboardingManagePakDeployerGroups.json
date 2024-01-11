@@ -33,7 +33,8 @@
 												"sn": "cp4admin",
 												"userPassword": "cp4admin",
 												"homeDirectory": "/home/cp4admin/",
-												"mail": "cp4admin@cp.internal"
+												"mail": "cp4admin@cp.internal",
+												"employeeType": "admin"
 											},
 											{
 												"action": "update",
