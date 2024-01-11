@@ -1,7 +1,7 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.0",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingLabsGeneric.json",
+	"fileVersion": "1.0.1",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
 	"requiredCP4BAPattern": "Enterprise",
@@ -195,7 +195,7 @@
 										"configMapName": "client-onboarding-state-admin-$$(CPEICNLABOBJECTSTORE_LOWER)$$-os",
 										"granteeNames": [
 											"$$(generalUsersGroupName)$$",
-											"§IF($(generalUsersGroupExists|default=false)$)§($(generalUsersGroupDN|default=)$)§ELSE§()ENDIF§"
+											"§IF($(generalUsersGroupExists|default=false)$)§($(generalUsersGroupDN|default=)$)ENDIF§"
 										],
 										"updateTypes": "All, !EntryTemplates",
 										"exclusionsByType": [
@@ -844,6 +844,19 @@
 									}
 								},
 								{
+									"UPDATEP8REPOSETTINGS": {
+										"enabled": "true",
+										"description": "Update P8 repository settings to enable Entry Template Management, Redaction, and Edit Services",
+										"repoId": "$(REPOSITORY_ID)$",
+										"enableDocumentHistory": true,
+										"allowEntryTemplateManagement": true,
+										"enableRedaction": true,
+										"allowMergeSplitForRoleBasedRedaction": true,
+										"deliverRedactedPDFAsPDF": false,
+										"enableEditService": true
+									}
+								},
+								{
 									"PATCHDESKTOP": {
 										"enabled": "true",
 										"description": "Patch 'ICN' desktop exported from enterprise deployment to work in current deployment",
@@ -892,19 +905,6 @@
 										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
 										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
-									}
-								},
-								{
-									"UPDATEP8REPOSETTINGS": {
-										"enabled": "true",
-										"description": "Update P8 repository settings to enable Entry Template Management, Redaction, and Edit Services",
-										"repoId": "$(REPOSITORY_ID)$",
-										"enableDocumentHistory": true,
-										"allowEntryTemplateManagement": true,
-										"enableRedaction": true,
-										"allowMergeSplitForRoleBasedRedaction": true,
-										"deliverRedactedPDFAsPDF": false,
-										"enableEditService": true
 									}
 								},
 								{
@@ -1192,7 +1192,7 @@
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
 										"description": "Onboard users with respective roles to Cloud Pak Platform",
-										"comment": "Sub action will be skipped if first user is not found which might be true",
+										"comment": "Sub action will be skipped if first user is not found which might be true, Cloup Pak Deployer deployment get the list of users directly ignoring userBaseName, userBaseName, userStartNumber & userTargetNumber as long as deriveUsersFromLDAPIfAvailable is set to true",
 										"entities": [
 											{
 												"action": "update",
