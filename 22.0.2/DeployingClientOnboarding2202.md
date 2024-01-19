@@ -1,6 +1,6 @@
 # Deploying the Client Onboarding scenario to a Jam-in-a-Box environment (for CP4BA 22.0.2)
 
-A version for [CP4BA 23.0.1](/23.0.1/DeployingClientOnboarding2301.md) is also available
+**This version is outdated and deprecated - A version for [CP4BA 23.0.1](/23.0.1/DeployingClientOnboarding2301.md) is available**
 
 ## Introduction
 
