@@ -4,7 +4,7 @@
 
 Use these instruction to deploy the out-of-the-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/23.0.1) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 23.0.1**).
 
-For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
+For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://ibm.biz/Jam-in-a-Box) page.
 
 
 ## Prerequisites
