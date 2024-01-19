@@ -56,6 +56,9 @@ SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 SET gmailAppKey=REQUIRED
 
+rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+SET createUsers=false
+
 rem Should ADP be used within the Client Oboarding scenario (do not change for now)
 SET adpConfigured=false
 
@@ -119,7 +122,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.2.6
+SET SCRIPTVERSION=1.2.7
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -297,6 +300,21 @@ if defined cp4baNamespace (
 	)
 )
 
+if defined createUsers (
+	if "%createUsers%"=="true" (
+		set createUsersFile=onboardUsersFile=AddUsersToPlatform.json
+		
+		rem Determine if the json file exist
+		for /f "tokens=*" %%i in ('dir /b * ^| findstr /l "AddUsersToPlatform.json"') do set USERFILENAME=%%i
+		
+		rem In case not available/found print error and mark as validation failed
+		if not defined USERFILENAME (
+			set validationFailed=true
+			echo   Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory
+		)
+	)
+)
+
 if defined dockerUserName (
 	if "%dockerUserName%"=="REQUIRED" (
 		if not defined validationFailed (
@@ -359,6 +377,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% %createUsersFile% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
