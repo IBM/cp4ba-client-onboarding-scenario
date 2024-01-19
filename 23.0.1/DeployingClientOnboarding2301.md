@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/23.0.1) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 23.0.1**). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
+Use these instruction to deploy the out-of-the-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/23.0.1) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 23.0.1**).
+
+For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
 
 
 ## Prerequisites
@@ -83,8 +85,9 @@ Update the variable `pakInstallerPortalURL` defined at the top of the file with 
 
 <img src="..\images\techzone-reserved-env_2301.jpg"/>
 
-> In case you want to use the environment to **perform the Workflow labs with the business users** instead of the admin user, set `enableWorkflowLabsForBusinessUsers` to `true`. This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
+> In case you want to use the environment to **perform the Workflow labs with the business users** instead of the admin user, set `enableWorkflowLabsForBusinessUsers` to `true`. This will extend the deployment time to about 45 minutes.
 >
+> This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
 
 ### Perform Import
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access (e.g. is not blocked by a firewall or requires a proxy server) both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
@@ -154,27 +157,13 @@ For the purpose of analyzing issues the deployment tool creates four files in th
 
 In case your deployment fails and you get stuck, please reach out using the contact information that is given when the deployment fails and provide the `<date>_collector.zip` file created in this instance.
 
+
+
+
+
 ## Advanced Configuration
 
-### Updating bat/sh File for non-PakInstaller Starter Deployment Environments
-
-In case you have a starter deployment environment of CP4BA 23.0.1 that was not deployed using PakInstaller, update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the bat/sh file with your specific details:
-
-1. **Login** to the OpenShift Web Console
-
-2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner 
-
-   <img src="..\images\openshift-copy-log-in-command.jpg" />
-
-3. Click on **Display Token** link shown on the next page 
-
-4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`
-
-   <img src="..\images\openshift-log-in-token.jpg" />
-
-5. Start the deployment of the Client Onboarding artifacts
-
-### Performing the Workflow labs using business users (instead of admin user)
+### Performing the Workflow labs using business users (instead of or in addition to the admin user)
 
 As part of editing the **deployClientOnboardingStarter.bat** or **deployClientOnboardingStarter.sh** file, ensure to set the `enableWorkflowLabsForBusinessUsers` variable to `true`.
 
@@ -207,6 +196,26 @@ You need to set the following two variables in the bat/sh-file you downloaded an
 
 If you have previously run the deployment, run it again. It will recognize that your RPA configuration has changed and will redeploy the artifact that contains the changed RPA information.
 
+### Updating bat/sh File for non-PakInstaller Starter Deployment Environments
+
+In case you have a starter deployment environment of CP4BA 23.0.1 that was not deployed using PakInstaller, update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the bat/sh file with your specific details, and the `ocpStorageClassForInternalMailServer` variable with a storage class of your cluster that supports RWO and RWX:
+
+1. **Login** to the OpenShift Web Console
+
+2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner 
+
+   <img src="..\images\openshift-copy-log-in-command.jpg" />
+
+3. Click on **Display Token** link shown on the next page 
+
+4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`
+
+   <img src="..\images\openshift-log-in-token.jpg" />
+
+5. Go to **Storage -> StorageClasses**, select an appropriate storage class, and set the storage class name for `ocpStorageClassForInternalMailServer`
+
+6. Start the deployment of the Client Onboarding artifacts
+
 ### Configuring an external email server (gmail)
 
 By default a Jam-in-a-Box environment is deployed with an internal email server and web-based email client. Emails being sent as part of the Client Onboarding scenario can only be send and received using the internal email addresses of the email server.
@@ -227,8 +236,11 @@ In case you want to create one or multiple users to  have user names other than 
 
 1. Download the file [AddUsersToPlatform.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/AddUsersToPlatform.json) and place it in the same directory where you placed the bat/sh file
 2. Edit the AddUsersToPlatform.json in your favorite text editor
-   1. If you want to **add a single user**, modify the existing entry for user "Henry" to match your needs (using the "members" array, you can add the new user to any of the pre-existing groups/using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak)
-   2. If you want to **add multiple users**, just duplicate the user definition and make your modifications
+   1. If you want to **add a single user**, modify the existing entry for user "Henry" to match your needs 
+      - Ensure to update ALL properties like "dn", "cn", "sn", "uid", "mail"
+      - Using the "members" array, you can add the new user to any of the pre-existing groups
+      - Using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak
+   2. If you want to **add multiple users**, just duplicate the user definition and make your modifications (again making sure to update all properties)
    3. If you **don't want to add users** **but modify the password of the admin and/or regular users**, then either remove the whole "entities" array or set the attribute "enabled" to false
    4. If you want to **set the password for the admin user** "cp4admin" to a value of your choice, add element "adminPwd" with the password to be set on the same level as the "entities" attribute. (e.g. "adminPwd": "password")
    5. If you want to **set the password for all regular users** ("user1" to "user10") to a value of your choice, add element "userPwd" with the password to be set on the same level as the "entities" attribute. (e.g. "userPwd": "password"). Be aware that all of the users 1-10 will get the same password
