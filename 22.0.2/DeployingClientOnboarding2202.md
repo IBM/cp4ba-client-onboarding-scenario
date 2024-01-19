@@ -1,5 +1,7 @@
 # Deploying the Client Onboarding scenario to a Jam-in-a-Box environment (for CP4BA 22.0.2)
 
+A version for [CP4BA 23.0.1](/23.0.1/DeployingClientOnboarding2301.md) is also available
+
 ## Introduction
 
 Use these instruction to deploy the out-of-box end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/22.0.2) to a self-provisioned Jam-in-a-Box environment (based on **Cloud Pak for Business Automation (CP4BA) 22.0.2**). For more information about Jam-in-a-Box refer to the [Jam-in-a-Box overview](https://github.com/IBM/cp4ba-jam-in-a-box) page.
@@ -7,7 +9,7 @@ Use these instruction to deploy the out-of-box end-to-end [Client Onboarding sol
 
 ## Prerequisites
 
-1. **Cloud Pak for Business Automation (CP4BA) 22.0.2 environment** - CP4BA 23.0.1 is not yet supported!
+1. **Cloud Pak for Business Automation (CP4BA) 22.0.2 environment**
 
    **a) IBM Business Partners and IBMers**
 
