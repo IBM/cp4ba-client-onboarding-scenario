@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to undeploy the email server and client capability",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/RemoveEmailCapability.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
@@ -155,6 +155,19 @@
 											{
 												"action": "delete",
 												"configMapName": "mailserver.config"
+											}
+										]
+									}
+								},
+								{
+									"MANAGESECRETS": {
+										"enabled": "§IF($$(ISSET(localSmtpServerNamespace))$$)§(true)§ELSE§(false)ENDIF§",
+										"description": "Delete mailserver-tls-secret secret",
+										"namespaceName": "$$(localSmtpServerNamespace|default=)$$",
+										"secrets": [
+											{
+												"action": "delete",
+												"secretName": "mailserver-tls-secret"
 											}
 										]
 									}
