@@ -74,7 +74,14 @@ createUsers=false
 #proxyPwd=
 
 # Specific trace string for the boostrapping process (only uncomment if instructed to do so)
-#bootstrapDebugString="\"-bootstrapDebugString=*=finest\""
+#bootstrapDebugString="\"-dbs=*=finest\""
+
+# Specify a value if the log files should be written to a specific path, otherwise will be written to the location from which this file is executed
+outputPath=
+
+# Change to true in case detailed output messages and/or trace messages should be printed to the console
+printDetailedMessageToConsole=false
+printTraceMessageToConsole=false
 
 # ----------------------------------------------------------------------------------------------------------
 # Construct the proxy settings for curl and deployment automation tool if proxy is configured
@@ -84,14 +91,14 @@ if [ ! -z "${proxyHost+x}" ]
 then
   if [ ! -z "${proxyUser+x}" ]
   then
-     TOOLPROXYSETTINGS=-"proxyScenario=${proxyScenario} -proxyHost=${proxyHost} -proxyPort=${proxyPort} -proxyUser=${proxyUser} -proxyPwd=${proxyPwd}"
+     TOOLPROXYSETTINGS=-"psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort} -pu=${proxyUser} -ppwd=${proxyPwd}"
 
      if [[ "${proxyScenario}" == "GitHub" ]] 
      then
        CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort} -U ${proxyUser}:${proxyPwd}"
      fi
   else
-    TOOLPROXYSETTINGS="-proxyScenario=${proxyScenario} -proxyHost=${proxyHost} -proxyPort=${proxyPort}"
+    TOOLPROXYSETTINGS="-psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort}"
     if [[ "${proxyScenario}" == "GitHub" ]] 
     then
        CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort}"
@@ -121,7 +128,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.1.9
+SCRIPTVERSION=1.1.10
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -194,7 +201,7 @@ then
 		fi
 		echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 	else
-		INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+		INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
 	fi
 	
 	if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
@@ -206,7 +213,7 @@ then
 		fi
 		echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 	else
-		INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
+		INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
 	fi
 else 
 	if ([[ "${ocLoginServer}" != "REQUIRED" ]] && [[ "${ocLoginServer}" != "" ]]) || ([[ "${ocLoginToken}" != "REQUIRED" ]] && [[ "${ocLoginToken}" != "" ]])
@@ -218,7 +225,7 @@ else
 		fi
 		echo "  Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
 	else
-		INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=${pakInstallerPortalURL}
+		INTERNALPAKINSTALLERPORTALURL=-pipurl=${pakInstallerPortalURL}
 	fi
 fi
 
@@ -356,6 +363,27 @@ else
   fi
 fi
 
+if [[ ! -z "${printDetailedMessageToConsole+x}" ]]
+then
+  if [[ "${printDetailedMessageToConsole}" == "true" ]]
+  then
+    INTERNALPDMTOC=-pdmtc
+  fi
+fi
+
+if [[ ! -z "${printTraceMessageToConsole+x}" ]]
+then
+  if [[ "${printTraceMessageToConsole}" == "true" ]]
+  then
+    INTERALPTCTOC=-ptmtc
+  fi
+fi
+
+if [[ ! -z "${outputPath+x}" ]]
+then
+	INTERNALOUTPUTPATH=\"-op=${outputPath}\"
+fi
+
 OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=${ocpStorageClassForInternalMailServer}
 
 if ! $validationSuccess
@@ -379,4 +407,4 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}

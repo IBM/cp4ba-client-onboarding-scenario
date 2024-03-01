@@ -75,7 +75,14 @@ rem SET proxyUser=
 rem SET proxyPwd=
 
 rem Specific trace string for the boostrapping process (only uncomment if instructed to do so)
-rem SET bootstrapDebugString="-bootstrapDebugString=*=finest"
+rem SET bootstrapDebugString="-bds=*=finest"
+
+rem Specify a value if the log files should be written to a specific path, otherwise will be written to the location from which this file is executed
+SET outputPath=
+
+rem Change to true in case detailed output messages and/or trace messages should be printed to the console
+SET printDetailedMessageToConsole=false
+SET printTraceMessageToConsole=false
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Construct the proxy settings for curl and deployment automation tool if proxy is configured
@@ -83,13 +90,13 @@ rem ----------------------------------------------------------------------------
 
 if defined proxyHost (
 	if defined proxyUser (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort% -proxyUser=%proxyUser% -proxyPwd=%proxyPwd%"
+		SET TOOLPROXYSETTINGS="-psc=%proxyScenario% -ph=%proxyHost% -pp=%proxyPort% -pu=%proxyUser% -ppwd=%proxyPwd%"
 		
 		if "%proxyScenario%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort% -U %proxyUser%:%proxyPwd%"
 		)
 	) else (
-		SET TOOLPROXYSETTINGS="-proxyScenario=%proxyScenario% -proxyHost=%proxyHost% -proxyPort=%proxyPort%"
+		SET TOOLPROXYSETTINGS="-psc=%proxyScenario% -ph=%proxyHost% -pp=%proxyPort%"
 		
 		if "%proxyScenario%"=="GitHub" (
 			SET CURLPROXYSETTINGS="-x %proxyHost%:%proxyPort%"
@@ -119,7 +126,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.1.10
+SET SCRIPTVERSION=1.1.11
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -203,7 +210,7 @@ if defined pakInstallerPortalURL (
 				if "%ocLoginServer%"=="" (
 					set ocLoginServerRequired=true
 				) else (
-					set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+					set INTERNALOCLOGINSERVER=-ocls=%ocLoginServer%
 				)
 			)
 		) else (
@@ -218,7 +225,7 @@ if defined pakInstallerPortalURL (
 				if "%ocLoginToken%"=="" (
 					set ocLoginTokenRequired=true
 				) else (
-					set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+					set INTERNALOCLOGINTOKEN=-oclt=%ocLoginToken%
 				)
 			)
 		) else (
@@ -238,7 +245,7 @@ if defined pakInstallerPortalURL (
 			)
 		)
 		
-		set INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=%pakInstallerPortalURL%
+		set INTERNALPAKINSTALLERPORTALURL=-pipurl=%pakInstallerPortalURL%
 	)
 rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginServer' and 'ocLoginToken' are properly defined
 ) else (
@@ -250,7 +257,7 @@ rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginSer
 			if "%ocLoginServer%"=="" (
 				set ocLoginServerRequired=true
 			) else (
-				set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+				set INTERNALOCLOGINSERVER=-ocls=%ocLoginServer%
 			)
 		)
 	) else (
@@ -265,7 +272,7 @@ rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginSer
 			if "%ocLoginToken%"=="" (
 				set ocLoginTokenRequired=true
 			) else (
-				set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+				set INTERNALOCLOGINTOKEN=-oclt=%ocLoginToken%
 			)
 		)
 	) else (
@@ -416,6 +423,18 @@ if defined dockerUserName (
 	)
 )
 
+if defined printDetailedMessageToConsole (
+	if "%printDetailedMessageToConsole%"=="true" (
+		set INTERNALPDMTOC=-pdmtc
+	)
+)
+if defined printTraceMessageToConsole  (
+	if "%printTraceMessageToConsole%"=="true" (
+		set INTERALPTCTOC=-ptmtc
+	)
+)
+if defined outputPath set INTERNALOUTPUTPATH="-op=%outputPath%"
+
 set OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=%ocpStorageClassForInternalMailServer%
 
 if defined toolValidationFailed set overallValidationFailed=true
@@ -430,6 +449,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %OCPSTORAGECLASSFOREMAILINTERNAL% %gmailAddressInternal% %gmailAppKeyInternal% %enableConfigureLabsInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-sdp=%SCRIPTDOWNLOADPATH%" "-sn=%FILENAME%" "-ss=%SCRIPTNAME%" "-sv=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -ibp=/%DEPLOYMENTPATTERN% -c=%CONFIGNAME% -as=%AUTOMATIONSCRIPT% %INTERNALOUTPUTPATH% %INTERNALPDMTOC% %INTERALPTCTOC% %OCPSTORAGECLASSFOREMAILINTERNAL% %gmailAddressInternal% %gmailAppKeyInternal% %enableConfigureLabsInternal% %workflowLabsForBusinessUsers% %createUsersFile% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
 
 ENDLOCAL
