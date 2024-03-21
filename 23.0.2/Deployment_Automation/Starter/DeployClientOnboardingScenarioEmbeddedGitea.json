@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingScenarioEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -596,10 +596,6 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/Workplace-$$(cp4baVersionWithFixpack)$$.zip",
-												"useCurrentOrEarlierFileVersion": true
-											},
-											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"
 											},
 											{
@@ -618,31 +614,6 @@
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test Navigator availability"
-									}
-								},
-								{
-									"IMPORTAPPLICATION": {
-										"enabled": "true",
-										"description": "Import Workplace app",
-										"appEngineAppConfigName": "APPENG0",
-										"name": "Workplace",
-										"useCurrentOrEarlierFileVersion": true,
-										"file": "Workplace-$$(cp4baVersionWithFixpack)$$.zip"
-									}
-								},
-								{
-									"SETAPPPERMISSIONS": {
-										"enabled": "true",
-										"description": "Make Workplace app accessible for all authenticated users",
-										"appEngineAppConfigName": "APPENG0",
-										"name": "Workplace",
-										"action": "update",
-										"permissions": [
-											{
-												"name": "#AUTHENTICATED-USERS",
-												"action": "add"
-											}
-										]
 									}
 								},
 								{
