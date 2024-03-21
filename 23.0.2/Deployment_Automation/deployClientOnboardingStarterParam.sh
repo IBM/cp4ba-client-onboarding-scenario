@@ -25,6 +25,10 @@ ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginToken=REQUIRED
 
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=REQUIRED
+
 # URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
 #pakInstallerPortalURL=REQUIRED
 
@@ -111,7 +115,7 @@ fi
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h,d --long ocls:,oclt:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h,d --long ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -124,6 +128,7 @@ while [ : ]; do
         echo "Optional command line parameters (overwriting parameters set in sh file):"
         echo "--ocls = ocpLoginServer"
         echo "--oclt = ocpLoginToken"
+        echo "--ns = cp4baNamespace"
         echo "--cl = configureLabs (true/false)"
         echo "--cu = createUsers (true/false)"
         echo "--ewflbu = enableWorkflowLabsForBusinessUsers (true/false)"
@@ -152,6 +157,10 @@ while [ : ]; do
         ;;
     --oclt)
         ocLoginToken=$2
+        shift 2
+        ;;
+    -ns)
+        cp4baNamespace=$2
         shift 2
         ;;
     --cl)
@@ -229,6 +238,7 @@ then
   echo "Config parameter values:"
   echo "ocLoginServer '${ocLoginServer}'"
   echo "ocLoginToken '${ocLoginToken}'"
+  echo "cp4baNamespace '${cp4baNamespace}'"
   echo "configureLabs '${configureLabs}'"
   echo "createUsers '${createUsers}'"
   echo "enableWorkflowLabsForBusinessUsers '${enableWorkflowLabsForBusinessUsers}'"
@@ -269,7 +279,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -420,6 +430,21 @@ then
   echo "  Variable 'rpaServer' has not been set"
 fi
 
+if [ ! -z "${cp4baNamespace+x}" ]
+then
+  if [[ "${cp4baNamespace}" == "REQUIRED" ]] || [[ "${cp4baNamespace}" == "" ]]
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Variable 'cp4baNamespace' has not been set"
+  else
+    INTERNALCP4BANAMESPACE=-cp4bans=${cp4baNamespace}
+  fi
+fi
+
 if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
 then
    createUsersFile=onboardUsersFile=AddUsersToPlatform.json
@@ -548,4 +573,4 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
