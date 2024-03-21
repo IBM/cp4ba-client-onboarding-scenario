@@ -159,7 +159,7 @@ while [ : ]; do
         ocLoginToken=$2
         shift 2
         ;;
-    -ns)
+    --ns)
         cp4baNamespace=$2
         shift 2
         ;;
@@ -279,7 +279,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.2
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
