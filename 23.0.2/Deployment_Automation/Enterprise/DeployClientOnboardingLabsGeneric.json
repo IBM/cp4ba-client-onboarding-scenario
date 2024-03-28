@@ -1191,7 +1191,7 @@
 								{
 									"PLATFORM_USERMGT": {
 										"enabled": "true",
-										"description": "Onboard users with respective roles to Cloud Pak Platform",
+										"description": "Onboard users with respective roles to Cloud Pak Platform (required by wxO lab)",
 										"comment": "Sub action will be skipped if first user is not found which might be true, Cloup Pak Deployer deployment get the list of users directly ignoring userBaseName, userBaseName, userStartNumber & userTargetNumber as long as deriveUsersFromLDAPIfAvailable is set to true",
 										"entities": [
 											{
