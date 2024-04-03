@@ -1,49 +1,49 @@
-18000,Federal,Canada,Rejected,1000000,Customer 27,customer27@example.com,Paul,Smith,Segment 2,55,Infrastructure Consultation,99.9979,7,0
-23750,Finance,Canada,Approved,15000000,Naboo Telecom,tom.jonas@example.com,Tom,Jonas,Segment 2,900,Corporate Credit Card;Fraud Protection,100,55,0
-15000,Healthcare,USA,Approved,9500000,Customer 29,customer29@example.com,Swapnil,Agrawal,Segment 2,450,Onsite Medical Testing,99.9997,27,0
-18000,Finance,Germany,Rejected,1100000,Customer 30,customer30@example.com,Rebecca,Elis,Segment 2,100,Tax Consultation,99.9868,7,0
-25000,Finance,USA,Approved,50000000,Automation Elite,june.marie@example.com,June,Marie,Segment 1,1200,External Audit;Tax Consultation,97.0696,8,0
-18000,Healthcare,USA,Approved,15000000,Customer 32,customer32@example.com,Johnny,Rose,Segment 2,1500,Mental Health Care,99.8582,15,1
-23750,Insurance,Canada,Approved,25000000,Customer 33,customer33@example.com,Moira,David,Segment 2,800,Merchandise Insurance;Warehouse Insurance,100,40,0
-15000,Telecom,USA,Approved,1000000,Customer 34,customer34@example.com,Alexis,Bud,Segment 2,400,Communication Equipment,99.9894,21,0
-25000,Finance,Canada,Approved,9000000,Customer 35,customer35@example.com,Thomas,Schulze,Segment 2,1300,External Audit;Tax Consultation,99.7184,18,0
-25000,Federal,Canada,Approved,7000000,Customer 26,customer26@example.com,John,Smith,Segment 2,1200,Education Funding;Green Technology Equipment,72.2508,15,0
-18000,Healthcare,USA,Approved,7500000,Customer 36,customer36@example.com,Augustus,Carlos,Segment 2,300,Mental Health Care,95.6754,17,1
-18000,Federal,Australia,Rejected,3500000,Customer 37,customer37@example.com,Lionel,Doe,Segment 2,50,Education Funding,99.7593,12,0
-18000,Healthcare,Australia,Rejected,1000000,Customer 38,customer38@example.com,Angela,Patel,Segment 2,30,Employee Benefits Plan,99.9905,5,1
-18000,Insurance,Canada,Approved,23000000,Customer 40,customer40@example.com,Allison,Jack,Segment 2,115,Medical Insurance,99.8703,17,1
-35000,Healthcare,USA,Approved,4500000,Customer 39,customer39@example.com,Peter,Jones,Segment 2,75,Mental Health Care;Onsite Medical Testing,67.6501,14,1
-30400,Federal,Germany,Approved,33754344,Cusomer 10,thos@example.com,Thomas ,Schulze,Segment 2,1032432,Green Technology Equipment;Infrastructure Consultation;Transport Security,100,234,0
-34200,Federal,China,Approved,3754344,Cusomer 9,bfg@example.com,Bu Feng,Hou,Segment 2,7032321,Education Funding;Green Technology Equipment;Transport Security,100,16,0
-30400,Finance,Canada,Approved,2892214,Cusomer 8,sg@example.com,Sandeep,Gupta,Segment 2,27032,External Audit;Tax Consultation;Fraud Protection,100,32,0
-36100,Finance,Australia,Approved,43892214,Bank of Jakku,jim.high@example.com,Jim,High,Segment 2,335662,Corporate Credit Card;External Audit;Tax Consultation,100,7,0
-34200,Finance,Germany,Approved,1092214,Cusomer 6,oha@example.com,Olaf ,Hahnl,Segment 2,242566,External Audit;Tax Consultation;Fraud Protection,100,23,0
-34200,Telecom,China,Approved,2892214,Cusomer 5,ztg@example.com,Zhong Tao,Gao,Segment 2,22234098,Business Devices;Communication Equipment;Tieline Solution,100,23,0
-20000,Finance,South Africa,Approved,29799924,Ocean Insurance,james.north@example.com,James,North,Segment 2,123456,Corporate Credit Card;Tax Consultation,100,99,0
-45000,Federal,Canada,Approved,9799924,Cusomer 1,ppacholski@example.com,Paul,Pacholski,Segment 2,11233,Education Funding;Green Technology Equipment;Infrastructure Consultation;Transport Security,100,12,0
-38000,Telecom,USA,Approved,20000000,Customer 42,customer42@example.com,Jane,Sample,Segment 2,5000,Communication Equipment;Fibre Internet;Tieline Solution,100,10,0
-35000,Finance,USA,Rejected,7100000,Customer 44,customer44@example.com,Priya,Kaur,Segment 2,500,Tax Consultation;Fraud Protection,99.2601,9,1
-30000,Federal,USA,Rejected,17000000,Customer 45,customer45@example.com,Paul,Klein,Segment 2,800,Education Funding;Green Technology Equipment,79.4731,12,0
-30400,Finance,Germany,Approved,26500000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,15000,External Audit;Tax Consultation;Fraud Protection,100,49,0
-14250,Federal,Canada,Approved,3700000,Customer 48,customer48@example.com,Raj,Sharma,Segment 2,2000,Transport Security,100,33,0
-13500,Telecom,Canada,Approved,19000000,Customer 49,customer49@example.com,Marie,Allen,Segment 2,12000,Tieline Solution,100,18,0
-13500,Insurance,Canada,Approved,37000000,Customer 47,customer47@example.com,Andrea,Sarkar,Segment 2,25000,Merchandise Insurance,100,31,1
-18000,Finance,USA,Rejected,9000000,Customer 50,customer50@example.com,Kate,Wilson,Segment 2,50,External Audit,99.9929,5,0
-25000,Federal,Canada,Approved,3400000,Customer 43,customer43@example.com,Brad,Nolan,Segment 2,3700,Education Funding;Infrastructure Consultation,99.9987,18,1
-30000,Finance,USA,Rejected,1000000,Customer 41,customer41@example.com,Smith,Baker,Segment 2,14,External Audit;Tax Consultation,99.9999,2,0
-53200,Insurance,Germany,Rejected,1122233,Customer 20,holk@example.com,Holger,Kolata,Segment 2,122,Medical Insurance;Merchandise Insurance;Warehouse Insurance,77.0047,12,1
-53200,Telecom,China,Approved,454234,Customer 19,jjw@example.com,Jing Jing,Wei,Segment 2,3332,Business Devices;Communication Equipment;Tieline Solution,80.9362,1,1
-70000,Insurance,Canada,Rejected,422211,Customer 18,bah@example.com,Barbara,High,Segment 2,67,Loan Insurance;Medical Insurance;Merchandise Insurance;Warehouse Insurance,99.991,3,1
-64600,Insurance,Australia,Rejected,322211,Customer 17,swapa@example.com,Swapnil,Agrawal,Segment 2,23,Loan Insurance;Medical Insurance;Warehouse Insurance,99.9986,1,1
-53200,Healthcare,USA,Approved,938323,Customer 16,clb@example.com,Clandis,Baker,Segment 2,4554,Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,98.2075,3,1
-40000,Finance,South Africa,Approved,1822123,Customer 15,cls@example.com,Cladio,Steen,Segment 2,90332,Corporate Credit Card;External Audit;Tax Consultation;Fraud Protection,100,32,1
-34200,Finance,Germany,Approved,11322123,Customer 14,mhaas@example.com,Manfred,Haas,Segment 2,243244,Corporate Credit Card;Tax Consultation;Fraud Protection,100,44,1
-47500,Federal,China,Approved,19399329,Customer 13,yanj@example.com,Yan Yong,Ji,Segment 2,24244,Education Funding;Green Technology Equipment;Infrastructure Consultation;Transport Security,100,12,1
-38000,Federal,Canada,Approved,9399323,Customer 12,toma@example.com,Tom,Al-Hamwy,Segment 2,873,Education Funding;Green Technology Equipment;Infrastructure Consultation,100,33,1
-38000,Telecom,Australia,Approved,9393992,Customer 11,glow@example.com,Glen,Low,Segment 2,99,Business Devices;Fibre Internet;Tieline Solution,100,56,1
-47500,Healthcare,China,Approved,7323535,Customer 25,yfw@examle.com,Yi Fan,Wu,Segment 2,343434,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,100,2,1
-35000,Finance,Canada,Approved,4323333,Customer 24,elp@examle.com,Elizabeth,Moulin,Segment 2,2123,Tax Consultation;Fraud Protection,93.329,12,1
-64600,Insurance,Australia,Rejected,323333,Customer 23,wib@examle.com,William,Bane,Segment 2,19,Medical Insurance;Merchandise Insurance;Warehouse Insurance,99.9924,3,1
-53200,Healthcare,USA,Rejected,3233323,Customer 22,row@examle.com,Ron,White,Segment 2,234,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing,99.9992,1,1
-53200,Telecom,South Africa,Rejected,3233323,Customer 21,cvdp@examle.com,Claus,Van der Klopp,Segment 2,23,Business Devices;Fibre Internet;Tieline Solution,97.9719,7,1
-60000,Healthcare,South Africa,Approved,4500000,Customer 51,jb@example.com,Jim,Bloom,Segment 2,75,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,67.6501,14,1
+18000,Federal,Canada,Rejected,1000000,Customer 27,customer27@example.com,Paul,Smith,Segment 2,55,Infrastructure Consultation,99.9979,7,FALSE
+23750,Finance,Canada,Approved,15000000,Naboo Telecom,tom.jonas@example.com,Tom,Jonas,Segment 2,900,Corporate Credit Card;Fraud Protection,100,55,FALSE
+15000,Healthcare,USA,Approved,9500000,Customer 29,customer29@example.com,Swapnil,Agrawal,Segment 2,450,Onsite Medical Testing,99.9997,27,FALSE
+18000,Finance,Germany,Rejected,1100000,Customer 30,customer30@example.com,Rebecca,Elis,Segment 2,100,Tax Consultation,99.9868,7,FALSE
+25000,Finance,USA,Approved,50000000,Automation Elite,june.marie@example.com,June,Marie,Segment 1,75,External Audit;Tax Consultation,97.0696,30,FALSE
+18000,Healthcare,USA,Approved,15000000,Customer 32,customer32@example.com,Johnny,Rose,Segment 2,1500,Mental Health Care,99.8582,15,TRUE
+23750,Insurance,Canada,Approved,25000000,Customer 33,customer33@example.com,Moira,David,Segment 2,800,Merchandise Insurance;Warehouse Insurance,100,40,FALSE
+15000,Telecom,USA,Approved,1000000,Customer 34,customer34@example.com,Alexis,Bud,Segment 2,400,Communication Equipment,99.9894,21,FALSE
+25000,Finance,Canada,Approved,9000000,Customer 35,customer35@example.com,Thomas,Schulze,Segment 2,1300,External Audit;Tax Consultation,99.7184,18,FALSE
+25000,Federal,Canada,Approved,7000000,Customer 26,customer26@example.com,John,Smith,Segment 2,1200,Education Funding;Green Technology Equipment,72.2508,15,FALSE
+18000,Healthcare,USA,Approved,7500000,Customer 36,customer36@example.com,Augustus,Carlos,Segment 2,300,Mental Health Care,95.6754,17,TRUE
+18000,Federal,Australia,Rejected,3500000,Customer 37,customer37@example.com,Lionel,Doe,Segment 2,50,Education Funding,99.7593,12,FALSE
+18000,Healthcare,Australia,Rejected,1000000,Customer 38,customer38@example.com,Angela,Patel,Segment 2,30,Employee Benefits Plan,99.9905,5,TRUE
+18000,Insurance,Canada,Approved,23000000,Customer 40,customer40@example.com,Allison,Jack,Segment 2,115,Medical Insurance,99.8703,17,TRUE
+35000,Healthcare,USA,Approved,4500000,Customer 39,customer39@example.com,Peter,Jones,Segment 2,75,Mental Health Care;Onsite Medical Testing,67.6501,14,TRUE
+30400,Federal,Germany,Approved,33754344,Cusomer 10,thos@example.com,Thomas ,Schulze,Segment 2,1032432,Green Technology Equipment;Infrastructure Consultation;Transport Security,100,234,FALSE
+34200,Federal,China,Approved,3754344,Cusomer 9,bfg@example.com,Bu Feng,Hou,Segment 2,7032321,Education Funding;Green Technology Equipment;Transport Security,100,16,FALSE
+30400,Finance,Canada,Approved,2892214,Cusomer 8,sg@example.com,Sandeep,Gupta,Segment 2,27032,External Audit;Tax Consultation;Fraud Protection,100,32,FALSE
+36100,Finance,Australia,Approved,43892214,Bank of Jakku,jim.high@example.com,Jim,High,Segment 2,335662,Corporate Credit Card;External Audit;Tax Consultation,100,7,FALSE
+34200,Finance,Germany,Approved,1092214,Cusomer 6,oha@example.com,Olaf ,Hahnl,Segment 2,242566,External Audit;Tax Consultation;Fraud Protection,100,23,FALSE
+34200,Telecom,China,Approved,2892214,Cusomer 5,ztg@example.com,Zhong Tao,Gao,Segment 2,22234098,Business Devices;Communication Equipment;Tieline Solution,100,23,FALSE
+20000,Finance,South Africa,Approved,29799924,Ocean Insurance,james.north@example.com,James,North,Segment 2,123456,Corporate Credit Card;Tax Consultation,100,99,FALSE
+45000,Federal,Canada,Approved,9799924,Cusomer 1,ppacholski@example.com,Paul,Pacholski,Segment 2,11233,Education Funding;Green Technology Equipment;Infrastructure Consultation;Transport Security,100,12,FALSE
+38000,Telecom,USA,Approved,20000000,Customer 42,customer42@example.com,Jane,Sample,Segment 2,5000,Communication Equipment;Fibre Internet;Tieline Solution,100,10,FALSE
+35000,Finance,USA,Rejected,7100000,Customer 44,customer44@example.com,Priya,Kaur,Segment 2,500,Tax Consultation;Fraud Protection,99.2601,9,TRUE
+30000,Federal,USA,Rejected,17000000,Customer 45,customer45@example.com,Paul,Klein,Segment 2,800,Education Funding;Green Technology Equipment,79.4731,12,FALSE
+30400,Finance,Germany,Approved,2500000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,30,External Audit;Tax Consultation;Fraud Protection,100,12,TRUE
+14250,Federal,Canada,Approved,3700000,Customer 48,customer48@example.com,Raj,Sharma,Segment 2,2000,Transport Security,100,33,FALSE
+13500,Telecom,Canada,Approved,19000000,Customer 49,customer49@example.com,Marie,Allen,Segment 2,12000,Tieline Solution,100,18,FALSE
+13500,Insurance,Canada,Approved,37000000,Customer 47,customer47@example.com,Andrea,Sarkar,Segment 2,25000,Merchandise Insurance,100,31,TRUE
+18000,Finance,USA,Rejected,9000000,Customer 50,customer50@example.com,Kate,Wilson,Segment 2,50,External Audit,99.9929,5,FALSE
+25000,Federal,Canada,Approved,3400000,Customer 43,customer43@example.com,Brad,Nolan,Segment 2,3700,Education Funding;Infrastructure Consultation,99.9987,18,TRUE
+30000,Finance,USA,Rejected,1000000,Customer 41,customer41@example.com,Smith,Baker,Segment 2,14,External Audit;Tax Consultation,99.9999,2,FALSE
+53200,Insurance,Germany,Rejected,1122233,Customer 20,holk@example.com,Holger,Kolata,Segment 2,122,Medical Insurance;Merchandise Insurance;Warehouse Insurance,77.0047,12,TRUE
+53200,Telecom,China,Approved,454234,Customer 19,jjw@example.com,Jing Jing,Wei,Segment 2,3332,Business Devices;Communication Equipment;Tieline Solution,80.9362,1,TRUE
+70000,Insurance,Canada,Rejected,422211,Customer 18,bah@example.com,Barbara,High,Segment 2,67,Loan Insurance;Medical Insurance;Merchandise Insurance;Warehouse Insurance,99.991,3,TRUE
+64600,Insurance,Australia,Rejected,322211,Customer 17,swapa@example.com,Swapnil,Agrawal,Segment 2,23,Loan Insurance;Medical Insurance;Warehouse Insurance,99.9986,1,TRUE
+53200,Healthcare,USA,Approved,938323,Customer 16,clb@example.com,Clandis,Baker,Segment 2,4554,Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,98.2075,3,TRUE
+40000,Finance,South Africa,Approved,1822123,Customer 15,cls@example.com,Cladio,Steen,Segment 2,90332,Corporate Credit Card;External Audit;Tax Consultation;Fraud Protection,100,32,TRUE
+34200,Finance,Germany,Approved,11322123,Customer 14,mhaas@example.com,Manfred,Haas,Segment 2,243244,Corporate Credit Card;Tax Consultation;Fraud Protection,100,44,TRUE
+47500,Federal,China,Approved,19399329,Customer 13,yanj@example.com,Yan Yong,Ji,Segment 2,24244,Education Funding;Green Technology Equipment;Infrastructure Consultation;Transport Security,100,12,TRUE
+38000,Federal,Canada,Approved,9399323,Customer 12,toma@example.com,Tom,Al-Hamwy,Segment 2,873,Education Funding;Green Technology Equipment;Infrastructure Consultation,100,33,TRUE
+38000,Telecom,Australia,Approved,9393992,Customer 11,glow@example.com,Glen,Low,Segment 2,99,Business Devices;Fibre Internet;Tieline Solution,100,56,TRUE
+47500,Healthcare,China,Approved,7323535,Customer 25,yfw@examle.com,Yi Fan,Wu,Segment 2,343434,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,100,2,TRUE
+35000,Finance,Canada,Approved,4323333,Customer 24,elp@examle.com,Elizabeth,Moulin,Segment 2,2123,Tax Consultation;Fraud Protection,93.329,12,TRUE
+64600,Insurance,Australia,Rejected,323333,Customer 23,wib@examle.com,William,Bane,Segment 2,19,Medical Insurance;Merchandise Insurance;Warehouse Insurance,99.9924,3,TRUE
+53200,Healthcare,USA,Rejected,3233323,Customer 22,row@examle.com,Ron,White,Segment 2,234,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing,99.9992,1,TRUE
+53200,Telecom,South Africa,Rejected,3233323,Customer 21,cvdp@examle.com,Claus,Van der Klopp,Segment 2,23,Business Devices;Fibre Internet;Tieline Solution,97.9719,7,TRUE
+60000,Healthcare,South Africa,Approved,4500000,Customer 51,jb@example.com,Jim,Bloom,Segment 2,75,Employee Benefits Plan;Mental Health Care;Onsite Medical Testing;Virtual Medical Assistance,67.6501,14,TRUE
