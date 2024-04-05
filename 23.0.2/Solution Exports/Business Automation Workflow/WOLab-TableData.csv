@@ -24,7 +24,7 @@
 38000,Telecom,USA,Approved,20000000,Customer 42,customer42@example.com,Jane,Sample,Segment 2,5000,Communication Equipment;Fibre Internet;Tieline Solution,100,10,FALSE
 35000,Finance,USA,Rejected,7100000,Customer 44,customer44@example.com,Priya,Kaur,Segment 2,500,Tax Consultation;Fraud Protection,99.2601,9,TRUE
 30000,Federal,USA,Rejected,17000000,Customer 45,customer45@example.com,Paul,Klein,Segment 2,800,Education Funding;Green Technology Equipment,79.4731,12,FALSE
-30400,Finance,Germany,Approved,2500000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,30,External Audit;Tax Consultation;Fraud Protection,100,12,TRUE
+30400,Finance,Germany,Approved,35000000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,30,External Audit;Tax Consultation;Fraud Protection,100,12,TRUE
 14250,Federal,Canada,Approved,3700000,Customer 48,customer48@example.com,Raj,Sharma,Segment 2,2000,Transport Security,100,33,FALSE
 13500,Telecom,Canada,Approved,19000000,Customer 49,customer49@example.com,Marie,Allen,Segment 2,12000,Tieline Solution,100,18,FALSE
 13500,Insurance,Canada,Approved,37000000,Customer 47,customer47@example.com,Andrea,Sarkar,Segment 2,25000,Merchandise Insurance,100,31,TRUE
