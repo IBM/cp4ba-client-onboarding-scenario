@@ -585,7 +585,7 @@ fi
 
 if [ ! -z "${bootstrapDebugString+x}" ]
 then
-	BOOTSTRAPDEBUGSTRINGINTERNAL=\"-dbs=${bootstrapDebugString}\"
+	BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
 fi
 
 if [ ! -z "${debugString+x}" ]
