@@ -115,7 +115,7 @@ fi
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dv:;dc:;ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
