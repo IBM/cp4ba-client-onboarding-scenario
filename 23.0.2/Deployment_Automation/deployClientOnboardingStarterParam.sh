@@ -79,7 +79,7 @@ createUsers=false
 #proxyPwd=
 
 # Specific trace string for the boostrapping process (only uncomment if instructed to do so)
-#bootstrapDebugString="\"-dbs=*=finest\""
+#bootstrapDebugString=*=finest
 
 # Specify a value if the log files should be written to a specific path, otherwise will be written to the location from which this file is executed
 outputPath=
@@ -579,9 +579,14 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-if [ ! -z "${debugString+x}" ]
+if [ ! -z "${bootstrapDebugString+x}" ]
 then
-	debugStringInternal=\"debugString=${debugString}\"
+	BOOTSTRAPDEBUGSTRINGINTERNAL=\"-dbs=${bootstrapDebugString}\"
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${debugStringInternal} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+if [ ! -z "${debugString+x}" ]
+then
+	DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+fi
+
+java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
