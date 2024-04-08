@@ -2,7 +2,7 @@
 23750,Finance,Canada,Approved,15000000,Naboo Telecom,tom.jonas@example.com,Tom,Jonas,Segment 2,900,Corporate Credit Card;Fraud Protection,100,55,0
 15000,Healthcare,USA,Approved,9500000,Customer 29,customer29@example.com,Swapnil,Agrawal,Segment 2,450,Onsite Medical Testing,99.9997,27,0
 18000,Finance,Germany,Rejected,1100000,Customer 30,customer30@example.com,Rebecca,Elis,Segment 2,100,Tax Consultation,99.9868,7,0
-25000,Finance,USA,Approved,50000000,Automation Elite,june.marie@example.com,June,Marie,Segment 1,1200,External Audit;Tax Consultation,97.0696,8,0
+25000,Finance,USA,Approved,50000000,Automation Elite,june.marie@example.com,June,Marie,Segment 1,75,External Audit;Tax Consultation,97.0696,30,0
 18000,Healthcare,USA,Approved,15000000,Customer 32,customer32@example.com,Johnny,Rose,Segment 2,1500,Mental Health Care,99.8582,15,1
 23750,Insurance,Canada,Approved,25000000,Customer 33,customer33@example.com,Moira,David,Segment 2,800,Merchandise Insurance;Warehouse Insurance,100,40,0
 15000,Telecom,USA,Approved,1000000,Customer 34,customer34@example.com,Alexis,Bud,Segment 2,400,Communication Equipment,99.9894,21,0
@@ -24,7 +24,7 @@
 38000,Telecom,USA,Approved,20000000,Customer 42,customer42@example.com,Jane,Sample,Segment 2,5000,Communication Equipment;Fibre Internet;Tieline Solution,100,10,0
 35000,Finance,USA,Rejected,7100000,Customer 44,customer44@example.com,Priya,Kaur,Segment 2,500,Tax Consultation;Fraud Protection,99.2601,9,1
 30000,Federal,USA,Rejected,17000000,Customer 45,customer45@example.com,Paul,Klein,Segment 2,800,Education Funding;Green Technology Equipment,79.4731,12,0
-30400,Finance,Germany,Approved,26500000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,15000,External Audit;Tax Consultation;Fraud Protection,100,49,0
+30400,Finance,Germany,Approved,35000000,Legacy Consulting,werner.foss@example.com,Werner,Foss,Segment 2,30,External Audit;Tax Consultation;Fraud Protection,100,12,1
 14250,Federal,Canada,Approved,3700000,Customer 48,customer48@example.com,Raj,Sharma,Segment 2,2000,Transport Security,100,33,0
 13500,Telecom,Canada,Approved,19000000,Customer 49,customer49@example.com,Marie,Allen,Segment 2,12000,Tieline Solution,100,18,0
 13500,Insurance,Canada,Approved,37000000,Customer 47,customer47@example.com,Andrea,Sarkar,Segment 2,25000,Merchandise Insurance,100,31,1
