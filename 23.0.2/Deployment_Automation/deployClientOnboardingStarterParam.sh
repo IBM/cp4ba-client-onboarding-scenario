@@ -115,7 +115,7 @@ fi
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h,d --long ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h,d --long ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -140,6 +140,7 @@ while [ : ]; do
         echo "--dt = dockerToken"
         echo "--jvm = jvmSettings"
         echo "--bd = bootstrapDebugString"
+        echo "--ds = debugString"
         echo "--dgithub = disableAccessToGitHub"
         echo "--op = outputPath"
         echo "--pdmtoc = printDetailedMessageToConsole (true/false)"
@@ -207,8 +208,12 @@ while [ : ]; do
         jvmSettings=$2
         shift 2
         ;;
-	--bd)
+    --bd)
         bootstrapDebugString=$2
+        shift 2
+        ;;
+    --ds)
+        debugString=$2
         shift 2
         ;;
     --op)
@@ -223,7 +228,7 @@ while [ : ]; do
         printTraceMessageToConsole=$2
         shift 2
         ;;
-	--dgithub)
+    --dgithub)
         disableAccessToGitHub=$2
         shift 2
         ;;
@@ -251,6 +256,7 @@ then
   echo "dockerToken '${dockerToken}'"
   echo "jvmSettings '${jvmSettings}'"
   echo "bootstrapDebugString '${bootstrapDebugString}'"
+  echo "debugString '${debugString}'"
   echo "disableAccessToGitHub '${disableAccessToGitHub}'"
   echo "outputPath '${outputPath}'"
   echo "printDetailedMessageToConsole '${printDetailedMessageToConsole}'"
@@ -279,7 +285,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.3
+SCRIPTVERSION=1.0.4
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -573,4 +579,9 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+if [ ! -z "${debugString+x}" ]
+then
+	debugStringInternal=\"debugString=${debugString}\"
+fi
+
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${debugStringInternal} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
