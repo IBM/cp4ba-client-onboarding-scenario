@@ -4,49 +4,26 @@
 
 Use these instruction to deploy the end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/23.0.2/README.md) to a self-provisioned **Cloud Pak for Business Automation (CP4BA) 23.0.2** environment using an OpenShift Job.
 
-This deployment approach does not require a separate machine with Java on it to run the deployment or the manual download of any resources. 
+This deployment approach does not require a separate machine with Java on it to run the deployment or the manual download of any resources. A different deployment approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentSeparateMachine.md).
 
-A different deployment approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentSeparateMachine.md).
 
 
 ## Prerequisites
 
 **Cloud Pak for Business Automation (CP4BA) 23.0.2 IF002 or newer Starter deployment environment**
 
-### IBM TechZone provided environment
+Either
 
-Reserve a Business Automation environment from IBM TechZone. For that select the **CP4BA 23.0.x - Multi-Pattern Starter TechZone Deployer powered CP4BA 2023.x** tile from the [Pre-Installed Software](https://techzone.ibm.com/collection/tech-zone-certified-base-images/journey-pre-installed-software) tab.
+- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) or
+- bring your own CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
-Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
+Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
 
-<img src="images\techzone-reservation_2302_starter.jpg" />
 
-Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after about 2-3 hours it finally becomes **Ready**. You will receive an email when provisioning starts and a second email with the subject '**Reservation Ready on IBM Technology Zone**' when it completes. 
-
-> [!WARNING]
->
-> Ready in this case only means that OpenShift has been provisioned and that deploying Cloud Pak for Business Automation has been started but **not** that it is fully deployed yet. This may take another 4-5 hours to complete. 
-> See below for how to check that CP4BA has been successfully deployed.
-
-The final email contains a link '**View My Reservations**' to get to your reservations. Click on this link and click on the tile that represents your reservation.
-
-<img src="images\your-environment-is-ready_2302_starter.jpg" />
-
-Towards the top of the screen you will find the **link to the OpenShift console**, the **Username** (which is always **kubeadmin**) to log into the OpenShift console, and the unique **Password** for the environment.
-
-   <img src="images\techzone-reserved-env_2302_starter.jpg" />
-
-### Bring Your Own CP4BA environment
-
-Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
-
-> [!IMPORTANT]
->
-> IF002 or later is required due to bugs in earlier versions that prohibit the deployment and successful working of the scenario.
 
 ## Import Instructions
 
-1. **Log into the OpenShift console** of your environment (for TechZone environments use the information from the tile representing your reservation as shown above)
+1. **Log into the OpenShift console** of your environment (for TechZone environments use the information from the tile representing your reservation)
 
 2. **Validate the environment is fully deployed**
 
@@ -136,7 +113,7 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    | configureLabs                        | true/false                 | Should the artifacts for the labs be deployed too (true) or only those for the Client Onboarding scenario (false) |
    | enableWorkflowLabsForBusinessUsers   | true/false                 | Should the environment be configured so that business users (user1-user10)  can perform the Workflow labs (true) and not just the admin (cp4admin) user (true).<br />If set to true, this will significantly increase the deployment time to up to 45 minutes. |
    | rpaBotExecutionUser                  | User short name            | User (e.g. cp4admin) for who the RPA bot is executed (specifying a non-existing user always skips the RPA bot execution) |
-   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **[Advanced Configuration](StarterDeploymentViaJob.md#configuring-an-rpa-environment)** entry below. |
+   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **[Advanced Configuration Scenarios](StarterDeploymentViaJob.md#configuring-an-rpa-environment)** entry below. |
    | printDetailedMessageToConsole        | true/false                 | Should detailed log messages be printed to the console (true) or just the summary (false). |
 
    > [!IMPORTANT]
@@ -283,7 +260,15 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
 
       This is the same information, that is also available in the `client-onboarding-information` ConfigMap as shown above.deploy-
 
-### Troubleshooting the Client Onboarding Deployment
+
+
+> [!NOTE]
+>
+> **If everything worked, you should now have a CP4BA 23.0.2 deployment with the Client Onboarding scenario deployed and are done!**
+
+
+
+## Troubleshooting the Client Onboarding Deployment
 
 The deployment tool performs a lot of validations and will report any issues it encounters. It can be execute sequentially multiple times without causing any issues, but should not be executed multiple times in parallel. It will skip over those deployment steps that have already been successfully performed. 
 
@@ -345,7 +330,9 @@ To get to the logs and optionally copy them to your local machine , follow these
    - the name of the file you want to copy (could also be the collector zip file),
    - and the target directory and name where the file should be copied to
 
-## Advanced Configuration
+
+
+## Advanced Configuration Scenarios
 
 ### Performing the Workflow labs using business users (instead of or in addition to the admin user)
 

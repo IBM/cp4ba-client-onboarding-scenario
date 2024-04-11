@@ -9,44 +9,21 @@ This deployment approach requires a separate machine with Java on it to run the 
 A simpler deployment approach without the need for a separate machine is described [here](StarterDeploymentViaJob.md).
 
 
+
 ## Prerequisites
 
 ### 1. Cloud Pak for Business Automation (CP4BA) 23.0.2 IF002 or newer Starter deployment environment
 
-#### IBM TechZone provided environment
+Either
 
-Reserve a Business Automation environment from IBM TechZone. For that select the **CP4BA 23.0.x - Multi-Pattern Starter TechZone Deployer powered CP4BA 2023.x** tile from the [Pre-Installed Software](https://techzone.ibm.com/collection/tech-zone-certified-base-images/journey-pre-installed-software) tab.
-
-Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
-
-<img src="images\techzone-reservation_2302_starter.jpg" />
-
-Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after about 2-3 hours it finally becomes **Ready**. You will receive an email when provisioning starts and a second email with the subject '**Reservation Ready on IBM Technology Zone**' when it completes. 
-
-> [!WARNING]
->
-> Ready in this case only means that OpenShift has been provisioned and that deploying Cloud Pak for Business Automation has been started but **not** that it is fully deployed yet. This may take another 4-5 hours to complete. 
-> See below for how to check that CP4BA has been successfully deployed.
-
-The final email contains a link '**View My Reservations**' to get to your reservations. Click on this link and click on the tile that represents your reservation.
-
-<img src="images\your-environment-is-ready_2302_starter.jpg" />
-
-Towards the top of the screen you will find the **link to the OpenShift console**, the **Username** (which is always **kubeadmin**) to log into the OpenShift console, and the unique **Password** for the environment.
-
-   <img src="images\techzone-reserved-env_2302_starter.jpg" />
-
-#### Bring Your Own CP4BA environment
-
-Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
-
-> [!IMPORTANT]
->
-> IF002 or later is required due to bugs in earlier versions that prohibit the deployment and successful working of the scenario.
+- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) or
+- bring your own CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 ### 2. Machine to start the deployment from
 
 A Windows, Linux, or Mac system with **Java 8** or later installed is required to start the deployment of the Client Onboarding artifacts. Ensure that the **bin** directory of your Java installation is part of the operation system path. If you receive an error like **'Java' is not recognized as an internal or external command** then this is not the case.
+
+
 
 ## Import Instructions
 
@@ -140,6 +117,14 @@ Successfully created ConfigMap 'client-onboarding-information' with same informa
 ```
 
 This information is also stored in a ConfigMap named `client-onboarding-information`. If you need to find the information again, you can always review it in this single location. Just log into the OpenShift Web Console of your environment, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`.
+
+
+
+> [!NOTE]
+>
+> **If everything worked, you should now have a CP4BA 23.0.2 deployment with the Client Onboarding scenario deployed and are done!**
+
+
 
 ### Troubleshooting the Client Onboarding Deployment
 
