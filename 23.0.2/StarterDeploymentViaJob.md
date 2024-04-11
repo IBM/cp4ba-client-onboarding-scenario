@@ -6,7 +6,7 @@ Use these instruction to deploy the end-to-end [Client Onboarding solution](http
 
 This deployment approach does not require a separate machine with Java on it to run the deployment or the manual download of any resources. 
 
-I different approach using a separate machine, that offers more customization options, is described [here](/StarterDeploymentViaJob.md).
+I different approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentViaJob.md).
 
 
 ## Prerequisites
