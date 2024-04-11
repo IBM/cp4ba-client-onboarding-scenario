@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to undeploy all artifacts required by the labs but not the user created artifacts nor the Client Onboarding solution artifacts",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/RemoveClientOnboardingLabArtifactsEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -20,6 +20,19 @@
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required to cleanup watsonx Orchestrate lab",
+										"name": "Download WO lab",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/DBExecutionHelper.twx"
+											}
+										]
+									}
+								},
+								{
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description": "Delete 'WXC SERVICE' Workflow solution",
@@ -35,7 +48,7 @@
 								{
 									"EXECUTESQL": {
 										"enabled": "true",
-										"description": "Execute SQL for watsonx Orchestrate to create and populate db table",
+										"description": "Execute SQL for watsonx Orchestrate to drop db table",
 										"removeConfigMapName": "client-onboarding-state-wo-lab",
 										"actions": [
 											{
