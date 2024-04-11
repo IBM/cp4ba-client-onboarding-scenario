@@ -1,6 +1,4 @@
-# Deploying the Client Onboarding scenario into a Starter deployment environment - Using an OCP Job 
-
-# (for CP4BA 23.0.2 IF002 and above) 
+# Deploying the Client Onboarding scenario into a Starter deployment environment - Using an OCP Job (for CP4BA 23.0.2 IF002 and above) 
 
 ## Introduction
 
@@ -21,7 +19,7 @@ Reserve a Business Automation environment from IBM TechZone. For that select the
 
 Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
 
-<img src="..\images\techzone-reservation_2302_starter.jpg" style="zoom: 67%;" />
+<img src="..\images\techzone-reservation_2302_starter.jpg" />
 
 Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after about 2-3 hours it finally becomes **Ready**. You will receive an email when provisioning starts and a second email with the subject '**Reservation Ready on IBM Technology Zone**' when it completes. 
 
@@ -32,11 +30,11 @@ Once you have reserved an environment in IBM TechZone, it is first **Scheduled**
 
 The final email contains a link '**View My Reservations**' to get to your reservations. Click on this link and click on the tile that represents your reservation.
 
-<img src="..\images\your-environment-is-ready_2302_starter.jpg" style="zoom: 25%;" />
+<img src="..\images\your-environment-is-ready_2302_starter.jpg" />
 
 Towards the top of the screen you will find the **link to the OpenShift console**, the **Username** (which is always **kubeadmin**) to log into the OpenShift console, and the unique **Password** for the environment.
 
-   <img src="..\images\techzone-reserved-env_2302_starter.jpg" style="zoom:25%;" />
+   <img src="..\images\techzone-reserved-env_2302_starter.jpg" />
 
 ### Bring Your Own CP4BA environment
 
@@ -76,11 +74,11 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    >
    > 1. Once logged into the OpenShift console, **click** the **+** sign in the top right corner
    >
-   > <img src="..\images\openshift-import-YAML-button.jpg" style="zoom:40%;" />
+   > <img src="..\images\openshift-import-YAML-button.jpg" />
    >
    > 2. **Paste** your **YAML** into the large text box and **click Create** at the bottom left to have OpenShift apply your YAML
    >
-   >    <img src="..\images\openshift-import-YAML.jpg" style="zoom:40%;" />
+   >    <img src="..\images\openshift-import-YAML.jpg"/>
 
    
 
@@ -127,7 +125,7 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
 
    As a result you should see a similar screen as below:
 
-   <img src="..\images\sa-yaml-import-complete.jpg" style="zoom:30%;" />
+   <img src="..\images\sa-yaml-import-complete.jpg" />
 
 4. **Import** the following **YAML** to **deploy the Client Onboarding scenario** itself 
    If required customize any of the settings starting with a lower-case character in the **env** section of the YAML.
@@ -229,13 +227,13 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    ```
 
    As soon as you **click Create**, a job will be created and opened in the console, showing as **In progress**.
-   <img src="..\images\ocp-deploy-job-created-inprogress.jpg" style="zoom:40%;" />
+   <img src="..\images\ocp-deploy-job-created-inprogress.jpg" />
 
 5. **Follow the progress** of the deployment using one of two methods:
 
    1. The easiest way is to **watch the job** created by importing the second YAML, to get to the **Complete** (or Failed) state. 
 
-      <img src="..\images\ocp-deploy-job-created-complete.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-deploy-job-created-complete.jpg" />
 
       Once completed, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`. (Make sure that either *All Projects* or the project of the CP4BA deployment is selected).
       A ConfigMap named `client-onboarding-information` will provide you with all required access details.
@@ -274,10 +272,10 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
       ```
 
    2. In case you want to follow the execution of the Client Onboarding scenario deployment in detail, click on the **Pods** tab.
-      <img src="..\images\ocp-deploy-job-created-pods.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-deploy-job-created-pods.jpg" />
 
       From there click on the pod and switch to the **Logs** tab.
-      <img src="..\images\ocp-deploy-job-created-pod-logs.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-deploy-job-created-pod-logs.jpg" />
 
       You can follow the progress of the deployment tool as it prints an overview of the actions it performs and their results to the console. 
 
@@ -294,7 +292,7 @@ The deployment tool performs a lot of validations and will report any issues it 
 
 If the deployment finally failed, you will see three different pods all in **Error** state and the Job in **Failed** state.
 
-<img src="..\images\ocp-deploy-job-created-failed.jpg" style="zoom:40%;" />
+<img src="..\images\ocp-deploy-job-created-failed.jpg" />
 
 For the purpose of analyzing the execution details or failures, the deployment tool creates four log files in a directory specific to the pod the deployment is run from (using the pod's name) that is located in the **/logs/application/client-onboarding** directory:
 - deployClientOnboarding_23.0.2_Starter_output.txt - Contains the messages printed to the console
@@ -492,23 +490,23 @@ If you have previously run the deployment, run it again by importing the YAML ag
 
    1. The easiest way is to **watch the job** created by importing the undeploy YAML, to get to the **Complete** (or Failed) state. 
 
-      <img src="..\images\ocp-undeploy-job-created-complete.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-undeploy-job-created-complete.jpg" />
 
       > [!TIP]
       >
       > The ConfigMap named `client-onboarding-information` will only be deleted when `cleanupClientOnboardingScenario` is set to true.
    
    2. In case you want to follow the execution of the Client Onboarding scenario undeployment in detail, click on the **Pods** tab.
-      <img src="..\images\ocp-undeploy-job-created-pods.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-undeploy-job-created-pods.jpg" />
    
       From there click on the pod and switch to the **Logs** tab.
-      <img src="..\images\ocp-undeploy-job-created-pod-logs.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-undeploy-job-created-pod-logs.jpg" />
    
       You can follow the progress of the deployment tool as it prints an overview of the actions it performs and their results to the console. 
    
       Once the deployment tool completes without a fatal error, it will output a status message that declares successful undeployment of the Client Onboarding scenario.
    
-      <img src="..\images\ocp-undeploy-job-created-pod-logs-complete.jpg" style="zoom:40%;" />
+      <img src="..\images\ocp-undeploy-job-created-pod-logs-complete.jpg" />
 
 3. **Troubleshooting undeploy errors**
 
