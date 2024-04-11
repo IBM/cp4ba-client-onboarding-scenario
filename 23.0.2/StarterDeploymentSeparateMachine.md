@@ -16,7 +16,10 @@ A simpler deployment approach without the need for a separate machine is describ
 
 Either
 
-- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) or
+- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) 
+
+  or
+
 - bring your own CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 ### 2. Machine to start the deployment from

@@ -14,7 +14,10 @@ This deployment approach does not require a separate machine with Java on it to 
 
 Either
 
-- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) or
+- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) 
+
+  or
+
 - bring your own CP4BA 23.0.2 IF002 or newer Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
