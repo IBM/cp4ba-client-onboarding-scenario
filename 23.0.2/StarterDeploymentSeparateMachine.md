@@ -6,7 +6,7 @@ Use these instruction to deploy the out-of-the-box end-to-end [Client Onboarding
 
 This deployment approach requires a separate machine with Java on it to run the deployment and the manual download and modification of a file to kick off the deployment. It offers the largest flexibility for customized deployments.
 
-I simpler approach without the need for a separate machine is described [here](StarterDeploymentViaJob.md).
+A simpler approach without the need for a separate machine is described [here](StarterDeploymentViaJob.md).
 
 
 ## Prerequisites
@@ -19,7 +19,7 @@ Reserve a Business Automation environment from IBM TechZone. For that select the
 
 Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
 
-<img src="..\images\techzone-reservation_2302_starter.jpg" style="zoom: 67%;" />
+<img src="images\techzone-reservation_2302_starter.jpg" />
 
 Once you have reserved an environment in IBM TechZone, it is first **Scheduled** for provisioning. After a while it moves into status **Provisioning**, and after about 2-3 hours it finally becomes **Ready**. You will receive an email when provisioning starts and a second email with the subject '**Reservation Ready on IBM Technology Zone**' when it completes. 
 
@@ -30,11 +30,11 @@ Once you have reserved an environment in IBM TechZone, it is first **Scheduled**
 
 The final email contains a link '**View My Reservations**' to get to your reservations. Click on this link and click on the tile that represents your reservation.
 
-<img src="..\images\your-environment-is-ready_2302_starter.jpg" style="zoom: 25%;" />
+<img src="images\your-environment-is-ready_2302_starter.jpg" />
 
 Towards the top of the screen you will find the **link to the OpenShift console**, the **Username** (which is always **kubeadmin**) to log into the OpenShift console, and the unique **Password** for the environment.
 
-   <img src="..\images\techzone-reserved-env_2302_starter.jpg" style="zoom:25%;" />
+   <img src="images\techzone-reserved-env_2302_starter.jpg" />
 
 #### Bring Your Own CP4BA environment
 
@@ -69,13 +69,13 @@ Update the two variables `ocLoginServer` and `ocLoginToken` defined at the top o
 
 2. Click the **Copy login command** option in the drop down that appears when clicking on the user name in the top right corner 
 
-   <img src="..\images\openshift-copy-log-in-command.jpg" />
+   <img src="images\openshift-copy-log-in-command.jpg" />
 
 3. Click on **Display Token** link shown on the next page 
 
 4. For `ocLoginServer` set the value displayed after `--server=`. For `--ocLoginToken` set the value displayed after `token=`
 
-   <img src="..\images\openshift-log-in-token.jpg" />
+   <img src="images\openshift-log-in-token.jpg" />
 
 5. Go to **Storage -> StorageClasses**, select an appropriate storage class, and set the storage class name for `ocpStorageClassForInternalMailServer` (The default value normally works for TechZone OCP clusters.)
 
