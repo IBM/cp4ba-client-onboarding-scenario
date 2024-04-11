@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -12,13 +12,13 @@
 
 # This file is to be used with CP4BA 23.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
 
-# Set all variables according to your environment before executing this file
+# Set all variables according to your environment before executing this file or use the respective command line options
 
 #----------------------------------------------------------------------------------------------------------
 # Specify below variables to launch the deployment automation with
 #----------------------------------------------------------------------------------------------------------
 
-# Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
+# 'ocLoginServer' and 'ocLoginToken' need to be specified
 
 # Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginServer=REQUIRED
@@ -28,9 +28,6 @@ ocLoginToken=REQUIRED
 # Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 #cp4baNamespace=REQUIRED
-
-# URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
-#pakInstallerPortalURL=REQUIRED
 
 
 # Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
@@ -67,7 +64,7 @@ createUsers=false
 #jvmSettings="-Xms4096M"
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
-#disableAccessToGitHub="-disableAccessToGitHub=true"
+#disableAccessToGitHub=true
 
 # Proxy settings in case a proxy server needs to be used to access the GitHub resources
 # Uncomment at least the proxScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
@@ -89,33 +86,10 @@ printDetailedMessageToConsole=false
 printTraceMessageToConsole=false
 
 # ----------------------------------------------------------------------------------------------------------
-# Construct the proxy settings for curl and deployment automation tool if proxy is configured
-# ----------------------------------------------------------------------------------------------------------
-
-if [ ! -z "${proxyHost+x}" ]
-then
-  if [ ! -z "${proxyUser+x}" ]
-  then
-     TOOLPROXYSETTINGS=-"psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort} -pu=${proxyUser} -ppwd=${proxyPwd}"
-
-     if [[ "${proxyScenario}" == "GitHub" ]] 
-     then
-       CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort} -U ${proxyUser}:${proxyPwd}"
-     fi
-  else
-    TOOLPROXYSETTINGS="-psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort}"
-    if [[ "${proxyScenario}" == "GitHub" ]] 
-    then
-       CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort}"
-    fi
-  fi
-fi
-
-# ----------------------------------------------------------------------------------------------------------
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -129,6 +103,11 @@ while [ : ]; do
         echo "--ocls = ocpLoginServer"
         echo "--oclt = ocpLoginToken"
         echo "--ns = cp4baNamespace"
+        echo "--pscenario = proxyScenario (needs to be GitHub if set)"
+        echo "--phost = proxyHost"
+        echo "--pport = proxyPort"
+        echo "--puser = proxyUser"
+        echo "--ppwd = proxyPwd"
         echo "--cl = configureLabs (true/false)"
         echo "--cu = createUsers (true/false)"
         echo "--ewflbu = enableWorkflowLabsForBusinessUsers (true/false)"
@@ -141,7 +120,7 @@ while [ : ]; do
         echo "--jvm = jvmSettings"
         echo "--bd = bootstrapDebugString"
         echo "--ds = debugString"
-        echo "--dgithub = disableAccessToGitHub"
+        echo "--dgithub = disableAccessToGitHub (true/false)"
         echo "--op = outputPath"
         echo "--pdmtoc = printDetailedMessageToConsole (true/false)"
         echo "--ptmtoc = printTraceMessageToConsole (true/false)"
@@ -166,6 +145,26 @@ while [ : ]; do
         ;;
     --ns)
         cp4baNamespace=$2
+        shift 2
+        ;;
+    --pscenario)
+        proxyScenario=$2
+        shift 2
+        ;;
+    --phost)
+        proxyHost=$2
+        shift 2
+        ;;
+    --pport)
+        proxyPort=$2
+        shift 2
+        ;;
+    --puser)
+        proxyUser=$2
+        shift 2
+        ;;
+    --ppwd)
+        proxyPwd=$2
         shift 2
         ;;
     --cl)
@@ -248,6 +247,11 @@ then
   echo "ocLoginServer '${ocLoginServer}'"
   echo "ocLoginToken '${ocLoginToken}'"
   echo "cp4baNamespace '${cp4baNamespace}'"
+  echo "proxyScenario '${proxyScenario}'"
+  echo "proxyHost '${proxyHost}'"
+  echo "proxyPort '${proxyPort}'"
+  echo "proxyUser '${proxyUser}'"
+  echo "proxyPwd '${proxyPwd}'"
   echo "configureLabs '${configureLabs}'"
   echo "createUsers '${createUsers}'"
   echo "enableWorkflowLabsForBusinessUsers '${enableWorkflowLabsForBusinessUsers}'"
@@ -265,6 +269,29 @@ then
   echo "outputPath '${outputPath}'"
   echo "printDetailedMessageToConsole '${printDetailedMessageToConsole}'"
   echo "printTraceMessageToConsole '${printTraceMessageToConsole}'"
+fi
+
+# ----------------------------------------------------------------------------------------------------------
+# Construct the proxy settings for curl and deployment automation tool if proxy is configured
+# ----------------------------------------------------------------------------------------------------------
+
+if [ ! -z "${proxyHost+x}" ]
+then
+  if [ ! -z "${proxyUser+x}" ]
+  then
+     TOOLPROXYSETTINGS=-"psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort} -pu=${proxyUser} -ppwd=${proxyPwd}"
+
+     if [[ "${proxyScenario}" == "GitHub" ]] 
+     then
+       CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort} -U ${proxyUser}:${proxyPwd}"
+     fi
+  else
+    TOOLPROXYSETTINGS="-psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort}"
+    if [[ "${proxyScenario}" == "GitHub" ]] 
+    then
+       CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort}"
+    fi
+  fi
 fi
 
 # ----------------------------------------------------------------------------------------------------------
@@ -289,7 +316,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.5
+SCRIPTVERSION=1.0.6
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -298,11 +325,16 @@ SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding
 # GitHub access is disabled. Validate that the deployment tool jar is available
 # ----------------------------------------------------------------------------------------------------------
 
+if [ ! -z "${disableAccessToGitHub+x}" ] && "${disableAccessToGitHub}" == "true"
+then
+  DISABLEACCESSTOGITHUBINTERNAL="-datgh"
+fi
+
 toolValidationSuccess=true
 echo "Bootstrapping deployment automation tool:"
 
 # In case access to GitHub is disabled check if the deployment automation jar is available locally
-if [ ! -z "${disableAccessToGitHub+x}" ]
+if [ ! -z "${DISABLEACCESSTOGITHUBINTERNAL+x}" ]
 then
   # 
   if ls *DeploymentAutomation.jar 1> /dev/null 2>&1; then
@@ -350,44 +382,28 @@ echo
 
 validationSuccess=true
 
-# if 'pakInstallerPortalURL' is not defined or set as default or empty then check that 'ocLoginServer' and 'ocLoginToken' are properly defined
-if [ -z "${pakInstallerPortalURL+x}" ] || [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
+if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
-	if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+	if $validationSuccess
 	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
-	else
-		INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
+		echo "Validating configuration failed:"
+		validationSuccess=false
 	fi
-	
-	if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+	echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+else
+	INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
+fi
+
+if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+then
+	if $validationSuccess
 	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
-	else
-		INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
+		echo "Validating configuration failed:"
+		validationSuccess=false
 	fi
-else 
-	if ([[ "${ocLoginServer}" != "REQUIRED" ]] && [[ "${ocLoginServer}" != "" ]]) || ([[ "${ocLoginToken}" != "REQUIRED" ]] && [[ "${ocLoginToken}" != "" ]])
-	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
-	else
-		INTERNALPAKINSTALLERPORTALURL=-pipurl=${pakInstallerPortalURL}
-	fi
+	echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+else
+	INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
 fi
 
 if [ ! -z "${gmailAddress+x}" ]
@@ -539,6 +555,18 @@ else
   fi
 fi
 
+if ! $validationSuccess
+then
+  echo
+fi
+
+if ! $validationSuccess || ! $toolValidationSuccess
+then
+  echo "Exiting..."
+  exit 1
+fi
+
+
 if [[ ! -z "${printDetailedMessageToConsole+x}" ]]
 then
   if [[ "${printDetailedMessageToConsole}" == "true" ]]
@@ -562,17 +590,6 @@ fi
 
 OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=${ocpStorageClassForInternalMailServer}
 
-if ! $validationSuccess
-then
-  echo
-fi
-
-if ! $validationSuccess || ! $toolValidationSuccess
-then
-  echo "Exiting..."
-  exit 1
-fi
-
 if [ ! -z "${enableWorkflowLabsForBusinessUsers+x}" ]
 then
 	workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
@@ -595,7 +612,7 @@ fi
 
 if [ ! -z "${dumpCmd+x}" ]
 then
-  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
