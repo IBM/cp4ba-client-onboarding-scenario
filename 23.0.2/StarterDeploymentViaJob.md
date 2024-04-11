@@ -136,7 +136,7 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    | configureLabs                        | true/false                 | Should the artifacts for the labs be deployed too (true) or only those for the Client Onboarding scenario (false) |
    | enableWorkflowLabsForBusinessUsers   | true/false                 | Should the environment be configured so that business users (user1-user10)  can perform the Workflow labs (true) and not just the admin (cp4admin) user (true).<br />If set to true, this will significantly increase the deployment time to up to 45 minutes. |
    | rpaBotExecutionUser                  | User short name            | User (e.g. cp4admin) for who the RPA bot is executed (specifying a non-existing user always skips the RPA bot execution) |
-   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **[Advanced Configuration](StarterDeploymentViaJob.md#advanced-configuration)** entry below. |
+   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **[Advanced Configuration](StarterDeploymentViaJob.md#configuring-an-rpa-environment)** entry below. |
    | printDetailedMessageToConsole        | true/false                 | Should detailed log messages be printed to the console (true) or just the summary (false). |
 
    > [!IMPORTANT]
@@ -510,7 +510,7 @@ If you have previously run the deployment, run it again by importing the YAML ag
 
 3. **Troubleshooting undeploy errors**
 
-   Please refer to the section **Troubleshooting the Client Onboarding Deployment** above for instructions on how to get to the log files created during undeployment.
+   Please refer to the section **[Troubleshooting the Client Onboarding Deployment](StarterDeploymentViaJob.md#troubleshooting-the-client-onboarding-deployment)** above for instructions on how to get to the log files created during undeployment.
 
 ## Support
 
