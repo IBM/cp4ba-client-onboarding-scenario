@@ -6,7 +6,7 @@ Use these instruction to deploy the end-to-end [Client Onboarding solution](http
 
 This deployment approach does not require a separate machine with Java on it to run the deployment or the manual download of any resources. 
 
-A different approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentSeparateMachine.md).
+A different deployment approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentSeparateMachine.md).
 
 
 ## Prerequisites
@@ -60,7 +60,7 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    - Click on **Workloads -> ConfigMaps** in the left-hand side navigator
    - Type '**access-info**' in the field next to 'Name'
 
-   If the ConfigMap '**icp4adeploy-cp4ba-access-info**' is shown, your CP4BA cluster is fully deployed. **If not, periodically check until it is listed.** 
+   If the ConfigMap **icp4adeploy-cp4ba-access-info** is shown, your CP4BA cluster is fully deployed. **If not, periodically check until it is listed.** 
 
    > [!NOTE]
    >
@@ -136,7 +136,7 @@ Alternatively, create or use a CP4BA 23.0.2 IF002 or newer Starter deployment au
    | configureLabs                        | true/false                 | Should the artifacts for the labs be deployed too (true) or only those for the Client Onboarding scenario (false) |
    | enableWorkflowLabsForBusinessUsers   | true/false                 | Should the environment be configured so that business users (user1-user10)  can perform the Workflow labs (true) and not just the admin (cp4admin) user (true).<br />If set to true, this will significantly increase the deployment time to up to 45 minutes. |
    | rpaBotExecutionUser                  | User short name            | User (e.g. cp4admin) for who the RPA bot is executed (specifying a non-existing user always skips the RPA bot execution) |
-   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **Advanced Configuration** entry below. |
+   | rpaServer                            | RPA  Asynch Server API URL | In case the RPA bot execution is enabled via above parameter need to set this to the **Asynch Server API** URL of the RPA environment to be used. <br />For more details see **Configuring an RPA environment** topic as part of the **[Advanced Configuration](StarterDeploymentViaJob.md#advanced-configuration)** entry below. |
    | printDetailedMessageToConsole        | true/false                 | Should detailed log messages be printed to the console (true) or just the summary (false). |
 
    > [!IMPORTANT]
@@ -403,11 +403,11 @@ If you have previously run the deployment, run it again by importing the YAML ag
     > [!IMPORTANT]
     >
     > If your CP4BA instance is not deployed into the namespace `cp4ba-starter`, you need to modify the **single** namespace location to match your deployment namespace.
-
+    
     > [!IMPORTANT]
     >
     > As part of the undeployment, resources are pulled from java.net, openshift.com, and github.com/githubusercontent.com. Therefore, your OCP environment needs to be connected to the Internet and these sites need to be reachable. 
-
+    
     ```yaml
     apiVersion: batch/v1
     kind: Job
@@ -482,7 +482,7 @@ If you have previously run the deployment, run it again by importing the YAML ag
           restartPolicy: Never
       backoffLimit: 2
     ```
-
+    
     As soon as you **click Create**, a job will be created and opened in the console, showing as **In progress**.
     <img src="images\ocp-undeploy-job-created-inprogress.jpg" style="zoom:40%;" />
 

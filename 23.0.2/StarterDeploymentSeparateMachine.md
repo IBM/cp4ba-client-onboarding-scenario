@@ -6,7 +6,7 @@ Use these instruction to deploy the out-of-the-box end-to-end [Client Onboarding
 
 This deployment approach requires a separate machine with Java on it to run the deployment and the manual download and modification of a file to kick off the deployment. It offers the largest flexibility for customized deployments.
 
-A simpler approach without the need for a separate machine is described [here](StarterDeploymentViaJob.md).
+A simpler deployment approach without the need for a separate machine is described [here](StarterDeploymentViaJob.md).
 
 
 ## Prerequisites
