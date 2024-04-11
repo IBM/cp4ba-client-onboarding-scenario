@@ -6,7 +6,7 @@ The Client Onboarding scenario and its accompanying labs consist of a large set 
 
 Depending on the target deployment environment (Starter vs. Enterprise deployment, Enterprise: Rapid Deployment Scripts LDAP with Gitea, Cloud Pak Deployer, Custom with arbitrary LDAP and external GitHub), the tool requires different configuration settings.
 
-Choose the environment type and deployment approach below that best matches your target environment and proceed as described in the linked document.
+Choose the environment type and deployment approach below, that best matches your target environment and proceed as described in the linked document.
 
 > [!NOTE]
 >
@@ -15,7 +15,7 @@ Choose the environment type and deployment approach below that best matches your
 > 1. (New and recommended) Using an OpenShift Job - Does not require a separate deployment machine with Java installed
 > 2. (Traditional) Using a separate deployment machine with Java installed
 >
-> When available using the OpenShift Job approach is recommended, as there is no additional requirement than having a CP4BA 23.0.2 IF002 or above cluster.
+> When available, using the OpenShift Job approach is recommended, as there is no additional requirement other than having a CP4BA 23.0.2 (IF002 or above) cluster.
 
 
 ## Target Deployment Type
