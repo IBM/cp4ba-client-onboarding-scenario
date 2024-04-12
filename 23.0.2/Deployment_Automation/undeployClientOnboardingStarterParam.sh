@@ -31,7 +31,7 @@ ocLoginToken=REQUIRED
 # - You ran a workshop and want to reuse the environment, you may want to only remove user-data but keep the lab and scenario artifacts deployed (change the second and third option to false)
 # - You want to remove the whole Client Onboarding Artifacts including! custom artifacts created by business users leave all three properties set to true
 # Warning: cleanupClientOnboardingLabs_UserData does not remove data in CPE that was created using the admin user of the environment, only data created by the business users. If the admin user
-# created data undeploying the content lab artfiacts may fail and manual cleanup may be required of the data created by the admin user before content lab artifcats can be undeployed successfully
+# created data undeploying the content lab artifacts may fail and manual cleanup may be required of the data created by the admin user before content lab artifacts can be undeployed successfully
 cleanupClientOnboardingLabs_UserData=true
 cleanupClientOnboardingLabs=true
 cleanupClientOnboardingScenario=true
