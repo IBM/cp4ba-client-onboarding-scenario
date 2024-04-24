@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.57 <1.2.0",
+	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1272,8 +1272,11 @@
 										"enabled": "true",
 										"description": "Install the patched WOX services WF solution",
 										"twxFile": "!patchedTWXFileName!",
+										"paDisplayName": "!projectDisplayName!",
 										"paAcronym": "!projectAcronym!",
 										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
 										"checkForUpdatedEnvironmentVariables": true
 									}
 								},

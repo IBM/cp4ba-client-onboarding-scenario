@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingLabsEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -1050,6 +1050,15 @@
 									}
 								},
 								{
+									"DETERMINEDEPLOYEDINFO": {
+										"enabled": "true",
+										"description": "Determine acronym of deployed WF Client Onboarding solution",
+										"relativePath": "Business Automation Workflow",
+										"sourceTwxFile": "Client_Onboarding.twx",
+										"globalContextVariableName": "clientOnboardingPAInfo"
+									}
+								},
+								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract project information from template file",
@@ -1192,8 +1201,11 @@
 										"enabled": "true",
 										"description": "Install the patched WOX services WF solution",
 										"twxFile": "!patchedTWXFileName!",
+										"paDisplayName": "!projectDisplayName!",
 										"paAcronym": "!projectAcronym!",
 										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
 										"checkForUpdatedEnvironmentVariables": true
 									}
 								},

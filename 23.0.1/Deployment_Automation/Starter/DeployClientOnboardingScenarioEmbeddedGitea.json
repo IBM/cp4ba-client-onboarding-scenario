@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingScenarioEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -296,8 +296,11 @@
 										"enabled": "true",
 										"description": "Install the patched Client Onboarding WF solution",
 										"twxFile": "!patchedTWXFileName!",
+										"paDisplayName": "!projectDisplayName!",
 										"paAcronym": "!projectAcronym!",
 										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
 										"checkForUpdatedEnvironmentVariables": true
 									}
 								},

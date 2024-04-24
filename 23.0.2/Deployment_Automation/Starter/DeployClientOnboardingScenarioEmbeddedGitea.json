@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.4",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingScenarioEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -222,7 +222,8 @@
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract the project information from the Client Onboarding TWX file",
-										"sourceTwxFile": "Client_Onboarding.twx"
+										"sourceTwxFile": "Client_Onboarding.twx",
+										"globalContextVariableName": "clientOnboardingPAInfo"
 									}
 								},
 								{
@@ -296,8 +297,11 @@
 										"enabled": "true",
 										"description": "Install the patched Client Onboarding WF solution",
 										"twxFile": "!patchedTWXFileName!",
+										"paDisplayName": "!projectDisplayName!",
 										"paAcronym": "!projectAcronym!",
 										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
 										"checkForUpdatedEnvironmentVariables": true
 									}
 								},
@@ -614,6 +618,15 @@
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test Navigator availability"
+									}
+								},
+								{
+									"DETERMINEDEPLOYEDINFO": {
+										"enabled": "true",
+										"description": "Determine acronym of deployed WF Client Onboarding solution",
+										"relativePath": "Business Automation Workflow",
+										"sourceTwxFile": "Client_Onboarding.twx",
+										"globalContextVariableName": "clientOnboardingPAInfo"
 									}
 								},
 								{
