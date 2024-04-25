@@ -24,7 +24,7 @@
 										"entities": [
 											{
 												"action": "update",
-												"name": "$$(cp4baAdminUsr)$$",
+												"name": "$$(cp4baAdminUsrLower)$$",
 												"roles": [
 													"Deployed Decision Manager"
 												]
@@ -324,10 +324,10 @@
 												"type": "process",
 												"automationServiceMappings": {
 													"project": {
-														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsr)$$/Client-Onboarding"
+														"cp4badmin/Client-Onboarding": "$$(cp4baAdminUsrLower)$$/Client-Onboarding"
 													},
 													"url": {
-														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsrLower)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
 											}
@@ -681,10 +681,10 @@
 												"BAWTOS": "$$(BAW_TOS)$$"
 											},
 											"2": {
-												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsrLower)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 											},
 											"3": {
-												"cp4badmin": "$$(cp4baAdminUsr)$$"
+												"cp4badmin": "$$(cp4baAdminUsrLower)$$"
 											}
 										}
 									}
