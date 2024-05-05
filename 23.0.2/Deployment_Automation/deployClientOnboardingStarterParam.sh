@@ -10,9 +10,11 @@
 #
 ###############################################################################
 
-# This file is to be used with CP4BA 23.0.2 starter deployment to deploy the Client Onboarding scenario and associated labs using an internal email server/client
+# This file is to be used with CP4BA 23.0.2 starter deployment to deploy the Client Onboarding scenario 
+# and associated labs using an internal email server/client
 
-# Set all variables according to your environment before executing this file or use the respective command line options
+# Set all variables according to your environment before executing this file either
+# by editing the file or using the respective command line options
 
 #----------------------------------------------------------------------------------------------------------
 # Specify below variables to launch the deployment automation with
@@ -25,10 +27,10 @@ ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginToken=REQUIRED
 
-# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been 
+# deployed and specify the name of the namespace you want to deploy to. 
 # If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
 #cp4baNamespace=REQUIRED
-
 
 # Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
 configureLabs=true
@@ -36,27 +38,31 @@ configureLabs=true
 # Set to true in case environment should be used to perform Workflow labs using business users (user1-user10) instead of admin user (cp4admin)
 enableWorkflowLabsForBusinessUsers=false
 
-
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution
 rpaServer=https://rpa-server.com:1111
 
-# Uncomment below two properties to provide credentials for an external gmail account if emails should be sent to external email addresses otherwise an internal email server/client will be used
+# Flag that determines if the internal email server is used/deployed or the external gmail service
+# (In case the internal email server is used, the users are retrieved from the local LDAP. 
+#  In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+useInternalMailServer=true
 
-# Email address of the gmail account to send emails
-# gmailAddress=REQUIRED
-# App key for accessing the gmail account to send emails
-# gmailAppKey=REQUIRED
-
-# Name of the storage class for the internal mail server (TechZone normally  uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
+# Name of the storage class for the internal mail server (TechZone normally uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
 ocpStorageClassForInternalMailServer=ocs-storagecluster-cephfs
 
-# Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
+# Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
+gmailAddress=REQUIRED
+# App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
+gmailAppKey=REQUIRED
+
+# Should one or multiple users be added to the Cloud Pak as part of deploying the solution 
+# (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
 
 
-# Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+# Uncomment following two lines in case you want to use your Docker.io account instead of pulling images 
+# for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
 #dockerToken=REQUIRED
 
@@ -91,7 +97,7 @@ printTraceMessageToConsole=false
 
 VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
-    exit 1;
+  exit 1;
 fi
 
 eval set -- "$VALID_ARGS"
@@ -113,6 +119,8 @@ while [ : ]; do
         echo "--ewflbu = enableWorkflowLabsForBusinessUsers (true/false)"
         echo "--rpau = rpaBotExecutionUser"
         echo "--rpas = rpaServer"
+        echo "--uims = useInternalMailServer"
+        echo "--sc = ocpStorageClassForInternalMailServer"
         echo "--gmaila = gmailAddress"
         echo "--gmailk = gmailAppKey"
         echo "--du = dockerUserName"
@@ -187,6 +195,10 @@ while [ : ]; do
         rpaServer=$2
         shift 2
         ;;
+    --uims)
+        useInternalMailServer=$2
+        shift 2
+        ;;
     --gmaila)
         gmailAddress=$2
         shift 2
@@ -257,6 +269,7 @@ then
   echo "enableWorkflowLabsForBusinessUsers '${enableWorkflowLabsForBusinessUsers}'"
   echo "rpaBotExecutionUser '${rpaBotExecutionUser}'"
   echo "rpaServer '${rpaServer}'"
+  echo "useInternalMailServer '${useInternalMailServer}"
   echo "gmailAddress '${gmailAddress}'"
   echo "gmailAppKey '${gmailAppKey}'"
   echo "ocpStorageClassForInternalMailServer '${ocpStorageClassForInternalMailServer}'"
@@ -289,7 +302,7 @@ then
     TOOLPROXYSETTINGS="-psc=${proxyScenario} -ph=${proxyHost} -pp=${proxyPort}"
     if [[ "${proxyScenario}" == "GitHub" ]] 
     then
-       CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort}"
+      CURLPROXYSETTINGS="-x ${proxyHost}:${proxyPort}"
     fi
   fi
 fi
@@ -360,8 +373,8 @@ else
   # In case the deployment automation jar does not yet exist locally download it otherwise print a msg that no download is required
   if [[ ! -f ${TOOLFILENAME} ]] 
   then
-      echo "  Downloading deployment automation jar ${TOOLFILENAME} from GitHub"
-      curl -O ${DOWNLOADURL} ${CURLPROXYSETTINGS}
+    echo "  Downloading deployment automation jar ${TOOLFILENAME} from GitHub"
+    curl -O ${DOWNLOADURL} ${CURLPROXYSETTINGS}
   else
     echo "  Deployment automation jar file '${TOOLFILENAME}' already exists, no need to download it from Github"
   fi
@@ -384,56 +397,66 @@ validationSuccess=true
 
 if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
-	if $validationSuccess
-	then
-		echo "Validating configuration failed:"
-		validationSuccess=false
-	fi
-	echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  if $validationSuccess
+  then
+    echo "Validating configuration failed:"
+    validationSuccess=false
+  fi
+  echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
-	INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
+  INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
 fi
 
 if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
-	if $validationSuccess
-	then
-		echo "Validating configuration failed:"
-		validationSuccess=false
-	fi
-	echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  if $validationSuccess
+  then
+    echo "Validating configuration failed:"
+    validationSuccess=false
+  fi
+  echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
-	INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
+  INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
 fi
 
-if [ ! -z "${gmailAddress+x}" ]
+if [[ "${useInternalMailServer}" == "false" ]]
 then
-  if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
+  if [ ! -z "${gmailAddress+x}" ]
   then
-    if $validationSuccess
+    if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
     then
-      echo "Validating configuration failed:"
-      validationSuccess=false
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAddress' has not been set"
+    else
+      GMAILADDRESSINTERNAL=wf_cp_emailID=${gmailAddress}
     fi
-    echo "  Variable 'gmailAddress' has not been set"
   else
-    gmailAddressInternal=wf_cp_emailID=${gmailAddress}
+    echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAddress' has not been set"
   fi
-fi
 
-if [ ! -z "${gmailAppKey+x}" ]
-then
-  if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+  if [ ! -z "${gmailAppKey+x}" ]
   then
-     if $validationSuccess
-     then
-       echo "Validating configuration failed:"
-       validationSuccess=false
-     fi
-    echo "  Variable 'gmailAppKey' has not been set"
+    if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
+    then
+      if $validationSuccess
+      then
+        echo "Validating configuration failed:"
+        validationSuccess=false
+      fi
+      echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAppKey' has not been set"
+    else
+      GMAILAPPKEYINTERNAL=wf_cp_emailPassword=${gmailAppKey}
+    fi
   else
-    gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
+    echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAppKey' has not been set"
   fi
+  ENABLEDEPLOYEMAILCAPABILITYINTERNAL=enableDeployEmailCapability=false
+else
+ ENABLEDEPLOYEMAILCAPABILITYINTERNAL=enableDeployEmailCapability=true
 fi
 
 if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
@@ -473,17 +496,17 @@ fi
 
 if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
 then
-   createUsersFile=onboardUsersFile=AddUsersToPlatform.json
+  CREATEUSERSFILEINTERNAL=onboardUsersFile=AddUsersToPlatform.json
 
-   if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
-   then
-     if $validationSuccess
-     then
-	echo "Validating configuration failed:"
-        validationSuccess=false
-     fi
-     echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
-   fi
+  if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
+  then
+    if $validationSuccess
+    then
+      echo "Validating configuration failed:"
+      validationSuccess=false
+    fi
+    echo "  Configured to add users to Cloud Pak environment but file 'AddUsersToPlatform.json' does not exist in current directory"
+  fi
 fi
 
 # if dockerUserName is defined check if not equal default value required
@@ -503,7 +526,7 @@ then
     then
       if [[ "${dockerToken}" == "REQUIRED" ]]
       then
-	echo "  Variable 'dockerToken' is defined but is not set correctly"
+        echo "  Variable 'dockerToken' is defined but is not set correctly"
       fi
     else
       echo "  Variable 'dockerToken' is not defined but must be defined as variable 'dockerUserName' is defined"
@@ -518,7 +541,7 @@ then
           echo "Validating configuration failed:"
           validationSuccess=false
         fi
-	echo "  Variable 'dockerToken' is defined but is not set correctly"
+        echo "  Variable 'dockerToken' is defined but is not set correctly"
       else
         INTERNALDOCKERINFO="dockerUserName=${dockerUserName} dockerToken=${dockerToken}"
       fi
@@ -539,8 +562,8 @@ else
     then
       if $validationSuccess
       then
-	echo "Validating configuration failed:"
-	validationSuccess=false
+        echo "Validating configuration failed:"
+        validationSuccess=false
       fi
       echo "  Variable 'dockerUserName' is not defined but must be defined as variable 'dockerToken' is defined"
       echo "  Variable 'dockerToken' is defined but is not set correctly"
@@ -554,18 +577,6 @@ else
     fi
   fi
 fi
-
-if ! $validationSuccess
-then
-  echo
-fi
-
-if ! $validationSuccess || ! $toolValidationSuccess
-then
-  echo "Exiting..."
-  exit 1
-fi
-
 
 if [[ ! -z "${printDetailedMessageToConsole+x}" ]]
 then
@@ -585,34 +596,45 @@ fi
 
 if [[ ! -z "${outputPath+x}" ]]
 then
-	INTERNALOUTPUTPATH=\"-op=${outputPath}\"
+  INTERNALOUTPUTPATH=\"-op=${outputPath}\"
 fi
 
 OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=${ocpStorageClassForInternalMailServer}
 
 if [ ! -z "${enableWorkflowLabsForBusinessUsers+x}" ]
 then
-	workflowLabsForBusinessUsers=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
+  WORKFLOWLABSFORBUSINESSUSERSINTERNAL=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
 fi
 
 if [ ! -z "${configureLabs+x}" ]
 then
-	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
+  ENABLECONFIGURELABSINTERNAL=enableConfigureSWATLabs=${configureLabs}
 fi
 
 if [ ! -z "${bootstrapDebugString+x}" ]
 then
-	BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
+  BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
 fi
 
 if [ ! -z "${debugString+x}" ]
 then
-	DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+  DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+fi
+
+if ! $validationSuccess
+then
+  echo
+fi
+
+if ! $validationSuccess || ! $toolValidationSuccess
+then
+  echo "Exiting..."
+  exit 1
 fi
 
 if [ ! -z "${dumpCmd+x}" ]
 then
-  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALCP4BANAMESPACE} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${gmailAddressInternal} ${gmailAppKeyInternal} ${enableConfigureLabsInternal} ${workflowLabsForBusinessUsers} ${createUsersFile} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
