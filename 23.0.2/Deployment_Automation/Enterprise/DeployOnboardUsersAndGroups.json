@@ -8,7 +8,7 @@
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(onboardUsersFile))$",
+				"enabled": "$(ISSET(onboardUsersFile))$ && $$(isCloudPakDeployerDeployment)$$",
 				"description": "Onboard new users to the Cloud Pak",
 				"actions": [
 					{
@@ -29,7 +29,7 @@
 								},
 								{
 									"MANAGEMAILUSERS": {
-										"enabled": "$$(isLocalMailAvailable)$$ && $$(LDAPModified|default=false)$$",
+										"enabled": "$$(isLocalMailAvailable)$$ && $(LDAPModified|default=false)$",
 										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
 										"synchronizeWithLDIF": true,
 										"removeAllOtherUsers": true
