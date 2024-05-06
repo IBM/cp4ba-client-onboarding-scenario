@@ -8,16 +8,16 @@
 	"actions": [
 		{
 			"INCLUDE": {
-				"comment": "For Pak Deployer deployed environments ensure required groups exist",
+				"comment": "Optionally add/remove users and groups from environment and synchronize mail server users with LDAP users if mail server is running",
 				"enabled": "true",
-				"file": "DeployClientOnboardingManagePakDeployerGroups.json"
+				"file": "DeployOnboardUsersAndGroups.json"
 			}
 		},
 		{
 			"INCLUDE": {
-				"comment": "Optionally add/remove users and groups from environment and synchronize mail server users with LDAP users if mail server is running",
+				"comment": "For Pak Deployer deployed environments ensure required groups exist",
 				"enabled": "true",
-				"file": "DeployOnboardUsersAndGroups.json"
+				"file": "DeployClientOnboardingManagePakDeployerGroups.json"
 			}
 		},
 		{
