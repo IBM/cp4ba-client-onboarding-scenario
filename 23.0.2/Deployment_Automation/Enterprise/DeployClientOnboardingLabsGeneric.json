@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.4",
+	"fileVersion": "1.0.5",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -1130,6 +1130,15 @@
 														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsrLower)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
+											},
+											{
+												"name": "Client_Onboarding_Workflows",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": {
+														"CO": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$"
+													}
+												}
 											}
 										]
 									}
@@ -1155,11 +1164,29 @@
 									}
 								},
 								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the automation service to call WF project using the acronym after it got imported",
+										"sourceTwxFile": "!twxFileName!",
+										"filePatchInfos": [
+											{
+												"name": "Client_Onboarding_Workflows",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": {
+														"CO": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$"
+													}
+												}
+											}
+										]
+									}
+								},
+								{
 									"IMPORTPROJECT": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Document Upload' BAA template into Studio",
 										"name": "!solutionName!",
-										"file": "!twxFileName!",
+										"file": "!patchedTWXFileName!",
 										"type": "!solutionType!",
 										"acronym": "!solutionAcronym!",
 										"snapshot": "!snapshotAcronym!",
