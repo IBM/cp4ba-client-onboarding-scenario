@@ -141,9 +141,9 @@
     {
      "kind": "LG",
      "w": 2,
-     "x": 2,
+     "x": 0,
      "h": 2,
-     "y": 9
+     "y": 5
     }
    ]
   },
@@ -162,28 +162,28 @@
     {
      "kind": "LG",
      "w": 2,
-     "x": 4,
+     "x": 0,
      "h": 2,
-     "y": 9
+     "y": 7
     }
    ]
   },
   {
    "name": "Average Revenue from Service Fees for Approved Clients",
    "id": "82ab7394-a0b6-4be4-a8b9-94579a33e330",
-   "config": {"goalId": "AQVHro4B0vuTxIIxRal8"},
+   "config": {"goalId": "JoNOTo8BJvObweXZ0jPi"},
    "layouts": []
   },
   {
    "name": "Highest Service Fee by Industry Sector",
    "id": "94236f4f-4b5e-4489-b19d-24122fc31360",
-   "config": {"goalId": "AQVHro4B0vuTxIIxRal8"},
+   "config": {"goalId": "JoNOTo8BJvObweXZ0jPi"},
    "layouts": []
   }
  ],
  "goalsLayout": [{
   "name": "Focus Corp's top Client Onboarding KPI Completed",
-  "id": "AQVHro4B0vuTxIIxRal8",
+  "id": "JoNOTo8BJvObweXZ0jPi",
   "layouts": [
    {
     "kind": "SM",
