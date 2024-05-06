@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.4",
+	"fileVersion": "1.0.6",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -342,7 +342,7 @@
 										"paDisplayName": "!projectDisplayName!",
 										"paAcronym": "!projectAcronym!",
 										"paSnapshot": "!snapshotAcronym!",
-										"allowPAAcronymChange": false,
+										"allowPAAcronymChange": true,
 										"allowTKAcronymChange": false,
 										"checkForUpdatedEnvironmentVariables": true
 									}
@@ -685,6 +685,9 @@
 											},
 											"3": {
 												"cp4badmin": "$$(cp4baAdminUsrLower)$$"
+											},
+											"4": {
+												"\"CO\"": "\"$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$\""
 											}
 										}
 									}
@@ -714,12 +717,24 @@
 									}
 								},
 								{
+									"PATCHAPPLICATION": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Document Upload' app to work in current environment",
+										"file": "ClientOnboardingDocumentUpload.zip",
+										"simpleTextMappings": {
+											"1": {
+												"\"CO\"": "\"$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$\""
+											}
+										}
+									}
+								},
+								{
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Document Upload' app",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Document Upload",
-										"file": "ClientOnboardingDocumentUpload.zip"
+										"file": "!patchedZIPFileName!"
 									}
 								},
 								{
