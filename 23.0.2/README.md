@@ -25,8 +25,8 @@ Choose the environment type and deployment approach below, that best matches you
    - Using a [separate machine](StarterDeploymentSeparateMachine.md) to run the deployment from
 2. **Enterprise Deployment**
    1. **Deployed by Cloud Pak Deployer**
-      - Using an OpenShift Job - **Recommended**
-      - Using a separate machine to run the deployment from
+      - Using an [OpenShift Job](CloudPakDeployerViaJob.md) - **Recommended**
+      - Using a [separate machine](CloudPakDeployerSeparateMachine.md) to run the deployment from
    2. **Deployed using LDAP content as defined by Rapid Deployment Scripts** ([predefined.ldif & cp4ba.ldif](https://github.com/IBM/cp4ba-rapid-deployment/blob/main/cp4ba-21-0-3/03createVMForLDAP.md)) **with a co-deployed Gitea**
       - Using a separate machine to run the deployment from
    3. **Deployed using an arbitrary LDAP and an external GitHub**
