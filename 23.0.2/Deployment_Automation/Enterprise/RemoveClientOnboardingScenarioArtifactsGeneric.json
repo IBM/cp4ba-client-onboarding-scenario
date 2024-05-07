@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to undeploy all artifacts of the Client Onboarding scenario itself but not the artifacts used in labs and/or user created artifacts",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/RemoveClientOnboardingScenarioArtifactsGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -119,6 +119,19 @@
 							"description": "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for WF",
+										"name": "Download Workflow file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
+											}
+										]
+									}
+								},
 								{
 									"DETERMINEDEPLOYEDINFO": {
 										"enabled": "true",
