@@ -95,7 +95,7 @@ printTraceMessageToConsole=false
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -134,6 +134,10 @@ while [ : ]; do
         echo "--ptmtoc = printTraceMessageToConsole (true/false)"
         shift;
         exit 0;
+        ;;
+    --dd)
+        dumpDetails=true
+        shift
         ;;
     --dv)
         dumpVariables=true
@@ -329,7 +333,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.6
+SCRIPTVERSION=1.0.8
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -405,6 +409,10 @@ then
   echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
   INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'ocLoginServer' = '${INTERNALOCLOGINSERVER}'" 
+  fi
 fi
 
 if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
@@ -417,6 +425,10 @@ then
   echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
   INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'ocLoginToken' = '${INTERNALOCLOGINTOKEN}'" 
+  fi
 fi
 
 if [[ "${useInternalMailServer}" == "false" ]]
@@ -433,6 +445,10 @@ then
       echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAddress' has not been set"
     else
       GMAILADDRESSINTERNAL=wf_cp_emailID=${gmailAddress}
+      if [ ! -z "${dumpDetails+x}" ]
+      then
+        echo "set 'gmailAddress' = '${GMAILADDRESSINTERNAL}'" 
+      fi
     fi
   else
     echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAddress' has not been set"
@@ -450,13 +466,25 @@ then
       echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAppKey' has not been set"
     else
       GMAILAPPKEYINTERNAL=wf_cp_emailPassword=${gmailAppKey}
+      if [ ! -z "${dumpDetails+x}" ]
+      then
+        echo "set 'gmailAppKey' = '${GMAILAPPKEYINTERNAL}'" 
+      fi
     fi
   else
     echo "  Variable 'useInternalMailServer' is set to 'true' but variable 'gmailAppKey' has not been set"
   fi
   ENABLEDEPLOYEMAILCAPABILITYINTERNAL=enableDeployEmailCapability=false
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'enableDeployEmailCapability' = '${ENABLEDEPLOYEMAILCAPABILITYINTERNAL}'" 
+  fi
 else
- ENABLEDEPLOYEMAILCAPABILITYINTERNAL=enableDeployEmailCapability=true
+  ENABLEDEPLOYEMAILCAPABILITYINTERNAL=enableDeployEmailCapability=true
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'enableDeployEmailCapability' = '${ENABLEDEPLOYEMAILCAPABILITYINTERNAL}'" 
+  fi
 fi
 
 if [[ "${rpaBotExecutionUser}" == "REQUIRED" ]] || [[ "${rpaBotExecutionUser}" == "" ]]
@@ -491,12 +519,20 @@ then
     echo "  Variable 'cp4baNamespace' has not been set"
   else
     INTERNALCP4BANAMESPACE=-cp4bans=${cp4baNamespace}
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'cp4baNamespace' = '${INTERNALCP4BANAMESPACE}'" 
+    fi
   fi
 fi
 
 if [[ ! -z "${createUsers+x}"  ]] && "${createUsers}" == "true"
 then
   CREATEUSERSFILEINTERNAL=onboardUsersFile=AddUsersToPlatform.json
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'onboardUsersFile' = '${CREATEUSERSFILEINTERNAL}'" 
+  fi
 
   if ! ls "AddUsersToPlatform.json" 1> /dev/null 2>&1; 
   then
@@ -544,6 +580,10 @@ then
         echo "  Variable 'dockerToken' is defined but is not set correctly"
       else
         INTERNALDOCKERINFO="dockerUserName=${dockerUserName} dockerToken=${dockerToken}"
+        if [ ! -z "${dumpDetails+x}" ]
+        then
+          echo "set 'dockerInfo' = '${INTERNALDOCKERINFO}'" 
+        fi
       fi
     else
       if $validationSuccess
@@ -583,6 +623,10 @@ then
   if [[ "${printDetailedMessageToConsole}" == "true" ]]
   then
     INTERNALPDMTOC=-pdmtc
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'printDetailedMessageToConsole' = '${INTERNALPDMTOC}'" 
+    fi
   fi
 fi
 
@@ -591,12 +635,20 @@ then
   if [[ "${printTraceMessageToConsole}" == "true" ]]
   then
     INTERALPTCTOC=-ptmtc
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'printTraceMessageToConsole' = '${INTERALPTCTOC}'" 
+    fi
   fi
 fi
 
 if [[ ! -z "${outputPath+x}" ]]
 then
   INTERNALOUTPUTPATH=\"-op=${outputPath}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'outputPath' = '${INTERNALOUTPUTPATH}'" 
+  fi
 fi
 
 OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=${ocpStorageClassForInternalMailServer}
@@ -604,21 +656,37 @@ OCPSTORAGECLASSFOREMAILINTERNAL=ocpStorageClassForMail=${ocpStorageClassForInter
 if [ ! -z "${enableWorkflowLabsForBusinessUsers+x}" ]
 then
   WORKFLOWLABSFORBUSINESSUSERSINTERNAL=enableWFLabForBusinessUsers=${enableWorkflowLabsForBusinessUsers}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'enableWFLabForBusinessUsers' = '${WORKFLOWLABSFORBUSINESSUSERSINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${configureLabs+x}" ]
 then
   ENABLECONFIGURELABSINTERNAL=enableConfigureSWATLabs=${configureLabs}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'enableConfigureSWATLabs' = '${ENABLECONFIGURELABSINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${bootstrapDebugString+x}" ]
 then
   BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'bootstrapDebugString' = '${BOOTSTRAPDEBUGSTRINGINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${debugString+x}" ]
 then
   DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'debugString' = '${DEBUGSTRINGINTERNAL}'" 
+  fi
 fi
 
 if ! $validationSuccess
