@@ -392,7 +392,7 @@ then
     echo "Validating configuration failed:"
     validationSuccess=false
    fi
-   echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+   echo "  Variable 'ocLoginServer' has not been defined/set"
 else
    INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
 fi
@@ -404,7 +404,7 @@ then
     echo "Validating configuration failed:"
     validationSuccess=false
   fi
-  echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  echo "  Variable 'ocLoginToken' has not been defined/set"
 else
   INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
 fi
