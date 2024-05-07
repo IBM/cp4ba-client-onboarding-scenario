@@ -309,26 +309,26 @@ validationSuccess=true
 
 if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
-	if $validationSuccess
-	then
-		echo "Validating configuration failed:"
-		validationSuccess=false
-	fi
-	echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  if $validationSuccess
+  then
+    echo "Validating configuration failed:"
+    validationSuccess=false
+  fi
+  echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
-	INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+  INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
 fi
 
 if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
-	if $validationSuccess
-	then
-		echo "Validating configuration failed:"
-		validationSuccess=false
-	fi
-	echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  if $validationSuccess
+  then
+    echo "Validating configuration failed:"
+    validationSuccess=false
+  fi
+  echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
 else
-	INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
+  INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
 fi
 
 if ! $validationSuccess
@@ -360,37 +360,37 @@ fi
 
 if [[ ! -z "${outputPath+x}" ]]
 then
-	INTERNALOUTPUTPATH=\"-op=${outputPath}\"
+  INTERNALOUTPUTPATH=\"-op=${outputPath}\"
 fi
 
 if [ ! -z "${cleanupClientOnboardingLabs_UserData+x}" ]
 then
-	CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL=enableCleanupSWATLabs_UserData=${cleanupClientOnboardingLabs_UserData}
+  CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL=enableCleanupSWATLabs_UserData=${cleanupClientOnboardingLabs_UserData}
 fi
 
 if [ ! -z "${cleanupClientOnboardingLabs+x}" ]
 then
-	CLEANUPCLIENTONBOARDINGLABSINTERNAL=enableCleanupSWATLabs=${cleanupClientOnboardingLabs}
+  CLEANUPCLIENTONBOARDINGLABSINTERNAL=enableCleanupSWATLabs=${cleanupClientOnboardingLabs}
 fi
 
 if [ ! -z "${cleanupClientOnboardingScenario+x}" ]
 then
-	CLEANUPCLIENTONBOARDINGINTERNAL=enableCleanupClientOnboarding=${cleanupClientOnboardingScenario}
+  CLEANUPCLIENTONBOARDINGINTERNAL=enableCleanupClientOnboarding=${cleanupClientOnboardingScenario}
 fi
 
 if [ ! -z "${bootstrapDebugString+x}" ]
 then
-	BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
+  BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
 fi
 
 if [ ! -z "${debugString+x}" ]
 then
-	DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+  DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
 fi
 
 if [ ! -z "${dumpCmd+x}" ]
 then
-	echo java -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL} ${CLEANUPCLIENTONBOARDINGLABSINTERNAL} ${CLEANUPCLIENTONBOARDINGINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC}
+  echo java -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL} ${CLEANUPCLIENTONBOARDINGLABSINTERNAL} ${CLEANUPCLIENTONBOARDINGINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC}
 fi
 
 java -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL} ${CLEANUPCLIENTONBOARDINGLABSINTERNAL} ${CLEANUPCLIENTONBOARDINGINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC}
