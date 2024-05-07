@@ -1,4 +1,4 @@
-# Deploying the Client Onboarding scenario into an Enterprise Deployment created by Cloud Pak Deployer - Using an OCP Job (for CP4BA 23.0.2 IF002 and above) 
+# Deploying the Client Onboarding scenario into an Enterprise Deployment created by Cloud Pak Deployer - Using a separate machine (for CP4BA 23.0.2 IF002 and above) 
 
 ## Introduction
 
@@ -19,13 +19,13 @@ A simpler deployment approach without the need for a separate machine is describ
 
 ## Prerequisites
 
-### 1. Cloud Pak for Business Automation (CP4BA) 23.0.2 IF002 or newer Starter deployment environment
+### 1. Cloud Pak for Business Automation (CP4BA) 23.0.2 IF002 or newer Enterprise deployment environment deployed via Cloud Pak Deployer
 
 **Cloud Pak for Business Automation (CP4BA) 23.0.2 IF002 or newer Enterprise deployment environment deployed via Cloud Pak Deployer**
 
 Either
 
-- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-cp4ba--tech-zone-deployer) 
+- request a CP4BA 23.0.2 Enterprise environment deployed via Cloud Pak Deployer from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-cp4ba--tech-zone-deployer) 
 
   or
 
