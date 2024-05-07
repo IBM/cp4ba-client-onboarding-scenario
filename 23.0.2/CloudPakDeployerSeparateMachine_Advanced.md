@@ -95,17 +95,19 @@ In case you experience an Out Of Memory (OOM) situation while deploying the Clie
 1. Uncomment the line containing `jvmSettings=`
 2. Set an appropriate heap size
 
-### Removing the Client Onboarding Artifacts from the Environment
+### Removing the Client Onboarding Artifacts from the environment
 
 In case you want to clean up your environment and remove the Client Onboarding artifacts you previously imported perform these steps:
 
 1. **Save the undeployment file** that corresponds to the operating system of your deployment machine into the directory created in step 1 (in the context menu of your browser select **Save as.../Save page as...** or similar)
 
-   **Linux/Mac** *CP4BA 23.0.2* - Enterprise deployment via Cloud Pak Deployer - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingStarter.sh`*)
+   **Linux/Mac** *CP4BA 23.0.2* - Enterprise deployment via Cloud Pak Deployer - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh)** (*Ensure to make the sh file executable by performing `chmod +x undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh`*)
 
    **Windows** - *CP4BA 23.0.2* - Enterprise deployment via Cloud Pak Deployer - **[undeploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat)**
 
 2. Update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the bat/sh file with your specific details.
+
+3. In a console window execute either **`undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat`** or **`./undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh`** to perform the import of the Client Onboarding scenario and lab artifacts.
 
 ## Support
 
