@@ -66,7 +66,7 @@ printTraceMessageToConsole=false
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dv:,dc:,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cCOLUD:,cCOL:,cCOS:,bd:,ds:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cCOLUD:,cCOL:,cCOS:,bd:,ds:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -246,7 +246,7 @@ SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGiteaParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
