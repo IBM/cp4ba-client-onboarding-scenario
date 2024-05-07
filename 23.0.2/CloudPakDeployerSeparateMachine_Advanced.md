@@ -1,4 +1,4 @@
-# Advanced configuration scenarios when deploying the Client Onboarding scenario into an Enterprise Deployment created by Cloud Pak Deployer (for CP4BA 23.0.2 IF002 and above)  
+# Advanced configuration scenarios when deploying the Client Onboarding scenario into an Enterprise Deployment created by Cloud Pak Deployer - Using a separate machine (for CP4BA 23.0.2 IF002 and above)  
 
 ## Introduction
 

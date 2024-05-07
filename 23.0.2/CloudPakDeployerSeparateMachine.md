@@ -31,7 +31,6 @@ Either
 
 - bring your own CP4BA 23.0.2 IF002 or newer Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
-Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
 
 ### 2. Machine to start the deployment from
 
@@ -151,12 +150,12 @@ In case your deployment fails and you get stuck, please reach out using the cont
 
 ## Advanced Configuration
 
-Refer to this [document](CloudPakDeployerViaJob_Advanced.md) for advanced configuration scenarios like:
+Refer to this [document](CloudPakDeployerSeparateMachine_Advanced.md) for advanced configuration scenarios like:
 
 - Configuring an RPA environment
 - Performing the Workflow labs using business users (instead of or in addition to the admin user)
 - Adding users/setting regular user passwords during deployment
-- Removing the Client Onboarding Artifacts from the Environment
+- Removing the Client Onboarding Artifacts from the environment
 
 
 
