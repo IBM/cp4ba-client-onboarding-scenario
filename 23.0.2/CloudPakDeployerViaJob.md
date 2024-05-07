@@ -266,12 +266,13 @@ Once you have a suitable environment proceed to the chapter [Import Instructions
       <img src="images\ocp-deploy-job-created-pods.jpg" />
 
       From there click on the pod and switch to the **Logs** tab.
+      
       <img src="images\ocp-deploy-job-created-pod-logs.jpg" />
-   
+      
       You can follow the progress of the deployment tool as it prints an overview of the actions it performs and their results to the console. 
-   
+      
       Once the deployment tool completes without a fatal error, it will output a status message that declares successful deployment of the Client Onboarding scenario. In addition, it provides key links and user names/passwords for you to use. These links/values are specific to your environment. 
-   
+      
       This is the same information, that is also available in the `client-onboarding-information` ConfigMap as shown above.
 
 
@@ -295,7 +296,7 @@ Refer to this [document](CloudPakDeployerViaJob_Advanced.md) for advanced config
 - Configuring an RPA environment
 - Performing the Workflow labs using business users (instead of or in addition to the admin user)
 - Adding users/setting regular user passwords during deployment
-- Removing the Client Onboarding Artifacts from the Environment
+- Removing the Client Onboarding Artifacts from the environment
 
 
 
