@@ -21,7 +21,7 @@ This deployment approach does not require a separate machine with Java on it to 
 
 Either
 
-- request a CP4BA 23.0.2 Starter environment from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-cp4ba--tech-zone-deployer) 
+- request a CP4BA 23.0.2 Enterprise environment deployed via Cloud Pak Deployer from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-cp4ba--tech-zone-deployer) 
 
   or
 
