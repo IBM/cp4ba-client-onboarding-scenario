@@ -307,24 +307,28 @@ echo
 
 validationSuccess=true
 
-if [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
   if $validationSuccess
   then
     echo "Validating configuration failed:"
     validationSuccess=false
-  fi
-  echo "  Variable 'ocLoginServer' has not been set"
+   fi
+   echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+else
+   INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
 fi
 
-if [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
 then
   if $validationSuccess
   then
     echo "Validating configuration failed:"
     validationSuccess=false
   fi
-  echo "  Variable 'ocLoginToken' has not been set"
+  echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+else
+  INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
 fi
 
 if [ ! -z "${cp4baNamespace+x}" ]
@@ -338,7 +342,7 @@ then
     fi
     echo "  Variable 'cp4baNamespace' has not been set"
   else
-    cp4baNamespaceInternal=-cp4baNamespace=${cp4baNamespace}
+    INTERNALCP4BANAMESPACE=-cp4bans=${cp4baNamespace}
   fi
 fi
 
