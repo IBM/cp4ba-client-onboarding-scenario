@@ -10,7 +10,7 @@
 #
 ###############################################################################
 
-rem This file is to be used with CP4BA 23.0.2 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
+# This file is to be used with CP4BA 23.0.2 Enterprise deployment that was deployed using either Apollo-One-Shot or Cloud Pak Deployer approach with a co-deployed gitea to remove the Client Onboarding scenario and associated labs
 
 # Set all variables according to your environment before executing this file
 
@@ -101,7 +101,7 @@ SCRIPTNAME=undeployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
