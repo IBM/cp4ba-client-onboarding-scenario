@@ -66,7 +66,7 @@ printTraceMessageToConsole=false
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cCOLUD:,cCOL:,cCOS:,bd:,ds:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cCOLUD:,cCOL:,cCOS:,bd:,ds:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
@@ -96,6 +96,10 @@ while [ : ]; do
         echo "--ptmtoc = printTraceMessageToConsole (true/false)"
         shift;
         exit 0;
+        ;;
+    --dd)
+        dumpDetails=true
+        shift
         ;;
     --dv)
         dumpVariables=true
@@ -317,7 +321,10 @@ then
   echo "  Variable 'ocLoginServer' has not been defined/set"
 else
   INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
-  echo "set 'ocLoginServer' -- '${INTERNALOCLOGINSERVER}' --" 
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'ocLoginServer' = '${INTERNALOCLOGINSERVER}'" 
+  fi
 fi
 
 if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
@@ -330,7 +337,10 @@ then
   echo "  Variable 'ocLoginToken' has not been defined/set"
 else
   INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
-  echo "set 'ocLoginToken' -- '${INTERNALOCLOGINTOKEN}' --" 
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'ocLoginToken' = '${INTERNALOCLOGINTOKEN}'" 
+  fi
 fi
 
 if [ ! -z "${cp4baNamespace+x}" ]
@@ -345,7 +355,10 @@ then
     echo "  Variable 'cp4baNamespace' has not been set"
   else
     INTERNALCP4BANAMESPACE=-cp4bans=${cp4baNamespace}
-	echo "set 'cp4baNamespace' -- '${INTERNALCP4BANAMESPACE}' --" 
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'cp4baNamespace' = '${INTERNALCP4BANAMESPACE}'" 
+    fi
   fi
 fi
 
@@ -365,6 +378,10 @@ then
   if [[ "${printDetailedMessageToConsole}" == "true" ]]
   then
     INTERNALPDMTOC=-pdmtc
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'printDetailedMessageToConsole' = '${INTERNALPDMTOC}'" 
+    fi
   fi
 fi
 
@@ -373,37 +390,65 @@ then
   if [[ "${printTraceMessageToConsole}" == "true" ]]
   then
     INTERALPTCTOC=-ptmtc
+    if [ ! -z "${dumpDetails+x}" ]
+    then
+      echo "set 'printTraceMessageToConsole' = '${INTERALPTCTOC}'" 
+    fi
   fi
 fi
 
 if [[ ! -z "${outputPath+x}" ]]
 then
   INTERNALOUTPUTPATH=\"-op=${outputPath}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'outputPath' = '${INTERNALOUTPUTPATH}'" 
+  fi
 fi
 
 if [ ! -z "${cleanupClientOnboardingLabs_UserData+x}" ]
 then
   CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL=enableCleanupSWATLabs_UserData=${cleanupClientOnboardingLabs_UserData}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'cleanupClientOnboardingLabs_UserData' = '${CLEANUPCLIENTONBOARDINGLABS_USERDATAINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${cleanupClientOnboardingLabs+x}" ]
 then
   CLEANUPCLIENTONBOARDINGLABSINTERNAL=enableCleanupSWATLabs=${cleanupClientOnboardingLabs}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'cleanupClientOnboardingLabs' = '${CLEANUPCLIENTONBOARDINGLABSINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${cleanupClientOnboardingScenario+x}" ]
 then
   CLEANUPCLIENTONBOARDINGINTERNAL=enableCleanupClientOnboarding=${cleanupClientOnboardingScenario}
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'enableCleanupClientOnboarding' = '${CLEANUPCLIENTONBOARDINGINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${bootstrapDebugString+x}" ]
 then
   BOOTSTRAPDEBUGSTRINGINTERNAL=\"-bds=${bootstrapDebugString}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'bootstrapDebugString' = '${BOOTSTRAPDEBUGSTRINGINTERNAL}'" 
+  fi
 fi
 
 if [ ! -z "${debugString+x}" ]
 then
   DEBUGSTRINGINTERNAL=\"debugString=${debugString}\"
+  if [ ! -z "${dumpDetails+x}" ]
+  then
+    echo "set 'debugString' = '${DEBUGSTRINGINTERNAL}'" 
+  fi
 fi
 
 
