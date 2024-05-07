@@ -1,6 +1,6 @@
 {
 	"comment": "Contains/references the steps required to undeploy all artifacts created by users as part of the labs, the artifacts required by the labs and the Client Onboarding scenario itself",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/RemoveClientOnboardingArtifactsGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -34,6 +34,13 @@
 				"comment": "Clean up Client Onboarding scenario related artifacts in reverse order",
 				"enabled": "$$(enableCleanupClientOnboarding)$$",
 				"file": "RemoveClientOnboardingScenarioArtifactsGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Clean up email server and client",
+				"enabled": "$$(enableCleanupEmailCapability)$$",
+				"file": "RemoveEmailCapability.json"
 			}
 		}
 	]
