@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to undeploy all artifacts of the Client Onboarding scenario itself but not the artifacts used in labs and/or user created artifacts",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/RemoveClientOnboardingScenarioArtifactsGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -120,11 +120,20 @@
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
+									"DETERMINEDEPLOYEDINFO": {
+										"enabled": "true",
+										"description": "Determine acronym of deployed WF Client Onboarding solution",
+										"relativePath": "Business Automation Workflow",
+										"sourceTwxFile": "Client_Onboarding.twx",
+										"globalContextVariableName": "clientOnboardingPAInfo"
+									}
+								},
+								{
 									"DELETEPROJECT": {
 										"enabled": "true",
 										"description": "Delete 'Client Onboarding' Workflow solution",
 										"projectName": "Client Onboarding",
-										"projectAcronym": "CO",
+										"projectAcronym": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$",
 										"projectType": "WF_PA",
 										"unpublishAutomationServices": true,
 										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
@@ -215,13 +224,6 @@
 									}
 								}
 							]
-						}
-					},
-					{
-						"INCLUDE": {
-							"comment": "Clean up email server and client",
-							"enabled": "$$(enableCleanupEmailCapability)$$",
-							"file": "RemoveEmailCapability.json"
 						}
 					}
 				]
