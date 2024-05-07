@@ -12,7 +12,7 @@
 
 ### Performing the Workflow labs using business users (instead of or in addition to the admin user)
 
-As part of editing the **deployClientOnboardingStarter.bat** or **deployClientOnboardingStarter.sh** file, ensure to set the `enableWorkflowLabsForBusinessUsers` variable to `true`.
+As part of editing the **deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat** or **deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh** file, ensure to set the `enableWorkflowLabsForBusinessUsers` variable to `true`.
 
 This will extend the deployment time to about 45 minutes. This is due to the fact that the security settings for elements in two Content Service object stores need to be updated and the CPE pods need to be restarted twice due to other changes.
 
