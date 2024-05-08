@@ -59,18 +59,44 @@ If you have previously run the deployment, run it again. It will recognize that 
 
 ### Creating users during deployment / Setting regular user passwords
 
-In case you want to create one or multiple users to  have user names other than cpuser, cpuser1, and cpuser2 or cpadmin and/or you want to set your own password for all users, follow these steps:
+In all cases described below, when you change the LDAP the mail server will be synchronized to have the same users and those users will have the same passwords for the mail server as in the LDAP.
 
-1. Download the file [AddUsersToPlatform.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/AddUsersToPlatform.json) and place it in the same directory where you placed the bat/sh file
+#### Adding individually named users
+
+In case you want to create one or multiple users to have individual user names other than cpuser, cpuser1, and cpuser2 or cpadmin follow these steps:
+
+1. Download the file [AddIndividualUsersToPlatform.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/AddIndividualUsersToPlatform.json), place it in the same directory where you placed the bat/sh file, and **rename** it to **AddUsersToPlatform.json**
 2. Edit the AddUsersToPlatform.json in your favorite text editor
-   1. If you want to **add a single user**, modify the existing entry for user "Henry" to match your needs 
-      - Ensure to update ALL properties like "dn", "cn", "sn", "uid", "mail"
+   1. If you want to **add a single user**, modify the existing entry for user "henry" to match your needs. The file uses several variables that are at runtime replaced with the respective configuration of the actual environment ($(ldapUserQualifier)$, $(ldapUserOrg)$, $(localMailDomain)$, $(generalUsersGroupFull)$)
+      - Ensure to update ALL properties like "dn", "cn", "sn", "uid", "mail" (always replacing henry)
       - Using the "members" array, you can add the new user to any of the pre-existing groups
       - Using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak
    2. If you want to **add multiple users**, just duplicate the user definition and make your modifications (again making sure to update all properties)
-   3. If you **don't want to add users** **but modify the password of the regular users**, then either remove the whole "entities" array or set the attribute "enabled" to false
-   4. If you want to **set the password for all regular users** to a value of your choice, add element "userPwd" with the password to be set on the same level as the "entities" attribute. (e.g. "userPwd": "password"). Be aware that all of the users will get the same password
-3. In the sh/bat file modify the line "**createUsers**=" and set the value from false to true
+3. In the sh/bat file modify the line "**createUsers**=" and set the value from false to **true**
+
+#### Adding a range of users following a naming convention
+
+In case you want to create a series of users with a common naming scheme (e.g. usr001-usr020 or user11-user20) in one go with either a common password or a randomly generated password, follow these steps:
+
+1. Download the file [AddSeriesOfUsersToPlatformGeneratedPwd.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/AddSeriesOfUsersToPlatformGeneratedPwd.json) when you want to automatically generate individual password for the users to be added, or download the file [AddSeriesOfUsersToPlatformStaticPwd.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/AddSeriesOfUsersToPlatformStaticPwd.json) when you want to use a single static password for all users to be added, place the respective file in the same directory where you placed the bat/sh file, and **rename** it to **AddUsersToPlatform.json**
+2. Edit the AddUsersToPlatform.json in your favorite text editor
+      1.  Specify the static part of the user name as property `userBaseName` (e.g. usr or user)
+      2. Specify the first (`userStartNumber`) and last (`userTargetNumber`) number of the generated users (e.g. 1 and 30 to generate 30 users starting with 1 ending with 30)
+      3. Specify in which format (`userNumberingFormatter`) the numbers are appended to the static part of the user name (e.g. %03d to always get a three digit number (e.g. 010) or %d to only get the number of digits the number has (e.g. 10))
+      4. In the case of the file *AddSeriesOfUsersToPlatformGeneratedPwd.json* define the number of alpha-numeric characters the password should have using `generatedUserPasswordLength`
+      5. In the case of the file *AddSeriesOfUsersToPlatformStaticPwd.json* define the static password to be set for all users to be added using `userPassword`
+      6. Using the "members" array, you can add the new user to any of the pre-existing groups. `$(generalUsersGroupFull)$` will add the user to the group of the environment that holds all general/non-admin users
+      7. Using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak
+3. In the sh/bat file modify the line "**createUsers**=" and set the value from false to **true**
+
+#### Setting the password of all non-admin users to a specific value
+
+In case you want to set your own password for all users (user1-user10), follow these steps:
+
+1. Download the file [SetPasswordForNonAdminUsers.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/SetPasswordForNonAdminUsers.json),place it in the same directory where you placed the bat/sh file, and **rename** it to **AddUsersToPlatform.json**
+2. In the sh/bat file modify the line "**createUsers**=" and set the value from false to **true**
+
+
 
 ### Using a proxy server to access github.com
 
@@ -80,6 +106,8 @@ In case you need to go through a proxy to access github.com perform these steps:
 2. Specify the host and port values for your proxy
 3. In case your proxy requires authentication do the same for the lines `proxyUser=` and `proxyPwd=`
 
+
+
 ### Executing the deployment without access to github.com
 
 In case don't have access to github.com and want to perform the deployment in air-gap mode perform these steps: 
@@ -88,12 +116,16 @@ In case don't have access to github.com and want to perform the deployment in ai
 2. Copy both folders and the jar file into the directory previously created in you put the bat/sh file
 3. Uncomment the line `disableAccessToGitHub="-disableAccessToGitHub=true"` to disable access to github.com and only use local files
 
+
+
 ### Configuring Java Heap Size to Avoid Out-of-Memory
 
 In case you experience an Out Of Memory (OOM) situation while deploying the Client Onboarding scenario perform these steps:
 
 1. Uncomment the line containing `jvmSettings=`
 2. Set an appropriate heap size
+
+
 
 ### Removing the Client Onboarding Artifacts from the environment
 
