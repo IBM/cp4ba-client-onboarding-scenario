@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 >
-> These instructions only apply in case you want to troubleshoot the OCP Job-based deployment of the Client Onboarding scenario to a CP4BA 23.0.2 Enterprise deployment deployed by [**Cloud Pak Deployer**](CloudPakDeployerViaJob.md).
+> These instructions only apply in case you want to troubleshoot the [OCP Job-based deployment](CloudPakDeployerViaJob.md) of the Client Onboarding scenario to a CP4BA 23.0.2 Enterprise deployment deployed by [**Cloud Pak Deployer**](CloudPakDeployerViaJob.md).
 >
 
 
