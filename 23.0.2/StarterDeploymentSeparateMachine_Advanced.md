@@ -73,7 +73,7 @@ In case you want to create one or multiple users to have individual user names o
 
 1. Download the file [AddIndividualUsersToPlatform.json](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/AddIndividualUsersToPlatform.json), place it in the same directory where you placed the bat/sh file, and **rename** it to **AddUsersToPlatform.json**
 2. Edit the AddUsersToPlatform.json in your favorite text editor
-   1. If you want to **add a single user**, modify the existing entry for user "henry" to match your needs. The file uses several variables that are at runtime replaced with the respective configuration of the actual environment ($(ldapUserQualifier)$, $(ldapUserOrg)$, $(localMailDomain)$, $(generalUsersGroupFull)$)
+   1. If you want to **add a single user**, modify the existing entry for user "henry" to match your needs. The file uses several variables that are at runtime replaced with the respective configuration of the actual environment (`$(ldapUserQualifier)$`, `$(ldapUserOrg)$`, `$(localMailDomain)$`, `$(generalUsersGroupFull)$`)
       - Ensure to update ALL properties like "dn", "cn", "sn", "uid", "mail" (always replacing henry)
       - Using the "members" array, you can add the new user to any of the pre-existing groups
       - Using the "roles" array, you can determine the Cloud Pak/Zen roles the user should get when onboarded to the Cloud Pak
