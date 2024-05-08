@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 >
-> These instructions only apply in case you want to perform advanced configuration of [deployment](CloudPakDeployerSeparateMachine.md) of the Client Onboarding scenario to a CP4BA 23.0.2 Enterprise deployment deployed by [**Cloud Pak Deployer**](CloudPakDeployerSeparateMachine.md).
+> These instructions only apply in case you want to perform advanced configuration of [deployment](CloudPakDeployerSeparateMachine.md) of the Client Onboarding scenario to a CP4BA 23.0.2 Enterprise deployment deployed by [**Cloud Pak Deployer**](CloudPakDeployerSeparateMachine.md) using a separate machine.
 
 
 
