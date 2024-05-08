@@ -65,6 +65,8 @@ If you have previously run the deployment, run it again. It will recognize that 
 
 ### Creating users during deployment / Setting admin and/or regular user passwords
 
+In all cases described below, when you change the LDAP the mail server (if installed) will be synchronized to have the same users and those users will have the same passwords for the mail server as in the LDAP.
+
 #### Adding individually named users
 
 In case you want to create one or multiple users to have individual user names other than user1-user10 or cp4admin follow these steps:
