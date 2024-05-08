@@ -8,6 +8,10 @@ This document describes the steps required to request a CP4BA 23.0.2 Starter dep
 
 Reserve a Business Automation environment from IBM TechZone. For that select the **CP4BA 23.0.x - Multi-Pattern Starter TechZone Deployer powered CP4BA 2023.x** tile from the [Pre-Installed Software](https://techzone.ibm.com/collection/tech-zone-certified-base-images/journey-pre-installed-software) tab.
 
+> [!WARNING]
+>
+> Currently (May 2024) TechZone requires you to specify an 'Sales opportunity number' independent of the purpose. for this type of environment. Rules may change without notice. Unfortunately we have no control and influence on that.
+
 Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
 
 <img src="images\techzone-reservation_2302_starter.jpg" />
