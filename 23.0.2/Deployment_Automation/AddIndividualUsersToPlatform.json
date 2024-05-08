@@ -4,16 +4,16 @@
 		{
 			"enabled": true,
 			"type": "user",
-			"dn": "uid=henry,dc=example,dc=org",
+			"dn": "$(ldapUserQualifier)$henry$(ldapUserOrg)$",
 			"cn": "henry",
 			"sn": "henry",
 			"uid": "henry",
 			"userPassword": "pwd",
 			"homeDirectory": "/home/henry/",
-			"mail": "henry@example.org",
+			"mail": "henry$(localMailDomain)$",
 			"members": [
 				{
-					"dn": "cn=GeneralUsers,dc=example,dc=org"
+					"dn": "$(generalUsersGroupFull)$"
 				}
 			],
 			"roles": [
