@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.3",
+	"fileVersion": "1.0.4",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployClientOnboardingLabsEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.59 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
@@ -1080,6 +1080,15 @@
 													},
 													"url": {
 														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+													}
+												}
+											},
+											{
+												"name": "Client_Onboarding_Workflows",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": {
+														"CO": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$"
 													}
 												}
 											}
