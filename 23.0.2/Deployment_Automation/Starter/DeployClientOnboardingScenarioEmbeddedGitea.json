@@ -268,14 +268,12 @@
 											{
 												"adpProjectID": "$(adpProjectId|default=)$"
 											},
-											,
 											{
 												"adpMaxRetries": "$(adpMaxRetries|default=20)$"
 											},
 											{
 												"adpLogLevel": "$(adpLogLevel|default=0)$"
 											},
-
 											{
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
 											},
