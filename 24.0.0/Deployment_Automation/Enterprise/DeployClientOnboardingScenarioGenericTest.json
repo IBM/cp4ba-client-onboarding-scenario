@@ -1,0 +1,153 @@
+{
+	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
+	"fileVersion": "1.0.2",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "This container wraps all actions to deploy the Client Onboarding scenario itself",
+				"enabled": "$$(enableDeployClientOnboarding)$$",
+				"description": "Deploy Client Onboarding Scenario",
+				"actions": [
+					{
+						"ICN": {
+							"comment": "Imports two desktops and the two applications and configures access to the first",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
+							"description": "Navigator - Import apps and desktops",
+							"name": "Prepare Apps and Desktops",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for Navigator",
+										"name": "Download ICN files",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequestDesktop.properties"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"
+											}
+										]
+									}
+								},
+								{
+									"TESTCONNECTION": {
+										"enabled": "true",
+										"description": "Test Navigator availability"
+									}
+								},
+								{
+									"PATCHAPPLICATION": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Request' app to work in current environment",
+										"file": "ClientOnboardingRequest.zip",
+										"simpleTextMappings": {
+											"1": {
+												"BAWTOS": "$$(BAW_TOS)$$"
+											},
+											"2": {
+												"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsr)$$%2Fclient_onboarding%2FClient Onboarding Decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
+											},
+											"3": {
+												"cp4badmin": "$$(cp4baAdminUsr)$$"
+											}
+										}
+									}
+								},
+								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import patched 'Client Onboarding Request' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Request",
+										"file": "!patchedZIPFileName!"
+									}
+								},
+								{
+									"SETAPPPERMISSIONS": {
+										"enabled": "true",
+										"description": "Make 'Client Onboarding Request' app accessible for all authenticated users",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Request",
+										"action": "update",
+										"permissions": [
+											{
+												"name": "#AUTHENTICATED-USERS",
+												"action": "add"
+											}
+										]
+									}
+								},
+								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Document Upload' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Document Upload",
+										"file": "ClientOnboardingDocumentUpload.zip"
+									}
+								},
+								{
+									"PATCHDESKTOP": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in current deployment",
+										"file": "ClientOnboardingRequestDesktop.properties",
+										"simpleTextMappings": {
+											"APPENG0": "APPENG0",
+											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
+											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
+											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
+										}
+									}
+								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "false",
+										"description": "Import patched 'Client Onboarding Request' desktop",
+										"enforceImport": false,
+										"name": "Client Onboarding Request",
+										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								},
+								{
+									"PATCHDESKTOP": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in current deployment",
+										"file": "CODocumentUploadDesktop.properties",
+										"simpleTextMappings": {
+											"APPENG0": "APPENG0",
+											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
+											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
+											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
+										}
+									}
+								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "false",
+										"description": "Import patched 'Client Onboarding Document Upload' desktop",
+										"enforceImport": false,
+										"name": "Client Onboarding Document Upload",
+										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

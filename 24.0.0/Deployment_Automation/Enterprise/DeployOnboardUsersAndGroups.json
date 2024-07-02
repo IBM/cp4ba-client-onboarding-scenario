@@ -1,0 +1,45 @@
+{
+	"comment": "Contains the steps to optionally onboard users defined in an external file and synchronize the mail server users based on the user modification",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.0/Deployment_Automation/Enterprise/DeployOnboardUsersAndGroups.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=24.0.0 <24.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$(ISSET(onboardUsersFile))$ && $$(isCloudPakDeployerDeployment)$$",
+				"description": "Onboard new users to the Cloud Pak",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Manage Cloud Pak and mail server users",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"ADDUSERSGROUPSTOENV": {
+										"enabled": "true",
+										"description": "Add Users",
+										"restartPod": "true",
+										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
+										"configFile": "$$(onboardUsersFile|default=)$$"
+									}
+								},
+								{
+									"MANAGEMAILUSERS": {
+										"enabled": "$$(isLocalMailAvailable)$$ && $(LDAPModified|default=false)$",
+										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
+										"synchronizeWithLDIF": true,
+										"removeAllOtherUsers": true
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

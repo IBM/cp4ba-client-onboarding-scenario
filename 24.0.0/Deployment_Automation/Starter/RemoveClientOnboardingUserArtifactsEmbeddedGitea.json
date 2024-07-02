@@ -1,0 +1,280 @@
+{
+	"comment": "Contains the steps required to undeploy all user created artifacts as part of the labs but not the lab artifacts nor the Client Onboarding solution artifacts",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.0/Deployment_Automation/Starter/RemoveClientOnboardingUserArtifactsEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=24.0.0 <24.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up user created artifacts",
+				"enabled": "$$(enableCleanupSWATLabs_UserData)$$",
+				"description": "Remove artifcats created by users in Client Onboarding labs (BAI, BAA, ICN, CPE, WF, ADS, End-to-End)",
+				"actions": [
+					{
+						"BAI": {
+							"comment": "Clean up non-system and non Client Onboarding dashboards and goals",
+							"enabled": "$$(enableCleanupSWATLabs_UserData_BAI)$$",
+							"description": "BAI - Clean up non-system and non Client Onboarding dashboards and goals",
+							"relativeBasePath": "Business Automation Insights",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all non-system dashboards except 'Client Onboarding Completed' dashboard",
+										"artifactNames": [
+											"*"
+										],
+										"excludeArtifactNames":[
+											"Client Onboarding Completed"
+										],
+										"handleAllUserArtifacts": true,
+										"artifactType": "Dashboard"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all non-system except 'Focus Corp's top Client Onboarding KPI Completed' goal",
+										"artifactNames": [
+											"*"
+										],
+										"excludeArtifactNames":[
+											"Focus Corp's top Client Onboarding KPI Completed"
+										],
+										"handleAllUserArtifacts": true,
+										"artifactType": "Goal"
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAA": {
+							"comment": "Delete all APPs, APP templates, and APP TKs except pre-deployed and Client Onboarding solution ones",
+							"enabled": "$$(enableCleanupSWATLabs_UserData_BAA)$$",
+							"description": "BAA - Delete all APPs, APP templates, and APP TKs (except pre-deployed and Client Onboarding solution ones)",
+							"relativeBasePath": "Business Automation Application",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all apps except predeployed and Client Onboarding apps",
+										"projectName": "*",
+										"projectType": "APP",
+										"excludeProjectAcronyms": [
+											"COT",
+											"CODU"
+										],
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all app templates except predeployed and Client Onboarding app templates",
+										"projectName": "*",
+										"projectType": "APP_TEMPLATE",
+										"excludeProjectAcronyms": [
+											"COT"
+										],
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all app toolkits except predeployed and Client Onboarding app toolits",
+										"projectName": "*",
+										"projectType": "APP_TK",
+										"excludeProjectAcronyms": [
+											"COTK",
+											"COTK2"
+										],
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"enabled": "$$(enableCleanupSWATLabs_UserData_CONTENT)$$",
+							"description": "Cleanup Content Services Labs (ICN, CPE, GraphQL) User Created Artifacts",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for ICN cleanup",
+										"name": "Download ICN cleanup helper file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ICNCleanupHelper.war"
+											}
+										]
+									}
+								},
+								{
+									"CLEANUPUSERCREATEDDATA": {
+										"enabled": "true",
+										"description": "Cleanup data created by non-admin users in repository",
+										"desktopName": "$$(BAW_DOCS)$$",
+										"objectStoreName": "$$(BAW_DOCS)$$",
+										"resourceTypes": "all",
+										"deleteNonAdminArtifactsInCPE": true,
+										"useCutOffDate": true,
+										"userBase": "user",
+										"listOnly": false,
+										"debug": false,
+										"maxNumRetries": "5",
+										"sleepInSecBetweenRetries": "2"
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment": "Delete all non-predeployed solution, templates and toolkits created as part of WF or RPA labs",
+							"enabled": "$$(enableCleanupSWATLabs_UserData_WF)$$",
+							"description": "WF - Delete all WF solutions, WF templates, and WF TKs (except pre-deployed ones and those belonging to the Client Onboarding scenario)",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow solutions except Client Onboarding, WXC SERVICE & Hiring Sample",
+										"projectName": "*",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"excludeProjectAcronyms": [
+											"CO",
+											"WXCSERV",
+											"HSS"
+										],
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow templates",
+										"projectName": "*",
+										"projectType": "WF_TEMPLATE",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow toolkits except ADP Utils, Client Onboarding Toolkit & IBM RPA Toolkit",
+										"projectName": "*",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"excludeProjectAcronyms": [
+											"ADPU",
+											"COTK",
+											"IBMRPAT"
+										],
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"comment": "Unpublish, undeploy decision services within all non Client Onboarding ADS projects followed by deleting both the project and the git repo backing the project if any",
+							"enabled": "$$(enableCleanupSWATLabs_UserData_ADS)$$",
+							"description": "ADS - Unpublish, undeploy decision services within all non Client Onboarding ADS projects followed by deleting both the project and the git repo backing the project if any",
+							"relativeBasePath": "Automation Decision Services",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for ADS cleanup",
+										"name": "Download ADS cleanup helper files",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ADSCleanupHelper.twx"
+											},
+											{
+												"url": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ADSMongoDB_NetworkPolicy$$(cp4baVersionShort)$$.json"
+											}
+										]
+									}
+								},
+								{
+									"CLEANUPADS": {
+										"enabled": "true",
+										"description": "Delete all non Client Onboarding ADS projects",
+										"adsCleanupActions": [
+											"Project"
+										],
+										"projectName": "*",
+										"excludeProjectNames": [
+											"Client Onboarding"
+										],
+										"handleAllProjects": "true",
+										"decisionServiceName": "*",
+										"version": "*",
+										"unpublishAutomationServices": true,
+										"undeployDecisionService": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$",
+										"maxUndeployCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUndeployCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"description": "WF - Remove all cases of case type 'CO_ClientOnboardingRequest' in the system",
+							"enabled": "$$(enableCleanupSWATLabs_UserData_ENDTOEND)$$",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DELETECASE": {
+										"enabled": "true",
+										"description": "Delete All Cases of case type 'CO_ClientOnboardingRequest'",
+										"tosName": "$$(BAW_TOS)$$",
+										"caseType": "CO_ClientOnboardingRequest"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,226 @@
+#refer to: https://docker-mailserver.github.io/docker-mailserver/edge/config/advanced/kubernetes/
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mailserver.config
+  labels:
+    app: mailserver
+data:
+  postfix-accounts.cf: |
+    cp4badmin@example.com|{PLAIN}passw0rd
+    usr001@example.com|{PLAIN}passw0rd
+    usr002@example.com|{PLAIN}passw0rd
+    usr003@example.com|{PLAIN}passw0rd
+    usr004@example.com|{PLAIN}passw0rd
+    usr005@example.com|{PLAIN}passw0rd
+    usr006@example.com|{PLAIN}passw0rd
+    usr007@example.com|{PLAIN}passw0rd
+    usr008@example.com|{PLAIN}passw0rd
+    usr009@example.com|{PLAIN}passw0rd
+    usr010@example.com|{PLAIN}passw0rd
+
+  postfix-virtual.cf: |
+    usr001@example.com usr001@example.com
+    usr002@example.com usr002@example.com
+    usr003@example.com usr003@example.com
+    usr004@example.com usr004@example.com
+    usr005@example.com usr005@example.com
+    usr006@example.com usr006@example.com
+    usr007@example.com usr007@example.com
+    usr008@example.com usr008@example.com
+    usr009@example.com usr009@example.com
+    usr010@example.com usr010@example.com
+    @example.com cp4badmin@example.com
+
+  postfix-main.cf: |
+    smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mailserver.env.config
+  labels:
+    app: mailserver
+data:
+  # Cannot be set to cp.internal, otherwise postfix is eating mails, some details at https://github.com/docker-mailserver/docker-mailserver/issues/968
+  OVERRIDE_HOSTNAME: relay.local
+  ENABLE_FETCHMAIL: "0"
+  ENABLE_SPAMASSASSIN: "0"
+  ENABLE_CLAMAV: "0"
+  ENABLE_FAIL2BAN: "0"
+  ENABLE_POSTGREY: "0"
+  ENABLE_AMAVIS: "0"
+  ENABLE_SRS: "0"
+  ENABLE_QUOTAS: "0"
+  ENABLE_UPDATE_CHECK: "0"
+  ENABLE_SASLAUTHD: "0"
+  ONE_DIR: "1"
+  DMS_DEBUG: "0"
+  SSL_TYPE: "manual"
+  SSL_CERT_PATH: "/tmp/ssl/tls.crt"
+  SSL_KEY_PATH: "/tmp/ssl/tls.key"
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'mail-privileged'
+subjects:
+  - kind: ServiceAccount
+    name: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:privileged'
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mail-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "managed-nfs-storage"
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mailserver
+  labels:
+    app: mailserver
+spec:
+  selector:
+    app: mailserver
+  ports:
+    - name: smtp
+      port: 25
+      targetPort: smtp
+    - name: smtp-secure
+      port: 465
+      targetPort: smtp-secure
+    - name: smtp-auth
+      port: 587
+      targetPort: smtp-auth
+    - name: imap
+      port: 143
+      targetPort: imap
+    - name: imap-secure
+      port: 993
+      targetPort: imap-secure
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailserver
+  template:
+    metadata:
+      labels:
+        app: mailserver
+        role: mail
+        tier: backend
+    spec:
+      containers:
+        - name: docker-mailserver
+          image: "mailserver/docker-mailserver:11.1.0"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              # If Fail2Ban is not enabled, you can remove NET_ADMIN.
+              # If you are running on CRI-O, you will need the SYS_CHROOT capability,
+              # as it is no longer a default capability.
+              add: ["SYS_PTRACE", "SYS_CHROOT" ]
+          readinessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 45
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          livenessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: 45
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10            
+          volumeMounts:
+            - name: config
+              subPath: postfix-accounts.cf
+              mountPath: /tmp/docker-mailserver/postfix-accounts.cf
+              readOnly: true
+            - name: config
+              subPath: postfix-virtual.cf
+              mountPath: /tmp/docker-mailserver/postfix-virtual.cf
+              readOnly: true
+            - name: config
+              subPath: postfix-main.cf            
+              mountPath: /tmp/docker-mailserver/postfix-main.cf
+              readOnly: true
+            - name: data
+              mountPath: /var/mail
+              subPath: data
+            - name: data
+              mountPath: /var/mail-state
+              subPath: state
+            - name: public-dir-pipe-folder
+              mountPath: /var/mail-state/spool-postfix/public
+              subPath: public
+            - name: private-dir-pipe-folder
+              mountPath: /var/mail-state/spool-postfix/private
+              subPath: public
+            - name: data
+              mountPath: /var/log/mail
+              subPath: log
+            - name: tls
+              readOnly: true
+              mountPath: /tmp/ssl            
+          ports:
+            - name: smtp
+              containerPort: 25
+              protocol: TCP
+            - name: smtp-secure
+              containerPort: 465
+              protocol: TCP
+            - name: smtp-auth
+              containerPort: 587
+            - name: imap
+              containerPort: 143
+              protocol: TCP
+            - name: imap-secure
+              containerPort: 993
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: mailserver.env.config
+      volumes:
+        - name: config
+          configMap:
+            name: mailserver.config
+        - name: data
+          persistentVolumeClaim:
+            claimName: mail-storage
+        # Cannot create named pipes on connected storage class, must be in. Risk of loosing data.
+        - name: public-dir-pipe-folder
+          emptyDir: {}
+        # Cannot create named pipes on connected storage class, must be in. Risk of loosing data.
+        - name: private-dir-pipe-folder
+          emptyDir: {}
+        - name: tls
+          secret:
+            secretName: mailserver-tls-secret 
+            defaultMode: 256          
+
