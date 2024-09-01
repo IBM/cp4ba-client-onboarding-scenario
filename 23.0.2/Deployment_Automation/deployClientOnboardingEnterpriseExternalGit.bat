@@ -136,7 +136,7 @@ SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 
@@ -382,6 +382,8 @@ if defined useInternalMailServer (
 
 if defined useInternalMailServer (
 	if "%useInternalMailServer%"=="false" (
+		set enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
+
 		if defined gmailAddress (
 			if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
 			if "%gmailAddress%"=="" set gmailAddressRequired=true

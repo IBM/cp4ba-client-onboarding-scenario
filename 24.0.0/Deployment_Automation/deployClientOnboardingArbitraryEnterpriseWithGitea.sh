@@ -291,6 +291,8 @@ fi
 
 if [[ "${useInternalMailServer}" == "false" ]]
 then
+  enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
+
   if [ ! -z "${gmailAddress+x}" ]
   then
     if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]
@@ -309,8 +311,6 @@ fi
 
 if [[ "${useInternalMailServer}" == "false" ]] && [ ! -z "${gmailAppKey+x}" ]
 then
-  enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
-
   if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
   then
      if $validationSuccess
