@@ -131,7 +131,7 @@ SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -309,6 +309,8 @@ fi
 
 if [[ "${useInternalMailServer}" == "false" ]] && [ ! -z "${gmailAppKey+x}" ]
 then
+  enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
+
   if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
   then
      if $validationSuccess
@@ -316,7 +318,7 @@ then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  VVariable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
+    echo "  Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
   else
     gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi

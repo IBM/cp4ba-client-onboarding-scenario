@@ -118,7 +118,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 
@@ -220,6 +220,8 @@ fi
 
 if [[ "${useInternalMailServer}" == "false" ]] && [ ! -z "${gmailAppKey+x}" ]
 then
+  enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
+
   if [[ "${gmailAppKey}" == "REQUIRED" ]] || [[ "${gmailAppKey}" == "" ]]
   then
      if $validationSuccess
