@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.6",
+	"fileVersion": "1.0.7",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.59 <1.2.0",
+	"requiredToolVersion": ">=1.1.73 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1231,6 +1231,18 @@
 										"comment": "Sub action will be skipped if first user is not found which might be true, Cloup Pak Deployer deployment get the list of users directly ignoring userBaseName, userBaseName, userStartNumber & userTargetNumber as long as deriveUsersFromLDAPIfAvailable is set to true",
 										"entities": [
 											{
+												"enabled": "§IF($$(isCloudPakDeployerDeployment)$$)§(false)§ELSE§(true)ENDIF§",
+												"action": "update",
+												"type": "user",
+												"skipIfFirstUserDoesNotExist" : true,
+												"roleCopySourceIsGroup": true,
+												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
+												"deriveUsersFromLDAPIfAvailable": false,
+												"name": "wodemo",
+												"replaceExistingRoles": false
+											},
+											{
+												"enabled": "true",
 												"action": "update",
 												"type": "user",
 												"skipIfFirstUserDoesNotExist" : true,
