@@ -558,7 +558,7 @@ As soon as you **click Create**, a job will be created and opened in the console
 
       > [!TIP]
       >
-      > The ConfigMap named `client-onboarding-information` will only be deleted when `cleanupClientOnboardingScenario` is set to true.
+      > The ConfigMap named `000-client-onboarding-information` will only be deleted when `cleanupClientOnboardingScenario` is set to true.
 
    2. In case you want to follow the execution of the Client Onboarding scenario undeployment in detail, click on the **Pods** tab.
       <img src="images\ocp-undeploy-job-created-pods.jpg" />

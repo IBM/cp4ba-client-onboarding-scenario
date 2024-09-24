@@ -216,7 +216,7 @@ Once you have a suitable environment proceed to the chapter [Import Instructions
       <img src="images\ocp-deploy-job-created-complete.jpg" />
 
       Once completed, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`. (Make sure that either *All Projects* or the project of the CP4BA deployment is selected).
-      A ConfigMap named `client-onboarding-information` will provide you with all required access details.
+      A ConfigMap named `000-client-onboarding-information` will provide you with all required access details.
 
       ```
       Key resources to access are:
@@ -261,7 +261,7 @@ Once you have a suitable environment proceed to the chapter [Import Instructions
 
       Once the deployment tool completes without a fatal error, it will output a status message that declares successful deployment of the Client Onboarding scenario. In addition, it provides key links and user names/passwords for you to use. These links/values are specific to your environment. 
 
-      This is the same information, that is also available in the `client-onboarding-information` ConfigMap as shown above.deploy-
+      This is the same information, that is also available in the `000-client-onboarding-information` ConfigMap as shown above.deploy-
 
 
 

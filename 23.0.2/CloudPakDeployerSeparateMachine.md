@@ -25,7 +25,7 @@ A simpler deployment approach without the need for a separate machine is describ
 
 Either
 
-- request a CP4BA 23.0.2 Enterprise environment deployed via Cloud Pak Deployer from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-cp4ba--tech-zone-deployer) 
+- request a CP4BA 23.0.2 Enterprise environment deployed via Cloud Pak Deployer from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey--archive) 
 
   or
 
@@ -119,10 +119,10 @@ Local Mail Server/Client:
 Remarks:
   - WatsonX Orchestrate: CP4BA-side configuration performed, requires additional separate WatsonX Orchestrate SaaS instance
       
-Successfully created ConfigMap 'client-onboarding-information' with same information as above
+Successfully created ConfigMap '000-client-onboarding-information' with same information as above
 ```
 
-This information is also stored in a ConfigMap named `client-onboarding-information`. If you need to find the information again, you can always review it in this single location. Just log into the OpenShift Web Console of your environment, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`.
+This information is also stored in a ConfigMap named `000-client-onboarding-information`. If you need to find the information again, you can always review it in this single location. Just log into the OpenShift Web Console of your environment, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`.
 
 
 

@@ -117,12 +117,12 @@ Local Mail Server/Client:
 Remarks:
       - WatsonX Orchestrate: CP4BA-side configuration performed, requires additional separate WatsonX Orchestrate SaaS instance
 
-Successfully created ConfigMap 'client-onboarding-information' with same information as above
+Successfully created ConfigMap '000-client-onboarding-information' with same information as above
 
 --- Execution completed ---
 ```
 
-This information is also stored in a ConfigMap named `client-onboarding-information`. If you need to find the information again, you can always review it in this single location. Just log into the OpenShift Web Console of your environment, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`.
+This information is also stored in a ConfigMap named `000-client-onboarding-information`. If you need to find the information again, you can always review it in this single location. Just log into the OpenShift Web Console of your environment, in the left-hand navigator expand `Workloads`, click on `ConfigMaps`, and enter `client` into the field next to `Name`.
 
 
 
