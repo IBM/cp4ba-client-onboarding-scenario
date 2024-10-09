@@ -12,7 +12,13 @@ This deployment approach does not require a separate machine with Java on it to 
 
 **Cloud Pak for Business Automation (CP4BA) 24.0.0 Starter deployment environment**
 
-Bring your own CP4BA 24.0.0 Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
+Either
+
+- request a CP4BA 24.0.0 Starter environment from TechZone following these [instructions](RequestingTechZoneStarterEnv.md) 
+
+  or
+
+- bring your own CP4BA 24.0.0 Starter deployment authoring environment with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
 
