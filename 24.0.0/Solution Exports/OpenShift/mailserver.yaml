@@ -133,7 +133,7 @@ spec:
     spec:
       containers:
         - name: docker-mailserver
-          image: "mailserver/docker-mailserver:11.1.0"
+          image: "quay.io/zhongtao/swat-jam/docker-mailserver:11.1.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:

@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: roundcubenginx
-        image: nginx:alpine
+        image: quay.io/jitesoft/nginx:1.27.1
         imagePullPolicy: ""
         env:
         - name: NGINX_HOST

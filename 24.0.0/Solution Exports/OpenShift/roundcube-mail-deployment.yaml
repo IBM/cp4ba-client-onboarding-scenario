@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: roundcubemail
-        image: roundcube/roundcubemail:1.6.0-fpm-alpine
+        image: quay.io/zhongtao/swat-jam/roundcubemail:1.6.0-fpm-alpine
         imagePullPolicy: ""
         env:
         - name: ROUNDCUBEMAIL_DB_TYPE
