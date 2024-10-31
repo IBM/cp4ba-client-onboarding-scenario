@@ -124,9 +124,12 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.2
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+rem Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,configureLabs,enableWorkflowLabsForBusinessUsers,rpaBotExecutionUser,rpaServer,gmailAddress,gmailAppKey,ocpStorageClassForInternalMailServer,createUsers,dockerUserName,dockerToken,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
+
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

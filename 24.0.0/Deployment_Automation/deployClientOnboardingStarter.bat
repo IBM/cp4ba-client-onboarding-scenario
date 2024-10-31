@@ -118,7 +118,7 @@ SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
-SET COPYVARVALUES=ocLoginServer,ocLoginToken,configureLabs,enableWorkflowLabsForBusinessUsers,rpaBotExecutionUser,rpaServer,gmailAddress,gmailAppKey,ocpStorageClassForInternalMailServer,createUsers,dockerUserName,dockerToken,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,configureLabs,enableWorkflowLabsForBusinessUsers,rpaBotExecutionUser,rpaServer,gmailAddress,gmailAppKey,ocpStorageClassForInternalMailServer,createUsers,dockerUserName,dockerToken,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
