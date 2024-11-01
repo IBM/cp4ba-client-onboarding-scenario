@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.0/Deployment_Automation/Starter/DeployClientOnboardingScenarioEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.68 <1.2.0",
+	"requiredToolVersion": ">=1.1.75 <1.2.0",
 	"requiredCP4BAVersion": ">=24.0.0 <24.1.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -51,7 +51,8 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions.zip"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions-$$(cp4baVersionWithFixpack)$$.zip",
+												"useCurrentOrEarlierFileVersion": true
 											}
 										]
 									}
@@ -90,7 +91,8 @@
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Decisions' decision service",
 										"decisionServiceName": "Client Onboarding Decisions",
-										"file": "ClientOnboardingDecisions.zip"
+										"useCurrentOrEarlierFileVersion": true,
+										"file": "ClientOnboardingDecisions-$$(cp4baVersionWithFixpack)$$.zip"
 									}
 								},
 								{
