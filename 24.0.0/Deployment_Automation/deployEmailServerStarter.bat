@@ -292,6 +292,6 @@ if defined overallValidationFailed (
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %INTERNALPAKINSTALLERPORTALURL% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %OCPSTORAGECLASSFOREMAILINTERNAL% %createUsersFile% %INTERNALDOCKERINFO%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" %INTERNALOCLOGINSERVER% %INTERNALOCLOGINTOKEN% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %OCPSTORAGECLASSFOREMAILINTERNAL% %createUsersFile% %INTERNALDOCKERINFO%
 
 ENDLOCAL
