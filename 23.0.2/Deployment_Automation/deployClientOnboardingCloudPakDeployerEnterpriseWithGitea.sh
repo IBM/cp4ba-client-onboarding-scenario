@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -23,14 +23,14 @@ ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginToken=REQUIRED
 
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=REQUIRED
+
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
 # URL of the RPA server to be invoked for the RPA bot execution
 rpaServer=https://rpa-server.com:1111
-
-# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-#cp4baNamespace=REQUIRED
 
 # Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
 configureLabs=true
@@ -118,10 +118,11 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
-
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,giteaCredentials,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

@@ -3,7 +3,7 @@ rem ############################################################################
 rem #
 rem # Licensed Materials - Property of IBM
 rem #
-rem # (C) Copyright IBM Corp. 2023. All Rights Reserved.
+rem # (C) Copyright IBM Corp. 2024. All Rights Reserved.
 rem #
 rem # US Government Users Restricted Rights - Use, duplication or
 rem # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -28,6 +28,11 @@ SET ocLoginToken=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
 
+
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=REQUIRED
+
 rem Modify below three properties according to your needs. Only if the previous option is set to true, the next option can be set to true, too 
 rem (e.g. only when cleanupClientOnboardingLabs_UserData is set to true, cleanupClientOnboardingLabs can be set to true)
 rem Potential use-cases:
@@ -42,10 +47,6 @@ SET cleanupClientOnboardingScenario=true
 
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admin
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
-
-rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-rem SET cp4baNamespace=REQUIRED
 
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub=-disableAccessToGitHub=true
@@ -104,9 +105,11 @@ SET SCRIPTNAME=undeployClientOnboardingRapidDeploymentEnterpriseGeneric.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminPassword,cp4baNamespace,cleanupClientOnboardingLabs_UserData,cleanupClientOnboardingLabs,cleanupClientOnboardingScenario,giteaCredentials,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

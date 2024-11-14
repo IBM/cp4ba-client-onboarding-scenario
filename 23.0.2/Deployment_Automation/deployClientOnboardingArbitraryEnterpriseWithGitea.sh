@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -131,9 +131,11 @@ SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,giteaCredentials,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,configureLabs,adpConfigured,configureContentLab,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -318,7 +320,7 @@ then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  VVariable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
+    echo "  Variable 'useInternalMailServer' is set to 'false' but variable 'gmailAppKey' has not been set"
   else
     gmailAppKeyInternal=wf_cp_emailPassword=${gmailAppKey}
   fi

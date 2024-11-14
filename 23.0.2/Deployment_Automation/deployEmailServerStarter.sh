@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -18,15 +18,10 @@
 # Specify below variables to launch the deployment automation with
 #----------------------------------------------------------------------------------------------------------
 
-# Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
-
-# URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
-pakInstallerPortalURL=REQUIRED
-
 # Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-#ocLoginServer=REQUIRED
+ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-#ocLoginToken=REQUIRED
+ocLoginToken=REQUIRED
 
 
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
@@ -103,9 +98,11 @@ SCRIPTNAME=deployEmailServerStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,ocpStorageClassForInternalMailServer,createUsers,dockerUserName,dockerToken,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -164,44 +161,28 @@ echo
 
 validationSuccess=true
 
-# if 'pakInstallerPortalURL' is not defined or set as default or empty then check that 'ocLoginServer' and 'ocLoginToken' are properly defined
-if [ -z "${pakInstallerPortalURL+x}" ] || [[ "${pakInstallerPortalURL}" == "REQUIRED" ]] || [[ "${pakInstallerPortalURL}" == "" ]]
+if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
 then
-	if [ -z "${ocLoginServer+x}" ] || [[ "${ocLoginServer}" == "REQUIRED" ]] || [[ "${ocLoginServer}" == "" ]]
+	if $validationSuccess
 	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
-	else
-		INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+		echo "Validating configuration failed:"
+		validationSuccess=false
 	fi
-	
-	if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+	echo "  Variable 'ocLoginServer' has not been defined/set"
+else
+	INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
+fi
+
+if [ -z "${ocLoginToken+x}" ] || [[ "${ocLoginToken}" == "REQUIRED" ]] || [[ "${ocLoginToken}" == "" ]]
+then
+	if $validationSuccess
 	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
-	else
-		INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
+		echo "Validating configuration failed:"
+		validationSuccess=false
 	fi
-else 
-	if ([[ "${ocLoginServer}" != "REQUIRED" ]] && [[ "${ocLoginServer}" != "" ]]) || ([[ "${ocLoginToken}" != "REQUIRED" ]] && [[ "${ocLoginToken}" != "" ]])
-	then
-		if $validationSuccess
-		then
-			echo "Validating configuration failed:"
-			validationSuccess=false
-		fi
-		echo "  Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both"
-	else
-		INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=${pakInstallerPortalURL}
-	fi
+	echo "  Variable 'ocLoginToken' has not been defined/set"
+else
+	INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
 fi
 
 if [[ ! -z "${createUsers+x}" ]] && "${createUsers}" == "true"
@@ -302,4 +283,4 @@ then
 fi
 
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALPAKINSTALLERPORTALURL} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${createUsersFile} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${INTERNALDOCKERINFO}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${createUsersFile} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${INTERNALDOCKERINFO}

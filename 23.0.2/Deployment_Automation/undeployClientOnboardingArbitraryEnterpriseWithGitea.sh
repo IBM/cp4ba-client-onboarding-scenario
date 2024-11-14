@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -22,6 +22,10 @@
 ocLoginServer=REQUIRED
 # Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
 ocLoginToken=REQUIRED
+
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=REQUIRED
 
 # Fully qualified user id (cn=<username>, dc=<org>, ... or uid=<username>, ...) of an admin user for the CP4BA instance
 cp4baAdminUserName=REQUIRED
@@ -42,9 +46,6 @@ cleanupClientOnboardingScenario=true
 # Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 #giteaCredentials="-giteaUserName= -giteaUserPwd="
 
-# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-#cp4baNamespace=REQUIRED
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
@@ -106,9 +107,11 @@ SCRIPTNAME=undeployClientOnboardingArbitraryEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cleanupClientOnboardingLabs_UserData,cleanupClientOnboardingLabs,cleanupClientOnboardingScenario,giteaCredentials,cp4baNamespace,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

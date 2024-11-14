@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -29,6 +29,8 @@ ocLoginToken=REQUIRED
 
 # Password for the CP4BA admin user to use to access the CP4BA environment
 cp4baAdminPassword=REQUIRED
+# Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
+#giteaCredentials="-giteaUserName= -giteaUserPwd="
 
 # Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
 configureLabs=true
@@ -49,8 +51,6 @@ gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 gmailAppKey=REQUIRED
 
-# Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
-#giteaCredentials="-giteaUserName= -giteaUserPwd="
 
 # User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 rpaBotExecutionUser=cp4admin2
@@ -123,9 +123,11 @@ SCRIPTNAME=deployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminPassword,giteaCredentials,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -254,7 +256,7 @@ fi
 if [[ "${useInternalMailServer}" == "false" ]]
 then
   enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
-
+  
   if [ ! -z "${gmailAddress+x}" ]
   then
     if [[ "${gmailAddress}" == "REQUIRED" ]] || [[ "${gmailAddress}" == "" ]]

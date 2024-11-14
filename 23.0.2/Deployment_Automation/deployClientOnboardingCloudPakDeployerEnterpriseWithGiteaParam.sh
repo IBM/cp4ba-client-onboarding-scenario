@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -56,6 +56,10 @@ gmailAppKey=REQUIRED
 #dockerUserName=REQUIRED
 #dockerToken=REQUIRED
 
+# User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
+rpaBotExecutionUser=cp4admin2
+# URL of the RPA server to be invoked for the RPA bot execution
+rpaServer=https://rpa-server.com:1111
 
 # Should ADP be used within the Client Oboarding scenario (do not change for now)
 adpConfigured=false
@@ -327,10 +331,11 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGiteaParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.2
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
-
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,configureLabs,enableWorkflowLabsForBusinessUsers,createUsers,useInternalMailServer,ocpStorageClassForInternalMailServer,gmailAddress,gmailAppKey,dockerUserName,dockerToken,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,outputPath,printDetailedMessageToConsole,printTraceMessageToConsole
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

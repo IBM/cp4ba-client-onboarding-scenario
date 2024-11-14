@@ -3,7 +3,7 @@
 #
 # Licensed Materials - Property of IBM
 #
-# (C) Copyright IBM Corp. 2023. All Rights Reserved.
+# (C) Copyright IBM Corp. 2024. All Rights Reserved.
 #
 # US Government Users Restricted Rights - Use, duplication or
 # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -28,6 +28,11 @@ cp4baAdminUserName=REQUIRED
 # Password for the CP4BA admin user to use to access the CP4BA environment
 cp4baAdminPassword=REQUIRED
 
+
+# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+#cp4baNamespace=REQUIRED
+
 # Modify below three properties according to your needs. Only if the previous option is set to true, the next option can be set to true, too 
 # (e.g. only when cleanupClientOnboardingLabs_UserData is set to true, cleanupClientOnboardingLabs can be set to true)
 # Potential use-cases:
@@ -41,10 +46,6 @@ cleanupClientOnboardingScenario=true
 
 # Uncomment in case GitHub is not accessible and all resources are already available locally
 #disableAccessToGitHub="-disableAccessToGitHub=true"
-
-# Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-# If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-#cp4baNamespace=REQUIRED
 
 # Proxy settings in case a proxy server needs to be used to access the GitHub resources
 # Uncomment at least the proxScenatio, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
@@ -103,9 +104,11 @@ SCRIPTNAME=undeployClientOnboardingEnterpriseExternalGit.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baNamespace,cleanupClientOnboardingLabs_UserData,cleanupClientOnboardingLabs,cleanupClientOnboardingScenario,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

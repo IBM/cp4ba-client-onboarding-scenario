@@ -3,7 +3,7 @@ rem ############################################################################
 rem #
 rem # Licensed Materials - Property of IBM
 rem #
-rem # (C) Copyright IBM Corp. 2023. All Rights Reserved.
+rem # (C) Copyright IBM Corp. 2024. All Rights Reserved.
 rem #
 rem # US Government Users Restricted Rights - Use, duplication or
 rem # disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -136,9 +136,11 @@ SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.2
+SET SCRIPTVERSION=1.0.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,adsGitOrg,adsGitUserName,adsGitRepoAPIKey,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -383,7 +385,7 @@ if defined useInternalMailServer (
 if defined useInternalMailServer (
 	if "%useInternalMailServer%"=="false" (
 		set enableDeployEmailCapabilityInternal=enableDeployEmailCapability=false
-
+	
 		if defined gmailAddress (
 			if "%gmailAddress%"=="REQUIRED" set gmailAddressRequired=true
 			if "%gmailAddress%"=="" set gmailAddressRequired=true

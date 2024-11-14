@@ -241,9 +241,11 @@ SCRIPTNAME=undeployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
+# Variable values to be copied to newer version in case found
+COPYVARVALUES=ocLoginServer,ocLoginToken,cleanupClientOnboardingLabs_UserData,cleanupClientOnboardingLabs,cleanupClientOnboardingScenario,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,outputPath,printDetailedMessageToConsole,printTraceMessageToConsole
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -314,7 +316,7 @@ then
     echo "Validating configuration failed:"
     validationSuccess=false
   fi
-  echo "  Variable 'ocLoginServer' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  echo "  Variable 'ocLoginServer' has not been defined/set"
 else
   INTERNALOCLOGINSERVER=-ocLoginServer=${ocLoginServer}
 fi
@@ -326,7 +328,7 @@ then
     echo "Validating configuration failed:"
     validationSuccess=false
   fi
-  echo "  Variable 'ocLoginToken' has not been defined/set (nor is variable 'pakInstallerPortalURL' defined/set)"
+  echo "  Variable 'ocLoginToken' has not been defined/set"
 else
   INTERNALOCLOGINTOKEN=-ocLoginToken=${ocLoginToken}
 fi
