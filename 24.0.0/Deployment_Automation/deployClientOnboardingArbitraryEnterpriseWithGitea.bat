@@ -130,9 +130,11 @@ SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,giteaCredentials,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,configureLabs,adpConfigured,configureContentLab,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

@@ -30,6 +30,11 @@ SET cp4baAdminUserName=REQUIRED
 rem Password for the CP4BA admin user to use to access the CP4BA environment
 SET cp4baAdminPassword=REQUIRED
 
+
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=REQUIRED
+
 rem Modify below three properties according to your needs. Only if the previous option is set to true, the next option can be set to true, too 
 rem (e.g. only when cleanupClientOnboardingLabs_UserData is set to true, cleanupClientOnboardingLabs can be set to true)
 rem Potential use-cases:
@@ -45,16 +50,13 @@ SET cleanupClientOnboardingScenario=true
 rem Uncomment in case GitHub is not accessible and all resources are already available locally
 rem SET disableAccessToGitHub="-disableAccessToGitHub=true"
 
-rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-rem SET cp4baNamespace=REQUIRED
 
 rem Proxy settings in case a proxy server needs to be used to access the GitHub resources
 rem Uncomment at least the proxyScenario, proxyHost, and proxyPort lines and set values accordingly in case a proxy server needs to be used to access GitHub
 rem Uncomment the lines proxyUser and proxyPwd too, in case the proxy server requires authentication
 rem SET proxyScenario=GitHub
-rem SET proxyHost=cp31.fyre.ibm.com
-rem SET proxyPort=3128
+rem SET proxyHost=
+rem SET proxyPort=
 rem SET proxyUser=
 rem SET proxyPwd=
 
@@ -103,9 +105,11 @@ SET SCRIPTNAME=undeployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baNamespace,cleanupClientOnboardingLabs_UserData,cleanupClientOnboardingLabs,cleanupClientOnboardingScenario,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

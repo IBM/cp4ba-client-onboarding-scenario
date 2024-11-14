@@ -20,15 +20,10 @@ rem ----------------------------------------------------------------------------
 rem Specify below variables to launch the deployment automation with
 rem ----------------------------------------------------------------------------------------------------------
 
-rem Either 'pakInstallerPortalURL' or 'ocLoginServer' and 'ocLoginToken' need to be specified but not both depending on how environment is installed
-
-rem URL of the PAK INSTALLER PORTAL directly from the 'Your environment is ready' email 'PakInstaller Portal URL:' when deployed from TechZone via Pak Installer
-SET pakInstallerPortalURL=REQUIRED
-
 rem Value of the 'server' parameter as shown on the 'Copy login command' page in the OCP web console
-rem SET ocLoginServer=REQUIRED
+SET ocLoginServer=REQUIRED
 rem Value shown under 'Your API token is' or as 'token' parameter as shown on the 'Copy login command' page in the OCP web console
-rem SET ocLoginToken=REQUIRED
+SET ocLoginToken=REQUIRED
 
 rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 SET createUsers=false
@@ -100,9 +95,11 @@ SET SCRIPTNAME=deployEmailServerStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,ocpStorageClassForInternalMailServer,createUsers,dockerUserName,dockerToken,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -172,94 +169,34 @@ rem ----------------------------------------------------------------------------
 rem Validation that all required parameters are set
 rem ----------------------------------------------------------------------------------------------------------
 
-rem if pakInstallerPortalURL is defined and default or value not specified check that both ocLoginServer and ocLoginToken are defined properly
-if defined pakInstallerPortalURL (
-	rem if pakInstallerPortalURL has default value then need to ensure oc variables are properly defined
-	if "%pakInstallerPortalURL%"=="REQUIRED" (
-		rem if ocLoginServer variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
-		if defined ocLoginServer (
-			if "%ocLoginServer%"=="REQUIRED" (
-				set ocLoginServerRequired=true
-			) else (
-				if "%ocLoginServer%"=="" (
-					set ocLoginServerRequired=true
-				) else (
-					set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
-				)
-			)
-		) else (
-			set ocLoginServerRequired=true
-		)
-	
-		rem if ocLoginToken variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
-		if defined ocLoginToken (
-			if "%ocLoginToken%"=="REQUIRED" (
-				set ocLoginTokenRequired=true
-			) else (
-				if "%ocLoginToken%"=="" (
-					set ocLoginTokenRequired=true
-				) else (
-					set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
-				)
-			)
-		) else (
-			set ocLoginTokenRequired=true
-		)
-	rem pakInstallerPortalURL is set a to a value ensure that 'ocLoginServer' and 'ocLoginToken' are either not defined (commented out) or remain at the default value
-	) else (
-		if defined ocLoginServer (
-			if NOT "%ocLoginServer%"=="REQUIRED" (
-				set multipleLoginMethod=true
-			)
-		)
-
-		if defined ocLoginToken (
-			if NOT "%ocLoginToken%"=="REQUIRED" (
-				set multipleLoginMethod=true
-			)
-		)
-		
-		set INTERNALPAKINSTALLERPORTALURL=-pakInstallerPortalURL=%pakInstallerPortalURL%
-	)
-rem pakInstallerPortalURL is not defined (commented out) ensure that 'ocLoginServer' and 'ocLoginToken' are properly defined
-) else (
-	rem if 'ocLoginServer' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
-	if defined ocLoginServer (
-		if "%ocLoginServer%"=="REQUIRED" (
-			set ocLoginServerRequired=true
-		) else (
-			if "%ocLoginServer%"=="" (
-				set ocLoginServerRequired=true
-			) else (
-				set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
-			)
-		)
-	) else (
+rem if 'ocLoginServer' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+if defined ocLoginServer (
+	if "%ocLoginServer%"=="REQUIRED" (
 		set ocLoginServerRequired=true
-	)
-	
-	rem if 'ocLoginToken' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
-	if defined ocLoginToken (
-		if "%ocLoginToken%"=="REQUIRED" (
-			set ocLoginTokenRequired=true
-		) else (
-			if "%ocLoginToken%"=="" (
-				set ocLoginTokenRequired=true
-			) else (
-				set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
-			)
-		)
 	) else (
-		set ocLoginTokenRequired=true
+		if "%ocLoginServer%"=="" (
+			set ocLoginServerRequired=true
+		) else (
+			set INTERNALOCLOGINSERVER=-ocLoginServer=%ocLoginServer%
+		)
 	)
+) else (
+	set ocLoginServerRequired=true
 )
 
-if defined multipleLoginMethod ( 
-	if not defined validationFailed (
-		echo Validating configuration failed:
-		set validationFailed=true
+rem if 'ocLoginToken' variable is defined, ensure it is not at default value or empty, otherwise including not defined set marker that it is missing
+if defined ocLoginToken (
+	if "%ocLoginToken%"=="REQUIRED" (
+		set ocLoginTokenRequired=true
+	) else (
+		if "%ocLoginToken%"=="" (
+			set ocLoginTokenRequired=true
+		) else (
+			set INTERNALOCLOGINTOKEN=-ocLoginToken=%ocLoginToken%
+		)
 	)
-	echo   Either 'ocLoginServer' and 'ocLoginToken' or 'pakInstallerPortalURL' can be specified but NOT both
+) else (
+	set ocLoginTokenRequired=true
 )
 
 if defined ocLoginServerRequired ( 
@@ -267,7 +204,7 @@ if defined ocLoginServerRequired (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginServer' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
+	echo   Variable 'ocLoginServer' has not been defined/set
 )
 
 if defined ocLoginTokenRequired ( 
@@ -275,7 +212,7 @@ if defined ocLoginTokenRequired (
 		echo Validating configuration failed:
 		set validationFailed=true
 	)
-	echo   Variable 'ocLoginToken' has not been defined/set ^(nor is variable 'pakInstallerPortalURL' defined/set^)
+	echo   Variable 'ocLoginToken' has not been defined/set
 )
 
 if defined createUsers (

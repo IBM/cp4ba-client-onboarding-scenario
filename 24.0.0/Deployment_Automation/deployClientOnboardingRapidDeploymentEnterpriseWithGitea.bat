@@ -54,8 +54,6 @@ SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 SET gmailAppKey=REQUIRED
 
-
-
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution
@@ -125,9 +123,11 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminPassword,giteaCredentials,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 

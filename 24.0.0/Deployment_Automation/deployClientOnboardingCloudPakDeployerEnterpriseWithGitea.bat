@@ -26,15 +26,15 @@ rem Value shown under 'Your API token is' or as 'token' parameter as shown on th
 SET ocLoginToken=REQUIRED
 
 
+rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
+rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
+rem SET cp4baNamespace=REQUIRED
+
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
 rem URL of the RPA server to be invoked for the RPA bot execution
 SET rpaServer=https://rpa-server.com:1111
 
-
-rem Uncomment when the OCP cluster contains more than one namespace/project into which CP4BA has been deployed and specify the name of the namespace you want to deploy to. 
-rem If only one CP4BA namespace exists the deployment tool will determine the namespace automatically
-rem SET cp4baNamespace=REQUIRED
 
 rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
@@ -119,9 +119,11 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
+rem Variable values to be copied to newer version in case found
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,giteaCredentials,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
