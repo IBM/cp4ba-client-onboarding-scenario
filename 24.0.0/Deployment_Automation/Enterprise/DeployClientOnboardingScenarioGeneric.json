@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.75 <1.2.0",
+	"requiredToolVersion": ">=1.1.76 <1.2.0",
 	"requiredCP4BAVersion": ">=24.0.0 <24.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -53,6 +53,9 @@
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ClientOnboardingDecisions-$$(cp4baVersionWithFixpack)$$.zip",
 												"useCurrentOrEarlierFileVersion": true
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ADSGitServiceEgress_NetworkPolicy.json"
 											}
 										]
 									}
@@ -116,7 +119,16 @@
 										"comment": "Used when internal gitea is available, no external git server is specified, and ADS auto connect to Git is not configured",
 										"enabled": "$$(isGiteaAvailable)$$ && $$(ISNOTSET(adsGitServerUrl))$$ && $$(!isADSAutoConnectToGit)$$",
 										"description": "Connect ADS project to internal gitea repository",
-										"gitRepoUrl": "!GITREPOURL!"
+										"gitRepoUrl": "!GITREPOURL!",
+										"checkConnection": "true",
+										"egressNetworkPolicy": "ADSGitServiceEgress_NetworkPolicy.json",
+										"tryFixingLocalGiteaCertificateIssue": "true",
+										"pollForTrustedCertificateUpdate": "true",
+										"pollForTrustedCertificateUpdateMaxTimes": "12",
+										"pollForTrustedCertificateUpdatePollDelayInMinutes": "5",
+										"restartCP4BAOperator": "true",
+										"cp4baOperatorRestartMaxRepeat": "12",
+										"cp4baOperatorRestartSleepSeconds": "5"
 									}
 								},
 								{
