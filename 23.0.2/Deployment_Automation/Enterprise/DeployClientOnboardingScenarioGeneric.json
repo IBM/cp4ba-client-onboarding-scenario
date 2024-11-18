@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.76 <1.2.0",
+	"requiredToolVersion": ">=1.1.77 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.2 <24.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -55,6 +55,9 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ADSGitServiceEgress_NetworkPolicy.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Automation%20Decision%20Services/ADSBuildServiceEgress_NetworkPolicy.json"
 											}
 										]
 									}
@@ -120,7 +123,10 @@
 										"description": "Connect ADS project to internal gitea repository",
 										"gitRepoUrl": "!GITREPOURL!",
 										"checkConnection": "true",
-										"egressNetworkPolicy": "ADSGitServiceEgress_NetworkPolicy.json",
+										"egressNetworkPolicies": [
+											"ADSGitServiceEgress_NetworkPolicy.json",
+											"ADSBuildServiceEgress_NetworkPolicy.json"
+										],
 										"tryFixingLocalGiteaCertificateIssue": "true",
 										"pollForTrustedCertificateUpdate": "true",
 										"pollForTrustedCertificateUpdateMaxTimes": "12",

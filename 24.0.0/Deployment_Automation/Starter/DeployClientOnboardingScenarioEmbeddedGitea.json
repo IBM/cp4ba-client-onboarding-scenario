@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.0/Deployment_Automation/Starter/DeployClientOnboardingScenarioEmbeddedGitea.json",
-	"requiredToolVersion": ">=1.1.76 <1.2.0",
+	"requiredToolVersion": ">=1.1.77 <1.2.0",
 	"requiredCP4BAVersion": ">=24.0.0 <24.1.0",
 	"requiredCP4BAPattern": "Starter",
 	"actions": [
@@ -88,7 +88,9 @@
 										"description": "Connect ADS project to internal gitea repository",
 										"gitRepoUrl": "!GITREPOURL!",
 										"checkConnection": "true",
-										"egressNetworkPolicy": "ADSGitServiceEgress_NetworkPolicy.json",
+										"egressNetworkPolicies": [
+											"ADSGitServiceEgress_NetworkPolicy.json"
+										],
 										"tryFixingLocalGiteaCertificateIssue": "true",
 										"pollForTrustedCertificateUpdate": "true",
 										"pollForTrustedCertificateUpdateMaxTimes": "12",
