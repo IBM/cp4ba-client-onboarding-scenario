@@ -6,7 +6,7 @@ This document describes the steps required to request a CP4BA 24.0.0 Starter dep
 
 ## Reserving an IBM TechZone environment
 
-Reserve a Business Automation environment from IBM TechZone. For that select the **CP4BA 24.0.0 - Multi-Pattern Starter** tile from the [this page](https://techzone.ibm.com/collection/tech-zone-certified-base-images/journey-cp4ba-20240).
+Reserve a Business Automation environment from IBM TechZone. For that select the **CP4BA 24.0.0 - Multi-Pattern Starter** tile from the [this page](https://techzone.ibm.com/collection/tech-zone-certified-base-images/journey-pre-installed-software).
 
 Provide and select the required information. The selection you make for 'Purpose' determines if you need to specify a 'Sales Opportunity number' and the 'reservation policy' (how long the environment is available and how often it can be extended).
 
