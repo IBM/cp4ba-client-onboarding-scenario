@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps to deploy the email server and client capability",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.2/Deployment_Automation/Starter/DeployEmailCapability.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=23.2.0 <24.1.0",
@@ -29,7 +29,7 @@
 								},
 								{
 									"MANAGEMAILUSERS": {
-										"enabled": "$$(isLocalMailAvailable)$$ && $$(LDAPModified|default=false)$$",
+										"enabled": "$$(isLocalMailAvailable)$$ && $(LDAPModified|default=false)$",
 										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
 										"synchronizeWithLDIF": true,
 										"removeAllOtherUsers": true
