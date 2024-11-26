@@ -27,8 +27,8 @@ ocLoginToken=REQUIRED
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
 
-# Name of the storage class for the internal mail server (TechZone normally  uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
-ocpStorageClassForInternalMailServer=ocs-storagecluster-cephfs
+# Name of the storage class for the internal mail server (TechZone normally uses ocs-external-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
+ocpStorageClassForInternalMailServer=ocs-external-storagecluster-cephfs
 
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
@@ -98,7 +98,7 @@ SCRIPTNAME=deployEmailServerStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found

@@ -43,8 +43,8 @@ rem SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails
 rem SET gmailAppKey=REQUIRED
 
-rem Name of the storage class for the internal mail server (TechZone normally  uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
-SET ocpStorageClassForInternalMailServer=ocs-storagecluster-cephfs
+rem Name of the storage class for the internal mail server (TechZone normally uses ocs-external-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
+SET ocpStorageClassForInternalMailServer=ocs-external-storagecluster-cephfs
 
 rem Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 SET createUsers=false
@@ -114,7 +114,7 @@ SET SCRIPTNAME=deployClientOnboardingStarter.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.2
+SET SCRIPTVERSION=1.0.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found

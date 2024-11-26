@@ -43,8 +43,8 @@ rpaServer=https://rpa-server.com:1111
 # App key for accessing the gmail account to send emails
 # gmailAppKey=REQUIRED
 
-# Name of the storage class for the internal mail server (TechZone normally  uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
-ocpStorageClassForInternalMailServer=ocs-storagecluster-cephfs
+# Name of the storage class for the internal mail server (TechZone normally uses ocs-external-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
+ocpStorageClassForInternalMailServer=ocs-external-storagecluster-cephfs
 
 # Should one or multiple users be added to the Cloud Pak as part of deploying the solution (The actual users need to be specified in a file called 'AddUsersToPlatform.json' in the directory of this file.)
 createUsers=false
@@ -124,7 +124,7 @@ SCRIPTNAME=deployClientOnboardingStarter.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.4
+SCRIPTVERSION=1.0.5
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found

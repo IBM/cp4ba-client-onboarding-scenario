@@ -48,8 +48,8 @@ rpaServer=https://rpa-server.com:1111
 #  In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 useInternalMailServer=true
 
-# Name of the storage class for the internal mail server (TechZone normally uses ocs-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
-ocpStorageClassForInternalMailServer=ocs-storagecluster-cephfs
+# Name of the storage class for the internal mail server (TechZone normally uses ocs-external-storagecluster-cephfs, ROKS cp4a-file-delete-gold-gid)
+ocpStorageClassForInternalMailServer=ocs-external-storagecluster-cephfs
 
 # Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 gmailAddress=REQUIRED
@@ -333,7 +333,7 @@ SCRIPTNAME=deployClientOnboardingStarterParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.9
+SCRIPTVERSION=1.0.10
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
