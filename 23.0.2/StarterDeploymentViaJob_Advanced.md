@@ -162,7 +162,7 @@ spec:
             - name: LOG_DIR
               value: $(LOG_DIR_BASE_CO)/$(PODNAME)
             - name: ocpStorageClassForInternalMailServer
-              value: ocs-external-storagecluster-cephfs
+              value: ocs-storagecluster-cephfs
             - name: configureLabs
               value: "true"
             - name: enableWorkflowLabsForBusinessUsers
