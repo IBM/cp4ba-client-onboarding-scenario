@@ -1,0 +1,204 @@
+{
+ "visualizations": [
+  {
+   "name": "Services Subscription by Industry with Drilldowns",
+   "id": "8a1b7643-ad2e-4474-bcdd-d3d244e0444b",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 3
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 4,
+     "h": 2,
+     "y": 3
+    }
+   ]
+  },
+  {
+   "name": "Approval Count of High-Risk Cases",
+   "id": "f6e52d4d-c5d4-42a7-94ab-0f46b5bcade2",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 5
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 2,
+     "h": 2,
+     "y": 5
+    }
+   ]
+  },
+  {
+   "name": "Average Approval Confidence by Industry Sector and Revenue",
+   "id": "0dae90e6-949e-4fca-ac70-e5ad0f72c5cb",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 7
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 4,
+     "h": 4,
+     "y": 5
+    }
+   ]
+  },
+  {
+   "name": "Activity Duration Distribution in Case Completion",
+   "id": "7a1ac82d-54ff-4b8a-b096-8eb0e69ccbf7",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 9
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 0,
+     "h": 2,
+     "y": 3
+    }
+   ]
+  },
+  {
+   "name": "Completed Cases per Day",
+   "id": "0a43317c-d236-4b7b-91b3-448f65617fd8",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 11
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 2,
+     "h": 2,
+     "y": 7
+    }
+   ]
+  },
+  {
+   "name": "Approvals by Industry Heatmap",
+   "id": "ac55cb6c-9990-48af-9f11-45ffa9250b07",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 13
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 0,
+     "h": 2,
+     "y": 5
+    }
+   ]
+  },
+  {
+   "name": "Client Onboarding Data",
+   "id": "7ba02f82-395e-42ba-a14d-a5e5e35ebe2c",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 15
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 0,
+     "h": 2,
+     "y": 7
+    }
+   ]
+  },
+  {
+   "name": "Average Revenue from Service Fees for Approved Clients",
+   "id": "82ab7394-a0b6-4be4-a8b9-94579a33e330",
+   "config": {"goalId": "eyWdlpMBhyGBKXQgHuSe"},
+   "layouts": []
+  },
+  {
+   "name": "Approvals by Industry",
+   "id": "2611999d-e0aa-4b73-8922-75d3b46af63f",
+   "config": {},
+   "layouts": [
+    {
+     "kind": "SM",
+     "w": 1,
+     "x": 0,
+     "h": 2,
+     "y": 17
+    },
+    {
+     "kind": "LG",
+     "w": 2,
+     "x": 2,
+     "h": 2,
+     "y": 3
+    }
+   ]
+  },
+  {
+   "name": "Highest Service Fee by Industry Sector",
+   "id": "94236f4f-4b5e-4489-b19d-24122fc31360",
+   "config": {"goalId": "eyWdlpMBhyGBKXQgHuSe"},
+   "layouts": []
+  }
+ ],
+ "goalsLayout": [{
+  "name": "Focus Corp's top Client Onboarding KPI Completed",
+  "id": "eyWdlpMBhyGBKXQgHuSe",
+  "layouts": [
+   {
+    "kind": "SM",
+    "w": 1,
+    "x": 0,
+    "h": 3,
+    "y": 0
+   },
+   {
+    "kind": "LG",
+    "w": 6,
+    "x": 0,
+    "h": 3,
+    "y": 0
+   }
+  ]
+ }]
+}
