@@ -936,7 +936,7 @@
 										"description": "Manage role-based redaction for driver license for general users for '$$(CPEICNLABOBJECTSTORE)$$' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
-										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
+										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found, using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
@@ -1007,7 +1007,7 @@
 										"description": "Manage role-based redaction for driver license for admin users for '$$(CPEICNLABOBJECTSTORE)$$' repository",
 										"repository": "$(REPOSITORY_ID)$",
 										"reverseOrder": false,
-										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
+										"warning": "§IF($(generalUsersGroupExists|default=false)$)§()§ELSE§(Group 'GeneralUsers' not found, using group '$(generalUsersGroupShort)$' instead which will make the ICN lab instructions not match the groups in this environment)ENDIF§",
 										"redactionReasons": [
 											{
 												"action": "add",
