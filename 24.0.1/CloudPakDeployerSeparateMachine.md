@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 >
-> These instructions only apply in case you have set up your CP4BA 24.0.1 Enterprise deployment using [**Cloud Pak Deployer**](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/).
+> These instructions only apply in case you have set up your CP4BA 24.0.1 Enterprise deployment using [**Cloud Pak Deployer**](https://ibm.biz/cp4ba-enterprise-deployment).
 >
 > You need to have deployed at least the following capabilities in your CP4BA environment: Business Applications, Automation Decision Services, Workflow, Business Automation Insights.
 
@@ -29,7 +29,7 @@ Either
 
   or
 
-- bring your own CP4BA 24.0.1 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
+- bring your own CP4BA 24.0.1 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.biz/cp4ba-enterprise-deployment) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 
 ### 2. Machine to start the deployment from
@@ -140,10 +140,10 @@ The deployment tool performs a lot of validation upfront and will report any iss
 **Sometimes the deployment fails because of timing or network issues. These may not occur again when triggering the deployment a second time.** Other failures have been observed where the CP4BA environment or some of its PODs had issues and needed to be restarted.
 
 For the purpose of analyzing issues the deployment tool creates four files in the directory where it is located:
-- deployClientOnboarding_24.0.1_Starter_output.txt - Contains the messages printed to the console
-- deployClientOnboarding_24.0.1_Starter_detailedOutput.txt - Everything printed to the console plus details about the deployment steps
-- deployClientOnboarding_24.0.1_Starter_trace.txt - Contains very detailed trace messages about everything that is done as part of running a deployment
-- deployClientOnboarding_24.0.1_Starter_combined.txt - Contains a combination of the detailedOutput and trace files
+- deployClientOnboarding_24.0.1_Enterprise_output.txt - Contains the messages printed to the console
+- deployClientOnboarding_24.0.1_Enterprise_detailedOutput.txt - Everything printed to the console plus details about the deployment steps
+- deployClientOnboarding_24.0.1_Enterprise_trace.txt - Contains very detailed trace messages about everything that is done as part of running a deployment
+- deployClientOnboarding_24.0.1_Enterprise_combined.txt - Contains a combination of the detailedOutput and trace files
 
 In case your deployment fails and you get stuck, please reach out using the contact information that is given when the deployment fails and provide the `<date>_collector.zip` file created in this instance.
 
