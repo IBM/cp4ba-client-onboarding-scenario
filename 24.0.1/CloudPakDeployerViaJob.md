@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 >
-> These instructions only apply in case you have set up your CP4BA 24.0.1 Enterprise deployment using [**Cloud Pak Deployer**](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/).
+> These instructions only apply in case you have set up your CP4BA 24.0.1 Enterprise deployment using [**Cloud Pak Deployer**](https://ibm.biz/cp4ba-enterprise-deployment).
 >
 > You need to have deployed at least the following capabilities in your CP4BA environment: Business Applications, Automation Decision Services, Workflow, Business Automation Insights.
 
@@ -25,7 +25,7 @@ Either
 
   or
 
-- bring your own CP4BA 24.0.1 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
+- bring your own CP4BA 24.0.1 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.biz/cp4ba-enterprise-deployment) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
 
