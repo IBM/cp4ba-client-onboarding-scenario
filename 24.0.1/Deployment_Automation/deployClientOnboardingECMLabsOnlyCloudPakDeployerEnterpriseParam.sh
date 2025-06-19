@@ -289,7 +289,7 @@ CONFIGNAME="config-deploy-ecmlabsonly.properties"
 AUTOMATIONSCRIPT="DeployClientOnboardingGeneric.json"
 
 # Name of the source sh file passed to execution environment
-SCRIPTNAME=deployClientOnboardingECMLabsOnlyCloudPakDeployerEnterpriseWithGiteaParam.sh
+SCRIPTNAME=deployClientOnboardingECMLabsOnlyCloudPakDeployerEnterpriseParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
