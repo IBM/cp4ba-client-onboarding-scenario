@@ -1,0 +1,66 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/AddAdminsToICN.json",
+	"requiredToolVersion": ">=1.1.5 <1.2.0",
+	"requiredCP4BAVersion": ">=24.1.0 <25.0.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"ICN": {
+				"enabled": "true",
+				"description": "Add additional admin users as ICN Admins",
+				"relativeBasePath": "Business Automation Navigator",
+				"subActions": [
+					{
+						"UPDATEADMINSETTINGS": {
+							"enabled": "true",
+							"description": "Update Admin Settings",
+							"users": [
+								{
+									"action": "add",
+									"name": "cpadmin1"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin2"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin3"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin4"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin5"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin6"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin7"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin8"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin9"
+								},
+								{
+									"action": "add",
+									"name": "cpadmin10"
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
