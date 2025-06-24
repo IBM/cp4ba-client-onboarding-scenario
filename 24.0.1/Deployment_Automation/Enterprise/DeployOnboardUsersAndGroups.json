@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps to optionally onboard users defined in an external file and synchronize the mail server users based on the user modification",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployOnboardUsersAndGroups.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=24.0.1 <25.0.0",
@@ -32,7 +32,9 @@
 										"enabled": "$$(isLocalMailAvailable)$$ && $(LDAPModified|default=false)$",
 										"description": "Modify running mail server users to match users and password from server LDIF file, considering potentially added users",
 										"synchronizeWithLDIF": true,
-										"removeAllOtherUsers": true
+										"removeAllOtherUsers": true,
+										"maximumNumPollsForRestart": "$$(restartMailServer_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(restartMailServer_sleepBetweenPollsInSecondsForRestart)$$"
 									}
 								}
 							]
