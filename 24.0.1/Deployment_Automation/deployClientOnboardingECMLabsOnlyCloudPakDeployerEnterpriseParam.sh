@@ -284,7 +284,7 @@ DEPLOYMENTPATTERN="Enterprise"
 # Source URL to bootstrap configuration for the deployment tool
 BOOTSTRAPURL="-bootstrapURL=https://api.github.com/repos/IBM/cp4ba-client-onboarding-scenario/contents/${CP4BAVERSION}/Deployment_Automation/${DEPLOYMENTPATTERN}"
 # Name of the configuration file to use when running the deployment automation tool
-CONFIGNAME="config-deploy-ecmlabsonly.properties"
+CONFIGNAME="config-deploy-ecmlabsonly"
 # Automation script to use when running the deployment automation tool
 AUTOMATIONSCRIPT="DeployClientOnboardingGeneric.json"
 
@@ -293,7 +293,7 @@ SCRIPTNAME=deployClientOnboardingECMLabsOnlyCloudPakDeployerEnterpriseParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
