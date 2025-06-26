@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/AddAdminsToICN.json",
 	"requiredToolVersion": ">=1.1.5 <1.2.0",
 	"requiredCP4BAVersion": ">=24.1.0 <25.0.0",
@@ -18,43 +18,43 @@
 							"users": [
 								{
 									"action": "add",
-									"name": "cpadmin1"
+									"name": "cpadmin_1"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin2"
+									"name": "cpadmin_2"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin3"
+									"name": "cpadmin_3"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin4"
+									"name": "cpadmin_4"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin5"
+									"name": "cpadmin_5"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin6"
+									"name": "cpadmin_6"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin7"
+									"name": "cpadmin_7"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin8"
+									"name": "cpadmin_8"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin9"
+									"name": "cpadmin_9"
 								},
 								{
 									"action": "add",
-									"name": "cpadmin10"
+									"name": "cpadmin_10"
 								}
 							]
 						}
