@@ -1,0 +1,326 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Starter/RemoveAllCustomArtifacts.json",
+	"requiredToolVersion": ">=1.1.34 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up Client Onboarding related artifacts in reverse order",
+				"enabled": "true",
+				"description": "Remove Client Onboarding Artifacts",
+				"actions": [
+					{
+						"WF": {
+							"comment": "Delete watsonx Orchestrate artifacts",
+							"enabled": "$$(enableCleanupClientOnboarding_WO)$$",
+							"description": "WF - Delete watsonx Orchestrate service PA and remove table",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'WXC SERVICE' Workflow solution",
+										"projectName": "WXC SERVICE",
+										"projectAcronym": "WXCSERV",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"EXECUTESQL": {
+										"enabled": "true",
+										"description": "Execute SQL for watsonx Orchestrate to create and populate db table",
+										"removeConfigMapName": "client-onboarding-state-wo-lab",
+										"actions": [
+											{
+												"debug": true,
+												"action": "DropTable",
+												"tableName": "CODATA"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAI": {
+							"comment": "Clean up BAI data and remove all non-system provided dashboards and goals",
+							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
+							"description": "BAI - Delete all Case, WF data, and Goals and Dashboards (except pre-deployed ones)",
+							"relativeBasePath": "7_BAI",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all Case, WF data from indices",
+										"artifactNames": [
+											"icp4ba-bai-case-summaries-active-idx-ibm-bai",
+											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-timeseries-idx-ibm-bai"
+										],
+										"artifactType": "Index"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed dashboards",
+										"artifactNames": [
+											"*"
+										],
+										"artifactType": "Dashboard"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed goals",
+										"artifactNames": [
+											"*"
+										],
+										"artifactType": "Goal",
+										"deleteReferencingDashboard": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Remove the two applications and three desktops from Navigator",
+							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
+							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
+							"relativeBasePath": "6_ICN",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Remove Client Onboarding Request & Client Onboarding Document Upload app",
+										"appEngineAppConfigName": "APPENG0",
+										"artifactNames": [
+											"Client Onboarding Request",
+											"Client Onboarding Document Upload"
+										],
+										"artifactType": "Application"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Remove Client Onboarding Request, Client Onboarding Document Upload & CLOS desktops",
+										"artifactNames": [
+											"Client Onboarding Request",
+											"Client Onboarding Document Upload",
+											"CLOS"
+										],
+										"artifactType": "Desktop"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove EDS base plugin",
+										"action": "delete",
+										"pluginName": "External Data Services Support"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove custom EDS data source plugin",
+										"action": "delete",
+										"pluginName": "EDS Data Source"
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAA": {
+							"comment": "Delete all non-pre-deployed APPs, APP templates, and APP TKs",
+							"enabled": "$$(enableCleanupClientOnboarding_BAA)$$",
+							"description": "BAA - Delete all APPs, APP templates, and APP TKs (except pre-deployed ones)",
+							"relativeBasePath": "6_BAA",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed apps",
+										"projectName": "*",
+										"projectType": "APP",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed app templates",
+										"projectName": "*",
+										"projectType": "APP_TEMPLATE",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed app toolkits",
+										"projectName": "*",
+										"projectType": "APP_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Remove 'Client Documents' folder and with that also all contained documents but don't revert Content lab changes",
+							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
+							"description": "CPE - Delete 'Client Documents' folder and contained documents",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"relativeBasePath": "5_FNCM",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'Client Documents' folder and contained documents",
+										"artifactNames": [
+											"/Client Documents"
+										],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment": "Delete all non-predeployed solution, templates and toolkits",
+							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
+							"description": "WF - Delete all WF solutions, WF templates, and WF TKs (except pre-deployed ones)",
+							"relativeBasePath": "4_WF",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow solutions except Hiring Sample",
+										"projectName": "*",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"excludeProjectAcronyms": [
+											"HSS"
+										],
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow templates",
+										"projectName": "*",
+										"projectType": "WF_TEMPLATE",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete all non-predeployed Workflow toolkits",
+										"projectName": "*",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"comment": "Delete the ADS project",
+							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
+							"description": "ADS - Delete all ADS projects",
+							"relativeBasePath": "1_ADS",
+							"subActions": [
+								{
+									"CLEANUPADS": {
+										"enabled": "true",
+										"description": "Undeploy All deployed decision services within all ADS projects",
+										"adsCleanupActions": [
+											"Undeploy"
+										],
+										"projectName": "*",
+										"projectAcronym": "",
+										"decisionServiceName": "*",
+										"version": "*",
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5,
+										"maxUndeployCompletionPolls": 20,
+										"delayBetweenUndeployCompletionPolls": 5
+									}
+								},
+								{
+									"CLEANUPADS": {
+										"enabled": "true",
+										"description": "Delete all ADS projects",
+										"adsCleanupActions": [
+											"Project"
+										],
+										"projectName": "*",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": 5,
+										"maxUnpublishCompletionPolls": 20,
+										"delayBetweenUnpublishCompletionPolls": 5
+									}
+								},
+								{
+									"CLEANUPADS": {
+										"enabled": "$$(!isADSAutoConnectToGit)$$",
+										"description": "Delete org used by ADS and all contained repos",
+										"adsCleanupActions": [
+											"Git"
+										],
+										"gitDeletionType": "OrgWithRepos",
+										"gitOrgName": "$$(ACTION_adsGitOrg)$$"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

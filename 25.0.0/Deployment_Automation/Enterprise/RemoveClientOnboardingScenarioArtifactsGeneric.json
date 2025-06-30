@@ -1,0 +1,246 @@
+{
+	"comment": "Contains the steps required to undeploy all artifacts of the Client Onboarding scenario itself but not the artifacts used in labs and/or user created artifacts",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/RemoveClientOnboardingScenarioArtifactsGeneric.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up Client Onboarding scenario related artifacts in reverse order",
+				"enabled": "$$(enableCleanupClientOnboarding)$$",
+				"description": "Remove Client Onboarding Scenario Artifacts",
+				"actions": [
+					{
+						"BAI": {
+							"comment": "Clean up BAI data and remove Client Onboarding dashboard and goal",
+							"enabled": "$$(enableCleanupClientOnboarding_BAI)$$",
+							"description": "BAI - Delete all Case & WF data, and Goal and Dashboard",
+							"relativeBasePath": "Business Automation Insights",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete all Case & WF data from indices",
+										"artifactNames": [
+											"icp4ba-bai-case-summaries-active-idx-ibm-bai",
+											"icp4ba-bai-case-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-summaries-completed-idx-ibm-bai",
+											"icp4ba-bai-process-timeseries-idx-ibm-bai"
+										],
+										"artifactType": "Index"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding Completed' dashboard",
+										"artifactNames": [
+											"Client Onboarding Completed"
+										],
+										"artifactType": "Dashboard"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'Focus Corp's top Client Onboarding KPI Completed' goal",
+										"artifactNames": [
+											"Focus Corp's top Client Onboarding KPI Completed"
+										],
+										"artifactType": "Goal",
+										"deleteReferencingDashboard": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Remove the two applications and two desktops from Navigator",
+							"enabled": "$$(enableCleanupClientOnboarding_ICN)$$",
+							"description": "Navigator - Delete Client Onboarding Applications and Desktops",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
+										"appEngineAppConfigName": "APPENG0",
+										"artifactNames": [
+											"Client Onboarding Request",
+											"Client Onboarding Document Upload"
+										],
+										"artifactType": "Application"
+									}
+								},
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Remove Client Onboarding Request & Client Onboarding Document Upload desktops",
+										"artifactNames": [
+											"Client Onboarding Request",
+											"Client Onboarding Document Upload"
+										],
+										"artifactType": "Desktop"
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Remove 'Client Documents' folder and with that also all contained documents",
+							"enabled": "$$(enableCleanupClientOnboarding_FNCM)$$",
+							"description": "CPE - Delete 'Client Documents' folder and contained documents from TOS",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'Client Documents' folder and contained documents",
+										"artifactNames": [
+											"/Client Documents"
+										],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"comment": "Delete Client Onboarding solution and toolkits",
+							"enabled": "$$(enableCleanupClientOnboarding_WF)$$",
+							"description": "WF - Delete Client Onboarding solution related WF solution, WF templates, and WF TKs",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for WF",
+										"name": "Download Workflow file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
+											}
+										]
+									}
+								},
+								{
+									"DETERMINEDEPLOYEDINFO": {
+										"enabled": "true",
+										"description": "Determine acronym of deployed WF Client Onboarding solution",
+										"relativePath": "Business Automation Workflow",
+										"sourceTwxFile": "Client_Onboarding.twx",
+										"globalContextVariableName": "clientOnboardingPAInfo"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding' Workflow solution",
+										"projectName": "Client Onboarding",
+										"projectAcronym": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding Toolkit' TK",
+										"projectName": "Client Onboarding Toolkit",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'IBM RPA Toolkit' TK",
+										"projectName": "IBM RPA Toolkit",
+										"projectAcronym": "IBMRPAT",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'ADP Utils' TK",
+										"projectName": "ADP Utils",
+										"projectAcronym": "ADPU",
+										"projectType": "WF_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ADS": {
+							"comment": "Remove the Git Org used for ADS, undeploy ADS project, delete the ADS project",
+							"enabled": "$$(enableCleanupClientOnboarding_ADS)$$",
+							"description": "ADS - Undeploy and delete the Client Onboarding ADS project and remove the Git org with repos for the ADS project",
+							"relativeBasePath": "Automation Decision Services",
+							"subActions": [
+								{
+									"CLEANUPADS": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding' ADS project",
+										"adsCleanupActions": [
+											"Project"
+										],
+										"projectName": "Client Onboarding",
+										"decisionServiceName": "Client Onboarding Decisions",
+										"version": "1.0.0",
+										"unpublishAutomationServices": true,
+										"undeployDecisionService": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$",
+										"maxUndeployCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUndeployCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"CLEANUPADS": {
+ 										"comment": "Only try to delete org in case gitea is avaiable and ADS is not configured for auto-connection",
+										"enabled": "$$(isGiteaAvailable)$$ && $$(!isADSAutoConnectToGit)$$",
+										"description": "Delete org used by ADS and all contained repos",
+										"adsCleanupActions": [
+											"Git"
+										],
+										"gitDeletionType": "OrgWithRepos",
+										"gitOrgName": "$$(ACTION_adsGitOrg)$$"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

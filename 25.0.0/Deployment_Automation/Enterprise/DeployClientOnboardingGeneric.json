@@ -1,0 +1,52 @@
+{
+	"comment": "Contains/references the steps required to optionally onboard users/groups, optionally deploy an email server & client, deploy the Client Onboarding scenario itself, and the Client Onboarding labs",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingGeneric.json",
+	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"INCLUDE": {
+				"comment": "Optionally add/remove users and groups from environment and synchronize mail server users with LDAP users if mail server is running",
+				"enabled": "true",
+				"file": "DeployOnboardUsersAndGroups.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "For Pak Deployer deployed environments ensure required groups exist",
+				"enabled": "true",
+				"file": "DeployClientOnboardingManagePakDeployerGroups.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally deploy mail server & client",
+				"enabled": "true",
+				"file": "DeployEmailCapability.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally configure WF and CPE so that business users can create, deploy, and test WF solutions including case",
+				"enabled": "true",
+				"file": "DeployClientOnboardingLabsConfigureWFForBusinessUsers.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding scenario itself",
+				"enabled": "true",
+				"file": "DeployClientOnboardingScenarioGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Deploy Client Onboarding labs",
+				"enabled": "true",
+				"file": "DeployClientOnboardingLabsGeneric.json"
+			}
+		}
+	]
+}

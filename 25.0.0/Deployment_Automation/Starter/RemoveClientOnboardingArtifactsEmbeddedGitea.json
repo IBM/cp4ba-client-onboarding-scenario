@@ -1,0 +1,40 @@
+{
+	"comment": "Contains/references the steps required to undeploy all artifacts created by users as part of the labs, the artifacts required by the labs and the Client Onboarding scenario itself",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Starter/RemoveClientOnboardingArtifactsEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.1.38 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up artifacts created by users when performing labs and artifacts created initially for labs",
+				"enabled": "$$(enableCleanupSWATLabs_UserData)$$ || $$(enableCleanupSWATLabs)$$",
+				"description": "Remove Client Onboarding Lab User Data and Lab Artifacts",
+				"actions": [
+					{
+						"INCLUDE": {
+							"comment": "Delete custom user artifacts created in the environment as part of labs",
+							"enabled": "true",
+							"file": "RemoveClientOnboardingUserArtifactsEmbeddedGitea.json"
+						}
+					},
+					{
+						"INCLUDE": {
+							"comment": "Delete artifacts created for labs in the environment",
+							"enabled": "true",
+							"file": "RemoveClientOnboardingLabArtifactsEmbeddedGitea.json"
+						}
+					}
+				]
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Clean up Client Onboarding scenario related artifacts in reverse order",
+				"enabled": "$$(enableCleanupClientOnboarding)$$",
+				"file": "RemoveClientOnboardingScenarioArtifactsEmbeddedGitea.json"
+			}
+		}
+	]
+}

@@ -1,0 +1,472 @@
+{
+	"comment": "Contains the steps required to undeploy all artifacts required by the labs but not the user created artifacts nor the Client Onboarding solution artifacts",
+	"fileVersion": "1.0.ß",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Starter/RemoveClientOnboardingLabArtifactsEmbeddedGitea.json",
+	"requiredToolVersion": ">=1.1.40 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Starter",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up lab artifacts",
+				"enabled": "$$(enableCleanupSWATLabs)$$",
+				"description": "Remove artifacts created to run Client Onboarding labs (BAI, BAA, ICN, CPE, WF, ADS)",
+				"actions": [
+					{
+						"WF": {
+							"comment": "Delete watsonx Orchestrate artifacts",
+							"enabled": "$$(enableCleanupSWATLabs_WXO)$$",
+							"description": "WF - Delete watsonx Orchestrate services PA and drop table",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required to cleanup watsonx Orchestrate lab",
+										"name": "Download WO lab",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/DBExecutionHelper.twx"
+											}
+										]
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'WXC SERVICE' Workflow solution",
+										"projectName": "WXC SERVICE",
+										"projectAcronym": "WXCSERV",
+										"projectType": "WF_PA",
+										"unpublishAutomationServices": true,
+										"maxBASQueryRetries": "5",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"EXECUTESQL": {
+										"enabled": "true",
+										"description": "Execute SQL for watsonx Orchestrate to drop db table",
+										"removeConfigMapName": "client-onboarding-state-wo-lab",
+										"actions": [
+											{
+												"debug": true,
+												"action": "DropTable",
+												"tableName": "CODATA"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"BAA": {
+							"comment": "Delete Client Onboarding APP, APP templates, and APP TK",
+							"enabled": "$$(enableCleanupSWATLabs_BAA)$$",
+							"description": "BAA - Delete Client Onboarding APP, APP template, and APP TK",
+							"relativeBasePath": "Business Automation Application",
+							"subActions": [
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding Template' app",
+										"projectName": "Client Onboarding Template",
+										"projectAcronym": "COT",
+										"projectType": "APP",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete 'Client Onboarding Document Upload' app",
+										"projectName": "Client Onboarding Document Upload",
+										"projectAcronym": "CODU",
+										"projectType": "APP",
+										"unpublishAutomationServices": false,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete the app template 'Client Onboarding Template'",
+										"projectName": "Client Onboarding Template",
+										"projectAcronym": "COT",
+										"projectType": "APP_TEMPLATE",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								},
+								{
+									"DELETEPROJECT": {
+										"enabled": "true",
+										"description": "Delete the 'Client Onboarding Toolkit' app toolkit",
+										"projectName": "Client Onboarding Toolkit",
+										"projectType": "APP_TK",
+										"unpublishAutomationServices": true,
+										"deleteReferencingProjects": true,
+										"maxBASQueryRetries": "$$(maxBASQueryRetries)$$",
+										"maxUnpublishCompletionPolls": "$$(unpublishAS_maxPublishCompletionPolls)$$",
+										"delayBetweenUnpublishCompletionPolls": "$$(unpublishAS_delayBetweenPublishCompletionPolls)$$"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Remove the two plugins Navigator",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_ICN)$$",
+							"description": "Navigator - Delete Custom Plugins",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Determine ICN repository information based on object store symbolic name",
+										"osSymbolicName": "$$(BAW_DOCS)$$"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove EDS base plugin",
+										"action": "delete",
+										"pluginName": "External Data Services Support"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "true",
+										"description": "Remove custom EDS data source plugin",
+										"action": "delete",
+										"pluginName": "EDS Data Source"
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Delete role-based redaction definitions for driver license for general users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": true,
+										"redactionReasons": [
+											{
+												"action": "delete",
+												"name": "Driver License Number"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "delete",
+												"type": "Viewer",
+												"name": "Viewer group"
+											},
+											{
+												"action": "delete",
+												"type": "Editor",
+												"name": "Editor user group roles"
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "delete",
+												"name": "Driver License Policy"
+											}
+										]
+									}
+								},
+								{
+									"MANAGEREDACTION": {
+										"enabled": "true",
+										"description": "Delete role-based redaction for driver license for admin users for 'CONTENT' repository",
+										"repository": "$(REPOSITORY_ID)$",
+										"reverseOrder": true,
+										"redactionReasons": [
+											{
+												"action": "delete",
+												"name": "Driver License Number admins"
+											}
+										],
+										"redactionRoles": [
+											{
+												"action": "delete",
+												"type": "Viewer",
+												"name": "Viewer group admins"
+											},
+											{
+												"action": "delete",
+												"type": "Editor",
+												"name": "Editor user group roles admins"
+											}
+										],
+										"redactionPolicies": [
+											{
+												"action": "delete",
+												"name": "Driver License Policy Admins"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "First remove folders and document and just after that the document classes and properties once all documents and folder have been removed",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_GQL)$$",
+							"description": "CPE - Delete folder and contained documents from $$(BAW_DOCS)$$ used in GraphQL lab",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'SOLUTION Client Onboarding' folder and contained documents",
+										"artifactNames": [
+											"/SOLUTION Client Onboarding"
+										],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "First remove folders and document and just after that the document classes and properties once all documents and folder have been removed",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_CPE)$$ && $$(enableCleanupSWATLabs_CONTENT_GQL)$$",
+							"description": "CPE - Delete folder and contained documents from $$(BAW_DOCS)$$ used in CPE & GraphQL labs",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete 'Case Folders' folder and contained documents",
+										"artifactNames": [
+											"/Case Folders"
+										],
+										"artifactType": "Folder",
+										"deleteSubfolders": true,
+										"deleteDocuments": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Now remove the document classes and properties as all documents and folder have been removed by now",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_ICN)$$",
+							"description": "CPE - Delete class definitions and property templates for ICN lab from object store $$(BAW_DOCS)$$",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the document classes 'ClientDocument' & 'UtilityBill' used in the ICN lab",
+										"artifactNames": [
+											"UtilityBill",
+											"ClientDocument"
+										],
+										"artifactType": "ClassDefinition"
+									}
+								},
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the property templates 'Client_Name', 'ReferenceID', and 'ServiceAddress' used in the ICN lab",
+										"artifactNames": [
+											"Client_Name",
+											"ReferenceID",
+											"ServiceAddress"
+										],
+										"artifactType": "PropertyTemplate"
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Now remove the document classes and properties as all documents and folder have been removed by now",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_GQL)$$",
+							"description": "CPE - Delete document classes and property templates from $$(BAW_DOCS)$$ used in GraphQL lab",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the document classes 'SOLUTION_Client_Document', 'SOLUTION_Client_Information' & 'SOLUTION_Bank_Information'",
+										"artifactNames": [
+											"SOLUTION_Client_Information",
+											"SOLUTION_Bank_Information",
+											"SOLUTION_Client_Document"
+										],
+										"artifactType": "ClassDefinition"
+									}
+								},
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the property templates 'SOLUTION_Account_Type' and 'SOLUTION_Date_Of_Birth' used in the content lab",
+										"artifactNames": [
+											"SOLUTION_Account_Type",
+											"SOLUTION_Date_Of_Birth"
+										],
+										"artifactType": "PropertyTemplate"
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Now remove the folder class and properties as all documents and folder have been removed by now",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_CPE)$$ && $$(enableCleanupSWATLabs_CONTENT_GQL)$$",
+							"description": "CPE - Delete folder class and property templates from $$(BAW_DOCS)$$ used in CPE & GraphQL labs",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the folder class 'SWAT_JAM_Case_Folder'",
+										"artifactNames": [
+											"SWAT_JAM_Case_Folder"
+										],
+										"artifactType": "ClassDefinition"
+									}
+								},
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the property templates 'SWAT_Client_Name', 'SWAT_Reference_ID', 'SWAT_First_Name', 'SWAT_Last_Name', 'SWAT_Identification_Number', 'SWAT_Account_Number', 'SWAT_Routing_Number' and 'SWAT_Bank_Name' used in the CPE & GraphQL labs",
+										"artifactNames": [
+											"SWAT_Client_Name",
+											"SWAT_Reference_ID",
+											"SWAT_First_Name",
+											"SWAT_Last_Name",
+											"SWAT_Identification_Number",
+											"SWAT_Account_Number",
+											"SWAT_Routing_Number",
+											"SWAT_Bank_Name"
+										],
+										"artifactType": "PropertyTemplate"
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_CPE)$$ && $$(enableCleanupSWATLabs_CONTENT_GQL)$$",
+							"name": "Remove ConfigMap to track making general users group admins in $$(BAW_DOCS)$$ Object Store",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "true",
+										"description": "Remove 'client-onboarding-state-admin-$$(BAW_DOCS_LOWER)$$-os' ConfigMap",
+										"namespaceName": "$$(cp4baNamespace)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "client-onboarding-state-admin-$$(BAW_DOCS_LOWER)$$-os"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Remove storage policy from object store $$(BAW_DOCS)$$",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_CPE)$$",
+							"description": "CPE - Delete storage policy used in CPE lab from object store $$(BAW_DOCS)$$",
+							"objectStoreName": "$$(BAW_DOCS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"DELETEDESIGNARTIFACT": {
+										"enabled": "true",
+										"description": "Delete the storage policy 'Default Advanced Storage Area'",
+										"artifactNames": [
+											"Default Advanced Storage Area"
+										],
+										"artifactType": "StoragePolicy"
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"comment": "Remove the ICN desktop from Navigator when all thee content services lab artifacts should be removed",
+							"enabled": "$$(enableCleanupSWATLabs_CONTENT_CPE)$$ && $$(enableCleanupSWATLabs_CONTENT_GQL)$$ && $$(enableCleanupSWATLabs_CONTENT_ICN)$$",
+							"description": "Navigator - Delete ICN Desktop",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DELETEARTIFACT": {
+										"enabled": "true",
+										"description": "Remove ICN desktop",
+										"artifactNames": [
+											"ICN"
+										],
+										"artifactType": "Desktop"
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"enabled": "$$(enableCleanupSWATLabs_WF)$$",
+							"name": "Remove ConfigMaps to track making general users group admins in $$(BAW_DOS)$$ & $$(BAW_TOS)$$ Object Store",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MANAGECONFIGMAPS": {
+										"enabled": "true",
+										"description": "Remove 'client-onboarding-state-admin-$$(BAW_DOS_LOWER)$$-os' and 'client-onboarding-state-admin-$$(BAW_TOS_LOWER)$$-os' ConfigMaps",
+										"namespaceName": "$$(cp4baNamespace)$$",
+										"configMaps": [
+											{
+												"action": "delete",
+												"configMapName": "client-onboarding-state-admin-$$(BAW_DOS_LOWER)$$-os"
+											},
+											{
+												"action": "delete",
+												"configMapName": "client-onboarding-state-admin-$$(BAW_TOS_LOWER)$$-os"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

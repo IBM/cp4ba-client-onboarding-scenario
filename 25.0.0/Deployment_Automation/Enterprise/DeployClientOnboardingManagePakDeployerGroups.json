@@ -1,0 +1,94 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingManagePakDeployerGroups.json",
+	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"comment": "To be used with CP4BA 24.0.1 Enterprise deployment deployed by Pak Deployer to ensure required groups exist",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$ && $(isLocalLDAPAvailable|default=false)$",
+				"description": "Ensure groups are available for Cloud Pak Deployer deployed environments",
+				"comment": "Will only be executed for Cloud Pak Deployer deployed environments and when the local LDAP could be found",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Add 'GeneralUsers' & 'P8Administrators' groups required by Client Onboarding labs and optionally add additional users and groups as requested by user to LDAP and Cloud Pak and sync user with email server",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MODIFYLOCALLDAP": {
+										"enabled": "true",
+										"description": "Modify LDAP by adding 'GeneralUsers' and 'P8Administrators' groups as copy of existing groups",
+										"restartPod": "false",
+										"entities": [
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal",
+												"uid": "cp4admin",
+												"cn": "cp4admin",
+												"sn": "cp4admin",
+												"userPassword": "cp4admin",
+												"homeDirectory": "/home/cp4admin/",
+												"mail": "cp4admin@cp.internal",
+												"employeeType": "admin"
+											},
+											{
+												"action": "update",
+												"type": "group",
+												"dn": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"cn": "cpadmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal"
+													}
+												]
+											},
+											{
+												"action": "update",
+												"type": "group",
+												"dn": "cn=cpusers,ou=Groups,dc=cp,dc=internal",
+												"cn": "cpadmins",
+												"members": [
+													{
+														"action": "add",
+														"dn": "uid=cp4admin,ou=Users,dc=cp,dc=internal"
+													}
+												]
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpusers1,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=GeneralUsers,ou=Groups,dc=cp,dc=internal",
+												"cn": "GeneralUsers"
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=P8Administrators,ou=Groups,dc=cp,dc=internal",
+												"cn": "P8Administrators"
+											},
+											{
+												"action": "clone",
+												"type": "group",
+												"cloneSourceDN": "cn=cpadmins,ou=Groups,dc=cp,dc=internal",
+												"dn": "cn=CE_EnvironmentOwners,ou=Groups,dc=cp,dc=internal",
+												"cn": "CE_EnvironmentOwners"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
