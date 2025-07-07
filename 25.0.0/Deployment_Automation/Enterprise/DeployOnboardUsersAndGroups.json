@@ -1,7 +1,7 @@
 {
 	"comment": "Contains the steps to optionally onboard users defined in an external file and synchronize the mail server users based on the user modification",
-	"fileVersion": "1.0.0",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployOnboardUsersAndGroups.json",
+	"fileVersion": "1.0.1",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployOnboardUsersAndGroups.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
