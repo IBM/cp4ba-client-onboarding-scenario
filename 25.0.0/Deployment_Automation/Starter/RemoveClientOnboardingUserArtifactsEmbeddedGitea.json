@@ -1,7 +1,7 @@
 {
 	"comment": "Contains the steps required to undeploy all user created artifacts as part of the labs but not the lab artifacts nor the Client Onboarding solution artifacts",
-	"fileVersion": "1.0.0",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Starter/RemoveClientOnboardingUserArtifactsEmbeddedGitea.json",
+	"fileVersion": "1.0.1",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Starter/RemoveClientOnboardingUserArtifactsEmbeddedGitea.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Starter",
