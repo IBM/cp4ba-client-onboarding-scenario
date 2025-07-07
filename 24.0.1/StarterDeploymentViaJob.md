@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Use these instruction to deploy the end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/24.0.1/README.md) to a self-provisioned **Cloud Pak for Business Automation (CP4BA) 24.0.1** environment using an OpenShift Job.
+Use these instruction to deploy the end-to-end [Client Onboarding solution](https://github.com/IBM/cp4ba-client-onboarding-scenario) and its accompanying [labs](https://github.com/IBM/cp4ba-labs/tree/main/24.0.1/README.md) to a self-provisioned **Cloud Pak for Business Automation (CP4BA) 24.0.1** Starter deployment environment using an OpenShift Job.
 
 This deployment approach does not require a separate machine with Java on it to run the deployment or the manual download of any resources. A different deployment approach using a separate machine, that offers more customization options, is described [here](StarterDeploymentSeparateMachine.md).
 
@@ -245,7 +245,7 @@ Once you have a suitable environment proceed to the chapter [Import Instructions
       - Mail Client URL: https://roundcubenginx-mail.<clustername>
       - User Ids: '<username> or <username>@example.org'
       - Passwords: 'same as above'
-      - Only internal email addresses (<username>@example.org) can be used!
+      - Only these internal email addresses (<username>@example.org) are allowed to be specified in the Client Onboarding app!
       
       Remarks:
       - Object store name for Content labs is 'Content'
