@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredToolVersion": ">=1.1.87 <1.2.0",
 	"requiredCP4BAVersion": ">=24.0.1 <25.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -633,6 +633,13 @@
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
+									"ADDADDON": {
+										"enabled": "true",
+										"description": "Add E-Mail AddOn",
+										"addOns": [
+											"5.2.1 Workplace E-mail Extensions"
+										]
+									},
 									"CREATEPROPERTYTEMPLATE": {
 										"enabled": "true",
 										"description": "Define three property templates for usage in document classes",
@@ -713,7 +720,8 @@
 														"auditEventName": "Checked-in Event",
 														"recordingLevel": "original and modify objects",
 														"auditTypes": [
-															"Success", "Failure"
+															"Success",
+															"Failure"
 														],
 														"includeSubclasses": true
 													},
@@ -1234,7 +1242,7 @@
 												"enabled": "§IF($$(isCloudPakDeployerDeployment)$$)§(false)§ELSE§(true)ENDIF§",
 												"action": "update",
 												"type": "user",
-												"skipIfFirstUserDoesNotExist" : true,
+												"skipIfFirstUserDoesNotExist": true,
 												"roleCopySourceIsGroup": true,
 												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": false,
@@ -1245,7 +1253,7 @@
 												"enabled": "true",
 												"action": "update",
 												"type": "user",
-												"skipIfFirstUserDoesNotExist" : true,
+												"skipIfFirstUserDoesNotExist": true,
 												"roleCopySourceIsGroup": true,
 												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": true,
@@ -1256,7 +1264,7 @@
 												"replaceExistingRoles": false
 											}
 										],
-										"configMapName" : "client-onboarding-state-onboard-users"
+										"configMapName": "client-onboarding-state-onboard-users"
 									}
 								}
 							]

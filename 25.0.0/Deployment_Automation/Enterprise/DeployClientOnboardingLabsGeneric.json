@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/24.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredToolVersion": ">=1.1.87 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -633,6 +633,13 @@
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
+									"ADDADDON": {
+										"enabled": "true",
+										"description": "Add E-Mail AddOn",
+										"addOns": [
+											"5.2.1 Workplace E-mail Extensions"
+										]
+									},
 									"CREATEPROPERTYTEMPLATE": {
 										"enabled": "true",
 										"description": "Define three property templates for usage in document classes",
