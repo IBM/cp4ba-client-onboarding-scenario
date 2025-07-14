@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/23.0.1/Deployment_Automation/Starter/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.59 <1.2.0",
+	"requiredToolVersion": ">=1.1.90 <1.2.0",
 	"requiredCP4BAVersion": ">=23.1.0 <23.2.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -686,6 +686,39 @@
 									}
 								},
 								{
+									"MODIFYCLASSSECURITY": {
+										"enabled": "true",
+										"description": "Remove general users group and #authenticated-users from instance security for doc class EntryTemplate for multi-user environment",
+										"name": "Modify security for Client Onboarding classes",
+										"ignoreMissingGrantees": "true",
+										"classes": [
+											{
+												"enabled": "true",
+												"classSymbolicName": "Document/EntryTemplate",
+												"securityReplaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"granteeName": "$$(generalUsersGroupName)$$",
+														"granteeType": "Group",
+														"isNonCaseSensitive": true,
+														"defaultInstanceSecurityAction": "Remove",
+														"securityInheritableDepth": "No inheritance"
+													},
+													{
+														"enabled": "true",
+														"granteeName": "#AUTHENTICATED-USERS",
+														"granteeType": "Group",
+														"isNonCaseSensitive": true,
+														"defaultInstanceSecurityAction": "Remove",
+														"securityInheritableDepth": "No inheritance"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
 									"MANAGEAUDITDEFINITIONS": {
 										"enabled": "true",
 										"description": "Manage audit definitions for document class 'ClientDocument'",
@@ -713,7 +746,8 @@
 														"auditEventName": "Checked-in Event",
 														"recordingLevel": "original and modify objects",
 														"auditTypes": [
-															"Success", "Failure"
+															"Success",
+															"Failure"
 														],
 														"includeSubclasses": true
 													},
@@ -1197,7 +1231,7 @@
 											{
 												"action": "update",
 												"type": "user",
-												"skipIfFirstUserDoesNotExist" : true,
+												"skipIfFirstUserDoesNotExist": true,
 												"roleCopySourceIsGroup": true,
 												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": true,
@@ -1208,7 +1242,7 @@
 												"replaceExistingRoles": false
 											}
 										],
-										"configMapName" : "client-onboarding-state-onboard-users"
+										"configMapName": "client-onboarding-state-onboard-users"
 									}
 								}
 							]
