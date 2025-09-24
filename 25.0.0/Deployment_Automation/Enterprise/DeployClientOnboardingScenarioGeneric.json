@@ -651,7 +651,7 @@
 										"description": "Create 'Legacy Consulting - Annual Report 2024' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
-										"docClass": "CO_ClientDocument",
+										"docClass": "CO_AnnualReport",
 										"docTitle": "Legacy Consulting - Annual Report",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting",
