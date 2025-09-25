@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.6",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.90 <1.2.0",
+	"requiredToolVersion": ">=1.1.95 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1137,6 +1137,9 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/refs/heads/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Request.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/refs/heads/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Application/Client_Onboarding_Comments.twx"
 											}
 										]
 									}
@@ -1238,6 +1241,44 @@
 										"verbose": false
 									}
 								},
+																{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract project information from Client Onboarding Comments app file",
+										"sourceTwxFile": "Client_Onboarding_Comments.twx"
+									}
+								},
+								{
+									"PATCHSOLUTION": {
+										"enabled": "true",
+										"description": "Patch the automation service to call WF project using the acronym after it got imported",
+										"sourceTwxFile": "!twxFileName!",
+										"filePatchInfos": [
+											{
+												"name": "Client_Onboarding_Workflows",
+												"type": "process",
+												"automationServiceMappings": {
+													"project": {
+														"CO": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$"
+													}
+												}
+											}
+										]
+									}
+								},
+								{
+									"IMPORTPROJECT": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Comments' BAA template into Studio",
+										"name": "!solutionName!",
+										"file": "!patchedTWXFileName!",
+										"type": "!solutionType!",
+										"acronym": "!solutionAcronym!",
+										"snapshot": "!snapshotAcronym!",
+										"maxBASQueryRetries": 3,
+										"verbose": false
+									}
+								},
 								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
@@ -1271,6 +1312,23 @@
 														"CO": "$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$"
 													}
 												}
+											}
+										],
+										"environmentVariables": [
+											{
+												"contentAssistantFeatureEnabled": "$$(enableContentAssistant|default=false)$$"
+											},
+											{
+												"evObjectStoreName": "$$(BAW_TOS)$$"
+											},
+											{
+												"enableLogging": "$$(app_cp_enableLogging)$$"
+											},
+											{
+												"graphQLURL": "$$(app_cp_graphQLURL)$$"
+											},
+											{
+												"contentAssistantFeatureOnlyForUser": "$$(app_cp_contentAssistantFeatureOnlyForUser)$$"
 											}
 										]
 									}

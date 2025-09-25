@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredToolVersion": ">=1.1.95 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -285,6 +285,15 @@
 									}
 								},
 								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Determine ICN repository information based on the desktop '$(wf_cp_icaDesktopName)$' and object store '$(BAW_TOS)$'",
+										"desktopSymbolicName": "$(wf_cp_icaDesktopName)$",
+										"osSymbolicName": "$(BAW_TOS)$",
+										"useFirst": true
+									}
+								},
+								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
 										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID, email, and RPA config and automation service based on user used to import ADS solution",
@@ -306,13 +315,19 @@
 												"adpProjectID": "$(adpProjectId|default=)$"
 											},
 											{
+												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+											},
+											{
+												"commentUploadPage": "$$(wf_cp_commentUploadPage|default=)$$"
+											},
+											{
+												"contentAssistantDesktopName": "$$(wf_cp_icaDesktopName|default=)$$"
+											},
+											{
+												"contentAssistantFeatureEnabled": "$$(enableContentAssistant|default=false)$$"
+											},
+											{
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
-											},
-											{
-												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost|default=)$)§ELSE§(smtp.gmail.com)ENDIF§"
-											},
-											{
-												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort|default=)$)§ELSE§(587)ENDIF§"
 											},
 											{
 												"emailID": "$$(wf_cp_emailIDInternal)$$"
@@ -321,13 +336,31 @@
 												"emailPassword": "§IF($$(ISSET(wf_cp_emailPassword))$$)§($$(wf_cp_emailPassword|default=)$$)§ELSEIF($(isLocalMailAvailable)$)§()§ELSE§(§FAIL(Gmail app key not provided but local mail server also not available))ENDIF§"
 											},
 											{
-												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
+												"enableLogging": "$$(wf_cp_enableLogging)$$"
+											},
+											{
+												"genAIFeatureEnabled": "$$(enableWFGenAI|default=false)$$"
+											},
+											{
+												"graphQLURL": "$$(wf_cp_graphQLURL|default=)$$"
+											},
+											{
+												"icnBaseURL": "$$(wf_cp_icnBaseURL|default=)$$"
+											},
+											{
+												"icnTOSRepoID": "$$(REPOSITORY_ID|default=)$$"
 											},
 											{
 												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
 											},
 											{
 												"rpaServer": "$$(wf_cp_rpaServer)$$"
+											},
+											{
+												"smtpHost": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpHost|default=)$)§ELSE§(smtp.gmail.com)ENDIF§"
+											},
+											{
+												"smtpPort": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§($(localSmtpPort|default=)$)§ELSE§(587)ENDIF§"
 											},
 											{
 												"tosName": "$$(BAW_TOS)$$"
@@ -449,6 +482,12 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Vieria%20Electricity.jpg"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-Brochure.jpg"
 											}
 										]
 									}
@@ -621,7 +660,7 @@
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
 										"docClass": "CO_BankingInformation",
-										"docTitle": "Legacy Consulting - Banking Information",
+										"docTitle": "§IF($(enableContentAssistant)$)§(Account 7250512345)§ELSE§(Legacy Consulting - Banking Information)ENDIF§",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting",
 											"CO_AccountNumber": "7250512345"
@@ -637,7 +676,7 @@
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
 										"docClass": "CO_ClientDocument",
-										"docTitle": "Legacy Consulting - Certificate of Incorporation",
+										"docTitle": "Certificate of Incorporation",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting"
 										},
@@ -652,13 +691,43 @@
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
 										"docClass": "CO_AnnualReport",
-										"docTitle": "Legacy Consulting - Annual Report",
+										"docTitle": "Annual Report",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting",
-											"CO_FiscalYear": "2024",
+											"CO_FiscalYear": "2024"
 										},
 										"file": "Legacy Consulting - Annual Report.pdf",
 										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Create 'Legacy Consulting - Brochure' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_ClientDocument",
+										"docTitle": "Brochure",
+										"docProps": {
+											"CO_ClientName": "Legacy Consulting"
+										},
+										"file": "Legacy Consulting - Brochure.jpg",
+										"fileContentType": "image/jpg"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Create 'Legacy Consulting - Vieria Electricity' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_ClientDocument",
+										"docTitle": "Viera Electricity",
+										"docProps": {
+											"CO_ClientName": "Legacy Consulting"
+										},
+										"file": "Legacy Consulting - Vieria Electricity.jpg",
+										"fileContentType": "image/jpg"
 									}
 								}
 							]
@@ -666,7 +735,7 @@
 					},
 					{
 						"ICN": {
-							"comment": "Imports two desktops and the two applications and configures access to the first",
+							"comment": "Imports two desktops and the three applications and configures access to the first",
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
 							"description": "Navigator - Import apps and desktops",
 							"name": "Prepare Apps and Desktops",
@@ -684,6 +753,9 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingComments.zip"
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequestDesktop.properties"
@@ -727,7 +799,24 @@
 											"4": {
 												"\"CO\"": "\"$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$\""
 											}
-										}
+										},
+										"environmentVariables": [
+											{
+												"contentAssistantFeatureEnabled": "$$(enableContentAssistant|default=false)$$"
+											},
+											{
+												"evObjectStoreName": "$$(BAW_TOS)$$"
+											},
+											{
+												"enableLogging": "$$(app_cp_enableLogging)$$"
+											},
+											{
+												"graphQLURL": "$$(app_cp_graphQLURL)$$"
+											},
+											{
+												"contentAssistantFeatureOnlyForUser": "$$(app_cp_contentAssistantFeatureOnlyForUser)$$"
+											}
+										]
 									}
 								},
 								{
@@ -772,6 +861,27 @@
 										"description": "Import 'Client Onboarding Document Upload' app",
 										"appEngineAppConfigName": "APPENG0",
 										"name": "Client Onboarding Document Upload",
+										"file": "!patchedZIPFileName!"
+									}
+								},
+								{
+									"PATCHAPPLICATION": {
+										"enabled": "true",
+										"description": "Patch 'Client Onboarding Comments' app to work in current environment",
+										"file": "ClientOnboardingComments.zip",
+										"simpleTextMappings": {
+											"1": {
+												"\"CO\"": "\"$(OBJECT(clientOnboardingPAInfo;projectAcronym)|default=CO)$\""
+											}
+										}
+									}
+								},
+								{
+									"IMPORTAPPLICATION": {
+										"enabled": "true",
+										"description": "Import 'Client Onboarding Comments' app",
+										"appEngineAppConfigName": "APPENG0",
+										"name": "Client Onboarding Comments",
 										"file": "!patchedZIPFileName!"
 									}
 								},
