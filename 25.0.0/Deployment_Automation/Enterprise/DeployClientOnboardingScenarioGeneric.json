@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.3",
+	"fileVersion": "1.0.4",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.95 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -287,7 +287,7 @@
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
 										"enabled": "$(enableContentAssistant)$",
-										"description": "Determine ICN repository information based on the desktop '$(wf_cp_icaDesktopName)$' and object store '$(BAW_TOS)$'",
+										"description": "Determine ICN repository information based on the desktop '$(ACTION_wf_cp_icaDesktopName)$' and object store '$(BAW_TOS)$'",
 										"desktopSymbolicName": "$(wf_cp_icaDesktopName)$",
 										"osSymbolicName": "$(BAW_TOS)$",
 										"useFirst": true
