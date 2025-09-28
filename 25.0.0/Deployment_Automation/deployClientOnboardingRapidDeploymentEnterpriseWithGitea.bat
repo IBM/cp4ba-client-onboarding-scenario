@@ -44,10 +44,29 @@ SET useInternalMailServer=true
 rem Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
 SET ocpStorageClassForInternalMailServer=REQUIRED
 
+rem Section with flags related to using AI-enhanced Client Onboarding scenario
+
+rem Is the Content Assistant capability available in the environment or not?
+SET enableContentAssistant=false
+rem Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
+SET restrictContentAssistantToUser=
+rem Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
+SET icaDesktopName=ICA
+rem Is the GenAI capability available in Workflow
+SET enableWFGenAI=false
+rem Is the Workflow Assistant capability available
+SET enableWFAssistant=false
+
+rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
+SET graphQLURL=
+rem Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
+SET icnBaseURL=
+
+
+
 rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 rem SET dockerUserName=REQUIRED
 rem SET dockerToken=REQUIRED
-
 
 rem Email address of a gmail account to be used to send emails in the Client Onboarding scenario (in case useInternalMailServer is set to false)
 SET gmailAddress=REQUIRED
@@ -80,6 +99,9 @@ rem SET proxyPwd=
 
 rem Specific trace string for the boostrapping process (only uncomment if instructed to do so)
 rem SET bootstrapDebugString="-bootstrapDebugString=*=finest"
+
+rem Any other options can be defined here and will be passed unchanged to the deployment tool
+SET additionalOptions=
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Construct the proxy settings for curl and deployment automation tool if proxy is configured
@@ -123,7 +145,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
@@ -431,6 +453,34 @@ if defined dockerUserName (
 	)
 )
 
+if defined enableContentAssistant (
+	set internalEnableContentAssistant=enableContentAssistant=%enableContentAssistant%
+)
+
+if defined restrictContentAssistantToUser (
+	if NOT "%restrictContentAssistantToUser%" == "" set internalRestrictContentAssistantToUser=restrictContentAssistantToUser=%restrictContentAssistantToUser%
+)
+
+if defined icaDesktopName (
+	set internalICADesktopName=icaDesktopName=%icaDesktopName%
+)
+
+if defined enableWFGenAI (
+	set internalEnableWFGenAI=enableWFGenAI=%enableWFGenAI%
+)
+
+if defined enableWFAssistant (
+	set internalEnableWFAssistant=enableWFAssistant=%enableWFAssistant%
+)
+
+if defined graphQLURL (
+	if NOT "%graphQLURL%" == "" set internalGraphQLURL=graphQLURL=%graphQLURL%
+)
+
+if defined icnBaseURL (
+	if NOT "%icnBaseURL%" == "" set internalIcnBaseURL=icnBaseURL=%icnBaseURL%
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -445,6 +495,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% %enableConfigureLabsInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% %enableConfigureLabsInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
 
 ENDLOCAL
