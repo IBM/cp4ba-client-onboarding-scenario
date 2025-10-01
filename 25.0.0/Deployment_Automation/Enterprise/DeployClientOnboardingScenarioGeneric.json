@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.5",
+	"fileVersion": "1.0.7",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.95 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -296,7 +296,7 @@
 								{
 									"PATCHSOLUTION": {
 										"enabled": "true",
-										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID, email, and RPA config and automation service based on user used to import ADS solution",
+										"description": "Patch the Environment Variables, especially enable/disable ADP depending on availability of ADP project ID, email, and RPA config and automation service based on user used to import ADS solution, and AI features being enabled/disabled",
 										"sourceTwxFile": "!twxFileName!",
 										"environmentVariables": [
 											{
@@ -318,13 +318,13 @@
 												"clientEmailAddress": "§IF($(isLocalMailAvailable)$ && $$(ISNOTSET(wf_cp_emailPassword))$$)§(<user>$(localMailDomain|default=)$)§ELSE§(focuscorpdemo@gmail.com)ENDIF§"
 											},
 											{
-												"commentUploadPage": "$$(wf_cp_commentUploadPage|default=)$$"
+												"commentUploadPage": "$$(wf_cp_commentUploadPage)$$"
 											},
 											{
-												"contentAssistantDesktopName": "$$(wf_cp_icaDesktopName|default=)$$"
+												"contentAssistantDesktopName": "$$(wf_cp_icaDesktopName)$$"
 											},
 											{
-												"contentAssistantFeatureEnabled": "$$(enableContentAssistant|default=false)$$"
+												"contentAssistantFeatureEnabled": "$$(enableContentAssistant)$$"
 											},
 											{
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
@@ -339,16 +339,16 @@
 												"enableLogging": "$$(wf_cp_enableLogging)$$"
 											},
 											{
-												"genAIFeatureEnabled": "$$(enableWFGenAI|default=false)$$"
+												"genAIFeatureEnabled": "$$(enableWFGenAI)$$"
 											},
 											{
-												"graphQLURL": "$$(wf_cp_graphQLURL|default=)$$"
+												"graphQLURL": "$$(wf_cp_graphQLURL)$$"
 											},
 											{
-												"icnBaseURL": "$$(wf_cp_icnBaseURL|default=)$$"
+												"icnBaseURL": "$$(wf_cp_icnBaseURL)$$"
 											},
 											{
-												"icnTOSRepoID": "$$(REPOSITORY_ID|default=)$$"
+												"icnTOSRepoID": "$(REPOSITORY_ID|default=)$"
 											},
 											{
 												"rpaBotExecutionUser": "$$(wf_cp_rpaBotExecutionUser)$$"
