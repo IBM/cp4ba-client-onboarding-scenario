@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps to deploy the email server and client capability",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployEmailCapability.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -124,6 +124,13 @@
 										"userBase": "$$(externalLDIF_userBase)$$",
 										"userDC": "$$(externalLDIF_userDC)$$",
 										"userNumberingFormatter": "$$(externalLDIF_userNumberingFormatter)$$",
+										"users": [
+											{
+												"action": "add",
+												"name": "dummy",
+												"password": "$dummyPwd123$"
+											}
+										],
 										"removeAllOtherUsers": true
 									}
 								},
