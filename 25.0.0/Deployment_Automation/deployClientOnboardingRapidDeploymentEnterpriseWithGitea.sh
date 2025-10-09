@@ -42,6 +42,26 @@ useInternalMailServer=true
 # Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
 ocpStorageClassForInternalMailServer=REQUIRED
 
+# Section with flags related to using AI-enhanced Client Onboarding scenario
+
+# Is the Content Assistant capability available in the environment or not?
+enableContentAssistant=false
+# Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
+restrictContentAssistantToUser=
+# Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
+icaDesktopName=ICA
+# Is the GenAI capability available in Workflow
+enableWFGenAI=false
+# Is the Workflow Assistant capability available
+enableWFAssistant=false
+# The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
+createSampleCaseDataForNumUsers=201
+
+# Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
+graphQLURL=
+# Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
+icnBaseURL=
+
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
 #dockerToken=REQUIRED
@@ -123,11 +143,11 @@ SCRIPTNAME=deployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
-COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminPassword,giteaCredentials,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminPassword,giteaCredentials,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,enableWFGenAI,enableWFAssistant,createSampleCaseDataForNumUsers,graphQLURL,icnBaseURL
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -422,6 +442,48 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
+
+if [ ! -z "${enableContentAssistant+x}" ]
+then
+	internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
+fi
+
+if [ ! -z "${restrictContentAssistantToUser+x}" ]
+then
+	if [[ "${restrictContentAssistantToUser}" != "" ]] internalRestrictContentAssistantToUser=restrictContentAssistantToUser=${restrictContentAssistantToUser}
+fi
+
+if [ ! -z "${icaDesktopName+x}" ]
+then
+	internalICADesktopName=icaDesktopName=${icaDesktopName}
+fi
+
+if [ ! -z "${enableWFGenAI+x}" ]
+then
+	internalEnableWFGenAI=enableWFGenAI=${enableWFGenAI}
+fi
+
+if [ ! -z "${enableWFAssistant+x}" ]
+then
+	internalEnableWFAssistant=enableWFAssistant=${enableWFAssistant}
+fi
+
+if [ ! -z "${graphQLURL+x}" ]
+then
+	if [[ "${graphQLURL}" != "" ]] internalGraphQLURL=graphQLURL=${graphQLURL}
+fi
+
+if [ ! -z "${icnBaseURL+x}" ]
+then
+	if [[ "${icnBaseURL}" != "" ]] internalIcnBaseURL=icnBaseURL=${icnBaseURL}
+fi
+
+if [ ! -z "${createSampleCaseDataForNumUsers+x}" ]
+then
+	if [[ "${createSampleCaseDataForNumUsers}" != "" ]] internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=${createSampleCaseDataForNumUsers}
+fi
+
+
 if ! $validationSuccess
 then
   echo
@@ -433,4 +495,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+echo java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} -cp4baAdminPwd=${cp4baAdminPassword} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${additionalOptions}
