@@ -980,14 +980,13 @@
 								},
 								{
 									"PATCHDESKTOP": {
-										"enabled": "$$((enableContentAssistant)$$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Patch 'ICN with ICA' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ICNDesktopICA.properties",
 										"simpleTextMappings": {
 											"CONTENTrepo": "$(REPOSITORY_ID)$",
 											"https://icp4adeploy-cpe-stateless-svc:9443": "$$(cpe-stlessSrvURL)$$",
-											"https://icp4adeploy-bastudio-service.ibm-cp4ba.svc:443": "$$(bastudioSRVURL)$$",
-											"cpd-ibm-cp4ba.apps.swat01.cp.fyre.ibm.com": "$$(cpdURLWithoutProtocol)$$"
+											"https://icp4adeploy-bastudio-service.ibm-cp4ba.svc:443": "$$(bastudioSRVURL)$$"
 										}
 									}
 								},
