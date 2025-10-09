@@ -1,0 +1,823 @@
+{
+	"comment": "Contains the steps required to create the case instances for the Client Onboarding scenario when Workflow Asisstant is enabled",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioCasesGeneric.json",
+	"requiredToolVersion": ">=1.1.98 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"ITERATOR": {
+				"enabled": "$$(enableWFAssistant)$$",
+				"description": "Loop to create sample cases for the users when the Workflow Assistant capability is enabled",
+				"statusConfigMapName": "client-onboarding-create-cases-iterator",
+				"maxThreads": "$$(maxCaseIteratorThreads)$$",
+				"additionalItems": [
+					"$$(cp4baAdminUsrLower)$$"
+				],
+				"startCount": "1",
+				"endCount": "$$(numUsersSampleCaseDataForWFAssistant)$$",
+				"prefix": "usr",
+				"indexFormatter": "%03d",
+				"actions": [
+					{
+						"WF": {
+							"enabled": "true",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"CREATECASE": {
+										"enabled": "true",
+										"description": "Create two Cases",
+										"comment": "First two CO request require Account Manager, third/fourth are notification, fifth notification, and sixth Account Manager. Add delay to ensure this is the order they will appear",
+										"tosName": "BAWTOS",
+										"caseTypes": [
+											"CO_ClientOnboardingRequest",
+											"CO_ClientOnboardingRequest",
+											"EOSAF_ExecutionofServiceandFeedback",
+											"CO_ClientOnboardingRequest",
+											"EOSAF_ExecutionofServiceandFeedback",
+											"CO_ClientOnboardingRequest",
+											"CO_ClientOnboardingRequest",
+											"CO_ClientOnboardingRequest"
+										],
+										"delayAfterCaseCreation": [
+											0,
+											0,
+											30,
+											0,
+											0,
+											0,
+											120
+										],
+										"caseData": [
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "SC7MDA27"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Health for Life Co"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Healthcare"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 12
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 2500000
+												},
+												{
+													"SymbolicName": "CO_DefaultedPayment",
+													"Value": true
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Employee Benefits Plan",
+														"Mental Health Care"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 35000
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											],
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "DE1RDS65"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Evergreen Assurance Group"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Insurance"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 12
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 2500000
+												},
+												{
+													"SymbolicName": "CO_DefaultedPayment",
+													"Value": true
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Employee Benefits Plan",
+														"Mental Health Care"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 35000
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											],
+											[
+												{
+													"SymbolicName": "EOSAF_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "EOSAF_readOnly",
+													"Value": true
+												},
+												{
+													"SymbolicName": "EOSAF_randomDelay",
+													"Value": true
+												},
+												{
+													"SymbolicName": "EOSAF_maxDelay",
+													"Value": 45
+												},
+												{
+													"SymbolicName": "EOSAF_clientNames",
+													"Value": [
+														"Oakwood Medical Group",
+														"Verve Financial",
+														"Peak Potential Learning Inc",
+														"AquaFlow Services"
+													]
+												}
+											],
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "E21POL23"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Department of Commerce"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Federal"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 75
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 50000000
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Corporate Credit Card"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 13500
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											],
+											[
+												{
+													"SymbolicName": "EOSAF_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "EOSAF_readOnly",
+													"Value": true
+												},
+												{
+													"SymbolicName": "EOSAF_randomDelay",
+													"Value": true
+												},
+												{
+													"SymbolicName": "EOSAF_maxDelay",
+													"Value": 120
+												},
+												{
+													"SymbolicName": "EOSAF_clientNames",
+													"Value": [
+														"Bright Spark Energy",
+														"Nuvico Finance Partners",
+														"Quantum Assurance Partners",
+														"VitalMed Health Center"
+													]
+												}
+											],
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "VCKMRA31"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Performance Group"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Finance"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 75
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 50000000
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Corporate Credit Card"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 13500
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											],
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "KO2025WW1"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Environmental Protection Agency"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Federal"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 75
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 50000000
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Corporate Credit Card"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 13500
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											],
+											[
+												{
+													"SymbolicName": "CO_UserID",
+													"Value": "$(iterationString)$"
+												},
+												{
+													"SymbolicName": "CO_ReferenceID",
+													"Value": "RE132S43"
+												},
+												{
+													"SymbolicName": "CO_ClientName",
+													"Value": "Global Assurance Partners"
+												},
+												{
+													"SymbolicName": "CO_Industry",
+													"Value": "Insurance"
+												},
+												{
+													"SymbolicName": "CO_NumberOfEmployees",
+													"Value": 30
+												},
+												{
+													"SymbolicName": "CO_CompanyAge",
+													"Value": 12
+												},
+												{
+													"SymbolicName": "CO_AnnualRevenue",
+													"Value": 2500000
+												},
+												{
+													"SymbolicName": "CO_DefaultedPayment",
+													"Value": true
+												},
+												{
+													"SymbolicName": "CO_ServicesRequested",
+													"Value": [
+														"Employee Benefits Plan",
+														"Mental Health Care"
+													]
+												},
+												{
+													"SymbolicName": "CO_ServicesFee",
+													"Value": 35000
+												},
+												{
+													"SymbolicName": "CO_AddressStreet",
+													"Value": "3974 Carson St"
+												},
+												{
+													"SymbolicName": "CO_AddressUnit",
+													"Value": "1A"
+												},
+												{
+													"SymbolicName": "CO_AddressCity",
+													"Value": "Lansing"
+												},
+												{
+													"SymbolicName": "CO_AddressZipCode",
+													"Value": "48911"
+												},
+												{
+													"SymbolicName": "CO_AddressState",
+													"Value": "MI"
+												},
+												{
+													"SymbolicName": "CO_AddressCountry",
+													"Value": "USA"
+												},
+												{
+													"SymbolicName": "CO_PhoneNumber",
+													"Value": "517-555-0000"
+												},
+												{
+													"SymbolicName": "CO_FirstName",
+													"Value": "June Marie"
+												},
+												{
+													"SymbolicName": "CO_LastName",
+													"Value": "Smith"
+												},
+												{
+													"SymbolicName": "CO_ReviewedDocuments",
+													"Value": [
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Banking Information"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														},
+														{
+															"Properties": [
+																{
+																	"SymbolicName": "CO_DocumentName",
+																	"Value": "Utility Bill"
+																},
+																{
+																	"SymbolicName": "CO_DocumentStatus",
+																	"Value": "Verified"
+																}
+															]
+														}
+													]
+												},
+												{
+													"SymbolicName": "CO_Email",
+													"Value": "dummy$(localMailDomain)$"
+												},
+												{
+													"SymbolicName": "CO_IsReadOnly",
+													"Value": true
+												}
+											]
+										]
+									}
+								},
+								{
+									"PRINTMESSAGE": {
+										"enabled": "true",
+										"description": "Debug",
+										"debugMessages": [
+											"Msg Index '$(index)$' IndexRaw '$(indexRaw)$' IterationString '$(iterationString)$'"
+										],
+										"messages": [
+											"Msg Index '$(index)$' IndexRaw '$(indexRaw)$' IterationString '$(iterationString)$'"
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
