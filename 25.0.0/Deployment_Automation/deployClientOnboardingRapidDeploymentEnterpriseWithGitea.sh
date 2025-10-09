@@ -98,6 +98,9 @@ adpConfigured=false
 # Specific trace string for the boostrapping process (only uncomment if instructed to do so)
 #bootstrapDebugString="\"-bootstrapDebugString=*=finest\""
 
+# Any other options can be defined here and will be passed unchanged to the deployment tool
+additionalOptions=
+
 # ----------------------------------------------------------------------------------------------------------
 # Construct the proxy settings for curl and deployment automation tool if proxy is configured
 # ----------------------------------------------------------------------------------------------------------
@@ -450,37 +453,49 @@ fi
 
 if [ ! -z "${restrictContentAssistantToUser+x}" ]
 then
-	if [[ "${restrictContentAssistantToUser}" != "" ]] internalRestrictContentAssistantToUser=restrictContentAssistantToUser=${restrictContentAssistantToUser}
+  if [[ "${restrictContentAssistantToUser}" != "" ]]
+  then
+    internalRestrictContentAssistantToUser=restrictContentAssistantToUser=${restrictContentAssistantToUser}
+  fi
 fi
 
 if [ ! -z "${icaDesktopName+x}" ]
 then
-	internalICADesktopName=icaDesktopName=${icaDesktopName}
+  internalICADesktopName=icaDesktopName=${icaDesktopName}
 fi
 
 if [ ! -z "${enableWFGenAI+x}" ]
 then
-	internalEnableWFGenAI=enableWFGenAI=${enableWFGenAI}
+  internalEnableWFGenAI=enableWFGenAI=${enableWFGenAI}
 fi
 
 if [ ! -z "${enableWFAssistant+x}" ]
 then
-	internalEnableWFAssistant=enableWFAssistant=${enableWFAssistant}
+  internalEnableWFAssistant=enableWFAssistant=${enableWFAssistant}
 fi
 
 if [ ! -z "${graphQLURL+x}" ]
 then
-	if [[ "${graphQLURL}" != "" ]] internalGraphQLURL=graphQLURL=${graphQLURL}
+  if [[ "${graphQLURL}" != "" ]]
+  then
+    internalGraphQLURL=graphQLURL=${graphQLURL}
+  fi
 fi
 
 if [ ! -z "${icnBaseURL+x}" ]
 then
-	if [[ "${icnBaseURL}" != "" ]] internalIcnBaseURL=icnBaseURL=${icnBaseURL}
+  if [[ "${icnBaseURL}" != "" ]] 
+  then
+    internalIcnBaseURL=icnBaseURL=${icnBaseURL}
+  fi
 fi
 
 if [ ! -z "${createSampleCaseDataForNumUsers+x}" ]
 then
-	if [[ "${createSampleCaseDataForNumUsers}" != "" ]] internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=${createSampleCaseDataForNumUsers}
+  if [[ "${createSampleCaseDataForNumUsers}" != "" ]]
+  then
+    internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=${createSampleCaseDataForNumUsers}
+  fi
 fi
 
 
