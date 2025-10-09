@@ -471,6 +471,18 @@
 									}
 								},
 								{
+									"DEPLOYCASESOLUTION": {
+										"enabled": "true",
+										"description": "Deploy the Case part of the Execution of Service and Feedback WF solution",
+										"solutionName": "!solutionName!",
+										"solutionAcronym": "!solutionAcronym!",
+										"dosName": "$$(BAW_DOS)$$",
+										"ignoreSolutionVersion": true,
+										"maxDeployCompletionPolls": 20,
+										"delayBetweenDeployCompletionPolls": 10
+									}
+								},
+								{
 									"DETERMINEAPPENGINESERVERID": {
 										"enabled": "true",
 										"description": "Determine App Engine Server Id",
