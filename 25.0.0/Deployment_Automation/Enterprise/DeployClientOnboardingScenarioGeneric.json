@@ -804,6 +804,9 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktopICA.properties"
 											}
 										]
 									}
@@ -999,7 +1002,7 @@
 								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "$$((enableContentAssistant)$$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Import 'ICN with ICA' desktop used to display annual report (for object store $$(CPEICNLABOBJECTSTORE)$$)",
 										"enforceImport": false,
 										"name": "ICN",
@@ -1008,7 +1011,7 @@
 								},
 								{
 									"MANAGEDESKTOP": {
-										"enabled": "$$((enableContentAssistant)$$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
 										"desktopName": "ICN",
 										"action": "update",
