@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.95 <1.2.0",
+	"requiredToolVersion": ">=1.1.98 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -272,6 +272,12 @@
 										"files": [
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Execution_of_Service_and_Feedback.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/ClientOnboardingRequestsSavedView.json"
 											}
 										]
 									}
@@ -441,6 +447,35 @@
 												}
 											}
 										]
+									}
+								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "$$(enableWFAssistant)$$",
+										"description": "Extract the project information from the Execution of Service and Feedback TWX file",
+										"sourceTwxFile": "Execution_of_Service_and_Feedback.twx",
+										"globalContextVariableName": "ExecutionOfServiceAndFeedbackPAInfo"
+									}
+								},
+								{
+									"INSTALLSOLUTION": {
+										"enabled": "$$(enableWFAssistant)$$",
+										"description": "Install the Execution of Service and Feedback WF solution",
+										"twxFile": "Execution_of_Service_and_Feedback.twx",
+										"paDisplayName": "!projectDisplayName!",
+										"paAcronym": "!projectAcronym!",
+										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
+										"checkForUpdatedEnvironmentVariables": false
+									}
+								},
+								{
+									"IMPORTSAVEDVIEW": {
+										"enabled": "$$(enableWFAssistant)$$",
+										"description": "Import the Cient Onboarding Request Saved View",
+										"fileName": "ClientOnboardingRequestsSavedView.json",
+										"appEngineAppConfigName": "$$(appEngineName)$$"
 									}
 								}
 							]
@@ -859,7 +894,7 @@
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Document Upload' app",
-										"appEngineAppConfigName": "APPENG0",
+										"appEngineAppConfigName": "$$(appEngineName)$$",
 										"name": "Client Onboarding Document Upload",
 										"file": "!patchedZIPFileName!"
 									}
@@ -880,7 +915,7 @@
 									"IMPORTAPPLICATION": {
 										"enabled": "true",
 										"description": "Import 'Client Onboarding Comments' app",
-										"appEngineAppConfigName": "APPENG0",
+										"appEngineAppConfigName": "$$(appEngineName)$$",
 										"name": "Client Onboarding Comments",
 										"file": "!patchedZIPFileName!"
 									}
@@ -891,7 +926,7 @@
 										"description": "Patch 'Client Onboarding Request' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ClientOnboardingRequestDesktop.properties",
 										"simpleTextMappings": {
-											"APPENG0": "APPENG0",
+											"APPENG0": "$$(appEngineName)$$",
 											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
 											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
 											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
@@ -913,7 +948,7 @@
 										"description": "Patch 'Client Onboarding Document Upload' desktop exported from enterprise deployment to work in current deployment",
 										"file": "CODocumentUploadDesktop.properties",
 										"simpleTextMappings": {
-											"APPENG0": "APPENG0",
+											"APPENG0": "$$(appEngineName)$$",
 											"repositories=icmbawtos": "repositories=icm$$(BAW_TOS_LOWER)$$",
 											"defaultRepository=icmbawtos": "defaultRepository=icm$$(BAW_TOS_LOWER)$$",
 											"repository.navigator.icmbawtos": "&delete&|repository.navigator.icm$$(BAW_TOS_LOWER)$$"
@@ -927,6 +962,39 @@
 										"enforceImport": false,
 										"name": "Client Onboarding Document Upload",
 										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								},
+								{
+									"PATCHDESKTOP": {
+										"enabled": "$$((enableContentAssistant)$$",
+										"description": "Patch 'ICN with ICA' desktop exported from enterprise deployment to work in current deployment",
+										"file": "ICNDesktopICA.properties",
+										"simpleTextMappings": {
+											"CONTENTrepo": "$(REPOSITORY_ID)$",
+											"https://icp4adeploy-cpe-stateless-svc:9443": "$$(cpe-stlessSrvURL)$$",
+											"https://icp4adeploy-bastudio-service.ibm-cp4ba.svc:443": "$$(bastudioSRVURL)$$",
+											"cpd-ibm-cp4ba.apps.swat01.cp.fyre.ibm.com": "$$(cpdURLWithoutProtocol)$$"
+										}
+									}
+								},
+								{
+									"IMPORTDESKTOP": {
+										"enabled": "$$((enableContentAssistant)$$",
+										"description": "Import 'ICN with ICA' desktop used to display annual report (for object store $$(CPEICNLABOBJECTSTORE)$$)",
+										"enforceImport": false,
+										"name": "ICN",
+										"file": "!patchedDesktopPropertiesFileName!"
+									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "$$((enableContentAssistant)$$",
+										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
+										"desktopName": "ICN",
+										"action": "update",
+										"enabledDesktopEmailClient": true,
+										"allowUsersToChangeEntryTemplateDuringCheckIn": true,
+										"showDocumentHistory": true
 									}
 								}
 							]
