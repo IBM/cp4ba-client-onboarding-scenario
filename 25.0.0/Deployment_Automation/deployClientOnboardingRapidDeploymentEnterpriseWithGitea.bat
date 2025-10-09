@@ -56,6 +56,8 @@ rem Is the GenAI capability available in Workflow
 SET enableWFGenAI=false
 rem Is the Workflow Assistant capability available
 SET enableWFAssistant=false
+rem The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
+SET createSampleCaseDataForNumUsers=201
 
 rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
 SET graphQLURL=
@@ -481,6 +483,11 @@ if defined icnBaseURL (
 	if NOT "%icnBaseURL%" == "" set internalIcnBaseURL=icnBaseURL=%icnBaseURL%
 )
 
+if defined createSampleCaseDataForNumUsers (
+	if NOT "%createSampleCaseDataForNumUsers%" == "" set internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=%createSampleCaseDataForNumUsers%
+)
+
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -495,6 +502,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% %enableConfigureLabsInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% -cp4baAdminPwd=%cp4baAdminPassword% %giteaCredentials% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% %enableConfigureLabsInternal% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %internalNumUsersSampleCaseDataForWFAssistant% %additionalOptions%
 
 ENDLOCAL
