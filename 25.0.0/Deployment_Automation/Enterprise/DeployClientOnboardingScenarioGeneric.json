@@ -979,6 +979,13 @@
 									}
 								},
 								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Determine ICN repository information based on object store symbolic name",
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
+									}
+								},
+								{
 									"PATCHDESKTOP": {
 										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Patch 'ICN with ICA' desktop exported from enterprise deployment to work in current deployment",
