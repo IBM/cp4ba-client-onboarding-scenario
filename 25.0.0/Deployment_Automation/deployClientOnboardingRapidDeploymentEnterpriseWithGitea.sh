@@ -49,13 +49,13 @@ enableContentAssistant=false
 # Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
 restrictContentAssistantToUser=
 # Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
-icaDesktopName=ICA
+icaDesktopName=ICN
 # Is the GenAI capability available in Workflow
 enableWFGenAI=false
 # Is the Workflow Assistant capability available
 enableWFAssistant=false
 # The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
-createSampleCaseDataForNumUsers=201
+createSampleCaseDataForNumUsers=10
 
 # Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
 graphQLURL=
