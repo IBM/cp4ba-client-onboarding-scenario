@@ -111,6 +111,9 @@ rem SET proxyPwd=
 rem Specific trace string for the boostrapping process (only uncomment if instructed to do so)
 rem SET bootstrapDebugString="-bootstrapDebugString=*=finest"
 
+rem Any other options can be defined here and will be passed unchanged to the deployment tool
+SET additionalOptions=
+
 rem ----------------------------------------------------------------------------------------------------------
 rem Construct the proxy settings for curl and deployment automation tool if proxy is configured
 rem ----------------------------------------------------------------------------------------------------------
@@ -157,7 +160,7 @@ SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
-SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,adsGitOrg,adsGitUserName,adsGitRepoAPIKey,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,adsGitOrg,adsGitUserName,adsGitRepoAPIKey,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,enableWFGenAI,enableWFAssistant,graphQLURL,icnBaseURL
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
