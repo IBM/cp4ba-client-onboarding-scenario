@@ -45,13 +45,7 @@ SET adsGitUserName=REQUIRED
 rem Git API key to connect to the Git server
 SET adsGitRepoAPIKey=REQUIRED
 
-
-rem Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
-SET configureLabs=true
-
-rem Flag that determines if the internal email server is used or the external gmail service
-rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
-SET useInternalMailServer=true
+rem Section with flags related to using AI-enhanced Client Onboarding scenario
 
 rem Is the Content Assistant capability available in the environment or not?
 SET enableContentAssistant=false
@@ -74,10 +68,13 @@ SET graphQLURL=
 rem Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
 SET icnBaseURL=
 
-rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
-rem SET dockerUserName=REQUIRED
-rem SET dockerToken=REQUIRED
 
+rem Set to false in case environment the Client Onboarding lab artifacts should not be deployed and only the Client Onboarding scenario is required (if set to false, will reduce deployment time)
+SET configureLabs=true
+
+rem Flag that determines if the internal email server is used or the external gmail service
+rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
+SET useInternalMailServer=true
 
 rem Name of the storage class for the internal mail server (in case useInternalMailServer is set to true)
 SET ocpStorageClassForInternalMailServer=REQUIRED
@@ -87,23 +84,9 @@ SET gmailAddress=REQUIRED
 rem App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 SET gmailAppKey=REQUIRED
 
-rem Section with flags related to using AI-enhanced Client Onboarding scenario
-
-rem Is the Content Assistant capability available in the environment or not?
-SET enableContentAssistant=false
-rem Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
-SET restrictContentAssistantToUser=
-rem Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
-SET icaDesktopName=ICA
-rem Is the GenAI capability available in Workflow
-SET enableWFGenAI=false
-rem Is the Workflow Assistant capability available
-SET enableWFAssistant=false
-
-rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
-SET graphQLURL=
-rem Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
-SET icnBaseURL=
+rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
+rem SET dockerUserName=REQUIRED
+rem SET dockerToken=REQUIRED
 
 rem User for who the RPA bot is executed (specifying a non-existing user basically skipped the RPA bot execution)
 SET rpaBotExecutionUser=cp4admin2
