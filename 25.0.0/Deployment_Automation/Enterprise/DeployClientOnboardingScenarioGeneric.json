@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.99 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -743,7 +743,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "true",
+										"enabled": "$(enableContentAssistant)$",
 										"description": "Create 'Legacy Consulting - Annual Report 2024' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -998,7 +998,7 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "true",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Determine ICN repository information based on object store symbolic name",
 										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
 									}
