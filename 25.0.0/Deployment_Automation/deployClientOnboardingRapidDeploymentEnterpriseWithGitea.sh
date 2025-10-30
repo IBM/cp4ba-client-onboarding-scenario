@@ -447,7 +447,6 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-
 if [ ! -z "${enableContentAssistant+x}" ]
 then
 	internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
