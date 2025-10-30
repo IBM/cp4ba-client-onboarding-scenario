@@ -53,6 +53,27 @@ rem Flag that determines if the internal email server is used or the external gm
 rem (in case internal email server is used one or two LDIF files with the users and their passwords need to be placed in the same location as this file. In case of the gmail server the two properties 'gmailAddress' and 'gmailAppKey' need to be specified)
 SET useInternalMailServer=true
 
+rem Is the Content Assistant capability available in the environment or not?
+SET enableContentAssistant=false
+rem Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
+SET restrictContentAssistantToUser=
+rem Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
+SET icaDesktopName=ICA
+rem Is the GenAI capability available in Workflow
+SET enableWFGenAI=false
+rem Is the Workflow Assistant capability available
+SET enableWFAssistant=false
+rem The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
+SET createSampleCaseDataForNumUsers=20
+rem The maximum number of thread used to create the dummy cases in parallel
+SET maxCaseIteratorThreads=20
+
+
+rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
+SET graphQLURL=
+rem Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
+SET icnBaseURL=
+
 rem Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 rem SET dockerUserName=REQUIRED
 rem SET dockerToken=REQUIRED
@@ -156,7 +177,7 @@ SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
@@ -535,6 +556,42 @@ if defined dockerUserName (
 		) 
 	)
 )
+
+if defined enableContentAssistant (
+	set internalEnableContentAssistant=enableContentAssistant=%enableContentAssistant%
+)
+
+if defined restrictContentAssistantToUser (
+	if NOT "%restrictContentAssistantToUser%" == "" set internalRestrictContentAssistantToUser=restrictContentAssistantToUser=%restrictContentAssistantToUser%
+)
+
+if defined icaDesktopName (
+	set internalICADesktopName=icaDesktopName=%icaDesktopName%
+)
+
+if defined enableWFGenAI (
+	set internalEnableWFGenAI=enableWFGenAI=%enableWFGenAI%
+)
+
+if defined enableWFAssistant (
+	set internalEnableWFAssistant=enableWFAssistant=%enableWFAssistant%
+)
+
+if defined graphQLURL (
+	if NOT "%graphQLURL%" == "" set internalGraphQLURL=graphQLURL=%graphQLURL%
+)
+
+if defined icnBaseURL (
+	if NOT "%icnBaseURL%" == "" set internalIcnBaseURL=icnBaseURL=%icnBaseURL%
+)
+
+if defined createSampleCaseDataForNumUsers (
+	if NOT "%createSampleCaseDataForNumUsers%" == "" set internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=%createSampleCaseDataForNumUsers%
+)
+
+if defined maxCaseIteratorThreads (
+	if NOT "%maxCaseIteratorThreads%" == "" set internalMaxCaseIteratorThreads=maxCaseIteratorThreads=%maxCaseIteratorThreads%
+}
 
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
