@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.98 <1.2.0",
+	"requiredToolVersion": ">=1.1.103 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -445,6 +445,16 @@
 									}
 								},
 								{
+									"ADDADDON": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Add AddOns for Content Assistant",
+										"addOns": [
+											"5.6.0 Persistent Text Extract Extensions",
+											"5.7.0 Gen AI Extensions"
+										]
+									}
+								},
+								{
 									"CREATEPROPERTYTEMPLATE": {
 										"enabled": "true",
 										"description": "Define Property Templates for GraphQL lab",
@@ -518,6 +528,62 @@
 											"SOLUTION_Account_Type"
 										],
 										"enableCBR": true
+									}
+								},
+								{
+									"MANAGEPERSISTENTTEXTEXTRACT": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Enable Persistent Text Extraction for doc class 'SOLUTION Client Document'",
+										"enablePTE": "true",
+										"docClasses": [
+											"SOLUTION_Client_Document"
+										]
+									}
+								},
+								{
+									"CONFIGUREGENAI": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Update Gen AI Configuration",
+										"genAIAccessCode": "§IF($$(ISSET(genAIAccessCode))$$)§($$(genAIAccessCode|default=)$$)§ELSE§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))ENDIF§",
+										"genAIServiceURL": "§IF($$(ISSET(genAIServiceURL))$$)§($$(genAIServiceURL|default=)$$)§ELSE§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))ENDIF§"
+									}
+								},
+								{
+									"MANAGESUBSCRIPTIONS": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'SOLUTION Client Document'",
+										"subscriptionDefinitions": [
+											{
+												"action": "add",
+												"displayName": "SOLUTION Client Document - Vector Index",
+												"targetClassSmybolicName": "SOLUTION_Client_Document",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Vector Indexing Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
+											},
+											{
+												"action": "add",
+												"displayName": "SOLUTION Client Document - Summarize",
+												"targetClassSmybolicName": "SOLUTION_Client_Document",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Summary Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
+											}
+										]
 									}
 								},
 								{
@@ -1242,7 +1308,7 @@
 										"verbose": false
 									}
 								},
-																{
+								{
 									"EXTRACTTWXPROJECTINFO": {
 										"enabled": "true",
 										"description": "Extract project information from Client Onboarding Comments app file",

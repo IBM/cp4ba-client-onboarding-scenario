@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.13",
+	"fileVersion": "1.0.15",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.99 <1.2.0",
+	"requiredToolVersion": ">=1.1.103 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -484,21 +484,6 @@
 										"maxDeployCompletionPolls": 20,
 										"delayBetweenDeployCompletionPolls": 10
 									}
-								},
-								{
-									"DETERMINEAPPENGINESERVERID": {
-										"enabled": "$$(enableWFAssistant)$$",
-										"description": "Determine App Engine Server Id",
-										"useFirst": true
-									}
-								},
-								{
-									"IMPORTSAVEDVIEW": {
-										"enabled": "$$(enableWFAssistant)$$",
-										"description": "Import the Cient Onboarding Request Saved View",
-										"fileName": "ClientOnboardingRequestsSavedView.json",
-										"appEngineAppConfigName": "$(appEngineServerId)$"
-									}
 								}
 							]
 						}
@@ -553,6 +538,16 @@
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test FNCM availability"
+									}
+								},
+								{
+									"ADDADDON": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Add AddOns for Content Assistant",
+										"addOns": [
+											"5.6.0 Persistent Text Extract Extensions",
+											"5.7.0 Gen AI Extensions"
+										]
 									}
 								},
 								{
@@ -635,6 +630,62 @@
 														"securityAccessRights": "Modify properties"
 													}
 												]
+											}
+										]
+									}
+								},
+								{
+									"MANAGEPERSISTENTTEXTEXTRACT": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Enable Persistent Text Extraction for doc class 'Client Document'",
+										"enablePTE": "true",
+										"docClasses": [
+											"CO_ClientDocument"
+										]
+									}
+								},
+								{
+									"CONFIGUREGENAI": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Update Gen AI Configuration",
+										"genAIAccessCode": "§IF($$(ISSET(genAIAccessCode))$$)§($$(genAIAccessCode|default=)$$)§ELSE§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))ENDIF§",
+										"genAIServiceURL": "§IF($$(ISSET(genAIServiceURL))$$)§($$(genAIServiceURL|default=)$$)§ELSE§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))ENDIF§"
+									}
+								},
+								{
+									"MANAGESUBSCRIPTIONS": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'Client Document'",
+										"subscriptionDefinitions": [
+											{
+												"action": "add",
+												"displayName": "Client Document - Vector Index",
+												"targetClassSmybolicName": "CO_ClientDocument",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Vector Indexing Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
+											},
+											{
+												"action": "add",
+												"displayName": "Client Document - Summarize",
+												"targetClassSmybolicName": "CO_ClientDocument",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Summary Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
 											}
 										]
 									}
@@ -791,6 +842,53 @@
 						}
 					},
 					{
+						"OCP": {
+							"comment": "Steps that are only required if the Content Assistant is enabled",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $(enableContentAssistant)$",
+							"name": "Copy Content Assistant ICN plugin to plugins folder in ICN pod",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for OCP",
+										"name": "Download custom plugin file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/genaiPlugin.jar"
+											}
+										]
+									}
+								},
+								{
+									"COPYFILES": {
+										"enabled": "true",
+										"description": "Copy Content Assistant plugin file to navigator pod",
+										"delayBefore": 0,
+										"namespaceName": "$$(cp4baNamespace)$$",
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
+										"copyActions": [
+											{
+												"action": "toContainer",
+												"podLabelName": "app",
+												"podLabelSelector": "$$(cp4baClusterName)$$-navigator-deploy",
+												"containerName": "$$(cp4baClusterName)$$-navigator-deploy",
+												"localFileName": "genaiPlugin.jar",
+												"remoteFileName": "genaiPlugin-1.0.0-dev-fix-Merge-and-Split.jar",
+												"remotePath": "/opt/ibm/plugins",
+												"overExistingFile": false
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
 						"ICN": {
 							"comment": "Imports two desktops and the three applications and configures access to the first",
 							"enabled": "$$(enableDeployClientOnboarding_BAA)$$",
@@ -830,6 +928,49 @@
 									"TESTCONNECTION": {
 										"enabled": "true",
 										"description": "Test Navigator availability"
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Add IBM Content Assistant plugin",
+										"action": "add",
+										"pluginName": "IBM Content Assistant",
+										"jarFilePath": "/opt/ibm/plugins/genaiPlugin-1.0.0-dev-fix-Merge-and-Split.jar",
+										"configParameters": {
+											"region": "§IF($$(ISSET(genAIRegion))$$)§($$(genAIRegion|default=)$$)§ELSE§(§FAIL(Gen AI Region not provided while Content Assistant is enabled))ENDIF§",
+											"desktopSuggestions": [
+												{
+													"id": null,
+													"suggestions": [
+														""
+													]
+												},
+												{
+													"id": "admin",
+													"suggestions": []
+												}
+											]
+										}
+									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "$(enableContentAssistant)$",
+										"description": "Update desktops 'BAI' and 'desktop1-5' to use to use all but the IBM Content Assistant plug-in",
+										"action": "update",
+										"desktopNames": [
+											"BAI",
+											"desktop1",
+											"desktop2",
+											"desktop3",
+											"desktop4",
+											"desktop5"
+										],
+										"onlySpecifiedPluginNames": true,
+										"pluginNames": [
+											"!IBM Content Assistant"
+										]
 									}
 								},
 								{
@@ -1142,6 +1283,32 @@
 										"description": "Make dashboard visible to all users",
 										"name": "Client Onboarding Completed",
 										"isShared": true
+									}
+								}
+							]
+						}
+					},
+					{
+						"WF": {
+							"enabled": "$$(enableDeployClientOnboarding_WF)$$",
+							"description": "WF - Import Saved View when WF Assistant is enabled",
+							"relativeBasePath": "Business Automation Workflow",
+							"subActions": [
+								{
+									"DETERMINEAPPENGINESERVERID": {
+										"enabled": "$$(enableWFAssistant)$$",
+										"description": "Determine App Engine Server Id",
+										"useFirst": true
+									}
+								},
+								{
+									"IMPORTSAVEDVIEW": {
+										"enabled": "$$(enableWFAssistant)$$",
+										"description": "Import the Cient Onboarding Request Saved View",
+										"fileName": "ClientOnboardingRequestsSavedView.json",
+										"appEngineAppConfigName": "$(appEngineServerId)$",
+										"maxNumPolls": "15",
+										"sleepInSecBetweenPolls": "30"
 									}
 								}
 							]
