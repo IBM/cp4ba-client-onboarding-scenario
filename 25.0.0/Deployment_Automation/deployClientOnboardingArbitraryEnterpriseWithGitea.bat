@@ -65,6 +65,12 @@ rem Is the usage of Content Assistant in the APP to be limited to a specific use
 SET restrictContentAssistantToUser=
 rem Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
 SET icaDesktopName=ICA
+rem Region to use for the IBM Content Assistant ICN plug-in (can either be aws-us-east-1 / aws-eu-central-1 (only required when enableContentAssistant=true)
+SET icaGenAIRegion=REQUIRED
+rem Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+SET genAIAccessCode=REQUIRED
+rem Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+SET genAIServiceURL=REQUIRED
 rem Is the GenAI capability available in Workflow
 SET enableWFGenAI=false
 rem Is the Workflow Assistant capability available
@@ -151,11 +157,11 @@ SET SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
-SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,giteaCredentials,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,configureLabs,adpConfigured,configureContentLab,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,enableWFGenAI,enableWFAssistant,graphQLURL,icnBaseURL
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,giteaCredentials,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,configureLabs,adpConfigured,configureContentLab,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWFAssistant,graphQLURL,icnBaseURL
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -506,6 +512,83 @@ if defined dockerUserName (
 	)
 )
 
+if defined enableContentAssistant (
+	if "%enableContentAssistant%"=="true" (
+		set internalEnableContentAssistant=enableContentAssistant=%enableContentAssistant%
+		
+		if "%genAIRegion%"=="REQUIRED" set genAIRegionRequired=true
+		if "%genAIRegion%"=="" set genAIRegionRequired=true
+		
+		if "%genAIAccessCode%"=="REQUIRED" set genAIAccessCodeRequired=true
+		if "%genAIAccessCode%"=="" set genAIAccessCodeRequired=true
+		
+		if "%genAIServiceURL%"=="REQUIRED" set genAIServiceURLRequired=true
+		if "%genAIServiceURL%"=="" set genAIServiceURLRequired=true
+
+		if defined genAIRegionRequired ( 
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegion' has not been set
+		) else (
+			set internalGenAIRegion=genAIRegion=%genAIRegion%
+		)
+		
+		if defined genAIAccessCode ( 
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'enableContentAssistant' is set to 'true' but variable 'genAIAccessCode' has not been set
+		) else (
+			set internalGenAIAccessCode=genAIAccessCode=%genAIAccessCode%
+		)
+		
+		if defined genAIRegionRequired ( 
+			if not defined validationFailed (
+				echo Validating configuration failed:
+				set validationFailed=true
+			)
+			echo   Variable 'enableContentAssistant' is set to 'true' but variable 'genAIServiceURL' has not been set
+		) else (
+			set internalGenAIServiceURL=genAIServiceURL=%genAIServiceURL%
+		)
+	)
+)
+
+if defined restrictContentAssistantToUser (
+	if NOT "%restrictContentAssistantToUser%" == "" set internalRestrictContentAssistantToUser=restrictContentAssistantToUser=%restrictContentAssistantToUser%
+)
+
+if defined icaDesktopName (
+	set internalICADesktopName=icaDesktopName=%icaDesktopName%
+)
+
+if defined enableWFGenAI (
+	set internalEnableWFGenAI=enableWFGenAI=%enableWFGenAI%
+)
+
+if defined enableWFAssistant (
+	set internalEnableWFAssistant=enableWFAssistant=%enableWFAssistant%
+)
+
+if defined graphQLURL (
+	if NOT "%graphQLURL%" == "" set internalGraphQLURL=graphQLURL=%graphQLURL%
+)
+
+if defined icnBaseURL (
+	if NOT "%icnBaseURL%" == "" set internalIcnBaseURL=icnBaseURL=%icnBaseURL%
+)
+
+if defined createSampleCaseDataForNumUsers (
+	if NOT "%createSampleCaseDataForNumUsers%" == "" set internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=%createSampleCaseDataForNumUsers%
+)
+
+if defined maxCaseIteratorThreads (
+	if NOT "%maxCaseIteratorThreads%" == "" set internalMaxCaseIteratorThreads=maxCaseIteratorThreads=%maxCaseIteratorThreads%
+)
+
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
 
@@ -520,4 +603,4 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% "cp4baAdminGroup=%cp4baAdminGroup%" "generalUsersGroupName=%generalUsersGroup%" %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% enableConfigureSWATLabs_FNCM=%configureContentLab% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer% %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%

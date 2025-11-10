@@ -47,6 +47,12 @@ enableContentAssistant=false
 restrictContentAssistantToUser=
 # Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
 icaDesktopName=ICN
+# Region to use for the IBM Content Assistant ICN plug-in (can either be aws-us-east-1 / aws-eu-central-1 (only required when enableContentAssistant=true)
+icaGenAIRegion=REQUIRED
+# Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+genAIAccessCode=REQUIRED
+#  Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+genAIServiceURL=REQUIRED
 # Is the GenAI capability available in Workflow
 enableWFGenAI=false
 # Is the Workflow Assistant capability available
@@ -143,11 +149,11 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
-COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,giteaCredentials,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,enableWFGenAI,enableWFAssistant,createSampleCaseDataForNumUsers,maxCaseIteratorThreads,graphQLURL,icnBaseURL
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,giteaCredentials,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWFAssistant,createSampleCaseDataForNumUsers,maxCaseIteratorThreads,graphQLURL,icnBaseURL
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -395,9 +401,45 @@ then
 	enableConfigureLabsInternal=enableConfigureSWATLabs=${configureLabs}
 fi
 
-if [ ! -z "${enableContentAssistant+x}" ]
+if [[ "${enableContentAssistant}" == "true" ]]
 then
-	internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
+  internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
+  
+  if [[ "${genAIRegion}" == "REQUIRED" ]] || [[ "${genAIRegion}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegion' has not been set"
+  else
+    internalGenAIRegion=genAIRegion=${genAIRegion}
+  fi
+  
+  if [[ "${genAIAccessCode}" == "REQUIRED" ]] || [[ "${genAIAccessCode}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIAccessCode' has not been set"
+  else
+    internalGenAIAccessCode=genAIAccessCode=${genAIAccessCode}
+  fi
+  
+  if [[ "${genAIRegionRequired}" == "REQUIRED" ]] || [[ "${genAIRegionRequired}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegionRequired' has not been set"
+  else
+    internalGenAIServiceURL=genAIRegionRequired=${genAIRegionRequired}
+  fi
 fi
 
 if [ ! -z "${restrictContentAssistantToUser+x}" ]
@@ -466,4 +508,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
