@@ -164,7 +164,7 @@ SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.2
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
@@ -527,16 +527,16 @@ if [[ "${enableContentAssistant}" == "true" ]]
 then
   internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
   
-  if [[ "${genAIRegion}" == "REQUIRED" ]] || [[ "${genAIRegion}" == "" ]]
+  if [[ "${icaGenAIRegion}" == "REQUIRED" ]] || [[ "${icaGenAIRegion}" == "" ]]
   then
      if $validationSuccess
      then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegion' has not been set"
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'icaGenAIRegion' has not been set"
   else
-    internalGenAIRegion=genAIRegion=${genAIRegion}
+    internalGenAIRegion=genAIRegion=${icaGenAIRegion}
   fi
   
   if [[ "${genAIAccessCode}" == "REQUIRED" ]] || [[ "${genAIAccessCode}" == "" ]]
@@ -551,16 +551,16 @@ then
     internalGenAIAccessCode=genAIAccessCode=${genAIAccessCode}
   fi
   
-  if [[ "${genAIRegionRequired}" == "REQUIRED" ]] || [[ "${genAIRegionRequired}" == "" ]]
+  if [[ "${genAIServiceURL}" == "REQUIRED" ]] || [[ "${genAIServiceURL}" == "" ]]
   then
      if $validationSuccess
      then
        echo "Validating configuration failed:"
        validationSuccess=false
      fi
-    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegionRequired' has not been set"
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIServiceURL' has not been set"
   else
-    internalGenAIServiceURL=genAIRegionRequired=${genAIRegionRequired}
+    internalGenAIServiceURL=genAIServiceURL=${genAIServiceURL}
   fi
 fi
 
