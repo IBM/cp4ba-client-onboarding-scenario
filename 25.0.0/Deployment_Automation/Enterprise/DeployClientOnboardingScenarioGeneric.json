@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.15",
+	"fileVersion": "1.0.16",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.103 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -292,7 +292,7 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Determine ICN repository information based on the desktop '$(ACTION_wf_cp_icaDesktopName)$' and object store '$(BAW_TOS)$'",
 										"desktopSymbolicName": "$(wf_cp_icaDesktopName)$",
 										"osSymbolicName": "$(BAW_TOS)$",
@@ -542,7 +542,7 @@
 								},
 								{
 									"ADDADDON": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Add AddOns for Content Assistant",
 										"addOns": [
 											"5.6.0 Persistent Text Extract Extensions",
@@ -636,7 +636,7 @@
 								},
 								{
 									"MANAGEPERSISTENTTEXTEXTRACT": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Enable Persistent Text Extraction for doc class 'Client Document'",
 										"enablePTE": "true",
 										"docClasses": [
@@ -646,7 +646,7 @@
 								},
 								{
 									"CONFIGUREGENAI": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Update Gen AI Configuration",
 										"genAIAccessCode": "§IF($$(ISSET(genAIAccessCode))$$)§($$(genAIAccessCode|default=)$$)§ELSE§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))ENDIF§",
 										"genAIServiceURL": "§IF($$(ISSET(genAIServiceURL))$$)§($$(genAIServiceURL|default=)$$)§ELSE§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))ENDIF§"
@@ -654,7 +654,7 @@
 								},
 								{
 									"MANAGESUBSCRIPTIONS": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'Client Document'",
 										"subscriptionDefinitions": [
 											{
@@ -794,7 +794,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Create 'Legacy Consulting - Annual Report 2024' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -810,7 +810,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Create 'Legacy Consulting - Brochure' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -825,7 +825,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Create 'Legacy Consulting - Vieria Electricity' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -844,7 +844,7 @@
 					{
 						"OCP": {
 							"comment": "Steps that are only required if the Content Assistant is enabled",
-							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $(enableContentAssistant)$",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $$(enableContentAssistant)$$",
 							"name": "Copy Content Assistant ICN plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -932,7 +932,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Add IBM Content Assistant plugin",
 										"action": "add",
 										"pluginName": "IBM Content Assistant",
@@ -956,7 +956,7 @@
 								},
 								{
 									"MANAGEDESKTOP": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$$(enableContentAssistant)$$",
 										"description": "Update desktops 'BAI' and 'desktop1-5' to use to use all but the IBM Content Assistant plug-in",
 										"action": "update",
 										"desktopNames": [
