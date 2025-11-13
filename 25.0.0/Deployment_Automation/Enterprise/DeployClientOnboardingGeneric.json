@@ -1,6 +1,6 @@
 {
 	"comment": "Contains/references the steps required to optionally onboard users/groups, optionally deploy an email server & client, deploy the Client Onboarding scenario itself, and the Client Onboarding labs",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingGeneric.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -53,6 +53,13 @@
 				"comment": "Optionally create case instances for users",
 				"enabled": "true",
 				"file": "DeployClientOnboardingScenarioCasesGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Optionally validate a random set of users can login both to CP4BA and the email client",
+				"enabled": "true",
+				"file": "DeployValidateUserLogin.json"
 			}
 		}
 	]

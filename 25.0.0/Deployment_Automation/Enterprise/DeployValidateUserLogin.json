@@ -1,0 +1,36 @@
+{
+	"comment": "Contains the steps to optionally onboard users defined in an external file and synchronize the mail server users based on the user modification",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/DeployValidateUserLogin.json",
+	"requiredToolVersion": ">=1.1.100 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"OCP": {
+				"enabled": "$$(enableDeployEmailCapability)$$ && $(ISNOTSET(isCloudPakDeployerDeployment))$",
+				"name": "Validate random users can login both to CP4BA and mail client",
+				"relativeBasePath": "OpenShift",
+				"subActions": [
+					{
+						"VALIDATEUSERSLOGIN": {
+							"enabled": "true",
+							"numRandomUsers": "5",
+							"externalLDIF1": "$$(externalLDIF1|default=)$$",
+							"externalLDIF2": "$$(externalLDIF2|default=)$$",
+							"userBase": "$$(externalLDIF_userBase)$$",
+							"userDC": "$$(externalLDIF_userDC)$$",
+							"userNumberingFormatter": "$$(externalLDIF_userNumberingFormatter)$$",
+							"users": [
+								{
+									"name": "$$(cp4baAdminUsr)$$",
+									"password": "$$(cp4baAdminPwd)$$"
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
