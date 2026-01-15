@@ -1,0 +1,23 @@
+{
+	"apiVersion": "networking.k8s.io/v1",
+	"kind": "NetworkPolicy",
+	"metadata": {
+		"name": "deploytool-ads-git-service-egress-allow-all",
+		"namespace": "$$(cp4baNamespace)$$"
+	},
+	"spec": {
+		"podSelector": {
+			"matchLabels": {
+				"app.kubernetes.io/component": "ads",
+				"app.kubernetes.io/instance": "$$(cp4baClusterName)$$",
+				"app.kubernetes.io/name": "ads-git-service"
+			}
+		},
+		"policyTypes": [
+			"Egress"
+		],
+		"egress": [
+			{}
+		]
+	}
+}

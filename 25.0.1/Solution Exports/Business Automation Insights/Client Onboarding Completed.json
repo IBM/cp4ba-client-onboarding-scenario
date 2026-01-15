@@ -1,0 +1,792 @@
+{
+  "id" : "qVQp140BBLhrpUQ54tL9",
+  "name" : "Client Onboarding Completed",
+  "description" : "Custom visualizations for completed client onboarding requests.",
+  "owner" : "ceadmin",
+  "type" : "ONLY_ME",
+  "visualizations" : [ {
+    "id" : "2611999d-e0aa-4b73-8922-75d3b46af63f",
+    "name" : "Approvals by Industry",
+    "description" : "",
+    "config" : {
+      "type" : "MetricConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "",
+          "kind" : "Count"
+        } ],
+        "groups" : [ {
+          "field" : "data.CO_ApprovalStatus.keyword"
+        }, {
+          "field" : "data.CO_Industry.keyword"
+        } ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsHierarchicalPieDto",
+        "unit" : "",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : ""
+        },
+        "_version" : 1
+      },
+      "_version" : 1
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 3.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 2.0,
+      "y" : 3.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "8a1b7643-ad2e-4474-bcdd-d3d244e0444b",
+    "name" : "Services Subscription by Industry with Drilldowns",
+    "description" : "",
+    "config" : {
+      "type" : "DrillDownConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "drillDownLayers" : [ {
+        "id" : "b2675684-9b04-4cec-8e05-352ec96162a6",
+        "name" : "Industry",
+        "description" : "",
+        "config" : {
+          "type" : "MetricConfigDto",
+          "domain" : {
+            "kind" : "Workflow (Case)",
+            "id" : "Client Onboarding",
+            "name" : "Client Onboarding",
+            "fields" : [ "solution-name.keyword" ],
+            "fieldValues" : [ "Client Onboarding" ],
+            "timestampField" : "timestamp",
+            "hasSuggestions" : false
+          },
+          "fieldAggregation" : {
+            "aggregations" : [ {
+              "field" : "",
+              "kind" : "Count"
+            } ],
+            "groups" : [ {
+              "field" : "data.CO_Industry.keyword"
+            } ],
+            "drill" : false,
+            "_version" : 2
+          },
+          "settings" : {
+            "type" : "SingleSettingsDoughnutDto",
+            "unit" : "",
+            "legend" : {
+              "displayLegend" : true,
+              "displayTitle" : true,
+              "title" : ""
+            },
+            "displayInnerLabel" : true,
+            "innerLabel" : "",
+            "_version" : 1
+          },
+          "_version" : 1
+        },
+        "layouts" : [ ],
+        "showAsTable" : false
+      }, {
+        "id" : "f36d9a0e-4fc4-4123-b8f1-38a2ceccaf16",
+        "name" : "Services Requested",
+        "description" : "",
+        "config" : {
+          "type" : "MetricConfigDto",
+          "domain" : {
+            "kind" : "Workflow (Case)",
+            "id" : "Client Onboarding",
+            "name" : "Client Onboarding",
+            "fields" : [ "solution-name.keyword" ],
+            "fieldValues" : [ "Client Onboarding" ],
+            "timestampField" : "timestamp",
+            "hasSuggestions" : false
+          },
+          "fieldAggregation" : {
+            "aggregations" : [ {
+              "field" : "",
+              "kind" : "Count"
+            } ],
+            "groups" : [ {
+              "field" : "data.CO_ServicesRequested.keyword"
+            } ],
+            "drill" : false,
+            "_version" : 2
+          },
+          "settings" : {
+            "type" : "SingleSettingsDoughnutDto",
+            "unit" : "",
+            "legend" : {
+              "displayLegend" : true,
+              "displayTitle" : true,
+              "title" : ""
+            },
+            "displayInnerLabel" : true,
+            "innerLabel" : "",
+            "_version" : 1
+          },
+          "_version" : 1
+        },
+        "layouts" : [ ],
+        "showAsTable" : false
+      }, {
+        "id" : "f9779ef4-4381-4888-bb4f-038685df0b4d",
+        "name" : "Country",
+        "description" : "",
+        "config" : {
+          "type" : "MetricConfigDto",
+          "domain" : {
+            "kind" : "Workflow (Case)",
+            "id" : "Client Onboarding",
+            "name" : "Client Onboarding",
+            "fields" : [ "solution-name.keyword" ],
+            "fieldValues" : [ "Client Onboarding" ],
+            "timestampField" : "timestamp",
+            "hasSuggestions" : false
+          },
+          "fieldAggregation" : {
+            "aggregations" : [ {
+              "field" : "",
+              "kind" : "Count"
+            } ],
+            "groups" : [ {
+              "field" : "data.CO_AddressCountry.keyword"
+            } ],
+            "drill" : false,
+            "_version" : 2
+          },
+          "settings" : {
+            "type" : "SingleSettingsDoughnutDto",
+            "unit" : "",
+            "legend" : {
+              "displayLegend" : true,
+              "displayTitle" : true,
+              "title" : ""
+            },
+            "displayInnerLabel" : true,
+            "innerLabel" : "",
+            "_version" : 1
+          },
+          "_version" : 1
+        },
+        "layouts" : [ ],
+        "showAsTable" : false
+      } ]
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 5.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 4.0,
+      "y" : 3.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "f6e52d4d-c5d4-42a7-94ab-0f46b5bcade2",
+    "name" : "Approval Count of High-Risk Cases",
+    "description" : "",
+    "config" : {
+      "type" : "MetricTrendConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "filters" : [ {
+        "field" : "data.CO_HighRisk",
+        "op" : "IsTrue",
+        "values" : [ ]
+      }, {
+        "field" : "data.CO_ApprovalStatus.keyword",
+        "op" : "Eq",
+        "values" : [ "Approved" ]
+      } ],
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "",
+          "kind" : "Count"
+        } ],
+        "groups" : [ ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "interval" : {
+        "type" : "FixedIntervalDto",
+        "unit" : "MINUTE",
+        "value" : 1
+      },
+      "timestampField" : "timestamp",
+      "settings" : {
+        "type" : "TrendSettingsBarDto",
+        "unit" : "Date",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : "",
+          "position" : "right",
+          "iconShape" : "circle"
+        },
+        "labelYAxis" : "Approvals",
+        "verticalDirection" : true,
+        "stacked" : true,
+        "_version" : 1
+      },
+      "predictionConfig" : {
+        "enabled" : false,
+        "_version" : 2
+      }
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 7.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 2.0,
+      "y" : 5.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "0dae90e6-949e-4fca-ac70-e5ad0f72c5cb",
+    "name" : "Average Approval Confidence by Industry Sector and Revenue",
+    "description" : "",
+    "config" : {
+      "type" : "MetricConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "data.CO_AnnualRevenue",
+          "kind" : "Average"
+        }, {
+          "field" : "data.CO_RiskConfidence",
+          "kind" : "Average"
+        }, {
+          "field" : "",
+          "kind" : "Count"
+        } ],
+        "groups" : [ {
+          "field" : "data.CO_Industry.keyword"
+        } ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsBubbleDto",
+        "unit" : "Average Company Revenue",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : "Industry"
+        },
+        "labelYAxis" : "Average Approval Confidence Level",
+        "_version" : 1
+      },
+      "_version" : 1
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 9.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 4.0,
+      "y" : 5.0,
+      "w" : 2.0,
+      "h" : 4.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "7a1ac82d-54ff-4b8a-b096-8eb0e69ccbf7",
+    "name" : "Activity Duration Distribution in Case Completion",
+    "description" : "",
+    "config" : {
+      "type" : "MetricConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "duration-seconds",
+          "kind" : "Average"
+        } ],
+        "groups" : [ {
+          "field" : "task-name.keyword"
+        } ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsDoughnutDto",
+        "unit" : "Activity",
+        "formatters" : [ {
+          "field" : "duration-seconds",
+          "format" : "DURATION",
+          "options" : {
+            "type" : "DurationOptionsDto",
+            "input" : "SECOND",
+            "output" : "MINUTE"
+          }
+        } ],
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : ""
+        },
+        "displayInnerLabel" : true,
+        "innerLabel" : "Average Case Duration",
+        "_version" : 1
+      },
+      "_version" : 1
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 11.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 0.0,
+      "y" : 5.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "0a43317c-d236-4b7b-91b3-448f65617fd8",
+    "name" : "Completed Cases per Day",
+    "description" : "",
+    "config" : {
+      "type" : "KpiTrendConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "filters" : [ {
+        "field" : "type.keyword",
+        "op" : "Eq",
+        "values" : [ "case" ]
+      }, {
+        "field" : "state.keyword",
+        "op" : "Eq",
+        "values" : [ "Complete" ]
+      } ],
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "",
+          "kind" : "Count"
+        } ],
+        "groups" : [ ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "interval" : {
+        "type" : "FixedIntervalDto",
+        "unit" : "MINUTE",
+        "value" : 1
+      },
+      "timestampField" : "timestamp",
+      "settings" : {
+        "type" : "TrendSettingsBarDto",
+        "unit" : "Date",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : "",
+          "position" : "right",
+          "iconShape" : "circle"
+        },
+        "labelYAxis" : "Completed Cases",
+        "verticalDirection" : true,
+        "stacked" : true,
+        "_version" : 1
+      },
+      "targets" : [ {
+        "name" : "Target",
+        "value" : 3.0
+      } ],
+      "thresholds" : [ {
+        "name" : "Case Completion Rate",
+        "value" : 2.0,
+        "ranges" : [ {
+          "name" : "Low",
+          "start" : "min",
+          "end" : "2",
+          "color" : "#fa4d56"
+        }, {
+          "name" : "Normal",
+          "start" : "2",
+          "end" : "5",
+          "color" : "#b28600"
+        } ]
+      }, {
+        "name" : "T2",
+        "value" : 5.0,
+        "ranges" : [ {
+          "name" : "High",
+          "start" : "5",
+          "end" : "max",
+          "color" : "#198038"
+        } ]
+      } ],
+      "alertsConfig" : [ {
+        "id" : "8a3e9820-9cb4-426f-8b8b-87883e546032",
+        "kind" : "HitTargetDown",
+        "message" : "The case completion rate is low.",
+        "targetName" : "Case Completion Rate",
+        "targetType" : "Threshold",
+        "priority" : "High"
+      } ],
+      "predictionConfig" : {
+        "enabled" : true,
+        "nextPrediction" : {
+          "type" : "CalendarIntervalDto",
+          "unit" : "DAY"
+        },
+        "_version" : 2
+      }
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 13.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 2.0,
+      "y" : 7.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "ac55cb6c-9990-48af-9f11-45ffa9250b07",
+    "name" : "Approvals by Industry Heatmap",
+    "description" : "",
+    "config" : {
+      "type" : "MetricConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "",
+          "kind" : "Count"
+        } ],
+        "groups" : [ {
+          "field" : "data.CO_ApprovalStatus.keyword"
+        }, {
+          "field" : "data.CO_Industry.keyword"
+        } ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsHeatMapDto",
+        "unit" : "Approval Status",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : ""
+        },
+        "labelYAxis" : "Industry ",
+        "_version" : 1
+      },
+      "_version" : 1
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 15.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 0.0,
+      "y" : 7.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "7ba02f82-395e-42ba-a14d-a5e5e35ebe2c",
+    "name" : "Client Onboarding Data",
+    "description" : "",
+    "config" : {
+      "type" : "TableConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "filters" : [ {
+        "field" : "category.keyword",
+        "op" : "Eq",
+        "values" : [ "icm" ]
+      }, {
+        "field" : "type.keyword",
+        "op" : "Eq",
+        "values" : [ "case" ]
+      }, {
+        "field" : "state.keyword",
+        "op" : "Eq",
+        "values" : [ "Complete" ]
+      } ],
+      "columns" : [ {
+        "field" : "data.CO_ServicesFee",
+        "label" : "Service Fee"
+      }, {
+        "field" : "data.CO_Industry.keyword",
+        "label" : "Industry"
+      }, {
+        "field" : "data.CO_AddressCountry.keyword",
+        "label" : "Country"
+      }, {
+        "field" : "data.CO_ApprovalStatus.keyword",
+        "label" : "Approved?"
+      }, {
+        "field" : "duration-seconds",
+        "label" : "Duration",
+        "textFormatter" : {
+          "field" : "duration-seconds",
+          "format" : "DURATION",
+          "options" : {
+            "type" : "DurationOptionsDto",
+            "input" : "SECOND",
+            "output" : "MINUTE"
+          }
+        }
+      } ]
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 17.0,
+      "w" : 1.0,
+      "h" : 2.0
+    }, {
+      "kind" : "LG",
+      "x" : 0.0,
+      "y" : 3.0,
+      "w" : 2.0,
+      "h" : 2.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "82ab7394-a0b6-4be4-a8b9-94579a33e330",
+    "name" : "Average Revenue from Service Fees for Approved Clients",
+    "description" : "",
+    "config" : {
+      "type" : "KpiConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "filters" : [ {
+        "field" : "data.CO_ApprovalStatus.keyword",
+        "op" : "Eq",
+        "values" : [ "Approved" ]
+      } ],
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "data.CO_ServicesFee",
+          "kind" : "Average"
+        } ],
+        "groups" : [ ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsRadialGaugeDto",
+        "unit" : "$",
+        "min" : 0.0,
+        "max" : 100000.0,
+        "_version" : 1
+      },
+      "targets" : [ {
+        "name" : "Target",
+        "value" : 80000.0
+      } ],
+      "thresholds" : [ {
+        "name" : "Below",
+        "value" : 30000.0,
+        "ranges" : [ {
+          "name" : "Poor",
+          "start" : "min",
+          "end" : "30000",
+          "color" : "#fa4d56"
+        }, {
+          "name" : "Good",
+          "start" : "30000",
+          "end" : "80000",
+          "color" : "#b28600"
+        } ]
+      }, {
+        "name" : "Above",
+        "value" : 80000.0,
+        "ranges" : [ {
+          "name" : "Excellent",
+          "start" : "80000",
+          "end" : "max",
+          "color" : "#198038"
+        } ]
+      } ]
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 0.0,
+      "w" : 1.0,
+      "h" : 3.0
+    }, {
+      "kind" : "LG",
+      "x" : 0.0,
+      "y" : 0.0,
+      "w" : 2.0,
+      "h" : 3.0
+    } ],
+    "showAsTable" : false
+  }, {
+    "id" : "94236f4f-4b5e-4489-b19d-24122fc31360",
+    "name" : "Highest Service Fee by Industry Sector",
+    "description" : "",
+    "config" : {
+      "type" : "MetricConfigDto",
+      "domain" : {
+        "kind" : "Workflow (Case)",
+        "id" : "Client Onboarding",
+        "name" : "Client Onboarding",
+        "fields" : [ "solution-name.keyword" ],
+        "fieldValues" : [ "Client Onboarding" ],
+        "timestampField" : "timestamp",
+        "hasSuggestions" : false
+      },
+      "fieldAggregation" : {
+        "aggregations" : [ {
+          "field" : "data.CO_ServicesFee",
+          "kind" : "Max"
+        } ],
+        "groups" : [ {
+          "field" : "data.CO_Industry.keyword"
+        } ],
+        "drill" : false,
+        "_version" : 2
+      },
+      "settings" : {
+        "type" : "SingleSettingsBarDto",
+        "unit" : "Industry",
+        "legend" : {
+          "displayLegend" : true,
+          "displayTitle" : true,
+          "title" : ""
+        },
+        "labelYAxis" : "Maximum Service Fee [$]",
+        "verticalDirection" : true,
+        "stacked" : true,
+        "_version" : 1
+      },
+      "_version" : 1
+    },
+    "layouts" : [ {
+      "kind" : "SM",
+      "x" : 0.0,
+      "y" : 0.0,
+      "w" : 1.0,
+      "h" : 3.0
+    }, {
+      "kind" : "LG",
+      "x" : 0.0,
+      "y" : 0.0,
+      "w" : 2.0,
+      "h" : 3.0
+    } ],
+    "showAsTable" : false
+  } ],
+  "timeWindow" : {
+    "type" : "NoTimeWindowDto"
+  },
+  "creation" : "2024-02-23T18:11:03.027Z",
+  "lastUpdate" : "2024-05-01T19:41:13.22652926Z",
+  "goalsLayout" : [ ],
+  "monitoringSources" : [ ],
+  "_dashboardVersion" : 4
+}
