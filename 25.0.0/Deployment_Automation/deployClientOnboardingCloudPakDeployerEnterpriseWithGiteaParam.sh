@@ -52,6 +52,34 @@ gmailAddress=REQUIRED
 # App key for accessing the gmail account to send emails (in case useInternalMailServer is set to false)
 gmailAppKey=REQUIRED
 
+# Section with flags related to using AI-enhanced Client Onboarding scenario
+
+# Is the Content Assistant capability available in the environment or not?
+enableContentAssistant=false
+# Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
+restrictContentAssistantToUser=
+# Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
+icaDesktopName=ICN
+# Region to use for the IBM Content Assistant ICN plug-in (can either be aws-us-east-1 / aws-eu-central-1 (only required when enableContentAssistant=true)
+icaGenAIRegion=REQUIRED
+# Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+genAIAccessCode=REQUIRED
+#  Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
+genAIServiceURL=REQUIRED
+# Is the GenAI capability available in Workflow
+enableWFGenAI=false
+# Is the Workflow Assistant capability available
+enableWFAssistant=false
+# The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
+createSampleCaseDataForNumUsers=10
+# The maximum number of thread used to create the dummy cases in parallel
+maxCaseIteratorThreads=20
+
+# Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
+graphQLURL=
+# Explicit base URL for accessing ICN (only required if automatic detection does not work in environment)
+icnBaseURL=
+
 # Uncomment following two lines in case you want to use your Docker.io account instead of pulling images for the mail server anonymously (mostly relvant when anonymous pull limit has been reached)
 #dockerUserName=REQUIRED
 #dockerToken=REQUIRED
@@ -89,11 +117,14 @@ outputPath=
 printDetailedMessageToConsole=false
 printTraceMessageToConsole=false
 
+# Any other options can be defined here and will be passed unchanged to the deployment tool
+additionalOptions=
+
 # ----------------------------------------------------------------------------------------------------------
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,uims:,gmaila:,gmailk:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub: -- "$@")
+VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,uims:,gmaila:,gmailk:,eca:,rcatu:,icadn:,icaregion:,icaac:,icaservice:,ewfai:,ewfa:,cscdfu:,mcit:,gqlurl:,icnburl:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub:,addopt: -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -120,7 +151,19 @@ while [ : ]; do
         echo "--uims = useInternalMailServer"
         echo "--sc = ocpStorageClassForInternalMailServer"
         echo "--gmaila = gmailAddress"
-        echo "--gmailk = gmailAppKey"
+        echo "--eca = enableContentAssistant"
+        echo "--rcatu = restrictContentAssistantToUser"
+        echo "--icadn = icaDesktopName"
+        echo "--icaregion = icaGenAIRegion"
+        echo "--icaac = genAIAccessCode"
+        echo "--icaservice = genAIServiceURL"
+        echo "--ewfai = enableWFGenAI"
+        echo "--ewfa = enableWFAssistant"
+        echo "--cscdfu = createSampleCaseDataForNumUsers"
+        echo "--mcit = maxCaseIteratorThreads"
+        echo "--gqlurl = graphQLURL"
+        echo "--icnburl = icnBaseURL"
+        echo "--addopt = additionalOptions"
         echo "--du = dockerUserName"
         echo "--dt = dockerToken"
         echo "--jvm = jvmSettings"
@@ -213,6 +256,54 @@ while [ : ]; do
         ocpStorageClassForInternalMailServer=$2
         shift 2
         ;;
+    --eca)
+        enableContentAssistant=$2
+        shift 2
+        ;;
+    --rcatu)
+        restrictContentAssistantToUser=$2
+        shift 2
+        ;;
+    --icadn)
+        icaDesktopName=$2
+        shift 2
+        ;;
+    --icaregion)
+        icaGenAIRegion=$2
+        shift 2
+        ;;
+    --icaac)
+        genAIAccessCode=$2
+        shift 2
+        ;;
+    --icaservice)
+        genAIServiceURL=$2
+        shift 2
+        ;;
+    --ewfai)
+        enableWFGenAI=$2
+        shift 2
+        ;;
+    --ewfa)
+        enableWFAssistant=$2
+        shift 2
+        ;;
+    --cscdfu)
+        createSampleCaseDataForNumUsers=$2
+        shift 2
+        ;;
+    --mcit)
+        maxCaseIteratorThreads=$2
+        shift 2
+        ;;
+    --gqlurl)
+        graphQLURL=$2
+        shift 2
+        ;;
+    --icnburl)
+        icnBaseURL=$2
+        shift 2
+        ;;
     --du)
         dockerUserName=$2
         shift 2
@@ -249,6 +340,10 @@ while [ : ]; do
         disableAccessToGitHub=$2
         shift 2
         ;;
+    --addopt)
+        additionalOptions=$2
+        shift 2
+        ;;
     --) shift; 
         break 
         ;;
@@ -275,6 +370,18 @@ then
   echo "gmailAddress '${gmailAddress}'"
   echo "gmailAppKey '${gmailAppKey}'"
   echo "ocpStorageClassForInternalMailServer '${ocpStorageClassForInternalMailServer}'"
+  echo "enableContentAssistant '${enableContentAssistant}'"
+  echo "restrictContentAssistantToUser '${restrictContentAssistantToUser}'"
+  echo "icaDesktopName '${icaDesktopName}'"
+  echo "icaGenAIRegion '${icaGenAIRegion}'"
+  echo "genAIAccessCode '${genAIAccessCode}'"
+  echo "genAIServiceURL '${genAIServiceURL}'"
+  echo "enableWFGenAI '${enableWFGenAI}'"
+  echo "enableWFAssistant '${enableWFAssistant}'"
+  echo "createSampleCaseDataForNumUsers '${createSampleCaseDataForNumUsers}'"
+  echo "maxCaseIteratorThreads '${maxCaseIteratorThreads}'"
+  echo "graphQLURL '${graphQLURL}'"
+  echo "icnBaseURL '${icnBaseURL}'"  
   echo "dockerUserName '${dockerUserName}'"
   echo "dockerToken '${dockerToken}'"
   echo "jvmSettings '${jvmSettings}'"
@@ -284,6 +391,7 @@ then
   echo "outputPath '${outputPath}'"
   echo "printDetailedMessageToConsole '${printDetailedMessageToConsole}'"
   echo "printTraceMessageToConsole '${printTraceMessageToConsole}'"
+  echo "additionalOptions '${additionalOptions}'"
 fi
 
 # ----------------------------------------------------------------------------------------------------------
@@ -331,7 +439,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGiteaParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
@@ -696,6 +804,102 @@ then
   fi
 fi
 
+if [[ "${enableContentAssistant}" == "true" ]]
+then
+  internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
+  
+  if [[ "${icaGenAIRegion}" == "REQUIRED" ]] || [[ "${icaGenAIRegion}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'icaGenAIRegion' has not been set"
+  else
+    internalGenAIRegion=genAIRegion=${icaGenAIRegion}
+  fi
+  
+  if [[ "${genAIAccessCode}" == "REQUIRED" ]] || [[ "${genAIAccessCode}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIAccessCode' has not been set"
+  else
+    internalGenAIAccessCode=genAIAccessCode=${genAIAccessCode}
+  fi
+  
+  if [[ "${genAIServiceURL}" == "REQUIRED" ]] || [[ "${genAIServiceURL}" == "" ]]
+  then
+     if $validationSuccess
+     then
+       echo "Validating configuration failed:"
+       validationSuccess=false
+     fi
+    echo "  Variable 'enableContentAssistant' is set to 'true' but variable 'genAIServiceURL' has not been set"
+  else
+    internalGenAIServiceURL=genAIServiceURL=${genAIServiceURL}
+  fi
+fi
+
+if [ ! -z "${restrictContentAssistantToUser+x}" ]
+then
+  if [[ "${restrictContentAssistantToUser}" != "" ]]
+  then
+    internalRestrictContentAssistantToUser=restrictContentAssistantToUser=${restrictContentAssistantToUser}
+  fi
+fi
+
+if [ ! -z "${icaDesktopName+x}" ]
+then
+  internalICADesktopName=icaDesktopName=${icaDesktopName}
+fi
+
+if [ ! -z "${enableWFGenAI+x}" ]
+then
+  internalEnableWFGenAI=enableWFGenAI=${enableWFGenAI}
+fi
+
+if [ ! -z "${enableWFAssistant+x}" ]
+then
+  internalEnableWFAssistant=enableWFAssistant=${enableWFAssistant}
+fi
+
+if [ ! -z "${graphQLURL+x}" ]
+then
+  if [[ "${graphQLURL}" != "" ]]
+  then
+    internalGraphQLURL=graphQLURL=${graphQLURL}
+  fi
+fi
+
+if [ ! -z "${icnBaseURL+x}" ]
+then
+  if [[ "${icnBaseURL}" != "" ]] 
+  then
+    internalIcnBaseURL=icnBaseURL=${icnBaseURL}
+  fi
+fi
+
+if [ ! -z "${createSampleCaseDataForNumUsers+x}" ]
+then
+  if [[ "${createSampleCaseDataForNumUsers}" != "" ]]
+  then
+    internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=${createSampleCaseDataForNumUsers}
+  fi
+fi
+
+if [ ! -z "${createSampleCaseDataForNumUsers+x}" ]
+then
+  if [[ "${createSampleCaseDataForNumUsers}" != "" ]]
+  then
+    internalMaxCaseIteratorThreads=maxCaseIteratorThreads=${maxCaseIteratorThreads}
+  fi
+fi
+
 
 if ! $validationSuccess
 then
@@ -710,7 +914,7 @@ fi
 
 if [ ! -z "${dumpCmd+x}" ]
 then
-  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
