@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.103 <1.2.0",
+	"requiredToolVersion": ">=1.1.111 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -274,9 +274,11 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
 											},
 											{
+												"enabled": "$$(enableWFAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Execution_of_Service_and_Feedback.twx"
 											},
 											{
+												"enabled": "$$(enableWFAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/ClientOnboardingRequestsSavedView.json"
 											}
 										]
@@ -523,12 +525,15 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"
 											},
 											{
+												"enabled": "$$(enableContentAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report.pdf"
 											},
 											{
+												"enabled": "$$(enableContentAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Vieria%20Electricity.jpg"
 											},
 											{
+												"enabled": "$$(enableContentAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Brochure.jpg"
 											}
 										]
@@ -919,6 +924,7 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"
 											},
 											{
+												"enabled": "$$(enableContentAssistant)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktopICA.properties"
 											}
 										]
@@ -1290,20 +1296,20 @@
 					},
 					{
 						"WF": {
-							"enabled": "$$(enableDeployClientOnboarding_WF)$$",
+							"enabled": "$$(enableDeployClientOnboarding_WF)$$ && $$(enableWFAssistant)$$",
 							"description": "WF - Import Saved View when WF Assistant is enabled",
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
 									"DETERMINEAPPENGINESERVERID": {
-										"enabled": "$$(enableWFAssistant)$$",
+										"enabled": "true",
 										"description": "Determine App Engine Server Id",
 										"useFirst": true
 									}
 								},
 								{
 									"IMPORTSAVEDVIEW": {
-										"enabled": "$$(enableWFAssistant)$$",
+										"enabled": "true",
 										"description": "Import the Cient Onboarding Request Saved View",
 										"fileName": "ClientOnboardingRequestsSavedView.json",
 										"appEngineAppConfigName": "$(appEngineServerId)$",
