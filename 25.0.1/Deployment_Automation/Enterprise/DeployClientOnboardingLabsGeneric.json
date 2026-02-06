@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.103 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -556,7 +556,7 @@
 											{
 												"action": "add",
 												"displayName": "SOLUTION Client Document - Vector Index",
-												"targetClassSmybolicName": "SOLUTION_Client_Document",
+												"targetClassSymbolicName": "SOLUTION_Client_Document",
 												"subscribedEvents": [
 													"checkin",
 													"update"
@@ -571,7 +571,7 @@
 											{
 												"action": "add",
 												"displayName": "SOLUTION Client Document - Summarize",
-												"targetClassSmybolicName": "SOLUTION_Client_Document",
+												"targetClassSymbolicName": "SOLUTION_Client_Document",
 												"subscribedEvents": [
 													"checkin",
 													"update"
