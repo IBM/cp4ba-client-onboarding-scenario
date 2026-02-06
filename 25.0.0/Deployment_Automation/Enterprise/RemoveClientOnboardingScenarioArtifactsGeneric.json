@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to undeploy all artifacts of the Client Onboarding scenario itself but not the artifacts used in labs and/or user created artifacts",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.0/Deployment_Automation/Enterprise/RemoveClientOnboardingScenarioArtifactsGeneric.json",
 	"requiredToolVersion": ">=1.1.40 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.0 <25.1.0",
@@ -66,11 +66,12 @@
 								{
 									"DELETEARTIFACT": {
 										"enabled": "true",
-										"description": "Remove 'Client Onboarding Request' & 'Client Onboarding Document Upload' apps",
+										"description": "Remove 'Client Onboarding Request', 'Client Onboarding Document Upload' & 'Client Onboarding Comments' apps",
 										"appEngineAppConfigName": "APPENG0",
 										"artifactNames": [
 											"Client Onboarding Request",
-											"Client Onboarding Document Upload"
+											"Client Onboarding Document Upload",
+											"Client Onboarding Comments"
 										],
 										"artifactType": "Application"
 									}
