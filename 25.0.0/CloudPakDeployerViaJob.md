@@ -19,13 +19,7 @@ This deployment approach does not require a separate machine with Java on it to 
 
 **Cloud Pak for Business Automation (CP4BA) 25.0.0 Enterprise deployment environment deployed via Cloud Pak Deployer**
 
-Either
-
-- request a CP4BA 25.0.0 Enterprise environment deployed via Cloud Pak Deployer from TechZone following these [instructions](https://techzone.ibm.com/collection/apollo-business-automation/journey-archive) 
-
-  or
-
-- bring your own CP4BA 25.0.0 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
+Bring your own CP4BA 25.0.0 Enterprise deployment authoring environment deployed via [Cloud Pak Deployer](https://ibm.github.io/cloud-pak-deployer/30-reference/configuration/cp4ba/) with at least the following capabilities: Business Applications, Automation Decision Services, Workflow, Business Automation Insights, Process Federation Server.
 
 Once you have a suitable environment proceed to the chapter [Import Instructions](#import-instructions)
 
@@ -48,10 +42,6 @@ Once you have a suitable environment proceed to the chapter [Import Instructions
    - Type '**access-info**' in the field next to 'Name'
 
    If the ConfigMap **icp4adeploy-cp4ba-access-info** is shown, your CP4BA cluster is fully deployed. **If not, periodically check until it is listed.** 
-
-   > [!NOTE]
-   >
-   > For an environment provisioned from TechZone, this can take up to 4-7 hours after you have received the email, for the environment to be ready.
 
 3. **Import** the following **YAML** to **create a Service Account** and **assign** it the **required rights** 
 
