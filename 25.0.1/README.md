@@ -12,7 +12,7 @@ Choose the environment type and deployment approach below, that best matches you
 >
 > Depending on the target environment one or two deployment approaches exist:
 >
-> 1. (New and recommended) Using an OpenShift Job - Does not require a separate deployment machine with Java installed
+> 1. (Recommended) Using an OpenShift Job - Does not require a separate deployment machine with Java installed
 > 2. (Traditional) Using a separate deployment machine with Java installed
 >
 > When available, using the OpenShift Job approach is recommended, as there is no additional requirement other than having a CP4BA 25.0.1 cluster.
@@ -21,16 +21,23 @@ Choose the environment type and deployment approach below, that best matches you
 ## Target Deployment Type
 
 1. **Starter Deployment**
+   
    - Using an [OpenShift Job](StarterDeploymentViaJob.md) - **Recommended**
    - Using a [separate machine](StarterDeploymentSeparateMachine.md) to run the deployment from
+   
 2. **Enterprise Deployment**
+
+   Refer to [this page](EnterprisePattern.md) for details or quick links below.
+
    1. **Deployed by Cloud Pak Deployer**
       - Using an [OpenShift Job](CloudPakDeployerViaJob.md) - **Recommended**
       - Using a [separate machine](CloudPakDeployerSeparateMachine.md) to run the deployment from
    2. **Deployed using LDAP content as defined by Rapid Deployment Scripts** ([predefined.ldif & cp4ba.ldif](https://github.com/IBM/cp4ba-rapid-deployment/blob/main/cp4ba-21-0-3/03createVMForLDAP.md)) **with a co-deployed Gitea**
-      - Using a separate machine to run the deployment from
-   3. **Deployed using an arbitrary LDAP and an external GitHub**
-      - Using a separate machine to run the deployment from
+      - Using a [separate machine](RapidDeploymentLDAPandGitea.md) to run the deployment from
+   3. **Deployed using an arbitrary LDAP and co-deployed Gitea**
+      - Using a [separate machine](ArbitraryLDAPandGitea.md) to run the deployment from
+   4. **Deployed using an arbitrary LDAP and an external GitHub**
+      - Using a [separate machine](ArbitraryLDAPExternalGitHub.md) to run the deployment from
 
 ## Support
 
