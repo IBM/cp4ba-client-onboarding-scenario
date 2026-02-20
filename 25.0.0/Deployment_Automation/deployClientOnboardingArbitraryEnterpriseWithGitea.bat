@@ -37,7 +37,7 @@ rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contain
 SET cp4baAdminGroup=REQUIRED
 rem Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance
 SET generalUsersGroup=REQUIRED
-rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admini
+rem Uncomment when the admin credentials for the embedded Gitea differ from the credentials of the CP4BA admin
 rem SET giteaCredentials="-giteaUserName= -giteaUserPwd="
 
 rem Flag that determines if the internal email server is used or the external gmail service
