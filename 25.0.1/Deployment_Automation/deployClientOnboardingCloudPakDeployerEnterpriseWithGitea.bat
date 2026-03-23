@@ -57,8 +57,8 @@ SET gmailAppKey=REQUIRED
 
 rem Section with flags related to using AI-enhanced Client Onboarding scenario
 
-rem Is the Content Assistant capability available in the environment or not?
-SET enableContentAssistant=false
+rem Is the Content Assistant capability available in the environment or not? (auto to auto-detect if IBM Content Assistant Client Managed is available)
+SET enableContentAssistant=auto
 rem Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
 SET restrictContentAssistantToUser=
 rem Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
@@ -69,10 +69,10 @@ rem Used for the respective GenAI configuration within CPE and a Gen AI enabled 
 SET genAIAccessCode=REQUIRED
 rem Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
 SET genAIServiceURL=REQUIRED
-rem Is the GenAI capability available in Workflow
-SET enableWFGenAI=false
-rem Is the Workflow Assistant capability available
-SET enableWFAssistant=false
+rem Is the GenAI capability available in Workflow (auto to auto-detect if genAI is configured for BAW)
+SET enableWFGenAI=auto
+rem Is the Workflow Assistant capability available (auto to auto-detect if Workplace Assistant is available
+SET enableWorkplaceAssistant=auto
 
 rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)
 SET graphQLURL=
@@ -145,11 +145,11 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.0
+SET SCRIPTVERSION=1.0.1
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
-SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,giteaCredentials,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWFAssistant,graphQLURL,icnBaseURL
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,rpaBotExecutionUser,rpaServer,giteaCredentials,configureLabs,useInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWorkplaceAssistant,graphQLURL,icnBaseURL
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -376,8 +376,12 @@ if defined dockerUserName (
 )
 
 if defined enableContentAssistant (
+	if "%enableContentAssistant%"=="auto" (
+		set internalEnableContentAssistant=enableContentAssistant=auto
+	}
+	
 	if "%enableContentAssistant%"=="true" (
-		set internalEnableContentAssistant=enableContentAssistant=%enableContentAssistant%
+		
 		
 		if "%genAIRegion%"=="REQUIRED" set genAIRegionRequired=true
 		if "%genAIRegion%"=="" set genAIRegionRequired=true
@@ -432,8 +436,8 @@ if defined enableWFGenAI (
 	set internalEnableWFGenAI=enableWFGenAI=%enableWFGenAI%
 )
 
-if defined enableWFAssistant (
-	set internalEnableWFAssistant=enableWFAssistant=%enableWFAssistant%
+if defined enableWorkplaceAssistant (
+	set internalEnableWorkplaceAssistant=enableWorkplaceAssistant=%enableWorkplaceAssistant%
 )
 
 if defined graphQLURL (
@@ -466,6 +470,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalEnableWFGenAI% %internalEnableWorkplaceAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
 
 ENDLOCAL

@@ -54,8 +54,8 @@ gmailAppKey=REQUIRED
 
 # Section with flags related to using AI-enhanced Client Onboarding scenario
 
-# Is the Content Assistant capability available in the environment or not?
-enableContentAssistant=false
+# Is the Content Assistant capability available in the environment or not? (auto to auto-detect if IBM Content Assistant Client Managed is available)
+enableContentAssistant=auto
 # Is the usage of Content Assistant in the APP to be limited to a specific user or not (left empty)
 restrictContentAssistantToUser=
 # Name of the ICN desktop that should be used to open the Annual Report in Daeja Viewer from the Workflow solution
@@ -66,10 +66,10 @@ icaGenAIRegion=REQUIRED
 genAIAccessCode=REQUIRED
 #  Used for the respective GenAI configuration within CPE and a Gen AI enabled object store (only required when enableContentAssistant=true)
 genAIServiceURL=REQUIRED
-# Is the GenAI capability available in Workflow
-enableWFGenAI=false
-# Is the Workflow Assistant capability available
-enableWFAssistant=false
+# Is the GenAI capability available in Workflow (auto to auto-detect if genAI is configured for BAW)
+enableWFGenAI=auto
+# Is the Workplace Assistant capability available (auto to auto-detect if Workplace Assistant is available
+enableWorkplaceAssistant=auto
 # The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
 createSampleCaseDataForNumUsers=10
 # The maximum number of thread used to create the dummy cases in parallel
@@ -124,7 +124,7 @@ additionalOptions=
 # Section handling values specified on the command line, requires GNU’s getopt command
 # ----------------------------------------------------------------------------------------------------------
 
-VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,uims:,gmaila:,gmailk:,eca:,rcatu:,icadn:,icaregion:,icaac:,icaservice:,ewfai:,ewfa:,cscdfu:,mcit:,gqlurl:,icnburl:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub:,addopt: -- "$@")
+VALID_ARGS=$(getopt -o h --long dd,dv,dc,ocls:,oclt:,ns:,pscenario:,phost:,pport:,puser:,ppwd:,cl:,cu:,ewflbu:,rpau:,rpas:,uims:,gmaila:,gmailk:,eca:,rcatu:,icadn:,icaregion:,icaac:,icaservice:,ewfai:,ewpa:,cscdfu:,mcit:,gqlurl:,icnburl:,sc:,du:,dt:,jvm:,ds:,bd:,op:,pdmtoc:,ptmtoc:,dgithub:,addopt: -- "$@")
 if [[ $? -ne 0 ]]; then
   exit 1;
 fi
@@ -158,7 +158,7 @@ while [ : ]; do
         echo "--icaac = genAIAccessCode"
         echo "--icaservice = genAIServiceURL"
         echo "--ewfai = enableWFGenAI"
-        echo "--ewfa = enableWFAssistant"
+        echo "--ewpa = enableWorkplaceAssistant"
         echo "--cscdfu = createSampleCaseDataForNumUsers"
         echo "--mcit = maxCaseIteratorThreads"
         echo "--gqlurl = graphQLURL"
@@ -284,8 +284,8 @@ while [ : ]; do
         enableWFGenAI=$2
         shift 2
         ;;
-    --ewfa)
-        enableWFAssistant=$2
+    --ewpa)
+        enableWorkplaceAssistant=$2
         shift 2
         ;;
     --cscdfu)
@@ -377,7 +377,7 @@ then
   echo "genAIAccessCode '${genAIAccessCode}'"
   echo "genAIServiceURL '${genAIServiceURL}'"
   echo "enableWFGenAI '${enableWFGenAI}'"
-  echo "enableWFAssistant '${enableWFAssistant}'"
+  echo "enableWorkplaceAssistant '${enableWorkplaceAssistant}'"
   echo "createSampleCaseDataForNumUsers '${createSampleCaseDataForNumUsers}'"
   echo "maxCaseIteratorThreads '${maxCaseIteratorThreads}'"
   echo "graphQLURL '${graphQLURL}'"
@@ -439,11 +439,11 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGiteaParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.0
+SCRIPTVERSION=1.0.1
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
-COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,configureLabs,enableWorkflowLabsForBusinessUsers,createUsers,useInternalMailServer,ocpStorageClassForInternalMailServer,gmailAddress,gmailAppKey,dockerUserName,dockerToken,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,outputPath,printDetailedMessageToConsole,printTraceMessageToConsole
+COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baNamespace,configureLabs,enableWorkflowLabsForBusinessUsers,createUsers,useInternalMailServer,ocpStorageClassForInternalMailServer,gmailAddress,gmailAppKey,dockerUserName,dockerToken,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,outputPath,printDetailedMessageToConsole,printTraceMessageToConsole,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWorkplaceAssistant,createSampleCaseDataForNumUsers,maxCaseIteratorThreads,graphQLURL,icnBaseURL
 
 # ----------------------------------------------------------------------------------------------------------
 # Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -804,9 +804,12 @@ then
   fi
 fi
 
-if [[ "${enableContentAssistant}" == "true" ]]
+if [[ "${enableContentAssistant}" == "auto" ]]
 then
-  internalEnableContentAssistant=enableContentAssistant=${enableContentAssistant}
+  internalEnableContentAssistant=enableContentAssistant=auto
+elif [[ "${enableContentAssistant}" == "true" ]]
+then
+  internalEnableContentAssistant=enableContentAssistant=true
   
   if [[ "${icaGenAIRegion}" == "REQUIRED" ]] || [[ "${icaGenAIRegion}" == "" ]]
   then
@@ -863,9 +866,9 @@ then
   internalEnableWFGenAI=enableWFGenAI=${enableWFGenAI}
 fi
 
-if [ ! -z "${enableWFAssistant+x}" ]
+if [ ! -z "${enableWorkplaceAssistant+x}" ]
 then
-  internalEnableWFAssistant=enableWFAssistant=${enableWFAssistant}
+  internalEnableWorkplaceAssistant=enableWorkplaceAssistant=${enableWorkplaceAssistant}
 fi
 
 if [ ! -z "${graphQLURL+x}" ]
@@ -914,7 +917,7 @@ fi
 
 if [ ! -z "${dumpCmd+x}" ]
 then
-  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
+  echo java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWorkplaceAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWFAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${BOOTSTRAPDEBUGSTRINGINTERNAL} ${BOOTSTRAPURL} \"-sdp=${SCRIPTDOWNLOADPATH}\" \"-sn=${FILENAME}\" \"-ss=${SCRIPTNAME}\" \"-sv=${SCRIPTVERSION}\" ${INTERNALOCLOGINSERVER} ${INTERNALOCLOGINTOKEN} ${INTERNALCP4BANAMESPACE} ${TOOLPROXYSETTINGS} ${DEBUGSTRINGINTERNAL} -ibp=${DEPLOYMENTPATTERN} -c=${CONFIGNAME} -as=${AUTOMATIONSCRIPT} ${DISABLEACCESSTOGITHUBINTERNAL} ${INTERNALOUTPUTPATH} ${INTERNALPDMTOC} ${INTERALPTCTOC} ${OCPSTORAGECLASSFOREMAILINTERNAL} ${GMAILADDRESSINTERNAL} ${GMAILAPPKEYINTERNAL} ${ENABLECONFIGURELABSINTERNAL} ${WORKFLOWLABSFORBUSINESSUSERSINTERNAL} ${CREATEUSERSFILEINTERNAL} ${ENABLEDEPLOYEMAILCAPABILITYINTERNAL} ${INTERNALDOCKERINFO} enableDeployClientOnboarding_ADP=${adpConfigured} ACTION_wf_cp_adpEnabled=${adpConfigured} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalRestrictContentAssistantToUser} ${internalEnableWFGenAI} ${internalEnableWorkplaceAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
