@@ -1,14 +1,14 @@
 {
 	"comment": "Contains the steps to optionally onboard users defined in an external file and synchronize the mail server users based on the user modification",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployOnboardUsersAndGroups.json",
-	"requiredToolVersion": ">=1.1.94 <1.2.0",
+	"requiredToolVersion": ">=1.1.113 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.1 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(onboardUsersFile))$ && $$(isCloudPakDeployerDeployment)$$",
+				"enabled": "$(ISSET(onboardUsersFile))$ && $$(isCloudPakDeployerDeployment)$$ && $$(enableOnboardUsers|default=true)$$",
 				"description": "Onboard new users to the Cloud Pak",
 				"actions": [
 					{
@@ -24,7 +24,8 @@
 										"restartPod": "true",
 										"maximumNumPollsForRestart": "$$(modifyStarterLDAP_maximumNumPollsForRestart)$$",
 										"sleepBetweenPollsInSecondsForRestart": "$$(modifyStarterLDAP_sleepBetweenPollsInSecondsForRestart)$$",
-										"configFile": "$$(onboardUsersFile|default=)$$"
+										"configFile": "$$(onboardUsersFile|default=)$$",
+										"cloudPakOnboardingConfigMapName" : "client-onboarding-onboardcloudpakusers"
 									}
 								},
 								{

@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.8",
+	"fileVersion": "1.0.9",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.103 <1.2.0",
+	"requiredToolVersion": ">=1.1.112 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -446,7 +446,7 @@
 								},
 								{
 									"ADDADDON": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Add AddOns for Content Assistant",
 										"addOns": [
 											"5.6.0 Persistent Text Extract Extensions",
@@ -532,7 +532,7 @@
 								},
 								{
 									"MANAGEPERSISTENTTEXTEXTRACT": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Enable Persistent Text Extraction for doc class 'SOLUTION Client Document'",
 										"enablePTE": "true",
 										"docClasses": [
@@ -542,15 +542,15 @@
 								},
 								{
 									"CONFIGUREGENAI": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update Gen AI Configuration",
-										"genAIAccessCode": "§IF($(ISSET(genAIAccessCode))$)§($(genAIAccessCode|default=)$)§ELSE§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))ENDIF§",
-										"genAIServiceURL": "§IF($(ISSET(genAIServiceURL))$)§($(genAIServiceURL|default=)$)§ELSE§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))ENDIF§"
+										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
 									}
 								},
 								{
 									"MANAGESUBSCRIPTIONS": {
-										"enabled": "$(enableContentAssistant)$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'SOLUTION Client Document'",
 										"subscriptionDefinitions": [
 											{
@@ -984,6 +984,7 @@
 										"description": "Import 'ICN' desktop used in Content/ICN lab (for object store $$(CPEICNLABOBJECTSTORE)$$)",
 										"comment": "May be imported already as part of configuring the scenario itself if Content Assistant is enabled",
 										"enforceImport": false,
+										"enforceImportOnAppNameMismatch": "ICN",
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}

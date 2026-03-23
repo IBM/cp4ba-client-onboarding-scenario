@@ -1,24 +1,24 @@
 {
-	"comment": "Contains the steps required to create the case instances for the Client Onboarding scenario when Workflow Assistant is enabled",
-	"fileVersion": "1.0.1",
+	"comment": "Contains the steps required to create the case instances for the Client Onboarding scenario when Workplace Assistant is enabled",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioCasesGeneric.json",
-	"requiredToolVersion": ">=1.1.98 <1.2.0",
+	"requiredToolVersion": ">=1.1.112 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
 		{
 			"ITERATOR": {
-				"enabled": "$$(enableWFAssistant)$$",
-				"description": "Loop to create sample cases for the users when the Workflow Assistant capability is enabled",
+				"enabled": "$(enableWorkplaceAssistantInternal)$",
+				"description": "Loop to create sample cases for the users when the Workplace Assistant capability is enabled",
 				"statusConfigMapName": "client-onboarding-state-create-cases-iterator",
 				"maxThreads": "$$(maxCaseIteratorThreads)$$",
 				"additionalItems": [
 					"$$(cp4baAdminUsrLower)$$"
 				],
 				"startCount": "1",
-				"endCount": "$$(numUsersSampleCaseDataForWFAssistant)$$",
-				"prefix": "usr",
-				"indexFormatter": "%03d",
+				"endCount": "$(numUsersSampleCaseDataForWorkplaceAssistantInternal)$",
+				"prefix": "$(userPrefixSampleCaseDataForWorkplaceAssistantInternal)$",
+				"indexFormatter": "$(numberFormatterSampleCaseDataForWorkplaceAssistantInternal)$",
 				"actions": [
 					{
 						"WF": {

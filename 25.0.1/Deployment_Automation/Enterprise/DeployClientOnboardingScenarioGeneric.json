@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.4",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.111 <1.2.0",
+	"requiredToolVersion": ">=1.1.112 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -274,11 +274,11 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Client_Onboarding.twx"
 											},
 											{
-												"enabled": "$$(enableWFAssistant)$$",
+												"enabled": "$$(enableWorkplaceAssistantInternal)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Execution_of_Service_and_Feedback.twx"
 											},
 											{
-												"enabled": "$$(enableWFAssistant)$$",
+												"enabled": "$$(enableWorkplaceAssistantInternal)$$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/ClientOnboardingRequestsSavedView.json"
 											}
 										]
@@ -294,9 +294,9 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "$$(enableContentAssistant)$$",
-										"description": "Determine ICN repository information based on the desktop '$(ACTION_wf_cp_icaDesktopName)$' and object store '$(BAW_TOS)$'",
-										"desktopSymbolicName": "$(wf_cp_icaDesktopName)$",
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Determine ICN repository information based on the desktop 'baw' and object store '$(BAW_TOS)$'",
+										"desktopSymbolicName": "baw",
 										"osSymbolicName": "$(BAW_TOS)$",
 										"useFirst": true
 									}
@@ -332,7 +332,7 @@
 												"contentAssistantDesktopName": "$$(wf_cp_icaDesktopName)$$"
 											},
 											{
-												"contentAssistantFeatureEnabled": "$$(enableContentAssistant)$$"
+												"contentAssistantFeatureEnabled": "$(enableContentAssistantInternal)$"
 											},
 											{
 												"documentUploadPage": "$$(wf_cp_documentUploadPage)$$"
@@ -347,7 +347,7 @@
 												"enableLogging": "$$(wf_cp_enableLogging)$$"
 											},
 											{
-												"genAIFeatureEnabled": "$$(enableWFGenAI)$$"
+												"genAIFeatureEnabled": "$(enableWFGenAIInternal)$"
 											},
 											{
 												"graphql": "$$(ACTION_wf_cp_graphQL)$$"
@@ -456,7 +456,7 @@
 								},
 								{
 									"EXTRACTTWXPROJECTINFO": {
-										"enabled": "$$(enableWFAssistant)$$",
+										"enabled": "$(enableWorkplaceAssistantInternal)$",
 										"description": "Extract the project information from the Execution of Service and Feedback TWX file",
 										"sourceTwxFile": "Execution_of_Service_and_Feedback.twx",
 										"globalContextVariableName": "ExecutionOfServiceAndFeedbackPAInfo"
@@ -464,7 +464,7 @@
 								},
 								{
 									"INSTALLSOLUTION": {
-										"enabled": "$$(enableWFAssistant)$$",
+										"enabled": "$(enableWorkplaceAssistantInternal)$",
 										"description": "Install the Execution of Service and Feedback WF solution",
 										"twxFile": "Execution_of_Service_and_Feedback.twx",
 										"paDisplayName": "!projectDisplayName!",
@@ -477,7 +477,7 @@
 								},
 								{
 									"DEPLOYCASESOLUTION": {
-										"enabled": "$$(enableWFAssistant)$$",
+										"enabled": "$(enableWorkplaceAssistantInternal)$",
 										"description": "Deploy the Case part of the Execution of Service and Feedback WF solution",
 										"solutionName": "!solutionName!",
 										"solutionAcronym": "!solutionAcronym!",
@@ -525,15 +525,15 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"
 											},
 											{
-												"enabled": "$$(enableContentAssistant)$$",
+												"enabled": "$(enableContentAssistantInternal)$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report.pdf"
 											},
 											{
-												"enabled": "$$(enableContentAssistant)$$",
+												"enabled": "$(enableContentAssistantInternal)$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Vieria%20Electricity.jpg"
 											},
 											{
-												"enabled": "$$(enableContentAssistant)$$",
+												"enabled": "$(enableContentAssistantInternal)$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Brochure.jpg"
 											}
 										]
@@ -547,7 +547,7 @@
 								},
 								{
 									"ADDADDON": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Add AddOns for Content Assistant",
 										"addOns": [
 											"5.6.0 Persistent Text Extract Extensions",
@@ -641,7 +641,7 @@
 								},
 								{
 									"MANAGEPERSISTENTTEXTEXTRACT": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Enable Persistent Text Extraction for doc class 'Client Document'",
 										"enablePTE": "true",
 										"docClasses": [
@@ -651,15 +651,15 @@
 								},
 								{
 									"CONFIGUREGENAI": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update Gen AI Configuration",
-										"genAIAccessCode": "§IF($(ISSET(genAIAccessCode))$)§($(genAIAccessCode|default=)$)§ELSE§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))ENDIF§",
-										"genAIServiceURL": "§IF($(ISSET(genAIServiceURL))$)§($(genAIServiceURL|default=)$)§ELSE§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))ENDIF§"
+										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
 									}
 								},
 								{
 									"MANAGESUBSCRIPTIONS": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'Client Document'",
 										"subscriptionDefinitions": [
 											{
@@ -773,7 +773,7 @@
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
 										"docClass": "CO_BankingInformation",
-										"docTitle": "§IF($(enableContentAssistant)$)§(Account 7250512345)§ELSE§(Legacy Consulting - Banking Information)ENDIF§",
+										"docTitle": "§IF($(enableContentAssistantInternal)$)§(Account 7250512345)§ELSE§(Legacy Consulting - Banking Information)ENDIF§",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting",
 											"CO_AccountNumber": "7250512345"
@@ -799,7 +799,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Create 'Legacy Consulting - Annual Report 2024' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -815,7 +815,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Create 'Legacy Consulting - Brochure' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -830,7 +830,7 @@
 								},
 								{
 									"CREATEDOCUMENT": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Create 'Legacy Consulting - Vieria Electricity' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
@@ -849,7 +849,7 @@
 					{
 						"OCP": {
 							"comment": "Steps that are only required if the Content Assistant is enabled",
-							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $$(enableContentAssistant)$$",
+							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $(enableContentAssistantInternal)$",
 							"name": "Copy Content Assistant ICN plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -861,7 +861,7 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/genaiPlugin.jar"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/$(genAIPluginDownloadNameInternal)$"
 											}
 										]
 									}
@@ -882,8 +882,8 @@
 												"podLabelName": "app",
 												"podLabelSelector": "$$(cp4baClusterName)$$-navigator-deploy",
 												"containerName": "$$(cp4baClusterName)$$-navigator-deploy",
-												"localFileName": "genaiPlugin.jar",
-												"remoteFileName": "genaiPlugin-1.0.0-dev-fix-Merge-and-Split.jar",
+												"localFileName": "$(genAIPluginDownloadNameInternal)$",
+												"remoteFileName": "genaiPlugin.jar",
 												"remotePath": "/opt/ibm/plugins",
 												"overExistingFile": false
 											}
@@ -909,7 +909,6 @@
 										"replaceExistingFiles": true,
 										"files": [
 											{
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingRequest.zip"
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ClientOnboardingDocumentUpload.zip"
@@ -924,7 +923,7 @@
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/CODocumentUploadDesktop.properties"
 											},
 											{
-												"enabled": "$$(enableContentAssistant)$$",
+												"enabled": "$(enableContentAssistantInternal)$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktopICA.properties"
 											}
 										]
@@ -938,11 +937,11 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$ && $(!ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Add IBM Content Assistant plugin",
 										"action": "add",
 										"pluginName": "IBM Content Assistant",
-										"jarFilePath": "/opt/ibm/plugins/genaiPlugin-1.0.0-dev-fix-Merge-and-Split.jar",
+										"jarFilePath": "/opt/ibm/plugins/genaiPlugin.jar",
 										"configParameters": {
 											"region": "§IF($(ISSET(genAIRegion))$)§($(genAIRegion|default=)$)§ELSE§(§FAIL(Gen AI Region not provided while Content Assistant is enabled))ENDIF§",
 											"desktopSuggestions": [
@@ -961,10 +960,35 @@
 									}
 								},
 								{
+									"MANAGEPLUGINS": {
+										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Add IBM Content Assistant plugin",
+										"action": "add",
+										"pluginName": "IBM Content Assistant",
+										"jarFilePath": "/opt/ibm/plugins/genaiPlugin.jar",
+										"configParameters": {
+											"region": "$(genAIRegion|default=aws-eu-central-1)$",
+											"desktopSuggestions": [
+												{
+													"id": "admin",
+													"suggestions": []
+												}
+											],
+											"defaultWxO": "yes",
+											"wxoRegion": "aws-us-east-1",
+											"wxoIntegrationID": "",
+											"wxoServiceInstanceID": "",
+											"wxoCloudUrl": "",
+											"wxoOrchestrateUrl": ""
+										}
+									}
+								},
+								{
 									"MANAGEDESKTOP": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update desktops 'BAI' and 'desktop1-5' to use to use all but the IBM Content Assistant plug-in",
 										"action": "update",
+										"ignoreMissingDesktop": "true",
 										"desktopNames": [
 											"BAI",
 											"desktop1",
@@ -1016,7 +1040,7 @@
 										},
 										"environmentVariables": [
 											{
-												"contentAssistantFeatureEnabled": "$$(enableContentAssistant|default=false)$$"
+												"contentAssistantFeatureEnabled": "$$(enableContentAssistantInternal|default=false)$$"
 											},
 											{
 												"evObjectStoreName": "$$(BAW_TOS)$$"
@@ -1053,6 +1077,21 @@
 											{
 												"name": "#AUTHENTICATED-USERS",
 												"action": "add"
+											}
+										]
+									}
+								},
+								{
+									"SETAPPENVVARS": {
+										"enabled": "true",
+										"description": "Update Prompt Env Var in 'Client Onboarding Request' app",
+										"appEngineAppConfigName": "$(appEngineServerId)$",
+										"name": "Client Onboarding Request",
+										"envVars": [
+											{
+												"action": "update",
+												"name": "userPrompt",
+												"value": "Classify this document in one line: utility bill, bank statement or certificate of incorporation. If you cannot identify the type of document return other. Provide the output in plain text without any explanation and without any html tags"
 											}
 										]
 									}
@@ -1097,6 +1136,26 @@
 										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"name": "Client Onboarding Comments",
 										"file": "!patchedZIPFileName!"
+									}
+								},
+								{
+									"SETAPPENVVARS": {
+										"enabled": "$(enableWorkplaceAssistantInternal)$",
+										"description": "Update Env Vars in 'Workplace' app when Workplace Assistant is present",
+										"appEngineAppConfigName": "$(appEngineServerId)$",
+										"name": "Workplace",
+										"envVars": [
+											{
+												"action": "update",
+												"name": "WorkplaceConfig.agent.enable",
+												"value": "true"
+											},
+											{
+												"action": "update",
+												"name": "WorkplaceConfig.agent.endpoint",
+												"value": "$$(cpdURL)$$/agent/runtimeChat"
+											}
+										]
 									}
 								},
 								{
@@ -1145,14 +1204,14 @@
 								},
 								{
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Determine ICN repository information based on object store symbolic name",
 										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
 									}
 								},
 								{
 									"PATCHDESKTOP": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Patch 'ICN with ICA' desktop exported from enterprise deployment to work in current deployment",
 										"file": "ICNDesktopICA.properties",
 										"simpleTextMappings": {
@@ -1164,16 +1223,17 @@
 								},
 								{
 									"IMPORTDESKTOP": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Import 'ICN with ICA' desktop used to display annual report (for object store $$(CPEICNLABOBJECTSTORE)$$)",
 										"enforceImport": false,
+										"enforceImportOnAppNameMismatch": "ICN",
 										"name": "ICN",
 										"file": "!patchedDesktopPropertiesFileName!"
 									}
 								},
 								{
 									"MANAGEDESKTOP": {
-										"enabled": "$$(enableContentAssistant)$$",
+										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
 										"desktopName": "ICN",
 										"action": "update",
@@ -1296,7 +1356,7 @@
 					},
 					{
 						"WF": {
-							"enabled": "$$(enableDeployClientOnboarding_WF)$$ && $$(enableWFAssistant)$$",
+							"enabled": "$$(enableDeployClientOnboarding_WF)$$ && $(enableWorkplaceAssistantInternal)$",
 							"description": "WF - Import Saved View when WF Assistant is enabled",
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [

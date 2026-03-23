@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingManagePakDeployerGroups.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -8,7 +8,7 @@
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$ && $(isLocalLDAPAvailable|default=false)$",
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$ && $(isLocalLDAPAvailable|default=false)$ && $$(enableEnsureGroups|default=true)$$",
 				"description": "Ensure groups are available for Cloud Pak Deployer deployed environments",
 				"comment": "Will only be executed for Cloud Pak Deployer deployed environments and when the local LDAP could be found",
 				"actions": [
