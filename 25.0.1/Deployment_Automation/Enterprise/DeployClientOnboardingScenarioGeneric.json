@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.4",
+	"fileVersion": "1.0.5",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.112 <1.2.0",
+	"requiredToolVersion": ">=1.1.114 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1232,14 +1232,84 @@
 									}
 								},
 								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "ContentListToolbar menu based on DefaultContentListToolbar with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICAContentListToolbar",
+										"menuName": "COICA_CustomContentListToolbar",
+										"sourceMenuId": "DefaultContentListToolbar",
+										"actionChanges": [
+											{
+												"actionId": "CompareAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "SearchResultsToolbar menu based on DefaultSearchResultsToolbar with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICADefaultSearchResultsToolbar",
+										"menuName": "COICA_CustomDefaultSearchResultsToolbar",
+										"sourceMenuId": "DefaultSearchResultsToolbar",
+										"actionChanges": [
+											{
+												"actionId": "CompareAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "ItemContextMenu menu based on DefaultItemContextMenu with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICACustomDefaultItemContextMenu",
+										"menuName": "COICA_CustomDefaultItemContextMenu",
+										"sourceMenuId": "DefaultItemContextMenu",
+										"actionChanges": [
+											{
+												"actionId": "ViewVersionsAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "FavoriteItemContextMenu menu based on DefaultFavoriteItemContextMenu with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICACustomDefaultFavoriteItemContextMenu",
+										"menuName": "COICA_CustomDefaultFavoriteItemContextMenu",
+										"sourceMenuId": "DefaultFavoriteItemContextMenu",
+										"actionChanges": [
+											{
+												"actionId": "ViewVersionsAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
 									"MANAGEDESKTOP": {
 										"enabled": "$(enableContentAssistantInternal)$",
-										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in and use document history",
+										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in, use document history, and a set of custom menus",
 										"desktopName": "ICN",
 										"action": "update",
 										"enabledDesktopEmailClient": true,
 										"allowUsersToChangeEntryTemplateDuringCheckIn": true,
-										"showDocumentHistory": true
+										"showDocumentHistory": true,
+										"menuUpdates": [
+											"COICAContentListToolbar",
+											"COICADefaultSearchResultsToolbar",
+											"COICACustomDefaultItemContextMenu",
+											"COICACustomDefaultFavoriteItemContextMenu"
+										]
 									}
 								}
 							]
