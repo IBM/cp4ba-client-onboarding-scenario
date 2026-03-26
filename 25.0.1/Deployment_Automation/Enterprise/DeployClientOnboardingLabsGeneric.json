@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.9",
+	"fileVersion": "1.0.10",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.112 <1.2.0",
+	"requiredToolVersion": ">=1.1.114 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -684,6 +684,48 @@
 										},
 										"file": "Legacy Consulting - Certificate of Incorporation.pdf",
 										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"MODIFYDOCORFOLDERSECURITY": {
+										"enabled": "true",
+										"name": "Security for #AUTHENTICATED-USERS on two banking information documents",
+										"entities": [
+											{
+												"enabled": "true",
+												"entityType": "Document",
+												"fullPathName": "/SOLUTION Client Onboarding/Banking Information - Automation Elite Inc.pdf",
+												"replaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"granteeType": "Group",
+														"securityAccessRights": "",
+														"granteeName": "#AUTHENTICATED-USERS",
+														"securityInheritableDepth": "No inheritance"
+													}
+												]
+											},
+											{
+												"enabled": "true",
+												"entityType": "Document",
+												"fullPathName": "/SOLUTION Client Onboarding/Legacy Consulting - Banking Information.pdf",
+												"replaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"granteeType": "Group",
+														"securityAccessRights": "",
+														"granteeName": "#AUTHENTICATED-USERS",
+														"securityInheritableDepth": "No inheritance"
+													}
+												]
+											}
+										]
 									}
 								}
 							]
