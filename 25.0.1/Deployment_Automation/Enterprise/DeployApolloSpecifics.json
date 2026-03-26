@@ -1,0 +1,278 @@
+{
+	"comment": "Contains the steps specific to Apollo environments",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployApolloSpecifics.json",
+	"requiredToolVersion": ">=1.1.114 <1.2.0",
+	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$",
+				"description": "Perform Apollo specific steps",
+				"actions": [
+					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Prepare the document class 'Document' and its children for summarization and vectorization",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "OS1",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"ADDADDON": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Add AddOns for Content Assistant",
+										"addOns": [
+											"5.6.0 Persistent Text Extract Extensions",
+											"5.7.0 Gen AI Extensions"
+										]
+									}
+								},
+								{
+									"MANAGEPERSISTENTTEXTEXTRACT": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Enable Persistent Text Extraction for doc class 'Document'",
+										"enablePTE": "true",
+										"docClasses": [
+											"Document"
+										]
+									}
+								},
+								{
+									"CONFIGUREGENAI": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Update Gen AI Configuration",
+										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
+									}
+								},
+								{
+									"MANAGESUBSCRIPTIONS": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Add vector indexing and watsonx summary subscriptions to doc class 'Document'",
+										"subscriptionDefinitions": [
+											{
+												"action": "add",
+												"displayName": "Document - Vector Index",
+												"targetClassSymbolicName": "Document",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Vector Indexing Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
+											},
+											{
+												"action": "add",
+												"displayName": "Document - Summarize",
+												"targetClassSymbolicName": "Document",
+												"subscribedEvents": [
+													"checkin",
+													"update"
+												],
+												"subscriptionType": "classSubscription",
+												"isEnabled": true,
+												"eventActionName": "Gen AI Summary Request Event Action",
+												"isSubscriptionEnabled": true,
+												"isSynchronous": true,
+												"includeSubclasses": true
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"OCP": {
+							"comment": "Steps that are only required if the Content Assistant is enabled",
+							"enabled": "$(enableContentAssistantInternal)$",
+							"name": "Copy Content Assistant ICN plugin to plugins folder in ICN pod",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for OCP",
+										"name": "Download custom plugin file",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/$(genAIPluginDownloadNameInternal)$"
+											}
+										]
+									}
+								},
+								{
+									"COPYFILES": {
+										"enabled": "true",
+										"description": "Copy Content Assistant plugin file to navigator pod",
+										"delayBefore": 0,
+										"namespaceName": "$$(cp4baNamespace)$$",
+										"maxNumRetries": "$$(copyFiles_maxNumRetries)$$",
+										"sleepInSecBetweenRetries": "$$(copyFiles_sleepInSecBetweenRetries)$$",
+										"maxNumPollsForCompletion": "$$(copyFiles_maxNumPollsForCompletion)$$",
+										"sleepInSecBetweenPolls": "$$(copyFiles_sleepInSecBetweenPolls)$$",
+										"copyActions": [
+											{
+												"action": "toContainer",
+												"podLabelName": "app",
+												"podLabelSelector": "$$(cp4baClusterName)$$-navigator-deploy",
+												"containerName": "$$(cp4baClusterName)$$-navigator-deploy",
+												"localFileName": "$(genAIPluginDownloadNameInternal)$",
+												"remoteFileName": "genaiPlugin.jar",
+												"remotePath": "/opt/ibm/plugins",
+												"overExistingFile": false
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"ICN": {
+							"enabled": "true",
+							"description": "Navigator - Manage ICA plugin, ICA related menus and usage of these in the OS1 dobject store and desktop",
+							"name": "Prepare Desktop",
+							"relativeBasePath": "Business Automation Navigator",
+							"subActions": [
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "$(enableContentAssistantInternal)$ && $(!ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Add IBM Content Assistant plugin",
+										"action": "add",
+										"pluginName": "IBM Content Assistant",
+										"jarFilePath": "/opt/ibm/plugins/genaiPlugin.jar",
+										"configParameters": {
+											"region": "§IF($(ISSET(genAIRegion))$)§($(genAIRegion|default=)$)§ELSE§(§FAIL(Gen AI Region not provided while Content Assistant is enabled))ENDIF§",
+											"desktopSuggestions": [
+												{
+													"id": null,
+													"suggestions": [
+														""
+													]
+												},
+												{
+													"id": "admin",
+													"suggestions": []
+												}
+											]
+										}
+									}
+								},
+								{
+									"MANAGEPLUGINS": {
+										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Add IBM Content Assistant plugin",
+										"action": "add",
+										"pluginName": "IBM Content Assistant",
+										"jarFilePath": "/opt/ibm/plugins/genaiPlugin.jar",
+										"configParameters": {
+											"region": "$(genAIRegion|default=aws-eu-central-1)$",
+											"desktopSuggestions": [
+												{
+													"id": "admin",
+													"suggestions": []
+												}
+											],
+											"defaultWxO": "yes",
+											"wxoRegion": "aws-us-east-1",
+											"wxoIntegrationID": "",
+											"wxoServiceInstanceID": "",
+											"wxoCloudUrl": "",
+											"wxoOrchestrateUrl": ""
+										}
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "ContentListToolbar menu based on DefaultContentListToolbar with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICAContentListToolbar",
+										"menuName": "COICA_CustomContentListToolbar",
+										"sourceMenuId": "DefaultContentListToolbar",
+										"actionChanges": [
+											{
+												"actionId": "CompareAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "SearchResultsToolbar menu based on DefaultSearchResultsToolbar with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICADefaultSearchResultsToolbar",
+										"menuName": "COICA_CustomDefaultSearchResultsToolbar",
+										"sourceMenuId": "DefaultSearchResultsToolbar",
+										"actionChanges": [
+											{
+												"actionId": "CompareAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "ItemContextMenu menu based on DefaultItemContextMenu with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICACustomDefaultItemContextMenu",
+										"menuName": "COICA_CustomDefaultItemContextMenu",
+										"sourceMenuId": "DefaultItemContextMenu",
+										"actionChanges": [
+											{
+												"actionId": "ViewVersionsAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEMENU": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "FavoriteItemContextMenu menu based on DefaultFavoriteItemContextMenu with the addition of the CompareAction",
+										"action": "copy",
+										"menuId": "COICACustomDefaultFavoriteItemContextMenu",
+										"menuName": "COICA_CustomDefaultFavoriteItemContextMenu",
+										"sourceMenuId": "DefaultFavoriteItemContextMenu",
+										"actionChanges": [
+											{
+												"actionId": "ViewVersionsAction",
+												"targetPosition": 0
+											}
+										]
+									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Update 'OS1 with ICA' desktop to use a set of custom menus for ICA",
+										"desktopName": "OS1",
+										"action": "update",
+										"menuUpdates": [
+											"COICAContentListToolbar",
+											"COICADefaultSearchResultsToolbar",
+											"COICACustomDefaultItemContextMenu",
+											"COICACustomDefaultFavoriteItemContextMenu"
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
