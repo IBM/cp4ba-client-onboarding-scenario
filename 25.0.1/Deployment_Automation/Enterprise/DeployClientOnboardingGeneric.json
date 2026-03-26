@@ -1,6 +1,6 @@
 {
 	"comment": "Contains/references the steps required to optionally onboard users/groups, optionally deploy an email server & client, deploy the Client Onboarding scenario itself, and the Client Onboarding labs",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingGeneric.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -16,7 +16,7 @@
 		{
 			"INCLUDE": {
 				"comment": "For Pak Deployer deployed environments ensure required groups exist",
-				"enabled": "true",
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$",
 				"file": "DeployClientOnboardingManagePakDeployerGroups.json"
 			}
 		},
@@ -53,6 +53,13 @@
 				"comment": "Optionally create case instances for users",
 				"enabled": "true",
 				"file": "DeployClientOnboardingScenarioCasesGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Perform Apollo specific tasks",
+				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$",
+				"file": "DeployApolloSpecifics.json"
 			}
 		},
 		{
