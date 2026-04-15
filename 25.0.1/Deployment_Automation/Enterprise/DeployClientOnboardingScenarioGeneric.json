@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.6",
+	"fileVersion": "1.0.7",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.114 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -526,7 +526,11 @@
 											},
 											{
 												"enabled": "$(enableContentAssistantInternal)$",
-												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report.pdf"
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report%202024.pdf"
+											},
+											{
+												"enabled": "$(enableContentAssistantInternal)$",
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Annual%20Report%202025.pdf"
 											},
 											{
 												"enabled": "$(enableContentAssistantInternal)$",
@@ -798,18 +802,43 @@
 									}
 								},
 								{
+									"CREATEFOLDER": {
+										"enabled": "false && $(enableContentAssistantInternal)$",
+										"description": "Create 'Legacy Consulting' folder below 'Client documents' folder",
+										"parentFolderPath": "/Client Documents",
+										"folderClassSymbolicName": "Folder",
+										"folderName": "Legacy Consulting"
+									}
+								},
+								{
 									"CREATEDOCUMENT": {
 										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Create 'Legacy Consulting - Annual Report 2024' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/Client Documents",
 										"docClass": "CO_AnnualReport",
-										"docTitle": "Annual Report",
+										"docTitle": "Annual Report 2024",
 										"docProps": {
 											"CO_ClientName": "Legacy Consulting",
 											"CO_FiscalYear": "2024"
 										},
-										"file": "Legacy Consulting - Annual Report.pdf",
+										"file": "Legacy Consulting - Annual Report 2024.pdf",
+										"fileContentType": "application/pdf"
+									}
+								},
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Create 'Legacy Consulting - Annual Report 2025' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/Client Documents",
+										"docClass": "CO_AnnualReport",
+										"docTitle": "Annual Report 2025",
+										"docProps": {
+											"CO_ClientName": "Legacy Consulting",
+											"CO_FiscalYear": "2025"
+										},
+										"file": "Legacy Consulting - Annual Report 2025.pdf",
 										"fileContentType": "application/pdf"
 									}
 								},
