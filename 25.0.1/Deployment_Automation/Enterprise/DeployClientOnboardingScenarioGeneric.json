@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.7",
+	"fileVersion": "1.0.8",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.114 <1.2.0",
+	"requiredToolVersion": ">=1.1.116 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -655,10 +655,19 @@
 								},
 								{
 									"CONFIGUREGENAI": {
-										"enabled": "$(enableContentAssistantInternal)$",
-										"description": "Update Gen AI Configuration",
+										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Update Gen AI Configuration for ICA Client Managed",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
+									}
+								},
+								{
+									"CONFIGUREGENAI": {
+										"enabled": "$(enableContentAssistantInternal)$ && $(!ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Update Gen AI Configuration for ICA SaaS",
+										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
+										"genaiLLMDefaultModel" : "$(genaiLLMDefaultModelTOSInternal)$"
 									}
 								},
 								{
@@ -1113,8 +1122,8 @@
 								},
 								{
 									"SETAPPENVVARS": {
-										"enabled": "true",
-										"description": "Update Prompt Env Var in 'Client Onboarding Request' app",
+										"enabled": "$(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Update Prompt Env Var in 'Client Onboarding Request' app for ICA Client Managed",
 										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"name": "Client Onboarding Request",
 										"envVars": [
@@ -1122,6 +1131,21 @@
 												"action": "update",
 												"name": "userPrompt",
 												"value": "Classify this document in one line: utility bill, bank statement or certificate of incorporation. If you cannot identify the type of document return other. Provide the output in plain text without any explanation and without any html tags"
+											}
+										]
+									}
+								},
+								{
+									"SETAPPENVVARS": {
+										"enabled": "$(!ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"description": "Update Prompt Env Var in 'Client Onboarding Request' app for ICA SaaS",
+										"appEngineAppConfigName": "$(appEngineServerId)$",
+										"name": "Client Onboarding Request",
+										"envVars": [
+											{
+												"action": "update",
+												"name": "userPrompt",
+												"value": "Classify this document in one line from one of these catagories in plain text: utility bill, Annual report, bank statement or certificate of incorporation."
 											}
 										]
 									}
@@ -1304,7 +1328,7 @@
 										"actionChanges": [
 											{
 												"actionId": "ViewVersionsAction",
-												"targetPosition": 0
+												"targetPosition": 2
 											}
 										]
 									}
@@ -1320,7 +1344,7 @@
 										"actionChanges": [
 											{
 												"actionId": "ViewVersionsAction",
-												"targetPosition": 0
+												"targetPosition": 2
 											}
 										]
 									}
