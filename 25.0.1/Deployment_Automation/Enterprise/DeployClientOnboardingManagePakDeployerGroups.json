@@ -1,5 +1,5 @@
 {
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingManagePakDeployerGroups.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -24,6 +24,18 @@
 										"description": "Modify LDAP by adding 'GeneralUsers' and 'P8Administrators' groups as copy of existing groups",
 										"restartPod": "false",
 										"entities": [
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=icademo,ou=Users,dc=cp,dc=internal",
+												"uid": "icademo",
+												"cn": "icademo",
+												"sn": "icademo",
+												"userPassword": "C0ntentA55i5t",
+												"homeDirectory": "/home/icademo/",
+												"mail": "icademo@cp.internal",
+												"employeeType": "user"
+											},
 											{
 												"action": "add",
 												"type": "user",
