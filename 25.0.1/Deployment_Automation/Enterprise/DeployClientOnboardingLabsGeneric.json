@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.114 <1.2.0",
+	"requiredToolVersion": ">=1.1.116 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -687,6 +687,30 @@
 									}
 								},
 								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create 'Automation Elite Inc Terms and Conditions' doc with versions",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Client_Document",
+										"docTitle": "Automation Elite Inc Terms and Conditions",
+										"docProps": {
+											"SWAT_Reference_ID": "ABCDEFG",
+											"SWAT_Client_Name": "Automation Elite Inc"
+										},
+										"files": [
+											{
+												"file": "Automation_Elite_Inc_Terms_and_Conditions.pdf",
+												"fileContentType": "application/pdf"
+											},
+											{
+												"file": "Automation_Elite_Inc_Terms_and_Conditions_updated.pdf",
+												"fileContentType": "application/pdf"
+											}
+										]
+									}
+								},
+								{
 									"MODIFYDOCORFOLDERSECURITY": {
 										"enabled": "true",
 										"name": "Security for #AUTHENTICATED-USERS on two banking information documents",
@@ -712,6 +736,23 @@
 												"enabled": "true",
 												"entityType": "Document",
 												"fullPathName": "/SOLUTION Client Onboarding/Legacy Consulting - Banking Information.pdf",
+												"replaceAccessRights": false,
+												"granteeSettings": [
+													{
+														"enabled": "true",
+														"securityAction": "Update",
+														"securityAccessType": "Allow",
+														"granteeType": "Group",
+														"securityAccessRights": "",
+														"granteeName": "#AUTHENTICATED-USERS",
+														"securityInheritableDepth": "No inheritance"
+													}
+												]
+											},
+											{
+												"enabled": "true",
+												"entityType": "Document",
+												"fullPathName": "/SOLUTION Client Onboarding/Automation Elite Inc Terms and Conditions.pdf",
 												"replaceAccessRights": false,
 												"granteeSettings": [
 													{
@@ -1503,6 +1544,18 @@
 												"roleCopySourceName": "§IF($$(isCloudPakDeployerDeployment)$$)§(cpusers1)§ELSE§($$(generalUsersGroupName)$$)ENDIF§",
 												"deriveUsersFromLDAPIfAvailable": false,
 												"name": "wodemo",
+												"replaceExistingRoles": false
+											},
+											{
+												"enabled": "§IF($$(isCloudPakDeployerDeployment)$$)§(false)§ELSE§(true)ENDIF§",
+												"action": "update",
+												"type": "user",
+												"skipIfFirstUserDoesNotExist": true,
+												"roles": [
+													"User"
+												],
+												"deriveUsersFromLDAPIfAvailable": false,
+												"name": "icademo",
 												"replaceExistingRoles": false
 											},
 											{
