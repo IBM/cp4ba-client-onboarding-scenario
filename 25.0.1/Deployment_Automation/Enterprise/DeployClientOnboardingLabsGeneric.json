@@ -1,7 +1,7 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
 	"fileVersion": "1.0.12",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.116 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",

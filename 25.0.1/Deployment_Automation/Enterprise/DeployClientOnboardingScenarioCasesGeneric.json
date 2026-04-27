@@ -1,7 +1,7 @@
 {
 	"comment": "Contains the steps required to create the case instances for the Client Onboarding scenario when Workplace Assistant is enabled",
 	"fileVersion": "1.0.4",
-	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.1.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioCasesGeneric.json",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioCasesGeneric.json",
 	"requiredToolVersion": ">=1.1.112 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
