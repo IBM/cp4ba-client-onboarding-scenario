@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.8",
+	"fileVersion": "1.0.9",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.116 <1.2.0",
+	"requiredToolVersion": ">=1.1.117 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -667,7 +667,7 @@
 										"description": "Update Gen AI Configuration for ICA SaaS",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
-										"genaiLLMDefaultModel" : "$(genaiLLMDefaultModelTOSInternal)$"
+										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelTOSInternal)$"
 									}
 								},
 								{
@@ -964,6 +964,10 @@
 											{
 												"enabled": "$(enableContentAssistantInternal)$",
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/ICNDesktopICA.properties"
+											},
+											{
+												"enabled": "$(enableContentAssistantInternal)$",
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Navigator/AnnualReportsSearch.json"
 											}
 										]
 									}
@@ -1364,6 +1368,26 @@
 											"COICACustomDefaultItemContextMenu",
 											"COICACustomDefaultFavoriteItemContextMenu"
 										]
+									}
+								},
+								{
+									"DETERMINEREPONAMEFROMOBJECTSTORE": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Determine ICN repository information based on object store symbolic name for BAW TOS",
+										"osSymbolicName": "$$(BAW_TOS)$$",
+										"useFirst": true
+									}
+								},
+								{
+									"MANAGESAVEDSEARCH": {
+										"enabled": "$(enableContentAssistantInternal)$",
+										"description": "Create a saved search for Annual Reports in the BAW TOS via the ICN desktop",
+										"action": "add",
+										"savedSearchName": "Legacy Consulting Annual Reports",
+										"desktop": "ICN",
+										"repositoryId": "$(REPOSITORY_ID)$",
+										"forceCreate": false,
+										"savedSearchFile": "AnnualReportsSearch.json"
 									}
 								}
 							]
