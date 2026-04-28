@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.12",
+	"fileVersion": "1.0.13",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.116 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -440,6 +440,12 @@
 											},
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Legacy%20Consulting%20-%20Certificate%20of%20Incorporation.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Automation_Elite_Inc_Terms_and_Conditions.pdf"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/FileNet%20Content%20Manager/Client%20Documents/Automation_Elite_Inc_Terms_and_Conditions_updated.pdf"
 											}
 										]
 									}
