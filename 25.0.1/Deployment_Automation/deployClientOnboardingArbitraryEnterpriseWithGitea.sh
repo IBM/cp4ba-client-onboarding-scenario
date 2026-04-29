@@ -162,7 +162,7 @@ SCRIPTNAME=deployClientOnboardingArbitraryEnterpriseWithGitea.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.1
+SCRIPTVERSION=1.0.2
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
@@ -585,7 +585,7 @@ if [ ! -z "${createSampleCaseDataForNumUsers+x}" ]
 then
   if [[ "${createSampleCaseDataForNumUsers}" != "" ]]
   then
-    internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=${createSampleCaseDataForNumUsers}
+    internalnumUsersSampleCaseDataForWorkplaceAssistant=numUsersSampleCaseDataForWorkplaceAssistant=${createSampleCaseDataForNumUsers}
   fi
 fi
 
@@ -608,4 +608,4 @@ then
   exit 1
 fi
 
-java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalRestrictContentAssistantToUser} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalEnableWFGenAI} ${internalEnableWorkplaceAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalNumUsersSampleCaseDataForWFAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}
+java ${jvmSettings} -jar ${TOOLFILENAME} ${bootstrapDebugString} ${BOOTSTRAPURL} \"-scriptDownloadPath=${SCRIPTDOWNLOADPATH}\" \"-scriptName=${FILENAME}\" \"-scriptSource=${SCRIPTNAME}\" \"-scriptVersion=${SCRIPTVERSION}\" -ocLoginServer=${ocLoginServer} -ocLoginToken=${ocLoginToken} ${cp4baNamespaceInternal} ${TOOLPROXYSETTINGS} -installBasePath=${DEPLOYMENTPATTERN} -config=${CONFIGNAME} -automationScript=${AUTOMATIONSCRIPT} cp4baAdminUserName=${cp4baAdminUserName} -cp4baAdminPwd=${cp4baAdminPassword} cp4baAdminGroup=${cp4baAdminGroup} generalUsersGroupName=${generalUsersGroup} ${giteaCredentials} ${enableConfigureLabsInternal} enableDeployClientOnboarding_ADP=${adpConfigured} enableConfigureSWATLabs_FNCM=${configureContentLab} ACTION_wf_cp_adpEnabled=${adpConfigured} ${enableDeployEmailCapabilityInternal} ${ocpStorageClassForInternalMailServerInternal} ${ldifFileLineInternal} ${gmailAddressInternal} ${gmailAppKeyInternal} ${INTERNALDOCKERINFO} ACTION_wf_cp_rpaBotExecutionUser=${rpaBotExecutionUser} ACTION_wf_cp_rpaServer=${rpaServer} ${internalEnableContentAssistant} ${internalRestrictContentAssistantToUser} ${internalGenAIRegion} ${internalGenAIAccessCode} ${internalGenAIServiceURL} ${internalEnableWFGenAI} ${internalEnableWorkplaceAssistant} ${internalICADesktopName} ${internalGraphQLURL} ${internalIcnBaseURL} ${internalnumUsersSampleCaseDataForWorkplaceAssistant} ${internalMaxCaseIteratorThreads} ${additionalOptions}

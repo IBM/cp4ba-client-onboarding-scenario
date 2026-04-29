@@ -145,7 +145,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.2
+SET SCRIPTVERSION=1.0.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
@@ -449,7 +449,7 @@ if defined icnBaseURL (
 )
 
 if defined createSampleCaseDataForNumUsers (
-	if NOT "%createSampleCaseDataForNumUsers%" == "" set internalNumUsersSampleCaseDataForWFAssistant=numUsersSampleCaseDataForWFAssistant=%createSampleCaseDataForNumUsers%
+	if NOT "%createSampleCaseDataForNumUsers%" == "" set internalnumUsersSampleCaseDataForWorkplaceAssistant=numUsersSampleCaseDataForWorkplaceAssistant=%createSampleCaseDataForNumUsers%
 )
 
 if defined maxCaseIteratorThreads (
@@ -470,6 +470,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalEnableWFGenAI% %internalEnableWorkplaceAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% %giteaCredentials% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalRestrictContentAssistantToUser% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalEnableWFGenAI% %internalEnableWorkplaceAssistant% %internalnumUsersSampleCaseDataForWorkplaceAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
 
 ENDLOCAL
