@@ -61,8 +61,8 @@ rem Used for the respective GenAI configuration within CPE and a Gen AI enabled 
 SET genAIServiceURL=REQUIRED
 rem Is the GenAI capability available in Workflow
 SET enableWFGenAI=false
-rem Is the Workflow Assistant capability available
-SET enableWFAssistant=false
+rem Is the Workplace Assistant capability available (auto to auto-detect if Workplace Assistant is available)
+SET enableWorkplaceAssistant=false
 rem The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
 SET createSampleCaseDataForNumUsers=20
 rem The maximum number of thread used to create the dummy cases in parallel
@@ -166,11 +166,11 @@ SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
-SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,adsGitOrg,adsGitUserName,adsGitRepoAPIKey,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWFAssistant,graphQLURL,icnBaseURL
+SET COPYVARVALUES=ocLoginServer,ocLoginToken,cp4baAdminUserName,cp4baAdminPassword,cp4baAdminGroup,generalUsersGroup,adsGitOrg,adsGitUserName,adsGitRepoAPIKey,configureLabs,useInternalMailServer,ocpStorageClassForInternalMailServer,dockerUserName,dockerToken,gmailAddress,gmailAppKey,rpaBotExecutionUser,rpaServer,adpConfigured,jvmSettings,disableAccessToGitHub,proxyScenario,proxyHost,proxyPort,proxyUser,proxyPwd,proxyPwd,bootstrapDebugString,enableContentAssistant,restrictContentAssistantToUser,icaDesktopName,icaGenAIRegion,genAIAccessCode,genAIServiceURL,enableWFGenAI,enableWorkplaceAssistant,graphQLURL,icnBaseURL
 
 rem ----------------------------------------------------------------------------------------------------------
 rem Retrieve the deployment automation jar file from GitHub if not already available or use local one when 
@@ -603,8 +603,8 @@ if defined enableWFGenAI (
 	set internalEnableWFGenAI=enableWFGenAI=%enableWFGenAI%
 )
 
-if defined enableWFAssistant (
-	set internalEnableWFAssistant=enableWFAssistant=%enableWFAssistant%
+if defined enableWorkplaceAssistant (
+	set internalEnableWorkplaceAssistant=enableWorkplaceAssistant=%enableWorkplaceAssistant%
 )
 
 if defined graphQLURL (
@@ -637,6 +637,6 @@ if defined configureLabs set enableConfigureLabsInternal=enableConfigureSWATLabs
 echo Starting deployment automation tool...
 echo:
 
-java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% adsGitOrg=%adsGitOrg% adsGitUserName=%adsGitUserName% adsGitRepoAPIKey=%adsGitRepoAPIKey% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWFAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
+java %jvmSettings% -jar %TOOLFILENAME% %bootstrapDebugString% %BOOTSTRAPURL% "-scriptDownloadPath=%SCRIPTDOWNLOADPATH%" "-scriptName=%FILENAME%" "-scriptSource=%SCRIPTNAME%" "-scriptVersion=%SCRIPTVERSION%" -ocLoginServer=%ocLoginServer% -ocLoginToken=%ocLoginToken% %cp4baNamespaceInternal% %TOOLPROXYSETTINGS% -installBasePath=/%DEPLOYMENTPATTERN% -config=%CONFIGNAME% -automationScript=%AUTOMATIONSCRIPT% "cp4baAdminUserName=%cp4baAdminUserName%" -cp4baAdminPwd=%cp4baAdminPassword% cp4baAdminGroup=%cp4baAdminGroup% generalUsersGroupName=%generalUsersGroup% adsGitOrg=%adsGitOrg% adsGitUserName=%adsGitUserName% adsGitRepoAPIKey=%adsGitRepoAPIKey% %enableConfigureLabsInternal% enableDeployClientOnboarding_ADP=%adpConfigured% ACTION_wf_cp_adpEnabled=%adpConfigured% %enableDeployEmailCapabilityInternal% %ocpStorageClassForInternalMailServerInternal% %ldifFileLineInternal% %gmailAddressInternal% %gmailAppKeyInternal% %INTERNALDOCKERINFO% ACTION_wf_cp_rpaBotExecutionUser=%rpaBotExecutionUser% ACTION_wf_cp_rpaServer=%rpaServer%  %internalEnableContentAssistant% %internalGenAIRegion% %internalGenAIAccessCode% %internalGenAIServiceURL% %internalRestrictContentAssistantToUser% %internalEnableWFGenAI% %internalEnableWorkplaceAssistant% %internalICADesktopName% %internalGraphQLURL% %internalIcnBaseURL% %additionalOptions%
 
 ENDLOCAL

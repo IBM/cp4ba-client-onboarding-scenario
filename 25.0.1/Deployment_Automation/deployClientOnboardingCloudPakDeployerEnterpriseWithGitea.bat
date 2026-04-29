@@ -71,7 +71,7 @@ rem Used for the respective GenAI configuration within CPE and a Gen AI enabled 
 SET genAIServiceURL=REQUIRED
 rem Is the GenAI capability available in Workflow (auto to auto-detect if genAI is configured for BAW)
 SET enableWFGenAI=auto
-rem Is the Workflow Assistant capability available (auto to auto-detect if Workplace Assistant is available
+rem Is the Workflow Assistant capability available (auto to auto-detect if Workplace Assistant is available)
 SET enableWorkplaceAssistant=auto
 
 rem Explicit base URL for accessing graphQL (only required if automatic detection does not work in environment)

@@ -55,7 +55,7 @@ genAIAccessCode=REQUIRED
 genAIServiceURL=REQUIRED
 # Is the GenAI capability available in Workflow (auto to auto-detect if genAI is configured for BAW)
 enableWFGenAI=auto
-# Is the Workplace Assistant capability available (auto to auto-detect if Workplace Assistant is available
+# Is the Workplace Assistant capability available (auto to auto-detect if Workplace Assistant is available)
 enableWorkplaceAssistant=auto
 # The number of users to create sample case data for (cp4badmin and usr001-usrXXX, therefore number needs to be one more than usrXXX)
 createSampleCaseDataForNumUsers=10
