@@ -145,7 +145,7 @@ SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.1
+SET SCRIPTVERSION=1.0.2
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
@@ -383,8 +383,8 @@ if defined enableContentAssistant (
 	if "%enableContentAssistant%"=="true" (
 		
 		
-		if "%genAIRegion%"=="REQUIRED" set genAIRegionRequired=true
-		if "%genAIRegion%"=="" set genAIRegionRequired=true
+		if "%icaGenAIRegion%"=="REQUIRED" set genAIRegionRequired=true
+		if "%icaGenAIRegion%"=="" set genAIRegionRequired=true
 		
 		if "%genAIAccessCode%"=="REQUIRED" set genAIAccessCodeRequired=true
 		if "%genAIAccessCode%"=="" set genAIAccessCodeRequired=true
@@ -399,10 +399,10 @@ if defined enableContentAssistant (
 			)
 			echo   Variable 'enableContentAssistant' is set to 'true' but variable 'genAIRegion' has not been set
 		) else (
-			set internalGenAIRegion=genAIRegion=%genAIRegion%
+			set internalGenAIRegion=genAIRegion=%icaGenAIRegion%
 		)
 		
-		if defined genAIAccessCode ( 
+		if defined genAIAccessCodeRequired ( 
 			if not defined validationFailed (
 				echo Validating configuration failed:
 				set validationFailed=true
@@ -412,7 +412,7 @@ if defined enableContentAssistant (
 			set internalGenAIAccessCode=genAIAccessCode=%genAIAccessCode%
 		)
 		
-		if defined genAIRegionRequired ( 
+		if defined genAIServiceURLRequired ( 
 			if not defined validationFailed (
 				echo Validating configuration failed:
 				set validationFailed=true
