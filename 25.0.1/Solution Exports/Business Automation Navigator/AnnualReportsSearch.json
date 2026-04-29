@@ -8,13 +8,10 @@
 	"andSearch": true,
 	"resultsDisplay": {
 		"sortBy": "{NAME}",
-		"sortAsc": true,
+		"sortAsc": false,
 		"columns": [
 			"{NAME}",
-			"ContentSize",
-			"LastModifier",
-			"DateLastModified",
-			"MajorVersionNumber"
+			"GenaiWatsonxSummary"
 		],
 		"honorNameProperty": true
 	},
