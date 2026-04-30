@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.13",
+	"fileVersion": "1.0.14",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.116 <1.2.0",
+	"requiredToolVersion": ">=1.1.119 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -409,9 +409,9 @@
 					},
 					{
 						"FNCM": {
-							"comment": "Steps that are only required by the GraphQL content lab",
+							"comment": "Steps that are only required by the GraphQL content lab - Part 1",
 							"enabled": "$$(enableConfigureSWATLabs_CONTENT_GQL)$$ && $(contentOSAvailable)$",
-							"description": "GQL - Steps unique to the GraphQL lab: Create property templates, class definitions, folders, and document upload",
+							"description": "GQL - Steps unique to the GraphQL lab Part 1: Create property templates, class definitions, folders, and document upload",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
 							"relativeBasePath": "FileNet Content Manager",
@@ -695,7 +695,7 @@
 								{
 									"CREATEDOCUMENT": {
 										"enabled": "true",
-										"description": "Create 'Automation Elite Inc Terms and Conditions' doc with versions",
+										"description": "Create 'Automation Elite Inc Terms and Conditions' doc",
 										"replaceExistingDocument": false,
 										"folderName": "/SOLUTION Client Onboarding",
 										"docClass": "SOLUTION_Client_Document",
@@ -704,16 +704,8 @@
 											"SWAT_Reference_ID": "ABCDEFG",
 											"SWAT_Client_Name": "Automation Elite Inc"
 										},
-										"files": [
-											{
-												"file": "Automation_Elite_Inc_Terms_and_Conditions.pdf",
-												"fileContentType": "application/pdf"
-											},
-											{
-												"file": "Automation_Elite_Inc_Terms_and_Conditions_updated.pdf",
-												"fileContentType": "application/pdf"
-											}
-										]
+										"file": "Automation_Elite_Inc_Terms_and_Conditions.pdf",
+										"fileContentType": "application/pdf"
 									}
 								},
 								{
@@ -1524,6 +1516,34 @@
 												}
 											}
 										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"comment": "Steps that are only required by the GraphQL content lab - Part 2",
+							"enabled": "$$(enableConfigureSWATLabs_CONTENT_GQL)$$ && $(contentOSAvailable)$",
+							"description": "GQL - Steps unique to the GraphQL lab Part 2: Create document version",
+							"replaceExistingDocuments": false,
+							"objectStoreName": "$$(CPEICNLABOBJECTSTORE)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"CREATEDOCUMENT": {
+										"enabled": "true",
+										"description": "Create new version of 'Automation Elite Inc Terms and Conditions' doc",
+										"replaceExistingDocument": false,
+										"folderName": "/SOLUTION Client Onboarding",
+										"docClass": "SOLUTION_Client_Document",
+										"docTitle": "Automation Elite Inc Terms and Conditions",
+										"createNewVersion": "true",
+										"file": "Automation_Elite_Inc_Terms_and_Conditions_updated.pdf",
+										"fileContentType": "application/pdf",
+										"waitForGenAIIndexing": "$(enableContentAssistantInternal)$",
+										"maximumNumPollsForGenAIIndexing": "100",
+										"sleepBetweenPollsInSecondsForGenAIIndexing": "10"
 									}
 								}
 							]
