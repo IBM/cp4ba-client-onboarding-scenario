@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.14",
+	"fileVersion": "1.0.15",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.119 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -45,6 +45,7 @@
 										"acronym": "COTK",
 										"type": "WF_TK",
 										"ignoreMissingPrincipals": true,
+										"isNonCaseSensitive": true,
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
@@ -67,6 +68,7 @@
 										"acronym": "ADPU",
 										"type": "WF_TK",
 										"ignoreMissingPrincipals": true,
+										"isNonCaseSensitive": true,
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
@@ -89,6 +91,7 @@
 										"acronym": "IBMRPAT",
 										"type": "WF_TK",
 										"ignoreMissingPrincipals": true,
+										"isNonCaseSensitive": true,
 										"maxBASQueryRetries": 5,
 										"principals": [
 											{
@@ -1505,6 +1508,7 @@
 										"acronym": "COTK2",
 										"type": "APP_TK",
 										"ignoreMissingPrincipals": true,
+										"isNonCaseSensitive": true,
 										"principals": [
 											{
 												"name": "$$(generalUsersGroupName)$$",
