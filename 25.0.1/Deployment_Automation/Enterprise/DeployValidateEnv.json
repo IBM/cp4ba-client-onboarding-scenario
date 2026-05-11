@@ -1,0 +1,123 @@
+{
+	"comment": "Contains any validation steps to be performed after the deployment was successful",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployValidateEnv.json",
+	"requiredToolVersion": ">=1.1.121 <1.2.0",
+	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"OCP": {
+				"enabled": "$$(enableDeployEmailCapability)$$ && $(ISNOTSET(isCloudPakDeployerDeployment))$",
+				"name": "Validate random users can login both to CP4BA and mail client",
+				"relativeBasePath": "OpenShift",
+				"subActions": [
+					{
+						"VALIDATEUSERSLOGIN": {
+							"enabled": "true",
+							"numRandomUsers": "5",
+							"externalLDIF1": "$$(externalLDIF1|default=)$$",
+							"externalLDIF2": "$$(externalLDIF2|default=)$$",
+							"userBase": "$$(externalLDIF_userBase)$$",
+							"userDC": "$$(externalLDIF_userDC)$$",
+							"userNumberingFormatter": "$$(externalLDIF_userNumberingFormatter)$$",
+							"users": [
+								{
+									"name": "$$(cp4baAdminUsr)$$",
+									"password": "$$(cp4baAdminPwd)$$"
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"FNCM": {
+				"enabled": "$(enableContentAssistantInternal)$",
+				"description": "Validate prompt output for ICA used in AI assisted review",
+				"objectStoreName": "$$(BAW_TOS)$$",
+				"relativeBasePath": "FileNet Content Manager",
+				"subActions": [
+					{
+						"VALIDATEICAQUERIES": {
+							"enabled": "true",
+							"description": "Validate ICA Prompts",
+							"objectStoreName": "BAWTOS",
+							"onlyShowWarningsOnFailure": true,
+							"customSuccessMsg": "Success - ICA queries for AI assisted review in Client Onboarding scenario validated successfully",
+							"customWarningFailureMsg": "Failure - At least one ICA query for AI assisted review in Client Onboarding scenario failed. This part of the scenario will likely not work!",
+							"waitForGenAIIndexing": "true",
+							"maximumNumPollsForGenAIIndexing": "20",
+							"sleepBetweenPollsInSecondsForGenAIIndexing": "10",
+							"prompts": [
+								{
+									"enabled": "true",
+									"prompt": "§IF($(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE|default=false)$)§($(ACTION_app_cp_contentAssistantPromptCM)$)§ELSE§($(ACTION_app_cp_contentAssistantPromptSaaS)$)ENDIF§",
+									"documents": [
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Account 7250512345",
+											"docClass": "CO_BankingInformation",
+											"regex": "bank statement|banking information",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Annual Report 2024",
+											"docClass": "CO_AnnualReport",
+											"regex": "annual report",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Annual Report 2025",
+											"docClass": "CO_AnnualReport",
+											"regex": "annual report",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Banking Information - Automation Elite Inc",
+											"docClass": "CO_BankingInformation",
+											"regex": "bank statement|banking information",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Certificate of Incorporation - Automation Elite Inc",
+											"docClass": "CO_ClientDocument",
+											"regex": "certificate of incorporation",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Certificate of Incorporation",
+											"docClass": "CO_ClientDocument",
+											"regex": "certificate of incorporation",
+											"caseInsensitive": true
+										},
+										{
+											"enabled": "true",
+											"docFolder": "/Client Documents",
+											"docName": "Utility Bill - Automation Elite Inc",
+											"docClass": "CO_UtilityBill",
+											"regex": "utility bill",
+											"caseInsensitive": true
+										}
+									]
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
