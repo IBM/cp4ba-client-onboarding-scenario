@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.9",
+	"fileVersion": "1.0.10",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.117 <1.2.0",
+	"requiredToolVersion": ">=1.1.121 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1132,9 +1132,10 @@
 										"name": "Client Onboarding Request",
 										"envVars": [
 											{
+												"enabled": "true",
 												"action": "update",
 												"name": "userPrompt",
-												"value": "Classify this document in one line: utility bill, bank statement or certificate of incorporation. If you cannot identify the type of document return other. Provide the output in plain text without any explanation and without any html tags"
+												"value": "$(ACTION_app_cp_contentAssistantPromptCM)$"
 											}
 										]
 									}
@@ -1147,9 +1148,10 @@
 										"name": "Client Onboarding Request",
 										"envVars": [
 											{
+												"enabled": "true",
 												"action": "update",
 												"name": "userPrompt",
-												"value": "Classify this document in one line from one of these catagories in plain text: utility bill, Annual report, bank statement or certificate of incorporation."
+												"value": "$(ACTION_app_cp_contentAssistantPromptSaaS)$"
 											}
 										]
 									}
