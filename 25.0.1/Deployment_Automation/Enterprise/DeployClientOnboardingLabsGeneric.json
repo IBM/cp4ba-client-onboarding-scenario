@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.16",
+	"fileVersion": "1.0.17",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.119 <1.2.0",
+	"requiredToolVersion": ">=1.1.122 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -554,7 +554,12 @@
 										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update Gen AI Configuration",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
-										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
+										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
+										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelInternal)$",
+										"genaiLLMDocComparisonPromptTemplate": "$(genaiLLMDocComparisonPromptTemplateInternal)$",
+										"genaiLLMDocSummaryPromptTemplate": "$(genaiLLMDocSummaryPromptTemplateInternal)$",
+										"genaiLLMQueryPromptTemplate": "$(genaiLLMQueryPromptTemplateInternal)$"
 									}
 								},
 								{
@@ -1543,7 +1548,7 @@
 										"docClass": "SOLUTION_Client_Document",
 										"docTitle": "Automation Elite Inc Terms and Conditions",
 										"createNewVersion": "true",
-										"onlyIfLessThanVersions" : "2",
+										"onlyIfLessThanVersions": "2",
 										"file": "Automation_Elite_Inc_Terms_and_Conditions_updated.pdf",
 										"fileContentType": "application/pdf",
 										"waitForGenAIIndexing": "$(enableContentAssistantInternal)$",

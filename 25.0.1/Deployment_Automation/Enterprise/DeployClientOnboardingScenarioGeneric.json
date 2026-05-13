@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.10",
+	"fileVersion": "1.0.11",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.121 <1.2.0",
+	"requiredToolVersion": ">=1.1.122 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -658,7 +658,12 @@
 										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Update Gen AI Configuration for ICA Client Managed",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
-										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
+										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
+										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelInternal)$",
+										"genaiLLMDocComparisonPromptTemplate": "$(genaiLLMDocComparisonPromptTemplateInternal)$",
+										"genaiLLMDocSummaryPromptTemplate": "$(genaiLLMDocSummaryPromptTemplateInternal)$",
+										"genaiLLMQueryPromptTemplate": "$(genaiLLMQueryPromptTemplateInternal)$"
 									}
 								},
 								{
@@ -667,7 +672,11 @@
 										"description": "Update Gen AI Configuration for ICA SaaS",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
-										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelTOSInternal)$"
+										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
+										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelInternal)$",
+										"genaiLLMDocComparisonPromptTemplate": "$(genaiLLMDocComparisonPromptTemplateInternal)$",
+										"genaiLLMDocSummaryPromptTemplate": "$(genaiLLMDocSummaryPromptTemplateInternal)$",
+										"genaiLLMQueryPromptTemplate": "$(genaiLLMQueryPromptTemplateInternal)$"
 									}
 								},
 								{
@@ -1206,11 +1215,13 @@
 										"name": "Workplace",
 										"envVars": [
 											{
+												"enabled": "true",
 												"action": "update",
 												"name": "WorkplaceConfig.agent.enable",
 												"value": "true"
 											},
 											{
+												"enabled": "true",
 												"action": "update",
 												"name": "WorkplaceConfig.agent.endpoint",
 												"value": "$$(cpdURL)$$/agent/runtimeChat"

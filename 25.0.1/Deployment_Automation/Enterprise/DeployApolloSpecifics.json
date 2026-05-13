@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps specific to Apollo environments",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployApolloSpecifics.json",
-	"requiredToolVersion": ">=1.1.114 <1.2.0",
+	"requiredToolVersion": ">=1.1.122 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -14,7 +14,7 @@
 					{
 						"FNCM": {
 							"enabled": "true",
-							"description": "CPE - Prepare the document class 'Document' and its children for summarization and vectorization",
+							"description": "CPE - Prepare the document class 'Document' and its children for summarization and vectorization and enable ICA for OS 'OS1'",
 							"replaceExistingDocuments": false,
 							"objectStoreName": "OS1",
 							"relativeBasePath": "FileNet Content Manager",
@@ -44,7 +44,12 @@
 										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Update Gen AI Configuration",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
-										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§"
+										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
+										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
+										"genaiLLMDefaultModel": "$(genaiLLMDefaultModelInternal)$",
+										"genaiLLMDocComparisonPromptTemplate": "$(genaiLLMDocComparisonPromptTemplateInternal)$",
+										"genaiLLMDocSummaryPromptTemplate": "$(genaiLLMDocSummaryPromptTemplateInternal)$",
+										"genaiLLMQueryPromptTemplate": "$(genaiLLMQueryPromptTemplateInternal)$"
 									}
 								},
 								{
