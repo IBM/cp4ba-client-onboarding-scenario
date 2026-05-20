@@ -366,7 +366,7 @@ then
   echo "enableWorkflowLabsForBusinessUsers '${enableWorkflowLabsForBusinessUsers}'"
   echo "rpaBotExecutionUser '${rpaBotExecutionUser}'"
   echo "rpaServer '${rpaServer}'"
-  echo "useInternalMailServer '${useInternalMailServer}"
+  echo "useInternalMailServer '${useInternalMailServer}'"
   echo "gmailAddress '${gmailAddress}'"
   echo "gmailAppKey '${gmailAppKey}'"
   echo "ocpStorageClassForInternalMailServer '${ocpStorageClassForInternalMailServer}'"
@@ -392,6 +392,7 @@ then
   echo "printDetailedMessageToConsole '${printDetailedMessageToConsole}'"
   echo "printTraceMessageToConsole '${printTraceMessageToConsole}'"
   echo "additionalOptions '${additionalOptions}'"
+  echo ""
 fi
 
 # ----------------------------------------------------------------------------------------------------------
@@ -439,7 +440,7 @@ SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGiteaParam.sh
 # Name of the actual sh file passed to execution environment
 FILENAME=$0
 # Version of this script file passed to execution environment
-SCRIPTVERSION=1.0.2
+SCRIPTVERSION=1.0.3
 # Download URL for this script
 SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/${CP4BAVERSION%}/Deployment_Automation/${SCRIPTNAME%}
 # Variable values to be copied to newer version in case found
@@ -514,7 +515,7 @@ else
   INTERNALOCLOGINSERVER=-ocls=${ocLoginServer}
   if [ ! -z "${dumpDetails+x}" ]
   then
-    echo "set 'ocLoginToken' = '${INTERNALOCLOGINTOKEN}'" 
+    echo "set 'ocLoginServer' = '${INTERNALOCLOGINSERVER}'" 
   fi
 fi
 
@@ -530,7 +531,7 @@ else
   INTERNALOCLOGINTOKEN=-oclt=${ocLoginToken}
   if [ ! -z "${dumpDetails+x}" ]
   then
-    echo "set 'cp4baNamespace' = '${INTERNALCP4BANAMESPACE}'" 
+    echo "set 'ocLoginToken' = '${INTERNALOCLOGINTOKEN}'" 
   fi
 fi
 
