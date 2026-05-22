@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.17",
+	"fileVersion": "1.0.18",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.122 <1.2.0",
+	"requiredToolVersion": ">=1.1.123 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -32,11 +32,91 @@
 						}
 					},
 					{
+						"OCP": {
+							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
+							"name": "Configure wxO connection for BAW AI Agent lab using tiger-wxo-playground tenant",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MANAGEXMLSECRET": {
+										"enabled": "true",
+										"id": "ManageXMLSecret",
+										"description": "Validate user logins",
+										"namespaceName": "$(cp4baNamespace)$",
+										"secret": "wfs-lombardi-custom-xml-secret",
+										"keys": [
+											{
+												"enabled": "true",
+												"name": "",
+												"actions": [
+													{
+														"enabled": "true",
+														"action": "update",
+														"xpath": "/properties/server/wxo/token-url",
+														"value": "https://iam.platform.saas.ibm.com/siusermgr/api/1.0/apikeys/token"
+													},
+													{
+														"enabled": "true",
+														"action": "update",
+														"xpath": "/properties/server/wxo/discovery/service-instance-url",
+														"value": "https://api.dl.watson-orchestrate.ibm.com/instances/20250915-1524-4858-605e-e40de8a07508"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"RESTARTPODS": {
+										"enabled": "true",
+										"description": "Restart BA Studio pod(s) after wfs-lombardi-custom-xml-secret was modified",
+										"dependentOnId": "ManageXMLSecret",
+										"dependencyType": "skip",
+										"namespace": "$$(cp4baNamespace)$$",
+										"labels": [
+											{
+												"labelName": "app.kubernetes.io/component",
+												"labelValue": "deployment"
+											},
+											{
+												"labelName": "app.kubernetes.io/instance",
+												"labelValue": "$$(cp4baClusterName)$$"
+											},
+											{
+												"labelName": "app.kubernetes.io/managed-by",
+												"labelValue": "Operator"
+											},
+											{
+												"labelName": "app.kubernetes.io/name",
+												"labelValue": "bastudio"
+											}
+										],
+										"maximumNumPollsForRestart": "$$(restartStudioPods_maximumNumPollsForRestart)$$",
+										"sleepBetweenPollsInSecondsForRestart": "$$(restartStudioPods_sleepBetweenPollsInSecondsForRestart)$$"
+									}
+								}
+							]
+						}
+					},
+					{
 						"WF": {
 							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
-							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs",
+							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs and deploy additional solutions for GenAI/AI Agent and Workplace labs",
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
+								{
+									"DOWNLOADRESOURCES": {
+										"enabled": "$$(enableArtifactDownloadFromGit)$$",
+										"description": "Download resources required for WF labs",
+										"name": "Download WF Solutions",
+										"replaceExistingFiles": true,
+										"files": [
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Doc_Recognition.twx"
+											}
+										]
+									}
+								},
 								{
 									"ADDCOLLABORATORS": {
 										"enabled": "true",
@@ -90,6 +170,50 @@
 										"name": "IBM RPA Toolkit",
 										"acronym": "IBMRPAT",
 										"type": "WF_TK",
+										"ignoreMissingPrincipals": true,
+										"isNonCaseSensitive": true,
+										"maxBASQueryRetries": 5,
+										"principals": [
+											{
+												"name": "$$(generalUsersGroupName)$$",
+												"type": "group",
+												"permissions": {
+													"read": true,
+													"write": false,
+													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"EXTRACTTWXPROJECTINFO": {
+										"enabled": "true",
+										"description": "Extract the project information from the Doc Recognition TWX file",
+										"sourceTwxFile": "Doc_Recognition.twx",
+										"globalContextVariableName": "DocRecognitionPAInfo"
+									}
+								},
+								{
+									"INSTALLSOLUTION": {
+										"enabled": "true",
+										"description": "Install the Execution of Doc_Recognition WF solution",
+										"twxFile": "Doc_Recognition.twx",
+										"paDisplayName": "!projectDisplayName!",
+										"paAcronym": "!projectAcronym!",
+										"paSnapshot": "!snapshotAcronym!",
+										"allowPAAcronymChange": false,
+										"allowTKAcronymChange": false,
+										"checkForUpdatedEnvironmentVariables": false
+									}
+								},
+								{
+									"ADDCOLLABORATORS": {
+										"enabled": "true",
+										"description": "Add the general users group to the collaborators of the Doc Recognition PA as reader",
+										"name": "!projectDisplayName!",
+										"acronym": "!projectAcronym!",
+										"type": "WF_PA",
 										"ignoreMissingPrincipals": true,
 										"isNonCaseSensitive": true,
 										"maxBASQueryRetries": 5,
