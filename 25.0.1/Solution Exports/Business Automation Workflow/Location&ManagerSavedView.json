@@ -1,0 +1,111 @@
+{
+	"metadata": {
+		"name": "Location & Manager",
+		"description": "",
+		"sharing": {
+			"shared": true,
+			"teams": [
+				{
+					"teamName": "All Users",
+					"teamId": "24.da7e4d23-78cb-4483-98ed-b9c238308a03",
+					"processAppName": "System Data"
+				}
+			]
+		}
+	},
+	"datasource": {
+		"datatype": "TASKS",
+		"systemTypes": [
+			"Process"
+		]
+	},
+	"population": {
+		"target": "SELF"
+	},
+	"filters": {
+		"interaction": "claimed_and_available",
+		"v1_conditions": [],
+		"json_query": {
+			"and": [
+				{
+					"field": {
+						"name": "instanceProcessApp",
+						"kind": "System"
+					},
+					"operator": "Equals",
+					"value": "HSSX2"
+				},
+				{
+					"field": {
+						"name": "taskActivityType",
+						"kind": "System"
+					},
+					"operator": "Equals",
+					"value": "USER_TASK"
+				}
+			]
+		},
+		"string_query": "\"Workflow app acronym\" is \"HSSX2\""
+	},
+	"output": {
+		"includeAllBusinessData": false,
+		"usersFullName": true,
+		"fields": [
+			{
+				"name": "taskPriority",
+				"kind": "System"
+			},
+			{
+				"name": "taskSubject",
+				"kind": "System"
+			},
+			{
+				"name": "taskDueDate",
+				"kind": "System"
+			},
+			{
+				"name": "HiringManager",
+				"kind": "Instance"
+			},
+			{
+				"name": "Location",
+				"kind": "Instance"
+			},
+			{
+				"name": "assignedToUser",
+				"kind": "System"
+			}
+		],
+		"aliases": [
+			{
+				"field": {
+					"name": "HiringManager",
+					"kind": "Instance"
+				},
+				"alias": "Hiring Manager"
+			},
+			{
+				"field": {
+					"name": "Location",
+					"kind": "Instance"
+				},
+				"alias": "Location"
+			}
+		],
+		"sort": [
+			{
+				"field": {
+					"name": "taskDueDate",
+					"kind": "System"
+				},
+				"order": "ASC"
+			}
+		],
+		"alphabeticalSort": true,
+		"size": 500,
+		"stats": {
+			"type": "Basic"
+		}
+	},
+	"jsonFormat": "v2"
+}
