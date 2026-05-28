@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.18",
+	"fileVersion": "1.0.19",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.123 <1.2.0",
+	"requiredToolVersion": ">=1.1.125 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -101,7 +101,7 @@
 					{
 						"WF": {
 							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
-							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs and deploy additional solutions for GenAI/AI Agent and Workplace labs",
+							"description": "WF - Add read-collaborators to Client Onboarding, RPA, and ADP TKs for WF/RPA labs, deploy and configure additional solutions and data for GenAI/AI Agent, Workplace Assistant labs",
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
@@ -113,6 +113,18 @@
 										"files": [
 											{
 												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Doc_Recognition.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Smart_Hire.twx"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/AssistantLabSavedView.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Location&ManagerSavedView.json"
+											},
+											{
+												"url": "https://github.com/IBM/cp4ba-client-onboarding-scenario/raw/main/$$(cp4baVersion)$$/Solution%20Exports/Business%20Automation%20Workflow/Owner&WorkflowIDSavedView.json"
 											}
 										]
 									}
@@ -225,6 +237,868 @@
 													"read": true,
 													"write": false,
 													"administration": false
+												}
+											}
+										]
+									}
+								},
+								{
+									"CONTAINER": {
+										"enabled": "($$(isApolloDeployment)$$ || $$(isCloudPakDeployerDeployment)$$) && $(enableWorkplaceAssistantInternal)$",
+										"description": "Definitions required to deploy and configure WF solution and to create instances for the IBM Workplace Assistant lab for Apollo/Jam-in-a-Box environment",
+										"actions": [
+											{
+												"WF": {
+													"enabled": "true",
+													"description": "Delete 'Hiring Sample' WF solution, patch and deploy 'Smart Hire' WF solution",
+													"relativeBasePath": "Business Automation Workflow",
+													"subActions": [
+														{
+															"DELETEPROJECT": {
+																"enabled": "true",
+																"description": "Delete 'Hiring Sample' WF solution",
+																"projectName": "Hiring Sampe",
+																"projectAcronym": "HSS",
+																"projectType": "WF_PA",
+																"unpublishAutomationServices": false,
+																"deleteReferencingProjects": false,
+																"maxBASQueryRetries": "3"
+															}
+														},
+														{
+															"EXTRACTTWXPROJECTINFO": {
+																"enabled": "true",
+																"description": "Extract project information from 'Smart Hire' WF solution TWX file",
+																"sourceTwxFile": "Smart_Hire.twx"
+															}
+														},
+														{
+															"PATCHSOLUTION": {
+																"enabled": "true",
+																"description": "Patch the teams (four teams per usrXXX) in the 'Smart Hire' WF solution TWX",
+																"sourceTwxFile": "!twxFileName!",
+																"teamsActions": {
+																	"startCount": "$(usersStartIndexSampleProcessDataForWorkplaceAssistantInternal)$",
+																	"endCount": "$(numUsersSampleProcessDataForWorkplaceAssistantInternal)$",
+																	"prefix": "$(userPrefixSampleProcessDataForWorkplaceAssistantInternal)$",
+																	"indexFormatter": "$(numberFormatterSampleProcessDataForWorkplaceAssistantInternal)$",
+																	"additionalItems": [
+																		"$$(cp4baAdminUsrLower)$$"
+																	],
+																	"loopActions2": [
+																		{
+																			"action": "clone",
+																			"newTeamName": "SH Team Managers $(iterationString)$",
+																			"copySourceTeamName": "SH Team Managers",
+																			"teamMembers": [
+																				{
+																					"type": "User",
+																					"name": "$(iterationString)$"
+																				}
+																			]
+																		},
+																		{
+																			"action": "clone",
+																			"newTeamName": "SH General Managers $(iterationString)$",
+																			"copySourceTeamName": "SH General Managers",
+																			"managerTeamName": "SH Team Managers $(iterationString)$",
+																			"teamMembers": [
+																				{
+																					"type": "User",
+																					"name": "$(iterationString)$"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser1"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser2"
+																				}
+																			]
+																		},
+																		{
+																			"action": "clone",
+																			"newTeamName": "SH Hiring Managers $(iterationString)$",
+																			"copySourceTeamName": "SH Hiring Managers",
+																			"managerTeamName": "SH Team Managers $(iterationString)$",
+																			"teamMembers": [
+																				{
+																					"type": "User",
+																					"name": "$(iterationString)$"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser1"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser2"
+																				}
+																			]
+																		},
+																		{
+																			"action": "clone",
+																			"newTeamName": "SH Human Resources $(iterationString)$",
+																			"copySourceTeamName": "SH Human Resources",
+																			"managerTeamName": "SH Team Managers $(iterationString)$",
+																			"teamMembers": [
+																				{
+																					"type": "User",
+																					"name": "$(iterationString)$"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser1"
+																				},
+																				{
+																					"type": "User",
+																					"name": "cpuser2"
+																				}
+																			]
+																		}
+																	]
+																}
+															}
+														},
+														{
+															"INSTALLSOLUTION": {
+																"enabled": "true",
+																"description": "Install the patched 'Smart Hire' WF solution",
+																"twxFile": "!patchedTWXFileName!",
+																"paDisplayName": "!projectDisplayName!",
+																"paAcronym": "!projectAcronym!",
+																"paSnapshot": "!snapshotAcronym!",
+																"allowPAAcronymChange": false,
+																"allowTKAcronymChange": false,
+																"checkForUpdatedEnvironmentVariables": false,
+																"maxRetries": "3"
+															}
+														}
+													]
+												}
+											},
+											{
+												"ITERATOR": {
+													"enabled": "true",
+													"description": "Loop to create sample processes for the Workplace Assistant lab based on 'Smart Hire' WF solution for all users",
+													"statusConfigMapName": "client-onboarding-state-create-wpa-processes-iterator",
+													"maxThreads": "$$(maxProcessIteratorThreads)$$",
+													"additionalItems": [
+														"$$(cp4baAdminUsrLower)$$"
+													],
+													"startCount": "$(usersStartIndexSampleProcessDataForWorkplaceAssistantInternal)$",
+													"endCount": "$(numUsersSampleProcessDataForWorkplaceAssistantInternal)$",
+													"prefix": "$(userPrefixSampleProcessDataForWorkplaceAssistantInternal)$",
+													"indexFormatter": "$(numberFormatterSampleProcessDataForWorkplaceAssistantInternal)$",
+													"actions": [
+														{
+															"CONTAINER": {
+																"enabled": "true",
+																"description": "Create instances for user '$(iterationString)$'",
+																"actions": [
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:   (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "Normal"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Glen Morangie (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Glen Morangie",
+																													"date": "2025-07-10T19:10:44.781Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Chicago",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Glen Morangie",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Programming"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Bachelor of Science (BS)"
+																															],
+																															"selected": []
+																														},
+																														"experience": "10+ years experience"
+																													},
+																													"positionType": "New",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "Job Title: IT Operations Specialist\n\nJob Description:\n\nWe are seeking an experienced IT Operations Specialist to join our team. The successful candidate will be responsible for managing and maintaining our IT infrastructure, ensuring optimal performance and security.\n\nKey Responsibilities:\n\n1. Manage and maintain server hardware and software, including operating systems, databases, and applications.\n2. Implement and maintain IT security protocols and procedures.\n3. Monitor system performance and troubleshoot issues as they arise.\n4. Collaborate with cross-functional teams to ensure IT solutions align with business needs.\n5. Provide technical support and guidance to end-users.\n6. Stay current with the latest IT trends and technologies.\n\nQualifications:\n\n1. Bachelor's degree in Computer Science, Information Technology, or a related field.\n2. Proven experience in IT operations, with a focus on server management and maintenance.\n3. Strong knowledge of server hardware and software, including operating systems, databases, and applications.\n4. Experience with IT security protocols and procedures.\n5. Excellent problem-solving and communication skills.\n6. Ability to work in a fast-paced environment and manage multiple priorities.\n\nPreferred Qualifications:\n\n1. Relevant certifications (e.g., MCSA, MCSE, CompTIA Security+)\n2. Experience with cloud-based solutions (e.g., AWS, Azure, Google Cloud)\n3. Knowledge of scripting languages (e.g., Python, PowerShell)\n\nThis is a full-time position with competitive salary and benefits. If you are passionate about IT operations and want to make a significant impact in a dynamic organization, we would love to hear from you.",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Review new position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2025-07-01T20:12:00Z",
+																									"priority": "Normal"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Glen Morangie (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Glen Morangie",
+																													"date": "2025-07-10T19:12:59.869Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Denver",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Glen Morangie",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Algorithms"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Bachelor of Science (BS)"
+																															],
+																															"selected": []
+																														},
+																														"experience": "10+ years experience"
+																													},
+																													"positionType": "Existing",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "### Job Description\n\n**Job Title:** Senior C++ Software Engineer\n\n**About Us:**\nWe are a dynamic and innovative technology company seeking a highly skilled Senior C++ Software Engineer to join our team. Our mission is to develop cutting-edge software solutions that drive efficiency and productivity in various industries.\n\n**Key Responsibilities:**\n\n1. **Design and Development:**\n   - Architect, design, and implement high-performance, scalable, and maintainable C++ software solutions.\n   - Collaborate with cross-functional teams to define, design, and ship new features.\n   - Optimize existing software for maximum speed and scalability.\n\n2. **Code Quality and Best Practices:**\n   - Write clean, efficient, and well-documented code adhering to best practices and coding standards.\n   - Conduct code reviews to ensure quality and consistency across the project.\n   - Implement automated testing frameworks to ensure software reliability and robustness.\n\n3. **Collaboration and Communication:**\n   - Work closely with product managers, designers, and other engineers to understand requirements and deliver optimal solutions.\n   - Participate in daily stand-ups, sprint planning, and retrospectives to ensure alignment with project goals.\n   - Mentor junior developers, sharing knowledge and fostering a culture of continuous learning and improvement.\n\n4. **Research and Innovation:**\n   - Stay updated with the latest trends and advancements in C++ and related technologies.\n   - Explore and evaluate new tools, libraries, and frameworks to enhance software development processes.\n   - Contribute to open-source projects and share knowledge within the development community.\n\n**Qualifications:**\n\n- Bachelor's degree in Computer Science, Software Engineering, or a related field.\n- Minimum of 5 years of professional experience in C++ development.\n- Proven expertise in object-oriented design and programming principles.\n- Strong understanding of data structures, algorithms, and software design patterns.\n- Experience with version control systems (e.g., Git).\n- Familiarity with Agile development methodologies.\n- Excellent problem-solving skills and attention to detail.\n- Strong communication and teamwork abilities.\n\n**Preferred Skills:**\n\n- Experience with modern C++ standards (",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Find position candidates'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "Normal"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Johnnie Walker (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Johnnie Walker",
+																													"date": "2025-07-10T19:15:29.880Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Denver",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Johnnie Walker",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Programming"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Bachelor of Engineering (B.Eng)"
+																															],
+																															"selected": []
+																														},
+																														"experience": ""
+																													},
+																													"positionType": "Existing",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "Job Title: Artificial Intelligence (AI) Prompt Engineer\n\nJob Description:\n\nWe are seeking a skilled Artificial Intelligence (AI) Prompt Engineer to join our dynamic team. The ideal candidate will have a strong background in AI, natural language processing, and machine learning. They will be responsible for designing, developing, and implementing AI prompts that enhance user experience and drive engagement.\n\nKey Responsibilities:\n\n1. Collaborate with cross-functional teams to understand user needs and business objectives.\n2. Develop and refine AI prompts to improve user interaction and system performance.\n3. Utilize machine learning algorithms to optimize prompt effectiveness.\n4. Conduct A/B testing to measure the impact of prompts on user behavior.\n5. Stay updated with the latest AI trends and incorporate them into prompt design.\n6. Troubleshoot and resolve technical issues related to AI prompts.\n7. Document processes and best practices for future reference.\n\nQualifications:\n\n1. Bachelor's degree in Computer Science, Engineering, or a related field.\n2. Proven experience as an AI Prompt Engineer or similar role.\n3. Strong understanding of AI, machine learning, and natural language processing.\n4. Proficiency in programming languages such as Python, Java, or C++.\n5. Excellent problem-solving skills and attention to detail.\n6. Strong communication and team collaboration skills.\n\nWe offer a competitive salary, comprehensive benefits, and a flexible work environment. If you are passionate about AI and eager to make a significant impact, we would love to hear from you.\n\nNote: This job description is not exhaustive and the responsibilities may evolve based on business needs.",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Find position candidates'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "Normal"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Laga Vulin (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Laga Vulin",
+																													"date": "2025-07-10T19:16:48.660Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Denver",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Laga Vulin",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Programming"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Bachelor of Science (BS)"
+																															],
+																															"selected": []
+																														},
+																														"experience": "5-10 years experience"
+																													},
+																													"positionType": "New",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "Job Title: Web Developer\n\nSummary:\nWe are seeking a skilled Web Developer to join our dynamic team. The ideal candidate will have a strong understanding of front-end and back-end web development, proficiency in various programming languages, and experience with web design principles.\n\nResponsibilities:\n1. Develop high-quality websites, ensuring responsiveness and cross-browser compatibility.\n2. Collaborate with the design team to translate UI/UX designs into functional websites.\n3. Optimize web applications for maximum speed and scalability.\n4. Maintain and update existing websites, ensuring they remain up-to-date and secure.\n5. Implement security and data protection measures.\n6. Stay updated with the latest web development trends and technologies.\n\nRequirements:\n1. Proven experience as a Web Developer or similar role.\n2. Expertise in front-end and back-end development.\n3. Proficiency in HTML, CSS, JavaScript, and at least one back-end language (e.g., Python, Ruby, Java).\n4. Familiarity with version control systems (e.g., Git).\n5. Strong problem-solving skills and attention to detail.\n6. Excellent communication and teamwork skills.\n\nPreferred:\n1. Experience with content management systems (e.g., WordPress, Drupal).\n2. Knowledge of SEO principles.\n3. Familiarity with Agile methodologies.\n\nThe successful candidate will be a team player with a passion for web development and a commitment to delivering high-quality work. If you meet the requirements and are eager to contribute to our projects, we encourage you to apply.",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Review new position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "Highest"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Laga Vulin (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Laga Vulin",
+																													"date": "2025-07-10T19:19:08.008Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Denver",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Laga Vulin",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Programming"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Bachelor of Architecture (B.Arch)"
+																															],
+																															"selected": []
+																														},
+																														"experience": "10+ years experience"
+																													},
+																													"positionType": "Existing",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "Job Title: IT Product Manager\n\nJob Description:\n\nWe are seeking a seasoned IT Product Manager to lead our product development and management efforts. The ideal candidate will have a strong technical background, with a deep understanding of software development lifecycles and agile methodologies.\n\nResponsibilities:\n\n1. Define and manage the product roadmap, ensuring alignment with company goals and market needs.\n2. Collaborate with cross-functional teams, including engineering, design, and marketing, to deliver high-quality products.\n3. Conduct market research and competitive analysis to identify opportunities and inform product strategy.\n4. Prioritize and manage product backlog, ensuring the team focuses on the most impactful features.\n5. Work closely with stakeholders to gather requirements, validate product concepts, and manage expectations.\n6. Oversee product launches, ensuring successful delivery and post-launch support.\n7. Analyze product performance metrics and user feedback to inform product improvements and future development.\n\nRequirements:\n\n1. Bachelor's degree in Computer Science, Information Technology, or a related field.\n2. Proven experience as a Product Manager, preferably in the IT or software industry.\n3. Strong understanding of software development processes and agile methodologies.\n4. Excellent communication and leadership skills, with the ability to influence stakeholders and manage cross-functional teams.\n5. Solid problem-solving skills and a data-driven approach to decision-making.\n6. Experience with project management tools and methodologies.\n7. Knowledge of various operating systems, databases, and the software development life cycle.\n\nIf you are a results-driven IT Product Manager looking to make a significant impact in a dynamic organization, we would love to hear from you. Apply today!",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Find position candidates'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "Normal"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"CONTAINER": {
+																			"enabled": "true",
+																			"description": "Create instance 'Smart Hire for:  Johnnie Walker (Smart Hire Process)' for user '$(iterationString)$'",
+																			"actions": [
+																				{
+																					"WF": {
+																						"enabled": "true",
+																						"subActions": [
+																							{
+																								"STARTPROCESS": {
+																									"enabled": "true",
+																									"description": "Start Process 'Smart Hire Process'",
+																									"projectAcronym": "HSSX2",
+																									"processName": "Smart Hire Process",
+																									"includeTK": "false",
+																									"processData": [
+																										{
+																											"actualUser": "$(iterationString)$"
+																										}
+																									],
+																									"variableName": "piid"
+																								}
+																							},
+																							{
+																								"COMPLETETASK": {
+																									"enabled": "true",
+																									"description": "Complete Task 'Submit position request'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"taskData": [
+																										[
+																											{
+																												"name": "requisition",
+																												"data": {
+																													"requester": "Johnnie Walker",
+																													"date": "2025-07-10T19:20:39.671Z",
+																													"approvalNeeded": false,
+																													"empNum": 1,
+																													"instanceId": "",
+																													"reqNum": "1141",
+																													"empType": "Contract",
+																													"gmApproval": false,
+																													"gmComments": "",
+																													"location": "Chicago",
+																													"department": "Finance"
+																												}
+																											},
+																											{
+																												"name": "currentPosition",
+																												"data": {
+																													"hireManager": "Johnnie Walker",
+																													"qualifications": {
+																														"skills": {
+																															"items": [
+																																"Algorithms"
+																															],
+																															"selected": []
+																														},
+																														"education": {
+																															"items": [
+																																"Master of Science in Mathematics (MMath)"
+																															],
+																															"selected": []
+																														},
+																														"experience": "1-2 years experience"
+																													},
+																													"positionType": "Existing",
+																													"iId": "",
+																													"jobTitle": "Head of Product Development",
+																													"jobDescription": "Job Title: Python Developer\n\nJob Description:\nWe are seeking a skilled Python Developer to join our dynamic team. The ideal candidate will have a strong understanding of Python programming and experience with web frameworks such as Django or Flask. Responsibilities will include developing and maintaining applications, collaborating with cross-functional teams, and troubleshooting issues. A bachelor's degree in Computer Science or a related field is preferred, along with a minimum of 2 years of professional experience in Python development. Excellent problem-solving skills and the ability to work in a fast-paced environment are a must.\n\nJob Responsibilities:\n1. Write efficient, testable, and maintainable code in Python.\n2. Collaborate with front-end developers and other back-end developers to integrate applications.\n3. Participate in code reviews to maintain code quality and facilitate knowledge sharing.\n4. Troubleshoot, debug, and upgrade existing applications.\n5. Implement security and data protection solutions.\n6. Contribute to the development of new features and applications.\n\nRequirements:\n1. Bachelor's degree in Computer Science, Information Technology, or a related field.\n2. Minimum of 2 years of professional experience in Python development.\n3. Strong knowledge of Python, with understanding of web frameworks such as Django or Flask.\n4. Familiarity with some ORM (Object-Relational Mapping) libraries.\n5. Ability to integrate multiple data sources and databases into a single system.\n6. Understanding of the threading limitations of Python, and multi-process architecture.\n7. Good understanding of server-side templating languages.\n8. Basic understanding of front-end technologies, such as JavaScript, HTML5, and CSS3.\n9. Understanding of accessibility and security compliance.\n10. Knowledge of user authentication and authorization between multiple systems, servers, and environments.\n11. Understanding of fundamental design principles for building a scalable application.\n12. Familiarity with event-driven programming in Python.\n13. Strong problem-solving skills and attention to detail.\n14. Excellent communication skills and the ability to work in a team.\n15. Ability to work in a fast-paced environment and manage multiple tasks.\n\nPreferred:\n1. Experience with cloud platforms (AWS, Google",
+																													"replacement": {
+																														"lastName": "Smith",
+																														"firstName": "Bob",
+																														"payType": "Exempt",
+																														"notes": "",
+																														"payLevel": "8",
+																														"supervisor": "Ann Fisher",
+																														"startDate": null
+																													}
+																												}
+																											}
+																										]
+																									]
+																								}
+																							},
+																							{
+																								"UPDATETASK": {
+																									"enabled": "true",
+																									"description": "Update Task 'Find position candidates'",
+																									"piid": "$(piid)$",
+																									"states": "ready,claimed",
+																									"dueDate": "2027-07-01T22:13:00Z",
+																									"priority": "High"
+																								}
+																							}
+																						]
+																					}
+																				}
+																			]
+																		}
+																	}
+																]
+															}
+														}
+													]
+												}
+											},
+											{
+												"WF": {
+													"enabled": "true",
+													"description": "Import Saved Views for Workplace Assistant Lab",
+													"relativeBasePath": "Business Automation Workflow",
+													"subActions": [
+														{
+															"DETERMINEAPPENGINESERVERID": {
+																"enabled": "true",
+																"description": "Determine App Engine Server Id",
+																"useFirst": true
+															}
+														},
+														{
+															"IMPORTSAVEDVIEW": {
+																"enabled": "true",
+																"description": "Import the 'Assistant Lab' Saved View",
+																"fileName": "AssistantLabSavedView.json",
+																"appEngineAppConfigName": "$(appEngineServerId)$",
+																"maxNumPolls": "15",
+																"sleepInSecBetweenPolls": "30"
+															}
+														},
+														{
+															"IMPORTSAVEDVIEW": {
+																"enabled": "true",
+																"description": "Import the 'Location & Manager' Saved View",
+																"fileName": "Location&ManagerSavedView.json",
+																"appEngineAppConfigName": "$(appEngineServerId)$",
+																"maxNumPolls": "15",
+																"sleepInSecBetweenPolls": "30"
+															}
+														},
+														{
+															"IMPORTSAVEDVIEW": {
+																"enabled": "true",
+																"description": "Import the 'Owner & Workflow ID' Saved View",
+																"fileName": "Owner&WorkflowIDSavedView.json",
+																"appEngineAppConfigName": "$(appEngineServerId)$",
+																"maxNumPolls": "15",
+																"sleepInSecBetweenPolls": "30"
+															}
+														}
+													]
 												}
 											}
 										]
