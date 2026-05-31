@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required for the Workplace Assistant lab",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsWPAssistant.json",
-	"requiredToolVersion": ">=1.1.26 <1.2.0",
+	"requiredToolVersion": ">=1.1.126 <1.2.0",
 	"requiredCP4BAVersion": ">=25.0.1 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -826,18 +826,10 @@
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
-									"DETERMINEAPPENGINESERVERID": {
-										"enabled": "true",
-										"description": "Determine App Engine Server Id",
-										"useFirst": true
-									}
-								},
-								{
 									"IMPORTSAVEDVIEW": {
 										"enabled": "true",
 										"description": "Import the 'Assistant Lab' Saved View",
 										"fileName": "AssistantLabSavedView.json",
-										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"maxNumPolls": "15",
 										"sleepInSecBetweenPolls": "30"
 									}
@@ -847,7 +839,6 @@
 										"enabled": "true",
 										"description": "Import the 'Location & Manager' Saved View",
 										"fileName": "Location&ManagerSavedView.json",
-										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"maxNumPolls": "15",
 										"sleepInSecBetweenPolls": "30"
 									}
@@ -857,7 +848,6 @@
 										"enabled": "true",
 										"description": "Import the 'Owner & Workflow ID' Saved View",
 										"fileName": "Owner&WorkflowIDSavedView.json",
-										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"maxNumPolls": "15",
 										"sleepInSecBetweenPolls": "30"
 									}

@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.11",
+	"fileVersion": "1.0.12",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.122 <1.2.0",
+	"requiredToolVersion": ">=1.1.126 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -1522,18 +1522,10 @@
 							"relativeBasePath": "Business Automation Workflow",
 							"subActions": [
 								{
-									"DETERMINEAPPENGINESERVERID": {
-										"enabled": "true",
-										"description": "Determine App Engine Server Id",
-										"useFirst": true
-									}
-								},
-								{
 									"IMPORTSAVEDVIEW": {
 										"enabled": "true",
 										"description": "Import the Cient Onboarding Request Saved View",
 										"fileName": "ClientOnboardingRequestsSavedView.json",
-										"appEngineAppConfigName": "$(appEngineServerId)$",
 										"maxNumPolls": "15",
 										"sleepInSecBetweenPolls": "30"
 									}
