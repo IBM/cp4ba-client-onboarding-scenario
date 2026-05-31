@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.20",
+	"fileVersion": "1.0.21",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.125 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -33,7 +33,7 @@
 					},
 					{
 						"OCP": {
-							"enabled": "$$(enableConfigureSWATLabs_WF)$$",
+							"enabled": "$(isCloudPakDeployerDeployment)$ && $$(enableConfigureSWATLabs_WF)$$",
 							"name": "Configure wxO connection for BAW AI Agent lab using tiger-wxo-playground tenant",
 							"relativeBasePath": "OpenShift",
 							"subActions": [
@@ -41,7 +41,7 @@
 									"MANAGEXMLSECRET": {
 										"enabled": "true",
 										"id": "ManageXMLSecret",
-										"description": "Validate user logins",
+										"description": "Configure wxO tenant for WF instance",
 										"namespaceName": "$(cp4baNamespace)$",
 										"secret": "wfs-lombardi-custom-xml-secret",
 										"keys": [
