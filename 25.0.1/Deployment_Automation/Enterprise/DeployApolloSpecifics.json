@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps specific to Apollo environments",
-	"fileVersion": "1.0.2",
+	"fileVersion": "1.0.3",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployApolloSpecifics.json",
 	"requiredToolVersion": ">=1.1.122 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -8,7 +8,7 @@
 	"actions": [
 		{
 			"CONTAINER": {
-				"enabled": "$(ISSET(isCloudPakDeployerDeployment))$",
+				"enabled": "$(isCloudPakDeployerDeployment|default=false)$",
 				"description": "Perform Apollo specific steps",
 				"actions": [
 					{
