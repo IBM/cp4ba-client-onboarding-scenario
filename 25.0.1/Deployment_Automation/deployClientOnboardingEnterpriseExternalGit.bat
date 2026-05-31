@@ -166,7 +166,7 @@ SET SCRIPTNAME=deployClientOnboardingEnterpriseExternalGit.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.3
+SET SCRIPTVERSION=1.0.4
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
@@ -621,7 +621,7 @@ if defined createSampleCaseDataForNumUsers (
 
 if defined maxCaseIteratorThreads (
 	if NOT "%maxCaseIteratorThreads%" == "" set internalMaxCaseIteratorThreads=maxCaseIteratorThreads=%maxCaseIteratorThreads%
-}
+)
 
 if defined toolValidationFailed set overallValidationFailed=true
 if defined validationFailed set overallValidationFailed=true
