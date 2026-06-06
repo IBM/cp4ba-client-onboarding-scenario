@@ -152,11 +152,11 @@ rem Automation script to use when running the deployment automation tool
 SET AUTOMATIONSCRIPT=DeployClientOnboardingGeneric.json
 
 rem Name of the source batch file passed to execution environment
-SET SCRIPTNAME=deployClientOnboardingCloudPakDeployerEnterpriseWithGitea.bat
+SET SCRIPTNAME=deployClientOnboardingRapidDeploymentEnterpriseWithGitea.bat
 rem Name of the actual batch file passed to execution environment
 SET FILENAME=%~nx0
 rem Version of this script file passed to execution environment
-SET SCRIPTVERSION=1.0.2
+SET SCRIPTVERSION=1.0.3
 rem Download URL for this script
 SET SCRIPTDOWNLOADPATH=https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/%CP4BAVERSION%/Deployment_Automation/%SCRIPTNAME%
 rem Variable values to be copied to newer version in case found
