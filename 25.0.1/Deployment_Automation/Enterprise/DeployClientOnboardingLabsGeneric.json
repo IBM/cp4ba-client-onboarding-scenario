@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.23",
+	"fileVersion": "1.0.24",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
 	"requiredToolVersion": ">=1.1.125 <1.2.0",
 	"requiredCP4BAVersion": ">=25.1.0 <26.0.0",
@@ -1186,7 +1186,8 @@
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
-										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$",
+										"useFirst": true
 									}
 								},
 								{
@@ -1252,7 +1253,8 @@
 									"DETERMINEREPONAMEFROMOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Determine ICN repository information based on object store symbolic name",
-										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$"
+										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$",
+										"useFirst": true
 									}
 								},
 								{
