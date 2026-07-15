@@ -1,0 +1,85 @@
+{
+	"metadata": {
+		"name": "Upsell Campaign Approvals",
+		"description": "Show only those tasks that belong to the Services Upsell Campaign",
+		"sharing": {
+			"shared": true,
+			"teams": [
+				{
+					"teamName": "All Users",
+					"teamId": "24.da7e4d23-78cb-4483-98ed-b9c238308a03",
+					"processAppName": "System Data"
+				}
+			]
+		}
+	},
+	"datasource": {
+		"datatype": "TASKS",
+		"systemTypes": [
+			"Process",
+			"BPEL"
+		]
+	},
+	"population": {
+		"target": "SELF"
+	},
+	"filters": {
+		"interaction": "claimed_and_available",
+		"v1_conditions": [],
+		"json_query": {
+			"and": [
+				{
+					"field": {
+						"name": "instanceProcessApp",
+						"kind": "System"
+					},
+					"operator": "Equals",
+					"value": "WXCSERV"
+				},
+				{
+					"field": {
+						"name": "taskActivityType",
+						"kind": "System"
+					},
+					"operator": "Equals",
+					"value": "USER_TASK"
+				}
+			]
+		},
+		"string_query": "\"Workflow app acronym\" is \"WXCSERV\""
+	},
+	"output": {
+		"includeAllBusinessData": false,
+		"usersFullName": true,
+		"fields": [
+			{
+				"name": "taskPriority",
+				"kind": "System"
+			},
+			{
+				"name": "taskSubject",
+				"kind": "System"
+			},
+			{
+				"name": "taskDueDate",
+				"kind": "System"
+			}
+		],
+		"aliases": [],
+		"sort": [
+			{
+				"field": {
+					"name": "taskDueDate",
+					"kind": "System"
+				},
+				"order": "ASC"
+			}
+		],
+		"alphabeticalSort": true,
+		"size": 500,
+		"stats": {
+			"type": "Basic"
+		}
+	},
+	"jsonFormat": "v2"
+}

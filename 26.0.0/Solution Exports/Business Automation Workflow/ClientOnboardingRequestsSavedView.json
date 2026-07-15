@@ -1,0 +1,108 @@
+{
+	"metadata": {
+		"name": "Client Onboarding Request",
+		"description": "Show only those tasks that belong to the Client Onboarding scenario sorted by escalation status",
+		"sharing": {
+			"shared": true,
+			"teams": [
+				{
+					"teamName": "All Users",
+					"teamId": "24.da7e4d23-78cb-4483-98ed-b9c238308a03",
+					"processAppName": "System Data"
+				}
+			]
+		}
+	},
+	"datasource": {
+		"datatype": "TASKS",
+		"systemTypes": [
+			"Process",
+			"BPEL"
+		]
+	},
+	"population": {
+		"target": "SELF"
+	},
+	"filters": {
+		"interaction": "claimed_and_available",
+		"v1_conditions": [],
+		"json_query": {
+			"and": [
+				{
+					"field": {
+						"name": "workflowApplication",
+						"kind": "System"
+					},
+					"operator": "Contains",
+					"value": "CO"
+				},
+				{
+					"field": {
+						"name": "taskActivityType",
+						"kind": "System"
+					},
+					"operator": "Equals",
+					"value": "USER_TASK"
+				}
+			]
+		},
+		"string_query": "\"Case solution\" contains \"CO\" ORDER BY \"Escalation_Status\" DESC"
+	},
+	"output": {
+		"includeAllBusinessData": false,
+		"usersFullName": true,
+		"fields": [
+			{
+				"name": "taskPriority",
+				"kind": "System"
+			},
+			{
+				"name": "taskSubject",
+				"kind": "System"
+			},
+			{
+				"name": "taskDueDate",
+				"kind": "System"
+			},
+			{
+				"name": "Escalation_Status",
+				"kind": "Instance"
+			},
+			{
+				"name": "Client",
+				"kind": "Instance"
+			}
+		],
+		"aliases": [
+			{
+				"field": {
+					"name": "Escalation_Status",
+					"kind": "Instance"
+				},
+				"alias": "Escalation Status"
+			},
+			{
+				"field": {
+					"name": "Client",
+					"kind": "Instance"
+				},
+				"alias": "Client"
+			}
+		],
+		"sort": [
+			{
+				"field": {
+					"name": "Escalation_Status",
+					"kind": "Instance"
+				},
+				"order": "DESC"
+			}
+		],
+		"alphabeticalSort": true,
+		"size": 10,
+		"stats": {
+			"type": "Basic"
+		}
+	},
+	"jsonFormat": "v2"
+}

@@ -1,0 +1,10 @@
+<?php
+    $config['plugins'] = [];
+    $config['log_driver'] = 'stdout';
+    $config['zipdownload_selection'] = true;
+    $config['des_key'] = 'CDwLI0Sdb/zAOTDatmxK8z0L';
+    $config['enable_spellcheck'] = true;
+    $config['spellcheck_engine'] = 'pspell';
+    include(__DIR__ . '/config.docker.inc.php');
+    include(__DIR__ . '/config.cert.inc.php');
+    

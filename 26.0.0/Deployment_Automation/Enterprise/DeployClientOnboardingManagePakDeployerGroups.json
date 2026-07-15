@@ -1,0 +1,49 @@
+{
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingManagePakDeployerGroups.json",
+	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"comment": "To be used with CP4BA 26.0.0 Enterprise deployment deployed by Pak Deployer to add icademo user",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$(isCloudPakDeployerDeployment)$ && $(isLocalLDAPAvailable|default=false)$ && $$(enableEnsureGroups|default=true)$$",
+				"description": "Add 'icademo' user to Cloud Pak Deployer deployed environments",
+				"comment": "Will only be executed for Cloud Pak Deployer deployed environments and when the local LDAP could be found",
+				"actions": [
+					{
+						"OCP": {
+							"enabled": "true",
+							"name": "Add 'icademo' used by Client Onboarding lab",
+							"relativeBasePath": "OpenShift",
+							"subActions": [
+								{
+									"MODIFYLOCALLDAP": {
+										"enabled": "true",
+										"description": "Modify LDAP by adding 'icademo' user",
+										"restartPod": "false",
+										"entities": [
+											{
+												"action": "add",
+												"type": "user",
+												"dn": "uid=icademo,ou=Users,dc=cp,dc=internal",
+												"uid": "icademo",
+												"cn": "icademo",
+												"sn": "icademo",
+												"userPassword": "-generated-",
+												"homeDirectory": "/home/icademo/",
+												"mail": "icademo@cp.internal",
+												"employeeType": "user"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}

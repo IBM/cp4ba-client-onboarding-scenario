@@ -1,0 +1,30 @@
+{
+	"comment": "Use this snippet to add 10 (userTargetNumber) business users with the names user1-user10 (userBaseName & userNumberingFormatter) and a password 'samplePwd' (userPassword) password to the LDAP. Each user is member of the environments 'general users group'. Onboard them to the Cloud Pak with the given roles (uppercase USER occurrences will be replaced with the actual user name, other variables will be replaced with the correct values of the environment)",
+	"entities": [
+		{
+			"enabled": true,
+			"type": "user",
+			"dn": "$(ldapUserQualifier)$USER$(ldapUserOrg)$",
+			"cn": "USER",
+			"sn": "USER",
+			"uid": "USER",
+			"userPassword": "samplePwd",
+			"homeDirectory": "/home/USER/",
+			"mail": "USER$(localMailDomain)$",
+			"members": [
+				{
+					"dn": "$(generalUsersGroupFull)$"
+				}
+			],
+			"roles": [
+				"iaf-automation-admin",
+				"iaf-automation-developer"
+			],
+			"replacementText": "USER",
+			"userBaseName": "user",
+			"userNumberingFormatter": "%d",
+			"userStartNumber": "1",
+			"userTargetNumber": "10"
+		}
+	]
+}

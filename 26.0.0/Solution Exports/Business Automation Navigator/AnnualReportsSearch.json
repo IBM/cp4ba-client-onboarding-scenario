@@ -1,0 +1,120 @@
+{
+	"id": "",
+	"name": "Legacy Consulting Annual Reports",
+	"description": "",
+	"autoRun": true,
+	"showInTree": false,
+	"showInAllSearches": true,
+	"andSearch": true,
+	"resultsDisplay": {
+		"sortBy": "{NAME}",
+		"sortAsc": true,
+		"columns": [
+			"{NAME}",
+			"ContentSize",
+			"LastModifier",
+			"DateLastModified",
+			"MajorVersionNumber"
+		],
+		"honorNameProperty": true
+	},
+	"parentFolderId": null,
+	"permissions": [
+		{
+			"granteeName": "#CREATOR-OWNER",
+			"accessType": 1,
+			"accessMask": 998903,
+			"granteeType": 2000,
+			"inheritableDepth": 0,
+			"roleName": null
+		},
+		{
+			"granteeName": "#AUTHENTICATED-USERS",
+			"accessType": 1,
+			"accessMask": 131201,
+			"granteeType": 2001,
+			"inheritableDepth": 0,
+			"roleName": null
+		}
+	],
+	"searchCriteria": [
+		{
+			"id": "CO_ClientName",
+			"name": "Client Name",
+			"selectedOperator": "STARTSWITH",
+			"values": [
+				"Legacy Consulting",
+				""
+			],
+			"dataType": "xs:string",
+			"cardinality": "SINGLE",
+			"availableOperators": [
+				"STARTSWITH",
+				"ENDSWITH",
+				"LIKE",
+				"NOTLIKE",
+				"EQUAL",
+				"NOTEQUAL",
+				"LESS",
+				"LESSOREQUAL",
+				"GREATER",
+				"GREATEROREQUAL",
+				"INANY",
+				"NOTIN",
+				"NULL",
+				"NOTNULL"
+			],
+			"hasSelectedOperators": false,
+			"itemId": "",
+			"defaultOperator": "STARTSWITH",
+			"format": null,
+			"defaultValue": [
+				"Legacy Consulting",
+				""
+			],
+			"allowedValues": [],
+			"maxLength": 128,
+			"minValue": null,
+			"maxValue": null
+		}
+	],
+	"editable": true,
+	"objectType": "document",
+	"template_name": "CO_AnnualReport",
+	"template_label": "Annual Report",
+	"searchSubclasses": true,
+	"includeAllProperties": false,
+	"pageSize": -1,
+	"search_objectstores": [
+		{
+			"id": "BAWTOS",
+			"name": "BAWTOS",
+			"displayName": "BAWTOS",
+			"repositoryId": "icmbawtos"
+		}
+	],
+	"search_classes": [],
+	"search_folders": [],
+	"moreOptions": {
+		"objectType": "document",
+		"versionOption": "releasedversion",
+		"macros": {
+			"fileTypes": []
+		}
+	},
+	"search_text_criteria": [
+		{
+			"text": null,
+			"operator": "any",
+			"proximityDistance": 1024,
+			"editProperty": "editable"
+		}
+	],
+	"textSearchCriteria": {
+		"text": null,
+		"operator": "any",
+		"proximityDistance": 1024,
+		"editProperty": "editable"
+	},
+	"textSearchType": "cascade"
+}

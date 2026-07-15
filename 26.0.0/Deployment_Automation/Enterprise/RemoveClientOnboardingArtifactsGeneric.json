@@ -1,0 +1,47 @@
+{
+	"comment": "Contains/references the steps required to undeploy all artifacts created by users as part of the labs, the artifacts required by the labs and the Client Onboarding scenario itself",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/25.0.1/Deployment_Automation/Enterprise/RemoveClientOnboardingArtifactsGeneric.json",
+	"requiredToolVersion": ">=1.1.94 <1.2.0",
+	"requiredCP4BAVersion": ">=25.0.1 <26.0.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"comment": "Clean up artifacts created by users when performing labs and artifacts created initially for labs",
+				"enabled": "$$(enableCleanupSWATLabs_UserData)$$ || $$(enableCleanupSWATLabs)$$",
+				"description": "Remove Client Onboarding Lab User Data and Lab Artifacts",
+				"actions": [
+					{
+						"INCLUDE": {
+							"comment": "Delete custom user artifacts created in the environment as part of labs",
+							"enabled": "true",
+							"file": "RemoveClientOnboardingUserArtifactsGeneric.json"
+						}
+					},
+					{
+						"INCLUDE": {
+							"comment": "Delete artifacts created for labs in the environment",
+							"enabled": "true",
+							"file": "RemoveClientOnboardingLabArtifactsGeneric.json"
+						}
+					}
+				]
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Clean up Client Onboarding scenario related artifacts in reverse order",
+				"enabled": "$$(enableCleanupClientOnboarding)$$",
+				"file": "RemoveClientOnboardingScenarioArtifactsGeneric.json"
+			}
+		},
+		{
+			"INCLUDE": {
+				"comment": "Clean up email server and client",
+				"enabled": "$$(enableCleanupEmailCapability)$$",
+				"file": "RemoveEmailCapability.json"
+			}
+		}
+	]
+}

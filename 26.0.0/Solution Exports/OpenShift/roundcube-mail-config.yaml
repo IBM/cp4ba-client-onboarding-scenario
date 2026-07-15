@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: roundcubemail-config
+data:
+  custom.php: |
+    <?php
+      $config['smtp_conn_options'] = array(
+        'ssl'         => array(
+           'verify_peer'      => false,
+           'verify_peer_name' => false,
+        ),
+      );
+      $config['imap_conn_options'] = array(
+        'ssl'         => array(
+           'verify_peer'      => false,
+           'verify_peer_name' => false,
+        ),
+      );
+      $config['username_domain'] = '$(localMailDomainNoAtSign)$';

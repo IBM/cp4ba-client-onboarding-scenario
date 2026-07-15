@@ -1,0 +1,109 @@
+{
+	"comment": "Contains the steps required to allow business users to create, deploy, and test case solutions",
+	"fileVersion": "1.0.0",
+	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsConfigureWFForBusinessUsers.json",
+	"requiredToolVersion": ">=1.1.81 <1.2.0",
+	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
+	"requiredCP4BAPattern": "Enterprise",
+	"actions": [
+		{
+			"CONTAINER": {
+				"enabled": "$$(enableConfigureSWATLabs)$$ && $$(enableConfigureSWATLabs_WF)$$ && $$(enableWFLabForBusinessUsers)$$ && $$(isCloudPakDeployerDeployment)$$",
+				"description": "Configure environment so that user in group '$$(generalUsersGroupName)$$' can create WF solutions including case capability",
+				"comment": "Container bundles activities to configure the environment for the WF lab for business users that should be executed before importing the WF solution",
+				"actions": [
+					{
+						"WF": {
+							"comment": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins, tw_authors, and project area to be able to create projects",
+							"enabled": "true",
+							"description": "WF - Add general user group '$$(generalUsersGroupShort)$$' to tw_admins, tw_authors, and project area",
+							"subActions": [
+								{
+									"MANAGEGROUPS": {
+										"enabled": "true",
+										"description": "Add general user group '$$(generalUsersGroupShort)$$' to tw_admins and tw_authors",
+										"activities": [
+											{
+												"action": "AddMembers",
+												"groupName": "tw_admins",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											},
+											{
+												"action": "AddMembers",
+												"groupName": "tw_authors",
+												"groups": [
+													"$$(generalUsersGroupShort)$$"
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object store $$(BAW_DOS)$$",
+							"objectStoreName": "$$(BAW_DOS)$$",
+							"relativeBasePath": "FileNet Content Manager",
+							"subActions": [
+								{
+									"MODIFYOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Modify security for $$(BAW_DOS)$$ Object Store",
+										"name": "Modify security for $$(BAW_DOS)$$ Object Store",
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Update",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control, !Set owner of any object, !Modify all properties"
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"FNCM": {
+							"enabled": "true",
+							"description": "CPE - Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
+							"objectStoreName": "$$(BAW_TOS)$$",
+							"subActions": [
+								{
+									"MODIFYOBJECTSTORE": {
+										"enabled": "true",
+										"description": "Modify security for $$(BAW_TOS)$$ Object Store",
+										"name": "Modify security for $$(BAW_TOS)$$ Object Store",
+										"replaceAccessRights": false,
+										"granteeSettings": [
+											{
+												"enabled": "true",
+												"action": "Update",
+												"granteeName": "$$(generalUsersGroupName)$$",
+												"granteeType": "Group",
+												"isNonCaseSensitive": true,
+												"accessType": "Allow",
+												"inheritableDepth": "No inheritance",
+												"accessRights": "Full control"
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
