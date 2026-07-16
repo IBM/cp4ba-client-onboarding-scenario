@@ -1,8 +1,8 @@
-# Deploying the Client Onboarding scenario on an Enterprise Deployment with arbitrary LDAP and a co-deployed Gitea (for CP4BA 26.0.0)
+# Deploying the Client Onboarding scenario on an Enterprise Deployment with arbitrary LDAP and external GitHub (for CP4BA 26.0.0)
 
 ## Introduction
 
-These instructions apply for those cases where you have an LDAP with arbitrary users and groups and want to use an external GitHub for your CP4BA 26.0.0 Enterprise deployment. The decision project is connected to the Gitea deployment, so no external GitHub information needs to be provided.
+These instructions apply for those cases where you have an LDAP with arbitrary users and groups and want to use an external Git repository on github.com for your CP4BA 26.0.0 Enterprise deployment. It is the most flexible deployment profile but therefore also requires the highest amount of configuration parameters to be specified.
 
 You need to have deployed at least the following capabilities in your CP4BA environment: Business Applications, Automation Decision Services, Workflow, Business Automation Insights.
 
@@ -26,10 +26,10 @@ A Windows, Linux, or Mac system with **Java 8** or later installed is required t
 
       **Linux/Mac** - *CP4BA 26.0.0* - Enterprise deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/deployClientOnboardingEnterpriseExternalGit.sh)** (*Ensure to make the sh file executable by performing `chmod +x deployClientOnboardingEnterpriseExternalGit.sh`*)
 
-      **Windows** - *CP4BA 26.0.0 - Enterprise deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/deployClientOnboardingEnterpriseExternalGit.bat)**
+      **Windows** - *CP4BA 26.0.0* - Enterprise deployment - **[deploy](https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/deployClientOnboardingEnterpriseExternalGit.bat)**
 
 ### Update bat/sh File
-On Windows open the file **deployClientOnboardingArbitraryEnterpriseWithGitea.bat**/on Linux or Mac open the file **deployClientOnboardingArbitraryEnterpriseWithGitea.sh** in the text editor of your choice. 
+On Windows open the file **deployClientOnboardingEnterpriseExternalGit.bat**/on Linux or Mac open the file **deployClientOnboardingEnterpriseExternalGit.sh** in the text editor of your choice. 
 
 1. Update the two variables `ocLoginServer` and `ocLoginToken` defined at the top of the file with your specific details
 
@@ -49,6 +49,14 @@ On Windows open the file **deployClientOnboardingArbitraryEnterpriseWithGitea.ba
    | cp4baAdminGroup    | default: empty | Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains the admin user/users for the CP4BA instance |
    | generalUsersGroup  | default: empty | Fully qualified name of a group (cn=<groupname>, dc=<org>, ...) that contains business users for the CP4BA instance |
 
+3. Update the Git repository related values used for the Automation Decision Service part according to below table
+
+   | Property         | Value          | Comment                                                      |
+   | ---------------- | -------------- | ------------------------------------------------------------ |
+   | adsGitOrg        | default: empty | Name of the Git organisation to create the ADS repository in. (Can not be a the personal user account!) |
+   | adsGitUserName   | default: empty | User name of the user used to create the ADS repository with |
+   | adsGitRepoAPIKey | default: empty | Git API key to connect to the Git server                     |
+
 4. Update the variable `ocpStorageClassForInternalMailServer` with the name of a storage class in your OCP cluster that can be used for the email server and client that will be deployed by default
 
    > [!TIP]
@@ -61,9 +69,9 @@ On Windows open the file **deployClientOnboardingArbitraryEnterpriseWithGitea.ba
 
 *As part of the deployment, the deployment tool pulls additional resources from its GitHub repository. Ensure the machine you are executing the tool from has access both to GitHub (github.com/githubusercontent.com) and the location where your CP4BA instance is running.*
 
-In a console window execute either **`deployClientOnboardingRapidDeploymentEnterpriseWithGitea.bat`** or **`./deployClientOnboardingRapidDeploymentEnterpriseWithGitea.sh`** to perform the import of the Client Onboarding scenario and lab artifacts.
+In a console window execute either **`deployClientOnboardingEnterpriseExternalGit.bat`** or **`./deployClientOnboardingEnterpriseExternalGit.sh`** to perform the import of the Client Onboarding scenario and lab artifacts.
 
-In case you are using Java 9 or later, you will see a message `WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.`. This can be ignored safely.
+In case you are using Java 9 or later, you will see a message `WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.` . This can be ignored safely.
 
 While executing, the deployment tool prints an overview of the actions it performs and their results to the console. 
 
