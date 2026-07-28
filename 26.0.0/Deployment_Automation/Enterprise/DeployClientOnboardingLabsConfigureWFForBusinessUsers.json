@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to allow business users to create, deploy, and test case solutions",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsConfigureWFForBusinessUsers.json",
 	"requiredToolVersion": ">=1.1.81 <1.2.0",
 	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
@@ -46,8 +46,7 @@
 					{
 						"FNCM": {
 							"enabled": "true",
-							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object store $$(BAW_DOS)$$",
-							"objectStoreName": "$$(BAW_DOS)$$",
+							"description": "CPE - Modify object store security granting group '$$(generalUsersGroupName)$$' rights for Workflow lab in object stores $$(BAW_DOS)$$ and $$(BAW_TOS)$$",
 							"relativeBasePath": "FileNet Content Manager",
 							"subActions": [
 								{
@@ -55,6 +54,7 @@
 										"enabled": "true",
 										"description": "Modify security for $$(BAW_DOS)$$ Object Store",
 										"name": "Modify security for $$(BAW_DOS)$$ Object Store",
+										"objectStoreName": "$$(BAW_DOS)$$",
 										"replaceAccessRights": false,
 										"granteeSettings": [
 											{
@@ -69,21 +69,13 @@
 											}
 										]
 									}
-								}
-							]
-						}
-					},
-					{
-						"FNCM": {
-							"enabled": "true",
-							"description": "CPE - Modify Workflow System Security Groups to allow '$$(generalUsersGroupName)$$' group to deploy case solutions and restart CPE pods to pick up P8 group changes",
-							"objectStoreName": "$$(BAW_TOS)$$",
-							"subActions": [
+								},
 								{
 									"MODIFYOBJECTSTORE": {
 										"enabled": "true",
 										"description": "Modify security for $$(BAW_TOS)$$ Object Store",
 										"name": "Modify security for $$(BAW_TOS)$$ Object Store",
+										"objectStoreName": "$$(BAW_TOS)$$",
 										"replaceAccessRights": false,
 										"granteeSettings": [
 											{
