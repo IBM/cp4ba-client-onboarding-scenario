@@ -1,6 +1,6 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.0",
+	"fileVersion": "1.0.1",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
 	"requiredToolVersion": ">=1.1.126 <1.2.0",
 	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
@@ -551,7 +551,7 @@
 								},
 								{
 									"ADDADDON": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "Add AddOns for Content Assistant",
 										"addOns": [
 											"5.6.0 Persistent Text Extract Extensions",
@@ -655,7 +655,7 @@
 								},
 								{
 									"CONFIGUREGENAI": {
-										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Update Gen AI Configuration for ICA Client Managed",
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
@@ -896,7 +896,7 @@
 					{
 						"OCP": {
 							"comment": "Steps that are only required if the Content Assistant is enabled",
-							"enabled": "$$(enableDeployClientOnboarding_BAA)$$ && $(enableContentAssistantInternal)$",
+							"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $$(enableDeployClientOnboarding_BAA)$$ && $(enableContentAssistantInternal)$",
 							"name": "Copy Content Assistant ICN plugin to plugins folder in ICN pod",
 							"relativeBasePath": "Business Automation Navigator",
 							"subActions": [
@@ -915,7 +915,7 @@
 								},
 								{
 									"COPYFILES": {
-										"enabled": "true",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$",
 										"description": "Copy Content Assistant plugin file to navigator pod",
 										"delayBefore": 0,
 										"namespaceName": "$$(cp4baNamespace)$$",
@@ -1013,7 +1013,7 @@
 								},
 								{
 									"MANAGEPLUGINS": {
-										"enabled": "$(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Add IBM Content Assistant plugin",
 										"action": "add",
 										"pluginName": "IBM Content Assistant",
@@ -1305,7 +1305,7 @@
 								},
 								{
 									"MANAGEMENU": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "ContentListToolbar menu based on DefaultContentListToolbar with the addition of the CompareAction",
 										"action": "copy",
 										"menuId": "COICAContentListToolbar",
@@ -1321,7 +1321,7 @@
 								},
 								{
 									"MANAGEMENU": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "SearchResultsToolbar menu based on DefaultSearchResultsToolbar with the addition of the CompareAction",
 										"action": "copy",
 										"menuId": "COICADefaultSearchResultsToolbar",
@@ -1337,7 +1337,7 @@
 								},
 								{
 									"MANAGEMENU": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "ItemContextMenu menu based on DefaultItemContextMenu with the addition of the CompareAction",
 										"action": "copy",
 										"menuId": "COICACustomDefaultItemContextMenu",
@@ -1353,7 +1353,7 @@
 								},
 								{
 									"MANAGEMENU": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "FavoriteItemContextMenu menu based on DefaultFavoriteItemContextMenu with the addition of the CompareAction",
 										"action": "copy",
 										"menuId": "COICACustomDefaultFavoriteItemContextMenu",
@@ -1369,7 +1369,7 @@
 								},
 								{
 									"MANAGEDESKTOP": {
-										"enabled": "$(enableContentAssistantInternal)$",
+										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in, use document history, and a set of custom menus",
 										"desktopName": "ICN",
 										"action": "update",
@@ -1381,6 +1381,23 @@
 											"COICADefaultSearchResultsToolbar",
 											"COICACustomDefaultItemContextMenu",
 											"COICACustomDefaultFavoriteItemContextMenu"
+										]
+									}
+								},
+								{
+									"MANAGEDESKTOP": {
+										"enabled": "$(isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
+										"description": "Update 'ICN with ICA' desktop to use desktop email client, allow users to change entry template on check-in, use document history, and a set of custom menus",
+										"desktopName": "ICN",
+										"action": "update",
+										"enabledDesktopEmailClient": true,
+										"allowUsersToChangeEntryTemplateDuringCheckIn": true,
+										"showDocumentHistory": true,
+										"menuUpdates": [
+											"GenAICompareContentListToolbar",
+											"GenAICompareSearchResultsToolbar",
+											"GenAIItemContextMenu",
+											"GenAIFavoriteItemContextMenu"
 										]
 									}
 								},
