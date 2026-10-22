@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding scenario itself",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingScenarioGeneric.json",
-	"requiredToolVersion": ">=1.1.126 <1.2.0",
+	"requiredToolVersion": ">=1.1.136 <1.2.0",
 	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -390,6 +390,15 @@
 														"/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/cp4badmin%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar": "/ads/runtime/api/v1/deploymentSpaces/embedded/decisions/$$(cp4baAdminUsrLower)$$%2Fclient_onboarding%2Fclient_onboarding_decisions%2FclientOnboardingDecisionsDecisionService%2F1.0.0%2FclientOnboardingDecisionsDecisionService-1.0.0.jar"
 													}
 												}
+											},
+											{
+												"name": "Client Comment Gen AI Service",
+												"type": "process",
+												"genAIMappings": {
+													"activityName": "Interpret Client Comment",
+													"llmType": "watsonx",
+													"llmId": "§IF($$(ISSET(genaiWFDefaultModelNameInternal))$$)§($$(genaiWFDefaultModelNameInternal)$$)§ELSE§(§FAIL(LLM for Gen AI activity not specified))ENDIF§"
+												}
 											}
 										]
 									}
@@ -657,6 +666,7 @@
 									"CONFIGUREGENAI": {
 										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$ && $(ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Update Gen AI Configuration for ICA Client Managed",
+										"ignoreIfActive": true,
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
 										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
@@ -670,6 +680,7 @@
 									"CONFIGUREGENAI": {
 										"enabled": "$(enableContentAssistantInternal)$ && $(!ISCONTENTASSISTANTCLIENTMANAGEDAVAILABLE)$",
 										"description": "Update Gen AI Configuration for ICA SaaS",
+										"ignoreIfActive": true,
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
 										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
@@ -1278,7 +1289,7 @@
 										"enabled": "$(enableContentAssistantInternal)$",
 										"description": "Determine ICN repository information based on object store symbolic name",
 										"osSymbolicName": "$$(CPEICNLABOBJECTSTORE)$$",
-										"useFirst" : true
+										"useFirst": true
 									}
 								},
 								{

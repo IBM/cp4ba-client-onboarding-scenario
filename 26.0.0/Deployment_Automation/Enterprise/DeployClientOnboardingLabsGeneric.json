@@ -1,8 +1,8 @@
 {
 	"comment": "Contains the steps required to deploy the Client Onboarding labs",
-	"fileVersion": "1.0.1",
+	"fileVersion": "1.0.2",
 	"fileLocation": "https://raw.githubusercontent.com/IBM/cp4ba-client-onboarding-scenario/main/26.0.0/Deployment_Automation/Enterprise/DeployClientOnboardingLabsGeneric.json",
-	"requiredToolVersion": ">=1.1.125 <1.2.0",
+	"requiredToolVersion": ">=1.1.136 <1.2.0",
 	"requiredCP4BAVersion": ">=26.0.0 <26.1.0",
 	"requiredCP4BAPattern": "Enterprise",
 	"actions": [
@@ -634,6 +634,7 @@
 									"CONFIGUREGENAI": {
 										"enabled": "$(!isCloudPakDeployerDeployment|default=false)$ && $(enableContentAssistantInternal)$",
 										"description": "Update Gen AI Configuration",
+										"ignoreIfActive": true,
 										"genAIAccessCode": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIAccessCodeInternal))$ || $(EQUALS(genAIAccessCodeInternal==))$))§(§FAIL(Gen AI Access Code not provided while Content Assistant is enabled))§ELSE§($(genAIAccessCodeInternal|default=)$)ENDIF§",
 										"genAIServiceURL": "§IF($(enableContentAssistantInternal|default=false)$ && ($(ISNOTSET(genAIServiceURLInternal))$ || $(EQUALS(genAIServiceURLInternal==))$))§(§FAIL(Gen AI Service URL not provided while Content Assistant is enabled))§ELSE§($(genAIServiceURLInternal|default=)$)ENDIF§",
 										"genaiEmbeddingModelName": "$(genaiEmbeddingModelNameInternal)$",
